@@ -2,7 +2,9 @@ import { t } from './i18n';
 import { useApp } from './store/app';
 import { Home } from './ui/Home';
 import { LessonScreen } from './ui/LessonScreen';
+import { Review } from './ui/Review';
 import { Settings } from './ui/Settings';
+import { UpdateBanner } from './ui/UpdateBanner';
 
 export function App() {
   const screen = useApp((s) => s.screen);
@@ -42,10 +44,12 @@ export function App() {
           </>
         )}
         {screen.name === 'settings' && <Settings />}
+        {screen.name === 'review' && <Review />}
         {screen.name === 'lesson' && (
           <LessonScreen key={screen.lessonId} unitId={screen.unitId} lessonId={screen.lessonId} />
         )}
       </main>
+      <UpdateBanner />
     </div>
   );
 }

@@ -7,7 +7,8 @@ Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`.
 - `npm run dev` – Dev-Server
 - `npm run lint` / `npm run typecheck` / `npm test` / `npm run build`
 - `npm run content` – validiert `content/**/*.yaml` und schreibt `public/content/` (generiert, läuft automatisch vor dev/build)
-- `npm run e2e` – Playwright (braucht `npx playwright install chromium`)
+- `npm run e2e` – Playwright gegen den Dev-Server (braucht `npx playwright install chromium`)
+- `npm run e2e:pwa` – Offline- und Manifest-Test gegen den Produktions-Build
 
 ## Konventionen
 
@@ -22,3 +23,5 @@ Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`.
 - Der Build prüft jedes `suffix_builder`-`target` gegen die Engine.
 - UI-Texte als i18n-Schlüssel, nicht hartcodiert.
 - Keine Gamification (siehe SPEC Abschnitt 2).
+- PWA: `vite-plugin-pwa` (`registerType: 'prompt'`), Inhalte (`public/content/*.json`) sind im Precache. `BASE_PATH` setzt die Basis für GitHub Pages. Icons: `npx tsx tools/make-icons.ts` (rendert `public/icon.svg`).
+- Review: Notizen ("Fehler melden") liegen lokal in Dexie (`notes`, seit Schema v2). `reviewed: true` wird nur im Repo in der YAML gesetzt.

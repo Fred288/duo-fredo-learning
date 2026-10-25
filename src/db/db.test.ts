@@ -1,9 +1,16 @@
 import 'fake-indexeddb/auto';
+import Dexie from 'dexie';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { db, safely } from './db';
 
 beforeEach(async () => {
-  await Promise.all([db.settings.clear(), db.attempts.clear(), db.completions.clear()]);
+  if (!db.isOpen()) await db.open();
+  await Promise.all([
+    db.settings.clear(),
+    db.attempts.clear(),
+    db.completions.clear(),
+    db.notes.clear(),
+  ]);
 });
 
 describe('db', () => {
@@ -29,6 +36,29 @@ describe('db', () => {
     });
     expect(await db.attempts.where('lessonId').equals('a1-u01-l1').count()).toBe(1);
     expect(await db.completions.where('day').equals('2026-03-01').count()).toBe(1);
+  });
+});
+
+describe('Migration v1 → v2', () => {
+  it('behält Daten aus Version 1 und ergänzt die Notizen-Tabelle', async () => {
+    db.close();
+    await Dexie.delete('yol');
+
+    // Datenbank wie in Version 1 anlegen und befüllen
+    const v1 = new Dexie('yol');
+    v1.version(1).stores({
+      settings: 'key',
+      attempts: '++id, exerciseId, lessonId, at',
+      completions: '++id, lessonId, day',
+    });
+    await v1.table('settings').put({ key: 'dailyGoal', value: 5 });
+    v1.close();
+
+    // Aktuelle Version öffnet und migriert
+    await db.open();
+    expect((await db.settings.get('dailyGoal'))?.value).toBe(5);
+    await db.notes.add({ itemId: 'x', unitId: 'a1-u01', text: 'Tippfehler', at: 1 });
+    expect(await db.notes.where('unitId').equals('a1-u01').count()).toBe(1);
   });
 });
 

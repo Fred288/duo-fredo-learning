@@ -15,6 +15,7 @@ import {
 import { suffixTiles } from '../session/suffix-tiles';
 import { useSettings } from '../store/settings';
 import { Feedback } from './Feedback';
+import { ReportError } from './ReportError';
 import { FreeTextInput } from './exercises/FreeTextInput';
 import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
 import { SuffixBuilderInput } from './exercises/SuffixBuilderInput';
@@ -27,6 +28,9 @@ interface Props {
   lesson: Lesson;
   /** Wortschatz der Unit; liefert Harmonie-/Erweichungs-Flags für Suffix-Builder. */
   vocab?: readonly Vocab[];
+  /** Für "Fehler melden" und den Prüfstatus; ohne unitId entfällt der Melde-Bereich. */
+  unitId?: string;
+  unitReviewed?: boolean;
   onExit: () => void;
   /** Erster Versuch je Übung und Lauf. */
   onAttempt?: (exerciseId: string, verdict: Verdict) => void;
@@ -34,7 +38,15 @@ interface Props {
   onComplete?: (correct: number, total: number) => void;
 }
 
-export function LessonRunner({ lesson, vocab = [], onExit, onAttempt, onComplete }: Props) {
+export function LessonRunner({
+  lesson,
+  vocab = [],
+  unitId,
+  unitReviewed = false,
+  onExit,
+  onAttempt,
+  onComplete,
+}: Props) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(() => lesson.exercises.filter(isSupported), [lesson]);
   const [session, setSession] = useState(() => createSession(exercises));
@@ -185,6 +197,14 @@ export function LessonRunner({ lesson, vocab = [], onExit, onAttempt, onComplete
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
           />
+          {unitId && (
+            <ReportError
+              key={supported.id}
+              exerciseId={supported.id}
+              unitId={unitId}
+              unreviewed={!(supported.reviewed ?? unitReviewed)}
+            />
+          )}
           <button
             type="button"
             autoFocus

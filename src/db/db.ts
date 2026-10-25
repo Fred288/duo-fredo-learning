@@ -18,7 +18,17 @@ export interface AttemptRow {
 
 export type CompletionRow = Completion & { id?: number };
 
+export interface NoteRow {
+  id?: number;
+  /** ID der gemeldeten Übung. */
+  itemId: string;
+  unitId: string;
+  text: string;
+  at: number;
+}
+
 class YolDb extends Dexie {
+  notes!: EntityTable<NoteRow, 'id'>;
   settings!: EntityTable<SettingRow, 'key'>;
   attempts!: EntityTable<AttemptRow, 'id'>;
   completions!: EntityTable<CompletionRow, 'id'>;
@@ -31,6 +41,8 @@ class YolDb extends Dexie {
       attempts: '++id, exerciseId, lessonId, at',
       completions: '++id, lessonId, day',
     });
+    // v2: lokale Fehlermeldungen/Notizen zu Inhalten. Bestehende Tabellen bleiben unverändert.
+    this.version(2).stores({ notes: '++id, itemId, unitId, at' });
   }
 }
 

@@ -6,6 +6,8 @@ export interface Manifest {
     id: string;
     level: Level;
     title: string;
+    /** Anzahl noch nicht geprüfter Übungen und Vokabeln. */
+    unreviewed: number;
     lessons: Pick<Lesson, 'id' | 'type' | 'title'>[];
   }[];
 }

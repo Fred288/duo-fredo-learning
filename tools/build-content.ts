@@ -2,7 +2,13 @@
 // Ungültige Inhalte beenden den Prozess mit Exit-Code 1 und brechen damit dev/build.
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { checkSuffixTargets, checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
+import {
+  checkSuffixTargets,
+  checkUnits,
+  countUnreviewed,
+  parseUnitFile,
+  type LoadedUnit,
+} from './content-checks';
 
 const CONTENT_DIR = 'content';
 const OUT_DIR = join('public', 'content');
@@ -40,6 +46,8 @@ const manifest = units.map(({ unit }) => ({
   id: unit.id,
   level: unit.level,
   title: unit.title,
+  reviewed: unit.reviewed,
+  unreviewed: countUnreviewed(unit),
   lessons: unit.lessons.map((l) => ({ id: l.id, type: l.type, title: l.title })),
 }));
 writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));

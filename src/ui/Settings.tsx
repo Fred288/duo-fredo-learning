@@ -9,6 +9,7 @@ const stepButton =
 
 export function Settings() {
   const goHome = useApp((s) => s.goHome);
+  const openReview = useApp((s) => s.openReview);
   const { dailyGoal, showStreak, tolerateDiacritics, theme, set } = useSettings();
 
   return (
@@ -77,6 +78,14 @@ export function Settings() {
           {t('settings.tolerate.hint')}
         </p>
       </div>
+
+      <button
+        type="button"
+        onClick={openReview}
+        className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+      >
+        {t('review.open')}
+      </button>
 
       <fieldset>
         <legend className="mb-2">{t('settings.theme')}</legend>

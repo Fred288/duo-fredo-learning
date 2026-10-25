@@ -68,6 +68,38 @@ test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async (
   await expect(page.getByText('1 von 1 Lektionen')).toBeVisible();
 });
 
+test('Fehler melden: Notiz erscheint in der Review-Ansicht und bleibt erhalten', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await page.getByText('Merhaba').click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await expect(page.getByText('Noch nicht geprüft')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Fehler melden' }).click();
+  await page.getByLabel('Was stimmt hier nicht?').fill('Glosse unnatürlich\nzweite Zeile');
+  await page.getByRole('button', { name: 'Notiz speichern' }).click();
+  await expect(page.getByText('Notiz gespeichert.')).toBeVisible();
+  // Enter im Textfeld darf die Lektion nicht weiterschalten
+  await expect(page.getByRole('button', { name: 'Weiter' })).toBeVisible();
+
+  await page.getByRole('button', { name: /Zurück/ }).click();
+  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await page.getByRole('button', { name: 'Inhalte prüfen' }).click();
+  await expect(page.getByText('a1-u01-l1-e1 ·')).toBeVisible();
+  await expect(page.getByText('Glosse unnatürlich')).toBeVisible();
+  await expect(page.getByText(/^\d+ ungeprüft$/).first()).toBeVisible();
+
+  await page.reload();
+  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await page.getByRole('button', { name: 'Inhalte prüfen' }).click();
+  await expect(page.getByText('Glosse unnatürlich')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Notiz zu a1-u01-l1-e1 löschen' }).click();
+  await expect(page.getByText('Noch keine Notizen.')).toBeVisible();
+});
+
 test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Endungen bauen/ }).click();

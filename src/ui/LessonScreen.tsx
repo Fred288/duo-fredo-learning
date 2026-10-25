@@ -12,6 +12,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
   const recordCompletion = useProgress((s) => s.recordCompletion);
   const [lesson, setLesson] = useState<Lesson>();
   const [vocab, setVocab] = useState<Vocab[]>([]);
+  const [unitReviewed, setUnitReviewed] = useState(false);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
         const found = unit.lessons.find((l) => l.id === lessonId);
         if (found) {
           setVocab(unit.vocab ?? []);
+          setUnitReviewed(unit.reviewed);
           setLesson(found);
         } else setFailed(true);
       })
@@ -32,6 +34,8 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
     <LessonRunner
       lesson={lesson}
       vocab={vocab}
+      unitId={unitId}
+      unitReviewed={unitReviewed}
       onExit={goHome}
       onAttempt={(exerciseId, verdict) => recordAttempt(exerciseId, lessonId, verdict)}
       onComplete={(correct, total) => recordCompletion(unitId, lessonId, correct, total)}

@@ -59,3 +59,22 @@ describe('Progress-Store', () => {
     expect(await db.attempts.count()).toBe(1);
   });
 });
+
+describe('Notizen', () => {
+  it('speichert Notizen dauerhaft und formatiert sie als Korrekturliste', async () => {
+    const { useNotes, notesAsText } = await import('./notes');
+    await db.notes.clear();
+    useNotes.setState({ notes: [] });
+    await useNotes.getState().add('a1-u01-l1-e1', 'a1-u01', '  Glosse\nunnatürlich ');
+    await useNotes.getState().add('a1-u01-l1-e2', 'a1-u01', '   '); // leer: ignoriert
+    expect(useNotes.getState().notes).toHaveLength(1);
+
+    useNotes.setState({ notes: [] });
+    await useNotes.getState().load();
+    const { notes } = useNotes.getState();
+    expect(notesAsText(notes)).toBe('a1-u01-l1-e1: Glosse unnatürlich');
+
+    await useNotes.getState().remove(notes[0]!.id!);
+    expect(await db.notes.count()).toBe(0);
+  });
+});

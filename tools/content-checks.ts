@@ -100,3 +100,9 @@ export function checkSuffixTargets(units: LoadedUnit[]): string[] {
   }
   return errors;
 }
+
+/** Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag). */
+export function countUnreviewed(unit: Unit): number {
+  const exercises = unit.lessons.flatMap((l) => l.exercises);
+  return [...exercises, ...(unit.vocab ?? [])].filter((i) => !(i.reviewed ?? unit.reviewed)).length;
+}
