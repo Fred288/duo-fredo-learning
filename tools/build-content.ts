@@ -2,7 +2,7 @@
 // Ungültige Inhalte beenden den Prozess mit Exit-Code 1 und brechen damit dev/build.
 import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
-import { checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
+import { checkSuffixTargets, checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
 
 const CONTENT_DIR = 'content';
 const OUT_DIR = join('public', 'content');
@@ -22,7 +22,7 @@ for (const file of files) {
 }
 
 const report = checkUnits(units, (p) => existsSync(join(CONTENT_DIR, p)));
-errors.push(...report.errors);
+errors.push(...report.errors, ...checkSuffixTargets(units));
 
 for (const w of report.warnings) console.warn(`⚠ ${w}`);
 if (errors.length > 0) {

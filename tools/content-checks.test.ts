@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
+import { checkSuffixTargets, checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
 
 const yamlUnit = (id: string, extra = '') => `
 id: ${id}
@@ -60,5 +60,41 @@ describe('checkUnits', () => {
     const { errors, warnings } = checkUnits(units, () => true);
     expect(errors).toEqual([]);
     expect(warnings).toContainEqual(expect.stringContaining('2 Einträge'));
+  });
+});
+
+describe('checkSuffixTargets', () => {
+  const unitWith = (target: string, vocab = '') => `
+id: a1-u02
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+lessons:
+  - id: a1-u02-l1
+    type: grammar
+    title: Suffixe
+    exercises:
+      - id: a1-u02-l1-e1
+        type: suffix_builder
+        stem: kitap
+        suffixes: [ACC]
+        target: ${target}
+${vocab}
+`;
+
+  it('akzeptiert Ziel, das die Engine mit Vokabel-Flags erzeugt', () => {
+    const u = load(
+      'a.yaml',
+      unitWith('kitabı', 'vocab:\n  - { tr: kitap, de: [Buch], pos: noun, softens: true }'),
+    );
+    expect(checkSuffixTargets([u])).toEqual([]);
+  });
+
+  it('meldet Abweichung mit Erwartungswert', () => {
+    const u = load('a.yaml', unitWith('kitabı'));
+    expect(checkSuffixTargets([u])).toEqual([
+      'a.yaml: a1-u02-l1-e1: target "kitabı", Engine erwartet "kitapı"',
+    ]);
   });
 });

@@ -1,5 +1,6 @@
 import { parse as parseYaml } from 'yaml';
-import { Unit, vocabId } from '../src/content/schema';
+import { Unit, vocabId, type Vocab } from '../src/content/schema';
+import { inflect, MorphError } from '../src/morphology';
 
 export interface LoadedUnit {
   file: string;
@@ -67,4 +68,34 @@ export function checkUnits(units: LoadedUnit[], fileExists: (path: string) => bo
   if (unreviewed > 0)
     warnings.push(`${unreviewed} Einträge sind noch nicht geprüft (reviewed: false)`);
   return { errors, warnings };
+}
+
+/** Suffix-Builder-Lösungen müssen mit der Morphologie-Engine übereinstimmen. */
+export function checkSuffixTargets(units: LoadedUnit[]): string[] {
+  const lexicon = new Map<string, Vocab>();
+  for (const { unit } of units) for (const v of unit.vocab ?? []) lexicon.set(v.tr, v);
+
+  const errors: string[] = [];
+  for (const { file, unit } of units) {
+    for (const lesson of unit.lessons) {
+      for (const ex of lesson.exercises) {
+        if (ex.type !== 'suffix_builder') continue;
+        const v = lexicon.get(ex.stem);
+        try {
+          const { form } = inflect(
+            { form: ex.stem, softens: v?.softens, harmonyVowel: v?.harmony_vowel },
+            ex.suffixes,
+          );
+          const target = ex.target.normalize('NFC').toLocaleLowerCase('tr');
+          if (form !== target) {
+            errors.push(`${file}: ${ex.id}: target "${ex.target}", Engine erwartet "${form}"`);
+          }
+        } catch (e) {
+          if (!(e instanceof MorphError)) throw e;
+          errors.push(`${file}: ${ex.id}: ${e.message}`);
+        }
+      }
+    }
+  }
+  return errors;
 }
