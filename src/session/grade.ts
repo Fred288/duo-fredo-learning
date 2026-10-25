@@ -1,4 +1,5 @@
 import type { Exercise } from '../content/schema';
+import { sameForm } from '../content/lexicon';
 import { checkAnswer, type AnswerResult } from '../lib/answer';
 
 export const SUPPORTED_TYPES = [
@@ -6,6 +7,7 @@ export const SUPPORTED_TYPES = [
   'word_bank',
   'free_text',
   'suffix_builder',
+  'conjugation',
 ] as const;
 type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
 
@@ -31,13 +33,20 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
     case 'suffix_builder':
       // Genau die Form zählt: kein Tippfehler-Spielraum, sonst wäre evda ≈ evde.
       return checkAnswer(answer, [ex.target], { allowTypos: false });
+    case 'conjugation': {
+      // Fragepartikel und değil sind eigene Bausteine; Leerzeichen und Apostroph zählen nicht.
+      const squash = (s: string) => s.replace(/[\s'’?]/g, '');
+      return sameForm(squash(ex.target), squash(answer))
+        ? { verdict: 'correct', matched: ex.target, hints: [] }
+        : { verdict: 'wrong', hints: [] };
+    }
   }
 }
 
 /** Kanonische Lösung zur Anzeige im Feedback. */
 export function solutionOf(ex: Supported): string {
   if (ex.type === 'multiple_choice') return ex.answer;
-  if (ex.type === 'suffix_builder') return ex.target;
+  if (ex.type === 'suffix_builder' || ex.type === 'conjugation') return ex.target;
   return ex.answers[0]!;
 }
 

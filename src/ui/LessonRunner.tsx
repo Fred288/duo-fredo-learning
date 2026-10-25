@@ -12,8 +12,9 @@ import {
   summary,
   type Session,
 } from '../session/session';
-import { suffixTiles } from '../session/suffix-tiles';
 import { useSettings } from '../store/settings';
+import { solveExercise } from '../content/lexicon';
+import { ConjugationInput } from './exercises/ConjugationInput';
 import { Feedback } from './Feedback';
 import { ReportError } from './ReportError';
 import { FreeTextInput } from './exercises/FreeTextInput';
@@ -165,6 +166,14 @@ export function LessonRunner({
         {supported.type === 'free_text' && (
           <FreeTextInput ex={supported} value={answer} onChange={setAnswer} disabled={!answering} />
         )}
+        {supported.type === 'conjugation' && (
+          <ConjugationInput
+            ex={supported}
+            vocab={vocab}
+            onChange={setAnswer}
+            disabled={!answering}
+          />
+        )}
         {supported.type === 'suffix_builder' && (
           <SuffixBuilderInput
             ex={supported}
@@ -190,8 +199,8 @@ export function LessonRunner({
             result={session.last!}
             solution={solutionOf(supported)}
             reasons={
-              supported.type === 'suffix_builder'
-                ? explainSteps(suffixTiles(supported, vocab).solution.steps)
+              supported.type === 'suffix_builder' || supported.type === 'conjugation'
+                ? explainSteps(solveExercise(supported, vocab).steps)
                 : undefined
             }
             explanation={supported.explanation ?? supported.hint}

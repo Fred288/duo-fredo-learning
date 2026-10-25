@@ -1,16 +1,10 @@
-import {
-  harmony2,
-  harmony4,
-  isFront,
-  isRounded,
-  isVoiceless,
-  isVowel,
-  lastVowel,
-  normalize,
-  soften,
-} from './phonology';
+import { trLower } from '../lib/turkish';
+import { isVowel, lastVowel, normalize, soften, VOWELS } from './phonology';
 import { POSS_3PL_AFTER_PL, PRONOMINAL_N, SUFFIXES } from './suffixes';
-import type { MorphTag } from './tags';
+import type { AnyTag, MorphTag } from './tags';
+import { realize, type Step } from './template';
+
+export type { Step } from './template';
 
 export interface Stem {
   form: string;
@@ -18,25 +12,17 @@ export interface Stem {
   softens?: boolean;
   /** Harmonievokal, falls abweichend vom letzten Vokal (saat → wie e). */
   harmonyVowel?: string;
+  /** Letzter Stammvokal fällt vor vokalischem Suffix aus (oğul → oğlum). */
+  dropsVowel?: boolean;
+  /** Eigenname: Schreibung bleibt, Apostroph vor dem Suffix, keine geschriebene Erweichung. */
+  proper?: boolean;
+  /** Großgeschrieben, aber ohne Apostroph (Nationalitäten: Türkler, Almanım). */
+  capitalized?: boolean;
 }
-
-export type Step =
-  | {
-      tag: MorphTag;
-      rule: 'harmony2' | 'harmony4';
-      vowel: string;
-      front: boolean;
-      rounded: boolean;
-      chose: string;
-    }
-  | { tag: MorphTag; rule: 'assimilation'; after: string; chose: 'd' | 't' }
-  | { tag: MorphTag; rule: 'buffer'; letter: string }
-  | { tag: MorphTag; rule: 'softening'; from: string; to: string }
-  | { tag: MorphTag; rule: 'pronominal_n' };
 
 export interface Inflection {
   form: string;
-  segments: { tag: MorphTag | 'STEM'; text: string }[];
+  segments: { tag: AnyTag | 'STEM'; text: string }[];
   steps: Step[];
 }
 
@@ -45,17 +31,22 @@ export class MorphError extends Error {}
 // Noch nicht abgedeckt; später über weitere Vocab-Flags lösbar.
 export const KNOWN_LIMITS = [
   'Konsonantenverdopplung (hak → hakkı, ret → reddi)',
-  'Vokalausfall (ağız → ağzı, isim → ismim)',
   'Stumme Endung arabischer Lehnwörter (cami → camii)',
-  "Eigennamen mit Apostroph (Frankfurt'ta, Mehmet'e)",
   'Unregelmäßige Stämme (su → suyun, ne → neyi)',
-  'Verbmorphologie (Kopula, Zeiten, Verneinung, Frage)',
+  'Verbmorphologie ab Stufe 2 (Präteritum, Futur, Aorist, Modalität)',
 ] as const;
 
+export const asStem = (input: Stem | string): Stem =>
+  typeof input === 'string' ? { form: input } : input;
+
+/** Schreibform des Stamms: Eigennamen und Nationalitäten behalten die Großschreibung. */
+export const stemSpelling = (stem: Stem): string =>
+  stem.proper || stem.capitalized ? stem.form.normalize('NFC').trim() : normalize(stem.form);
+
 export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
-  const stem: Stem = typeof input === 'string' ? { form: input } : input;
-  let stemForm = normalize(stem.form);
-  if (!lastVowel(stemForm) && !stem.harmonyVowel) {
+  const stem = asStem(input);
+  let stemForm = stemSpelling(stem);
+  if (!lastVowel(trLower(stemForm)) && !stem.harmonyVowel) {
     throw new MorphError(`Stamm "${stem.form}" enthält keinen Vokal`);
   }
   checkOrder(tags);
@@ -77,53 +68,33 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
       steps.push({ tag, rule: 'pronominal_n' });
     }
 
-    const base = stemForm + suffixTexts.join('');
-    let out = '';
-    for (let j = 0; j < template.length; j++) {
-      const ch = template[j]!;
-      const current = base + out;
-      const prevChar = current.at(-1)!;
+    const out = realize(template, tag, { base: stemForm + suffixTexts.join(''), steps, harmonyOf });
 
-      if (ch === '(') {
-        const inner = template[j + 1]!;
-        j += 2; // inner + ')'
-        const innerIsVowel = inner === 'I' || inner === 'A' || isVowel(inner);
-        const keep = innerIsVowel ? !isVowel(prevChar) : isVowel(prevChar);
-        if (!keep) continue;
-        if (!innerIsVowel) {
-          out += inner;
-          steps.push({ tag, rule: 'buffer', letter: inner });
-          continue;
+    // Lautwandel am Stamm nur vor vokalisch anlautendem erstem Suffix.
+    if (i === 0 && isVowel(out[0] ?? '')) {
+      if (stem.dropsVowel) {
+        const dropped = dropLastVowel(stemForm);
+        if (dropped) {
+          stemForm = dropped.form;
+          steps.push({ tag, rule: 'vowel_drop', vowel: dropped.vowel });
         }
-        out += realizeVowel(inner, harmonyOf(current), tag, steps);
-        continue;
       }
-      if (ch === 'A' || ch === 'I') {
-        out += realizeVowel(ch, harmonyOf(current), tag, steps);
-        continue;
-      }
-      if (ch === 'D') {
-        const chose = isVoiceless(prevChar) ? 't' : 'd';
-        steps.push({ tag, rule: 'assimilation', after: prevChar, chose });
-        out += chose;
-        continue;
-      }
-      out += ch;
-    }
-
-    // Erweichung nur direkt am Stamm und nur vor vokalisch anlautendem Suffix.
-    if (i === 0 && stem.softens && isVowel(out[0] ?? '')) {
-      const s = soften(stemForm);
-      if (s) {
-        stemForm = s.form;
-        steps.push({ tag, rule: 'softening', from: s.from, to: s.to });
+      // Bei Eigennamen bleibt die Erweichung ungeschrieben (Mehmet'e).
+      if (stem.softens && !stem.proper) {
+        const s = soften(stemForm);
+        if (s) {
+          stemForm = s.form;
+          steps.push({ tag, rule: 'softening', from: s.from, to: s.to });
+        }
       }
     }
     suffixTexts.push(out);
   });
 
+  const apostrophe = stem.proper && tags.length > 0 ? "'" : '';
+  if (apostrophe) steps.push({ tag: tags[0]!, rule: 'apostrophe' });
   return {
-    form: stemForm + suffixTexts.join(''),
+    form: stemForm + apostrophe + suffixTexts.join(''),
     segments: [
       { tag: 'STEM', text: stemForm },
       ...tags.map((tag, i) => ({ tag, text: suffixTexts[i]! })),
@@ -132,18 +103,12 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
   };
 }
 
-function realizeVowel(arch: string, vowel: string, tag: MorphTag, steps: Step[]): string {
-  if (arch !== 'A' && arch !== 'I') return arch;
-  const chose = arch === 'A' ? harmony2(vowel) : harmony4(vowel);
-  steps.push({
-    tag,
-    rule: arch === 'A' ? 'harmony2' : 'harmony4',
-    vowel,
-    front: isFront(vowel),
-    rounded: isRounded(vowel),
-    chose,
-  });
-  return chose;
+/** Entfernt den letzten Vokal (oğul → oğl); nur wenn danach noch genau ein Konsonant folgt. */
+function dropLastVowel(form: string): { form: string; vowel: string } | undefined {
+  const i = form.length - 2;
+  const vowel = form[i];
+  if (!vowel || !VOWELS.includes(vowel) || isVowel(form.at(-1)!)) return undefined;
+  return { form: form.slice(0, i) + form.slice(i + 1), vowel };
 }
 
 function checkOrder(tags: MorphTag[]): void {

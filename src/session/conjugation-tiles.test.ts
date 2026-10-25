@@ -1,0 +1,66 @@
+import { describe, expect, it } from 'vitest';
+import type { Exercise, Vocab } from '../content/schema';
+import { conjugationTiles } from './conjugation-tiles';
+import { grade } from './grade';
+
+type Conj = Extract<Exercise, { type: 'conjugation' }>;
+const conj = (extra: Partial<Conj>): Conj => ({
+  id: 'x-1',
+  type: 'conjugation',
+  mode: 'verb',
+  lemma: 'gelmek',
+  person: '1sg',
+  target: 'geliyorum',
+  ...extra,
+});
+const opts = { tolerateDiacritics: true };
+
+describe('conjugationTiles', () => {
+  it('liefert Engine-Segmente und Harmonie-Ablenker', () => {
+    const { tokens } = conjugationTiles(conj({}));
+    expect(tokens).toEqual(expect.arrayContaining(['gel', 'iyor', 'um']));
+    expect(tokens.length).toBeGreaterThan(3);
+  });
+
+  it('bietet bei Verneinung das unverengte -me als Ablenker', () => {
+    const { tokens } = conjugationTiles(conj({ negative: true, target: 'gelmiyorum' }));
+    expect(tokens).toEqual(expect.arrayContaining(['gel', 'mi', 'yor', 'um', 'me']));
+  });
+
+  it('bietet den unveränderten Stamm als Ablenker (bekle statt bekl, git statt gid)', () => {
+    expect(conjugationTiles(conj({ lemma: 'beklemek', target: 'bekliyorum' })).tokens).toContain(
+      'bekle',
+    );
+    const vocab: Vocab[] = [{ tr: 'gitmek', de: ['gehen'], pos: 'verb', softens: true }];
+    expect(conjugationTiles(conj({ lemma: 'gitmek', target: 'gidiyorum' }), vocab).tokens).toEqual(
+      expect.arrayContaining(['gid', 'git']),
+    );
+  });
+
+  it('führt die Fragepartikel als ganzen Baustein', () => {
+    const { tokens } = conjugationTiles(
+      conj({ person: '2sg', question: true, target: 'geliyor musun?' }),
+    );
+    expect(tokens).toEqual(expect.arrayContaining(['gel', 'iyor', 'musun']));
+  });
+});
+
+describe('grade conjugation', () => {
+  it('ignoriert Leerzeichen zwischen Bausteinen und Fragezeichen', () => {
+    const ex = conj({ person: '2sg', question: true, target: 'geliyor musun?' });
+    expect(grade(ex, 'geliyormusun', opts).verdict).toBe('correct');
+    expect(grade(ex, 'geliyormisin', opts).verdict).toBe('wrong');
+  });
+
+  it('Kopula mit değil und Eigennamen mit Apostroph', () => {
+    const neg = conj({
+      mode: 'copula',
+      lemma: 'öğretmen',
+      negative: true,
+      target: 'öğretmen değilim',
+    });
+    expect(grade(neg, 'öğretmendeğilim', opts).verdict).toBe('correct');
+    const name = conj({ mode: 'copula', lemma: 'Ayşe', target: "Ayşe'yim" });
+    expect(grade(name, 'Ayşeyim', opts).verdict).toBe('correct');
+  });
+});

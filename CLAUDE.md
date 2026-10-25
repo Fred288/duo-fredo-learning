@@ -20,7 +20,8 @@ Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`. Curriculum: `docs/CURR
 - Persistenz: Dexie in `src/db/db.ts` (Schemaänderungen nur als neue `version(n)` mit `upgrade`, nie v1 ändern). Zugriffe über `safely()`, damit die App ohne IndexedDB weiterläuft. Einstellungen in `store/settings.ts`, Fortschritt in `store/progress.ts`; Tagesziel zählt Lektionen, Streak/Fortschritt sind reine Funktionen in `src/progress/stats.ts`.
 - Von Claude erzeugter türkischer Content bleibt `reviewed: false`.
 - Morphologie-Regeln in `src/morphology/`, jede Regel mit Unit-Test. Suffixe als Archiphonem-Templates (`suffixes.ts`: A, I, D, Klammer = Puffer). Erweichung und Harmonie-Ausnahmen sind lexikalisch (`softens`, `harmony_vowel` in der Vokabel), nicht geraten. Bekannte Lücken: `KNOWN_LIMITS` in `inflect.ts`.
-- Der Build prüft jedes `suffix_builder`-`target` gegen die Engine.
+- Der Build prüft jedes `suffix_builder`- und `conjugation`-`target` gegen die Engine (`src/content/lexicon.ts`: `solveExercise`, `sameForm`).
+- Verben: Vokabel `tr` = Infinitiv (gelmek), Engine `conjugate()`; Nominalsatz `predicate()`; Pronomen als Tabelle (`pronouns.ts`). Weitere Vokabel-Flags: `drops_vowel` (oğul → oğlum), `proper` (İstanbul'da), `capitalized` (Almanlar).
 - UI-Texte als i18n-Schlüssel, nicht hartcodiert.
 - Keine Gamification (siehe SPEC Abschnitt 2).
 - PWA: `vite-plugin-pwa` (`registerType: 'prompt'`), Inhalte (`public/content/*.json`) sind im Precache. `BASE_PATH` setzt die Basis für GitHub Pages. Icons: `npx tsx tools/make-icons.ts` (rendert `public/icon.svg`).

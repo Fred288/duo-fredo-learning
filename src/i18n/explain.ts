@@ -32,6 +32,14 @@ export function explainSteps(steps: Step[]): string[] {
         return t('explain.softening', { from: step.from, to: step.to, tag });
       case 'pronominal_n':
         return t('explain.pronominal_n', { tag });
+      case 'vowel_drop':
+        return t('explain.vowel_drop', { vowel: step.vowel, tag });
+      case 'stem_vowel_drop':
+        return t('explain.stem_vowel_drop', { vowel: step.vowel, tag });
+      case 'narrowing':
+        return t('explain.narrowing', { chose: step.chose, tag });
+      case 'apostrophe':
+        return t('explain.apostrophe', { tag });
     }
   });
 }

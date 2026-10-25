@@ -58,6 +58,55 @@ const cases: Case[] = [
   [saat, ['PL', 'POSS_3PL'], 'saatleri'],
 ];
 
+const proper = (form: string, extra: Partial<Stem> = {}): Stem => ({
+  form,
+  proper: true,
+  ...extra,
+});
+const drops = (form: string): Stem => ({ form, dropsVowel: true });
+
+describe('Eigennamen', () => {
+  it.each([
+    [proper('İstanbul'), ['LOC'], "İstanbul'da"],
+    [proper('Frankfurt'), ['LOC'], "Frankfurt'ta"],
+    [proper('Berlin'), ['ABL'], "Berlin'den"],
+    [proper('Ankara'), ['DAT'], "Ankara'ya"],
+    [proper('Mehmet', { softens: true }), ['DAT'], "Mehmet'e"],
+    [proper('Ayşe'), ['GEN'], "Ayşe'nin"],
+    [proper('Almanya'), ['LOC'], "Almanya'da"],
+    [proper('Türkiye'), ['DAT'], "Türkiye'ye"],
+  ] as Case[])('%o + %j → %s', (stem, tags, expected) => {
+    expect(inflect(stem, tags).form).toBe(expected);
+  });
+
+  it('behält die Großschreibung im Stamm-Segment', () => {
+    expect(inflect(proper('İzmir'), ['LOC']).segments[0]).toEqual({ tag: 'STEM', text: 'İzmir' });
+  });
+});
+
+describe('Vokalausfall', () => {
+  it.each([
+    [drops('ağız'), ['POSS_1SG'], 'ağzım'],
+    [drops('ağız'), ['POSS_3SG'], 'ağzı'],
+    [drops('burun'), ['ACC'], 'burnu'],
+    [drops('oğul'), ['POSS_1SG'], 'oğlum'],
+    [drops('oğul'), ['POSS_3SG'], 'oğlu'],
+    [drops('isim'), ['POSS_1SG'], 'ismim'],
+    [drops('şehir'), ['ACC'], 'şehri'],
+    [drops('şehir'), ['LOC'], 'şehirde'],
+    [drops('ağız'), ['PL'], 'ağızlar'],
+    [drops('oğul'), ['PL', 'POSS_1SG'], 'oğullarım'],
+  ] as Case[])('%o + %j → %s', (stem, tags, expected) => {
+    expect(inflect(stem, tags).form).toBe(expected);
+  });
+
+  it('begründet den Vokalausfall', () => {
+    expect(inflect(drops('oğul'), ['POSS_1SG']).steps).toContainEqual(
+      expect.objectContaining({ rule: 'vowel_drop', vowel: 'u' }),
+    );
+  });
+});
+
 describe('inflect', () => {
   it.each(cases)('%o + %j → %s', (stem, tags, expected) => {
     expect(inflect(stem, tags).form).toBe(expected);
@@ -123,8 +172,6 @@ describe('inflect', () => {
 
   // Bekannte Grenzen, siehe KNOWN_LIMITS in inflect.ts und docs/ENGINE_GAPS.md
   it.todo('Konsonantenverdopplung: hak → hakkı, his → hissi, ret → reddi');
-  it.todo('Vokalausfall: ağız → ağzı, burun → burnu, isim → ismim');
   it.todo('Stumme Endung (arab. ʿain): cami → camii (umgangssprachlich auch camisi)');
-  it.todo("Eigennamen: Apostroph und keine geschriebene Erweichung (Frankfurt'ta, Mehmet'e)");
   it.todo('Unregelmäßig: su → suyun (Gen.), suyu (Poss. 3. Sg.); ne → neyi');
 });

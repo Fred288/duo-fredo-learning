@@ -1,7 +1,7 @@
 import { parse as parseYaml } from 'yaml';
-import { Unit, vocabId, type Vocab } from '../src/content/schema';
-import { trLower } from '../src/lib/turkish';
-import { inflect, MorphError } from '../src/morphology';
+import { Unit, vocabId } from '../src/content/schema';
+import { sameForm, solveExercise } from '../src/content/lexicon';
+import { MorphError } from '../src/morphology';
 
 export interface LoadedUnit {
   file: string;
@@ -71,24 +71,17 @@ export function checkUnits(units: LoadedUnit[], fileExists: (path: string) => bo
   return { errors, warnings };
 }
 
-/** Suffix-Builder-Lösungen müssen mit der Morphologie-Engine übereinstimmen. */
+/** Grammatik-Lösungen (Suffix-Builder, Konjugation) müssen mit der Morphologie-Engine übereinstimmen. */
 export function checkSuffixTargets(units: LoadedUnit[]): string[] {
-  const lexicon = new Map<string, Vocab>();
-  for (const { unit } of units) for (const v of unit.vocab ?? []) lexicon.set(v.tr, v);
-
+  const lexicon = units.flatMap(({ unit }) => unit.vocab ?? []);
   const errors: string[] = [];
   for (const { file, unit } of units) {
     for (const lesson of unit.lessons) {
       for (const ex of lesson.exercises) {
-        if (ex.type !== 'suffix_builder') continue;
-        const v = lexicon.get(ex.stem);
+        if (ex.type !== 'suffix_builder' && ex.type !== 'conjugation') continue;
         try {
-          const { form } = inflect(
-            { form: ex.stem, softens: v?.softens, harmonyVowel: v?.harmony_vowel },
-            ex.suffixes,
-          );
-          const target = trLower(ex.target);
-          if (form !== target) {
+          const { form } = solveExercise(ex, lexicon);
+          if (!sameForm(form, ex.target)) {
             errors.push(`${file}: ${ex.id}: target "${ex.target}", Engine erwartet "${form}"`);
           }
         } catch (e) {

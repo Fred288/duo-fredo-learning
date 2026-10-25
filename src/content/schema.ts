@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { MORPH_TAGS } from '../morphology/tags';
+import { PERSONS } from '../morphology/verb';
 
 export const LEVELS = ['A1', 'A2', 'B1', 'B2'] as const;
 export const Level = z.enum(LEVELS);
@@ -43,6 +44,12 @@ export const Vocab = z.object({
     .string()
     .regex(/^[aeıioöuü]$/)
     .optional(),
+  // Vokalausfall vor vokalischem Suffix (oğul → oğlum)
+  drops_vowel: z.boolean().optional(),
+  // Eigenname: Apostroph vor dem Suffix (İstanbul'da)
+  proper: z.boolean().optional(),
+  // großgeschrieben ohne Apostroph (Nationalitäten: Almanlar)
+  capitalized: z.boolean().optional(),
   register: register.optional(),
   reviewed: z.boolean().optional(),
   ...provenanceOverride,
@@ -96,6 +103,20 @@ export const SuffixBuilder = z.object({
   target: nonEmpty,
 });
 
+/** Verbkonjugation (mode verb, lemma = Infinitiv) oder Nominalsatz mit Kopula (mode copula). */
+export const Conjugation = z.object({
+  ...exerciseBase,
+  type: z.literal('conjugation'),
+  mode: z.enum(['verb', 'copula']),
+  lemma: nonEmpty,
+  person: z.enum(PERSONS),
+  tense: z.literal('present').optional(),
+  negative: z.boolean().optional(),
+  question: z.boolean().optional(),
+  dir: z.boolean().optional(),
+  target: nonEmpty,
+});
+
 export const Segment = z.object({
   ...exerciseBase,
   type: z.literal('segment'),
@@ -115,6 +136,7 @@ export const Exercise = z.discriminatedUnion('type', [
   WordBank,
   FreeText,
   SuffixBuilder,
+  Conjugation,
   Segment,
   SovPuzzle,
 ]);

@@ -1,9 +1,28 @@
 export {
+  asStem,
   inflect,
   KNOWN_LIMITS,
   MorphError,
+  stemSpelling,
   type Inflection,
   type Stem,
   type Step,
 } from './inflect';
-export { MORPH_TAGS, type MorphTag } from './tags';
+export {
+  PRONOUN_CASES,
+  PRONOUN_LEMMAS,
+  pronoun,
+  type PronounCase,
+  type PronounLemma,
+} from './pronouns';
+export { MORPH_TAGS, VERB_TAGS, type AnyTag, type MorphTag, type VerbTag } from './tags';
+export {
+  conjugate,
+  PERSONS,
+  predicate,
+  verbStem,
+  type ConjugateOptions,
+  type Person,
+  type PredicateOptions,
+  type VerbStem,
+} from './verb';

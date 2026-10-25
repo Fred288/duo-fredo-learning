@@ -98,3 +98,33 @@ ${vocab}
     ]);
   });
 });
+
+describe('checkSuffixTargets: Konjugation', () => {
+  const unit = (target: string, extra = '') => `
+id: a1-u08
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+lessons:
+  - id: a1-u08-l1
+    type: grammar
+    title: Präsens
+    exercises:
+      - { id: a1-u08-l1-e1, type: conjugation, mode: verb, lemma: gitmek, person: 1sg, target: ${target} }
+      - { id: a1-u08-l1-e2, type: conjugation, mode: copula, lemma: öğrenci, person: 2sg, question: true, target: öğrenci misin? }
+vocab:
+  - { tr: gitmek, de: [gehen], pos: verb, softens: true }
+${extra}
+`;
+
+  it('akzeptiert Formen, die die Engine bildet (inkl. Erweichung und Frage)', () => {
+    expect(checkSuffixTargets([load('a.yaml', unit('gidiyorum'))])).toEqual([]);
+  });
+
+  it('meldet falsche Formen mit Erwartungswert', () => {
+    expect(checkSuffixTargets([load('a.yaml', unit('gitiyorum'))])).toEqual([
+      'a.yaml: a1-u08-l1-e1: target "gitiyorum", Engine erwartet "gidiyorum"',
+    ]);
+  });
+});

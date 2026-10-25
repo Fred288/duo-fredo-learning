@@ -18,11 +18,11 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 | Assimilation c→ç, g→k (Suffixe -ci, -ce, -gen …)                                                             | ❌     | Archiphoneme `C`, `G` ergänzen, sobald Ableitungssuffixe kommen (Türkçe, kitapçı)                                                    | A2                                   |
 | Erweichung p/ç/t/k → b/c/d/ğ vor Vokal                                                                       | ✅     | lexikalisch über `softens` (nicht jedes Wort erweicht: at → atı)                                                                     | –                                    |
 | nk → ng                                                                                                      | ✅     | in `soften()`                                                                                                                        | –                                    |
-| Erweichung bei Verbstämmen (et-, git-, tat- → ed-, gid-, tad-)                                               | ❌     | Teil der Verbmorphologie, Flag am Verb                                                                                               | A1 (Präsens: gidiyorum)              |
-| Vokalausfall bei Suffix mit Vokal (ağız → ağzı, burun → burnu, oğul → oğlu, isim → ismi)                     | ❌     | neues Vokabel-Flag `drops_vowel: true`; Engine streicht den letzten Stammvokal vor vokalisch anlautendem Suffix                      | **A1** (Familie: oğlum; Name: ismim) |
+| Erweichung bei Verbstämmen (et-, git-, tat- → ed-, gid-, tad-)                                               | ✅     | `softens` am Verb (gidiyor, ediyor)                                                                                                  | A1 (Präsens: gidiyorum)              |
+| Vokalausfall bei Suffix mit Vokal (ağız → ağzı, burun → burnu, oğul → oğlu, isim → ismi)                     | ✅     | Vokabel-Flag `drops_vowel` (Phase 2, Schritt 1)                                                                                      | **A1** (Familie: oğlum; Name: ismim) |
 | Konsonantenverdopplung (hak → hakkı, his → hissi, sır → sırrı)                                               | ❌     | Vokabel-Flag `doubles: true`, kombinierbar mit Erweichung (ret → reddi)                                                              | A2                                   |
 | Stumme Endung arabischer Lehnwörter (cami → camii)                                                           | ❌     | Vokabel-Flag `consonant_final: true` (wie Konsonant behandeln, kein Puffer); beide Formen akzeptieren, da camisi inzwischen zulässig | A2                                   |
-| Eigennamen mit Apostroph (Berlin'de, Frankfurt'ta), keine geschriebene Erweichung (Mehmet'e, nicht *Mehmede) | ❌     | `proper: true`: Großschreibung erhalten, Apostroph vor dem ersten Suffix, Erweichung nur lautlich                                    | **A1** (Herkunft, Orte)              |
+| Eigennamen mit Apostroph (Berlin'de, Frankfurt'ta), keine geschriebene Erweichung (Mehmet'e, nicht *Mehmede) | ✅     | Vokabel-Flag `proper`; Nationalitäten ohne Apostroph über `capitalized` (Türkler, Almanım)                                           | **A1** (Herkunft, Orte)              |
 | Zirkumflex (kâr, hala vs. hâlâ)                                                                              | ❌     | nur Orthografie in Inhalten; Antwortprüfung sollte `â` ≈ `a` tolerieren (Hinweis statt Fehler)                                       | A2                                   |
 | Betonung (meist letzte Silbe; Ausnahmen bei Ortsnamen, -mA-Verneinung, Fragepartikel)                        | ❌     | kein Engine-Thema; Audio und Erklärkarten                                                                                            | später                               |
 | Unregelmäßige Stämme (su → suyun/suyu, ne → neyi)                                                            | 🟡     | su + ACC zufällig richtig (suyu); Gen. und Poss. 3. Sg. falsch. Ausnahmeliste mit festen Formen je Tag                               | A1 (Essen und Trinken)               |
@@ -36,10 +36,12 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 | Possessiv-Kompositum (Genitiv-Possessiv-Verbindung: okul müdürü, Türk kahvesi) | ❌     | zwei Wörter, das zweite mit POSS_3SG; als eigener Übungsfall, keine neue Engine-Regel nötig | A1/A2     |
 | Zugehörigkeitssuffix -ki (evdeki, benimki)                                     | ❌     | neuer Tag `KI` (harmonisiert nicht, außer bugünkü)                                          | A2        |
 | Ableitungen -lI, -sIz, -lIk, -CI                                               | ❌     | neue Tags; brauchen `C` für -ci                                                             | A2        |
-| Personalpronomen mit Kasus (bana, sana, beni, benim)                           | ❌     | unregelmäßig → Tabelle statt Regel                                                          | **A1**    |
+| Personalpronomen mit Kasus (bana, sana, beni, benim)                           | ✅     | Tabelle `pronouns.ts` (inkl. bu, şu)                                                        | **A1**    |
 | Kein Plural nach Zahlen und çok/birkaç                                         | –      | keine Engine-Regel; in Inhalten und Erklärkarte (A1-02 erledigt)                            | –         |
 
-## 3. Verbmorphologie (größte Lücke, Voraussetzung für A1-03 ff.)
+## 3. Verbmorphologie
+
+**Stufe 1 umgesetzt** (`src/morphology/verb.ts`): Präsens -Iyor mit Stammvokal-Ausfall und Verbstamm-Erweichung, de-/ye- unregelmäßig, Verneinung mit Verengung, Personalendungen Typ 1, Fragepartikel mI (getrennt, mit Personalendung; 3. Pl. am Verb), Kopula im Nominalsatz inkl. değil und -DIr. Übungstyp `conjugation`. Offen ab hier: Stufe 2.
 
 Die Grammatiken unterscheiden vier Typen von Personalendungen; die Engine braucht sie als
 eigene Template-Gruppen:
@@ -63,8 +65,8 @@ Zusätzlich nötig:
 
 ## 4. Empfohlene Reihenfolge (Phase 2)
 
-1. `proper`, `drops_vowel`, Personalpronomen-Tabelle (A1-03 Orte/Herkunft, A1-06 Familie)
-2. Verb-Engine Stufe 1: Kopula Typ 1, Präsens -Iyor, Verneinung -mA, Fragepartikel mI, Verbstamm-Erweichung
+1. ✅ `proper`, `drops_vowel`, Personalpronomen-Tabelle
+2. ✅ Verb-Engine Stufe 1: Kopula Typ 1, Präsens -Iyor, Verneinung -mA, Fragepartikel mI, Verbstamm-Erweichung
 3. Unregelmäßigkeiten-Liste (su, ne, de-/ye-: diyor, yiyor)
 4. Stufe 2 (A2): -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag, -(y)Abil, -mAlI, Imperativ; `C`/`G`; `doubles`, `consonant_final`; -ki, Ableitungen
 

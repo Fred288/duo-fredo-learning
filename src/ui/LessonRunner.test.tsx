@@ -163,6 +163,33 @@ describe('LessonRunner', () => {
     expect(screen.getByRole('status').textContent).toContain('Richtig!');
   });
 
+  it('Konjugation: verneinte Form bauen und Verengung begründen', () => {
+    const conjLesson: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e7',
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'gelmek',
+          person: '1sg',
+          negative: true,
+          target: 'gelmiyorum',
+          gloss_de: 'ich komme nicht',
+        },
+      ],
+    };
+    render(<LessonRunner lesson={conjLesson} onExit={() => {}} />);
+    expect(screen.getByText('gelmek · ich · verneint')).toBeTruthy();
+    for (const tile of ['gel', 'mi', 'yor', 'um']) {
+      fireEvent.click(screen.getByRole('button', { name: tile }));
+    }
+    click('Prüfen');
+    const status = screen.getByRole('status').textContent;
+    expect(status).toContain('Richtig!');
+    expect(status).toContain('Vor -yor wird die Verneinung -me/-ma zu „mi“');
+  });
+
   it('wählt MC-Optionen per Zifferntaste und prüft mit Enter', () => {
     render(<LessonRunner lesson={lesson} onExit={() => {}} />);
     fireEvent.keyDown(window, { key: '1' });

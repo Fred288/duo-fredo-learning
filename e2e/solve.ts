@@ -3,7 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { expect, type Page } from '@playwright/test';
 import type { Exercise, Unit } from '../src/content/schema';
-import { suffixTiles } from '../src/session/suffix-tiles';
+import { solveExercise } from '../src/content/lexicon';
 
 export function loadUnit(unitId: string): Unit {
   return JSON.parse(readFileSync(`public/content/units/${unitId}.json`, 'utf8')) as Unit;
@@ -25,7 +25,8 @@ async function answer(page: Page, ex: Exercise, unit: Unit) {
       await page.getByLabel('Deine Antwort').fill(ex.answers[0]!);
       break;
     case 'suffix_builder':
-      for (const { text } of suffixTiles(ex, unit.vocab).solution.segments) {
+    case 'conjugation':
+      for (const { text } of solveExercise(ex, unit.vocab).segments.filter((s) => s.text)) {
         await page.getByRole('button', { name: text, exact: true }).click();
       }
       break;

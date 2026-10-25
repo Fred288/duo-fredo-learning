@@ -1,6 +1,7 @@
 import type { Exercise, Vocab } from '../content/schema';
 import { inflect, type Inflection, type Stem } from '../morphology';
 import { suffixVariants } from '../morphology/variants';
+import { stemFromVocab } from '../content/lexicon';
 import { seededShuffle } from './grade';
 
 type SuffixBuilder = Extract<Exercise, { type: 'suffix_builder' }>;
@@ -13,10 +14,8 @@ export interface SuffixTiles {
 }
 
 /** Stamm samt lexikalischer Flags aus dem Wortschatz der Unit. */
-export function stemFor(ex: SuffixBuilder, vocab: readonly Vocab[] = []): Stem {
-  const v = vocab.find((x) => x.tr === ex.stem);
-  return { form: ex.stem, softens: v?.softens, harmonyVowel: v?.harmony_vowel };
-}
+export const stemFor = (ex: SuffixBuilder, vocab: readonly Vocab[] = []): Stem =>
+  stemFromVocab(ex.stem, vocab);
 
 const MAX_DISTRACTORS_PER_SLOT = 1;
 
