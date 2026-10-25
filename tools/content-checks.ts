@@ -1,5 +1,6 @@
 import { parse as parseYaml } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
+import { trLower } from '../src/lib/turkish';
 import { inflect, MorphError } from '../src/morphology';
 
 export interface LoadedUnit {
@@ -86,7 +87,7 @@ export function checkSuffixTargets(units: LoadedUnit[]): string[] {
             { form: ex.stem, softens: v?.softens, harmonyVowel: v?.harmony_vowel },
             ex.suffixes,
           );
-          const target = ex.target.normalize('NFC').toLocaleLowerCase('tr');
+          const target = trLower(ex.target);
           if (form !== target) {
             errors.push(`${file}: ${ex.id}: target "${ex.target}", Engine erwartet "${form}"`);
           }

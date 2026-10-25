@@ -11,7 +11,8 @@ Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`.
 
 ## Konventionen
 
-- Türkischer Text: nur `toLocaleLowerCase('tr')` / `toLocaleUpperCase('tr')` (ESLint-Regel erzwingt das). Vergleich nach NFC-Normalisierung.
+- Türkischer Text: nur `toLocaleLowerCase('tr')` / `toLocaleUpperCase('tr')` (ESLint-Regel erzwingt das), am besten über `trLower`/`trUpper` aus `src/lib/turkish.ts` (inkl. NFC).
+- Antwortprüfung: `checkAnswer` in `src/lib/answer.ts` (correct/almost/wrong + Hinweise). Grammatikübungen mit `allowTypos: false`, sonst gilt `evda` als Tippfehler von `evde`.
 - Inhalte liegen in `content/` (YAML/JSON), nie im Code; Zod-Validierung im Build.
 - Schema: `src/content/schema.ts`. IDs sind stabil (SRS hängt daran): Unit `a1-u01`, Lektion `a1-u01-l1`, Übung `a1-u01-l1-e1`; Vokabel-ID = `tr`, bei Homonymen explizites `id`.
 - Suffix-Builder referenziert Morphem-Tags (`src/morphology/tags.ts`), keine Oberflächenformen.

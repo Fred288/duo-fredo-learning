@@ -1,4 +1,5 @@
 // Lautklassen und Harmonieregeln des Türkischen.
+import { trLower } from '../lib/turkish';
 
 export const VOWELS = 'aeıioöuü';
 const FRONT = 'eiöü';
@@ -37,4 +38,4 @@ export function soften(stem: string): { form: string; from: string; to: string }
   return to ? { form: stem.slice(0, -1) + to, from: last, to } : undefined;
 }
 
-export const normalize = (s: string): string => s.normalize('NFC').trim().toLocaleLowerCase('tr');
+export const normalize = (s: string): string => trLower(s).trim();
