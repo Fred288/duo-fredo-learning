@@ -31,3 +31,23 @@ test('komplette Lektion a1-u01-l1 durchspielen', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Lektion geschafft' })).toBeVisible();
   await expect(page.getByText('3 von 3 beim ersten Versuch richtig')).toBeVisible();
 });
+
+test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Endungen bauen/ }).click();
+
+  // 1) ev + Plural
+  await page.getByRole('button', { name: 'ev', exact: true }).click();
+  await page.getByRole('button', { name: 'ler', exact: true }).click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await expect(page.getByRole('status')).toContainText('Richtig!');
+  await expect(page.getByRole('status')).toContainText('hell');
+  await page.getByRole('button', { name: 'Weiter' }).click();
+
+  // 2) okul + Plural + Lokativ, bewusst mit falscher Harmonie
+  await page.getByRole('button', { name: 'okul', exact: true }).click();
+  await page.getByRole('button', { name: 'ler', exact: true }).click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await expect(page.getByRole('status')).toContainText('Leider falsch.');
+  await expect(page.getByRole('status')).toContainText('Lösung: okullarda');
+});

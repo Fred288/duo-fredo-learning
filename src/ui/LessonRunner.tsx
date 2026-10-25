@@ -1,18 +1,28 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import type { Lesson } from '../content/schema';
+import type { Lesson, Vocab } from '../content/schema';
 import { t } from '../i18n';
+import { explainSteps } from '../i18n/explain';
 import { grade, isSupported, solutionOf } from '../session/grade';
 import { createSession, currentExercise, next, submit, summary } from '../session/session';
+import { suffixTiles } from '../session/suffix-tiles';
 import { useApp } from '../store/app';
 import { Feedback } from './Feedback';
 import { FreeTextInput } from './exercises/FreeTextInput';
 import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
+import { SuffixBuilderInput } from './exercises/SuffixBuilderInput';
 import { WordBankInput } from './exercises/WordBankInput';
 
 const buttonBase =
   'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 disabled:opacity-40';
 
-export function LessonRunner({ lesson, onExit }: { lesson: Lesson; onExit: () => void }) {
+interface Props {
+  lesson: Lesson;
+  /** Wortschatz der Unit; liefert Harmonie-/Erweichungs-Flags für Suffix-Builder. */
+  vocab?: readonly Vocab[];
+  onExit: () => void;
+}
+
+export function LessonRunner({ lesson, vocab = [], onExit }: Props) {
   const tolerateDiacritics = useApp((s) => s.tolerateDiacritics);
   const exercises = useMemo(() => lesson.exercises.filter(isSupported), [lesson]);
   const [session, setSession] = useState(() => createSession(exercises));
@@ -120,6 +130,14 @@ export function LessonRunner({ lesson, onExit }: { lesson: Lesson; onExit: () =>
         {supported.type === 'free_text' && (
           <FreeTextInput ex={supported} value={answer} onChange={setAnswer} disabled={!answering} />
         )}
+        {supported.type === 'suffix_builder' && (
+          <SuffixBuilderInput
+            ex={supported}
+            vocab={vocab}
+            onChange={setAnswer}
+            disabled={!answering}
+          />
+        )}
       </div>
 
       {answering ? (
@@ -136,6 +154,11 @@ export function LessonRunner({ lesson, onExit }: { lesson: Lesson; onExit: () =>
           <Feedback
             result={session.last!}
             solution={solutionOf(supported)}
+            reasons={
+              supported.type === 'suffix_builder'
+                ? explainSteps(suffixTiles(supported, vocab).solution.steps)
+                : undefined
+            }
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
           />

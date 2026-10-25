@@ -1,0 +1,49 @@
+# Minimale Beispiel-Unit für M5 (Suffix-Builder). Vollständiger Inhalt folgt in M7.
+id: a1-u02
+level: A1
+title: Vokalharmonie und Plural
+grammar_focus: [vokalharmonie, plural, lokativ]
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u02-l1
+    type: grammar
+    title: Endungen bauen
+    exercises:
+      - id: a1-u02-l1-e1
+        type: suffix_builder
+        stem: ev
+        suffixes: [PL]
+        target: evler
+        gloss_de: die Häuser
+      - id: a1-u02-l1-e2
+        type: suffix_builder
+        stem: okul
+        suffixes: [PL, LOC]
+        target: okullarda
+        gloss_de: in den Schulen
+      - id: a1-u02-l1-e3
+        type: suffix_builder
+        stem: göz
+        suffixes: [PL]
+        target: gözler
+        gloss_de: die Augen
+      - id: a1-u02-l1-e4
+        type: suffix_builder
+        stem: kitap
+        suffixes: [ACC]
+        target: kitabı
+        gloss_de: das Buch (Akkusativ)
+      - id: a1-u02-l1-e5
+        type: suffix_builder
+        stem: araba
+        suffixes: [DAT]
+        target: arabaya
+        gloss_de: zum Auto
+vocab:
+  - { tr: ev, de: [Haus, Wohnung], pos: noun }
+  - { tr: okul, de: [Schule], pos: noun }
+  - { tr: göz, de: [Auge], pos: noun }
+  - { tr: kitap, de: [Buch], pos: noun, softens: true }
+  - { tr: araba, de: [Auto], pos: noun }

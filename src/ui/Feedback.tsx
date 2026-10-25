@@ -14,10 +14,12 @@ interface Props {
   result: AnswerResult;
   solution: string;
   explanation?: string;
+  /** Regelbegründungen aus der Morphologie-Engine. */
+  reasons?: string[];
   retry: boolean;
 }
 
-export function Feedback({ result, solution, explanation, retry }: Props) {
+export function Feedback({ result, solution, explanation, reasons = [], retry }: Props) {
   const shown = result.matched ?? solution;
   return (
     <div
@@ -36,6 +38,16 @@ export function Feedback({ result, solution, explanation, retry }: Props) {
           {t(`feedback.hint.${h}`)}
         </p>
       ))}
+      {reasons.length > 0 && (
+        <div className="mt-2 text-sm">
+          <p className="font-medium">{t('explain.title')}</p>
+          <ul className="mt-1 list-disc pl-5">
+            {reasons.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       {explanation && <p className="mt-2 text-sm">{explanation}</p>}
       {retry && <p className="mt-2 text-sm opacity-80">{t('feedback.retry')}</p>}
     </div>

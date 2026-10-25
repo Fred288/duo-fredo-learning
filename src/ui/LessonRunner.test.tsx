@@ -25,8 +25,16 @@ const lesson: Lesson = {
       answers: ['Teşekkürler'],
       hint: '„Sağ ol“ ist informell.',
     },
-    // Noch nicht unterstützt (M5) → wird übersprungen
-    { id: 'a1-u01-l1-e3', type: 'suffix_builder', stem: 'ev', suffixes: ['LOC'], target: 'evde' },
+    // Noch nicht unterstützt (Phase 2) → wird übersprungen
+    {
+      id: 'a1-u01-l1-e3',
+      type: 'segment',
+      word: 'evde',
+      segments: [
+        { text: 'ev', role: 'Stamm' },
+        { text: 'de', role: 'Lokativ' },
+      ],
+    },
   ],
 };
 
@@ -88,6 +96,38 @@ describe('LessonRunner', () => {
     fireEvent.click(tile);
     expect(tile.hasAttribute('disabled')).toBe(true);
     fireEvent.keyDown(tile, { key: 'Enter' });
+    expect(screen.getByRole('status').textContent).toContain('Richtig!');
+  });
+
+  it('baut Wortformen im Suffix-Builder und begründet die Regel', () => {
+    const sbLesson: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e8',
+          type: 'suffix_builder',
+          stem: 'kitap',
+          suffixes: ['ACC'],
+          target: 'kitabı',
+          gloss_de: 'das Buch',
+        },
+      ],
+    };
+    const vocab = [{ tr: 'kitap', de: ['Buch'], pos: 'noun' as const, softens: true }];
+    render(<LessonRunner lesson={sbLesson} vocab={vocab} onExit={() => {}} />);
+    expect(screen.getByText('kitap + Akkusativ')).toBeTruthy();
+    // erst falsch (ungeänderter Stamm), dann richtig nach Wiederholung
+    fireEvent.click(screen.getByRole('button', { name: 'kitap' }));
+    fireEvent.click(screen.getByRole('button', { name: 'ı' }));
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Lösung: kitabı');
+    expect(screen.getByRole('status').textContent).toContain(
+      'Auslaut „p“ wird vor einem Vokal zu „b“',
+    );
+    click('Weiter');
+    fireEvent.click(screen.getByRole('button', { name: 'kitab' }));
+    fireEvent.click(screen.getByRole('button', { name: 'ı' }));
+    click('Prüfen');
     expect(screen.getByRole('status').textContent).toContain('Richtig!');
   });
 

@@ -1,7 +1,12 @@
 import type { Exercise } from '../content/schema';
 import { checkAnswer, type AnswerResult } from '../lib/answer';
 
-export const SUPPORTED_TYPES = ['multiple_choice', 'word_bank', 'free_text'] as const;
+export const SUPPORTED_TYPES = [
+  'multiple_choice',
+  'word_bank',
+  'free_text',
+  'suffix_builder',
+] as const;
 type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
 
 export const isSupported = (ex: Exercise): ex is Supported =>
@@ -23,12 +28,17 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
       return checkAnswer(answer, ex.answers, { allowTypos: false });
     case 'free_text':
       return checkAnswer(answer, ex.answers, { tolerateDiacritics: opts.tolerateDiacritics });
+    case 'suffix_builder':
+      // Genau die Form zählt: kein Tippfehler-Spielraum, sonst wäre evda ≈ evde.
+      return checkAnswer(answer, [ex.target], { allowTypos: false });
   }
 }
 
 /** Kanonische Lösung zur Anzeige im Feedback. */
 export function solutionOf(ex: Supported): string {
-  return ex.type === 'multiple_choice' ? ex.answer : ex.answers[0]!;
+  if (ex.type === 'multiple_choice') return ex.answer;
+  if (ex.type === 'suffix_builder') return ex.target;
+  return ex.answers[0]!;
 }
 
 /** Bausteine der Wortbank: Wörter der kanonischen Lösung plus Ablenker, stabil gemischt. */
@@ -37,7 +47,7 @@ export function wordBankTokens(ex: Extract<Exercise, { type: 'word_bank' }>): st
   return seededShuffle([...words, ...(ex.distractors ?? [])], ex.id);
 }
 
-function seededShuffle<T>(items: T[], seed: string): T[] {
+export function seededShuffle<T>(items: T[], seed: string): T[] {
   let h = 2166136261;
   for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
   const rand = () => {
