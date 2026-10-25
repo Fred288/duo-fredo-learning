@@ -1,0 +1,36 @@
+# Minimale Beispiel-Unit für M1 (Schema/Pipeline). Vollständiger Inhalt folgt in M7.
+id: a1-u01
+level: A1
+title: Alphabet und Begrüßung
+grammar_focus: [alphabet, aussprache]
+explainer: explainers/a1-alphabet.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u01-l1
+    type: vocab
+    title: Begrüßen
+    exercises:
+      - id: a1-u01-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „Hallo“?
+        options: [Merhaba, Teşekkürler, Hayır]
+        answer: Merhaba
+      - id: a1-u01-l1-e2
+        type: word_bank
+        prompt: Guten Morgen!
+        answers: [Günaydın!]
+        distractors: [İyi, akşamlar]
+      - id: a1-u01-l1-e3
+        type: free_text
+        direction: de_tr
+        prompt: Danke
+        answers: [Teşekkürler, Teşekkür ederim, Sağ ol]
+        hint: „Sağ ol“ ist informell (sen).
+vocab:
+  - { tr: merhaba, de: [hallo], pos: interj }
+  - { tr: günaydın, de: [guten Morgen], pos: interj }
+  - { tr: teşekkürler, de: [danke], pos: interj }
+  - { tr: evet, de: [ja], pos: particle }
+  - { tr: hayır, de: [nein], pos: particle }

@@ -1,0 +1,64 @@
+import { describe, expect, it } from 'vitest';
+import { checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
+
+const yamlUnit = (id: string, extra = '') => `
+id: ${id}
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+${extra}
+lessons:
+  - id: ${id}-l1
+    type: vocab
+    title: Wörter
+    exercises:
+      - id: ${id}-l1-e1
+        type: free_text
+        direction: de_tr
+        prompt: Haus
+        answers: [ev]
+vocab:
+  - { tr: ev, de: [Haus], pos: noun }
+`;
+
+const load = (file: string, text: string): LoadedUnit => {
+  const { unit, errors } = parseUnitFile(file, text);
+  expect(errors).toEqual([]);
+  return { file, unit: unit! };
+};
+
+describe('parseUnitFile', () => {
+  it('meldet YAML-Syntaxfehler mit Dateiname', () => {
+    const { errors } = parseUnitFile('x.yaml', 'id: [unclosed');
+    expect(errors[0]).toMatch(/^x\.yaml: YAML-Fehler/);
+  });
+
+  it('meldet Schemafehler mit Pfad', () => {
+    const { errors } = parseUnitFile('x.yaml', yamlUnit('a1-u01').replace('direction: de_tr', ''));
+    expect(errors).toContainEqual(expect.stringContaining('x.yaml: lessons.0.exercises.0'));
+  });
+});
+
+describe('checkUnits', () => {
+  it('findet doppelte IDs über Dateien hinweg', () => {
+    const units = [load('a.yaml', yamlUnit('a1-u01')), load('b.yaml', yamlUnit('a1-u01'))];
+    const { errors } = checkUnits(units, () => true);
+    expect(errors).toContainEqual(expect.stringContaining('doppelte Unit-ID "a1-u01"'));
+    expect(errors).toContainEqual(expect.stringContaining('doppelte Vokabel-ID "ev"'));
+  });
+
+  it('meldet fehlenden Explainer als Fehler', () => {
+    const units = [load('a.yaml', yamlUnit('a1-u01', 'explainer: explainers/fehlt.md'))];
+    expect(checkUnits(units, () => false).errors).toContainEqual(
+      expect.stringContaining('Explainer "explainers/fehlt.md" nicht gefunden'),
+    );
+  });
+
+  it('warnt vor ungeprüften Inhalten', () => {
+    const units = [load('a.yaml', yamlUnit('a1-u01'))];
+    const { errors, warnings } = checkUnits(units, () => true);
+    expect(errors).toEqual([]);
+    expect(warnings).toContainEqual(expect.stringContaining('2 Einträge'));
+  });
+});
