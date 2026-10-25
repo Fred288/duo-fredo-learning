@@ -48,7 +48,10 @@ const cases: Case[] = [
   [{ form: 'renk', softens: true }, ['ACC'], 'rengi'],
   [{ form: 'ağaç', softens: true }, ['DAT'], 'ağaca'],
   ['at', ['ACC'], 'atı'],
-  // Harmonie-Ausnahme (Lehnwort)
+  // Harmonie-Ausnahmen (Lehnwörter): Harmonie richtet sich nach dem Gehör, nicht der Schrift
+  [{ form: 'gol', harmonyVowel: 'ö' }, ['ACC'], 'golü'],
+  [{ form: 'gol', harmonyVowel: 'ö' }, ['PL'], 'goller'],
+  [{ form: 'kabul', harmonyVowel: 'ü' }, ['POSS_3SG'], 'kabulü'],
   [saat, ['ACC'], 'saati'],
   [saat, ['LOC'], 'saatte'],
   [saat, ['PL'], 'saatler'],
@@ -118,9 +121,10 @@ describe('inflect', () => {
     expect(() => inflect('brr', ['PL'])).toThrow(MorphError);
   });
 
-  // Bekannte Grenzen, siehe KNOWN_LIMITS in inflect.ts
-  it.todo('Konsonantenverdopplung: hak → hakkı');
-  it.todo('Unregelmäßig: su → suyu');
-  it.todo('Vokalausfall: ağız → ağzı');
-  it.todo("Eigennamen mit Apostroph: İstanbul'da");
+  // Bekannte Grenzen, siehe KNOWN_LIMITS in inflect.ts und docs/ENGINE_GAPS.md
+  it.todo('Konsonantenverdopplung: hak → hakkı, his → hissi, ret → reddi');
+  it.todo('Vokalausfall: ağız → ağzı, burun → burnu, isim → ismim');
+  it.todo('Stumme Endung (arab. ʿain): cami → camii (umgangssprachlich auch camisi)');
+  it.todo("Eigennamen: Apostroph und keine geschriebene Erweichung (Frankfurt'ta, Mehmet'e)");
+  it.todo('Unregelmäßig: su → suyun (Gen.), suyu (Poss. 3. Sg.); ne → neyi');
 });

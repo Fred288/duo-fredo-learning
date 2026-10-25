@@ -1,6 +1,6 @@
 # Yol – Türkisch lernen (Deutsch → Türkisch)
 
-Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`.
+Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`. Curriculum: `docs/CURRICULUM.md`, Engine-Lücken: `docs/ENGINE_GAPS.md`, Quellenregeln: `docs/REFERENCES.md` (keine Texte aus geschützten Werken übernehmen).
 
 ## Befehle
 

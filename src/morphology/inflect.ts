@@ -44,10 +44,12 @@ export class MorphError extends Error {}
 
 // Noch nicht abgedeckt; später über weitere Vocab-Flags lösbar.
 export const KNOWN_LIMITS = [
-  'Konsonantenverdopplung (hak → hakkı)',
-  'Unregelmäßige Stämme (su → suyu, ne → neyi)',
-  'Vokalausfall (ağız → ağzı, burun → burnu)',
-  "Eigennamen mit Apostroph (İstanbul'da)",
+  'Konsonantenverdopplung (hak → hakkı, ret → reddi)',
+  'Vokalausfall (ağız → ağzı, isim → ismim)',
+  'Stumme Endung arabischer Lehnwörter (cami → camii)',
+  "Eigennamen mit Apostroph (Frankfurt'ta, Mehmet'e)",
+  'Unregelmäßige Stämme (su → suyun, ne → neyi)',
+  'Verbmorphologie (Kopula, Zeiten, Verneinung, Frage)',
 ] as const;
 
 export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
