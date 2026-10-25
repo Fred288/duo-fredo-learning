@@ -32,6 +32,42 @@ test('komplette Lektion a1-u01-l1 durchspielen', async ({ page }) => {
   await expect(page.getByText('3 von 3 beim ersten Versuch richtig')).toBeVisible();
 });
 
+test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
+
+  // Lektion abschließen
+  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await page.getByText('Merhaba').click();
+  await page.keyboard.press('Enter');
+  await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: 'Günaydın', exact: true }).click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await page.keyboard.press('Enter');
+  await page.getByLabel('Deine Antwort').fill('Sağ ol');
+  await page.keyboard.press('Enter');
+  await page.keyboard.press('Enter');
+  await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+
+  await expect(page.getByText('Tagesziel erreicht')).toBeVisible();
+  await expect(page.getByText('1 Tag in Folge')).toBeVisible();
+  await expect(page.getByText('1 von 1 Lektionen')).toBeVisible();
+
+  // Einstellungen ändern: Dunkelmodus, Serie aus
+  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await page.getByText('Dunkel', { exact: true }).click();
+  await page.getByLabel('Serie anzeigen').uncheck();
+  await expect(page.locator('html')).toHaveClass(/dark/);
+  await page.getByRole('button', { name: /Zurück/ }).click();
+  await expect(page.getByText('1 Tag in Folge')).toHaveCount(0);
+
+  await page.reload();
+  await expect(page.locator('html')).toHaveClass(/dark/);
+  await expect(page.getByText('Tagesziel erreicht')).toBeVisible();
+  await expect(page.getByText('1 Tag in Folge')).toHaveCount(0);
+  await expect(page.getByText('1 von 1 Lektionen')).toBeVisible();
+});
+
 test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Endungen bauen/ }).click();

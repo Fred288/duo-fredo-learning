@@ -1,1 +1,4 @@
 @import 'tailwindcss';
+
+/* Dunkelmodus über Klasse auf <html> (siehe applyTheme), nicht nur per Systemeinstellung. */
+@custom-variant dark (&:where(.dark, .dark *));

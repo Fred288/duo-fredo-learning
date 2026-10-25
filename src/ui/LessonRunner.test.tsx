@@ -73,6 +73,38 @@ describe('LessonRunner', () => {
     expect(onExit).toHaveBeenCalled();
   });
 
+  it('meldet Versuche einmal je Übung und den Abschluss genau einmal', () => {
+    const onAttempt = vi.fn();
+    const onComplete = vi.fn();
+    render(
+      <LessonRunner
+        lesson={lesson}
+        onExit={() => {}}
+        onAttempt={onAttempt}
+        onComplete={onComplete}
+      />,
+    );
+
+    fireEvent.click(screen.getByLabelText(/Hayır/)); // falsch
+    click('Prüfen');
+    click('Weiter');
+    fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Teşekkürler' } });
+    click('Prüfen');
+    click('Weiter');
+    expect(onComplete).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByLabelText(/Merhaba/)); // Wiederholung der MC-Aufgabe
+    click('Prüfen');
+    click('Weiter');
+
+    expect(onAttempt.mock.calls).toEqual([
+      ['a1-u01-l1-e1', 'wrong'],
+      ['a1-u01-l1-e2', 'correct'],
+    ]); // Wiederholung wird nicht als neuer Versuch gezählt
+    expect(onComplete).toHaveBeenCalledTimes(1);
+    expect(onComplete).toHaveBeenCalledWith(1, 2);
+  });
+
   it('erlaubt Prüfen erst mit Antwort', () => {
     render(<LessonRunner lesson={lesson} onExit={() => {}} />);
     expect(screen.getByRole('button', { name: 'Prüfen' }).hasAttribute('disabled')).toBe(true);

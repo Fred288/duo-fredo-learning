@@ -16,6 +16,7 @@ Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`.
 - Inhalte liegen in `content/` (YAML/JSON), nie im Code; Zod-Validierung im Build.
 - Schema: `src/content/schema.ts`. IDs sind stabil (SRS hängt daran): Unit `a1-u01`, Lektion `a1-u01-l1`, Übung `a1-u01-l1-e1`; Vokabel-ID = `tr`, bei Homonymen explizites `id`.
 - Suffix-Builder referenziert Morphem-Tags (`src/morphology/tags.ts`), keine Oberflächenformen.
+- Persistenz: Dexie in `src/db/db.ts` (Schemaänderungen nur als neue `version(n)` mit `upgrade`, nie v1 ändern). Zugriffe über `safely()`, damit die App ohne IndexedDB weiterläuft. Einstellungen in `store/settings.ts`, Fortschritt in `store/progress.ts`; Tagesziel zählt Lektionen, Streak/Fortschritt sind reine Funktionen in `src/progress/stats.ts`.
 - Von Claude erzeugter türkischer Content bleibt `reviewed: false`.
 - Morphologie-Regeln in `src/morphology/`, jede Regel mit Unit-Test. Suffixe als Archiphonem-Templates (`suffixes.ts`: A, I, D, Klammer = Puffer). Erweichung und Harmonie-Ausnahmen sind lexikalisch (`softens`, `harmony_vowel` in der Vokabel), nicht geraten. Bekannte Lücken: `KNOWN_LIMITS` in `inflect.ts`.
 - Der Build prüft jedes `suffix_builder`-`target` gegen die Engine.

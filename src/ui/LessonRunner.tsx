@@ -1,11 +1,19 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type { Verdict } from '../lib/answer';
 import type { Lesson, Vocab } from '../content/schema';
 import { t } from '../i18n';
 import { explainSteps } from '../i18n/explain';
 import { grade, isSupported, solutionOf } from '../session/grade';
-import { createSession, currentExercise, next, submit, summary } from '../session/session';
+import {
+  createSession,
+  currentExercise,
+  next,
+  submit,
+  summary,
+  type Session,
+} from '../session/session';
 import { suffixTiles } from '../session/suffix-tiles';
-import { useApp } from '../store/app';
+import { useSettings } from '../store/settings';
 import { Feedback } from './Feedback';
 import { FreeTextInput } from './exercises/FreeTextInput';
 import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
@@ -20,10 +28,14 @@ interface Props {
   /** Wortschatz der Unit; liefert Harmonie-/Erweichungs-Flags für Suffix-Builder. */
   vocab?: readonly Vocab[];
   onExit: () => void;
+  /** Erster Versuch je Übung und Lauf. */
+  onAttempt?: (exerciseId: string, verdict: Verdict) => void;
+  /** Einmal pro abgeschlossenem Lauf; zählt den ersten Versuch je Übung. */
+  onComplete?: (correct: number, total: number) => void;
 }
 
-export function LessonRunner({ lesson, vocab = [], onExit }: Props) {
-  const tolerateDiacritics = useApp((s) => s.tolerateDiacritics);
+export function LessonRunner({ lesson, vocab = [], onExit, onAttempt, onComplete }: Props) {
+  const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(() => lesson.exercises.filter(isSupported), [lesson]);
   const [session, setSession] = useState(() => createSession(exercises));
   const [answer, setAnswer] = useState('');
@@ -33,8 +45,19 @@ export function LessonRunner({ lesson, vocab = [], onExit }: Props) {
 
   const check = useCallback(() => {
     if (!supported || !answer.trim()) return;
-    setSession((s) => submit(s, grade(supported, answer, { tolerateDiacritics })));
-  }, [supported, answer, tolerateDiacritics]);
+    const result = grade(supported, answer, { tolerateDiacritics });
+    if (!(supported.id in session.firstTry)) onAttempt?.(supported.id, result.verdict);
+    setSession((s) => submit(s, result));
+  }, [supported, answer, tolerateDiacritics, session.firstTry, onAttempt]);
+
+  // Abschluss genau einmal melden, auch unter StrictMode (doppelte Effekte).
+  const reported = useRef<Session>(null);
+  useEffect(() => {
+    if (session.phase !== 'done' || exercises.length === 0 || reported.current === session) return;
+    reported.current = session;
+    const { correct, total } = summary(session);
+    onComplete?.(correct, total);
+  }, [session, exercises.length, onComplete]);
 
   const proceed = useCallback(() => {
     setAnswer('');
