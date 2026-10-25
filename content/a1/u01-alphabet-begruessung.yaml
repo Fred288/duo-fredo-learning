@@ -1,8 +1,8 @@
-# Minimale Beispiel-Unit für M1 (Schema/Pipeline). Vollständiger Inhalt folgt in M7.
+# A1-01: Alphabet und Begrüßung. Claude-Entwurf, ungeprüft (reviewed: false).
 id: a1-u01
 level: A1
 title: Alphabet und Begrüßung
-grammar_focus: [alphabet, aussprache]
+grammar_focus: [alphabet, aussprache, begruessung, sen-siz]
 explainer: explainers/a1-alphabet.md
 source: eigene Formulierung (Claude-Entwurf)
 license: CC BY-SA 4.0
@@ -10,7 +10,7 @@ reviewed: false
 lessons:
   - id: a1-u01-l1
     type: vocab
-    title: Begrüßen
+    title: Begrüßen und verabschieden
     exercises:
       - id: a1-u01-l1-e1
         type: multiple_choice
@@ -26,11 +26,256 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Danke
-        answers: [Teşekkürler, Teşekkür ederim, Sağ ol]
-        hint: „Sağ ol“ ist informell (sen).
+        answers: [Teşekkürler, Teşekkür ederim, Çok teşekkürler, Çok teşekkür ederim, Sağ ol, Sağ olun]
+        hint: „Sağ ol“ ist vertraut (sen), „Sağ olun“ höflich oder zu mehreren (siz).
+      - id: a1-u01-l1-e4
+        type: multiple_choice
+        prompt: Du triffst abends Bekannte. Wie begrüßt du sie?
+        options: [İyi akşamlar, İyi geceler, Günaydın]
+        answer: İyi akşamlar
+        explanation: „İyi geceler“ (Gute Nacht) sagt man zum Abschied spät am Abend.
+      - id: a1-u01-l1-e5
+        type: word_bank
+        prompt: Guten Tag! (auch „Schönen Tag noch!“)
+        answers: [İyi günler!]
+        distractors: [akşamlar, geceler]
+        explanation: „İyi günler“ passt zur Begrüßung und zum Abschied tagsüber.
+      - id: a1-u01-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Gute Nacht!
+        answers: [İyi geceler]
+      - id: a1-u01-l1-e7
+        type: multiple_choice
+        prompt: Du gehst nach Hause, deine Freundin bleibt im Café. Was sagst du?
+        options: [Hoşça kal, Güle güle, Günaydın]
+        answer: Hoşça kal
+        register: informal
+        explanation: Wer geht, sagt „Hoşça kal“ (höflich oder zu mehreren „Hoşça kalın“). Wer bleibt, antwortet „Güle güle“.
+      - id: a1-u01-l1-e8
+        type: multiple_choice
+        prompt: Dein Besuch verabschiedet sich, du bleibst zu Hause. Was sagst du?
+        options: [Güle güle, Hoşça kal, Merhaba]
+        answer: Güle güle
+        explanation: „Güle güle“ sagt, wer bleibt, zu dem, der geht.
+      - id: a1-u01-l1-e9
+        type: free_text
+        direction: tr_de
+        prompt: Görüşürüz!
+        answers: [Bis bald, Bis dann, Bis später, Wir sehen uns, Man sieht sich, Tschüss, Tschüs, Auf Wiedersehen]
+        explanation: Wörtlich „Wir sehen uns“, ein lockerer Abschied.
+      - id: a1-u01-l1-e10
+        type: multiple_choice
+        prompt: Was bedeutet „Selam“?
+        options: [Hallo (vertraut), Danke, Gute Nacht]
+        answer: Hallo (vertraut)
+        register: informal
+        explanation: „Selam“ ist lockerer als „Merhaba“, unter Freunden und Gleichaltrigen üblich.
+
+  - id: a1-u01-l2
+    type: vocab
+    title: Buchstaben und Aussprache
+    exercises:
+      - id: a1-u01-l2-e1
+        type: multiple_choice
+        prompt: Welches Wort beginnt mit dem Laut „tsch“?
+        options: [çay, cam, şeker]
+        answer: çay
+        explanation: ç klingt wie „tsch“ (çay, Tee), c wie „dsch“ (cam, Glas).
+      - id: a1-u01-l2-e2
+        type: multiple_choice
+        prompt: Wie spricht man das c in „cam“ (Glas) aus?
+        options: [wie „dsch“ in Dschungel, wie „ts“ in Zahl, wie „k“ in Kamm]
+        answer: wie „dsch“ in Dschungel
+      - id: a1-u01-l2-e3
+        type: multiple_choice
+        prompt: Welches Wort enthält den Laut „sch“?
+        options: [şeker, su, çay]
+        answer: şeker
+        explanation: ş klingt wie deutsches „sch“; şeker heißt Zucker.
+      - id: a1-u01-l2-e4
+        type: multiple_choice
+        prompt: Was bewirkt das ğ in „dağ“ (Berg)?
+        options: [Es dehnt das a davor., Es klingt wie ein deutsches g., Es klingt wie „ch“ in Bach.]
+        answer: Es dehnt das a davor.
+        explanation: Das „weiche g“ (yumuşak g) wird kaum gesprochen. Nach a, ı, o, u verlängert es den Vokal davor; nach e und i klingt es oft wie ein leichtes j (değil).
+      - id: a1-u01-l2-e5
+        type: multiple_choice
+        prompt: Wie schreibt man „Mädchen“ richtig?
+        options: [kız, kiz, kis]
+        answer: kız
+        explanation: ı ohne Punkt ist ein dumpfes i, ähnlich dem e in „bitte“, aber mit der Zunge weiter hinten und ohne Lippenrundung.
+      - id: a1-u01-l2-e6
+        type: multiple_choice
+        prompt: Was ist die richtige Großschreibung von „istanbul“?
+        options: [İSTANBUL, ISTANBUL]
+        answer: İSTANBUL
+        explanation: Zu i gehört groß İ (mit Punkt), zu ı gehört groß I (ohne Punkt).
+      - id: a1-u01-l2-e7
+        type: multiple_choice
+        prompt: Wie klingt das z in „zor“ (schwer)?
+        options: ['stimmhaft wie „s“ in „Sonne“ (norddeutsche Aussprache)', wie „ts“ in „Zeit“]
+        answer: 'stimmhaft wie „s“ in „Sonne“ (norddeutsche Aussprache)'
+        explanation: Das türkische s ist dagegen immer stimmlos, wie „ss“ in „Wasser“.
+      - id: a1-u01-l2-e8
+        type: multiple_choice
+        prompt: Wie klingt das y in „yol“ (Weg)?
+        options: [wie deutsches j in „ja“, wie deutsches ü]
+        answer: wie deutsches j in „ja“
+      - id: a1-u01-l2-e9
+        type: multiple_choice
+        prompt: Wie klingt das v in „ev“ (Haus)?
+        options: [wie deutsches w, wie deutsches f]
+        answer: wie deutsches w
+      - id: a1-u01-l2-e10
+        type: free_text
+        direction: de_tr
+        prompt: Tee
+        answers: [çay]
+        hint: ç klingt wie „tsch“.
+      - id: a1-u01-l2-e11
+        type: free_text
+        direction: de_tr
+        prompt: Zucker
+        answers: [şeker]
+        hint: ş klingt wie „sch“.
+
+  - id: a1-u01-l3
+    type: dialog
+    title: Höflich und vertraut
+    exercises:
+      - id: a1-u01-l3-e1
+        type: multiple_choice
+        prompt: Du fragst eine Freundin, wie es ihr geht.
+        options: [Nasılsın?, Nasılsınız?, Adın ne?]
+        answer: Nasılsın?
+        register: informal
+        explanation: Die Endung -sın steht für „du“ (sen). „Nasılsınız?“ ist die Sie-Form (siz).
+      - id: a1-u01-l3-e2
+        type: multiple_choice
+        prompt: Du fragst eine ältere Nachbarin höflich, wie es ihr geht.
+        options: [Nasılsınız?, Nasılsın?, Görüşürüz?]
+        answer: Nasılsınız?
+        register: formal
+        explanation: siz ist die höfliche Anrede und zugleich der Plural „ihr“.
+      - id: a1-u01-l3-e3
+        type: word_bank
+        prompt: Mir geht es gut, danke.
+        answers: ['İyiyim, teşekkürler.', 'Teşekkürler, iyiyim.', 'İyiyim, teşekkür ederim.']
+        distractors: [Nasılsın, Benim]
+      - id: a1-u01-l3-e4
+        type: free_text
+        direction: de_tr
+        prompt: Bitte! (als Antwort auf „Danke“)
+        answers: [Rica ederim, Bir şey değil, Ne demek]
+        explanation: „Rica ederim“ ist die übliche Antwort auf ein Danke; „Bir şey değil“ und „Ne demek“ heißen etwa „Nicht der Rede wert“.
+      - id: a1-u01-l3-e5
+        type: multiple_choice
+        prompt: Du bestellst einen Tee. Welches Wort passt für „bitte“?
+        options: [lütfen, rica ederim, affedersiniz]
+        answer: lütfen
+        explanation: „Lütfen“ bei einer Bitte; „Rica ederim“ antwortet auf ein Danke. Anders als im Deutschen sind das zwei Wörter.
+      - id: a1-u01-l3-e6
+        type: multiple_choice
+        prompt: Du sprichst einen Fremden auf der Straße an. „Entschuldigen Sie …“
+        options: [Affedersiniz, Güle güle, Görüşürüz]
+        answer: Affedersiniz
+        register: formal
+        explanation: „Affedersiniz“ dient auch, um höflich Aufmerksamkeit zu bekommen. Für „Es tut mir leid“ sagt man „Özür dilerim“.
+      - id: a1-u01-l3-e7
+        type: word_bank
+        prompt: Wie heißt du?
+        answers: [Adın ne?, Senin adın ne?]
+        distractors: [Adınız, Benim]
+        register: informal
+      - id: a1-u01-l3-e8
+        type: word_bank
+        prompt: Wie heißen Sie?
+        answers: [Adınız nedir?, Adınız ne?, Sizin adınız nedir?, Sizin adınız ne?]
+        distractors: [Adın, Benim]
+        register: formal
+      - id: a1-u01-l3-e9
+        type: word_bank
+        prompt: Ich heiße Ayşe.
+        answers: [Benim adım Ayşe., Adım Ayşe.]
+        distractors: [Senin, ne]
+        explanation: Wörtlich „Mein Name (ist) Ayşe“. „ist“ wird hier nicht ausgedrückt.
+      - id: a1-u01-l3-e10
+        type: free_text
+        direction: de_tr
+        prompt: Freut mich!
+        answers: [Memnun oldum, Çok memnun oldum, Tanıştığımıza memnun oldum]
+      - id: a1-u01-l3-e11
+        type: free_text
+        direction: de_tr
+        prompt: Es tut mir leid. (Entschuldigung)
+        answers: [Özür dilerim, Kusura bakma, Kusura bakmayın, Pardon]
+        explanation: „Kusura bakma“ (sen) / „Kusura bakmayın“ (siz) heißt wörtlich „Schau nicht auf den Fehler“.
+
+  - id: a1-u01-l4
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u01-l4-e1
+        type: multiple_choice
+        prompt: Was bedeutet „Güle güle“?
+        options: ['Tschüss (sagt, wer bleibt)', Guten Morgen, Danke]
+        answer: 'Tschüss (sagt, wer bleibt)'
+      - id: a1-u01-l4-e2
+        type: free_text
+        direction: tr_de
+        prompt: Günaydın!
+        answers: [Guten Morgen, Morgen]
+      - id: a1-u01-l4-e3
+        type: free_text
+        direction: tr_de
+        prompt: Teşekkür ederim.
+        answers: [Danke, Danke schön, Dankeschön, Danke sehr, Vielen Dank, Ich danke dir, Ich danke Ihnen]
+      - id: a1-u01-l4-e4
+        type: word_bank
+        prompt: Guten Abend, wie geht es Ihnen?
+        answers: ['İyi akşamlar, nasılsınız?']
+        distractors: [geceler, nasılsın]
+        register: formal
+      - id: a1-u01-l4-e5
+        type: multiple_choice
+        prompt: Was heißt „hayır“?
+        options: [nein, ja, bitte]
+        answer: nein
+      - id: a1-u01-l4-e6
+        type: free_text
+        direction: de_tr
+        prompt: ja
+        answers: [evet]
+
 vocab:
   - { tr: merhaba, de: [hallo], pos: interj }
+  - { tr: selam, de: [hallo, hi], pos: interj, register: informal }
   - { tr: günaydın, de: [guten Morgen], pos: interj }
+  - { tr: iyi günler, de: [guten Tag, schönen Tag], pos: phrase }
+  - { tr: iyi akşamlar, de: [guten Abend], pos: phrase }
+  - { tr: iyi geceler, de: [gute Nacht], pos: phrase }
+  - { tr: hoşça kal, de: ['tschüss (sagt, wer geht)'], pos: phrase, register: informal }
+  - { tr: hoşça kalın, de: ['auf Wiedersehen (sagt, wer geht)'], pos: phrase, register: formal }
+  - { tr: güle güle, de: ['tschüss (sagt, wer bleibt)'], pos: phrase }
+  - { tr: görüşürüz, de: [bis bald, wir sehen uns], pos: phrase }
   - { tr: teşekkürler, de: [danke], pos: interj }
+  - { tr: teşekkür ederim, de: [danke, ich danke], pos: phrase }
+  - { tr: sağ ol, de: [danke], pos: phrase, register: informal }
+  - { tr: sağ olun, de: [danke], pos: phrase, register: formal }
+  - { tr: rica ederim, de: [bitte, gern geschehen], pos: phrase }
+  - { tr: lütfen, de: [bitte (bei einer Bitte)], pos: adv }
+  - { tr: affedersiniz, de: [entschuldigen Sie], pos: phrase, register: formal }
+  - { tr: özür dilerim, de: [es tut mir leid, Entschuldigung], pos: phrase }
+  - { tr: nasılsın, de: [wie geht es dir], pos: phrase, register: informal }
+  - { tr: nasılsınız, de: [wie geht es Ihnen, wie geht es euch], pos: phrase, register: formal }
+  - { tr: iyiyim, de: [mir geht es gut], pos: phrase }
+  - { tr: memnun oldum, de: [freut mich], pos: phrase }
   - { tr: evet, de: [ja], pos: particle }
   - { tr: hayır, de: [nein], pos: particle }
+  - { tr: çay, de: [Tee], pos: noun }
+  - { tr: şeker, de: [Zucker], pos: noun }
+  - { tr: cam, de: [Glas, Fensterscheibe], pos: noun }
+  - { tr: dağ, de: [Berg], pos: noun }
+  - { tr: yol, de: [Weg, Straße], pos: noun }
+  - { tr: su, de: [Wasser], pos: noun }

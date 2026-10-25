@@ -1,49 +1,210 @@
-# Minimale Beispiel-Unit für M5 (Suffix-Builder). Vollständiger Inhalt folgt in M7.
+# A1-02: Vokalharmonie und Plural. Claude-Entwurf, ungeprüft (reviewed: false).
 id: a1-u02
 level: A1
 title: Vokalharmonie und Plural
-grammar_focus: [vokalharmonie, plural, lokativ]
+grammar_focus: [vokalharmonie, plural, lokativ-vorschau]
+explainer: explainers/a1-vokalharmonie.md
 source: eigene Formulierung (Claude-Entwurf)
 license: CC BY-SA 4.0
 reviewed: false
 lessons:
   - id: a1-u02-l1
-    type: grammar
-    title: Endungen bauen
+    type: vocab
+    title: Wortschatz
     exercises:
       - id: a1-u02-l1-e1
-        type: suffix_builder
-        stem: ev
-        suffixes: [PL]
-        target: evler
-        gloss_de: die Häuser
+        type: multiple_choice
+        prompt: Was heißt „okul“?
+        options: [Schule, Auto, Uhr]
+        answer: Schule
       - id: a1-u02-l1-e2
-        type: suffix_builder
-        stem: okul
-        suffixes: [PL, LOC]
-        target: okullarda
-        gloss_de: in den Schulen
+        type: multiple_choice
+        prompt: Was heißt „Katze“?
+        options: [kedi, kız, kitap]
+        answer: kedi
       - id: a1-u02-l1-e3
-        type: suffix_builder
-        stem: göz
-        suffixes: [PL]
-        target: gözler
-        gloss_de: die Augen
+        type: free_text
+        direction: de_tr
+        prompt: Buch
+        answers: [kitap]
       - id: a1-u02-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Auto
+        answers: [araba]
+      - id: a1-u02-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „öğrenci“?
+        options: [Schüler, Lehrer, Kind]
+        answer: Schüler
+        explanation: „öğrenci“ heißt Schüler, Schülerin oder Student, Studentin. Ein Genus gibt es nicht.
+      - id: a1-u02-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Apfel
+        answers: [elma]
+      - id: a1-u02-l1-e7
+        type: free_text
+        direction: tr_de
+        prompt: çocuk
+        answers: [Kind, das Kind, ein Kind]
+      - id: a1-u02-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „saat“?
+        options: [Uhr, Haus, Rose]
+        answer: Uhr
+        explanation: „saat“ heißt auch „Stunde“.
+      - id: a1-u02-l1-e9
+        type: free_text
+        direction: tr_de
+        prompt: göz
+        answers: [Auge, das Auge, ein Auge]
+
+  - id: a1-u02-l2
+    type: grammar
+    title: Hell oder dunkel?
+    exercises:
+      - id: a1-u02-l2-e1
+        type: multiple_choice
+        prompt: Welche Vokale sind hell?
+        options: ['e, i, ö, ü', 'a, ı, o, u', 'a, e, i, o']
+        answer: 'e, i, ö, ü'
+      - id: a1-u02-l2-e2
+        type: multiple_choice
+        prompt: Plural von „kedi“ (Katze)?
+        options: [kediler, kedilar]
+        answer: kediler
+        explanation: Letzter Vokal i ist hell → -ler.
+      - id: a1-u02-l2-e3
+        type: multiple_choice
+        prompt: Plural von „araba“ (Auto)?
+        options: [arabalar, arabaler]
+        answer: arabalar
+        explanation: Letzter Vokal a ist dunkel → -lar.
+      - id: a1-u02-l2-e4
+        type: multiple_choice
+        prompt: Plural von „okul“ (Schule)?
+        options: [okuller, okullar]
+        answer: okullar
+        explanation: Letzter Vokal u ist dunkel → -lar.
+      - id: a1-u02-l2-e5
+        type: multiple_choice
+        prompt: Plural von „göz“ (Auge)?
+        options: [gözlar, gözler]
+        answer: gözler
+        explanation: Letzter Vokal ö ist hell → -ler.
+      - id: a1-u02-l2-e6
+        type: multiple_choice
+        prompt: Plural von „kız“ (Mädchen)?
+        options: [kızlar, kızler]
+        answer: kızlar
+        explanation: Letzter Vokal ı ist dunkel → -lar. Achtung, ı ohne Punkt!
+      - id: a1-u02-l2-e7
+        type: multiple_choice
+        prompt: Plural von „gül“ (Rose)?
+        options: [güller, güllar]
+        answer: güller
+        explanation: Letzter Vokal ü ist hell → -ler.
+      - id: a1-u02-l2-e8
+        type: multiple_choice
+        prompt: Plural von „öğrenci“ (Schüler)?
+        options: [öğrencilar, öğrenciler]
+        answer: öğrenciler
+        explanation: Nur der letzte Vokal zählt. Das letzte i ist hell → -ler.
+      - id: a1-u02-l2-e9
+        type: multiple_choice
+        prompt: Plural von „saat“ (Uhr)?
+        options: [saatler, saatlar]
+        answer: saatler
+        explanation: Ausnahme! saat ist ein Lehnwort aus dem Arabischen und nimmt helle Endungen.
+
+  - id: a1-u02-l3
+    type: grammar
+    title: Plural bauen
+    exercises:
+      - { id: a1-u02-l3-e1, type: suffix_builder, stem: ev, suffixes: [PL], target: evler, gloss_de: die Häuser }
+      - { id: a1-u02-l3-e2, type: suffix_builder, stem: okul, suffixes: [PL], target: okullar, gloss_de: die Schulen }
+      - { id: a1-u02-l3-e3, type: suffix_builder, stem: göz, suffixes: [PL], target: gözler, gloss_de: die Augen }
+      - { id: a1-u02-l3-e4, type: suffix_builder, stem: kız, suffixes: [PL], target: kızlar, gloss_de: die Mädchen }
+      - { id: a1-u02-l3-e5, type: suffix_builder, stem: kedi, suffixes: [PL], target: kediler, gloss_de: die Katzen }
+      - { id: a1-u02-l3-e6, type: suffix_builder, stem: araba, suffixes: [PL], target: arabalar, gloss_de: die Autos }
+      - { id: a1-u02-l3-e7, type: suffix_builder, stem: öğrenci, suffixes: [PL], target: öğrenciler, gloss_de: die Schüler }
+      - id: a1-u02-l3-e8
         type: suffix_builder
         stem: kitap
-        suffixes: [ACC]
-        target: kitabı
-        gloss_de: das Buch (Akkusativ)
-      - id: a1-u02-l1-e5
+        suffixes: [PL]
+        target: kitaplar
+        gloss_de: die Bücher
+        explanation: Das p bleibt, weil -lar mit einem Konsonanten beginnt.
+      - { id: a1-u02-l3-e9, type: suffix_builder, stem: çocuk, suffixes: [PL], target: çocuklar, gloss_de: die Kinder }
+      - id: a1-u02-l3-e10
         type: suffix_builder
-        stem: araba
-        suffixes: [DAT]
-        target: arabaya
-        gloss_de: zum Auto
+        stem: saat
+        suffixes: [PL]
+        target: saatler
+        gloss_de: die Uhren
+        explanation: Ausnahme, saat nimmt helle Endungen.
+
+  - id: a1-u02-l4
+    type: grammar
+    title: Plural und Ort
+    exercises:
+      - id: a1-u02-l4-e1
+        type: suffix_builder
+        stem: ev
+        suffixes: [LOC]
+        target: evde
+        gloss_de: zu Hause, im Haus
+        explanation: Wo? → -de/-da (nach p, t, k usw. -te/-ta), nach derselben Hell-dunkel-Regel wie der Plural.
+      - { id: a1-u02-l4-e2, type: suffix_builder, stem: okul, suffixes: [LOC], target: okulda, gloss_de: in der Schule }
+      - { id: a1-u02-l4-e3, type: suffix_builder, stem: ev, suffixes: [PL, LOC], target: evlerde, gloss_de: in den Häusern }
+      - { id: a1-u02-l4-e4, type: suffix_builder, stem: okul, suffixes: [PL, LOC], target: okullarda, gloss_de: in den Schulen }
+      - { id: a1-u02-l4-e5, type: suffix_builder, stem: araba, suffixes: [PL, LOC], target: arabalarda, gloss_de: in den Autos }
+      - id: a1-u02-l4-e6
+        type: suffix_builder
+        stem: kitap
+        suffixes: [PL, LOC]
+        target: kitaplarda
+        gloss_de: in den Büchern
+        explanation: Die Reihenfolge ist fest. Erst Plural, dann Ort.
+
+  - id: a1-u02-l5
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u02-l5-e1
+        type: word_bank
+        prompt: Die Kinder sind in der Schule.
+        answers: [Çocuklar okulda.]
+        distractors: [okullarda, Çocuk]
+        explanation: „sind“ wird in der 3. Person meist nicht ausgedrückt.
+      - id: a1-u02-l5-e2
+        type: word_bank
+        prompt: Die Bücher sind zu Hause.
+        answers: [Kitaplar evde.]
+        distractors: [evlerde, Kitap]
+      - id: a1-u02-l5-e3
+        type: free_text
+        direction: de_tr
+        prompt: die Äpfel
+        answers: [elmalar]
+      - id: a1-u02-l5-e4
+        type: multiple_choice
+        prompt: Plural von „çocuk“ (Kind)?
+        options: [çocuklar, çocuğlar, çocukler]
+        answer: çocuklar
+        explanation: Das k wird nur vor einem Vokal zu ğ (çocuğu). Vor -lar bleibt es.
+
 vocab:
-  - { tr: ev, de: [Haus, Wohnung], pos: noun }
+  - { tr: ev, de: [Haus, Wohnung, Zuhause], pos: noun }
   - { tr: okul, de: [Schule], pos: noun }
   - { tr: göz, de: [Auge], pos: noun }
-  - { tr: kitap, de: [Buch], pos: noun, softens: true }
+  - { tr: kız, de: [Mädchen, Tochter], pos: noun }
+  - { tr: gül, de: [Rose], pos: noun }
+  - { tr: kedi, de: [Katze], pos: noun }
   - { tr: araba, de: [Auto], pos: noun }
+  - { tr: çocuk, de: [Kind], pos: noun, softens: true }
+  - { tr: öğrenci, de: [Schüler, Student], pos: noun }
+  - { tr: elma, de: [Apfel], pos: noun }
+  - { tr: kitap, de: [Buch], pos: noun, softens: true }
+  - { tr: saat, de: [Uhr, Stunde], pos: noun, harmony_vowel: e }

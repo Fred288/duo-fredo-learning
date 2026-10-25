@@ -9,6 +9,7 @@ import { DailyGoal } from './DailyGoal';
 
 export function Home() {
   const openLesson = useApp((s) => s.openLesson);
+  const openExplainer = useApp((s) => s.openExplainer);
   const completions = useProgress((s) => s.completions);
   const [manifest, setManifest] = useState<Manifest>();
   const [failed, setFailed] = useState(false);
@@ -71,6 +72,15 @@ export function Home() {
                           <span>{label}</span>
                         </div>
                         <div className="mt-3 flex flex-wrap gap-2">
+                          {unit.explainer && (
+                            <button
+                              type="button"
+                              onClick={() => openExplainer(unit.id)}
+                              className="min-h-11 rounded-lg border border-teal-700 px-4 text-teal-800 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-teal-500 dark:text-teal-300 dark:hover:bg-stone-800"
+                            >
+                              {t('home.explainer')}
+                            </button>
+                          )}
                           {unit.lessons.map((lesson) => (
                             <button
                               key={lesson.id}

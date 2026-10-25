@@ -33,7 +33,7 @@ export default defineConfig({
       },
       workbox: {
         // Inhalte (JSON) gehören zum Precache: die Lektionen laufen komplett offline.
-        globPatterns: ['**/*.{js,css,html,svg,png,json,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,json,md,webmanifest}'],
         navigateFallback: `${base}index.html`,
       },
     }),

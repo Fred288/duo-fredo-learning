@@ -6,6 +6,8 @@ export interface Manifest {
     id: string;
     level: Level;
     title: string;
+    /** Pfad der Erklärkarte relativ zu content/, falls vorhanden. */
+    explainer?: string;
     /** Anzahl noch nicht geprüfter Übungen und Vokabeln. */
     unreviewed: number;
     lessons: Pick<Lesson, 'id' | 'type' | 'title'>[];
@@ -18,6 +20,12 @@ async function getJson<T>(path: string): Promise<T> {
   const res = await fetch(url(path));
   if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
   return (await res.json()) as T;
+}
+
+export async function fetchExplainer(path: string): Promise<string> {
+  const res = await fetch(url(path));
+  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
+  return res.text();
 }
 
 export const fetchManifest = () => getJson<Manifest>('index.json');

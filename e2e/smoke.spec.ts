@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { loadUnit, playLesson } from './solve';
 
 test('Startseite listet die Units', async ({ page }) => {
   await page.goto('/');
@@ -6,30 +7,32 @@ test('Startseite listet die Units', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toBeVisible();
 });
 
+test('Erklärkarte öffnen', async ({ page }) => {
+  await page.goto('/');
+  const unit = page
+    .getByRole('listitem')
+    .filter({ has: page.getByRole('heading', { name: 'Alphabet und Begrüßung' }) });
+  await unit.getByRole('button', { name: 'Erklärung' }).click();
+  await expect(page.getByRole('table')).toBeVisible();
+  await expect(page.getByRole('cell').first()).toBeVisible();
+  await page.getByRole('button', { name: /Zurück/ }).click();
+  await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toBeVisible();
+});
+
 test('komplette Lektion a1-u01-l1 durchspielen', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  const total = await playLesson(page, 'a1-u01', 'a1-u01-l1');
+  await expect(page.getByText(`${total} von ${total} beim ersten Versuch richtig`)).toBeVisible();
+});
 
-  // Multiple Choice
-  await page.getByText('Merhaba').click();
-  await page.getByRole('button', { name: 'Prüfen' }).click();
-  await expect(page.getByRole('status')).toContainText('Richtig!');
-  await page.getByRole('button', { name: 'Weiter' }).click();
-
-  // Wortbank
-  await page.getByRole('button', { name: 'Günaydın', exact: true }).click();
-  await page.getByRole('button', { name: 'Prüfen' }).click();
-  await expect(page.getByRole('status')).toContainText('Richtig!');
-  await page.keyboard.press('Enter');
-
-  // Freitext per Tastatur
-  await page.getByLabel('Deine Antwort').fill('Sağ ol');
-  await page.keyboard.press('Enter');
-  await expect(page.getByRole('status')).toContainText('Richtig!');
-  await page.keyboard.press('Enter');
-
-  await expect(page.getByRole('heading', { name: 'Lektion geschafft' })).toBeVisible();
-  await expect(page.getByText('3 von 3 beim ersten Versuch richtig')).toBeVisible();
+test('alle Lektionen aller Units sind mit den hinterlegten Lösungen lösbar', async ({ page }) => {
+  test.setTimeout(120_000);
+  for (const unitId of ['a1-u01', 'a1-u02']) {
+    for (const lesson of loadUnit(unitId).lessons) {
+      await page.goto('/');
+      await playLesson(page, unitId, lesson.id);
+    }
+  }
 });
 
 test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async ({ page }) => {
@@ -37,21 +40,12 @@ test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async (
   await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
 
   // Lektion abschließen
-  await page.getByRole('button', { name: /Begrüßen/ }).click();
-  await page.getByText('Merhaba').click();
-  await page.keyboard.press('Enter');
-  await page.keyboard.press('Enter');
-  await page.getByRole('button', { name: 'Günaydın', exact: true }).click();
-  await page.getByRole('button', { name: 'Prüfen' }).click();
-  await page.keyboard.press('Enter');
-  await page.getByLabel('Deine Antwort').fill('Sağ ol');
-  await page.keyboard.press('Enter');
-  await page.keyboard.press('Enter');
+  await playLesson(page, 'a1-u01', 'a1-u01-l1');
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
 
   await expect(page.getByText('Tagesziel erreicht')).toBeVisible();
   await expect(page.getByText('1 Tag in Folge')).toBeVisible();
-  await expect(page.getByText('1 von 1 Lektionen')).toBeVisible();
+  await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
 
   // Einstellungen ändern: Dunkelmodus, Serie aus
   await page.getByRole('button', { name: 'Einstellungen' }).click();
@@ -65,7 +59,7 @@ test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async (
   await expect(page.locator('html')).toHaveClass(/dark/);
   await expect(page.getByText('Tagesziel erreicht')).toBeVisible();
   await expect(page.getByText('1 Tag in Folge')).toHaveCount(0);
-  await expect(page.getByText('1 von 1 Lektionen')).toBeVisible();
+  await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
 });
 
 test('Fehler melden: Notiz erscheint in der Review-Ansicht und bleibt erhalten', async ({
@@ -102,7 +96,7 @@ test('Fehler melden: Notiz erscheint in der Review-Ansicht und bleibt erhalten',
 
 test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /Endungen bauen/ }).click();
+  await page.getByRole('button', { name: /Plural bauen/ }).click();
 
   // 1) ev + Plural
   await page.getByRole('button', { name: 'ev', exact: true }).click();
@@ -112,10 +106,10 @@ test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page 
   await expect(page.getByRole('status')).toContainText('hell');
   await page.getByRole('button', { name: 'Weiter' }).click();
 
-  // 2) okul + Plural + Lokativ, bewusst mit falscher Harmonie
+  // 2) okul + Plural, bewusst mit falscher Harmonie
   await page.getByRole('button', { name: 'okul', exact: true }).click();
   await page.getByRole('button', { name: 'ler', exact: true }).click();
   await page.getByRole('button', { name: 'Prüfen' }).click();
   await expect(page.getByRole('status')).toContainText('Leider falsch.');
-  await expect(page.getByRole('status')).toContainText('Lösung: okullarda');
+  await expect(page.getByRole('status')).toContainText('Lösung: okullar');
 });

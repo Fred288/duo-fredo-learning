@@ -1,7 +1,15 @@
 // Validiert content/**/*.yaml und schreibt lazy ladbare JSON-Bundles nach public/content/.
 // Ungültige Inhalte beenden den Prozess mit Exit-Code 1 und brechen damit dev/build.
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { join, relative } from 'node:path';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
+import { dirname, join, relative } from 'node:path';
 import {
   checkSuffixTargets,
   checkUnits,
@@ -42,10 +50,17 @@ mkdirSync(join(OUT_DIR, 'units'), { recursive: true });
 for (const { unit } of units) {
   writeFileSync(join(OUT_DIR, 'units', `${unit.id}.json`), JSON.stringify(unit));
 }
+for (const { unit } of units) {
+  if (!unit.explainer) continue;
+  const target = join(OUT_DIR, unit.explainer);
+  mkdirSync(dirname(target), { recursive: true });
+  copyFileSync(join(CONTENT_DIR, unit.explainer), target);
+}
 const manifest = units.map(({ unit }) => ({
   id: unit.id,
   level: unit.level,
   title: unit.title,
+  explainer: unit.explainer,
   reviewed: unit.reviewed,
   unreviewed: countUnreviewed(unit),
   lessons: unit.lessons.map((l) => ({ id: l.id, type: l.type, title: l.title })),
