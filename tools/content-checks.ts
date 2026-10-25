@@ -1,5 +1,5 @@
 import { parse as parseYaml } from 'yaml';
-import { Unit, vocabId } from '../src/content/schema';
+import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { sameForm, solveExercise } from '../src/content/lexicon';
 import { MorphError } from '../src/morphology';
 
@@ -92,6 +92,24 @@ export function checkSuffixTargets(units: LoadedUnit[]): string[] {
     }
   }
   return errors;
+}
+
+/**
+ * Vokabeln aus anderen Units, deren Flags (softens, proper …) die Grammatikübungen dieser Unit
+ * brauchen. Zur Laufzeit wird nur eine Unit geladen, daher schreibt der Build sie mit aus.
+ */
+export function foreignLexicon(unit: Unit, units: LoadedUnit[]): Vocab[] {
+  const own = new Set((unit.vocab ?? []).map((v) => v.tr));
+  const all = units.flatMap(({ unit: u }) => (u.id === unit.id ? [] : (u.vocab ?? [])));
+  const needed = new Set(
+    unit.lessons
+      .flatMap((l) => l.exercises)
+      .flatMap((ex) =>
+        ex.type === 'suffix_builder' ? [ex.stem] : ex.type === 'conjugation' ? [ex.lemma] : [],
+      )
+      .filter((form) => !own.has(form)),
+  );
+  return all.filter((v) => needed.has(v.tr));
 }
 
 /** Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag). */

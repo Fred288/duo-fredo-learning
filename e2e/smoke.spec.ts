@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
 import { loadUnit, playLesson } from './solve';
 
@@ -26,8 +27,11 @@ test('komplette Lektion a1-u01-l1 durchspielen', async ({ page }) => {
 });
 
 test('alle Lektionen aller Units sind mit den hinterlegten Lösungen lösbar', async ({ page }) => {
-  test.setTimeout(120_000);
-  for (const unitId of ['a1-u01', 'a1-u02']) {
+  test.setTimeout(300_000);
+  const { units } = JSON.parse(readFileSync('public/content/index.json', 'utf8')) as {
+    units: { id: string }[];
+  };
+  for (const { id: unitId } of units) {
     for (const lesson of loadUnit(unitId).lessons) {
       await page.goto('/');
       await playLesson(page, unitId, lesson.id);

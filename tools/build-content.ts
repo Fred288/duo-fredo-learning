@@ -14,6 +14,7 @@ import {
   checkSuffixTargets,
   checkUnits,
   countUnreviewed,
+  foreignLexicon,
   parseUnitFile,
   type LoadedUnit,
 } from './content-checks';
@@ -48,7 +49,9 @@ if (errors.length > 0) {
 rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(join(OUT_DIR, 'units'), { recursive: true });
 for (const { unit } of units) {
-  writeFileSync(join(OUT_DIR, 'units', `${unit.id}.json`), JSON.stringify(unit));
+  const lexicon = foreignLexicon(unit, units);
+  const out = lexicon.length > 0 ? { ...unit, lexicon } : unit;
+  writeFileSync(join(OUT_DIR, 'units', `${unit.id}.json`), JSON.stringify(out));
 }
 for (const { unit } of units) {
   if (!unit.explainer) continue;

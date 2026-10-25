@@ -26,7 +26,7 @@ async function answer(page: Page, ex: Exercise, unit: Unit) {
       break;
     case 'suffix_builder':
     case 'conjugation':
-      for (const { text } of solveExercise(ex, unit.vocab).segments.filter((s) => s.text)) {
+      for (const { text } of solveExercise(ex, [...(unit.vocab ?? []), ...(unit.lexicon ?? [])]).segments.filter((s) => s.text)) {
         await page.getByRole('button', { name: text, exact: true }).click();
       }
       break;
@@ -43,7 +43,8 @@ export async function playLesson(page: Page, unitId: string, lessonId: string) {
   const card = page
     .getByRole('listitem')
     .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) });
-  await card.getByRole('button', { name: new RegExp(lesson.title) }).click();
+  // String-Name = Teilstring-Treffer, damit Titel wie „Wo? …“ nicht als Regex gelesen werden.
+  await card.getByRole('button', { name: lesson.title }).click();
   for (const ex of lesson.exercises) {
     await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
     await answer(page, ex, unit);

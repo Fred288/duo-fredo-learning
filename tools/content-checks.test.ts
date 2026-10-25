@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { checkSuffixTargets, checkUnits, parseUnitFile, type LoadedUnit } from './content-checks';
+import {
+  checkSuffixTargets,
+  checkUnits,
+  foreignLexicon,
+  parseUnitFile,
+  type LoadedUnit,
+} from './content-checks';
 
 const yamlUnit = (id: string, extra = '') => `
 id: ${id}
@@ -126,5 +132,45 @@ ${extra}
     expect(checkSuffixTargets([load('a.yaml', unit('gitiyorum'))])).toEqual([
       'a.yaml: a1-u08-l1-e1: target "gitiyorum", Engine erwartet "gidiyorum"',
     ]);
+  });
+});
+
+describe('foreignLexicon', () => {
+  const withSuffix = (id: string, stem: string, vocab: string) => `
+id: ${id}
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+lessons:
+  - id: ${id}-l1
+    type: grammar
+    title: Suffixe
+    exercises:
+      - { id: ${id}-l1-e1, type: suffix_builder, stem: ${stem}, suffixes: [DAT], target: x }
+vocab:
+${vocab}
+`;
+
+  it('liefert Einträge anderer Units, die eine Grammatikübung braucht', () => {
+    const a = load(
+      'a.yaml',
+      withSuffix(
+        'a1-u02',
+        'ev',
+        [
+          '  - { tr: kitap, de: [Buch], pos: noun, softens: true }',
+          '  - { tr: ev, de: [Haus], pos: noun }',
+        ].join('\n'),
+      ),
+    );
+    const b = load(
+      'b.yaml',
+      withSuffix('a1-u03', 'kitap', '  - { tr: park, de: [Park], pos: noun }'),
+    );
+    expect(foreignLexicon(b.unit, [a, b])).toEqual([
+      { tr: 'kitap', de: ['Buch'], pos: 'noun', softens: true },
+    ]);
+    expect(foreignLexicon(a.unit, [a, b])).toEqual([]);
   });
 });

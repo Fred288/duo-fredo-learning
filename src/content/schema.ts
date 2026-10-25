@@ -158,6 +158,8 @@ export const Unit = z
     reviewed: z.boolean().default(false),
     lessons: z.array(Lesson).min(1),
     vocab: z.array(Vocab).optional(),
+    // Vom Build ergänzt: Einträge anderer Units, die Grammatikübungen dieser Unit brauchen.
+    lexicon: z.array(Vocab).optional(),
     ...provenanceFields,
   })
   .superRefine((unit, ctx) => {

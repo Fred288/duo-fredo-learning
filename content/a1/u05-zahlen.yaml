@@ -1,0 +1,311 @@
+# A1-05: Zahlen, Alter, Preise. Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u05
+level: A1
+title: Zahlen
+grammar_focus: [zahlen, kein-plural-nach-zahlen, alter, preise]
+explainer: explainers/a1-zahlen.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u05-l1
+    type: vocab
+    title: Eins bis zehn
+    exercises:
+      - id: a1-u05-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „bir“?
+        options: [eins, zwei, drei]
+        answer: eins
+        explanation: „bir“ heißt auch „ein, eine“ (bir kitap = ein Buch).
+      - id: a1-u05-l1-e2
+        type: multiple_choice
+        prompt: Was heißt „drei“?
+        options: [üç, iki, dört]
+        answer: üç
+      - id: a1-u05-l1-e3
+        type: free_text
+        direction: de_tr
+        prompt: zwei
+        answers: [iki]
+      - id: a1-u05-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „dört“?
+        options: [vier, fünf, sechs]
+        answer: vier
+      - id: a1-u05-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: fünf
+        answers: [beş]
+      - id: a1-u05-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „altı“?
+        options: [sechs, sieben, acht]
+        answer: sechs
+      - id: a1-u05-l1-e7
+        type: free_text
+        direction: tr_de
+        prompt: yedi
+        answers: [sieben, '7']
+      - id: a1-u05-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „acht“?
+        options: [sekiz, dokuz, yedi]
+        answer: sekiz
+      - id: a1-u05-l1-e9
+        type: free_text
+        direction: tr_de
+        prompt: dokuz
+        answers: [neun, '9']
+      - id: a1-u05-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: zehn
+        answers: [on]
+
+  - id: a1-u05-l2
+    type: vocab
+    title: Zehner, hundert, tausend
+    exercises:
+      - id: a1-u05-l2-e1
+        type: multiple_choice
+        prompt: Was heißt „yirmi“?
+        options: ['20', '30', '12']
+        answer: '20'
+      - id: a1-u05-l2-e2
+        type: multiple_choice
+        prompt: Was heißt „30“?
+        options: [otuz, kırk, elli]
+        answer: otuz
+      - id: a1-u05-l2-e3
+        type: multiple_choice
+        prompt: Was heißt „kırk“?
+        options: ['40', '50', '14']
+        answer: '40'
+      - id: a1-u05-l2-e4
+        type: free_text
+        direction: de_tr
+        prompt: '50'
+        answers: [elli]
+      - id: a1-u05-l2-e5
+        type: multiple_choice
+        prompt: Was heißt „altmış“?
+        options: ['60', '70', '16']
+        answer: '60'
+        explanation: altı (6) → altmış (60), yedi (7) → yetmiş (70).
+      - id: a1-u05-l2-e6
+        type: multiple_choice
+        prompt: Was heißt „seksen“?
+        options: ['80', '90', '18']
+        answer: '80'
+      - id: a1-u05-l2-e7
+        type: free_text
+        direction: de_tr
+        prompt: '90'
+        answers: [doksan]
+      - id: a1-u05-l2-e8
+        type: free_text
+        direction: de_tr
+        prompt: '100'
+        answers: [yüz]
+        explanation: Kein „bir“ davor, einfach „yüz“.
+      - id: a1-u05-l2-e9
+        type: free_text
+        direction: de_tr
+        prompt: '1000'
+        answers: [bin]
+
+  - id: a1-u05-l3
+    type: grammar
+    title: Zahlen zusammensetzen
+    exercises:
+      - id: a1-u05-l3-e1
+        type: multiple_choice
+        prompt: Wie heißt 11?
+        options: [on bir, bir on, bir ve on]
+        answer: on bir
+        explanation: Erst die Zehner, dann die Einer, ohne „und“.
+      - id: a1-u05-l3-e2
+        type: word_bank
+        prompt: '25'
+        answers: [yirmi beş]
+        distractors: [elli, ve]
+      - id: a1-u05-l3-e3
+        type: free_text
+        direction: de_tr
+        prompt: '14'
+        answers: [on dört]
+      - id: a1-u05-l3-e4
+        type: free_text
+        direction: tr_de
+        prompt: otuz yedi
+        answers: ['37', siebenunddreißig]
+      - id: a1-u05-l3-e5
+        type: word_bank
+        prompt: '300'
+        answers: [üç yüz]
+        distractors: [otuz, bir]
+      - id: a1-u05-l3-e6
+        type: multiple_choice
+        prompt: Wie heißt 150?
+        options: [yüz elli, bir yüz elli, elli yüz]
+        answer: yüz elli
+      - id: a1-u05-l3-e7
+        type: word_bank
+        prompt: '2026'
+        answers: [iki bin yirmi altı]
+        distractors: [yüz, on]
+      - id: a1-u05-l3-e8
+        type: word_bank
+        prompt: '1990'
+        answers: [bin dokuz yüz doksan]
+        distractors: [bir, on]
+        explanation: Jahreszahlen liest man wie normale Zahlen, „bin dokuz yüz …“, nicht „neunzehnhundert“.
+      - id: a1-u05-l3-e9
+        type: free_text
+        direction: tr_de
+        prompt: kırk iki
+        answers: ['42', zweiundvierzig]
+
+  - id: a1-u05-l4
+    type: grammar
+    title: Kein Plural nach Zahlen
+    exercises:
+      - id: a1-u05-l4-e1
+        type: multiple_choice
+        prompt: Wie heißt „zwei Bücher“?
+        options: [iki kitap, iki kitaplar, kitap iki]
+        answer: iki kitap
+        explanation: Nach Zahlen steht das Nomen im Singular. Die Zahl zeigt die Menge schon.
+      - id: a1-u05-l4-e2
+        type: word_bank
+        prompt: drei Kinder
+        answers: [üç çocuk]
+        distractors: [çocuklar, dört]
+      - id: a1-u05-l4-e3
+        type: word_bank
+        prompt: fünf Äpfel
+        answers: [beş elma]
+        distractors: [elmalar]
+      - id: a1-u05-l4-e4
+        type: free_text
+        direction: de_tr
+        prompt: zehn Katzen
+        answers: [on kedi]
+      - id: a1-u05-l4-e5
+        type: multiple_choice
+        prompt: Wie heißt „Wie viele Häuser?“
+        options: [Kaç ev?, Kaç evler?, Ev kaç?]
+        answer: Kaç ev?
+        explanation: Auch nach „kaç“ (wie viele) steht kein Plural.
+      - id: a1-u05-l4-e6
+        type: word_bank
+        prompt: Zwei Tee, bitte.
+        answers: [İki çay lütfen., İki çay., Lütfen iki çay.]
+        distractors: [çaylar]
+
+  - id: a1-u05-l5
+    type: dialog
+    title: Alter und Preise
+    exercises:
+      - id: a1-u05-l5-e1
+        type: word_bank
+        prompt: Wie alt bist du?
+        answers: [Kaç yaşındasın?]
+        distractors: [Ne kadar, yaş]
+        explanation: Wörtlich etwa „Im Alter von wie vielen Jahren bist du?“. Lerne die Wendung als Ganzes.
+      - id: a1-u05-l5-e2
+        type: word_bank
+        prompt: Ich bin zwanzig Jahre alt.
+        answers: [Yirmi yaşındayım.]
+        distractors: [yaşındasın, Yirmi yaş]
+      - id: a1-u05-l5-e3
+        type: free_text
+        direction: tr_de
+        prompt: Otuz yaşındayım.
+        answers: [Ich bin dreißig., Ich bin dreißig Jahre alt., Ich bin 30., Ich bin 30 Jahre alt.]
+      - id: a1-u05-l5-e4
+        type: word_bank
+        prompt: Wie viel kostet das?
+        answers: [Bu ne kadar?, Ne kadar?, Ne kadar bu?]
+        distractors: [Kaç yaşında, nerede]
+      - id: a1-u05-l5-e5
+        type: word_bank
+        prompt: Fünfzehn Lira.
+        answers: [On beş lira.]
+        distractors: [liralar, elli]
+      - id: a1-u05-l5-e6
+        type: multiple_choice
+        prompt: Was heißt „Kaç lira?“
+        options: [Wie viele Lira?, Wie alt?, Wo ist die Lira?]
+        answer: Wie viele Lira?
+      - id: a1-u05-l5-e7
+        type: free_text
+        direction: de_tr
+        prompt: hundert Lira
+        answers: [yüz lira]
+
+  - id: a1-u05-l6
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u05-l6-e1
+        type: multiple_choice
+        prompt: Welche Zahl ist „altmış beş“?
+        options: ['65', '56', '75']
+        answer: '65'
+      - id: a1-u05-l6-e2
+        type: free_text
+        direction: de_tr
+        prompt: '18'
+        answers: [on sekiz]
+      - id: a1-u05-l6-e3
+        type: word_bank
+        prompt: vier Schüler
+        answers: [dört öğrenci]
+        distractors: [öğrenciler, dokuz]
+      - id: a1-u05-l6-e4
+        type: multiple_choice
+        prompt: Was heißt „yetmiş“?
+        options: ['70', '60', '17']
+        answer: '70'
+      - id: a1-u05-l6-e5
+        type: word_bank
+        prompt: Der Lehrer ist fünfzig Jahre alt.
+        answers: [Öğretmen elli yaşında.]
+        distractors: [yaşındayım, beş]
+      - id: a1-u05-l6-e6
+        type: free_text
+        direction: de_tr
+        prompt: sechs Autos
+        answers: [altı araba]
+
+vocab:
+  - { tr: sıfır, de: ['null'], pos: num }
+  - { tr: bir, de: [eins, ein, eine], pos: num }
+  - { tr: iki, de: [zwei], pos: num }
+  - { tr: üç, de: [drei], pos: num }
+  - { tr: dört, de: [vier], pos: num }
+  - { tr: beş, de: [fünf], pos: num }
+  - { tr: altı, de: [sechs], pos: num }
+  - { tr: yedi, de: [sieben], pos: num }
+  - { tr: sekiz, de: [acht], pos: num }
+  - { tr: dokuz, de: [neun], pos: num }
+  - { tr: on, de: [zehn], pos: num }
+  - { tr: yirmi, de: [zwanzig], pos: num }
+  - { tr: otuz, de: [dreißig], pos: num }
+  - { tr: kırk, de: [vierzig], pos: num }
+  - { tr: elli, de: [fünfzig], pos: num }
+  - { tr: altmış, de: [sechzig], pos: num }
+  - { tr: yetmiş, de: [siebzig], pos: num }
+  - { tr: seksen, de: [achtzig], pos: num }
+  - { tr: doksan, de: [neunzig], pos: num }
+  - { id: yüz-hundert, tr: yüz, de: [hundert], pos: num }
+  - { tr: bin, de: [tausend], pos: num }
+  - { tr: kaç, de: [wie viele], pos: adv }
+  - { tr: ne kadar, de: [wie viel], pos: phrase }
+  - { tr: lira, de: [Lira], pos: noun }
+  - { id: yaş-alter, tr: yaş, de: [Alter, Lebensjahr], pos: noun }
+  - { tr: bu, de: [das, dies, dieser], pos: pron }
+  - { tr: yaşında, de: [… Jahre alt], pos: phrase }

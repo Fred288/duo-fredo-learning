@@ -20,7 +20,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       .then((unit) => {
         const found = unit.lessons.find((l) => l.id === lessonId);
         if (found) {
-          setVocab(unit.vocab ?? []);
+          setVocab([...(unit.vocab ?? []), ...(unit.lexicon ?? [])]);
           setUnitReviewed(unit.reviewed);
           setLesson(found);
         } else setFailed(true);

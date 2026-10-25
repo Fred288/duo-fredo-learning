@@ -1,0 +1,257 @@
+# A1-04: Herkunft und Beruf (Personalpronomen, „sein“, Fragepartikel mI). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u04
+level: A1
+title: Herkunft und Beruf
+grammar_focus: [personalpronomen, kopula, fragepartikel, degil]
+explainer: explainers/a1-sein.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u04-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u04-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „öğretmen“?
+        options: [Lehrer, Arzt, Koch]
+        answer: Lehrer
+        explanation: Wie bei „öğrenci“ gibt es keine eigene weibliche Form, „öğretmen“ heißt auch Lehrerin. Wenn nötig, sagt man „kadın öğretmen“.
+      - id: a1-u04-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Arzt, Ärztin
+        answers: [doktor, hekim]
+        explanation: „hekim“ ist das ältere, gehobene Wort.
+      - id: a1-u04-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „mühendis“?
+        options: [Ingenieur, Kellner, Schüler]
+        answer: Ingenieur
+      - id: a1-u04-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „aşçı“?
+        options: [Koch, Kellner, Lehrer]
+        answer: Koch
+      - id: a1-u04-l1-e5
+        type: free_text
+        direction: tr_de
+        prompt: garson
+        answers: [Kellner, Kellnerin, der Kellner, ein Kellner, die Kellnerin, eine Kellnerin, Bedienung]
+      - id: a1-u04-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „Alman“?
+        options: [Deutscher, Deutschland, Deutsch (Sprache)]
+        answer: Deutscher
+        explanation: Alman (Deutscher, Deutsche), Almanya (Deutschland), Almanca (Deutsch als Sprache).
+      - id: a1-u04-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „Türkçe“?
+        options: [Türkisch (Sprache), Türke, Türkei]
+        answer: Türkisch (Sprache)
+      - id: a1-u04-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Deutsch (die Sprache)
+        answers: [Almanca]
+      - id: a1-u04-l1-e9
+        type: multiple_choice
+        prompt: Was fragt „Nerelisin?“
+        options: [Woher kommst du?, Wo bist du?, Wer bist du?]
+        answer: Woher kommst du?
+        explanation: Wörtlich „Von wo bist du?“. nereli = von wo stammend.
+
+  - id: a1-u04-l2
+    type: grammar
+    title: ich, du, er …
+    exercises:
+      - id: a1-u04-l2-e1
+        type: multiple_choice
+        prompt: Was heißt „ich“?
+        options: [ben, sen, biz]
+        answer: ben
+      - id: a1-u04-l2-e2
+        type: multiple_choice
+        prompt: Was heißt „wir“?
+        options: [biz, siz, onlar]
+        answer: biz
+      - id: a1-u04-l2-e3
+        type: multiple_choice
+        prompt: Was heißt „o“?
+        options: ['er, sie oder es', nur er, sie (Plural)]
+        answer: 'er, sie oder es'
+        explanation: Türkisch unterscheidet kein Geschlecht. „o“ heißt er, sie oder es.
+      - id: a1-u04-l2-e4
+        type: free_text
+        direction: de_tr
+        prompt: du
+        answers: [sen]
+      - id: a1-u04-l2-e5
+        type: free_text
+        direction: de_tr
+        prompt: ihr / Sie (höflich)
+        answers: [siz]
+        explanation: siz ist zugleich „ihr“ und die höfliche Anrede „Sie“, wie in „nasılsınız“ aus Unit 1.
+      - id: a1-u04-l2-e6
+        type: free_text
+        direction: tr_de
+        prompt: onlar
+        answers: [sie, sie (Plural)]
+      - id: a1-u04-l2-e7
+        type: multiple_choice
+        prompt: Wann lässt man das Pronomen meist weg?
+        options: [Wenn die Endung die Person schon zeigt, Nie, Nur bei Fragen]
+        answer: Wenn die Endung die Person schon zeigt
+        explanation: „Almanım“ heißt schon „ich bin Deutscher“. „Ben Almanım“ betont das „ich“.
+
+  - id: a1-u04-l3
+    type: grammar
+    title: ich bin …
+    exercises:
+      - id: a1-u04-l3-e1
+        type: conjugation
+        mode: copula
+        lemma: Alman
+        person: 1sg
+        target: Almanım
+        gloss_de: ich bin Deutscher, Deutsche
+        explanation: „sein“ ist eine Endung. Sie folgt der Vierfach-Harmonie (ı, i, u, ü).
+      - { id: a1-u04-l3-e2, type: conjugation, mode: copula, lemma: Türk, person: 2sg, target: Türksün, gloss_de: du bist Türke, Türkin }
+      - { id: a1-u04-l3-e3, type: conjugation, mode: copula, lemma: öğretmen, person: 1pl, target: öğretmeniz, gloss_de: wir sind Lehrer }
+      - { id: a1-u04-l3-e4, type: conjugation, mode: copula, lemma: doktor, person: 2pl, target: doktorsunuz, gloss_de: ihr seid Ärzte, Sie sind Arzt }
+      - id: a1-u04-l3-e5
+        type: conjugation
+        mode: copula
+        lemma: öğrenci
+        person: 1sg
+        target: öğrenciyim
+        gloss_de: ich bin Schüler, Student
+        explanation: Nach einem Vokal steht ein y vor der Endung.
+      - { id: a1-u04-l3-e6, type: conjugation, mode: copula, lemma: aşçı, person: 1pl, target: aşçıyız, gloss_de: wir sind Köche }
+      - { id: a1-u04-l3-e7, type: conjugation, mode: copula, lemma: İngiliz, person: 2sg, target: İngilizsin, gloss_de: du bist Engländer }
+      - id: a1-u04-l3-e8
+        type: multiple_choice
+        prompt: Wie heißt „Er ist Ingenieur“?
+        options: [O mühendis., O mühendisim., O mühendissin.]
+        answer: O mühendis.
+        explanation: In der 3. Person Singular gibt es keine Endung.
+      - { id: a1-u04-l3-e9, type: conjugation, mode: copula, lemma: garson, person: 2sg, target: garsonsun, gloss_de: du bist Kellner }
+      - { id: a1-u04-l3-e10, type: conjugation, mode: copula, lemma: Fransız, person: 1sg, target: Fransızım, gloss_de: ich bin Franzose, Französin }
+
+  - id: a1-u04-l4
+    type: grammar
+    title: Fragen und verneinen
+    exercises:
+      - id: a1-u04-l4-e1
+        type: conjugation
+        mode: copula
+        lemma: Alman
+        person: 2sg
+        question: true
+        target: Alman mısın?
+        gloss_de: Bist du Deutscher?
+        explanation: Die Frage-Partikel mı/mi/mu/mü steht getrennt und trägt die Personalendung (außer bei „sie“ im Plural, Öğrenciler mi?).
+      - { id: a1-u04-l4-e2, type: conjugation, mode: copula, lemma: Türk, person: 2pl, question: true, target: Türk müsünüz?, gloss_de: Sind Sie Türke? }
+      - { id: a1-u04-l4-e3, type: conjugation, mode: copula, lemma: öğrenci, person: 3sg, question: true, target: öğrenci mi?, gloss_de: Ist er, sie Schüler? }
+      - { id: a1-u04-l4-e4, type: conjugation, mode: copula, lemma: doktor, person: 1sg, question: true, target: doktor muyum?, gloss_de: Bin ich Arzt? }
+      - id: a1-u04-l4-e5
+        type: conjugation
+        mode: copula
+        lemma: öğretmen
+        person: 1sg
+        negative: true
+        target: öğretmen değilim
+        gloss_de: ich bin kein Lehrer
+        explanation: Verneint wird mit „değil“. Die Personalendung hängt an „değil“.
+      - { id: a1-u04-l4-e6, type: conjugation, mode: copula, lemma: Türk, person: 1sg, negative: true, target: Türk değilim, gloss_de: ich bin kein Türke }
+      - { id: a1-u04-l4-e7, type: conjugation, mode: copula, lemma: aşçı, person: 3sg, negative: true, target: aşçı değil, gloss_de: er, sie ist kein Koch }
+      - id: a1-u04-l4-e8
+        type: conjugation
+        mode: copula
+        lemma: doktor
+        person: 2sg
+        negative: true
+        question: true
+        target: doktor değil misin?
+        gloss_de: Bist du kein Arzt?
+        explanation: Nach „değil“ folgt die Partikel dem i und wird zu mi (değil misin).
+      - id: a1-u04-l4-e9
+        type: conjugation
+        mode: copula
+        lemma: nereli
+        person: 2sg
+        target: nerelisin?
+        gloss_de: Woher kommst du?
+        explanation: Fragen mit Fragewort brauchen keine Partikel mi.
+      - { id: a1-u04-l4-e10, type: conjugation, mode: copula, lemma: nereli, person: 2pl, target: nerelisiniz?, gloss_de: Woher kommen Sie? }
+
+  - id: a1-u04-l5
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u04-l5-e1
+        type: word_bank
+        prompt: Ich bin Deutscher.
+        answers: [Ben Almanım., Almanım.]
+        distractors: [Almansın, Türk]
+      - id: a1-u04-l5-e2
+        type: word_bank
+        prompt: Sind Sie Türke?
+        answers: [Siz Türk müsünüz?, Türk müsünüz?, Türk müsünüz siz?]
+        distractors: [musunuz, misiniz]
+      - id: a1-u04-l5-e3
+        type: word_bank
+        prompt: Nein, ich bin kein Türke.
+        answers: ['Hayır, Türk değilim.', 'Hayır, ben Türk değilim.']
+        distractors: [değil, Türküm]
+      - id: a1-u04-l5-e4
+        type: word_bank
+        prompt: Woher kommst du?
+        answers: [Sen nerelisin?, Nerelisin?, Nerelisin sen?]
+        distractors: [nerede, nerelisiniz]
+      - id: a1-u04-l5-e5
+        type: word_bank
+        prompt: Ich komme aus Deutschland.
+        answers: [Ben Almanya'danım., Almanya'danım.]
+        distractors: [Almanya'da, Almanya'dayım]
+        explanation: Die Endung für „ich bin“ hängt auch an Ortsangaben, Almanya'dan + ım.
+      - id: a1-u04-l5-e6
+        type: free_text
+        direction: de_tr
+        prompt: Ich bin Lehrer.
+        answers: [Öğretmenim., Ben öğretmenim.]
+        hint: Das Pronomen kann wegfallen.
+      - id: a1-u04-l5-e7
+        type: free_text
+        direction: tr_de
+        prompt: Doktor musunuz?
+        answers: [Sind Sie Arzt?, Seid ihr Ärzte?, Sind Sie Ärztin?, Sind Sie Ärzte?, Seid ihr Ärztinnen?, Sind Sie Ärztinnen?, Sind Sie Doktor?, Seid ihr Doktoren?]
+      - id: a1-u04-l5-e8
+        type: multiple_choice
+        prompt: Welche Partikel passt? „Öğrenci … ?“ (Bist du Student?)
+        options: [misin, mısın, musun]
+        answer: misin
+        explanation: Letzter Vokal i → mi, mit Endung misin.
+
+vocab:
+  - { tr: ben, de: [ich], pos: pron }
+  - { tr: sen, de: [du], pos: pron, register: informal }
+  - { tr: o, de: [er, sie, es], pos: pron }
+  - { tr: biz, de: [wir], pos: pron }
+  - { tr: siz, de: [ihr, Sie], pos: pron }
+  - { tr: onlar, de: [sie (Plural)], pos: pron }
+  - { tr: değil, de: [nicht, kein], pos: particle }
+  - { tr: nereli, de: [woher stammend], pos: adj }
+  - { tr: öğretmen, de: [Lehrer, Lehrerin], pos: noun }
+  - { tr: doktor, de: [Arzt, Ärztin], pos: noun }
+  - { tr: mühendis, de: [Ingenieur, Ingenieurin], pos: noun }
+  - { tr: aşçı, de: [Koch, Köchin], pos: noun }
+  - { tr: garson, de: [Kellner, Kellnerin], pos: noun }
+  - { tr: Alman, de: [Deutscher, Deutsche, deutsch], pos: noun, capitalized: true }
+  - { tr: Türk, de: [Türke, Türkin], pos: noun, capitalized: true }
+  - { tr: İngiliz, de: [Engländer, Engländerin, Brite, Britin], pos: noun, capitalized: true }
+  - { tr: Fransız, de: [Franzose, Französin], pos: noun, capitalized: true }
+  - { tr: Türkçe, de: [Türkisch], pos: noun, capitalized: true }
+  - { tr: Almanca, de: [Deutsch], pos: noun, capitalized: true }
+  - { tr: İngilizce, de: [Englisch], pos: noun, capitalized: true }

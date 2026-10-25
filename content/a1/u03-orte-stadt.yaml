@@ -1,0 +1,235 @@
+# A1-03: Orte in der Stadt (Lokativ, Dativ, Ablativ, Eigennamen). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u03
+level: A1
+title: Orte in der Stadt
+grammar_focus: [lokativ, dativ, ablativ, eigennamen]
+explainer: explainers/a1-orte.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u03-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u03-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „hastane“?
+        options: [Krankenhaus, Hotel, Bahnhof]
+        answer: Krankenhaus
+      - id: a1-u03-l1-e2
+        type: multiple_choice
+        prompt: Was heißt „Stadt“?
+        options: [şehir, ülke, cadde]
+        answer: şehir
+      - id: a1-u03-l1-e3
+        type: free_text
+        direction: de_tr
+        prompt: Bank (Geldinstitut)
+        answers: [banka]
+      - id: a1-u03-l1-e4
+        type: free_text
+        direction: tr_de
+        prompt: lokanta
+        answers: [Restaurant, das Restaurant, ein Restaurant, Lokal, Gaststätte, Gasthaus, Speiselokal]
+      - id: a1-u03-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „istasyon“?
+        options: [Station, Straße, Land]
+        answer: Station
+        explanation: „istasyon“ ist allgemein eine Station, oft der Bahnhof; genauer heißt der Bahnhof „tren istasyonu“.
+      - id: a1-u03-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Land (z. B. Deutschland)
+        answers: [ülke]
+      - id: a1-u03-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „nerede“?
+        options: [wo, wohin, woher]
+        answer: wo
+      - id: a1-u03-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „nereye“?
+        options: [wohin, wo, woher]
+        answer: wohin
+      - id: a1-u03-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „nereden“?
+        options: [woher, wo, wohin]
+        answer: woher
+      - id: a1-u03-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „burada“?
+        options: [hier, dort, da drüben]
+        answer: hier
+        explanation: burada (hier), şurada (da, in Sichtweite), orada (dort).
+
+  - id: a1-u03-l2
+    type: grammar
+    title: Wo? -de, -da, -te, -ta
+    exercises:
+      - { id: a1-u03-l2-e1, type: suffix_builder, stem: banka, suffixes: [LOC], target: bankada, gloss_de: in der Bank }
+      - { id: a1-u03-l2-e2, type: suffix_builder, stem: otel, suffixes: [LOC], target: otelde, gloss_de: im Hotel }
+      - { id: a1-u03-l2-e3, type: suffix_builder, stem: hastane, suffixes: [LOC], target: hastanede, gloss_de: im Krankenhaus }
+      - id: a1-u03-l2-e4
+        type: suffix_builder
+        stem: park
+        suffixes: [LOC]
+        target: parkta
+        gloss_de: im Park
+        explanation: Nach k (und p, t, ç, s, ş, f, h) wird d zu t.
+      - { id: a1-u03-l2-e5, type: suffix_builder, stem: market, suffixes: [LOC], target: markette, gloss_de: im Supermarkt }
+      - { id: a1-u03-l2-e6, type: suffix_builder, stem: istasyon, suffixes: [LOC], target: istasyonda, gloss_de: am Bahnhof }
+      - id: a1-u03-l2-e7
+        type: suffix_builder
+        stem: şehir
+        suffixes: [LOC]
+        target: şehirde
+        gloss_de: in der Stadt
+      - { id: a1-u03-l2-e8, type: suffix_builder, stem: lokanta, suffixes: [LOC], target: lokantada, gloss_de: im Restaurant }
+      - id: a1-u03-l2-e9
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (auf der Hauptstraße)
+        options: [caddede, caddeda, caddete]
+        answer: caddede
+        explanation: Letzter Vokal e ist hell → -de. Nach Vokal bleibt d.
+
+  - id: a1-u03-l3
+    type: grammar
+    title: Wohin und woher?
+    exercises:
+      - id: a1-u03-l3-e1
+        type: suffix_builder
+        stem: banka
+        suffixes: [DAT]
+        target: bankaya
+        gloss_de: zur Bank
+        explanation: Wohin? → -e/-a. Nach Vokal steht ein y dazwischen.
+      - { id: a1-u03-l3-e2, type: suffix_builder, stem: otel, suffixes: [DAT], target: otele, gloss_de: zum Hotel }
+      - { id: a1-u03-l3-e3, type: suffix_builder, stem: park, suffixes: [DAT], target: parka, gloss_de: in den Park }
+      - { id: a1-u03-l3-e4, type: suffix_builder, stem: hastane, suffixes: [DAT], target: hastaneye, gloss_de: ins Krankenhaus }
+      - id: a1-u03-l3-e5
+        type: suffix_builder
+        stem: şehir
+        suffixes: [DAT]
+        target: şehre
+        gloss_de: in die Stadt
+        explanation: Bei şehir fällt das i vor einer vokalischen Endung weg (şehre, şehri), vor -de bleibt es (şehirde).
+      - { id: a1-u03-l3-e6, type: suffix_builder, stem: okul, suffixes: [DAT], target: okula, gloss_de: zur Schule }
+      - { id: a1-u03-l3-e7, type: suffix_builder, stem: ev, suffixes: [ABL], target: evden, gloss_de: von zu Hause, aus dem Haus }
+      - id: a1-u03-l3-e8
+        type: suffix_builder
+        stem: park
+        suffixes: [ABL]
+        target: parktan
+        gloss_de: aus dem Park
+        explanation: Woher? → -den/-dan, nach stimmlosem Konsonanten -ten/-tan.
+      - { id: a1-u03-l3-e9, type: suffix_builder, stem: market, suffixes: [ABL], target: marketten, gloss_de: aus dem Supermarkt }
+      - { id: a1-u03-l3-e10, type: suffix_builder, stem: lokanta, suffixes: [ABL], target: lokantadan, gloss_de: aus dem Restaurant }
+
+  - id: a1-u03-l4
+    type: grammar
+    title: Städte und Länder
+    exercises:
+      - id: a1-u03-l4-e1
+        type: suffix_builder
+        stem: İstanbul
+        suffixes: [LOC]
+        target: İstanbul'da
+        gloss_de: in Istanbul
+        explanation: Bei Namen trennt ein Apostroph die Endung ab.
+      - { id: a1-u03-l4-e2, type: suffix_builder, stem: Berlin, suffixes: [LOC], target: Berlin'de, gloss_de: in Berlin }
+      - id: a1-u03-l4-e3
+        type: suffix_builder
+        stem: Frankfurt
+        suffixes: [LOC]
+        target: Frankfurt'ta
+        gloss_de: in Frankfurt
+      - { id: a1-u03-l4-e4, type: suffix_builder, stem: Ankara, suffixes: [DAT], target: Ankara'ya, gloss_de: nach Ankara }
+      - { id: a1-u03-l4-e5, type: suffix_builder, stem: İzmir, suffixes: [DAT], target: İzmir'e, gloss_de: nach Izmir }
+      - { id: a1-u03-l4-e6, type: suffix_builder, stem: Türkiye, suffixes: [LOC], target: Türkiye'de, gloss_de: in der Türkei }
+      - { id: a1-u03-l4-e7, type: suffix_builder, stem: Almanya, suffixes: [ABL], target: Almanya'dan, gloss_de: aus Deutschland }
+      - { id: a1-u03-l4-e8, type: suffix_builder, stem: Berlin, suffixes: [ABL], target: Berlin'den, gloss_de: aus Berlin }
+      - id: a1-u03-l4-e9
+        type: multiple_choice
+        prompt: Wie schreibt man „in Istanbul“?
+        options: [İstanbul'da, İstanbulda, istanbul'da]
+        answer: İstanbul'da
+        explanation: Namen werden großgeschrieben, die Endung steht nach einem Apostroph.
+      - id: a1-u03-l4-e10
+        type: multiple_choice
+        prompt: Wie schreibt man „nach Frankfurt“?
+        options: [Frankfurt'a, Frankfurta, frankfurt'a]
+        answer: Frankfurt'a
+        explanation: Großschreibung und Apostroph, die Endung -a folgt dem dunklen u.
+
+  - id: a1-u03-l5
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u03-l5-e1
+        type: word_bank
+        prompt: Ayşe ist in Istanbul.
+        answers: [Ayşe İstanbul'da.]
+        distractors: [İstanbul'a, İstanbul'dan]
+      - id: a1-u03-l5-e2
+        type: word_bank
+        prompt: Wo ist das Hotel?
+        answers: [Otel nerede?]
+        distractors: [nereye, Otelde]
+      - id: a1-u03-l5-e3
+        type: word_bank
+        prompt: Die Kinder sind im Park.
+        answers: [Çocuklar parkta.]
+        distractors: [parktan, parka]
+      - id: a1-u03-l5-e4
+        type: word_bank
+        prompt: Die Bank ist dort.
+        answers: [Banka orada.]
+        distractors: [burada, Bankada]
+      - id: a1-u03-l5-e5
+        type: free_text
+        direction: de_tr
+        prompt: in der Türkei
+        answers: [Türkiye'de]
+      - id: a1-u03-l5-e6
+        type: free_text
+        direction: de_tr
+        prompt: aus Deutschland
+        answers: [Almanya'dan]
+      - id: a1-u03-l5-e7
+        type: multiple_choice
+        prompt: Was heißt „Mehmet okulda“?
+        options: [Mehmet ist in der Schule., Mehmet geht zur Schule., Mehmet kommt aus der Schule.]
+        answer: Mehmet ist in der Schule.
+      - id: a1-u03-l5-e8
+        type: multiple_choice
+        prompt: Welche Endung beantwortet „nereye?“ (wohin)?
+        options: [-e/-a, -de/-da, -den/-dan]
+        answer: -e/-a
+
+vocab:
+  - { tr: şehir, de: [Stadt], pos: noun, drops_vowel: true }
+  - { tr: ülke, de: [Land, Staat], pos: noun }
+  - { tr: cadde, de: [Hauptstraße, Allee], pos: noun }
+  - { tr: banka, de: [Bank], pos: noun }
+  - { tr: otel, de: [Hotel], pos: noun }
+  - { tr: park, de: [Park], pos: noun }
+  - { tr: market, de: [Supermarkt, Lebensmittelgeschäft], pos: noun }
+  - { tr: hastane, de: [Krankenhaus], pos: noun }
+  - { tr: lokanta, de: [Restaurant, Lokal], pos: noun }
+  - { tr: istasyon, de: [Station, Bahnhof], pos: noun }
+  - { tr: nerede, de: [wo], pos: adv }
+  - { tr: nereye, de: [wohin], pos: adv }
+  - { tr: nereden, de: [woher], pos: adv }
+  - { tr: burada, de: [hier], pos: adv }
+  - { tr: şurada, de: [da, da drüben], pos: adv }
+  - { tr: orada, de: [dort], pos: adv }
+  - { tr: Türkiye, de: [Türkei], pos: noun, proper: true }
+  - { tr: Almanya, de: [Deutschland], pos: noun, proper: true }
+  - { tr: İstanbul, de: [Istanbul], pos: noun, proper: true }
+  - { tr: Ankara, de: [Ankara], pos: noun, proper: true }
+  - { tr: İzmir, de: [Izmir], pos: noun, proper: true }
+  - { tr: Berlin, de: [Berlin], pos: noun, proper: true }
+  - { tr: Frankfurt, de: [Frankfurt], pos: noun, proper: true }
