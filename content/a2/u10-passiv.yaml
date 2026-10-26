@@ -1,0 +1,752 @@
+# A2-10: Reflexiv und Passiv (Grundlagen): Post, Telefon, Kommunikation. Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u10
+level: A2
+title: Post und Telefon
+grammar_focus: [passiv, reflexiv, kendi]
+explainer: explainers/a2-passiv.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u10-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u10-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „mektup“?
+        options: [Brief, Paket, Briefmarke]
+        answer: Brief
+        explanation: mektup (Brief), paket (Paket), pul (Briefmarke), zarf (Umschlag).
+      - id: a2-u10-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Paket
+        answers: [paket, koli]
+      - id: a2-u10-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „göndermek“?
+        options: [schicken, bekommen, abholen]
+        answer: schicken
+      - id: a2-u10-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: schreiben
+        answers: [yazmak]
+      - id: a2-u10-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „pul“?
+        options: [Briefmarke, Umschlag, Adresse]
+        answer: Briefmarke
+      - id: a2-u10-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Adresse
+        answers: [adres]
+      - id: a2-u10-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „mesaj“?
+        options: ['Nachricht (SMS, Chat)', Anruf, Antwort]
+        answer: 'Nachricht (SMS, Chat)'
+        explanation: mesaj (Textnachricht), haber (Neuigkeit, Nachrichten im Fernsehen), cevap (Antwort).
+      - id: a2-u10-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Antwort
+        answers: [cevap, yanıt]
+      - id: a2-u10-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „doldurmak“?
+        options: [ausfüllen, unterschreiben, abgeben]
+        answer: ausfüllen
+        explanation: formu doldurmak (das Formular ausfüllen), imzalamak (unterschreiben).
+      - id: a2-u10-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „imzalamak“?
+        options: [unterschreiben, stempeln, ausfüllen]
+        answer: unterschreiben
+      - id: a2-u10-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „kimlik“?
+        options: [Ausweis, Formular, Quittung]
+        answer: Ausweis
+      - id: a2-u10-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „teslim etmek“?
+        options: [zustellen, abholen, einpacken]
+        answer: zustellen
+        explanation: teslim etmek = übergeben, zustellen, abgeben.
+      - id: a2-u10-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „meşgul“?
+        options: [besetzt, frei, ausgeschaltet]
+        answer: besetzt
+        explanation: Hat meşgul. = Die Leitung ist besetzt. meşgul heißt auch beschäftigt.
+      - id: a2-u10-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: benutzen
+        answers: [kullanmak]
+      - id: a2-u10-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „kendi“?
+        options: [selbst, andere, jeder]
+        answer: selbst
+        explanation: kendi = selbst, eigen; kendim (ich selbst), kendi evim (mein eigenes Haus).
+      - id: a2-u10-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „giyinmek“?
+        options: [sich anziehen, sich waschen, sich beeilen]
+        answer: sich anziehen
+        explanation: giymek (etwas anziehen), giyinmek (sich anziehen).
+      - id: a2-u10-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: sich waschen
+        answers: [yıkanmak]
+      - id: a2-u10-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „Çok sevindim!“?
+        options: [Das freut mich sehr!, Ich bin sehr verliebt!, Ich habe es sehr gemocht!]
+        answer: Das freut mich sehr!
+        explanation: sevinmek = sich freuen, von sevmek (lieben) mit -in.
+
+  - id: a2-u10-l2
+    type: grammar
+    title: wurde geschickt (Passiv)
+    exercises:
+      - id: a2-u10-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: göndermek
+        person: 3sg
+        tense: past
+        passive: true
+        target: gönderildi
+        gloss_de: wurde geschickt
+        explanation: Passiv = Stamm + il (vierfache Harmonie), dann die Zeit, gönder-il-di.
+      - { id: a2-u10-l2-e2, type: conjugation, mode: verb, lemma: yazmak, person: 3sg, tense: past, passive: true, target: yazıldı, gloss_de: wurde geschrieben }
+      - { id: a2-u10-l2-e3, type: conjugation, mode: verb, lemma: satmak, person: 3sg, tense: past, passive: true, target: satıldı, gloss_de: wurde verkauft }
+      - id: a2-u10-l2-e4
+        type: conjugation
+        mode: verb
+        lemma: bulmak
+        person: 3sg
+        tense: past
+        passive: true
+        target: bulundu
+        gloss_de: wurde gefunden
+      - id: a2-u10-l2-e5
+        type: conjugation
+        mode: verb
+        lemma: ödemek
+        person: 3sg
+        tense: past
+        passive: true
+        target: ödendi
+        gloss_de: wurde bezahlt
+        explanation: Nach Vokal nur n, öde-n-di.
+      - { id: a2-u10-l2-e6, type: conjugation, mode: verb, lemma: söylemek, person: 3sg, tense: past, passive: true, target: söylendi, gloss_de: wurde gesagt }
+      - id: a2-u10-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: çalmak
+        person: 3sg
+        tense: past
+        passive: true
+        target: çalındı
+        gloss_de: wurde gestohlen
+        explanation: Nach l steht ın statt ıl, çal-ın-dı; ebenso bil-in-ir.
+      - id: a2-u10-l2-e8
+        type: conjugation
+        mode: verb
+        lemma: teslim etmek
+        person: 3sg
+        tense: future
+        passive: true
+        target: teslim edilecek
+        gloss_de: wird zugestellt werden
+        explanation: et → ed vor dem Vokal, edilecek.
+      - id: a2-u10-l2-e9
+        type: conjugation
+        mode: verb
+        lemma: beklemek
+        person: 3sg
+        tense: present
+        passive: true
+        target: bekleniyor
+        gloss_de: 'wird erwartet'
+      - id: a2-u10-l2-e10
+        type: word_bank
+        prompt: Der Brief wurde gestern geschickt.
+        answers: [Mektup dün gönderildi., Dün mektup gönderildi.]
+        distractors: [gönderdi, mektubu]
+        explanation: Im Passiv steht das Objekt ohne Akkusativ, es ist jetzt Subjekt.
+      - id: a2-u10-l2-e11
+        type: word_bank
+        prompt: Mein Handy wurde gestohlen!
+        answers: [Telefonum çalındı!, Cep telefonum çalındı!]
+        distractors: [çaldı, telefonumu]
+        explanation: Telefonum çaldı. heißt dagegen „Mein Telefon hat geklingelt“.
+      - id: a2-u10-l2-e12
+        type: word_bank
+        prompt: Das Paket wird morgen zugestellt.
+        answers: [Paket yarın teslim edilecek., Yarın paket teslim edilecek.]
+        distractors: [paketi, etti]
+      - id: a2-u10-l2-e13
+        type: word_bank
+        prompt: Der Brief wurde von Ali geschrieben.
+        answers: [Mektup Ali tarafından yazıldı.]
+        distractors: [yazdı, "Ali'ye"]
+        explanation: tarafından = von (beim Passiv). Meist lässt man es weg.
+      - id: a2-u10-l2-e14
+        type: word_bank
+        prompt: Die Besprechung wurde abgesagt.
+        answers: [Toplantı iptal edildi.]
+        distractors: [etti, toplantıyı]
+        explanation: iptal etmek = absagen.
+      - id: a2-u10-l2-e15
+        type: multiple_choice
+        prompt: Was heißt „Bu ev satıldı.“?
+        options: [Dieses Haus wurde verkauft., Dieses Haus wird verkauft., Er hat dieses Haus verkauft.]
+        answer: Dieses Haus wurde verkauft.
+        explanation: Zu verkaufen = satılık (Schild am Haus).
+
+  - id: a2-u10-l3
+    type: grammar
+    title: Wie schreibt man das? (man)
+    exercises:
+      - id: a2-u10-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: yazmak
+        person: 3sg
+        tense: aorist
+        passive: true
+        question: true
+        target: yazılır mı
+        gloss_de: schreibt man es?
+        explanation: Passiv im Aorist ersetzt das deutsche „man“, im Passiv immer -ır/-ir/-ur/-ür.
+      - id: a2-u10-l3-e2
+        type: word_bank
+        prompt: Wie schreibt man dieses Wort?
+        answers: [Bu kelime nasıl yazılır?]
+        distractors: [yazıyor, kelimeyi]
+      - id: a2-u10-l3-e3
+        type: word_bank
+        prompt: Wie sagt man das auf Türkisch?
+        answers: [Bu Türkçede nasıl söylenir?, Türkçede bu nasıl söylenir?, Bunu Türkçe nasıl söylerim?, Bu Türkçe nasıl söylenir?, Bunu Türkçede nasıl söylerim?]
+        distractors: [Türkçeyi, söyledi]
+        explanation: Sprachnamen ohne Apostroph, Türkçede, Almancada.
+      - { id: a2-u10-l3-e4, type: conjugation, mode: verb, lemma: söylemek, person: 3sg, tense: aorist, passive: true, target: söylenir, gloss_de: man sagt }
+      - id: a2-u10-l3-e5
+        type: conjugation
+        mode: verb
+        lemma: içmek
+        person: 3sg
+        tense: aorist
+        passive: true
+        negative: true
+        target: içilmez
+        gloss_de: man trinkt (raucht) nicht
+        explanation: Verneint -mez/-maz, Burada sigara içilmez. = Hier wird nicht geraucht.
+      - id: a2-u10-l3-e6
+        type: word_bank
+        prompt: Hier wird nicht geraucht.
+        answers: [Burada sigara içilmez.]
+        distractors: [içmez, sigarayı]
+      - id: a2-u10-l3-e7
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 3sg
+        tense: aorist
+        passive: true
+        target: gidilir
+        gloss_de: man geht, man kommt (dorthin)
+        explanation: Auch Verben ohne Objekt bilden ein Passiv, Oraya nasıl gidilir? = Wie kommt man dorthin?
+      - id: a2-u10-l3-e8
+        type: word_bank
+        prompt: Wie kommt man von hier zum Museum?
+        answers: [Buradan müzeye nasıl gidilir?, Müzeye buradan nasıl gidilir?]
+        distractors: [gider, müzede]
+      - id: a2-u10-l3-e9
+        type: word_bank
+        prompt: Hier wird Deutsch gesprochen.
+        answers: [Burada Almanca konuşulur., Burada Almanca konuşuluyor.]
+        distractors: [konuşur, Almancayı]
+      - id: a2-u10-l3-e10
+        type: conjugation
+        mode: verb
+        lemma: açmak
+        person: 3sg
+        tense: aorist
+        passive: true
+        target: açılır
+        gloss_de: wird geöffnet
+      - id: a2-u10-l3-e11
+        type: word_bank
+        prompt: Die Post öffnet um neun Uhr.
+        answers: [Postane saat dokuzda açılır., Postane dokuzda açılır., Postane saat dokuzda açılıyor., Postane dokuzda açılıyor.]
+        distractors: [açtı, dokuza]
+        explanation: Wörtlich „wird geöffnet“ (Passiv im Aorist); umgangssprachlich geht auch Postane dokuzda açar.
+      - id: a2-u10-l3-e12
+        type: conjugation
+        mode: verb
+        lemma: ödemek
+        person: 3sg
+        tense: aorist
+        passive: true
+        ability: true
+        question: true
+        target: ödenebilir mi
+        gloss_de: kann man bezahlen?
+        explanation: Passiv vor können, öde-n-ebil-ir.
+      - id: a2-u10-l3-e13
+        type: word_bank
+        prompt: Kann man mit Karte bezahlen?
+        answers: [Kartla ödenebilir mi?, Kredi kartıyla ödenebilir mi?, Kartla ödeyebilir miyim?, Kredi kartıyla ödeyebilir miyim?]
+        distractors: [öder, karta]
+      - id: a2-u10-l3-e14
+        type: multiple_choice
+        prompt: Was heißt „Pazar günleri posta dağıtılmaz.“?
+        options: [Sonntags wird keine Post ausgetragen., Sonntags ist die Post geschlossen., Am Sonntag kommt die Post.]
+        answer: Sonntags wird keine Post ausgetragen.
+        explanation: dağıtmak = verteilen, austragen.
+
+  - id: a2-u10-l4
+    type: grammar
+    title: selbst (kendi)
+    exercises:
+      - id: a2-u10-l4-e1
+        type: suffix_builder
+        stem: kendi
+        suffixes: [POSS_1SG]
+        target: kendim
+        gloss_de: ich selbst
+        explanation: kendi bekommt das Possessiv der Person, kendim, kendin, kendisi.
+      - { id: a2-u10-l4-e2, type: suffix_builder, stem: kendi, suffixes: [POSS_1PL], target: kendimiz, gloss_de: wir selbst }
+      - id: a2-u10-l4-e3
+        type: suffix_builder
+        stem: kendi
+        suffixes: [POSS_2SG, DAT]
+        target: kendine
+        gloss_de: dir selbst
+        explanation: Kendine iyi bak! = Pass auf dich auf!
+      - { id: a2-u10-l4-e4, type: suffix_builder, stem: kendi, suffixes: [POSS_1SG, ACC], target: kendimi, gloss_de: mich (selbst) }
+      - id: a2-u10-l4-e5
+        type: word_bank
+        prompt: Das habe ich selbst gemacht.
+        answers: [Bunu kendim yaptım., Bunu ben kendim yaptım., Ben bunu kendim yaptım.]
+        distractors: [kendimi, yaptın]
+      - id: a2-u10-l4-e6
+        type: word_bank
+        prompt: Pass auf dich auf!
+        answers: [Kendine iyi bak!]
+        distractors: [kendini, sana]
+      - id: a2-u10-l4-e7
+        type: word_bank
+        prompt: Passen Sie auf sich auf!
+        answers: [Kendinize iyi bakın!]
+        distractors: [kendine, bak]
+      - id: a2-u10-l4-e8
+        type: word_bank
+        prompt: Ich fühle mich nicht gut.
+        answers: [Kendimi iyi hissetmiyorum.]
+        distractors: [kendim, hissediyorum]
+        explanation: hissetmek = fühlen; kendini iyi hissetmek = sich gut fühlen (kendimi = mich).
+      - id: a2-u10-l4-e9
+        type: word_bank
+        prompt: Wir haben ein eigenes Haus.
+        answers: [Kendi evimiz var.]
+        distractors: [kendimiz, evimizde]
+        explanation: kendi + Possessiv am Nomen = eigen, kendi evim, kendi arabası.
+      - id: a2-u10-l4-e10
+        type: multiple_choice
+        prompt: Was heißt „Kendini tanıt.“?
+        options: [Stell dich vor., Erkenne dich selbst., Kennst du ihn?]
+        answer: Stell dich vor.
+        explanation: tanıtmak = vorstellen.
+      - id: a2-u10-l4-e11
+        type: multiple_choice
+        prompt: Was heißt „Çocuk kendi kendine oynuyor.“?
+        options: [Das Kind spielt allein (für sich)., Das Kind spielt mit sich selbst Fußball., Das Kind spielt mit seinem Freund.]
+        answer: Das Kind spielt allein (für sich).
+        explanation: kendi kendine = von selbst, allein.
+      - id: a2-u10-l4-e12
+        type: suffix_builder
+        stem: kendi
+        suffixes: [POSS_3SG]
+        target: kendisi
+        gloss_de: 'er, sie selbst'
+      - id: a2-u10-l4-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (für mich selbst)
+        options: [kendim için, kendime için, kendimi için]
+        answer: kendim için
+
+  - id: a2-u10-l5
+    type: grammar
+    title: sich waschen, sich anziehen (-in)
+    exercises:
+      - id: a2-u10-l5-e1
+        type: conjugation
+        mode: verb
+        lemma: yıkanmak
+        person: 1sg
+        tense: present
+        target: yıkanıyorum
+        gloss_de: ich wasche mich
+        explanation: yıkamak (waschen) + n = yıkanmak (sich waschen). Reflexive Verben lernt man als eigene Wörter.
+      - { id: a2-u10-l5-e2, type: conjugation, mode: verb, lemma: giyinmek, person: 1sg, tense: present, target: giyiniyorum, gloss_de: ich ziehe mich an }
+      - { id: a2-u10-l5-e3, type: conjugation, mode: verb, lemma: hazırlanmak, person: 2sg, tense: past, question: true, target: hazırlandın mı, gloss_de: hast du dich fertig gemacht? }
+      - id: a2-u10-l5-e4
+        type: conjugation
+        mode: verb
+        lemma: giyinmek
+        person: 2sg
+        tense: imperative
+        target: giyin
+        gloss_de: zieh dich an!
+      - { id: a2-u10-l5-e5, type: conjugation, mode: verb, lemma: sevinmek, person: 1sg, tense: past, target: sevindim, gloss_de: ich habe mich gefreut }
+      - id: a2-u10-l5-e6
+        type: word_bank
+        prompt: Morgens wasche ich mich und ziehe mich an.
+        answers: [Sabahları yıkanıyorum ve giyiniyorum., Sabahları yıkanırım ve giyinirim., 'Sabahları yıkanıyorum, sonra giyiniyorum.', 'Sabahları yıkanırım, sonra giyinirim.']
+        distractors: [yıkıyorum, giyiyorum]
+      - id: a2-u10-l5-e7
+        type: word_bank
+        prompt: Ich wasche das Auto.
+        answers: [Arabayı yıkıyorum.]
+        distractors: [yıkanıyorum, araba]
+        explanation: Mit Objekt yıkamak, ohne Objekt (sich selbst) yıkanmak.
+      - id: a2-u10-l5-e8
+        type: word_bank
+        prompt: Die Kinder ziehen sich an.
+        answers: [Çocuklar giyiniyor., Çocuklar giyiniyorlar.]
+        distractors: [giyiyor, çocukları]
+      - id: a2-u10-l5-e9
+        type: word_bank
+        prompt: Ich freue mich sehr über deine Nachricht.
+        answers: [Mesajına çok sevindim.]
+        distractors: [mesajını, sevdim]
+        explanation: sevinmek steht mit Dativ, mesajına.
+      - id: a2-u10-l5-e10
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Ali yıkandı.“ / „Ali yıkadı.“
+        options: ['Ali hat sich gewaschen. / Ali hat (etwas) gewaschen.', 'Ali wurde gewaschen. / Ali wäscht.', 'Kein Unterschied.']
+        answer: 'Ali hat sich gewaschen. / Ali hat (etwas) gewaschen.'
+        explanation: -n kann reflexiv oder passiv sein; meist zeigt der Zusammenhang, was gemeint ist.
+      - id: a2-u10-l5-e11
+        type: multiple_choice
+        prompt: Was heißt „giymek“ im Unterschied zu „giyinmek“?
+        options: ['etwas anziehen (giymek) / sich anziehen (giyinmek)', 'sich anziehen (giymek) / etwas anziehen (giyinmek)', 'gleiche Bedeutung']
+        answer: 'etwas anziehen (giymek) / sich anziehen (giyinmek)'
+        explanation: Ceketimi giydim. = Ich habe meine Jacke angezogen. Giyindim. = Ich habe mich angezogen.
+
+  - id: a2-u10-l6
+    type: grammar
+    title: 'Tabellen: Passiv und kendi'
+    exercises:
+      - id: a2-u10-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: davet etmek
+        tense: past
+        passive: true
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl, 3pl]
+        targets: [davet edildim, davet edildin, davet edildi, davet edildik, davet edildiniz, davet edildiler]
+        gloss_de: eingeladen werden (Vergangenheit)
+        explanation: Das Passiv hat alle Personen, ich wurde eingeladen = davet edildim.
+      - { id: a2-u10-l6-e2, type: paradigm, kind: verb, lemma: aramak, tense: past, passive: true, persons: [1sg, 2sg, 3sg, 1pl, 2pl, 3pl], targets: [arandım, arandın, arandı, arandık, arandınız, arandılar], gloss_de: 'angerufen werden (Vergangenheit)' }
+      - id: a2-u10-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: beklemek
+        tense: present
+        passive: true
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl, 3pl]
+        targets: [bekleniyorum, bekleniyorsun, bekleniyor, bekleniyoruz, bekleniyorsunuz, bekleniyorlar]
+        gloss_de: erwartet werden
+      - id: a2-u10-l6-e4
+        type: paradigm
+        kind: noun
+        lemma: kendi
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [kendim, kendin, kendisi, kendimiz, kendiniz, kendileri]
+        gloss_de: 'ich selbst, du selbst …'
+      - id: a2-u10-l6-e5
+        type: paradigm
+        kind: noun
+        lemma: kendi
+        rows: [[POSS_1SG, DAT], [POSS_2SG, DAT], [POSS_1SG, ACC], [POSS_2SG, ACC]]
+        targets: [kendime, kendine, kendimi, kendini]
+        gloss_de: 'mir, dir, mich, dich (selbst)'
+      - { id: a2-u10-l6-e6, type: paradigm, kind: verb, lemma: giyinmek, tense: past, persons: [1sg, 2sg, 3sg, 1pl, 2pl, 3pl], targets: [giyindim, giyindin, giyindi, giyindik, giyindiniz, giyindiler], gloss_de: 'sich anziehen (Vergangenheit)' }
+      - id: a2-u10-l6-e7
+        type: paradigm
+        kind: verb
+        lemma: yazmak
+        tense: aorist
+        passive: true
+        negative: true
+        persons: [3sg, 3pl]
+        targets: [yazılmaz, yazılmazlar]
+        gloss_de: wird nicht geschrieben
+      - id: a2-u10-l6-e8
+        type: paradigm
+        kind: verb
+        lemma: göndermek
+        tense: future
+        passive: true
+        persons: [3sg, 3pl]
+        targets: [gönderilecek, gönderilecekler]
+        gloss_de: wird geschickt werden
+
+  - id: a2-u10-l7
+    type: dialog
+    title: Auf der Post
+    exercises:
+      - id: a2-u10-l7-e1
+        type: word_bank
+        prompt: Ich möchte dieses Paket nach Deutschland schicken.
+        answers: [Bu paketi Almanya'ya göndermek istiyorum., Bu paketi Almanya'ya yollamak istiyorum.]
+        distractors: [paket, "Almanya'da"]
+        explanation: yollamak ist gleichbedeutend mit göndermek.
+      - id: a2-u10-l7-e2
+        type: word_bank
+        prompt: Füllen Sie bitte dieses Formular aus.
+        answers: [Lütfen bu formu doldurun., Bu formu doldurun lütfen., Lütfen bu formu doldurunuz., Bu formu lütfen doldurun., Bu formu doldurunuz lütfen.]
+        distractors: [form, doldur]
+      - id: a2-u10-l7-e3
+        type: word_bank
+        prompt: Wo soll ich unterschreiben?
+        answers: [Nereyi imzalamalıyım?, Nereyi imzalayayım?, Nereye imza atmalıyım?]
+        distractors: [nerede, imzaladım]
+        explanation: imza atmak = unterschreiben (wörtlich „eine Unterschrift werfen“).
+      - id: a2-u10-l7-e4
+        type: word_bank
+        prompt: Ihren Ausweis, bitte.
+        answers: ['Kimliğiniz, lütfen.', 'Kimliğinizi alabilir miyim?']
+        distractors: [kimlik, kimliğim]
+        explanation: kimlik erweicht vor Vokal, kimliğiniz.
+      - id: a2-u10-l7-e5
+        type: suffix_builder
+        stem: kimlik
+        suffixes: [POSS_2PL]
+        target: kimliğiniz
+        gloss_de: Ihr Ausweis
+      - id: a2-u10-l7-e6
+        type: word_bank
+        prompt: Wann kommt das Paket an?
+        answers: [Paket ne zaman varır?, Paket ne zaman teslim edilir?, Paket ne zaman ulaşır?, Paket ne zaman teslim edilecek?]
+        distractors: [nerede, paketi]
+      - id: a2-u10-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Paket üç gün içinde teslim edilir.
+        answers: [Das Paket wird innerhalb von drei Tagen zugestellt., Das Paket wird in drei Tagen zugestellt., Das Paket wird binnen drei Tagen zugestellt., Das Paket wird innerhalb von drei Tagen geliefert., Das Paket wird innerhalb von drei Tagen ausgeliefert.]
+      - id: a2-u10-l7-e8
+        type: word_bank
+        prompt: Ich brauche drei Briefmarken.
+        answers: [Üç pul istiyorum., Üç pula ihtiyacım var., Üç tane pul istiyorum., Üç tane pula ihtiyacım var.]
+        distractors: [pullar, pulu]
+        explanation: Nach Zahlen kein Plural, üç pul. ihtiyacım var = ich brauche.
+      - id: a2-u10-l7-e9
+        type: suffix_builder
+        stem: mektup
+        suffixes: [ACC]
+        target: mektubu
+        gloss_de: den Brief
+      - id: a2-u10-l7-e10
+        type: multiple_choice
+        prompt: Was heißt „Kargo takip numarası“?
+        options: [Sendungsverfolgungsnummer, Paketgewicht, Postleitzahl]
+        answer: Sendungsverfolgungsnummer
+        explanation: takip = Verfolgung; posta kodu = Postleitzahl.
+      - id: a2-u10-l7-e11
+        type: word_bank
+        prompt: Wurde mein Brief schon abgeschickt?
+        answers: [Mektubum gönderildi mi?, Mektubum gönderildi mi acaba?]
+        distractors: [mektubumu, gönderdi]
+      - id: a2-u10-l7-e12
+        type: multiple_choice
+        prompt: Was heißt „Bu mektup yanlış adrese gönderilmiş.“?
+        options: [Dieser Brief wurde (anscheinend) an die falsche Adresse geschickt., Schicken Sie diesen Brief an die richtige Adresse., Dieser Brief hat keine Adresse.]
+        answer: Dieser Brief wurde (anscheinend) an die falsche Adresse geschickt.
+        explanation: -miş nach dem Passiv, man hat es festgestellt.
+
+  - id: a2-u10-l8
+    type: dialog
+    title: Am Telefon
+    exercises:
+      - id: a2-u10-l8-e1
+        type: multiple_choice
+        prompt: Was sagt man, wenn man ans Telefon geht?
+        options: [Alo?, Merhabalar!, Hoşça kal!]
+        answer: Alo?
+      - id: a2-u10-l8-e2
+        type: word_bank
+        prompt: Ist Frau Ayşe da?
+        answers: [Ayşe Hanım orada mı?, Ayşe Hanım var mı?]
+        distractors: [burada, mi]
+        explanation: Hanım (Frau) und Bey (Herr) stehen nach dem Vornamen.
+      - id: a2-u10-l8-e3
+        type: word_bank
+        prompt: Mit wem spreche ich?
+        answers: [Kiminle görüşüyorum?, Kimle görüşüyorum?]
+        distractors: [kime, konuştum]
+        explanation: görüşmek = (miteinander) sprechen, sich treffen.
+      - id: a2-u10-l8-e4
+        type: word_bank
+        prompt: Die Leitung ist besetzt.
+        answers: [Hat meşgul.]
+        distractors: [hatta, boş]
+      - id: a2-u10-l8-e5
+        type: word_bank
+        prompt: Möchten Sie eine Nachricht hinterlassen?
+        answers: [Mesaj bırakmak ister misiniz?, Not bırakmak ister misiniz?]
+        distractors: [mesajı, istiyorum]
+      - id: a2-u10-l8-e6
+        type: word_bank
+        prompt: Können Sie später noch einmal anrufen?
+        answers: [Sonra tekrar arar mısınız?, Daha sonra tekrar arar mısınız?, Sonra tekrar arayabilir misiniz?, Daha sonra tekrar arayabilir misiniz?]
+        distractors: [aradınız, önce]
+      - id: a2-u10-l8-e7
+        type: word_bank
+        prompt: Mein Akku ist leer.
+        answers: [Şarjım bitti., Telefonumun şarjı bitti.]
+        distractors: [şarj, bitiyor]
+        explanation: şarj = Akkuladung, bitmek = zu Ende gehen.
+      - id: a2-u10-l8-e8
+        type: word_bank
+        prompt: Ich kann Sie nicht hören.
+        answers: [Sesiniz gelmiyor., Sizi duyamıyorum.]
+        distractors: [sesim, duyuyorum]
+        explanation: Wörtlich „Ihre Stimme kommt nicht“.
+      - id: a2-u10-l8-e9
+        type: conjugation
+        mode: copula
+        lemma: kapalı
+        person: 3sg
+        tense: past
+        target: kapalıydı
+        gloss_de: war ausgeschaltet
+      - id: a2-u10-l8-e10
+        type: word_bank
+        prompt: Mein Telefon war ausgeschaltet.
+        answers: [Telefonum kapalıydı.]
+        distractors: [kapalı, telefonu]
+      - id: a2-u10-l8-e11
+        type: word_bank
+        prompt: Ich habe deine Nachricht bekommen.
+        answers: [Mesajını aldım.]
+        distractors: [mesajın, gönderdim]
+      - id: a2-u10-l8-e12
+        type: free_text
+        direction: tr_de
+        prompt: Sana bir e-posta gönderdim.
+        answers: [Ich habe dir eine E-Mail geschickt., Ich habe dir eine Mail geschickt., Ich schickte dir eine E-Mail., Ich habe dir eine E-Mail gesendet.]
+      - id: a2-u10-l8-e13
+        type: word_bank
+        prompt: Ich wurde um zwei Uhr angerufen.
+        answers: [Saat ikide arandım.]
+        distractors: [aradım, ikiye]
+        explanation: arandım = ich wurde angerufen, aradım = ich habe angerufen.
+
+  - id: a2-u10-l9
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u10-l9-e1
+        type: free_text
+        direction: de_tr
+        prompt: Brief
+        answers: [mektup]
+      - id: a2-u10-l9-e2
+        type: free_text
+        direction: de_tr
+        prompt: ich selbst
+        answers: [kendim, ben kendim]
+      - { id: a2-u10-l9-e3, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: past, passive: true, target: yapıldı, gloss_de: wurde gemacht }
+      - { id: a2-u10-l9-e4, type: conjugation, mode: verb, lemma: kullanmak, person: 3sg, tense: aorist, passive: true, ability: true, target: kullanılabilir, gloss_de: kann benutzt werden }
+      - { id: a2-u10-l9-e5, type: conjugation, mode: verb, lemma: bilmek, person: 3sg, tense: aorist, passive: true, target: bilinir, gloss_de: man weiß }
+      - id: a2-u10-l9-e6
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wurde gelesen)
+        options: [okundu, okuldu, okunıldı]
+        answer: okundu
+        explanation: Nach Vokal nur n.
+      - id: a2-u10-l9-e7
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wurde gestohlen)
+        options: [çalındı, çalıldı, çallandı]
+        answer: çalındı
+        explanation: Nach l steht ın.
+      - id: a2-u10-l9-e8
+        type: word_bank
+        prompt: Wie schreibt man deinen Namen?
+        answers: [Adın nasıl yazılır?, Senin adın nasıl yazılır?, İsmin nasıl yazılır?, Senin ismin nasıl yazılır?]
+        distractors: [adını, yazıyor]
+      - id: a2-u10-l9-e9
+        type: word_bank
+        prompt: Ich wasche mich und ziehe mich an.
+        answers: [Yıkanıyorum ve giyiniyorum., Yıkanırım ve giyinirim.]
+        distractors: [yıkıyorum, giyiyorum]
+      - id: a2-u10-l9-e10
+        type: free_text
+        direction: tr_de
+        prompt: Kendine iyi bak!
+        answers: [Pass auf dich auf!, Pass gut auf dich auf!, Mach's gut!]
+      - id: a2-u10-l9-e11
+        type: word_bank
+        prompt: Wir wurden zur Hochzeit eingeladen.
+        answers: [Düğüne davet edildik.]
+        distractors: [düğünde, ettik]
+        explanation: düğün = Hochzeit(sfeier).
+      - id: a2-u10-l9-e12
+        type: multiple_choice
+        prompt: Was heißt „Burada fotoğraf çekilmez.“?
+        options: [Hier darf man nicht fotografieren., Hier gibt es keine Fotos., Hier kann man Fotos kaufen.]
+        answer: Hier darf man nicht fotografieren.
+        explanation: fotoğraf çekmek → çekilmez = wird nicht gemacht, man macht hier keine Fotos.
+
+vocab:
+  - { tr: mektup, de: [Brief], pos: noun, softens: true }
+  - { tr: paket, de: [Paket], pos: noun }
+  - { tr: pul, de: [Briefmarke], pos: noun }
+  - { tr: zarf, de: [Umschlag], pos: noun }
+  - { tr: adres, de: [Adresse], pos: noun }
+  - { tr: mesaj, de: ['Nachricht (SMS, Chat)'], pos: noun }
+  - { tr: cevap, de: [Antwort], pos: noun, softens: true }
+  - { tr: e-posta, de: [E-Mail], pos: noun }
+  - { tr: form, de: [Formular], pos: noun }
+  - { tr: kimlik, de: [Ausweis], pos: noun, softens: true }
+  - { tr: kelime, de: [Wort], pos: noun }
+  - { tr: göndermek, de: [schicken], pos: verb }
+  - { tr: yollamak, de: [schicken], pos: verb }
+  - { tr: yazmak, de: [schreiben], pos: verb }
+  - { tr: doldurmak, de: [ausfüllen, füllen], pos: verb }
+  - { tr: imzalamak, de: [unterschreiben], pos: verb }
+  - { tr: teslim etmek, de: [zustellen, übergeben, abgeben], pos: verb, softens: true }
+  - { tr: iptal etmek, de: [absagen, stornieren], pos: verb, softens: true }
+  - { tr: davet etmek, de: [einladen], pos: verb, softens: true }
+  - { tr: kullanmak, de: [benutzen], pos: verb }
+  - { tr: satmak, de: [verkaufen], pos: verb }
+  - { tr: dağıtmak, de: [verteilen, austragen], pos: verb }
+  - { tr: hissetmek, de: [fühlen], pos: verb, softens: true }
+  - { tr: tanıtmak, de: [vorstellen], pos: verb }
+  - { tr: kendi, de: [selbst, eigen], pos: pron }
+  - { tr: yıkanmak, de: [sich waschen], pos: verb }
+  - { tr: giymek, de: [anziehen (etwas)], pos: verb }
+  - { tr: giyinmek, de: [sich anziehen], pos: verb }
+  - { tr: hazırlanmak, de: [sich fertig machen, sich vorbereiten], pos: verb }
+  - { tr: sevinmek, de: [sich freuen], pos: verb }
+  - { tr: tarafından, de: [von (beim Passiv)], pos: postp }
+  - { tr: meşgul, de: [besetzt, beschäftigt], pos: adj }
+  - { tr: kapalı, de: [geschlossen, ausgeschaltet], pos: adj }
+  - { tr: şarj, de: [Akkuladung], pos: noun }
+  - { tr: görüşmek, de: [sprechen (miteinander), sich treffen], pos: verb }
+  - { tr: hat, de: [Leitung, Linie], pos: noun }
+  - { tr: düğün, de: [Hochzeit], pos: noun }
+  - { tr: kargo, de: [Paketdienst, Sendung], pos: noun }

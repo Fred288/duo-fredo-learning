@@ -1,0 +1,661 @@
+# A2-09: Zugehörigkeit -ki, Ableitungen -lI, -sIz, -lIk, -CI (Berufe, Arbeitswelt, Einkaufen). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u09
+level: A2
+title: Arbeit und Einkauf
+grammar_focus: [ableitung, li, siz, lik, ci, ki]
+explainer: explainers/a2-ableitungen.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u09-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u09-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „meslek“?
+        options: [Beruf, Firma, Gehalt]
+        answer: Beruf
+        explanation: meslek (Beruf), şirket (Firma), maaş (Gehalt).
+      - id: a2-u09-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Firma
+        answers: [şirket]
+      - id: a2-u09-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „maaş“?
+        options: [Gehalt, Preis, Rabatt]
+        answer: Gehalt
+      - id: a2-u09-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „toplantı“?
+        options: [Besprechung, Büro, Pause]
+        answer: Besprechung
+      - id: a2-u09-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Büro
+        answers: [ofis, büro]
+      - id: a2-u09-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „müdür“?
+        options: [Leiter, Kollege, Kunde]
+        answer: Leiter
+        explanation: müdür (Leiter, Direktor), iş arkadaşı (Kollege), müşteri (Kunde).
+      - id: a2-u09-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Kunde, Kundin
+        answers: [müşteri]
+      - id: a2-u09-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „fiyat“?
+        options: [Preis, Kasse, Quittung]
+        answer: Preis
+      - id: a2-u09-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „indirim“?
+        options: [Rabatt, Rechnung, Rückgabe]
+        answer: Rabatt
+        explanation: indirim (Rabatt, Ausverkauf), indirimli (reduziert).
+      - id: a2-u09-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: Kasse
+        answers: [kasa]
+      - id: a2-u09-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „nakit“?
+        options: [bar (Geld), mit Karte, auf Raten]
+        answer: bar (Geld)
+        explanation: nakit (bar), kredi kartı (Kreditkarte), kartla (mit Karte).
+      - id: a2-u09-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „beden“ im Geschäft?
+        options: [Größe (Kleidung), Farbe, Modell]
+        answer: Größe (Kleidung)
+        explanation: beden (Kleidergröße), numara (Schuhgröße).
+      - id: a2-u09-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „poşet“?
+        options: [Tüte, Quittung, Paket]
+        answer: Tüte
+      - id: a2-u09-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: verheiratet
+        answers: [evli]
+        explanation: ev + li, wörtlich „mit Haus“. Gegenteil bekâr (ledig).
+      - id: a2-u09-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „bekâr“?
+        options: [ledig, geschieden, verlobt]
+        answer: ledig
+      - id: a2-u09-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „ücretsiz“?
+        options: [kostenlos, teuer, bezahlt]
+        answer: kostenlos
+        explanation: ücret (Gebühr, Lohn) + siz (ohne) = kostenlos.
+      - id: a2-u09-l1-e17
+        type: multiple_choice
+        prompt: Was heißt „çalışan“?
+        options: [Angestellte(r), Arbeitgeber, Rentner]
+        answer: Angestellte(r)
+        explanation: çalışan = der/die Arbeitende, Mitarbeiter(in).
+      - id: a2-u09-l1-e18
+        type: free_text
+        direction: de_tr
+        prompt: bezahlen
+        answers: [ödemek]
+
+  - id: a2-u09-l2
+    type: grammar
+    title: Berufe mit -ci
+    exercises:
+      - id: a2-u09-l2-e1
+        type: suffix_builder
+        stem: kitap
+        suffixes: [CI]
+        target: kitapçı
+        gloss_de: 'Buchhändler(in), Buchhandlung'
+        explanation: -ci/-cı/-cu/-cü macht aus einer Sache den, der damit arbeitet. Nach einem stimmlosen Laut (p, ç, t, k, s, ş, f, h) wird c zu ç, kitapçı.
+      - id: a2-u09-l2-e2
+        type: suffix_builder
+        stem: gazete
+        suffixes: [CI]
+        target: gazeteci
+        gloss_de: 'Journalist(in)'
+        explanation: Nach Vokal oder stimmhaftem Konsonant bleibt c, gazeteci.
+      - { id: a2-u09-l2-e3, type: suffix_builder, stem: balık, suffixes: [CI], target: balıkçı, gloss_de: 'Fischer(in), Fischhändler(in)' }
+      - { id: a2-u09-l2-e4, type: suffix_builder, stem: çiçek, suffixes: [CI], target: çiçekçi, gloss_de: 'Florist(in), Blumenladen' }
+      - { id: a2-u09-l2-e5, type: suffix_builder, stem: süt, suffixes: [CI], target: sütçü, gloss_de: Milchmann }
+      - { id: a2-u09-l2-e6, type: suffix_builder, stem: yol, suffixes: [CI], target: yolcu, gloss_de: 'Reisende(r), Fahrgast' }
+      - { id: a2-u09-l2-e7, type: suffix_builder, stem: futbol, suffixes: [CI], target: futbolcu, gloss_de: 'Fußballspieler(in)' }
+      - { id: a2-u09-l2-e8, type: suffix_builder, stem: iş, suffixes: [CI], target: işçi, gloss_de: 'Arbeiter(in)' }
+      - { id: a2-u09-l2-e9, type: suffix_builder, stem: dondurma, suffixes: [CI], target: dondurmacı, gloss_de: Eisverkäufer }
+      - id: a2-u09-l2-e10
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Bäcker für Sesamringe, simit)
+        options: [simitçi, simitci, simitçı]
+        answer: simitçi
+        explanation: t ist stimmlos, also ç; i im Stamm, also i in der Endung.
+      - id: a2-u09-l2-e11
+        type: word_bank
+        prompt: Mein Vater ist Fischer.
+        answers: [Babam balıkçı.]
+        distractors: [balık, balıkçılar]
+      - id: a2-u09-l2-e12
+        type: word_bank
+        prompt: Wo ist die Buchhandlung?
+        answers: [Kitapçı nerede?]
+        distractors: [kitap, nereye]
+      - id: a2-u09-l2-e13
+        type: word_bank
+        prompt: Die Fahrgäste warten auf den Bus.
+        answers: [Yolcular otobüsü bekliyor., Yolcular otobüsü bekliyorlar.]
+        distractors: [yollar, otobüse]
+      - id: a2-u09-l2-e14
+        type: multiple_choice
+        prompt: Was heißt „dişçi“?
+        options: [Zahnarzt, Zahnbürste, Zahnschmerz]
+        answer: Zahnarzt
+        explanation: dişçi ist umgangssprachlich, offiziell diş hekimi.
+      - id: a2-u09-l2-e15
+        type: suffix_builder
+        stem: kitap
+        suffixes: [CI, DAT]
+        target: kitapçıya
+        gloss_de: zur Buchhandlung
+        explanation: Nach der Ableitung folgen Plural, Possessiv und Kasus wie bei jedem Nomen.
+
+  - id: a2-u09-l3
+    type: grammar
+    title: mit und ohne (-li, -siz)
+    exercises:
+      - id: a2-u09-l3-e1
+        type: suffix_builder
+        stem: şeker
+        suffixes: [LI]
+        target: şekerli
+        gloss_de: mit Zucker
+        explanation: -li/-lı/-lu/-lü = mit, -siz/-sız/-suz/-süz = ohne.
+      - { id: a2-u09-l3-e2, type: suffix_builder, stem: şeker, suffixes: [SIZ], target: şekersiz, gloss_de: ohne Zucker }
+      - { id: a2-u09-l3-e3, type: suffix_builder, stem: süt, suffixes: [LI], target: sütlü, gloss_de: mit Milch }
+      - { id: a2-u09-l3-e4, type: suffix_builder, stem: süt, suffixes: [SIZ], target: sütsüz, gloss_de: ohne Milch }
+      - { id: a2-u09-l3-e5, type: suffix_builder, stem: çocuk, suffixes: [LI], target: çocuklu, gloss_de: mit Kindern }
+      - { id: a2-u09-l3-e6, type: suffix_builder, stem: bahçe, suffixes: [LI], target: bahçeli, gloss_de: mit Garten }
+      - id: a2-u09-l3-e7
+        type: suffix_builder
+        stem: iş
+        suffixes: [SIZ]
+        target: işsiz
+        gloss_de: arbeitslos
+      - id: a2-u09-l3-e8
+        type: suffix_builder
+        stem: Ankara
+        suffixes: [LI]
+        target: Ankaralı
+        gloss_de: aus Ankara
+        explanation: Herkunft mit -li, ohne Apostroph, denn es entsteht ein neues Wort, Ankaralı, İstanbullu, Berlinli.
+      - id: a2-u09-l3-e9
+        type: conjugation
+        mode: copula
+        lemma: İstanbullu
+        person: 1sg
+        target: İstanbulluyum
+        gloss_de: ich bin aus Istanbul
+      - id: a2-u09-l3-e10
+        type: word_bank
+        prompt: Einen Tee ohne Zucker, bitte.
+        answers: [Şekersiz bir çay lütfen., 'Bir şekersiz çay, lütfen.', 'Bir çay, şekersiz lütfen.']
+        distractors: [şekerli, şeker]
+      - id: a2-u09-l3-e11
+        type: word_bank
+        prompt: Wir suchen eine Wohnung mit Balkon.
+        answers: [Balkonlu bir daire arıyoruz., Balkonlu bir ev arıyoruz.]
+        distractors: [balkonsuz, balkonda]
+      - id: a2-u09-l3-e12
+        type: conjugation
+        mode: copula
+        lemma: evli
+        person: 2sg
+        question: true
+        target: evli misin
+        gloss_de: bist du verheiratet?
+      - id: a2-u09-l3-e13
+        type: word_bank
+        prompt: Ja, ich bin verheiratet und habe zwei Kinder.
+        answers: ['Evet, evliyim ve iki çocuğum var.']
+        distractors: [bekârım, çocuklar]
+      - id: a2-u09-l3-e14
+        type: multiple_choice
+        prompt: Was heißt „Giriş ücretsiz.“?
+        options: [Der Eintritt ist frei., Der Eingang ist geschlossen., Der Eintritt kostet etwas.]
+        answer: Der Eintritt ist frei.
+        explanation: giriş = Eingang, Eintritt.
+      - id: a2-u09-l3-e15
+        type: multiple_choice
+        prompt: Was heißt „renkli“?
+        options: [bunt, farblos, schwarz-weiß]
+        answer: bunt
+        explanation: renk erweicht vor Vokal (rengi), vor -li nicht, renkli.
+
+  - id: a2-u09-l4
+    type: grammar
+    title: Dinge und Begriffe (-lik)
+    exercises:
+      - id: a2-u09-l4-e1
+        type: suffix_builder
+        stem: göz
+        suffixes: [LIK]
+        target: gözlük
+        gloss_de: Brille
+        explanation: -lik/-lık/-luk/-lük bildet Dinge (gözlük, tuzluk) und Begriffe (güzellik, arkadaşlık).
+      - { id: a2-u09-l4-e2, type: suffix_builder, stem: tuz, suffixes: [LIK], target: tuzluk, gloss_de: Salzstreuer }
+      - { id: a2-u09-l4-e3, type: suffix_builder, stem: kitap, suffixes: [LIK], target: kitaplık, gloss_de: Bücherregal }
+      - { id: a2-u09-l4-e4, type: suffix_builder, stem: güzel, suffixes: [LIK], target: güzellik, gloss_de: Schönheit }
+      - { id: a2-u09-l4-e5, type: suffix_builder, stem: arkadaş, suffixes: [LIK], target: arkadaşlık, gloss_de: Freundschaft }
+      - { id: a2-u09-l4-e6, type: suffix_builder, stem: çocuk, suffixes: [LIK], target: çocukluk, gloss_de: Kindheit }
+      - id: a2-u09-l4-e7
+        type: suffix_builder
+        stem: göz
+        suffixes: [LIK, POSS_1SG]
+        target: gözlüğüm
+        gloss_de: meine Brille
+        explanation: -lik erweicht vor Vokal, gözlüğüm, gözlüğü.
+      - { id: a2-u09-l4-e8, type: suffix_builder, stem: hafta, suffixes: [LIK], target: haftalık, gloss_de: 'wöchentlich, für eine Woche' }
+      - id: a2-u09-l4-e9
+        type: word_bank
+        prompt: Ich möchte ein Doppelzimmer.
+        answers: [İki kişilik bir oda istiyorum., İki kişilik oda istiyorum.]
+        distractors: [kişi, tek]
+        explanation: iki kişilik = für zwei Personen.
+      - id: a2-u09-l4-e10
+        type: word_bank
+        prompt: Wo ist meine Brille?
+        answers: [Gözlüğüm nerede?]
+        distractors: [gözlük, gözüm]
+      - id: a2-u09-l4-e11
+        type: multiple_choice
+        prompt: Was heißt „temizlikçi“?
+        options: [Reinigungskraft, sauber, Sauberkeit]
+        answer: Reinigungskraft
+        explanation: temiz (sauber) + lik (Sauberkeit) + çi (wer damit arbeitet). Ableitungen lassen sich stapeln.
+      - id: a2-u09-l4-e12
+        type: multiple_choice
+        prompt: Was heißt „Sağlık her şeyden önemli.“?
+        options: [Gesundheit ist wichtiger als alles andere., Gesundheit ist nicht wichtig., Alles ist gesund.]
+        answer: Gesundheit ist wichtiger als alles andere.
+        explanation: sağ (gesund, lebendig) + lık = sağlık. her şeyden = als alles (Ablativ beim Vergleich).
+      - id: a2-u09-l4-e13
+        type: free_text
+        direction: tr_de
+        prompt: günlük
+        answers: [täglich, Tagebuch, für einen Tag, Tages-, eintägig]
+
+  - id: a2-u09-l5
+    type: grammar
+    title: der auf dem Tisch (-ki)
+    exercises:
+      - id: a2-u09-l5-e1
+        type: suffix_builder
+        stem: masa
+        suffixes: [LOC, KI]
+        target: masadaki
+        gloss_de: der/die/das auf dem Tisch
+        explanation: Lokativ + ki macht aus einer Ortsangabe ein Adjektiv, masadaki kitap = das Buch auf dem Tisch.
+      - { id: a2-u09-l5-e2, type: suffix_builder, stem: dolap, suffixes: [LOC, KI], target: dolaptaki, gloss_de: der/die/das im Schrank }
+      - { id: a2-u09-l5-e3, type: suffix_builder, stem: İstanbul, suffixes: [LOC, KI], target: "İstanbul'daki", gloss_de: der/die/das in Istanbul }
+      - id: a2-u09-l5-e4
+        type: suffix_builder
+        stem: bugün
+        suffixes: [KI]
+        target: bugünkü
+        gloss_de: heutig
+        explanation: Nach Zeitwörtern steht ki direkt, yarınki, akşamki. Nur bugünkü, dünkü und öbürkü haben ü.
+      - { id: a2-u09-l5-e5, type: suffix_builder, stem: dün, suffixes: [KI], target: dünkü, gloss_de: gestrig }
+      - { id: a2-u09-l5-e6, type: suffix_builder, stem: yarın, suffixes: [KI], target: yarınki, gloss_de: morgig }
+      - id: a2-u09-l5-e7
+        type: word_bank
+        prompt: Das Buch auf dem Tisch gehört mir.
+        answers: [Masadaki kitap benim.]
+        distractors: [masada, seninki]
+      - id: a2-u09-l5-e8
+        type: word_bank
+        prompt: Die heutige Besprechung ist um drei Uhr.
+        answers: [Bugünkü toplantı saat üçte.]
+        distractors: [dünkü, üçe]
+      - id: a2-u09-l5-e9
+        type: word_bank
+        prompt: Hast du die gestrige Zeitung gelesen?
+        answers: [Dünkü gazeteyi okudun mu?]
+        distractors: [dün, gazete]
+      - id: a2-u09-l5-e10
+        type: word_bank
+        prompt: Mein Freund in Istanbul ruft mich oft an.
+        answers: [İstanbul'daki arkadaşım beni sık sık arıyor., İstanbul'daki arkadaşım sık sık beni arıyor.]
+        distractors: ["İstanbul'da", bana]
+      - id: a2-u09-l5-e11
+        type: word_bank
+        prompt: Meine Tasche ist schwarz, deine ist rot.
+        answers: ['Benim çantam siyah, seninki kırmızı.', 'Çantam siyah, seninki kırmızı.']
+        distractors: [senin, benimki]
+        explanation: benimki (meins), seninki (deins), onunki (seins/ihrs) – Genitiv + ki.
+      - id: a2-u09-l5-e12
+        type: suffix_builder
+        stem: Ali
+        suffixes: [GEN, KI]
+        target: "Ali'ninki"
+        gloss_de: der/die/das von Ali
+      - id: a2-u09-l5-e13
+        type: suffix_builder
+        stem: oda
+        suffixes: [LOC, KI, PL]
+        target: odadakiler
+        gloss_de: die im Zimmer
+        explanation: Nach -ki können Plural und Kasus folgen, odadakiler, odadakileri.
+      - id: a2-u09-l5-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (heutig)
+        options: [bugünkü, bugünki, bugünkı]
+        answer: bugünkü
+      - id: a2-u09-l5-e15
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (der/die/das im Haus)
+        options: [evdeki, evdekı, evteki]
+        answer: evdeki
+        explanation: -ki bleibt fast immer ki, auch nach a, ı, o, u, masadaki, okuldaki.
+
+  - id: a2-u09-l6
+    type: grammar
+    title: 'Tabellen: Ableitungen'
+    exercises:
+      - id: a2-u09-l6-e1
+        type: paradigm
+        kind: noun
+        lemma: süt
+        rows: [[LI], [SIZ], [CI]]
+        targets: [sütlü, sütsüz, sütçü]
+        gloss_de: 'Milch: mit, ohne, Milchmann'
+        explanation: Alle drei folgen der vierfachen Harmonie, ü nach ü.
+      - { id: a2-u09-l6-e2, type: paradigm, kind: noun, lemma: tuz, rows: [[LI], [SIZ], [LIK]], targets: [tuzlu, tuzsuz, tuzluk], gloss_de: 'Salz: salzig, ungesalzen, Salzstreuer' }
+      - { id: a2-u09-l6-e3, type: paradigm, kind: noun, lemma: şeker, rows: [[LI], [SIZ], [LIK]], targets: [şekerli, şekersiz, şekerlik], gloss_de: 'Zucker: mit, ohne, Zuckerdose' }
+      - id: a2-u09-l6-e4
+        type: paradigm
+        kind: noun
+        lemma: kitap
+        rows: [[CI], [LIK], [CI, LIK]]
+        targets: [kitapçı, kitaplık, kitapçılık]
+        gloss_de: 'Buch: Buchhändler, Bücherregal, Buchhandel'
+        explanation: kitap erweicht nicht vor Konsonant, kitapçı, kitaplık.
+      - id: a2-u09-l6-e5
+        type: paradigm
+        kind: noun
+        lemma: göz
+        rows: [[LIK], [LIK, POSS_1SG], [LIK, CI]]
+        targets: [gözlük, gözlüğüm, gözlükçü]
+        gloss_de: 'Brille, meine Brille, Optiker'
+      - id: a2-u09-l6-e6
+        type: paradigm
+        kind: noun
+        lemma: ev
+        rows: [[LOC, KI], [LOC, KI, PL], [LOC, KI, ACC]]
+        targets: [evdeki, evdekiler, evdekini]
+        gloss_de: 'der/die/das im Haus, die Leute im Haus, den/die/das im Haus'
+        explanation: Nach -ki steht wie nach dem Possessiv ein n vor dem Akkusativ, evdekini.
+      - id: a2-u09-l6-e7
+        type: paradigm
+        kind: noun
+        lemma: Berlin
+        rows: [[LI], [LI, PL], [LOC, KI]]
+        targets: [Berlinli, Berlinliler, "Berlin'deki"]
+        gloss_de: 'Berliner, Berliner (Pl.), der/die in Berlin'
+        explanation: Ableitung ohne Apostroph (Berlinli), Kasus mit Apostroph (Berlin'deki).
+      - id: a2-u09-l6-e8
+        type: paradigm
+        kind: copula
+        lemma: evli
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [evliyim, evlisin, evli, evliyiz, evlisiniz]
+        gloss_de: verheiratet sein
+
+  - id: a2-u09-l7
+    type: dialog
+    title: Im Geschäft
+    exercises:
+      - id: a2-u09-l7-e1
+        type: word_bank
+        prompt: Haben Sie dieses Hemd eine Nummer größer?
+        answers: [Bu gömleğin bir büyük bedeni var mı?, Bu gömleğin daha büyük bedeni var mı?]
+        distractors: [gömlek, numara]
+        explanation: gömlek erweicht, gömleğin. beden = Kleidergröße.
+      - id: a2-u09-l7-e2
+        type: word_bank
+        prompt: Wie viel kostet das?
+        answers: [Bu ne kadar?, Bunun fiyatı ne kadar?, Fiyatı ne kadar?, Ne kadar?]
+        distractors: [kaç, fiyat]
+      - id: a2-u09-l7-e3
+        type: word_bank
+        prompt: Ist das reduziert?
+        answers: [Bu indirimli mi?, İndirimli mi?]
+        distractors: [indirim, mı]
+      - id: a2-u09-l7-e4
+        type: word_bank
+        prompt: Zahlen Sie bar oder mit Karte?
+        answers: [Nakit mi kartla mı?, 'Nakit mi, kartla mı?', 'Nakit mi ödeyeceksiniz, kartla mı?', Nakit mi kartla mı ödeyeceksiniz?]
+        distractors: [karta, kartı]
+      - id: a2-u09-l7-e5
+        type: word_bank
+        prompt: Kann ich mit Kreditkarte bezahlen?
+        answers: [Kredi kartıyla ödeyebilir miyim?, Kredi kartı ile ödeyebilir miyim?]
+        distractors: [kartı, ödüyorum]
+        explanation: kredi kartı + yla = kredi kartıyla.
+      - id: a2-u09-l7-e6
+        type: word_bank
+        prompt: Möchten Sie eine Tüte?
+        answers: [Poşet ister misiniz?, Poşet istiyor musunuz?]
+        distractors: [poşetler, istiyorum]
+      - id: a2-u09-l7-e7
+        type: word_bank
+        prompt: Nein danke, ich habe meine eigene Tasche.
+        answers: ['Hayır teşekkürler, kendi çantam var.', 'Hayır, teşekkürler, kendi çantam var.']
+        distractors: [çanta, yok]
+        explanation: kendi çantam = meine eigene Tasche, mehr zu kendi in A2-10.
+      - id: a2-u09-l7-e8
+        type: word_bank
+        prompt: Einen Kaffee mit Milch und ohne Zucker, bitte.
+        answers: [Sütlü ve şekersiz bir kahve lütfen., 'Sütlü, şekersiz bir kahve lütfen.', 'Bir sütlü şekersiz kahve, lütfen.', 'Bir sütlü ve şekersiz kahve, lütfen.']
+        distractors: [şekerli, sütsüz]
+      - id: a2-u09-l7-e9
+        type: free_text
+        direction: tr_de
+        prompt: Kasa nerede?
+        answers: [Wo ist die Kasse?]
+      - id: a2-u09-l7-e10
+        type: multiple_choice
+        prompt: An einem Schild steht „Büyük indirim! Her şey yüzde elli indirimli.“ Was bedeutet das?
+        options: [Großer Ausverkauf! Alles 50 % reduziert., Alles kostet 50 Lira., 'Neue Ware, 50 Stück.']
+        answer: Großer Ausverkauf! Alles 50 % reduziert.
+        explanation: yüzde elli = 50 Prozent.
+      - id: a2-u09-l7-e11
+        type: word_bank
+        prompt: Die Schuhe im Schaufenster gefallen mir.
+        answers: [Vitrindeki ayakkabıları beğendim., Vitrindeki ayakkabılar hoşuma gitti.]
+        distractors: [vitrinde, ayakkabı]
+        explanation: vitrin = Schaufenster, vitrindeki = die im Schaufenster; beğenmek = gefallen, mögen.
+      - id: a2-u09-l7-e12
+        type: multiple_choice
+        prompt: Was heißt „Kaç numara giyiyorsunuz?“?
+        options: [Welche Schuhgröße haben Sie?, Welche Telefonnummer haben Sie?, Wie viele möchten Sie anprobieren?]
+        answer: Welche Schuhgröße haben Sie?
+
+  - id: a2-u09-l8
+    type: reading
+    title: Bei der Arbeit
+    exercises:
+      - id: a2-u09-l8-e1
+        type: word_bank
+        prompt: Was sind Sie von Beruf?
+        answers: [Mesleğiniz ne?, Ne iş yapıyorsunuz?]
+        distractors: [meslek, nerede]
+        explanation: meslek erweicht vor Vokal, mesleğiniz.
+      - id: a2-u09-l8-e2
+        type: suffix_builder
+        stem: meslek
+        suffixes: [POSS_2PL]
+        target: mesleğiniz
+        gloss_de: Ihr Beruf
+      - id: a2-u09-l8-e3
+        type: word_bank
+        prompt: Ich bin Ingenieurin bei einer großen Firma.
+        answers: [Büyük bir şirkette mühendisim., Ben büyük bir şirkette mühendisim.]
+        distractors: [şirkete, mühendis]
+      - id: a2-u09-l8-e4
+        type: word_bank
+        prompt: Mein Bruder ist Journalist, meine Schwester ist Polizistin.
+        answers: ['Ağabeyim gazeteci, ablam polis.', 'Erkek kardeşim gazeteci, kız kardeşim polis.', 'Ağabeyim gazeteci, kız kardeşim polis.', 'Erkek kardeşim gazeteci, ablam polis.']
+        distractors: [gazete, polisler]
+      - id: a2-u09-l8-e5
+        type: conjugation
+        mode: copula
+        lemma: işsiz
+        person: 2sg
+        question: true
+        target: işsiz misin
+        gloss_de: bist du arbeitslos?
+      - id: a2-u09-l8-e6
+        type: word_bank
+        prompt: Nein, ich arbeite in einem Büro.
+        answers: ['Hayır, bir ofiste çalışıyorum.', 'Hayır, bir büroda çalışıyorum.']
+        distractors: [ofise, çalıştım]
+      - id: a2-u09-l8-e7
+        type: multiple_choice
+        prompt: "Lesen Sie: „Elif bir kitapçıda çalışıyor. Maaşı yüksek değil ama işini çok seviyor. Kitapçıdaki müşteriler onu tanıyor.“ Was stimmt?"
+        options: ['Elif verdient nicht viel, mag ihre Arbeit aber sehr.', Elif ist Kundin in einer Buchhandlung., Elif verdient viel und mag ihre Arbeit nicht.]
+        answer: 'Elif verdient nicht viel, mag ihre Arbeit aber sehr.'
+      - id: a2-u09-l8-e8
+        type: multiple_choice
+        prompt: "Im selben Text: Wer kennt Elif?"
+        options: [die Kunden in der Buchhandlung, ihr Chef, die Buchhändler in der Stadt]
+        answer: die Kunden in der Buchhandlung
+        explanation: kitapçıdaki müşteriler = die Kunden in der Buchhandlung.
+      - id: a2-u09-l8-e9
+        type: word_bank
+        prompt: Die Mitarbeiter im Büro sind sehr nett.
+        answers: [Ofisteki çalışanlar çok iyi., Ofisteki çalışanlar çok kibar., Bürodaki çalışanlar çok iyi., Bürodaki çalışanlar çok kibar.]
+        distractors: [ofiste, çalışan]
+        explanation: kibar = höflich, nett.
+      - id: a2-u09-l8-e10
+        type: word_bank
+        prompt: Die morgige Besprechung ist sehr wichtig.
+        answers: [Yarınki toplantı çok önemli.]
+        distractors: [dünkü, toplantıda]
+      - id: a2-u09-l8-e11
+        type: free_text
+        direction: tr_de
+        prompt: Babam elli yıl işçi olarak çalıştı.
+        answers: [Mein Vater hat fünfzig Jahre als Arbeiter gearbeitet., Mein Vater arbeitete fünfzig Jahre als Arbeiter., Mein Vater hat fünfzig Jahre lang als Arbeiter gearbeitet., Mein Vater arbeitete fünfzig Jahre lang als Arbeiter.]
+        explanation: olarak = als (in der Rolle von).
+      - id: a2-u09-l8-e12
+        type: multiple_choice
+        prompt: Was sagt man zu Kollegen am Ende des Tages?
+        options: [Kolay gelsin! / İyi akşamlar!, Afiyet olsun!, Geçmiş olsun!]
+        answer: Kolay gelsin! / İyi akşamlar!
+        explanation: Kolay gelsin = etwa „frohes Schaffen“, zu jemandem, der (noch) arbeitet. Beim Gehen sagt man es zu den Kollegen, die bleiben.
+
+  - id: a2-u09-l9
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u09-l9-e1
+        type: free_text
+        direction: de_tr
+        prompt: ohne Zucker
+        answers: [şekersiz]
+      - id: a2-u09-l9-e2
+        type: free_text
+        direction: de_tr
+        prompt: Journalist(in)
+        answers: [gazeteci]
+      - { id: a2-u09-l9-e3, type: suffix_builder, stem: çay, suffixes: [CI], target: çaycı, gloss_de: Teeverkäufer }
+      - { id: a2-u09-l9-e4, type: suffix_builder, stem: para, suffixes: [SIZ], target: parasız, gloss_de: 'ohne Geld, umsonst' }
+      - { id: a2-u09-l9-e5, type: suffix_builder, stem: akşam, suffixes: [KI], target: akşamki, gloss_de: 'abendlich, von heute Abend' }
+      - id: a2-u09-l9-e6
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (aus Istanbul)
+        options: [İstanbullu, İstanbul'lu, İstanbullı]
+        answer: İstanbullu
+      - id: a2-u09-l9-e7
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Florist)
+        options: [çiçekçi, çiçekci, çiçeğci]
+        answer: çiçekçi
+      - id: a2-u09-l9-e8
+        type: word_bank
+        prompt: Die Kinder im Garten sind meine.
+        answers: [Bahçedeki çocuklar benim., Bahçedeki çocuklar benim çocuklarım.]
+        distractors: [bahçede, benimki]
+      - id: a2-u09-l9-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bu kalem senin mi? – Hayır, Ali'ninki.
+        answers: [Ist das dein Stift? – Nein, der von Ali., Ist dieser Stift deiner? – Nein, er gehört Ali., Ist das dein Stift? – Nein, das ist Alis., Ist das dein Stift? – Nein, Alis., Ist das dein Stift? – Nein, das ist der von Ali., Gehört dieser Stift dir? – Nein, er gehört Ali., Ist der Stift deiner? – Nein, Alis.]
+      - id: a2-u09-l9-e10
+        type: multiple_choice
+        prompt: Was heißt „arkadaşlık“?
+        options: [Freundschaft, Freundin, freundlich]
+        answer: Freundschaft
+      - id: a2-u09-l9-e11
+        type: word_bank
+        prompt: Ich suche ein Haus mit Garten.
+        answers: [Bahçeli bir ev arıyorum.]
+        distractors: [bahçesiz, bahçede]
+      - id: a2-u09-l9-e12
+        type: conjugation
+        mode: copula
+        lemma: evli
+        person: 1pl
+        target: evliyiz
+        gloss_de: wir sind verheiratet
+
+vocab:
+  - { tr: meslek, de: [Beruf], pos: noun, softens: true }
+  - { tr: şirket, de: [Firma], pos: noun }
+  - { tr: maaş, de: [Gehalt], pos: noun }
+  - { tr: toplantı, de: [Besprechung, Sitzung], pos: noun }
+  - { tr: ofis, de: [Büro], pos: noun }
+  - { tr: büro, de: [Büro], pos: noun }
+  - { tr: müdür, de: [Leiter, Direktor], pos: noun }
+  - { tr: müşteri, de: [Kunde, Kundin], pos: noun }
+  - { tr: fiyat, de: [Preis], pos: noun }
+  - { tr: indirim, de: [Rabatt, Ausverkauf], pos: noun }
+  - { tr: indirimli, de: [reduziert], pos: adj }
+  - { tr: kasa, de: [Kasse], pos: noun }
+  - { tr: nakit, de: [bar, Bargeld], pos: noun }
+  - { tr: kredi kartı, de: [Kreditkarte], pos: noun }
+  - { tr: beden, de: [Kleidergröße], pos: noun }
+  - { tr: numara, de: [Nummer, Schuhgröße], pos: noun }
+  - { tr: poşet, de: [Tüte], pos: noun }
+  - { tr: evli, de: [verheiratet], pos: adj }
+  - { tr: bekâr, de: [ledig], pos: adj }
+  - { tr: ücretsiz, de: [kostenlos], pos: adj }
+  - { tr: işsiz, de: [arbeitslos], pos: adj }
+  - { tr: çalışan, de: [Angestellte(r), Mitarbeiter(in)], pos: noun }
+  - { tr: ödemek, de: [bezahlen], pos: verb }
+  - { tr: kitapçı, de: [Buchhändler(in), Buchhandlung], pos: noun }
+  - { tr: gazeteci, de: [Journalist(in)], pos: noun }
+  - { tr: balıkçı, de: [Fischer(in), Fischhändler(in)], pos: noun }
+  - { tr: yolcu, de: [Reisende(r), Fahrgast], pos: noun }
+  - { tr: işçi, de: [Arbeiter(in)], pos: noun }
+  - { tr: gözlük, de: [Brille], pos: noun, softens: true }
+  - { tr: sağlık, de: [Gesundheit], pos: noun, softens: true }
+  - { tr: İstanbullu, de: [aus Istanbul], pos: adj, capitalized: true }
+  - { tr: vitrin, de: [Schaufenster], pos: noun }
+  - { tr: beğenmek, de: [gefallen, mögen], pos: verb }
+  - { tr: kibar, de: [höflich, nett], pos: adj }
+  - { tr: Ali, de: [Ali], pos: noun, proper: true }
+  - { tr: simit, de: [Sesamring], pos: noun }
+  - { tr: ücret, de: [Gebühr, Lohn], pos: noun }

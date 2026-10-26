@@ -1,0 +1,713 @@
+# A2-07: Komparation daha/en, Intensivierung (Menschen beschreiben, Wetter). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u07
+level: A2
+title: Wetter und Menschen
+grammar_focus: [komparativ, superlativ, kadar, verstaerkung]
+explainer: explainers/a2-vergleichen.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u07-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u07-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „sıcak“?
+        options: [heiß, kalt, kühl]
+        answer: heiß
+        explanation: sıcak (heiß, warm), soğuk (kalt), serin (kühl), ılık (lauwarm, mild).
+      - id: a2-u07-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: kalt
+        answers: [soğuk]
+      - id: a2-u07-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „kar“?
+        options: [Schnee, Regen, Wind]
+        answer: Schnee
+      - id: a2-u07-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Sonne
+        answers: [güneş]
+      - id: a2-u07-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „rüzgâr“?
+        options: [Wind, Wolke, Gewitter]
+        answer: Wind
+        explanation: Auch ohne Zirkumflex geschrieben, rüzgar.
+      - id: a2-u07-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: bulut
+        answers: [Wolke, die Wolke]
+      - id: a2-u07-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „Hava bulutlu.“?
+        options: [Es ist bewölkt., Es ist windig., Es ist sonnig.]
+        answer: Es ist bewölkt.
+        explanation: bulut + lu = mit Wolken. Ebenso güneşli (sonnig), yağmurlu (regnerisch), karlı (verschneit), rüzgârlı (windig). Mehr zu -lı/-li in A2-09.
+      - id: a2-u07-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „mevsim“?
+        options: [Jahreszeit, Monat, Wetter]
+        answer: Jahreszeit
+        explanation: ilkbahar (Frühling), yaz (Sommer), sonbahar (Herbst), kış (Winter).
+      - id: a2-u07-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: Winter
+        answers: [kış]
+      - id: a2-u07-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „yağmak“?
+        options: ['fallen (Regen, Schnee)', wehen, scheinen]
+        answer: 'fallen (Regen, Schnee)'
+        explanation: Yağmur yağıyor. (Es regnet.) Kar yağıyor. (Es schneit.) Wörtlich „Regen fällt“.
+      - id: a2-u07-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „genç“?
+        options: [jung, alt, klug]
+        answer: jung
+        explanation: genç (jung), yaşlı (alt, bei Menschen). eski (alt) sagt man bei Dingen; bei Menschen heißt eski „ehemalig“ (eski öğretmenim).
+      - id: a2-u07-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: 'alt (Mensch)'
+        answers: [yaşlı]
+      - id: a2-u07-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „zayıf“?
+        options: [schlank, dick, groß]
+        answer: schlank
+        explanation: zayıf (schlank, dünn, auch schwach), şişman (dick).
+      - id: a2-u07-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „saç“?
+        options: [Haar, Bart, Kopf]
+        answer: Haar
+        explanation: saç steht oft im Singular, Saçı uzun. oder Saçları uzun. (Sie hat lange Haare.)
+      - id: a2-u07-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „akıllı“?
+        options: [klug, fleißig, ruhig]
+        answer: klug
+      - id: a2-u07-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: fleißig
+        answers: [çalışkan]
+      - id: a2-u07-l1-e17
+        type: multiple_choice
+        prompt: Was heißt „tembel“?
+        options: [faul, müde, langsam]
+        answer: faul
+      - id: a2-u07-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „sakin“?
+        options: [ruhig, fröhlich, freundlich]
+        answer: ruhig
+        explanation: sakin (ruhig), neşeli (fröhlich).
+      - id: a2-u07-l1-e19
+        type: multiple_choice
+        prompt: Was heißt „benzemek“?
+        options: [ähnlich sein, vergleichen, gleich sein]
+        answer: ähnlich sein
+        explanation: benzemek steht mit Dativ, annesine benziyor = sie sieht ihrer Mutter ähnlich.
+      - id: a2-u07-l1-e20
+        type: free_text
+        direction: de_tr
+        prompt: hoch
+        answers: [yüksek]
+
+  - id: a2-u07-l2
+    type: grammar
+    title: größer als (-den daha)
+    exercises:
+      - id: a2-u07-l2-e1
+        type: suffix_builder
+        stem: Ayşe
+        suffixes: [ABL]
+        target: Ayşe'den
+        gloss_de: als Ayşe
+        explanation: Wer verglichen wird, steht im Ablativ, Ali Ayşe'den daha uzun.
+      - { id: a2-u07-l2-e2, type: suffix_builder, stem: dün, suffixes: [ABL], target: dünden, gloss_de: als gestern }
+      - { id: a2-u07-l2-e3, type: suffix_builder, stem: tren, suffixes: [ABL], target: trenden, gloss_de: als der Zug }
+      - { id: a2-u07-l2-e4, type: suffix_builder, stem: çay, suffixes: [ABL], target: çaydan, gloss_de: als Tee }
+      - id: a2-u07-l2-e5
+        type: suffix_builder
+        stem: ben
+        suffixes: [ABL]
+        target: benden
+        gloss_de: als ich
+        explanation: Pronomen ebenso, benden, senden, bizden.
+      - { id: a2-u07-l2-e6, type: suffix_builder, stem: kardeş, suffixes: [POSS_1SG, ABL], target: kardeşimden, gloss_de: als mein Bruder / meine Schwester }
+      - id: a2-u07-l2-e7
+        type: word_bank
+        prompt: Ali ist größer als Ayşe.
+        answers: [Ali Ayşe'den daha uzun., Ali Ayşe'den uzun.]
+        distractors: [Ayşe'ye, en]
+        explanation: Bei Menschen heißt „groß“ uzun (lang). daha kann wegfallen, der Ablativ reicht.
+      - id: a2-u07-l2-e8
+        type: word_bank
+        prompt: Heute ist es kälter als gestern.
+        answers: [Bugün dünden daha soğuk., Bugün hava dünden daha soğuk., Bugün dünden soğuk., Bugün hava dünden soğuk., Hava bugün dünden daha soğuk.]
+        distractors: [dün, sıcak]
+      - id: a2-u07-l2-e9
+        type: word_bank
+        prompt: Der Zug ist schneller als der Bus.
+        answers: [Tren otobüsten daha hızlı., Tren otobüsten hızlı.]
+        distractors: [otobüse, yavaş]
+      - id: a2-u07-l2-e10
+        type: word_bank
+        prompt: Ich möchte ein größeres Zimmer.
+        answers: [Daha büyük bir oda istiyorum.]
+        distractors: [en, odadan]
+        explanation: Ohne Vergleichsobjekt steht nur daha, daha büyük = größer.
+      - id: a2-u07-l2-e11
+        type: word_bank
+        prompt: Welches ist billiger?
+        answers: [Hangisi daha ucuz?]
+        distractors: [pahalı, hangi]
+        explanation: hangisi = welches (von ihnen).
+      - id: a2-u07-l2-e12
+        type: conjugation
+        mode: copula
+        lemma: büyük
+        person: 1sg
+        target: büyüğüm
+        gloss_de: ich bin älter (größer)
+        explanation: büyük erweicht vor -üm, büyüğüm. Bei Geschwistern heißt büyük älter, küçük jünger.
+      - id: a2-u07-l2-e13
+        type: word_bank
+        prompt: Mein Bruder ist drei Jahre jünger als ich.
+        answers: [Kardeşim benden üç yaş küçük.]
+        distractors: [büyük, bana]
+        explanation: üç yaş küçük = drei Jahre jünger, der Altersunterschied steht vor dem Adjektiv.
+      - id: a2-u07-l2-e14
+        type: multiple_choice
+        prompt: Was heißt „Kahve çaydan daha pahalı.“?
+        options: [Kaffee ist teurer als Tee., Tee ist teurer als Kaffee., Kaffee ist so teuer wie Tee.]
+        answer: Kaffee ist teurer als Tee.
+      - id: a2-u07-l2-e15
+        type: word_bank
+        prompt: Ankara ist im Winter kälter als Istanbul.
+        answers: [Ankara kışın İstanbul'dan daha soğuk., Kışın Ankara İstanbul'dan daha soğuk., Ankara kışın İstanbul'dan soğuk., Kışın Ankara İstanbul'dan soğuk.]
+        distractors: ["İstanbul'da", kış]
+      - id: a2-u07-l2-e16
+        type: free_text
+        direction: de_tr
+        prompt: besser
+        answers: [daha iyi]
+
+  - id: a2-u07-l3
+    type: grammar
+    title: am größten (en)
+    exercises:
+      - id: a2-u07-l3-e1
+        type: multiple_choice
+        prompt: Was heißt „en güzel“?
+        options: [am schönsten, schöner, sehr schön]
+        answer: am schönsten
+        explanation: en vor dem Adjektiv bildet den Superlativ, en büyük, en ucuz.
+      - id: a2-u07-l3-e2
+        type: suffix_builder
+        stem: Türkiye
+        suffixes: [GEN]
+        target: Türkiye'nin
+        gloss_de: der Türkei
+      - id: a2-u07-l3-e3
+        type: suffix_builder
+        stem: şehir
+        suffixes: [POSS_3SG]
+        target: şehri
+        gloss_de: (ihre) Stadt
+        explanation: Türkiye'nin en büyük şehri = die größte Stadt der Türkei, Genitiv + Possessiv wie bei Ali'nin evi. Bei şehir fällt das i aus.
+      - id: a2-u07-l3-e4
+        type: word_bank
+        prompt: Istanbul ist die größte Stadt der Türkei.
+        answers: [İstanbul Türkiye'nin en büyük şehri., Türkiye'nin en büyük şehri İstanbul.]
+        distractors: [şehir, daha]
+      - id: a2-u07-l3-e5
+        type: word_bank
+        prompt: Ayşe ist meine beste Freundin.
+        answers: [Ayşe en iyi arkadaşım., En iyi arkadaşım Ayşe.]
+        distractors: [daha, arkadaş]
+      - id: a2-u07-l3-e6
+        type: suffix_builder
+        stem: küçük
+        suffixes: [POSS_3SG]
+        target: küçüğü
+        gloss_de: 'der/die Kleine (davon), mit en: der Jüngste'
+        explanation: en küçüğü = das Kleinste, der Jüngste; das Adjektiv wird hier wie ein Nomen behandelt.
+      - id: a2-u07-l3-e7
+        type: word_bank
+        prompt: Ich bin der Jüngste in der Familie.
+        answers: [Ailenin en küçüğü benim., Ailede en küçük benim.]
+        distractors: [büyük, aile]
+        explanation: Ailenin en küçüğü = der Jüngste der Familie. benim = ich bin es.
+      - { id: a2-u07-l3-e8, type: suffix_builder, stem: genç, suffixes: [POSS_3SG], target: genci, gloss_de: 'der/die Junge (davon), mit en: der Jüngste' }
+      - id: a2-u07-l3-e9
+        type: word_bank
+        prompt: Welches ist das billigste?
+        answers: [En ucuzu hangisi?, Hangisi en ucuz?]
+        distractors: [daha, pahalı]
+        explanation: en ucuzu = das billigste (davon).
+      - id: a2-u07-l3-e10
+        type: word_bank
+        prompt: Der Juli ist der heißeste Monat.
+        answers: [Temmuz en sıcak ay., En sıcak ay temmuz.]
+        distractors: [soğuk, daha]
+        explanation: temmuz = Juli; Monatsnamen schreibt man klein.
+      - id: a2-u07-l3-e11
+        type: multiple_choice
+        prompt: Was heißt „En çok çay içerim.“?
+        options: [Am meisten trinke ich Tee., Ich trinke viel Tee., Ich trinke mehr Tee.]
+        answer: Am meisten trinke ich Tee.
+        explanation: en çok = am meisten, en az = am wenigsten.
+      - id: a2-u07-l3-e12
+        type: word_bank
+        prompt: Welche Jahreszeit magst du am liebsten?
+        answers: [En çok hangi mevsimi seviyorsun?, Hangi mevsimi en çok seviyorsun?]
+        distractors: [mevsim, daha]
+      - id: a2-u07-l3-e13
+        type: free_text
+        direction: tr_de
+        prompt: Bu dağ Türkiye'nin en yüksek dağı.
+        answers: [Dieser Berg ist der höchste Berg der Türkei., Dieser Berg ist der höchste der Türkei., Das ist der höchste Berg der Türkei.]
+      - id: a2-u07-l3-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (der schönste Monat des Jahres)
+        options: [yılın en güzel ayı, yılın en güzel ay, yıl en güzel ayı]
+        answer: yılın en güzel ayı
+        explanation: Genitiv beim Bezugswort (yılın), Possessiv am Nomen (ayı).
+
+  - id: a2-u07-l4
+    type: grammar
+    title: so … wie, ziemlich, nicht sehr
+    exercises:
+      - id: a2-u07-l4-e1
+        type: word_bank
+        prompt: Ali ist so groß wie Mehmet.
+        answers: [Ali Mehmet kadar uzun.]
+        distractors: ["Mehmet'ten", daha]
+        explanation: X kadar = so … wie X. Ohne Ablativ, das Nomen bleibt in der Grundform.
+      - id: a2-u07-l4-e2
+        type: word_bank
+        prompt: Ich bin nicht so schnell wie du.
+        answers: [Ben senin kadar hızlı değilim., Senin kadar hızlı değilim.]
+        distractors: [sen, senden]
+        explanation: Pronomen stehen vor kadar im Genitiv, benim kadar, senin kadar, onun kadar.
+      - id: a2-u07-l4-e3
+        type: word_bank
+        prompt: Heute ist es nicht so heiß wie gestern.
+        answers: [Bugün dün kadar sıcak değil., Bugün hava dün kadar sıcak değil., Hava bugün dün kadar sıcak değil.]
+        distractors: [dünden, soğuk]
+      - id: a2-u07-l4-e4
+        type: multiple_choice
+        prompt: Was heißt „Hava oldukça soğuk.“?
+        options: [Es ist ziemlich kalt., Es ist nicht sehr kalt., Es ist am kältesten.]
+        answer: Es ist ziemlich kalt.
+        explanation: oldukça = ziemlich, çok = sehr, biraz = etwas, ein bisschen.
+      - id: a2-u07-l4-e5
+        type: word_bank
+        prompt: Das Wetter ist nicht sehr gut.
+        answers: [Hava pek iyi değil., Hava çok iyi değil.]
+        distractors: [en, daha]
+        explanation: pek steht vor allem mit Verneinung, pek iyi değil = nicht besonders gut.
+      - id: a2-u07-l4-e6
+        type: word_bank
+        prompt: Ich bin heute ein bisschen müde.
+        answers: [Bugün biraz yorgunum., Ben bugün biraz yorgunum.]
+        distractors: [çok, yorgun]
+      - id: a2-u07-l4-e7
+        type: multiple_choice
+        prompt: Was heißt „bembeyaz“?
+        options: [ganz weiß, weißlich, weißer]
+        answer: ganz weiß
+        explanation: Verstärkung durch eine Vorsilbe, Wortanfang bis zum ersten Vokal plus m, p, r oder s, beyaz → bembeyaz, kara → kapkara, mavi → masmavi.
+      - id: a2-u07-l4-e8
+        type: multiple_choice
+        prompt: Wie verstärkt man „mavi“ (blau)?
+        options: [masmavi, mamavi, mapmavi]
+        answer: masmavi
+      - id: a2-u07-l4-e9
+        type: multiple_choice
+        prompt: Wie verstärkt man „yeşil“ (grün)?
+        options: [yemyeşil, yepyeşil, yesyeşil]
+        answer: yemyeşil
+        explanation: Welcher Konsonant kommt, ist festgelegt, man lernt die Formen einzeln, yemyeşil, sapsarı, kıpkırmızı, tertemiz.
+      - id: a2-u07-l4-e10
+        type: word_bank
+        prompt: Das Meer ist tiefblau.
+        answers: [Deniz masmavi.]
+        distractors: [mavi, daha]
+      - id: a2-u07-l4-e11
+        type: word_bank
+        prompt: Alles ist schneeweiß.
+        answers: [Her yer bembeyaz.]
+        distractors: [beyaz, kar]
+        explanation: her yer = überall, alles (wörtlich „jeder Ort“).
+      - id: a2-u07-l4-e12
+        type: word_bank
+        prompt: Heute gibt es weniger Regen.
+        answers: [Bugün daha az yağmur var.]
+        distractors: [çok, en]
+        explanation: daha az = weniger, daha çok / daha fazla = mehr.
+      - id: a2-u07-l4-e13
+        type: multiple_choice
+        prompt: Was heißt „Tee ist nicht so teuer wie Kaffee.“?
+        options: [Çay kahve kadar pahalı değil., Çay kahveden pahalı değil., Çay en pahalı değil.]
+        answer: Çay kahve kadar pahalı değil.
+
+  - id: a2-u07-l5
+    type: grammar
+    title: 'Tabellen: vergleichen und beschreiben'
+    exercises:
+      - id: a2-u07-l5-e1
+        type: paradigm
+        kind: noun
+        lemma: kardeş
+        rows: [[ABL], [PL, ABL], [POSS_1SG, ABL], [POSS_1PL, ABL]]
+        targets: [kardeşten, kardeşlerden, kardeşimden, kardeşimizden]
+        gloss_de: 'als der Bruder / die Schwester'
+        explanation: Das Vergleichsobjekt steht im Ablativ, mit oder ohne Possessiv.
+      - id: a2-u07-l5-e2
+        type: paradigm
+        kind: noun
+        lemma: Ankara
+        rows: [[ABL], [LOC], [DAT]]
+        targets: ["Ankara'dan", "Ankara'da", "Ankara'ya"]
+        gloss_de: 'als Ankara, in Ankara, nach Ankara'
+      - id: a2-u07-l5-e3
+        type: paradigm
+        kind: noun
+        lemma: şehir
+        rows: [[ABL], [POSS_3SG], [GEN]]
+        targets: [şehirden, şehri, şehrin]
+        gloss_de: Stadt
+        explanation: Vor einem Vokal fällt das i aus, şehri, şehrin; vor einem Konsonanten bleibt es, şehirden.
+      - id: a2-u07-l5-e4
+        type: paradigm
+        kind: copula
+        lemma: genç
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [gencim, gençsin, genç, genciz, gençsiniz]
+        gloss_de: jung sein
+        explanation: genç erweicht vor Vokal, gencim, genciz; vor Konsonant bleibt ç, gençsin.
+      - id: a2-u07-l5-e5
+        type: paradigm
+        kind: copula
+        lemma: büyük
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [büyüğüm, büyüksün, büyük, büyüğüz, büyüksünüz]
+        gloss_de: 'groß, älter sein'
+      - { id: a2-u07-l5-e6, type: paradigm, kind: copula, lemma: uzun, persons: [1sg, 2sg, 3sg, 1pl, 2pl], targets: [uzunum, uzunsun, uzun, uzunuz, uzunsunuz], gloss_de: 'lang, groß sein' }
+      - id: a2-u07-l5-e7
+        type: paradigm
+        kind: verb
+        lemma: benzemek
+        tense: present
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl, 3pl]
+        targets: [benziyorum, benziyorsun, benziyor, benziyoruz, benziyorsunuz, benziyorlar]
+        gloss_de: ähnlich sein
+        explanation: benze + iyor, das e fällt aus.
+      - { id: a2-u07-l5-e8, type: paradigm, kind: verb, lemma: görünmek, tense: present, persons: [1sg, 2sg, 3sg, 1pl, 2pl, 3pl], targets: [görünüyorum, görünüyorsun, görünüyor, görünüyoruz, görünüyorsunuz, görünüyorlar], gloss_de: 'aussehen, wirken' }
+      - id: a2-u07-l5-e9
+        type: paradigm
+        kind: copula
+        lemma: küçük
+        tense: past
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [küçüktüm, küçüktün, küçüktü, küçüktük, küçüktünüz]
+        gloss_de: klein sein (Vergangenheit)
+        explanation: Vor -tı/-tü erweicht nichts, küçüktüm. Ben küçükken … (als ich klein war) kommt später.
+
+  - id: a2-u07-l6
+    type: dialog
+    title: Wie sieht er aus?
+    exercises:
+      - id: a2-u07-l6-e1
+        type: word_bank
+        prompt: Was für ein Mensch ist dein Bruder?
+        answers: [Kardeşin nasıl biri?, Ağabeyin nasıl biri?]
+        distractors: [ne, kim]
+        explanation: nasıl biri = was für ein Mensch, fragt nach Aussehen und Charakter.
+      - id: a2-u07-l6-e2
+        type: word_bank
+        prompt: Er ist groß und schlank.
+        answers: [Uzun boylu ve zayıf., O uzun boylu ve zayıf.]
+        distractors: [şişman, kısa]
+        explanation: boy = Körpergröße; uzun boylu = groß gewachsen, kısa boylu = klein.
+      - id: a2-u07-l6-e3
+        type: word_bank
+        prompt: Sie hat lange schwarze Haare.
+        answers: [Saçları uzun ve siyah., Saçı uzun ve siyah., Uzun siyah saçları var., Saçları siyah ve uzun.]
+        distractors: [saç, kısa]
+        explanation: Wörtlich „Ihre Haare sind lang und schwarz“. saç und saçlar sind beide üblich.
+      - id: a2-u07-l6-e4
+        type: multiple_choice
+        prompt: Was heißt „mavi gözlü“?
+        options: [blauäugig, mit blauem Hemd, mit blauer Brille]
+        answer: blauäugig
+        explanation: göz + lü = mit Augen, mavi gözlü = mit blauen Augen; ebenso sarı saçlı (blond).
+      - id: a2-u07-l6-e5
+        type: word_bank
+        prompt: Du siehst deiner Mutter sehr ähnlich.
+        answers: [Annene çok benziyorsun.]
+        distractors: [annen, anneni]
+        explanation: benzemek mit Dativ, annene.
+      - id: a2-u07-l6-e6
+        type: conjugation
+        mode: verb
+        lemma: görünmek
+        person: 2sg
+        tense: present
+        target: görünüyorsun
+        gloss_de: du siehst … aus
+      - id: a2-u07-l6-e7
+        type: word_bank
+        prompt: Du siehst heute müde aus.
+        answers: [Bugün yorgun görünüyorsun.]
+        distractors: [yorgunsun, görüyorsun]
+      - id: a2-u07-l6-e8
+        type: word_bank
+        prompt: Mein Vater ist ruhig, meine Mutter ist fröhlich.
+        answers: ['Babam sakin, annem neşeli.']
+        distractors: [tembel, baba]
+      - id: a2-u07-l6-e9
+        type: word_bank
+        prompt: Sie ist sehr klug und fleißig.
+        answers: [Çok akıllı ve çalışkan., O çok akıllı ve çalışkan.]
+        distractors: [tembel, daha]
+      - id: a2-u07-l6-e10
+        type: conjugation
+        mode: copula
+        lemma: genç
+        person: 1sg
+        target: gencim
+        gloss_de: ich bin jung
+      - id: a2-u07-l6-e11
+        type: word_bank
+        prompt: Mein Großvater ist alt, aber sehr gesund.
+        answers: ['Dedem yaşlı ama çok sağlıklı.']
+        distractors: [eski, hasta]
+        explanation: sağlıklı = gesund (sağlık + lı). Für Dinge sagt man eski, nicht yaşlı.
+      - id: a2-u07-l6-e12
+        type: free_text
+        direction: tr_de
+        prompt: Ali benden daha çalışkan.
+        answers: [Ali ist fleißiger als ich.]
+      - id: a2-u07-l6-e13
+        type: multiple_choice
+        prompt: Was heißt „Kız kardeşim bana hiç benzemiyor.“?
+        options: [Meine Schwester sieht mir überhaupt nicht ähnlich., Meine Schwester mag mich nicht., Meine Schwester sieht mich nicht.]
+        answer: Meine Schwester sieht mir überhaupt nicht ähnlich.
+      - id: a2-u07-l6-e14
+        type: multiple_choice
+        prompt: Welches Wort passt für ein Haus? (alt)
+        options: [eski, yaşlı, genç]
+        answer: eski
+
+  - id: a2-u07-l7
+    type: reading
+    title: Der Wetterbericht
+    exercises:
+      - id: a2-u07-l7-e1
+        type: word_bank
+        prompt: Wie ist das Wetter?
+        answers: [Hava nasıl?]
+        distractors: [ne, havada]
+      - id: a2-u07-l7-e2
+        type: conjugation
+        mode: verb
+        lemma: yağmak
+        person: 3sg
+        tense: present
+        target: yağıyor
+        gloss_de: 'es regnet, es schneit (… fällt)'
+      - id: a2-u07-l7-e3
+        type: word_bank
+        prompt: Es regnet.
+        answers: [Yağmur yağıyor.]
+        distractors: [yağdı, kar]
+      - { id: a2-u07-l7-e4, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: past, target: yağdı, gloss_de: 'es hat geregnet, geschneit' }
+      - id: a2-u07-l7-e5
+        type: word_bank
+        prompt: Gestern hat es geschneit.
+        answers: [Dün kar yağdı.]
+        distractors: [yağıyor, yağmur]
+      - { id: a2-u07-l7-e6, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: future, target: yağacak, gloss_de: 'es wird regnen, schneien' }
+      - id: a2-u07-l7-e7
+        type: conjugation
+        mode: verb
+        lemma: esmek
+        person: 3sg
+        tense: present
+        target: esiyor
+        gloss_de: (der Wind) weht
+        explanation: Rüzgâr esiyor. = Es ist windig.
+      - id: a2-u07-l7-e8
+        type: word_bank
+        prompt: Wie viel Grad sind es?
+        answers: [Kaç derece?, Hava kaç derece?]
+        distractors: [ne kadar, saat]
+      - id: a2-u07-l7-e9
+        type: word_bank
+        prompt: Morgen wird es in Istanbul bewölkt sein.
+        answers: [Yarın İstanbul'da hava bulutlu olacak., İstanbul'da yarın hava bulutlu olacak., Yarın İstanbul'da bulutlu olacak., İstanbul'da yarın bulutlu olacak.]
+        distractors: ["İstanbul'a", oldu]
+        explanation: olacak = wird sein (olmak im Futur).
+      - id: a2-u07-l7-e10
+        type: free_text
+        direction: tr_de
+        prompt: Akşam yağmur yağacak.
+        answers: [Am Abend wird es regnen., Abends wird es regnen., Heute Abend wird es regnen., Am Abend regnet es.]
+      - id: a2-u07-l7-e11
+        type: multiple_choice
+        prompt: "Lesen Sie: „Yarın Ankara'da hava güneşli ve sıcak olacak, otuz derece. Erzurum'da hava daha serin, on sekiz derece.“ Wo ist es kühler?"
+        options: [In Erzurum, In Ankara, Es ist überall gleich.]
+        answer: In Erzurum
+      - id: a2-u07-l7-e12
+        type: multiple_choice
+        prompt: "Lesen Sie: „İzmir'de kışın kar pek yağmaz, ama çok yağmur yağar.“ Was stimmt?"
+        options: ['In Izmir schneit es im Winter kaum, aber es regnet viel.', In Izmir schneit es im Winter viel., In Izmir regnet es im Winter nie.]
+        answer: 'In Izmir schneit es im Winter kaum, aber es regnet viel.'
+        explanation: pek yağmaz = es fällt kaum (Aorist, Gewohnheit).
+      - { id: a2-u07-l7-e13, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: aorist, negative: true, target: yağmaz, gloss_de: '(gewöhnlich) fällt kein Regen/Schnee' }
+      - id: a2-u07-l7-e14
+        type: conjugation
+        mode: copula
+        lemma: soğuk
+        person: 3sg
+        tense: past
+        target: soğuktu
+        gloss_de: es war kalt
+        explanation: Dün hava soğuktu. Vor -tu erweicht nichts.
+      - id: a2-u07-l7-e15
+        type: word_bank
+        prompt: Im Herbst ist es in Istanbul kühl und windig.
+        answers: [Sonbaharda İstanbul'da hava serin ve rüzgârlı., İstanbul'da sonbaharda hava serin ve rüzgârlı.]
+        distractors: [kış, sıcak]
+
+  - id: a2-u07-l8
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u07-l8-e1
+        type: free_text
+        direction: de_tr
+        prompt: Schnee
+        answers: [kar]
+      - id: a2-u07-l8-e2
+        type: free_text
+        direction: de_tr
+        prompt: Sommer
+        answers: [yaz]
+      - id: a2-u07-l8-e3
+        type: word_bank
+        prompt: Mein Zimmer ist größer als dein Zimmer.
+        answers: [Benim odam senin odandan daha büyük., Odam senin odandan daha büyük., Odam odandan daha büyük., Benim odam odandan daha büyük., Odam senin odandan büyük., Benim odam senin odandan büyük., Odam odandan büyük.]
+        distractors: [en, odana]
+      - id: a2-u07-l8-e4
+        type: suffix_builder
+        stem: oda
+        suffixes: [POSS_2SG, ABL]
+        target: odandan
+        gloss_de: als dein Zimmer
+      - id: a2-u07-l8-e5
+        type: multiple_choice
+        prompt: Was heißt „Bu, şehrin en eski evi.“?
+        options: [Das ist das älteste Haus der Stadt., Das ist ein altes Haus in der Stadt., Das Haus ist älter als die Stadt.]
+        answer: Das ist das älteste Haus der Stadt.
+      - id: a2-u07-l8-e6
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (so groß wie du)
+        options: [senin kadar uzun, senden kadar uzun, sen kadar uzun]
+        answer: senin kadar uzun
+      - id: a2-u07-l8-e7
+        type: conjugation
+        mode: copula
+        lemma: büyük
+        person: 1pl
+        target: büyüğüz
+        gloss_de: wir sind älter (größer)
+      - id: a2-u07-l8-e8
+        type: word_bank
+        prompt: Im Frühling ist alles grün.
+        answers: [İlkbaharda her yer yemyeşil., İlkbaharda her yer yeşil.]
+        distractors: [sonbahar, mavi]
+      - id: a2-u07-l8-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bugün hava dünden daha sıcak.
+        answers: [Heute ist es wärmer als gestern., Heute ist das Wetter wärmer als gestern., Heute ist es heißer als gestern.]
+      - id: a2-u07-l8-e10
+        type: conjugation
+        mode: verb
+        lemma: benzemek
+        person: 3sg
+        tense: present
+        target: benziyor
+        gloss_de: 'er, sie ist ähnlich'
+      - id: a2-u07-l8-e11
+        type: multiple_choice
+        prompt: Was heißt „Pek sıcak değil.“?
+        options: [Es ist nicht besonders warm., Es ist sehr warm., Es ist wärmer.]
+        answer: Es ist nicht besonders warm.
+      - id: a2-u07-l8-e12
+        type: word_bank
+        prompt: Ich bin nicht so faul wie du!
+        answers: [Ben senin kadar tembel değilim!, Senin kadar tembel değilim!]
+        distractors: [senden, çalışkan]
+      - id: a2-u07-l8-e13
+        type: free_text
+        direction: de_tr
+        prompt: am billigsten
+        answers: [en ucuz]
+
+vocab:
+  - { tr: sıcak, de: [heiß, warm], pos: adj, softens: true }
+  - { tr: soğuk, de: [kalt], pos: adj, softens: true }
+  - { tr: serin, de: [kühl], pos: adj }
+  - { tr: ılık, de: [lauwarm, mild], pos: adj }
+  - { tr: kar, de: [Schnee], pos: noun }
+  - { tr: güneş, de: [Sonne], pos: noun }
+  - { tr: rüzgâr, de: [Wind], pos: noun }
+  - { tr: bulut, de: [Wolke], pos: noun }
+  - { tr: güneşli, de: [sonnig], pos: adj }
+  - { tr: bulutlu, de: [bewölkt], pos: adj }
+  - { tr: yağmurlu, de: [regnerisch], pos: adj }
+  - { tr: rüzgârlı, de: [windig], pos: adj }
+  - { tr: derece, de: [Grad], pos: noun }
+  - { tr: mevsim, de: [Jahreszeit], pos: noun }
+  - { tr: ilkbahar, de: [Frühling], pos: noun }
+  - { tr: sonbahar, de: [Herbst], pos: noun }
+  - { tr: kış, de: [Winter], pos: noun }
+  - { tr: yağmak, de: ['fallen (Regen, Schnee)'], pos: verb }
+  - { tr: esmek, de: [wehen], pos: verb }
+  - { tr: genç, de: [jung], pos: adj, softens: true }
+  - { tr: yaşlı, de: [alt (Mensch)], pos: adj }
+  - { tr: zayıf, de: [schlank, dünn, schwach], pos: adj }
+  - { tr: şişman, de: [dick], pos: adj }
+  - { tr: boy, de: [Körpergröße], pos: noun }
+  - { tr: saç, de: [Haar, Haare], pos: noun }
+  - { tr: akıllı, de: [klug], pos: adj }
+  - { tr: çalışkan, de: [fleißig], pos: adj }
+  - { tr: tembel, de: [faul], pos: adj }
+  - { tr: sakin, de: [ruhig], pos: adj }
+  - { tr: neşeli, de: [fröhlich], pos: adj }
+  - { tr: benzemek, de: [ähnlich sein, ähneln], pos: verb }
+  - { tr: görünmek, de: [aussehen, wirken], pos: verb }
+  - { tr: yüksek, de: [hoch], pos: adj, softens: true }
+  - { tr: en, de: [am …sten], pos: adv }
+  - { tr: oldukça, de: [ziemlich], pos: adv }
+  - { tr: pek, de: [besonders (verneint)], pos: adv }
+  - { tr: az, de: [wenig], pos: adv }
+  - { tr: hangisi, de: [welches (davon)], pos: pron }
+  - { tr: her yer, de: [überall], pos: pron }
+  - { tr: temmuz, de: [Juli], pos: noun }
+  - { tr: sağlıklı, de: [gesund], pos: adj }

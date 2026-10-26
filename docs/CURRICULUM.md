@@ -34,10 +34,10 @@ Aufbau jeder Unit (SPEC 3.1): Erklärkarte → Wortschatz → Grammatik → ab A
 | a2-u04 | Perfekt/Evidential -mIş                                                           | Erzählen, Gehörtes weitergeben      | ✅    |
 | a2-u05 | Modalität -(y)Abil, -mAlI, lazım/gerek                                            | Gesundheit, Arztbesuch, Apotheke    | ✅    |
 | a2-u06 | Imperativ (Voluntativ/Optativ als Vorschau)                                       | Wegbeschreibung, Unterwegs, Verkehr | ✅    |
-|        | Komparation daha/en, Intensivierung                                               | Menschen beschreiben, Wetter        |       |
-|        | Postpositionen (ile, için, gibi, -den sonra/önce, Ortsnomina üst/alt/yan/ön/arka) | Wohnung, Garten, Innenstadt         |       |
-|        | Zugehörigkeit -ki, Ableitungen -lI, -sIz, -lIk, -CI                               | Berufe, Arbeitswelt, Einkaufen      |       |
-|        | Reflexiv/Passiv (Grundlagen)                                                      | Post, Telefon, Kommunikation        |       |
+| a2-u07 | Komparation daha/en, Intensivierung                                               | Menschen beschreiben, Wetter        | ✅    |
+| a2-u08 | Postpositionen (ile, için, gibi, -den sonra/önce, Ortsnomina üst/alt/yan/ön/arka) | Wohnung, Garten, Innenstadt         | ✅    |
+| a2-u09 | Zugehörigkeit -ki, Ableitungen -lI, -sIz, -lIk, -CI                               | Berufe, Arbeitswelt, Einkaufen      | ✅    |
+| a2-u10 | Reflexiv/Passiv (Grundlagen)                                                      | Post, Telefon, Kommunikation        | ✅    |
 
 ## B1
 

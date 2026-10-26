@@ -1,0 +1,722 @@
+# A2-08: Postpositionen ile, için, gibi, -den önce/sonra, Ortsnomina (Wohnung, Garten, Innenstadt). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u08
+level: A2
+title: Wo genau?
+grammar_focus: [postpositionen, ortsnomina, instrumental, ile, icin, gibi]
+explainer: explainers/a2-postpositionen.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u08-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u08-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „üst“?
+        options: [Oberseite, Unterseite, Innenseite]
+        answer: Oberseite
+        explanation: üst (oben, Oberseite), alt (unten, Unterseite). masanın üstünde = auf dem Tisch.
+      - id: a2-u08-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Unterseite (Ortsnomen)
+        answers: [alt]
+      - id: a2-u08-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „iç“?
+        options: [Inneres, Äußeres, Mitte]
+        answer: Inneres
+        explanation: iç (innen, Inneres), dış (außen, Äußeres).
+      - id: a2-u08-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „ara“ in „iki evin arasında“?
+        options: [Zwischenraum, Ecke, Seite]
+        answer: Zwischenraum
+        explanation: iki evin arasında = zwischen den zwei Häusern.
+      - id: a2-u08-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „gibi“?
+        options: [wie, für, mit]
+        answer: wie
+        explanation: gibi (wie), için (für), ile (mit).
+      - id: a2-u08-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: legen, stellen, setzen
+        answers: [koymak]
+      - id: a2-u08-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „çanta“?
+        options: [Tasche, Koffer, Kiste]
+        answer: Tasche
+        explanation: çanta (Tasche), valiz (Koffer), kutu (Kiste, Schachtel).
+      - id: a2-u08-l1-e8
+        type: free_text
+        direction: tr_de
+        prompt: kutu
+        answers: [Kiste, Schachtel, Karton, Dose, die Kiste, die Schachtel]
+      - id: a2-u08-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „raf“?
+        options: [Regal, Schublade, Schrank]
+        answer: Regal
+      - id: a2-u08-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „hediye“?
+        options: [Geschenk, Einladung, Blume]
+        answer: Geschenk
+      - id: a2-u08-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Gebäude
+        answers: [bina]
+      - id: a2-u08-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „kütüphane“?
+        options: [Bibliothek, Buchhandlung, Schule]
+        answer: Bibliothek
+      - id: a2-u08-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „şehir merkezi“?
+        options: [Stadtzentrum, Stadtplan, Stadtrand]
+        answer: Stadtzentrum
+        explanation: merkez = Zentrum; şehir merkezi wie okul müdürü, mit -i am zweiten Wort.
+      - id: a2-u08-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: Bäckerei, Konditorei
+        answers: [pastane, fırın]
+        explanation: pastane (Konditorei mit Kuchen und Gebäck), fırın (Bäckerei, auch Ofen).
+      - id: a2-u08-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „çim“?
+        options: [Rasen, Zaun, Baum]
+        answer: Rasen
+      - id: a2-u08-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „dışarı“?
+        options: [nach draußen, nach drinnen, nach oben]
+        answer: nach draußen
+        explanation: dışarı (nach draußen), dışarıda (draußen); içeri (nach drinnen), içeride (drinnen).
+      - id: a2-u08-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: Vogel
+        answers: [kuş]
+      - id: a2-u08-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „otopark“?
+        options: [Parkplatz, Park, Tankstelle]
+        answer: Parkplatz
+
+  - id: a2-u08-l2
+    type: grammar
+    title: auf, unter, in
+    exercises:
+      - id: a2-u08-l2-e1
+        type: suffix_builder
+        stem: üst
+        suffixes: [POSS_3SG, LOC]
+        target: üstünde
+        gloss_de: 'auf (ihm, ihr)'
+        explanation: Lage = Ortsnomen + Possessiv 3. Person + n + Lokativ, üst-ü-n-de.
+      - { id: a2-u08-l2-e2, type: suffix_builder, stem: alt, suffixes: [POSS_3SG, LOC], target: altında, gloss_de: 'unter (ihm, ihr)' }
+      - { id: a2-u08-l2-e3, type: suffix_builder, stem: iç, suffixes: [POSS_3SG, LOC], target: içinde, gloss_de: 'in (ihm, ihr), drinnen' }
+      - id: a2-u08-l2-e4
+        type: suffix_builder
+        stem: masa
+        suffixes: [GEN]
+        target: masanın
+        gloss_de: des Tisches
+        explanation: Das Bezugswort steht im Genitiv, masanın üstünde = auf dem Tisch.
+      - id: a2-u08-l2-e5
+        type: word_bank
+        prompt: Das Buch liegt auf dem Tisch.
+        answers: [Kitap masanın üstünde., Kitap masanın üzerinde., Kitap masada.]
+        distractors: [altında, masaya]
+        explanation: üzerinde ist gleichbedeutend mit üstünde. Kurz geht auch masada (auf dem/am Tisch).
+      - id: a2-u08-l2-e6
+        type: suffix_builder
+        stem: yatak
+        suffixes: [GEN]
+        target: yatağın
+        gloss_de: des Bettes
+      - id: a2-u08-l2-e7
+        type: word_bank
+        prompt: Die Katze ist unter dem Bett.
+        answers: [Kedi yatağın altında.]
+        distractors: [üstünde, yatağa]
+      - id: a2-u08-l2-e8
+        type: word_bank
+        prompt: Die Schlüssel sind in der Tasche.
+        answers: [Anahtarlar çantanın içinde., Anahtarlar çantada.]
+        distractors: [dışında, çanta]
+      - id: a2-u08-l2-e9
+        type: suffix_builder
+        stem: dolap
+        suffixes: [GEN]
+        target: dolabın
+        gloss_de: des Schranks
+      - id: a2-u08-l2-e10
+        type: word_bank
+        prompt: Die Kiste steht auf dem Schrank.
+        answers: [Kutu dolabın üstünde., Kutu dolabın üzerinde.]
+        distractors: [dolaba, içinde]
+      - id: a2-u08-l2-e11
+        type: suffix_builder
+        stem: üst
+        suffixes: [POSS_3SG, DAT]
+        target: üstüne
+        gloss_de: 'auf (… hin)'
+        explanation: Wohin? Dativ, masanın üstüne koy = leg es auf den Tisch.
+      - id: a2-u08-l2-e12
+        type: word_bank
+        prompt: Leg das Buch auf den Tisch!
+        answers: [Kitabı masanın üstüne koy!, Kitabı masanın üzerine koy!, Kitabı masaya koy!]
+        distractors: [üstünde, kitap]
+        explanation: Bestimmtes Objekt im Akkusativ, kitabı.
+      - id: a2-u08-l2-e13
+        type: word_bank
+        prompt: Die Katze ist unter das Bett gekrochen.
+        answers: [Kedi yatağın altına girdi.]
+        distractors: [altında, çıktı]
+        explanation: girmek = hineingehen, mit Dativ.
+      - id: a2-u08-l2-e14
+        type: multiple_choice
+        prompt: Was heißt „Kutunun içinde ne var?“?
+        options: [Was ist in der Kiste?, Was ist auf der Kiste?, Wo ist die Kiste?]
+        answer: Was ist in der Kiste?
+
+  - id: a2-u08-l3
+    type: grammar
+    title: neben, vor, hinter, zwischen
+    exercises:
+      - { id: a2-u08-l3-e1, type: suffix_builder, stem: yan, suffixes: [POSS_3SG, LOC], target: yanında, gloss_de: neben }
+      - { id: a2-u08-l3-e2, type: suffix_builder, stem: ön, suffixes: [POSS_3SG, LOC], target: önünde, gloss_de: vor }
+      - { id: a2-u08-l3-e3, type: suffix_builder, stem: arka, suffixes: [POSS_3SG, LOC], target: arkasında, gloss_de: hinter }
+      - id: a2-u08-l3-e4
+        type: suffix_builder
+        stem: ara
+        suffixes: [POSS_3SG, LOC]
+        target: arasında
+        gloss_de: zwischen
+        explanation: Nach Vokal steht s, ara-sı-n-da, arka-sı-n-da.
+      - id: a2-u08-l3-e5
+        type: word_bank
+        prompt: Das Auto steht vor dem Haus.
+        answers: [Araba evin önünde.]
+        distractors: [arkasında, ev]
+      - id: a2-u08-l3-e6
+        type: word_bank
+        prompt: Der Garten ist hinter dem Haus.
+        answers: [Bahçe evin arkasında.]
+        distractors: [önünde, evde]
+      - id: a2-u08-l3-e7
+        type: word_bank
+        prompt: Die Lampe steht neben dem Sofa.
+        answers: [Lamba kanepenin yanında., Lamba koltuğun yanında.]
+        distractors: [kanepe, altında]
+      - id: a2-u08-l3-e8
+        type: word_bank
+        prompt: Die Bank ist zwischen der Post und dem Supermarkt.
+        answers: [Banka postane ile market arasında., Banka postaneyle market arasında., Banka postaneyle marketin arasında., Banka postane ile marketin arasında.]
+        distractors: [yanında, postanede]
+        explanation: X ile Y arasında = zwischen X und Y.
+      - id: a2-u08-l3-e9
+        type: word_bank
+        prompt: Die Apotheke ist gegenüber der Bibliothek.
+        answers: [Eczane kütüphanenin karşısında.]
+        distractors: [kütüphane, yanında]
+      - id: a2-u08-l3-e10
+        type: suffix_builder
+        stem: ön
+        suffixes: [POSS_3SG, DAT]
+        target: önüne
+        gloss_de: 'vor (… hin)'
+      - id: a2-u08-l3-e11
+        type: word_bank
+        prompt: Stell deine Schuhe vor die Tür!
+        answers: [Ayakkabılarını kapının önüne koy!]
+        distractors: [önünde, kapıya]
+      - id: a2-u08-l3-e12
+        type: suffix_builder
+        stem: arka
+        suffixes: [POSS_3SG, ABL]
+        target: arkasından
+        gloss_de: 'von hinter, hinter … hervor'
+        explanation: Woher? Ablativ, arkasından çıktı = kam hinter … hervor.
+      - id: a2-u08-l3-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (neben dem Hotel)
+        options: [otelin yanında, otel yanında, otelin yanda]
+        answer: otelin yanında
+
+      - id: a2-u08-l3-e14
+        type: multiple_choice
+        prompt: Was heißt „Çocuklar evin dışında oynuyor.“?
+        options: [Die Kinder spielen außerhalb des Hauses., Die Kinder spielen im Haus., Die Kinder spielen in ihrem Zimmer.]
+        answer: Die Kinder spielen außerhalb des Hauses.
+        explanation: evin dışında = außerhalb des Hauses, draußen.
+  - id: a2-u08-l4
+    type: grammar
+    title: mit (ile, -le)
+    exercises:
+      - id: a2-u08-l4-e1
+        type: suffix_builder
+        stem: otobüs
+        suffixes: [INS]
+        target: otobüsle
+        gloss_de: mit dem Bus
+        explanation: ile wird meist angehängt, -le/-la, nach Vokal -yle/-yla.
+      - { id: a2-u08-l4-e2, type: suffix_builder, stem: araba, suffixes: [INS], target: arabayla, gloss_de: mit dem Auto }
+      - { id: a2-u08-l4-e3, type: suffix_builder, stem: tren, suffixes: [INS], target: trenle, gloss_de: mit dem Zug }
+      - { id: a2-u08-l4-e4, type: suffix_builder, stem: kalem, suffixes: [INS], target: kalemle, gloss_de: mit dem Stift }
+      - id: a2-u08-l4-e5
+        type: suffix_builder
+        stem: anne
+        suffixes: [POSS_1SG, INS]
+        target: annemle
+        gloss_de: mit meiner Mutter
+      - id: a2-u08-l4-e6
+        type: suffix_builder
+        stem: Ayşe
+        suffixes: [INS]
+        target: Ayşe'yle
+        gloss_de: mit Ayşe
+        explanation: Auch getrennt möglich, Ayşe ile.
+      - id: a2-u08-l4-e7
+        type: word_bank
+        prompt: Ich fahre mit dem Bus zur Arbeit.
+        answers: [İşe otobüsle gidiyorum., Otobüsle işe gidiyorum., İşe otobüs ile gidiyorum., Otobüs ile işe gidiyorum.]
+        distractors: [otobüse, işte]
+      - id: a2-u08-l4-e8
+        type: word_bank
+        prompt: Mit wem bist du ins Kino gegangen?
+        answers: [Sinemaya kiminle gittin?, Kiminle sinemaya gittin?]
+        distractors: [kime, sinemada]
+        explanation: kim + le → kiminle (mit wem), ne + yle → neyle (womit).
+      - id: a2-u08-l4-e9
+        type: word_bank
+        prompt: Ich bin mit Ayşe ins Kino gegangen.
+        answers: [Ayşe'yle sinemaya gittim., Ayşe ile sinemaya gittim., Sinemaya Ayşe'yle gittim., Sinemaya Ayşe ile gittim.]
+        distractors: ["Ayşe'ye", gittin]
+      - id: a2-u08-l4-e10
+        type: word_bank
+        prompt: Ich habe mit meiner Mutter gesprochen.
+        answers: [Annemle konuştum., Annem ile konuştum.]
+        distractors: [annene, konuşuyorum]
+      - id: a2-u08-l4-e11
+        type: multiple_choice
+        prompt: Was heißt „Ali ile Ayşe evlendi.“?
+        options: [Ali und Ayşe haben geheiratet., Ali hat mit Ayşe gesprochen., Ali und Ayşe haben sich getrennt.]
+        answer: Ali und Ayşe haben geheiratet.
+        explanation: Zwischen zwei Personen kann ile auch „und“ heißen.
+      - id: a2-u08-l4-e12
+        type: word_bank
+        prompt: Schreib mit dem Stift!
+        answers: [Kalemle yaz!, Kalem ile yaz!]
+        distractors: [kaleme, yazın]
+      - id: a2-u08-l4-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (mit dem Auto)
+        options: [arabayla, arabala, arabaile]
+        answer: arabayla
+
+  - id: a2-u08-l5
+    type: grammar
+    title: für, wie (için, gibi)
+    exercises:
+      - id: a2-u08-l5-e1
+        type: word_bank
+        prompt: Diese Blumen sind für dich.
+        answers: [Bu çiçekler senin için., Bu çiçekler sana.]
+        distractors: [sen, gibi]
+        explanation: Personalpronomen stehen vor için und gibi im Genitiv, benim için, senin için, onun gibi (aber onlar için). Nomen bleiben in der Grundform, annem için.
+      - id: a2-u08-l5-e2
+        type: word_bank
+        prompt: Ich habe ein Geschenk für meine Mutter gekauft.
+        answers: [Annem için bir hediye aldım., Anneme bir hediye aldım., Annem için hediye aldım., Anneme hediye aldım.]
+        distractors: [annemin, gibi]
+      - id: a2-u08-l5-e3
+        type: word_bank
+        prompt: Ich gehe in die Türkei, um Türkisch zu lernen.
+        answers: [Türkçe öğrenmek için Türkiye'ye gidiyorum., Türkiye'ye Türkçe öğrenmek için gidiyorum.]
+        distractors: ["Türkiye'de", öğreniyorum]
+        explanation: Infinitiv + için = um … zu.
+      - id: a2-u08-l5-e4
+        type: multiple_choice
+        prompt: Was heißt „Ne için?“?
+        options: [Wofür?, Wie?, Womit?]
+        answer: Wofür?
+        explanation: Ne için? (wofür, wozu), Neden? / Niçin? (warum).
+      - id: a2-u08-l5-e5
+        type: word_bank
+        prompt: Sie spricht wie ihre Mutter.
+        answers: [Annesi gibi konuşuyor., O annesi gibi konuşuyor.]
+        distractors: [annesinin, için]
+      - id: a2-u08-l5-e6
+        type: word_bank
+        prompt: Ich will einen Freund wie dich.
+        answers: [Senin gibi bir arkadaş istiyorum.]
+        distractors: [sen, için]
+      - id: a2-u08-l5-e7
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wie ich)
+        options: [benim gibi, ben gibi, benden gibi]
+        answer: benim gibi
+      - id: a2-u08-l5-e8
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (für Ali)
+        options: [Ali için, Ali'nin için, Ali'ye için]
+        answer: Ali için
+        explanation: Bei Nomen und Namen kein Genitiv, Ali için, Ali gibi.
+      - id: a2-u08-l5-e9
+        type: word_bank
+        prompt: Das Haus ist wie ein Museum.
+        answers: [Ev bir müze gibi., Ev müze gibi.]
+        distractors: [müzede, için]
+      - id: a2-u08-l5-e10
+        type: free_text
+        direction: tr_de
+        prompt: Bu hediye senin için.
+        answers: [Dieses Geschenk ist für dich., Das Geschenk ist für dich., Das ist ein Geschenk für dich.]
+      - id: a2-u08-l5-e11
+        type: word_bank
+        prompt: Er singt wie ein Vogel.
+        answers: [Kuş gibi şarkı söylüyor., O kuş gibi şarkı söylüyor.]
+        distractors: [kuşa, için]
+      - id: a2-u08-l5-e12
+        type: multiple_choice
+        prompt: Was heißt „Bunun için geldim.“?
+        options: [Deswegen bin ich gekommen., Ich bin wie er gekommen., Ich bin damit gekommen.]
+        answer: Deswegen bin ich gekommen.
+        explanation: bunun için = dafür, deswegen.
+
+  - id: a2-u08-l6
+    type: grammar
+    title: vor und nach (-den önce, -den sonra)
+    exercises:
+      - id: a2-u08-l6-e1
+        type: suffix_builder
+        stem: yemek
+        suffixes: [ABL]
+        target: yemekten
+        gloss_de: nach dem Essen (yemekten sonra)
+        explanation: önce und sonra verlangen den Ablativ, yemekten sonra = nach dem Essen.
+      - { id: a2-u08-l6-e2, type: suffix_builder, stem: kahvaltı, suffixes: [ABL], target: kahvaltıdan, gloss_de: vor dem Frühstück (kahvaltıdan önce) }
+      - { id: a2-u08-l6-e3, type: suffix_builder, stem: ders, suffixes: [ABL], target: dersten, gloss_de: nach dem Unterricht (dersten sonra) }
+      - { id: a2-u08-l6-e4, type: suffix_builder, stem: iş, suffixes: [ABL], target: işten, gloss_de: nach der Arbeit (işten sonra) }
+      - id: a2-u08-l6-e5
+        type: word_bank
+        prompt: Nach dem Essen trinken wir Tee.
+        answers: [Yemekten sonra çay içeriz., Yemekten sonra çay içiyoruz.]
+        distractors: [yemek, önce]
+      - id: a2-u08-l6-e6
+        type: word_bank
+        prompt: Vor dem Frühstück gehe ich laufen.
+        answers: [Kahvaltıdan önce koşuyorum., Kahvaltıdan önce koşarım., Kahvaltıdan önce koşmaya gidiyorum.]
+        distractors: [sonra, kahvaltı]
+      - id: a2-u08-l6-e7
+        type: word_bank
+        prompt: Nach fünf Uhr bin ich zu Hause.
+        answers: [Saat beşten sonra evdeyim., Beşten sonra evdeyim.]
+        distractors: [önce, beşe]
+      - id: a2-u08-l6-e8
+        type: multiple_choice
+        prompt: Was heißt „Üç gün önce geldim.“?
+        options: [Ich bin vor drei Tagen gekommen., Ich bin drei Tage früher gekommen., Ich komme in drei Tagen.]
+        answer: Ich bin vor drei Tagen gekommen.
+        explanation: Zeitspanne + önce = vor (… Tagen), ohne Ablativ. Zeitspanne + sonra = nach, später.
+      - id: a2-u08-l6-e9
+        type: word_bank
+        prompt: Wir treffen uns in zwei Stunden.
+        answers: [İki saat sonra buluşuyoruz., İki saat sonra buluşalım., İki saat sonra buluşacağız.]
+        distractors: [saatten, önce]
+      - id: a2-u08-l6-e10
+        type: multiple_choice
+        prompt: Welche Form heißt „vor dem Unterricht“?
+        options: [dersten önce, ders önce, derse önce]
+        answer: dersten önce
+      - id: a2-u08-l6-e11
+        type: free_text
+        direction: tr_de
+        prompt: İşten sonra parka gidiyorum.
+        answers: [Nach der Arbeit gehe ich in den Park., Nach der Arbeit gehe ich zum Park., Ich gehe nach der Arbeit in den Park., Ich gehe nach der Arbeit zum Park.]
+      - id: a2-u08-l6-e12
+        type: word_bank
+        prompt: Danach sind wir nach Hause gegangen.
+        answers: [Ondan sonra eve gittik., Sonra eve gittik.]
+        distractors: [önce, evde]
+        explanation: ondan sonra = danach (o + Ablativ = ondan, mit n).
+
+  - id: a2-u08-l7
+    type: grammar
+    title: 'Tabellen: Ortsnomina und mit'
+    exercises:
+      - id: a2-u08-l7-e1
+        type: paradigm
+        kind: noun
+        lemma: üst
+        rows: [[POSS_3SG, LOC], [POSS_3SG, DAT], [POSS_3SG, ABL]]
+        targets: [üstünde, üstüne, üstünden]
+        gloss_de: 'auf: wo, wohin, woher'
+        explanation: Wo? -nde, wohin? -ne, woher? -nden; das n steht nach dem Possessiv der 3. Person.
+      - { id: a2-u08-l7-e2, type: paradigm, kind: noun, lemma: alt, rows: [[POSS_3SG, LOC], [POSS_3SG, DAT], [POSS_3SG, ABL]], targets: [altında, altına, altından], gloss_de: 'unter: wo, wohin, woher' }
+      - { id: a2-u08-l7-e3, type: paradigm, kind: noun, lemma: arka, rows: [[POSS_3SG, LOC], [POSS_3SG, DAT], [POSS_3SG, ABL]], targets: [arkasında, arkasına, arkasından], gloss_de: 'hinter: wo, wohin, woher' }
+      - { id: a2-u08-l7-e4, type: paradigm, kind: noun, lemma: iç, rows: [[POSS_3SG, LOC], [POSS_3SG, DAT], [POSS_3SG, ABL]], targets: [içinde, içine, içinden], gloss_de: 'in: wo, wohin, woher' }
+      - id: a2-u08-l7-e5
+        type: paradigm
+        kind: noun
+        lemma: yan
+        rows: [[POSS_1SG, LOC], [POSS_2SG, LOC], [POSS_3SG, LOC], [POSS_1PL, LOC]]
+        targets: [yanımda, yanında, yanında, yanımızda]
+        gloss_de: 'neben mir, dir, ihm, uns'
+        explanation: Bei Pronomen wechselt das Possessiv, benim yanımda, senin yanında, onun yanında, bizim yanımızda.
+      - id: a2-u08-l7-e6
+        type: paradigm
+        kind: noun
+        lemma: anne
+        rows: [[POSS_1SG, INS], [POSS_2SG, INS], [POSS_3SG, INS]]
+        targets: [annemle, annenle, annesiyle]
+        gloss_de: 'mit meiner, deiner, seiner Mutter'
+        explanation: Nach Vokal steht y, annesiyle – anders als bei den Kasus kein n (nicht annesinle).
+      - id: a2-u08-l7-e7
+        type: paradigm
+        kind: noun
+        lemma: köpek
+        rows: [[GEN], [INS], [ABL]]
+        targets: [köpeğin, köpekle, köpekten]
+        gloss_de: Hund
+        explanation: Nur vor einem Vokal erweicht k zu ğ, köpeğin; köpekle, köpekten bleiben.
+      - { id: a2-u08-l7-e8, type: paradigm, kind: noun, lemma: kapı, rows: [[GEN], [INS], [ABL]], targets: [kapının, kapıyla, kapıdan], gloss_de: 'Tür' }
+
+  - id: a2-u08-l8
+    type: dialog
+    title: In der Wohnung, im Garten
+    exercises:
+      - id: a2-u08-l8-e1
+        type: word_bank
+        prompt: Wo ist mein Handy?
+        answers: [Telefonum nerede?, Cep telefonum nerede?]
+        distractors: [nereye, telefon]
+        explanation: cep telefonu = Handy, meist kurz telefon.
+      - id: a2-u08-l8-e2
+        type: word_bank
+        prompt: Es liegt auf dem Regal, neben den Büchern.
+        answers: ['Rafın üstünde, kitapların yanında.', 'Rafta, kitapların yanında.']
+        distractors: [rafa, altında]
+      - id: a2-u08-l8-e3
+        type: word_bank
+        prompt: Die Kinder spielen im Garten.
+        answers: [Çocuklar bahçede oynuyor., Çocuklar bahçede oynuyorlar.]
+        distractors: [bahçeye, içinde]
+      - id: a2-u08-l8-e4
+        type: word_bank
+        prompt: Hinter dem Haus ist ein großer Baum.
+        answers: [Evin arkasında büyük bir ağaç var.]
+        distractors: [önünde, ağaçta]
+        explanation: Bei „es gibt“ steht der Ort vorne, Evin arkasında … var.
+      - id: a2-u08-l8-e5
+        type: word_bank
+        prompt: Der Vogel sitzt auf dem Baum.
+        answers: [Kuş ağacın üstünde., Kuş ağaçta., Kuş ağacın üzerinde.]
+        distractors: [ağaç, altında]
+      - id: a2-u08-l8-e6
+        type: word_bank
+        prompt: Der Hund schläft unter dem Tisch.
+        answers: [Köpek masanın altında uyuyor.]
+        distractors: [üstünde, masaya]
+      - id: a2-u08-l8-e7
+        type: free_text
+        direction: tr_de
+        prompt: Kediler dışarıda.
+        answers: [Die Katzen sind draußen.]
+      - id: a2-u08-l8-e8
+        type: word_bank
+        prompt: Komm rein, es ist kalt draußen.
+        answers: ['İçeri gel, dışarısı soğuk.', 'İçeri gel, dışarıda hava soğuk.', 'İçeri gel, dışarıda soğuk.']
+        distractors: [dışarıya, içeride]
+        explanation: dışarısı = das Draußen; içeri gel = komm rein.
+      - id: a2-u08-l8-e9
+        type: word_bank
+        prompt: Stell die Kiste in den Schrank.
+        answers: [Kutuyu dolabın içine koy., Kutuyu dolaba koy.]
+        distractors: [içinde, dolapta]
+      - id: a2-u08-l8-e10
+        type: multiple_choice
+        prompt: Was heißt „Halının altında ne var?“?
+        options: [Was ist unter dem Teppich?, Was ist auf dem Teppich?, Wo ist der Teppich?]
+        answer: Was ist unter dem Teppich?
+      - id: a2-u08-l8-e11
+        type: word_bank
+        prompt: Die Blumen stehen vor dem Fenster.
+        answers: [Çiçekler pencerenin önünde.]
+        distractors: [pencereye, arkasında]
+      - id: a2-u08-l8-e12
+        type: free_text
+        direction: de_tr
+        prompt: neben mir
+        answers: [yanımda, benim yanımda]
+
+  - id: a2-u08-l9
+    type: dialog
+    title: In der Innenstadt
+    exercises:
+      - id: a2-u08-l9-e1
+        type: word_bank
+        prompt: Gibt es hier eine Bäckerei?
+        answers: [Burada pastane var mı?, Burada fırın var mı?, Burada bir fırın var mı?, Burada bir pastane var mı?]
+        distractors: [nerede, yok]
+      - id: a2-u08-l9-e2
+        type: word_bank
+        prompt: Ja, neben der Bank.
+        answers: ['Evet, bankanın yanında.']
+        distractors: [bankaya, önüne]
+      - id: a2-u08-l9-e3
+        type: word_bank
+        prompt: Der Parkplatz ist hinter dem Gebäude.
+        answers: [Otopark binanın arkasında.]
+        distractors: [bina, önünde]
+      - id: a2-u08-l9-e4
+        type: word_bank
+        prompt: Ich warte vor dem Museum auf dich.
+        answers: [Seni müzenin önünde bekliyorum., Müzenin önünde seni bekliyorum., Seni müzenin önünde bekleyeceğim., Müzenin önünde seni bekleyeceğim.]
+        distractors: [sana, müzede]
+        explanation: beklemek mit Akkusativ, seni beklemek = auf dich warten.
+      - id: a2-u08-l9-e5
+        type: multiple_choice
+        prompt: Was heißt „Kütüphane parkın karşısında.“?
+        options: [Die Bibliothek ist gegenüber dem Park., Die Bibliothek ist im Park., Die Bibliothek ist hinter dem Park.]
+        answer: Die Bibliothek ist gegenüber dem Park.
+      - id: a2-u08-l9-e6
+        type: word_bank
+        prompt: Ins Stadtzentrum fahre ich mit der Metro.
+        answers: [Şehir merkezine metroyla gidiyorum., Şehir merkezine metro ile gidiyorum., Metroyla şehir merkezine gidiyorum., Metro ile şehir merkezine gidiyorum.]
+        distractors: [metroya, merkezde]
+        explanation: şehir merkezi + n + e = şehir merkezine.
+      - id: a2-u08-l9-e7
+        type: free_text
+        direction: tr_de
+        prompt: Postane iki binanın arasında.
+        answers: [Die Post ist zwischen den zwei Gebäuden., Die Post ist zwischen zwei Gebäuden., Die Post liegt zwischen den zwei Gebäuden., Die Post ist zwischen den beiden Gebäuden., Das Postamt ist zwischen den zwei Gebäuden., Das Postamt ist zwischen zwei Gebäuden., Die Post liegt zwischen zwei Gebäuden., Die Post liegt zwischen den beiden Gebäuden.]
+        explanation: Nach Zahlen steht kein Plural, iki bina.
+      - id: a2-u08-l9-e8
+        type: word_bank
+        prompt: Nach dem Einkaufen trinken wir einen Kaffee.
+        answers: [Alışverişten sonra bir kahve içelim., Alışverişten sonra kahve içeriz., Alışverişten sonra bir kahve içiyoruz., Alışverişten sonra kahve içelim., Alışverişten sonra kahve içiyoruz., Alışverişten sonra bir kahve içeriz.]
+        distractors: [önce, alışveriş]
+        explanation: alışveriş = Einkauf, alışverişten sonra = nach dem Einkaufen.
+      - id: a2-u08-l9-e9
+        type: multiple_choice
+        prompt: Was heißt „Bu sokak bir labirent gibi!“?
+        options: [Diese Straße ist wie ein Labyrinth!, Diese Straße ist für ein Labyrinth!, Diese Straße ist neben einem Labyrinth!]
+        answer: Diese Straße ist wie ein Labyrinth!
+      - id: a2-u08-l9-e10
+        type: word_bank
+        prompt: Der Brunnen ist mitten auf dem Platz.
+        answers: [Çeşme meydanın ortasında.]
+        distractors: [meydan, yanında]
+        explanation: orta = Mitte, ortasında = in der Mitte von.
+      - id: a2-u08-l9-e11
+        type: suffix_builder
+        stem: orta
+        suffixes: [POSS_3SG, LOC]
+        target: ortasında
+        gloss_de: in der Mitte
+
+  - id: a2-u08-l10
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u08-l10-e1
+        type: free_text
+        direction: de_tr
+        prompt: auf dem Tisch
+        answers: [masanın üstünde, masanın üzerinde, masada]
+      - id: a2-u08-l10-e2
+        type: free_text
+        direction: de_tr
+        prompt: mit dem Zug
+        answers: [trenle, tren ile]
+      - id: a2-u08-l10-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (hinter dem Haus)
+        options: [evin arkasında, evin arkada, ev arkasında]
+        answer: evin arkasında
+      - id: a2-u08-l10-e4
+        type: word_bank
+        prompt: Ich lerne für die Prüfung.
+        answers: [Sınav için çalışıyorum., Sınav için ders çalışıyorum., Sınava çalışıyorum.]
+        distractors: [sınavda, gibi]
+        explanation: sınav = Prüfung; ders çalışmak = lernen (für die Schule).
+      - id: a2-u08-l10-e5
+        type: word_bank
+        prompt: Wir sind nach dem Film nach Hause gegangen.
+        answers: [Filmden sonra eve gittik.]
+        distractors: [önce, film]
+      - { id: a2-u08-l10-e6, type: suffix_builder, stem: karşı, suffixes: [POSS_3SG, LOC], target: karşısında, gloss_de: gegenüber }
+      - { id: a2-u08-l10-e7, type: suffix_builder, stem: arkadaş, suffixes: [POSS_1PL, INS], target: arkadaşımızla, gloss_de: mit unserem Freund }
+      - id: a2-u08-l10-e8
+        type: multiple_choice
+        prompt: Was heißt „Benim için çok önemli.“?
+        options: [Es ist mir sehr wichtig., Es ist wie ich sehr wichtig., Es ist sehr wichtig mit mir.]
+        answer: Es ist mir sehr wichtig.
+        explanation: önemli = wichtig.
+      - id: a2-u08-l10-e9
+        type: word_bank
+        prompt: Mein Zimmer ist im zweiten Stock, neben dem Bad.
+        answers: ['Odam ikinci katta, banyonun yanında.']
+        distractors: [kat, önünde]
+      - id: a2-u08-l10-e10
+        type: free_text
+        direction: tr_de
+        prompt: Kiminle konuşuyorsun?
+        answers: [Mit wem sprichst du?, Mit wem redest du?]
+      - id: a2-u08-l10-e11
+        type: multiple_choice
+        prompt: Was heißt „Yemekten önce ellerini yıka!“?
+        options: [Wasch dir vor dem Essen die Hände!, Wasch dir nach dem Essen die Hände!, Wasch die Hände mit dem Essen!]
+        answer: Wasch dir vor dem Essen die Hände!
+        explanation: yıkamak = waschen.
+      - id: a2-u08-l10-e12
+        type: word_bank
+        prompt: Die Kinder sind wie Engel.
+        answers: [Çocuklar melek gibi.]
+        distractors: [meleğe, için]
+        explanation: melek = Engel.
+
+vocab:
+  - { tr: üst, de: [Oberseite, oben], pos: noun }
+  - { tr: alt, de: [Unterseite, unten], pos: noun }
+  - { tr: iç, de: [Inneres, innen], pos: noun }
+  - { tr: dış, de: [Äußeres, außen], pos: noun }
+  - { tr: ara, de: [Zwischenraum], pos: noun }
+  - { tr: orta, de: [Mitte], pos: noun }
+  - { tr: gibi, de: [wie], pos: postp }
+  - { tr: koymak, de: [legen, stellen, setzen], pos: verb }
+  - { tr: girmek, de: [hineingehen, eintreten], pos: verb }
+  - { tr: çanta, de: [Tasche], pos: noun }
+  - { tr: kutu, de: [Kiste, Schachtel], pos: noun }
+  - { tr: raf, de: [Regal], pos: noun }
+  - { tr: hediye, de: [Geschenk], pos: noun }
+  - { tr: bina, de: [Gebäude], pos: noun }
+  - { tr: kütüphane, de: [Bibliothek], pos: noun }
+  - { tr: merkez, de: [Zentrum], pos: noun }
+  - { tr: pastane, de: [Konditorei], pos: noun }
+  - { tr: fırın, de: [Bäckerei, Ofen], pos: noun }
+  - { tr: çim, de: [Rasen], pos: noun }
+  - { tr: dışarı, de: [nach draußen], pos: adv }
+  - { tr: içeri, de: [nach drinnen], pos: adv }
+  - { tr: kuş, de: [Vogel], pos: noun }
+  - { tr: otopark, de: [Parkplatz], pos: noun }
+  - { tr: çeşme, de: [Brunnen], pos: noun }
+  - { tr: telefon, de: [Telefon, Handy], pos: noun }
+  - { tr: alışveriş, de: [Einkauf], pos: noun }
+  - { tr: sınav, de: [Prüfung], pos: noun }
+  - { tr: önemli, de: [wichtig], pos: adj }
+  - { tr: yıkamak, de: [waschen], pos: verb }
+  - { tr: kim, de: [wer], pos: pron }
+  - { tr: melek, de: [Engel], pos: noun, softens: true }
+  - { tr: labirent, de: [Labyrinth], pos: noun }
