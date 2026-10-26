@@ -62,8 +62,10 @@ describe('wordBankTokens', () => {
       distractors: ['yok', 'Var'],
     };
     expect([...wordBankTokens(alt)].sort()).toEqual(
-      ['Bir', 'kedim', 'var', 'Benim', 'Güle', 'Güle', 'yok'].sort(),
+      ['Bir', 'kedim', 'var', 'Benim', 'Güle', 'güle', 'yok'].sort(),
     );
+    const tale = { ...ex, answers: ['Bir varmış, bir yokmuş'], distractors: [] };
+    expect([...wordBankTokens(tale)].sort()).toEqual(['Bir', 'bir', 'varmış', 'yokmuş'].sort());
   });
 
   it('mischt deterministisch je Übungs-ID', () => {

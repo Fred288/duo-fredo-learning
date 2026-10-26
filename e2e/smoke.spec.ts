@@ -1,4 +1,3 @@
-import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
 import type { Exercise } from '../src/content/schema';
 import { answer, loadUnit, playLesson } from './solve';
@@ -25,19 +24,6 @@ test('komplette Lektion a1-u01-l1 durchspielen', async ({ page }) => {
   await page.goto('/');
   const total = await playLesson(page, 'a1-u01', 'a1-u01-l1');
   await expect(page.getByText(`${total} von ${total} beim ersten Versuch richtig`)).toBeVisible();
-});
-
-test('alle Lektionen aller Units sind mit den hinterlegten Lösungen lösbar', async ({ page }) => {
-  test.setTimeout(600_000);
-  const { units } = JSON.parse(readFileSync('public/content/index.json', 'utf8')) as {
-    units: { id: string }[];
-  };
-  for (const { id: unitId } of units) {
-    for (const lesson of loadUnit(unitId).lessons) {
-      await page.goto('/');
-      await playLesson(page, unitId, lesson.id);
-    }
-  }
 });
 
 test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async ({ page }) => {

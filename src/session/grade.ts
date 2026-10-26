@@ -75,22 +75,21 @@ export function solutionOf(ex: Supported): string {
  * z. B. mit und ohne Pronomen) plus Ablenker, stabil gemischt. Groß/Klein gilt als gleiches Wort.
  */
 export function wordBankTokens(ex: Extract<Exercise, { type: 'word_bank' }>): string[] {
-  const needed = new Map<string, { word: string; count: number }>();
+  // Je Wort (ohne Groß/Klein) die Schreibungen der Antwort mit den meisten Vorkommen:
+  // „Bir varmış, bir yokmuş“ braucht Bir und bir.
+  const needed = new Map<string, string[]>();
   for (const answer of ex.answers) {
-    const counts = new Map<string, { word: string; count: number }>();
+    const spellings = new Map<string, string[]>();
     for (const raw of answer.split(/\s+/)) {
       const word = raw.replace(/^[„"«]+|[.,!?;:"“»]+$/g, '');
       if (!word) continue;
-      const entry = counts.get(trLower(word)) ?? { word, count: 0 };
-      counts.set(trLower(word), { ...entry, count: entry.count + 1 });
+      spellings.set(trLower(word), [...(spellings.get(trLower(word)) ?? []), word]);
     }
-    for (const [key, { word, count }] of counts) {
-      const prev = needed.get(key);
-      if (!prev) needed.set(key, { word, count });
-      else if (count > prev.count) needed.set(key, { ...prev, count });
+    for (const [key, list] of spellings) {
+      if (list.length > (needed.get(key)?.length ?? 0)) needed.set(key, list);
     }
   }
-  const words = [...needed.values()].flatMap(({ word, count }) => Array<string>(count).fill(word));
+  const words = [...needed.values()].flat();
   const extra = (ex.distractors ?? []).filter((d) => !needed.has(trLower(d)));
   return seededShuffle([...words, ...extra], ex.id);
 }

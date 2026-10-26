@@ -1,0 +1,639 @@
+# A2-04: Perfekt/Evidential -mIş, Kopula idi/imiş (Erzählen, Gehörtes weitergeben). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u04
+level: A2
+title: Es heißt, dass …
+grammar_focus: [evidential, mis, kopula-idi-imis, erzaehlen]
+explainer: explainers/a2-mis.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u04-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u04-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „duymak“?
+        options: [hören, sehen, sagen]
+        answer: hören
+        explanation: duymak heißt hören und auch „erfahren, mitbekommen“.
+      - id: a2-u04-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: erzählen
+        answers: [anlatmak]
+      - id: a2-u04-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „haber“?
+        options: [Nachricht, Zeitung, Brief]
+        answer: Nachricht
+        explanation: haberler = die Nachrichten (im Fernsehen).
+      - id: a2-u04-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Nachbar, Nachbarin
+        answers: [komşu]
+      - id: a2-u04-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „kaza“?
+        options: [Unfall, Feuer, Diebstahl]
+        answer: Unfall
+      - id: a2-u04-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: kaybetmek
+        answers: [verlieren]
+      - id: a2-u04-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „kazanmak“?
+        options: [gewinnen, ausgeben, verlieren]
+        answer: gewinnen
+        explanation: kazanmak heißt gewinnen und (Geld) verdienen.
+      - id: a2-u04-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: finden
+        answers: [bulmak]
+      - id: a2-u04-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „düşmek“?
+        options: [fallen, laufen, springen]
+        answer: fallen
+      - id: a2-u04-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: krank
+        answers: [hasta]
+      - id: a2-u04-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „galiba“?
+        options: [anscheinend, sicher, niemals]
+        answer: anscheinend
+        explanation: galiba = anscheinend, wohl; herhalde = wahrscheinlich.
+      - id: a2-u04-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „masal“?
+        options: [Märchen, Lied, Witz]
+        answer: Märchen
+      - id: a2-u04-l1-e13
+        type: free_text
+        direction: tr_de
+        prompt: olmak
+        answers: [werden, sein, passieren, geschehen]
+        explanation: olmak heißt werden, passieren und sein (ne oldu? = was ist passiert?).
+      - id: a2-u04-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „şaşırmak“?
+        options: [sich wundern, sich freuen, sich ärgern]
+        answer: sich wundern
+      - id: a2-u04-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „Ne oldu?“
+        options: [Was ist passiert?, Was machst du?, Wer ist das?]
+        answer: Was ist passiert?
+      - id: a2-u04-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: sagen
+        answers: [demek, söylemek]
+      - id: a2-u04-l1-e17
+        type: multiple_choice
+        prompt: Was heißt „hava“?
+        options: [Wetter, Wasser, Wind]
+        answer: Wetter
+        explanation: hava heißt auch Luft.
+      - id: a2-u04-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „yorgun“?
+        options: [müde, krank, traurig]
+        answer: müde
+      - id: a2-u04-l1-e19
+        type: free_text
+        direction: de_tr
+        prompt: glücklich
+        answers: [mutlu]
+
+  - id: a2-u04-l2
+    type: grammar
+    title: Er soll gekommen sein
+    exercises:
+      - id: a2-u04-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: evidential
+        target: gelmiş
+        gloss_de: 'er, sie ist (wohl) gekommen'
+        explanation: -miş für Dinge, die man nicht selbst erlebt hat, sondern gehört oder erschlossen hat.
+      - { id: a2-u04-l2-e2, type: conjugation, mode: verb, lemma: yapmak, person: 3pl, tense: evidential, target: yapmışlar, gloss_de: 'sie haben (angeblich) gemacht' }
+      - id: a2-u04-l2-e3
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 3sg
+        tense: evidential
+        target: okumuş
+        gloss_de: 'er, sie hat (wohl) gelesen'
+        explanation: Vierfach-Harmonie, nach u → muş.
+      - { id: a2-u04-l2-e4, type: conjugation, mode: verb, lemma: görmek, person: 3sg, tense: evidential, target: görmüş, gloss_de: 'er, sie hat (angeblich) gesehen' }
+      - id: a2-u04-l2-e5
+        type: conjugation
+        mode: verb
+        lemma: kazanmak
+        person: 3sg
+        tense: evidential
+        target: kazanmış
+        gloss_de: 'er, sie hat (angeblich) gewonnen'
+      - { id: a2-u04-l2-e6, type: conjugation, mode: verb, lemma: düşmek, person: 3sg, tense: evidential, target: düşmüş, gloss_de: 'er, sie ist (wohl) gefallen' }
+      - id: a2-u04-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 3pl
+        tense: evidential
+        target: gitmişler
+        gloss_de: 'sie sind (angeblich) gegangen'
+        explanation: Kein Wechsel zu gid, -miş beginnt mit einem Konsonanten.
+      - id: a2-u04-l2-e8
+        type: conjugation
+        mode: verb
+        lemma: unutmak
+        person: 1sg
+        tense: evidential
+        target: unutmuşum
+        gloss_de: ich habe (offenbar) vergessen
+        explanation: In der 1. Person drückt -miş Überraschung aus, „ich habe es wohl vergessen“.
+      - { id: a2-u04-l2-e9, type: conjugation, mode: verb, lemma: kaybetmek, person: 3sg, tense: evidential, target: kaybetmiş, gloss_de: 'er, sie hat (angeblich) verloren' }
+      - { id: a2-u04-l2-e10, type: conjugation, mode: verb, lemma: bulmak, person: 3pl, tense: evidential, target: bulmuşlar, gloss_de: 'sie haben (angeblich) gefunden' }
+      - { id: a2-u04-l2-e11, type: conjugation, mode: verb, lemma: evlenmek, person: 3pl, tense: evidential, target: evlenmişler, gloss_de: 'sie haben (angeblich) geheiratet' }
+      - { id: a2-u04-l2-e12, type: conjugation, mode: verb, lemma: olmak, person: 3sg, tense: evidential, target: olmuş, gloss_de: 'es ist (anscheinend) passiert' }
+      - id: a2-u04-l2-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er hat angeblich gelesen)
+        options: [okumuş, okumiş, okudumuş]
+        answer: okumuş
+      - id: a2-u04-l2-e14
+        type: word_bank
+        prompt: Ali hat angeblich ein Auto gekauft.
+        answers: [Ali bir araba almış., Ali araba almış.]
+        distractors: [aldı, alıyor]
+        explanation: Mit -miş gibt man wieder, was man gehört hat.
+
+  - id: a2-u04-l3
+    type: grammar
+    title: nicht und Fragen
+    exercises:
+      - id: a2-u04-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: evidential
+        negative: true
+        target: gelmemiş
+        gloss_de: 'er, sie ist (angeblich) nicht gekommen'
+      - { id: a2-u04-l3-e2, type: conjugation, mode: verb, lemma: yapmak, person: 3pl, tense: evidential, negative: true, target: yapmamışlar, gloss_de: 'sie haben (angeblich) nicht gemacht' }
+      - { id: a2-u04-l3-e3, type: conjugation, mode: verb, lemma: anlamak, person: 1sg, tense: evidential, negative: true, target: anlamamışım, gloss_de: ich habe (offenbar) nicht verstanden }
+      - { id: a2-u04-l3-e4, type: conjugation, mode: verb, lemma: duymak, person: 3sg, tense: evidential, negative: true, target: duymamış, gloss_de: 'er, sie hat (angeblich) nicht gehört' }
+      - id: a2-u04-l3-e5
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: evidential
+        question: true
+        target: gelmiş mi?
+        gloss_de: 'Ist er, sie (wohl) gekommen?'
+        explanation: Die Partikel steht wie im Präsens getrennt und trägt die Endung, außer bei -ler (gelmişler mi?).
+      - { id: a2-u04-l3-e6, type: conjugation, mode: verb, lemma: kazanmak, person: 3pl, tense: evidential, question: true, target: kazanmışlar mı?, gloss_de: Haben sie (wohl) gewonnen? }
+      - { id: a2-u04-l3-e7, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: evidential, question: true, target: okumuş mu?, gloss_de: "Hat er, sie (wohl) gelesen?" }
+      - id: a2-u04-l3-e8
+        type: multiple_choice
+        prompt: Was heißt „Hiç İstanbul'a gitmiş mi?“
+        options: [Ist er/sie (angeblich) schon einmal in Istanbul gewesen?, Ist er/sie nie in Istanbul gewesen?, Geht er/sie nach Istanbul?]
+        answer: Ist er/sie (angeblich) schon einmal in Istanbul gewesen?
+        explanation: hiç in der Frage = jemals.
+      - id: a2-u04-l3-e9
+        type: word_bank
+        prompt: Mehmet ist angeblich gestern nicht zur Arbeit gegangen.
+        answers: [Mehmet dün işe gitmemiş.]
+        distractors: [gitmedi, işte]
+        explanation: işe = zur Arbeit (iş + Dativ).
+      - id: a2-u04-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Ayşe hiç gelmemiş.
+        answers: [Ayşe ist gar nicht gekommen., Ayşe ist angeblich gar nicht gekommen., Ayşe ist offenbar gar nicht gekommen., Ayşe ist überhaupt nicht gekommen., Ayşe ist nie gekommen., Ayşe soll gar nicht gekommen sein., Ayşe ist offenbar überhaupt nicht gekommen.]
+      - id: a2-u04-l3-e11
+        type: multiple_choice
+        prompt: Welche Frage ist richtig? (Hat er es angeblich gefunden?)
+        options: [Bulmuş mu?, Bulmuşmu?, Buldu mu mış?]
+        answer: Bulmuş mu?
+      - id: a2-u04-l3-e12
+        type: word_bank
+        prompt: Sie haben das Spiel (angeblich) nicht gewonnen.
+        answers: [Maçı kazanmamışlar.]
+        distractors: [kazandılar, maç]
+      - id: a2-u04-l3-e13
+        type: free_text
+        direction: de_tr
+        prompt: 'er hat (angeblich) nicht gehört'
+        answers: [duymamış, o duymamış]
+      - id: a2-u04-l3-e14
+        type: conjugation
+        mode: verb
+        lemma: uyumak
+        person: 1sg
+        tense: evidential
+        target: uyumuşum
+        gloss_de: ich bin (offenbar) eingeschlafen
+
+  - id: a2-u04-l4
+    type: grammar
+    title: -dı oder -miş?
+    exercises:
+      - id: a2-u04-l4-e1
+        type: multiple_choice
+        prompt: Du hast es selbst gesehen. Wie sagst du „Ali ist gekommen“?
+        options: [Ali geldi., Ali gelmiş., Ali geliyor.]
+        answer: Ali geldi.
+        explanation: -dı für selbst Erlebtes, -miş für Gehörtes oder Erschlossenes.
+      - id: a2-u04-l4-e2
+        type: multiple_choice
+        prompt: Deine Schwester hat es dir erzählt. Wie sagst du „Ali ist gekommen“?
+        options: [Ali gelmiş., Ali geldi., Ali gelecek.]
+        answer: Ali gelmiş.
+        explanation: -miş markiert, dass man es nicht selbst gesehen hat. -dı wäre hier nicht falsch, klingt aber so, als wäre man sicher.
+      - id: a2-u04-l4-e3
+        type: multiple_choice
+        prompt: Du kommst nach Hause, der Boden ist nass. Was sagst du?
+        options: [Yağmur yağmış., Yağmur yağdı., Yağmur yağıyor.]
+        answer: Yağmur yağmış.
+        explanation: Du schließt aus den Spuren, dass es geregnet hat → -miş.
+      - id: a2-u04-l4-e4
+        type: multiple_choice
+        prompt: Du hast den Film gestern gesehen. Was sagst du?
+        options: [Dün filmi izledim., Dün filmi izlemişim., Dün filmi izlemiş.]
+        answer: Dün filmi izledim.
+      - id: a2-u04-l4-e5
+        type: word_bank
+        prompt: Laut Nachrichten gab es einen Unfall.
+        answers: [Haberlere göre bir kaza olmuş.]
+        distractors: [olacak, kazada]
+        explanation: haberlere göre = laut Nachrichten, … göre = laut, gemäß.
+      - id: a2-u04-l4-e6
+        type: word_bank
+        prompt: Oh, ich habe meinen Schlüssel ja vergessen! (du merkst es gerade erst)
+        answers: [Aa, anahtarımı unutmuşum!]
+        distractors: [unutacağım, anahtar]
+        explanation: In der 1. Person drückt -miş eine plötzliche Erkenntnis aus.
+      - id: a2-u04-l4-e7
+        type: multiple_choice
+        prompt: Was drückt „Aa, çok güzelmiş!“ aus?
+        options: ['Überraschung, „Oh, das ist ja sehr schön!“', eine Vermutung über morgen, eine Bitte]
+        answer: 'Überraschung, „Oh, das ist ja sehr schön!“'
+        explanation: güzel + miş, Vorschau auf -(y)miş in Lektion 5.
+      - id: a2-u04-l4-e8
+        type: word_bank
+        prompt: Ich habe gehört, dass dein Bruder geheiratet hat.
+        answers: [Duydum ki kardeşin evlenmiş.]
+        distractors: [evlenecek, duyuyorum]
+        explanation: duydum ki = ich habe gehört, dass. Das Gehörte steht dann im -miş.
+      - id: a2-u04-l4-e9
+        type: multiple_choice
+        prompt: Welche Zeit passt? „Ben dün sinemaya …“ (selbst erlebt)
+        options: [gittim, gitmişim, gitmiş]
+        answer: gittim
+      - id: a2-u04-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Komşumuz Almanya'ya taşınmış.
+        answers: [Unser Nachbar ist nach Deutschland gezogen., Unser Nachbar ist angeblich nach Deutschland gezogen., Unsere Nachbarin ist nach Deutschland gezogen., Unser Nachbar ist offenbar nach Deutschland gezogen., Unser Nachbar soll nach Deutschland gezogen sein., Unsere Nachbarin ist angeblich nach Deutschland gezogen., Unsere Nachbarin ist offenbar nach Deutschland gezogen., Unsere Nachbarin soll nach Deutschland gezogen sein.]
+      - id: a2-u04-l4-e11
+        type: multiple_choice
+        prompt: Womit beginnt ein türkisches Märchen?
+        options: ['Bir varmış, bir yokmuş …', Bir gün geldi …, Evvel zaman sonra …]
+        answer: 'Bir varmış, bir yokmuş …'
+        explanation: Wörtlich „Es gab einmal, es gab einmal nicht …“, wie „Es war einmal“. Märchen erzählt man im -miş.
+      - id: a2-u04-l4-e12
+        type: word_bank
+        prompt: Was ist passiert?
+        answers: [Ne oldu?, Ne olmuş?]
+        distractors: [olacak, kim]
+        explanation: Ne oldu? ist die neutrale Frage. Ne olmuş? klingt, als hätte man schon Spuren bemerkt oder etwas gehört.
+      - id: a2-u04-l4-e13
+        type: free_text
+        direction: de_tr
+        prompt: laut Nachrichten
+        answers: [haberlere göre]
+
+  - id: a2-u04-l5
+    type: grammar
+    title: war, soll gewesen sein
+    exercises:
+      - id: a2-u04-l5-e1
+        type: conjugation
+        mode: copula
+        lemma: öğrenci
+        person: 1sg
+        tense: past
+        target: öğrenciydim
+        gloss_de: ich war Student
+        explanation: „war“ = -(y)dı + Endung wie im Präteritum, nach Vokal mit y.
+      - { id: a2-u04-l5-e2, type: conjugation, mode: copula, lemma: öğretmen, person: 3sg, tense: past, target: öğretmendi, gloss_de: 'er, sie war Lehrer' }
+      - id: a2-u04-l5-e3
+        type: conjugation
+        mode: copula
+        lemma: hasta
+        person: 2sg
+        tense: past
+        target: hastaydın
+        gloss_de: du warst krank
+      - id: a2-u04-l5-e4
+        type: conjugation
+        mode: copula
+        lemma: Türk
+        person: 1pl
+        tense: past
+        target: Türktük
+        gloss_de: wir waren Türken
+        explanation: Nach k wird d zu t.
+      - id: a2-u04-l5-e5
+        type: conjugation
+        mode: copula
+        lemma: öğretmen
+        person: 1sg
+        tense: past
+        negative: true
+        target: öğretmen değildim
+        gloss_de: ich war kein Lehrer
+      - id: a2-u04-l5-e6
+        type: conjugation
+        mode: copula
+        lemma: hasta
+        person: 2sg
+        tense: past
+        question: true
+        target: hasta mıydın?
+        gloss_de: Warst du krank?
+        explanation: "mı + y + dı + n verschmelzen zu einem Wort: hasta mıydın?"
+      - id: a2-u04-l5-e7
+        type: conjugation
+        mode: copula
+        lemma: hasta
+        person: 3sg
+        tense: evidential
+        target: hastaymış
+        gloss_de: 'er, sie soll krank sein, war wohl krank'
+        explanation: „sein“ im -miş = -(y)miş, für Gehörtes.
+      - { id: a2-u04-l5-e8, type: conjugation, mode: copula, lemma: öğretmen, person: 3sg, tense: evidential, target: öğretmenmiş, gloss_de: 'er, sie soll Lehrer sein' }
+      - id: a2-u04-l5-e9
+        type: word_bank
+        prompt: Gestern war ich zu Hause.
+        answers: [Dün evdeydim., Ben dün evdeydim.]
+        distractors: [evdeyim, evde]
+        explanation: evde + y + dim.
+      - id: a2-u04-l5-e10
+        type: word_bank
+        prompt: Das Wetter war sehr schön.
+        answers: [Hava çok güzeldi.]
+        distractors: [güzel, güzelmiş]
+        explanation: hava = Wetter, Luft.
+      - id: a2-u04-l5-e11
+        type: word_bank
+        prompt: Das Essen soll sehr gut gewesen sein.
+        answers: [Yemek çok güzelmiş.]
+        distractors: [güzeldi, iyi]
+      - id: a2-u04-l5-e12
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Wo warst du?)
+        options: [Neredeydin?, Neredeidin?, Nerededin?]
+        answer: Neredeydin?
+      - id: a2-u04-l5-e13
+        type: free_text
+        direction: de_tr
+        prompt: Ich war krank.
+        answers: [Hastaydım., Ben hastaydım., Hasta idim., Ben hasta idim.]
+
+  - id: a2-u04-l6
+    type: grammar
+    title: 'Tabellen: -miş und „war“'
+    exercises:
+      - id: a2-u04-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: evidential
+        targets: [gelmişim, gelmişsin, gelmiş, gelmişiz, gelmişsiniz, gelmişler]
+        gloss_de: kommen
+        explanation: Stamm + miş + Endungen wie bei „sein“.
+      - { id: a2-u04-l6-e2, type: paradigm, kind: verb, lemma: yapmak, tense: evidential, targets: [yapmışım, yapmışsın, yapmış, yapmışız, yapmışsınız, yapmışlar], gloss_de: machen }
+      - { id: a2-u04-l6-e3, type: paradigm, kind: verb, lemma: okumak, tense: evidential, targets: [okumuşum, okumuşsun, okumuş, okumuşuz, okumuşsunuz, okumuşlar], gloss_de: lesen }
+      - { id: a2-u04-l6-e4, type: paradigm, kind: verb, lemma: görmek, tense: evidential, targets: [görmüşüm, görmüşsün, görmüş, görmüşüz, görmüşsünüz, görmüşler], gloss_de: sehen }
+      - id: a2-u04-l6-e5
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: evidential
+        negative: true
+        targets: [gelmemişim, gelmemişsin, gelmemiş, gelmemişiz, gelmemişsiniz, gelmemişler]
+        gloss_de: nicht kommen
+      - id: a2-u04-l6-e6
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: evidential
+        question: true
+        targets: [yapmış mıyım?, yapmış mısın?, yapmış mı?, yapmış mıyız?, yapmış mısınız?, yapmışlar mı?]
+        gloss_de: machen? (Frage)
+      - id: a2-u04-l6-e7
+        type: paradigm
+        kind: copula
+        lemma: öğrenci
+        tense: past
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [öğrenciydim, öğrenciydin, öğrenciydi, öğrenciydik, öğrenciydiniz]
+        gloss_de: Student (war)
+        explanation: "Nach Vokal y, dann dı + m, n, –, k, nız. „sie waren“: öğrenciydiler oder öğrencilerdi, beides üblich."
+      - id: a2-u04-l6-e8
+        type: paradigm
+        kind: copula
+        lemma: öğretmen
+        tense: past
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [öğretmendim, öğretmendin, öğretmendi, öğretmendik, öğretmendiniz]
+        gloss_de: Lehrer (war)
+        explanation: "„sie waren“: öğretmendiler oder öğretmenlerdi, beides üblich."
+      - id: a2-u04-l6-e9
+        type: paradigm
+        kind: copula
+        lemma: hasta
+        tense: past
+        persons: [1sg, 2sg, 3sg]
+        question: true
+        targets: [hasta mıydım?, hasta mıydın?, hasta mıydı?]
+        gloss_de: krank? (war, Frage)
+      - id: a2-u04-l6-e10
+        type: paradigm
+        kind: copula
+        lemma: öğretmen
+        tense: past
+        persons: [1sg, 2sg, 3sg]
+        negative: true
+        targets: [öğretmen değildim, öğretmen değildin, öğretmen değildi]
+        gloss_de: kein Lehrer (war)
+
+  - id: a2-u04-l7
+    type: reading
+    title: 'Lesetext: Neuigkeiten'
+    exercises:
+      - id: a2-u04-l7-e1
+        type: multiple_choice
+        prompt: '„Duydun mu? Komşumuz Ahmet piyangoda para kazanmış!“ – Was ist passiert?'
+        options: [Ahmet hat angeblich in der Lotterie gewonnen., Ahmet hat Geld verloren., Ahmet ist umgezogen.]
+        answer: Ahmet hat angeblich in der Lotterie gewonnen.
+        explanation: piyango = Lotterie. Die Sprecherin hat es nur gehört → -miş.
+      - id: a2-u04-l7-e2
+        type: multiple_choice
+        prompt: '„Duydun mu? Komşumuz Ahmet piyangoda para kazanmış!“ – Woher weiß die Sprecherin das?'
+        options: [Sie hat es gehört., Sie war dabei., Sie hat selbst gewonnen.]
+        answer: Sie hat es gehört.
+      - id: a2-u04-l7-e3
+        type: multiple_choice
+        prompt: '„Sonra yeni bir araba almış ve İzmir''e taşınmışlar.“ – Wohin sind sie gezogen?'
+        options: [nach Izmir, nach Istanbul, ins Ausland]
+        answer: nach Izmir
+      - id: a2-u04-l7-e4
+        type: multiple_choice
+        prompt: '„Ama karısı hiç mutlu değilmiş, çünkü İstanbul''u çok seviyormuş.“ – Warum ist seine Frau nicht glücklich?'
+        options: [Sie liebt Istanbul sehr., Sie mag das Auto nicht., Sie hat ihre Arbeit verloren.]
+        answer: Sie liebt Istanbul sehr.
+        explanation: çünkü = weil, karısı = seine Frau, değilmiş = sei nicht (değil + miş), seviyormuş = sie liebe angeblich (-iyor + -muş, Vorschau).
+      - id: a2-u04-l7-e5
+        type: word_bank
+        prompt: Hast du gehört? Unser Nachbar hat gewonnen!
+        answers: ['Duydun mu? Komşumuz kazanmış!']
+        distractors: [kazandı, duydum]
+      - id: a2-u04-l7-e6
+        type: free_text
+        direction: tr_de
+        prompt: Yeni bir araba almışlar.
+        answers: [Sie haben ein neues Auto gekauft., Sie haben angeblich ein neues Auto gekauft., Sie sollen ein neues Auto gekauft haben., Sie haben offenbar ein neues Auto gekauft., Sie haben sich ein neues Auto gekauft.]
+      - id: a2-u04-l7-e7
+        type: multiple_choice
+        prompt: '„Bir varmış, bir yokmuş, bir köyde yaşlı bir adam yaşarmış.“ – Was ist das?'
+        options: [der Anfang eines Märchens, eine Wegbeschreibung, ein Zeitungsbericht von heute]
+        answer: der Anfang eines Märchens
+        explanation: köy = Dorf, yaşlı bir adam = ein alter Mann, yaşarmış = lebte (Aorist + -mış, typisch für Märchen, Vorschau).
+      - id: a2-u04-l7-e8
+        type: word_bank
+        prompt: Es war einmal …
+        answers: ["Bir varmış, bir yokmuş"]
+        distractors: [vardı, yoktu]
+      - id: a2-u04-l7-e9
+        type: multiple_choice
+        prompt: Warum stehen Märchen im -miş?
+        options: [Weil der Erzähler die Geschichte nicht selbst erlebt hat., Weil sie in der Zukunft spielen., Weil sie Fragen sind.]
+        answer: Weil der Erzähler die Geschichte nicht selbst erlebt hat.
+      - id: a2-u04-l7-e10
+        type: word_bank
+        prompt: Gestern war ich in Izmir, das Wetter war sehr schön.
+        answers: ["Dün İzmir'deydim, hava çok güzeldi."]
+        distractors: [güzelmiş, "İzmir'e"]
+
+  - id: a2-u04-l8
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u04-l8-e1
+        type: free_text
+        direction: de_tr
+        prompt: er ist (angeblich) gekommen
+        answers: [gelmiş, o gelmiş]
+      - id: a2-u04-l8-e2
+        type: free_text
+        direction: de_tr
+        prompt: Wo warst du?
+        answers: [Neredeydin?, Sen neredeydin?, Nerede idin?, Sen nerede idin?]
+      - id: a2-u04-l8-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (sie sind angeblich gegangen)
+        options: [gitmişler, gidmişler, gitmişlar]
+        answer: gitmişler
+      - id: a2-u04-l8-e4
+        type: word_bank
+        prompt: Mein Großvater war Arzt. (du hast es selbst erlebt)
+        answers: [Dedem doktordu.]
+        distractors: [doktor, doktorum]
+      - id: a2-u04-l8-e5
+        type: free_text
+        direction: tr_de
+        prompt: Kaza olmuş.
+        answers: [Es hat einen Unfall gegeben., Es gab einen Unfall., Es gab angeblich einen Unfall., Es ist ein Unfall passiert., Es soll einen Unfall gegeben haben., Es ist offenbar ein Unfall passiert., Es ist angeblich ein Unfall passiert.]
+      - id: a2-u04-l8-e6
+        type: multiple_choice
+        prompt: Du hast es selbst erlebt. „Dün çok …“ (Ich war gestern sehr müde.)
+        options: [yorgundum, yorgunmuşum, yorgunum]
+        answer: yorgundum
+        explanation: yorgun = müde.
+      - id: a2-u04-l8-e7
+        type: conjugation
+        mode: verb
+        lemma: anlatmak
+        person: 3sg
+        tense: evidential
+        target: anlatmış
+        gloss_de: 'er, sie hat (angeblich) erzählt'
+      - id: a2-u04-l8-e8
+        type: conjugation
+        mode: copula
+        lemma: mutlu
+        person: 1pl
+        tense: past
+        target: mutluyduk
+        gloss_de: wir waren glücklich
+      - id: a2-u04-l8-e9
+        type: word_bank
+        prompt: Ich habe gehört, sie ist krank.
+        answers: [Duydum ki hastaymış.]
+        distractors: [hastayım, hastalar]
+      - id: a2-u04-l8-e10
+        type: free_text
+        direction: de_tr
+        prompt: Was ist passiert?
+        answers: [Ne oldu?, Ne olmuş?]
+      - id: a2-u04-l8-e11
+        type: multiple_choice
+        prompt: Was heißt „Galiba yağmur yağmış.“?
+        options: [Anscheinend hat es geregnet., Morgen regnet es., Es regnet gerade.]
+        answer: Anscheinend hat es geregnet.
+      - id: a2-u04-l8-e12
+        type: free_text
+        direction: tr_de
+        prompt: Hasta mıydın?
+        answers: [Warst du krank?, Bist du krank gewesen?]
+
+vocab:
+  - { tr: duymak, de: [hören, erfahren], pos: verb }
+  - { tr: anlatmak, de: [erzählen], pos: verb }
+  - { tr: demek, de: [sagen], pos: verb }
+  - { tr: haber, de: [Nachricht], pos: noun }
+  - { tr: komşu, de: [Nachbar, Nachbarin], pos: noun }
+  - { tr: kaza, de: [Unfall], pos: noun }
+  - { tr: kaybetmek, de: [verlieren], pos: verb, softens: true }
+  - { tr: kazanmak, de: [gewinnen, verdienen], pos: verb }
+  - { tr: bulmak, de: [finden], pos: verb }
+  - { tr: düşmek, de: [fallen], pos: verb }
+  - { tr: hasta, de: [krank, Patient], pos: adj }
+  - { tr: galiba, de: [anscheinend, wohl], pos: adv }
+  - { tr: masal, de: [Märchen], pos: noun }
+  - { tr: olmak, de: [werden, sein, passieren], pos: verb }
+  - { tr: şaşırmak, de: [sich wundern, überrascht sein], pos: verb }
+  - { tr: göre, de: [laut, gemäß], pos: postp }
+  - { tr: hava, de: [Wetter, Luft], pos: noun }
+  - { tr: yorgun, de: [müde], pos: adj }
+  - { tr: mutlu, de: [glücklich], pos: adj }
+  - { tr: çünkü, de: [weil, denn], pos: conj }
+  - { tr: iş, de: [Arbeit], pos: noun }

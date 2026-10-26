@@ -1,0 +1,634 @@
+# A2-06: Imperativ (Wegbeschreibung, Unterwegs, Verkehr). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u06
+level: A2
+title: Unterwegs
+grammar_focus: [imperativ, wegbeschreibung, richtungen]
+explainer: explainers/a2-imperativ.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u06-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u06-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „sağ“?
+        options: [rechts, links, geradeaus]
+        answer: rechts
+        explanation: sağ (rechts), sol (links), düz (geradeaus).
+      - id: a2-u06-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: links
+        answers: [sol]
+      - id: a2-u06-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „düz“?
+        options: [geradeaus, zurück, oben]
+        answer: geradeaus
+      - id: a2-u06-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Ecke
+        answers: [köşe]
+      - id: a2-u06-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „kavşak“?
+        options: [Kreuzung, Brücke, Platz]
+        answer: Kreuzung
+      - id: a2-u06-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: köprü
+        answers: [Brücke, die Brücke]
+      - id: a2-u06-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „durak“?
+        options: [Haltestelle, Bahnhof, Ampel]
+        answer: Haltestelle
+      - id: a2-u06-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Platz (in der Stadt)
+        answers: [meydan]
+      - id: a2-u06-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „trafik ışığı“?
+        options: [Ampel, Verkehrsschild, Stau]
+        answer: Ampel
+      - id: a2-u06-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „geçmek“?
+        options: [überqueren, warten, anhalten]
+        answer: überqueren
+        explanation: geçmek heißt überqueren, vorbeigehen, auch (Zeit) vergehen.
+      - id: a2-u06-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: aussteigen
+        answers: [inmek]
+        explanation: inmek (aussteigen, hinuntergehen) ist das Gegenteil von binmek.
+      - id: a2-u06-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „uzak“?
+        options: [weit, nah, schnell]
+        answer: weit
+        explanation: uzak (weit), yakın (nah).
+      - id: a2-u06-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: fragen
+        answers: [sormak]
+      - id: a2-u06-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „göstermek“?
+        options: [zeigen, sehen, suchen]
+        answer: zeigen
+      - id: a2-u06-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „karşı“ in „bankanın karşısında“?
+        options: [gegenüber, neben, hinter]
+        answer: gegenüber
+        explanation: bankanın karşısında = gegenüber der Bank, wörtlich „an der Gegenseite der Bank“.
+      - id: a2-u06-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: aufpassen, achten auf
+        answers: [dikkat etmek]
+      - id: a2-u06-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: Post (Gebäude)
+        answers: [postane]
+      - id: a2-u06-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „harita“?
+        options: [Karte, Fahrplan, Fahrkarte]
+        answer: Karte
+        explanation: harita = Landkarte, Stadtplan.
+      - id: a2-u06-l1-e19
+        type: multiple_choice
+        prompt: Was heißt „yanında“ in „otelin yanında“?
+        options: [neben, hinter, vor]
+        answer: neben
+        explanation: yan (Seite), ön (Vorderseite), arka (Rückseite) – otelin yanında, önünde, arkasında.
+
+  - id: a2-u06-l2
+    type: grammar
+    title: Komm! Geh! (du)
+    exercises:
+      - id: a2-u06-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: imperative
+        target: gel
+        gloss_de: komm!
+        explanation: Die du-Form ist einfach der Stamm, gelmek → gel!
+      - { id: a2-u06-l2-e2, type: conjugation, mode: verb, lemma: okumak, person: 2sg, tense: imperative, target: oku, gloss_de: lies! }
+      - { id: a2-u06-l2-e3, type: conjugation, mode: verb, lemma: beklemek, person: 2sg, tense: imperative, target: bekle, gloss_de: warte! }
+      - { id: a2-u06-l2-e4, type: conjugation, mode: verb, lemma: dönmek, person: 2sg, tense: imperative, target: dön, gloss_de: bieg ab! }
+      - { id: a2-u06-l2-e5, type: conjugation, mode: verb, lemma: gitmek, person: 2sg, tense: imperative, target: git, gloss_de: geh! }
+      - id: a2-u06-l2-e6
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: imperative
+        negative: true
+        target: gelme
+        gloss_de: komm nicht!
+        explanation: Verbot = Stamm + me/ma.
+      - { id: a2-u06-l2-e7, type: conjugation, mode: verb, lemma: yapmak, person: 2sg, tense: imperative, negative: true, target: yapma, gloss_de: mach das nicht! }
+      - { id: a2-u06-l2-e8, type: conjugation, mode: verb, lemma: unutmak, person: 2sg, tense: imperative, negative: true, target: unutma, gloss_de: vergiss nicht! }
+      - { id: a2-u06-l2-e9, type: conjugation, mode: verb, lemma: korkmak, person: 2sg, tense: imperative, negative: true, target: korkma, gloss_de: hab keine Angst! }
+      - id: a2-u06-l2-e10
+        type: word_bank
+        prompt: Komm her!
+        answers: [Buraya gel!, Gel buraya!]
+        distractors: [burada, gelin]
+        explanation: buraya = hierher (bura + Dativ).
+      - id: a2-u06-l2-e11
+        type: word_bank
+        prompt: Warte einen Moment!
+        answers: [Bir dakika bekle!]
+        distractors: [bekliyor, iki]
+      - id: a2-u06-l2-e12
+        type: word_bank
+        prompt: Bieg rechts ab!
+        answers: [Sağa dön!]
+        distractors: [sağda, sola]
+        explanation: Richtung mit Dativ, sağa (nach rechts), sola (nach links).
+      - { id: a2-u06-l2-e13, type: suffix_builder, stem: sağ, suffixes: [DAT], target: sağa, gloss_de: nach rechts }
+      - { id: a2-u06-l2-e14, type: suffix_builder, stem: sol, suffixes: [DAT], target: sola, gloss_de: nach links }
+
+  - id: a2-u06-l3
+    type: grammar
+    title: Gehen Sie! (ihr, Sie)
+    exercises:
+      - id: a2-u06-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2pl
+        tense: imperative
+        target: gelin
+        gloss_de: 'kommt! kommen Sie!'
+        explanation: -(y)in/-ın/-un/-ün, für ihr und die höfliche Anrede.
+      - id: a2-u06-l3-e2
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 2pl
+        tense: imperative
+        target: okuyun
+        gloss_de: 'lest! lesen Sie!'
+        explanation: Nach Vokal steht ein y.
+      - id: a2-u06-l3-e3
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 2pl
+        tense: imperative
+        target: gidin
+        gloss_de: 'geht! gehen Sie!'
+        explanation: git → gid vor dem Vokal der Endung.
+      - { id: a2-u06-l3-e4, type: conjugation, mode: verb, lemma: dönmek, person: 2pl, tense: imperative, target: dönün, gloss_de: 'biegt ab! biegen Sie ab!' }
+      - { id: a2-u06-l3-e5, type: conjugation, mode: verb, lemma: geçmek, person: 2pl, tense: imperative, target: geçin, gloss_de: 'überquert! überqueren Sie!' }
+      - { id: a2-u06-l3-e6, type: conjugation, mode: verb, lemma: beklemek, person: 2pl, tense: imperative, target: bekleyin, gloss_de: 'wartet! warten Sie!' }
+      - id: a2-u06-l3-e7
+        type: conjugation
+        mode: verb
+        lemma: devam etmek
+        person: 2pl
+        tense: imperative
+        target: devam edin
+        gloss_de: 'geht weiter! gehen Sie weiter!'
+        explanation: et → ed vor Vokal, wie bei gidin.
+      - id: a2-u06-l3-e8
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2pl
+        tense: imperative
+        polite: true
+        target: geliniz
+        gloss_de: kommen Sie! (sehr höflich, schriftlich)
+        explanation: -iniz ist die förmlichste Form, z. B. auf Schildern und in Anleitungen.
+      - id: a2-u06-l3-e9
+        type: conjugation
+        mode: verb
+        lemma: dikkat etmek
+        person: 2pl
+        tense: imperative
+        target: dikkat edin
+        gloss_de: 'passt auf! passen Sie auf!'
+      - id: a2-u06-l3-e10
+        type: conjugation
+        mode: verb
+        lemma: unutmak
+        person: 2pl
+        tense: imperative
+        negative: true
+        target: unutmayın
+        gloss_de: 'vergesst nicht! vergessen Sie nicht!'
+        explanation: Verneint me/ma + y + in.
+      - { id: a2-u06-l3-e11, type: conjugation, mode: verb, lemma: inmek, person: 2pl, tense: imperative, target: inin, gloss_de: 'steigt aus! steigen Sie aus!' }
+      - id: a2-u06-l3-e12
+        type: word_bank
+        prompt: Gehen Sie geradeaus!
+        answers: [Düz gidin!]
+        distractors: [git, düzde]
+      - id: a2-u06-l3-e13
+        type: word_bank
+        prompt: Biegen Sie an der Ampel links ab!
+        answers: [Trafik ışığında sola dönün!, Işıklardan sola dönün!]
+        distractors: [sağa, dön]
+        explanation: "trafik ışığı = Ampel (zusammengesetztes Wort mit -ı); + n + da → trafik ışığında. Umgangssprachlich: ışıklardan."
+      - id: a2-u06-l3-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Lesen Sie!)
+        options: [Okuyun!, Okuin!, Okusun!]
+        answer: Okuyun!
+
+  - id: a2-u06-l4
+    type: grammar
+    title: Er soll … (-sin)
+    exercises:
+      - id: a2-u06-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: imperative
+        target: gelsin
+        gloss_de: 'er, sie soll kommen'
+        explanation: 3. Person mit -sin/-sın/-sun/-sün.
+      - id: a2-u06-l4-e2
+        type: conjugation
+        mode: verb
+        lemma: beklemek
+        person: 3sg
+        tense: imperative
+        target: beklesin
+        gloss_de: 'er, sie soll warten'
+      - id: a2-u06-l4-e3
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 3pl
+        tense: imperative
+        target: gitsinler
+        gloss_de: sie sollen gehen
+        explanation: Kein gid, denn -sin beginnt mit einem Konsonanten.
+      - { id: a2-u06-l4-e4, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: imperative, target: okusun, gloss_de: 'er, sie soll lesen' }
+      - { id: a2-u06-l4-e5, type: conjugation, mode: verb, lemma: gelmek, person: 3pl, tense: imperative, negative: true, target: gelmesinler, gloss_de: sie sollen nicht kommen }
+      - { id: a2-u06-l4-e6, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: imperative, negative: true, target: yapmasın, gloss_de: 'er, sie soll das nicht machen' }
+      - id: a2-u06-l4-e7
+        type: word_bank
+        prompt: Ali soll morgen anrufen.
+        answers: [Ali yarın arasın., Yarın Ali arasın.]
+        distractors: [arıyor, aradı]
+        explanation: aramak = anrufen, suchen.
+      - id: a2-u06-l4-e8
+        type: multiple_choice
+        prompt: Was heißt „Kolay gelsin!“?
+        options: ['Frohes Schaffen! (zu jemandem, der arbeitet)', Komm leicht!, Gute Reise!]
+        answer: 'Frohes Schaffen! (zu jemandem, der arbeitet)'
+        explanation: Wörtlich „Es möge leicht kommen“, sehr häufig im Alltag.
+      - id: a2-u06-l4-e9
+        type: multiple_choice
+        prompt: Was heißt „Allah korusun!“?
+        options: [Gott bewahre!, Gute Nacht!, Herzlichen Glückwunsch!]
+        answer: Gott bewahre!
+        explanation: korumak = schützen. Die 3. Person drückt hier einen Wunsch aus.
+      - id: a2-u06-l4-e10
+        type: word_bank
+        prompt: Lass die Kinder spielen. (Die Kinder sollen spielen.)
+        answers: [Çocuklar oynasın., Çocuklar oynasınlar.]
+        distractors: [oynuyor, oynadı]
+        explanation: Bei 3. Person Plural ist -lar freiwillig.
+      - id: a2-u06-l4-e11
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (sie sollen gehen)
+        options: [gitsinler, gidsinler, gitsinlar]
+        answer: gitsinler
+      - id: a2-u06-l4-e12
+        type: multiple_choice
+        prompt: Was heißt „Gidelim!“?
+        options: [Lass uns gehen!, Geht!, Er soll gehen!]
+        answer: Lass uns gehen!
+        explanation: Vorschau, -elim/-alım = lass uns, gidelim, bakalım.
+
+  - id: a2-u06-l5
+    type: grammar
+    title: 'Tabellen: Imperativ'
+    exercises:
+      - id: a2-u06-l5-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: imperative
+        persons: [2sg, 3sg, 2pl, 3pl]
+        targets: [gel, gelsin, gelin, gelsinler]
+        gloss_de: kommen
+        explanation: du = Stamm, er = -sin, ihr/Sie = -in, sie = -sinler.
+      - { id: a2-u06-l5-e2, type: paradigm, kind: verb, lemma: okumak, tense: imperative, persons: [2sg, 3sg, 2pl, 3pl], targets: [oku, okusun, okuyun, okusunlar], gloss_de: lesen }
+      - id: a2-u06-l5-e3
+        type: paradigm
+        kind: verb
+        lemma: gitmek
+        tense: imperative
+        persons: [2sg, 3sg, 2pl, 3pl]
+        targets: [git, gitsin, gidin, gitsinler]
+        gloss_de: gehen
+        explanation: Nur vor -in wird t zu d.
+      - { id: a2-u06-l5-e4, type: paradigm, kind: verb, lemma: yapmak, tense: imperative, persons: [2sg, 3sg, 2pl, 3pl], targets: [yap, yapsın, yapın, yapsınlar], gloss_de: machen }
+      - { id: a2-u06-l5-e5, type: paradigm, kind: verb, lemma: beklemek, tense: imperative, persons: [2sg, 3sg, 2pl, 3pl], targets: [bekle, beklesin, bekleyin, beklesinler], gloss_de: warten }
+      - id: a2-u06-l5-e6
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: imperative
+        persons: [2sg, 3sg, 2pl, 3pl]
+        negative: true
+        targets: [gelme, gelmesin, gelmeyin, gelmesinler]
+        gloss_de: nicht kommen
+      - { id: a2-u06-l5-e7, type: paradigm, kind: verb, lemma: unutmak, tense: imperative, persons: [2sg, 3sg, 2pl, 3pl], negative: true, targets: [unutma, unutmasın, unutmayın, unutmasınlar], gloss_de: nicht vergessen }
+      - { id: a2-u06-l5-e8, type: paradigm, kind: verb, lemma: dönmek, tense: imperative, persons: [2sg, 3sg, 2pl, 3pl], targets: [dön, dönsün, dönün, dönsünler], gloss_de: 'abbiegen, zurückkehren' }
+      - id: a2-u06-l5-e9
+        type: paradigm
+        kind: verb
+        lemma: yemek
+        tense: imperative
+        persons: [2sg, 3sg, 2pl, 3pl]
+        targets: [ye, yesin, yiyin, yesinler]
+        gloss_de: essen
+        explanation: Nur vor -yin wird ye zu yi.
+      - { id: a2-u06-l5-e10, type: paradigm, kind: verb, lemma: devam etmek, tense: imperative, persons: [2sg, 3sg, 2pl, 3pl], targets: [devam et, devam etsin, devam edin, devam etsinler], gloss_de: 'weitermachen, weitergehen' }
+
+  - id: a2-u06-l6
+    type: dialog
+    title: Wo ist …? Den Weg beschreiben
+    exercises:
+      - id: a2-u06-l6-e1
+        type: word_bank
+        prompt: Entschuldigung, wo ist der Bahnhof?
+        answers: ['Affedersiniz, istasyon nerede?']
+        distractors: [nereye, istasyonda]
+      - id: a2-u06-l6-e2
+        type: word_bank
+        prompt: Gehen Sie geradeaus, dann biegen Sie rechts ab.
+        answers: ['Düz gidin, sonra sağa dönün.']
+        distractors: [sola, önce]
+      - id: a2-u06-l6-e3
+        type: word_bank
+        prompt: Biegen Sie in die zweite Straße links ab.
+        answers: [İkinci sokaktan sola dönün.]
+        distractors: [sokağa, sağa]
+        explanation: İkinci sokaktan = in die zweite Straße, wörtlich „von der zweiten Straße“.
+      - id: a2-u06-l6-e4
+        type: word_bank
+        prompt: Die Bank ist gegenüber der Post.
+        answers: [Banka postanenin karşısında.]
+        distractors: [postane, yanında]
+        explanation: postane = Post, karşısında = gegenüber, yanında = neben.
+      - id: a2-u06-l6-e5
+        type: word_bank
+        prompt: Ist es weit?
+        answers: [Uzak mı?]
+        distractors: [Yakın, mi]
+      - id: a2-u06-l6-e6
+        type: word_bank
+        prompt: Nein, zu Fuß fünf Minuten.
+        answers: ['Hayır, yürüyerek beş dakika.']
+        distractors: [uzak, saat]
+        explanation: "yürüyerek = zu Fuß (-erek = Art und Weise, Vorschau). Auch üblich: yürüyerek beş dakika sürer."
+      - id: a2-u06-l6-e7
+        type: word_bank
+        prompt: Überqueren Sie die Brücke.
+        answers: [Köprüyü geçin.]
+        distractors: [köprüde, geç]
+        explanation: köprüyü geçmek = die Brücke überqueren; köprüden geçmek = über die Brücke gehen; karşıya geçmek = auf die andere Seite gehen.
+      - id: a2-u06-l6-e8
+        type: multiple_choice
+        prompt: Was heißt „Köşede sola dönün.“?
+        options: [Biegen Sie an der Ecke links ab., Gehen Sie zur Ecke links., Die Ecke ist links.]
+        answer: Biegen Sie an der Ecke links ab.
+      - id: a2-u06-l6-e9
+        type: word_bank
+        prompt: Können Sie es mir auf der Karte zeigen?
+        answers: [Haritada gösterebilir misiniz?, Bana haritada gösterebilir misiniz?, Haritada bana gösterebilir misiniz?]
+        distractors: [gösterin, harita]
+        explanation: harita = Karte, Stadtplan.
+      - id: a2-u06-l6-e10
+        type: word_bank
+        prompt: Ich habe mich verlaufen.
+        answers: [Kayboldum.]
+        distractors: [kaybettim, kayboluyorum]
+        explanation: kaybolmak = sich verirren, verloren gehen.
+      - id: a2-u06-l6-e11
+        type: free_text
+        direction: tr_de
+        prompt: Meydana kadar düz gidin.
+        answers: [Gehen Sie geradeaus bis zum Platz., Gehen Sie bis zum Platz geradeaus., Geht geradeaus bis zum Platz., Geht bis zum Platz geradeaus., Gehen Sie bis zum Platz., Laufen Sie geradeaus bis zum Platz.]
+      - id: a2-u06-l6-e12
+        type: multiple_choice
+        prompt: Was heißt „Müze otelin yanında.“?
+        options: [Das Museum ist neben dem Hotel., Das Museum ist gegenüber dem Hotel., Das Museum ist hinter dem Hotel.]
+        answer: Das Museum ist neben dem Hotel.
+      - id: a2-u06-l6-e13
+        type: free_text
+        direction: de_tr
+        prompt: Biegen Sie rechts ab!
+        answers: [Sağa dönün!, Sağa dönünüz!]
+      - id: a2-u06-l6-e14
+        type: multiple_choice
+        prompt: Was heißt „Burası çok yakın.“?
+        options: [Es ist ganz in der Nähe., Hier ist es sehr weit., Hier ist es gefährlich.]
+        answer: Es ist ganz in der Nähe.
+        explanation: burası = dieser Ort hier.
+
+  - id: a2-u06-l7
+    type: dialog
+    title: Mit Bus und Metro
+    exercises:
+      - id: a2-u06-l7-e1
+        type: word_bank
+        prompt: Welcher Bus fährt nach Taksim?
+        answers: [Hangi otobüs Taksim'e gidiyor?, Hangi otobüs Taksim'e gider?, Taksim'e hangi otobüs gidiyor?, Taksim'e hangi otobüs gider?]
+        distractors: ["Taksim'de", nereye]
+      - id: a2-u06-l7-e2
+        type: word_bank
+        prompt: Steigen Sie nach drei Haltestellen aus.
+        answers: [Üç durak sonra inin.]
+        distractors: [binin, önce]
+      - id: a2-u06-l7-e3
+        type: word_bank
+        prompt: Wo kann ich das Ticket kaufen?
+        answers: [Bileti nereden alabilirim?, Nereden bilet alabilirim?, Bilet nereden alabilirim?]
+        distractors: [nereye, alıyorum]
+      - id: a2-u06-l7-e4
+        type: word_bank
+        prompt: Steigen Sie in die Metro.
+        answers: [Metroya binin.]
+        distractors: [metroda, bindi]
+      - id: a2-u06-l7-e5
+        type: suffix_builder
+        stem: durak
+        suffixes: [ABL]
+        target: duraktan
+        gloss_de: von der Haltestelle
+      - id: a2-u06-l7-e6
+        type: suffix_builder
+        stem: durak
+        suffixes: [DAT]
+        target: durağa
+        gloss_de: zur Haltestelle
+        explanation: k wird vor Vokal zu ğ.
+      - id: a2-u06-l7-e7
+        type: multiple_choice
+        prompt: Ein Schild sagt „Sigara içmeyiniz.“ Was bedeutet das?
+        options: [Bitte nicht rauchen., Rauchen erlaubt., Zigaretten hier kaufen.]
+        answer: Bitte nicht rauchen.
+        explanation: Die förmliche Form -iniz steht oft auf Schildern.
+      - id: a2-u06-l7-e8
+        type: word_bank
+        prompt: Passen Sie auf, der Bus kommt!
+        answers: ['Dikkat edin, otobüs geliyor!']
+        distractors: [dikkat et, gitti]
+      - id: a2-u06-l7-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bir sonraki durakta inin.
+        answers: [Steigen Sie an der nächsten Haltestelle aus., Steigt an der nächsten Haltestelle aus., Steigen Sie bei der nächsten Haltestelle aus., Steigt bei der nächsten Haltestelle aus.]
+        explanation: bir sonraki = der nächste.
+      - id: a2-u06-l7-e10
+        type: multiple_choice
+        prompt: Was heißt „Kapılar kapanıyor, lütfen dikkat edin.“?
+        options: ['Die Türen schließen, bitte Vorsicht.', 'Die Türen öffnen sich, bitte einsteigen.', Bitte die Türen schließen.]
+        answer: 'Die Türen schließen, bitte Vorsicht.'
+      - id: a2-u06-l7-e11
+        type: word_bank
+        prompt: Wie viele Haltestellen sind es noch?
+        answers: [Kaç durak kaldı?]
+        distractors: [duraklar, kalıyor]
+        explanation: kaldı = ist übrig geblieben (kalmak).
+      - id: a2-u06-l7-e12
+        type: free_text
+        direction: de_tr
+        prompt: Steigen Sie aus!
+        answers: [İnin!, İniniz!]
+      - id: a2-u06-l7-e13
+        type: word_bank
+        prompt: Steigen Sie am Taksim aus dem Bus aus.
+        answers: [Taksim'de otobüsten inin.]
+        distractors: [otobüse, binin]
+        explanation: inmek steht mit Ablativ, otobüsten inmek = aus dem Bus aussteigen.
+
+  - id: a2-u06-l8
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u06-l8-e1
+        type: free_text
+        direction: de_tr
+        prompt: Warte! (du)
+        answers: [Bekle!]
+      - id: a2-u06-l8-e2
+        type: free_text
+        direction: de_tr
+        prompt: Gehen Sie! (höflich)
+        answers: [Gidin!, Gidiniz!]
+      - id: a2-u06-l8-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Vergesst nicht!)
+        options: [Unutmayın!, Unutmeyin!, Unutmain!]
+        answer: Unutmayın!
+      - id: a2-u06-l8-e4
+        type: word_bank
+        prompt: Geh nicht! Bleib hier!
+        answers: [Gitme! Burada kal!, Gitme! Kal burada!]
+        distractors: [gidin, kalın]
+      - id: a2-u06-l8-e5
+        type: free_text
+        direction: tr_de
+        prompt: Sola dönün, sonra düz gidin.
+        answers: ["Biegen Sie links ab, dann gehen Sie geradeaus.", "Biegt links ab, dann geht geradeaus.", Biegen Sie links ab und gehen Sie dann geradeaus., "Biegen Sie nach links ab, dann gehen Sie geradeaus.", Biegt links ab und geht dann geradeaus.]
+      - id: a2-u06-l8-e6
+        type: multiple_choice
+        prompt: Was heißt „Mehmet beklesin.“?
+        options: [Mehmet soll warten., Mehmet wartet., Warte auf Mehmet.]
+        answer: Mehmet soll warten.
+      - id: a2-u06-l8-e7
+        type: conjugation
+        mode: verb
+        lemma: sormak
+        person: 2pl
+        tense: imperative
+        target: sorun
+        gloss_de: 'fragt! fragen Sie!'
+      - id: a2-u06-l8-e8
+        type: conjugation
+        mode: verb
+        lemma: göstermek
+        person: 2sg
+        tense: imperative
+        target: göster
+        gloss_de: zeig!
+      - id: a2-u06-l8-e9
+        type: word_bank
+        prompt: Die Haltestelle ist hinter dem Museum.
+        answers: [Durak müzenin arkasında.]
+        distractors: [müze, önünde]
+        explanation: arkasında = hinter, önünde = vor.
+      - id: a2-u06-l8-e10
+        type: free_text
+        direction: de_tr
+        prompt: nach links
+        answers: [sola]
+      - id: a2-u06-l8-e11
+        type: multiple_choice
+        prompt: Was sagt man zu jemandem bei der Arbeit?
+        options: [Kolay gelsin!, Geçmiş olsun!, Afiyet olsun!]
+        answer: Kolay gelsin!
+      - id: a2-u06-l8-e12
+        type: word_bank
+        prompt: Passt auf! Geht nicht über die Straße!
+        answers: [Dikkat edin! Caddeyi geçmeyin!, Dikkat edin! Yolu geçmeyin!, Dikkat edin! Karşıya geçmeyin!]
+        distractors: [geçin, caddede]
+
+vocab:
+  - { tr: sağ, de: [rechts], pos: adj }
+  - { tr: sol, de: [links], pos: adj }
+  - { tr: düz, de: [geradeaus, gerade], pos: adv }
+  - { tr: köşe, de: [Ecke], pos: noun }
+  - { tr: kavşak, de: [Kreuzung], pos: noun, softens: true }
+  - { tr: köprü, de: [Brücke], pos: noun }
+  - { tr: durak, de: [Haltestelle], pos: noun, softens: true }
+  - { tr: meydan, de: [Platz], pos: noun }
+  - { tr: trafik ışığı, de: [Ampel], pos: noun }
+  - { tr: geçmek, de: [überqueren, vorbeigehen, vergehen], pos: verb }
+  - { tr: inmek, de: [aussteigen, hinuntergehen], pos: verb }
+  - { tr: uzak, de: [weit, fern], pos: adj }
+  - { tr: yakın, de: [nah], pos: adj }
+  - { tr: sormak, de: [fragen], pos: verb }
+  - { tr: göstermek, de: [zeigen], pos: verb }
+  - { tr: karşı, de: [gegenüber], pos: noun }
+  - { tr: dikkat etmek, de: [aufpassen, achten auf], pos: verb, softens: true }
+  - { tr: devam etmek, de: [weitermachen, weitergehen], pos: verb, softens: true }
+  - { tr: korkmak, de: [Angst haben, sich fürchten], pos: verb }
+  - { tr: aramak, de: [anrufen, suchen], pos: verb }
+  - { tr: postane, de: [Post (Gebäude)], pos: noun }
+  - { tr: harita, de: [Karte, Stadtplan], pos: noun }
+  - { tr: kaybolmak, de: [sich verirren, verloren gehen], pos: verb }
+  - { tr: metro, de: [U-Bahn, Metro], pos: noun }
+  - { tr: buraya, de: [hierher], pos: adv }
+  - { tr: ön, de: [Vorderseite, vorne], pos: noun }
+  - { tr: arka, de: [Rückseite, hinten], pos: noun }
+  - { tr: yan, de: [Seite, neben], pos: noun }
+  - { tr: kolay, de: [leicht, einfach], pos: adj }
+  - { tr: burası, de: [dieser Ort hier], pos: pron }

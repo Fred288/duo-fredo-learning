@@ -34,7 +34,11 @@ export async function answer(page: Page, ex: Exercise, unit: Unit) {
         ...(unit.vocab ?? []),
         ...(unit.lexicon ?? []),
       ]).segments.filter((s) => s.text)) {
-        await page.getByRole('button', { name: text, exact: true }).click();
+        // Gleiche Bausteine (in-in): ersten freien nehmen.
+        await page
+          .getByRole('button', { name: text, exact: true, disabled: false })
+          .first()
+          .click();
       }
       break;
     case 'paradigm': {

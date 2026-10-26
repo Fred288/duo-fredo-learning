@@ -1,0 +1,711 @@
+# A2-05: Modalität -(y)Abil, -mAlI, lazım/gerek (Gesundheit, Arztbesuch, Apotheke). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u05
+level: A2
+title: Gesundheit
+grammar_focus: [koennen, muessen, lazim-gerek, koerper]
+explainer: explainers/a2-gesundheit.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u05-l1
+    type: vocab
+    title: Der Körper
+    exercises:
+      - id: a2-u05-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „baş“?
+        options: [Kopf, Hals, Bauch]
+        answer: Kopf
+      - id: a2-u05-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Hals (innen), Rachen
+        answers: [boğaz]
+      - id: a2-u05-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „karın“?
+        options: [Bauch, Rücken, Brust]
+        answer: Bauch
+        explanation: Vor einer vokalischen Endung fällt das ı weg, karnım (mein Bauch).
+      - id: a2-u05-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Zahn
+        answers: [diş]
+      - id: a2-u05-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „kol“?
+        options: [Arm, Bein, Hand]
+        answer: Arm
+      - id: a2-u05-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Bein
+        answers: [bacak]
+      - id: a2-u05-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „ayak“?
+        options: [Fuß, Knie, Finger]
+        answer: Fuß
+      - id: a2-u05-l1-e8
+        type: free_text
+        direction: tr_de
+        prompt: el
+        answers: [Hand, die Hand]
+      - id: a2-u05-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „mide“?
+        options: [Magen, Herz, Lunge]
+        answer: Magen
+      - id: a2-u05-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: Medikament, Arznei
+        answers: [ilaç]
+      - id: a2-u05-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „ateş“?
+        options: [Fieber, Husten, Schnupfen]
+        answer: Fieber
+        explanation: ateş heißt auch Feuer.
+      - id: a2-u05-l1-e12
+        type: free_text
+        direction: tr_de
+        prompt: öksürük
+        answers: [Husten, der Husten]
+      - id: a2-u05-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „ağrı“?
+        options: [Schmerz, Wunde, Krankheit]
+        answer: Schmerz
+        explanation: ağrımak = schmerzen, wehtun.
+      - id: a2-u05-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „reçete“?
+        options: [Rezept (vom Arzt), Rechnung, Termin]
+        answer: Rezept (vom Arzt)
+      - id: a2-u05-l1-e15
+        type: multiple_choice
+        prompt: Was sagt man zu jemandem, der krank ist?
+        options: [Geçmiş olsun!, Afiyet olsun!, İyi yolculuklar!]
+        answer: Geçmiş olsun!
+        explanation: Wörtlich „Möge es vorbei sein“, also „Gute Besserung“.
+      - id: a2-u05-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: sich hinlegen, im Bett liegen
+        answers: [yatmak]
+
+  - id: a2-u05-l2
+    type: grammar
+    title: Mir tut … weh
+    exercises:
+      - id: a2-u05-l2-e1
+        type: suffix_builder
+        stem: baş
+        suffixes: [POSS_1SG]
+        target: başım
+        gloss_de: mein Kopf
+      - id: a2-u05-l2-e2
+        type: word_bank
+        prompt: Ich habe Kopfschmerzen.
+        answers: [Başım ağrıyor.]
+        distractors: [ağrı, baş]
+        explanation: Wörtlich „Mein Kopf schmerzt“, Körperteil mit „mein“ + ağrıyor.
+      - id: a2-u05-l2-e3
+        type: suffix_builder
+        stem: karın
+        suffixes: [POSS_1SG]
+        target: karnım
+        gloss_de: mein Bauch
+        explanation: karın verliert das ı vor einer vokalischen Endung.
+      - { id: a2-u05-l2-e4, type: suffix_builder, stem: boğaz, suffixes: [POSS_1SG], target: boğazım, gloss_de: mein Hals }
+      - id: a2-u05-l2-e5
+        type: suffix_builder
+        stem: ayak
+        suffixes: [POSS_1SG]
+        target: ayağım
+        gloss_de: mein Fuß
+        explanation: k wird vor Vokal zu ğ.
+      - { id: a2-u05-l2-e6, type: suffix_builder, stem: diş, suffixes: [POSS_1SG], target: dişim, gloss_de: mein Zahn }
+      - { id: a2-u05-l2-e7, type: suffix_builder, stem: bacak, suffixes: [POSS_1SG], target: bacağım, gloss_de: mein Bein }
+      - id: a2-u05-l2-e8
+        type: word_bank
+        prompt: Ich habe Bauchschmerzen.
+        answers: [Karnım ağrıyor.]
+        distractors: [karınım, ağrım]
+      - id: a2-u05-l2-e9
+        type: word_bank
+        prompt: Ich habe Fieber.
+        answers: [Ateşim var.]
+        distractors: [ateş, yok]
+        explanation: Wie „haben“ aus A1, mein Fieber ist vorhanden.
+      - id: a2-u05-l2-e10
+        type: word_bank
+        prompt: Ich habe Husten.
+        answers: [Öksürüğüm var.]
+        distractors: [öksürük, ağrıyor]
+        explanation: öksürük + üm, k wird zu ğ.
+      - id: a2-u05-l2-e11
+        type: word_bank
+        prompt: Was fehlt Ihnen? (Was haben Sie?)
+        answers: [Neyiniz var?]
+        distractors: [nerede, yok]
+        explanation: "ne + y + iniz + var, wörtlich „Ihr Was ist vorhanden?“. Ebenso üblich: Şikâyetiniz nedir? (Was sind Ihre Beschwerden?)"
+      - id: a2-u05-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: Dişim ağrıyor.
+        answers: [Ich habe Zahnschmerzen., Mein Zahn tut weh., Mir tut der Zahn weh., Ich habe Zahnweh., Mir tut ein Zahn weh.]
+      - id: a2-u05-l2-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (mein Bauch)
+        options: [karnım, karınım, karnüm]
+        answer: karnım
+      - id: a2-u05-l2-e14
+        type: word_bank
+        prompt: Ich habe (die) Grippe.
+        answers: [Gribim., Grip oldum.]
+        distractors: [ateş, yok]
+        explanation: Gribim = ich bin vergrippt (wie hastayım), grip olmak = Grippe bekommen. Erkältung heißt nezle.
+      - id: a2-u05-l2-e15
+        type: word_bank
+        prompt: Ich bin krank, heute kann ich nicht kommen.
+        answers: ['Hastayım, bugün gelemem.']
+        distractors: [hasta, gelmem]
+
+  - id: a2-u05-l3
+    type: grammar
+    title: können -ebil
+    exercises:
+      - id: a2-u05-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: aorist
+        ability: true
+        target: gelebilirim
+        gloss_de: ich kann kommen
+        explanation: Stamm + ebil + ir + im. Der Aorist von bil ist -ir.
+      - id: a2-u05-l3-e2
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 2sg
+        tense: aorist
+        ability: true
+        target: yapabilirsin
+        gloss_de: du kannst machen
+        explanation: Zweifache Harmonie, nach a → abil.
+      - id: a2-u05-l3-e3
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 3sg
+        tense: aorist
+        ability: true
+        target: okuyabilir
+        gloss_de: 'er, sie kann lesen'
+        explanation: Nach Vokal steht ein y.
+      - { id: a2-u05-l3-e4, type: conjugation, mode: verb, lemma: yüzmek, person: 1pl, tense: aorist, ability: true, target: yüzebiliriz, gloss_de: wir können schwimmen }
+      - id: a2-u05-l3-e5
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1sg
+        tense: aorist
+        ability: true
+        target: gidebilirim
+        gloss_de: ich kann gehen
+        explanation: git → gid vor dem Vokal von -ebil.
+      - { id: a2-u05-l3-e6, type: conjugation, mode: verb, lemma: konuşmak, person: 3pl, tense: aorist, ability: true, target: konuşabilirler, gloss_de: sie können sprechen }
+      - id: a2-u05-l3-e7
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2pl
+        tense: aorist
+        ability: true
+        question: true
+        target: gelebilir misiniz?
+        gloss_de: Können Sie kommen?
+        explanation: Höfliche Bitte, gelebilir misiniz.
+      - id: a2-u05-l3-e8
+        type: conjugation
+        mode: verb
+        lemma: yardım etmek
+        person: 2sg
+        tense: aorist
+        ability: true
+        question: true
+        target: yardım edebilir misin?
+        gloss_de: Kannst du helfen?
+      - id: a2-u05-l3-e9
+        type: conjugation
+        mode: verb
+        lemma: yemek
+        person: 1sg
+        tense: aorist
+        ability: true
+        target: yiyebilirim
+        gloss_de: ich kann essen
+        explanation: ye → yi vor -yebil, wie im Futur.
+      - id: a2-u05-l3-e10
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: past
+        ability: true
+        target: gelebildim
+        gloss_de: ich konnte kommen
+        explanation: -ebil lässt sich mit jeder Zeit kombinieren, gelebildim = ich konnte kommen.
+      - { id: a2-u05-l3-e11, type: conjugation, mode: verb, lemma: yürümek, person: 1sg, tense: present, ability: true, target: yürüyebiliyorum, gloss_de: ich kann (jetzt wieder) gehen }
+      - id: a2-u05-l3-e12
+        type: word_bank
+        prompt: Kann ich hier rauchen?
+        answers: [Burada sigara içebilir miyim?]
+        distractors: [içer, misin]
+        explanation: sigara içmek = rauchen.
+      - id: a2-u05-l3-e13
+        type: free_text
+        direction: tr_de
+        prompt: Türkçe konuşabilir misiniz?
+        answers: [Können Sie Türkisch sprechen?, Sprechen Sie Türkisch?, Könnt ihr Türkisch sprechen?]
+      - id: a2-u05-l3-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er kann lesen)
+        options: [okuyabilir, okuabilir, okuyebilir]
+        answer: okuyabilir
+
+  - id: a2-u05-l4
+    type: grammar
+    title: nicht können -eme
+    exercises:
+      - id: a2-u05-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: aorist
+        ability: true
+        negative: true
+        target: gelemem
+        gloss_de: ich kann nicht kommen
+        explanation: Verneint ohne bil, Stamm + e + me, dann der verneinte Aorist.
+      - id: a2-u05-l4-e2
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 2sg
+        tense: aorist
+        ability: true
+        negative: true
+        target: yapamazsın
+        gloss_de: du kannst nicht machen
+      - { id: a2-u05-l4-e3, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: aorist, ability: true, negative: true, target: okuyamaz, gloss_de: 'er, sie kann nicht lesen' }
+      - id: a2-u05-l4-e4
+        type: conjugation
+        mode: verb
+        lemma: uyumak
+        person: 1sg
+        tense: present
+        ability: true
+        negative: true
+        target: uyuyamıyorum
+        gloss_de: ich kann (gerade) nicht schlafen
+        explanation: Mit -iyor, „im Moment nicht können“, uyu + ya + mı + yor + um.
+      - id: a2-u05-l4-e5
+        type: conjugation
+        mode: verb
+        lemma: yemek
+        person: 1sg
+        tense: aorist
+        ability: true
+        negative: true
+        target: yiyemem
+        gloss_de: ich kann nicht essen
+      - { id: a2-u05-l4-e6, type: conjugation, mode: verb, lemma: gitmek, person: 1pl, tense: aorist, ability: true, negative: true, target: gidemeyiz, gloss_de: wir können nicht gehen }
+      - id: a2-u05-l4-e7
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: past
+        ability: true
+        negative: true
+        target: gelemedim
+        gloss_de: ich konnte nicht kommen
+      - { id: a2-u05-l4-e8, type: conjugation, mode: verb, lemma: yürümek, person: 1sg, tense: present, ability: true, negative: true, target: yürüyemiyorum, gloss_de: ich kann (gerade) nicht gehen }
+      - id: a2-u05-l4-e9
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: aorist
+        ability: true
+        negative: true
+        question: true
+        target: gelemez misin?
+        gloss_de: Kannst du nicht kommen?
+      - id: a2-u05-l4-e10
+        type: word_bank
+        prompt: Ich kann nicht gut schlafen.
+        answers: [İyi uyuyamıyorum.]
+        distractors: [uyuyorum, uyumuyorum]
+      - id: a2-u05-l4-e11
+        type: word_bank
+        prompt: Ich konnte gestern nicht zur Arbeit gehen.
+        answers: [Dün işe gidemedim.]
+        distractors: [gitmedim, işte]
+      - id: a2-u05-l4-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Gelmem.“ / „Gelemem.“
+        options: [Ich komme nicht. / Ich kann nicht kommen., Beides heißt dasselbe., Ich kann nicht kommen. / Ich komme nicht.]
+        answer: Ich komme nicht. / Ich kann nicht kommen.
+      - id: a2-u05-l4-e13
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: aorist
+        ability: true
+        negative: true
+        target: gelemem
+        gloss_de: ich kann nicht kommen
+      - id: a2-u05-l4-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich kann nicht machen)
+        options: [yapamam, yapabilmem, yapamazım]
+        answer: yapamam
+        explanation: Die verneinte Form hat kein bil.
+
+  - id: a2-u05-l5
+    type: grammar
+    title: müssen -meli
+    exercises:
+      - id: a2-u05-l5-e1
+        type: conjugation
+        mode: verb
+        lemma: dinlenmek
+        person: 2sg
+        tense: necessitative
+        target: dinlenmelisin
+        gloss_de: du musst dich ausruhen
+        explanation: Stamm + meli/malı + Endung wie bei „sein“.
+      - id: a2-u05-l5-e2
+        type: conjugation
+        mode: verb
+        lemma: almak
+        person: 2sg
+        tense: necessitative
+        target: almalısın
+        gloss_de: du musst nehmen
+      - { id: a2-u05-l5-e3, type: conjugation, mode: verb, lemma: içmek, person: 2pl, tense: necessitative, target: içmelisiniz, gloss_de: 'ihr müsst trinken, Sie müssen trinken' }
+      - id: a2-u05-l5-e4
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1sg
+        tense: necessitative
+        target: gitmeliyim
+        gloss_de: ich muss gehen
+        explanation: Nach Vokal i steht bei „ich“ ein y, gitmeliyim.
+      - { id: a2-u05-l5-e5, type: conjugation, mode: verb, lemma: yatmak, person: 3sg, tense: necessitative, target: yatmalı, gloss_de: 'er, sie muss im Bett bleiben' }
+      - id: a2-u05-l5-e6
+        type: conjugation
+        mode: verb
+        lemma: içmek
+        person: 2sg
+        tense: necessitative
+        negative: true
+        target: içmemelisin
+        gloss_de: du solltest nicht trinken
+        explanation: Verneint heißt -meli meist „sollte nicht“.
+      - { id: a2-u05-l5-e7, type: conjugation, mode: verb, lemma: yemek, person: 2pl, tense: necessitative, negative: true, target: yememelisiniz, gloss_de: "ihr solltet nicht essen, Sie sollten nicht essen" }
+      - id: a2-u05-l5-e8
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1sg
+        tense: necessitative
+        question: true
+        target: gitmeli miyim?
+        gloss_de: Muss ich gehen?
+      - id: a2-u05-l5-e9
+        type: word_bank
+        prompt: Sie müssen viel Wasser trinken.
+        answers: [Çok su içmelisiniz., Bol su içmelisiniz.]
+        distractors: [içiyorsunuz, az]
+        explanation: bol = reichlich.
+      - id: a2-u05-l5-e10
+        type: word_bank
+        prompt: Du solltest nicht rauchen.
+        answers: [Sigara içmemelisin.]
+        distractors: [içmelisin, içmiyorsun]
+      - id: a2-u05-l5-e11
+        type: word_bank
+        prompt: Ich muss zum Arzt gehen.
+        answers: [Doktora gitmeliyim.]
+        distractors: [doktorda, gidiyorum]
+      - id: a2-u05-l5-e12
+        type: word_bank
+        prompt: Sie müssen dieses Medikament dreimal am Tag nehmen.
+        answers: [Bu ilacı günde üç kere almalısınız.]
+        distractors: [ilaç, alıyorsunuz]
+        explanation: günde üç kere = dreimal am Tag. ilaç → ilacı (ç → c).
+      - id: a2-u05-l5-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (du musst dich ausruhen)
+        options: [dinlenmelisin, dinlenmalısın, dinlenmesin]
+        answer: dinlenmelisin
+      - id: a2-u05-l5-e14
+        type: free_text
+        direction: tr_de
+        prompt: Erken yatmalısın.
+        answers: [Du musst früh ins Bett gehen., Du solltest früh ins Bett gehen., Du musst früh schlafen gehen., Du solltest früh schlafen gehen., Du musst früh zu Bett gehen., Du sollst früh ins Bett gehen.]
+
+  - id: a2-u05-l6
+    type: grammar
+    title: 'Tabellen: können und müssen'
+    exercises:
+      - id: a2-u05-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        ability: true
+        targets: [gelebilirim, gelebilirsin, gelebilir, gelebiliriz, gelebilirsiniz, gelebilirler]
+        gloss_de: kommen können
+        explanation: Stamm + ebil + ir + Endung.
+      - id: a2-u05-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: aorist
+        ability: true
+        targets: [yapabilirim, yapabilirsin, yapabilir, yapabiliriz, yapabilirsiniz, yapabilirler]
+        gloss_de: machen können
+      - id: a2-u05-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        ability: true
+        negative: true
+        targets: [gelemem, gelemezsin, gelemez, gelemeyiz, gelemezsiniz, gelemezler]
+        gloss_de: nicht kommen können
+        explanation: Wie der verneinte Aorist, bei ich und wir ohne z.
+      - { id: a2-u05-l6-e4, type: paradigm, kind: verb, lemma: yapmak, tense: aorist, ability: true, negative: true, targets: [yapamam, yapamazsın, yapamaz, yapamayız, yapamazsınız, yapamazlar], gloss_de: nicht machen können }
+      - { id: a2-u05-l6-e5, type: paradigm, kind: verb, lemma: okumak, tense: aorist, ability: true, targets: [okuyabilirim, okuyabilirsin, okuyabilir, okuyabiliriz, okuyabilirsiniz, okuyabilirler], gloss_de: lesen können }
+      - id: a2-u05-l6-e6
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: necessitative
+        targets: [gelmeliyim, gelmelisin, gelmeli, gelmeliyiz, gelmelisiniz, gelmeliler]
+        gloss_de: kommen müssen
+      - { id: a2-u05-l6-e7, type: paradigm, kind: verb, lemma: almak, tense: necessitative, targets: [almalıyım, almalısın, almalı, almalıyız, almalısınız, almalılar], gloss_de: nehmen müssen }
+      - { id: a2-u05-l6-e8, type: paradigm, kind: verb, lemma: içmek, tense: necessitative, negative: true, targets: [içmemeliyim, içmemelisin, içmemeli, içmemeliyiz, içmemelisiniz, içmemeliler], gloss_de: nicht trinken sollen }
+      - id: a2-u05-l6-e9
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: past
+        ability: true
+        negative: true
+        targets: [gelemedim, gelemedin, gelemedi, gelemedik, gelemediniz, gelemediler]
+        gloss_de: nicht kommen können (Vergangenheit)
+      - { id: a2-u05-l6-e10, type: paradigm, kind: verb, lemma: uyumak, tense: present, ability: true, negative: true, targets: [uyuyamıyorum, uyuyamıyorsun, uyuyamıyor, uyuyamıyoruz, uyuyamıyorsunuz, uyuyamıyorlar], gloss_de: nicht schlafen können (gerade) }
+
+  - id: a2-u05-l7
+    type: dialog
+    title: Beim Arzt und in der Apotheke
+    exercises:
+      - id: a2-u05-l7-e1
+        type: word_bank
+        prompt: Ich möchte einen Termin beim Arzt.
+        answers: [Doktordan randevu almak istiyorum.]
+        distractors: [doktorda, alıyorum]
+        explanation: randevu almak = einen Termin bekommen, doktordan = vom Arzt.
+      - id: a2-u05-l7-e2
+        type: word_bank
+        prompt: Seit drei Tagen habe ich Fieber.
+        answers: [Üç gündür ateşim var.]
+        distractors: [önce, yok]
+        explanation: üç gündür = seit drei Tagen (-dir an der Zeitangabe).
+      - id: a2-u05-l7-e3
+        type: word_bank
+        prompt: Ich brauche ein Medikament.
+        answers: [Bir ilaç lazım., Bana bir ilaç lazım., Bana ilaç lazım., İlaç lazım.]
+        distractors: [ilacı, yok]
+        explanation: lazım = nötig, gebraucht. Bana … lazım = ich brauche …
+      - id: a2-u05-l7-e4
+        type: word_bank
+        prompt: Ein Rezept ist nötig.
+        answers: [Reçete gerekli., Reçete lazım., Reçete gerek.]
+        distractors: [reçeteyi, var]
+        explanation: gerekli = notwendig, lazım = nötig.
+      - id: a2-u05-l7-e5
+        type: multiple_choice
+        prompt: Der Arzt sagt „Ağzınızı açın, lütfen.“ Was sollst du tun?
+        options: [den Mund öffnen, die Augen schließen, tief atmen]
+        answer: den Mund öffnen
+        explanation: ağız (Mund) → ağzınız (Ihr Mund), açın = öffnen Sie (Imperativ, nächste Unit).
+      - id: a2-u05-l7-e6
+        type: word_bank
+        prompt: Gute Besserung!
+        answers: [Geçmiş olsun!]
+        distractors: [Afiyet, Güle]
+      - id: a2-u05-l7-e7
+        type: word_bank
+        prompt: Sie müssen sich zwei Tage ausruhen.
+        answers: [İki gün dinlenmelisiniz.]
+        distractors: [dinleniyorsunuz, önce]
+      - id: a2-u05-l7-e8
+        type: multiple_choice
+        prompt: In der Apotheke. Was fragst du?
+        options: [Baş ağrısı için bir ilaç var mı?, Baş ağrısı için bir ilaç yok., Başım için ilaç alacak mısın?]
+        answer: Baş ağrısı için bir ilaç var mı?
+        explanation: baş ağrısı = Kopfschmerzen, için = für.
+      - id: a2-u05-l7-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bu ilacı yemekten sonra alın.
+        answers: [Nehmen Sie dieses Medikament nach dem Essen., Nehmt dieses Medikament nach dem Essen., Nehmen Sie das Medikament nach dem Essen., Nehmen Sie dieses Medikament nach dem Essen ein., Nehmen Sie das Medikament nach dem Essen ein., Nehmen Sie diese Arznei nach dem Essen.]
+        explanation: yemekten sonra = nach dem Essen, alın = nehmen Sie (Imperativ, nächste Unit).
+      - id: a2-u05-l7-e10
+        type: word_bank
+        prompt: Ich bekomme schlecht Luft.
+        answers: [İyi nefes alamıyorum., Rahat nefes alamıyorum.]
+        distractors: [alıyorum, almıyorum]
+        explanation: nefes almak = atmen, wörtlich „Atem nehmen“.
+      - id: a2-u05-l7-e11
+        type: multiple_choice
+        prompt: Was heißt „Sigarayı bırakmalısınız.“?
+        options: [Sie sollten mit dem Rauchen aufhören., Sie können rauchen., Sie haben geraucht.]
+        answer: Sie sollten mit dem Rauchen aufhören.
+        explanation: bırakmak = lassen, aufhören mit.
+      - id: a2-u05-l7-e12
+        type: word_bank
+        prompt: Wann kann ich wieder arbeiten?
+        answers: [Ne zaman tekrar çalışabilirim?, Tekrar ne zaman çalışabilirim?]
+        distractors: [çalışıyorum, nerede]
+        explanation: tekrar = wieder.
+      - id: a2-u05-l7-e13
+        type: free_text
+        direction: de_tr
+        prompt: Gute Besserung!
+        answers: [Geçmiş olsun!]
+
+  - id: a2-u05-l8
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u05-l8-e1
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe Kopfschmerzen.
+        answers: [Başım ağrıyor., Baş ağrım var.]
+      - id: a2-u05-l8-e2
+        type: free_text
+        direction: de_tr
+        prompt: ich kann schwimmen
+        answers: [yüzebilirim, ben yüzebilirim, yüzmeyi biliyorum, yüzme biliyorum]
+      - id: a2-u05-l8-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wir können nicht gehen)
+        options: [gidemeyiz, gidemezsiz, gitemeyiz]
+        answer: gidemeyiz
+      - id: a2-u05-l8-e4
+        type: word_bank
+        prompt: Du musst Medikamente nehmen.
+        answers: [İlaç almalısın.]
+        distractors: [alabilirsin, ilacı]
+      - id: a2-u05-l8-e5
+        type: free_text
+        direction: tr_de
+        prompt: Bugün işe gelemem.
+        answers: [Heute kann ich nicht zur Arbeit kommen., Ich kann heute nicht zur Arbeit kommen., Heute kann ich nicht zur Arbeit., Ich kann heute nicht zur Arbeit.]
+      - id: a2-u05-l8-e6
+        type: multiple_choice
+        prompt: Was passt? „Ateşin var, evde …“ (Rat geben)
+        options: [kalmalısın, kalabilirsin, kalmıyorsun]
+        answer: kalmalısın
+      - id: a2-u05-l8-e7
+        type: conjugation
+        mode: verb
+        lemma: görmek
+        person: 1sg
+        tense: present
+        ability: true
+        negative: true
+        target: göremiyorum
+        gloss_de: ich kann (gerade) nicht sehen
+      - id: a2-u05-l8-e8
+        type: conjugation
+        mode: verb
+        lemma: beklemek
+        person: 2pl
+        tense: aorist
+        ability: true
+        question: true
+        target: bekleyebilir misiniz?
+        gloss_de: Können Sie warten?
+      - id: a2-u05-l8-e9
+        type: word_bank
+        prompt: Mein Bein tut weh, ich kann nicht gehen.
+        answers: ['Bacağım ağrıyor, yürüyemiyorum.']
+        distractors: [bacak, yürüyorum]
+      - id: a2-u05-l8-e10
+        type: suffix_builder
+        stem: ayak
+        suffixes: [POSS_1SG]
+        target: ayağım
+        gloss_de: mein Fuß
+      - id: a2-u05-l8-e11
+        type: multiple_choice
+        prompt: Was heißt „Bana yardım edebilir misiniz?“
+        options: [Können Sie mir helfen?, Helfen Sie mir nicht?, Haben Sie mir geholfen?]
+        answer: Können Sie mir helfen?
+      - id: a2-u05-l8-e12
+        type: free_text
+        direction: de_tr
+        prompt: Ich brauche ein Rezept.
+        answers: [Reçete lazım., Bana reçete lazım., Bir reçete lazım., Bana bir reçete lazım., Reçete gerekli., Reçete gerekiyor., Bana reçete gerek.]
+
+vocab:
+  - { tr: baş, de: [Kopf], pos: noun }
+  - { tr: boğaz, de: [Hals, Rachen], pos: noun }
+  - { tr: karın, de: [Bauch], pos: noun, drops_vowel: true }
+  - { tr: diş, de: [Zahn], pos: noun }
+  - { tr: kol, de: [Arm], pos: noun }
+  - { tr: bacak, de: [Bein], pos: noun, softens: true }
+  - { tr: ayak, de: [Fuß], pos: noun, softens: true }
+  - { tr: el, de: [Hand], pos: noun }
+  - { tr: mide, de: [Magen], pos: noun }
+  - { tr: ilaç, de: [Medikament, Arznei], pos: noun, softens: true }
+  - { tr: ateş, de: [Fieber, Feuer], pos: noun }
+  - { tr: öksürük, de: [Husten], pos: noun, softens: true }
+  - { tr: ağrı, de: [Schmerz], pos: noun }
+  - { tr: ağrımak, de: [schmerzen, wehtun], pos: verb }
+  - { tr: reçete, de: [Rezept (ärztlich)], pos: noun }
+  - { tr: geçmiş olsun, de: [gute Besserung], pos: phrase }
+  - { tr: yatmak, de: [sich hinlegen, im Bett liegen, ins Bett gehen], pos: verb }
+  - { tr: yürümek, de: [gehen (zu Fuß), laufen], pos: verb }
+  - { tr: grip, de: [Grippe], pos: noun, softens: true }
+  - { tr: sigara, de: [Zigarette], pos: noun }
+  - { tr: lazım, de: [nötig, gebraucht], pos: adj }
+  - { tr: gerekli, de: [notwendig], pos: adj }
+  - { tr: nefes, de: [Atem], pos: noun }
+  - { tr: tekrar, de: [wieder, nochmal], pos: adv }
+  - { tr: için, de: [für], pos: postp }
+  - { tr: bırakmak, de: [lassen, aufhören mit], pos: verb }
+  - { tr: gerek, de: [nötig], pos: adj }
+  - { tr: bol, de: [reichlich, viel], pos: adj }
+  - { tr: kere, de: [Mal], pos: noun }
+  - { tr: şikâyet, de: [Beschwerde, Klage], pos: noun }
+  - { tr: ağız, de: [Mund], pos: noun, drops_vowel: true }
+  - { tr: baş ağrısı, de: [Kopfschmerzen], pos: noun }
