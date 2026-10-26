@@ -41,7 +41,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       unitId={unitId}
       unitReviewed={unitReviewed}
       onExit={goHome}
-      onAttempt={(exerciseId, verdict) => recordAttempt(exerciseId, lessonId, verdict)}
+      onAttempt={(ex, verdict) => recordAttempt(ex.id, lessonId, verdict, ex.type)}
       onComplete={(correct, total) => recordCompletion(unitId, lessonId, correct, total)}
       grammarFor={explainer ? (ex) => sectionFor(explainer, ex, lesson.title) : undefined}
     />

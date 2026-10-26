@@ -88,9 +88,7 @@ export function MistakesScreen() {
         return g?.markdown ? sectionFor(g.markdown, ex, g.lessonTitle) : undefined;
       }}
       // Versuche zählen für die echte Lektion; kein Lektionsabschluss, kein Tagesziel.
-      onAttempt={(exerciseId, verdict) =>
-        recordAttempt(exerciseId, run.lessonOf.get(exerciseId)!, verdict)
-      }
+      onAttempt={(ex, verdict) => recordAttempt(ex.id, run.lessonOf.get(ex.id)!, verdict, ex.type)}
     />
   );
 }

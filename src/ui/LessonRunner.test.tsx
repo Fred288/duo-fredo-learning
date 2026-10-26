@@ -97,7 +97,7 @@ describe('LessonRunner', () => {
     click('Prüfen');
     click('Weiter');
 
-    expect(onAttempt.mock.calls).toEqual([
+    expect(onAttempt.mock.calls.map(([ex, verdict]) => [ex.id, verdict])).toEqual([
       ['a1-u01-l1-e1', 'wrong'],
       ['a1-u01-l1-e2', 'correct'],
     ]); // Wiederholung wird nicht als neuer Versuch gezählt

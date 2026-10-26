@@ -7,6 +7,8 @@ export interface Settings {
   tolerateDiacritics: boolean;
   /** Ziel: abgeschlossene Lektionen pro Tag. */
   dailyGoal: number;
+  /** Neue Vokabelkarten pro Tag im Wiederholen; 0 schaltet Vokabelkarten ab. */
+  newWordsPerDay: number;
   showStreak: boolean;
   theme: Theme;
 }
@@ -14,11 +16,13 @@ export interface Settings {
 export const DEFAULT_SETTINGS: Settings = {
   tolerateDiacritics: true,
   dailyGoal: 1,
+  newWordsPerDay: 10,
   showStreak: true,
   theme: 'system',
 };
 
 export const GOAL_RANGE = { min: 1, max: 10 } as const;
+export const NEW_WORDS_RANGE = { min: 0, max: 30 } as const;
 
 interface SettingsState extends Settings {
   loaded: boolean;
@@ -63,6 +67,13 @@ function pickKnown(stored: Partial<Settings>): Partial<Settings> {
     stored.dailyGoal <= GOAL_RANGE.max
   ) {
     out.dailyGoal = Math.round(stored.dailyGoal);
+  }
+  if (
+    typeof stored.newWordsPerDay === 'number' &&
+    stored.newWordsPerDay >= NEW_WORDS_RANGE.min &&
+    stored.newWordsPerDay <= NEW_WORDS_RANGE.max
+  ) {
+    out.newWordsPerDay = Math.round(stored.newWordsPerDay);
   }
   if (stored.theme === 'system' || stored.theme === 'light' || stored.theme === 'dark') {
     out.theme = stored.theme;

@@ -1,5 +1,5 @@
 import 'fake-indexeddb/auto';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { db } from '../db/db';
 import { useProgress } from './progress';
 import { DEFAULT_SETTINGS, useSettings } from './settings';
@@ -7,9 +7,14 @@ import { DEFAULT_SETTINGS, useSettings } from './settings';
 const flush = () => new Promise((r) => setTimeout(r, 20));
 
 beforeEach(async () => {
-  await Promise.all([db.settings.clear(), db.attempts.clear(), db.completions.clear()]);
+  await Promise.all([
+    db.settings.clear(),
+    db.attempts.clear(),
+    db.completions.clear(),
+    db.cards.clear(),
+  ]);
   useSettings.setState({ ...DEFAULT_SETTINGS, loaded: false });
-  useProgress.setState({ completions: [], loaded: false });
+  useProgress.setState({ completions: [], attempts: [], cards: [], loaded: false });
   document.documentElement.classList.remove('dark');
 });
 
@@ -24,6 +29,19 @@ describe('Settings-Store', () => {
     expect(useSettings.getState().dailyGoal).toBe(4);
     expect(useSettings.getState().showStreak).toBe(false);
     expect(useSettings.getState().loaded).toBe(true);
+  });
+
+  it('speichert neue Wörter pro Tag und verwirft Werte außerhalb des Bereichs', async () => {
+    expect(useSettings.getState().newWordsPerDay).toBe(10);
+    useSettings.getState().set('newWordsPerDay', 0);
+    await flush();
+    useSettings.setState({ ...DEFAULT_SETTINGS });
+    await useSettings.getState().load();
+    expect(useSettings.getState().newWordsPerDay).toBe(0);
+
+    await db.settings.put({ key: 'newWordsPerDay', value: 31 });
+    await useSettings.getState().load();
+    expect(useSettings.getState().newWordsPerDay).toBe(10);
   });
 
   it('ignoriert ungültige gespeicherte Werte', async () => {
@@ -76,5 +94,65 @@ describe('Notizen', () => {
 
     await useNotes.getState().remove(notes[0]!.id!);
     expect(await db.notes.count()).toBe(0);
+  });
+});
+
+describe('SRS-Karten im Progress-Store', () => {
+  afterEach(() => vi.useRealTimers());
+  const day = (d: string) => vi.setSystemTime(new Date(`${d}T12:00:00`));
+  const { getState } = useProgress;
+
+  it('legt Karten für Grammatik und Fehler an, nicht für richtige Standardübungen', () => {
+    vi.useFakeTimers();
+    day('2026-05-01');
+    getState().recordAttempt('a1-u01-l1-e1', 'a1-u01-l1', 'correct', 'multiple_choice');
+    expect(getState().cards).toEqual([]);
+    getState().recordAttempt('a1-u01-l1-e2', 'a1-u01-l1', 'wrong', 'word_bank');
+    getState().recordAttempt('a1-u02-l2-e1', 'a1-u02-l2', 'correct', 'suffix_builder');
+    expect(getState().cards.map((c) => [c.id, c.box, c.due])).toEqual([
+      ['ex:a1-u01-l1-e2', 1, '2026-05-02'],
+      ['ex:a1-u02-l2-e1', 2, '2026-05-04'],
+    ]);
+    expect(getState().attempts).toHaveLength(3);
+  });
+
+  it('führt vorhandene Karten fort, auch ohne Typ, und rückt nur fällige vor', () => {
+    vi.useFakeTimers();
+    day('2026-05-01');
+    getState().recordAttempt('a1-u01-l1-e2', 'a1-u01-l1', 'wrong', 'word_bank');
+    getState().recordAttempt('a1-u01-l1-e2', 'a1-u01-l1', 'correct', 'word_bank'); // nicht fällig
+    expect(getState().cards[0]).toMatchObject({ box: 1, due: '2026-05-02' });
+    day('2026-05-02');
+    getState().recordAttempt('a1-u01-l1-e2', 'a1-u01-l1', 'correct');
+    expect(getState().cards[0]).toMatchObject({ box: 2, due: '2026-05-05' });
+  });
+
+  it('bewertet Vokabelkarten, speichert dauerhaft und entfernt gelöschte Karten', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    day('2026-05-01');
+    const ref = { kind: 'vocab', vocabId: 'ev', dir: 'tr_de' } as const;
+    getState().recordVocab(ref, 'a1-u02', 'correct');
+    getState().recordVocab({ ...ref, vocabId: 'göz' }, 'a1-u02', 'wrong');
+    await flush();
+    expect(await db.cards.count()).toBe(2);
+
+    useProgress.setState({ cards: [] });
+    await getState().load();
+    expect(getState().cards.map((c) => [c.id, c.box])).toEqual([
+      ['vo:tr_de:ev', 2],
+      ['vo:tr_de:göz', 1],
+    ]);
+
+    getState().removeCards(['vo:tr_de:göz']);
+    await flush();
+    expect(getState().cards).toHaveLength(1);
+    expect(await db.cards.count()).toBe(1);
+  });
+
+  it('behält vor dem Laden erfasste Karten', async () => {
+    getState().recordAttempt('a1-u01-l1-e2', 'a1-u01-l1', 'wrong');
+    await flush();
+    await getState().load();
+    expect(getState().cards).toHaveLength(1);
   });
 });

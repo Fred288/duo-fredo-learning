@@ -37,7 +37,7 @@ interface Props {
   unitReviewed?: boolean;
   onExit: () => void;
   /** Erster Versuch je Übung und Lauf. */
-  onAttempt?: (exerciseId: string, verdict: Verdict) => void;
+  onAttempt?: (exercise: Exercise, verdict: Verdict) => void;
   /** Einmal pro abgeschlossenem Lauf; zählt den ersten Versuch je Übung. */
   onComplete?: (correct: number, total: number) => void;
   /** Überschrift am Ende, Default „Lektion geschafft“. */
@@ -79,7 +79,7 @@ export function LessonRunner({
   const check = useCallback(() => {
     if (!supported || !answer.trim()) return;
     const result = grade(supported, answer, { tolerateDiacritics });
-    if (!(supported.id in session.firstTry)) onAttempt?.(supported.id, result.verdict);
+    if (!(supported.id in session.firstTry)) onAttempt?.(supported, result.verdict);
     setSession((s) => submit(s, result));
   }, [supported, answer, tolerateDiacritics, session.firstTry, onAttempt]);
 
