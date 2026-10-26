@@ -10,6 +10,7 @@ beforeEach(async () => {
     db.attempts.clear(),
     db.completions.clear(),
     db.notes.clear(),
+    db.cards.clear(),
   ]);
 });
 
@@ -59,6 +60,54 @@ describe('Migration v1 → v2', () => {
     expect((await db.settings.get('dailyGoal'))?.value).toBe(5);
     await db.notes.add({ itemId: 'x', unitId: 'a1-u01', text: 'Tippfehler', at: 1 });
     expect(await db.notes.where('unitId').equals('a1-u01').count()).toBe(1);
+  });
+});
+
+describe('Migration v2 → v3', () => {
+  it('legt Karten für bisher falsch beantwortete Übungen an', async () => {
+    db.close();
+    await Dexie.delete('yol');
+
+    const v2 = new Dexie('yol');
+    v2.version(1).stores({
+      settings: 'key',
+      attempts: '++id, exerciseId, lessonId, at',
+      completions: '++id, lessonId, day',
+    });
+    v2.version(2).stores({ notes: '++id, itemId, unitId, at' });
+    const at = (day: string) => new Date(`${day}T12:00:00`).getTime();
+    await v2.table('attempts').bulkAdd([
+      { exerciseId: 'a1-u02-l1-e3', lessonId: 'a1-u02-l1', verdict: 'wrong', at: at('2026-04-02') },
+      {
+        exerciseId: 'a1-u02-l1-e3',
+        lessonId: 'a1-u02-l1',
+        verdict: 'correct',
+        at: at('2026-04-03'),
+      },
+      {
+        exerciseId: 'a1-u02-l1-e4',
+        lessonId: 'a1-u02-l1',
+        verdict: 'correct',
+        at: at('2026-04-02'),
+      },
+    ]);
+    v2.close();
+
+    await db.open();
+    expect(await db.attempts.count()).toBe(3);
+    expect(await db.cards.toArray()).toEqual([
+      {
+        id: 'ex:a1-u02-l1-e3',
+        ref: { kind: 'exercise', exerciseId: 'a1-u02-l1-e3' },
+        unitId: 'a1-u02',
+        box: 2,
+        due: '2026-04-06',
+        introduced: '2026-04-02',
+        lastAt: at('2026-04-03'),
+        lapses: 0,
+      },
+    ]);
+    expect(await db.cards.where('due').belowOrEqual('2026-04-06').count()).toBe(1);
   });
 });
 

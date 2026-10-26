@@ -147,6 +147,21 @@ export function foreignLexicon(unit: Unit, units: LoadedUnit[]): Vocab[] {
   return all.filter((v) => needed.has(v.tr));
 }
 
+/** Eintrag der Unit in public/content/index.json (Typ `Manifest` in src/content/load.ts). */
+export function manifestEntry(unit: Unit) {
+  return {
+    id: unit.id,
+    level: unit.level,
+    title: unit.title,
+    explainer: unit.explainer,
+    reviewed: unit.reviewed,
+    unreviewed: countUnreviewed(unit),
+    lessons: unit.lessons.map((l) => ({ id: l.id, type: l.type, title: l.title })),
+    // Vokabel-IDs für neue SRS-Karten, ohne die Unit laden zu müssen.
+    vocab: (unit.vocab ?? []).map(vocabId),
+  };
+}
+
 /** Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag). */
 export function countUnreviewed(unit: Unit): number {
   const exercises = unit.lessons.flatMap((l) => l.exercises);

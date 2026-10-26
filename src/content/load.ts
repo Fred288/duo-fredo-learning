@@ -11,6 +11,8 @@ export interface Manifest {
     /** Anzahl noch nicht geprüfter Übungen und Vokabeln. */
     unreviewed: number;
     lessons: Pick<Lesson, 'id' | 'type' | 'title'>[];
+    /** Vokabel-IDs der Unit (`vocabId`), Grundlage neuer SRS-Karten. */
+    vocab: string[];
   }[];
 }
 

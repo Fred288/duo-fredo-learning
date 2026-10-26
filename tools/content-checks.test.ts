@@ -3,6 +3,7 @@ import {
   checkSuffixTargets,
   checkUnits,
   foreignLexicon,
+  manifestEntry,
   parseUnitFile,
   type LoadedUnit,
 } from './content-checks';
@@ -203,5 +204,24 @@ vocab:
     expect(parseUnitFile('a.yaml', unit('[şehirde, şehre, şehirden]')).errors[0]).toContain(
       '3 targets für 2 Zeilen',
     );
+  });
+});
+
+describe('manifestEntry', () => {
+  it('listet Lektionen und Vokabel-IDs der Unit', () => {
+    const text = yamlUnit('a1-u01', 'explainer: explainers/x.md').concat(
+      '  - { id: yüz-sayı, tr: yüz, de: [hundert], pos: num }\n',
+    );
+    const { unit } = load('a.yaml', text);
+    expect(manifestEntry(unit)).toEqual({
+      id: 'a1-u01',
+      level: 'A1',
+      title: 'Test',
+      explainer: 'explainers/x.md',
+      reviewed: false,
+      unreviewed: 3,
+      lessons: [{ id: 'a1-u01-l1', type: 'vocab', title: 'Wörter' }],
+      vocab: ['ev', 'yüz-sayı'],
+    });
   });
 });

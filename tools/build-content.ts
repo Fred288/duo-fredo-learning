@@ -13,8 +13,8 @@ import { dirname, join, relative } from 'node:path';
 import {
   checkSuffixTargets,
   checkUnits,
-  countUnreviewed,
   foreignLexicon,
+  manifestEntry,
   parseUnitFile,
   type LoadedUnit,
 } from './content-checks';
@@ -59,14 +59,6 @@ for (const { unit } of units) {
   mkdirSync(dirname(target), { recursive: true });
   copyFileSync(join(CONTENT_DIR, unit.explainer), target);
 }
-const manifest = units.map(({ unit }) => ({
-  id: unit.id,
-  level: unit.level,
-  title: unit.title,
-  explainer: unit.explainer,
-  reviewed: unit.reviewed,
-  unreviewed: countUnreviewed(unit),
-  lessons: unit.lessons.map((l) => ({ id: l.id, type: l.type, title: l.title })),
-}));
+const manifest = units.map(({ unit }) => manifestEntry(unit));
 writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));
 console.log(`✔ ${units.length} Unit(s) validiert und nach ${OUT_DIR} geschrieben.`);
