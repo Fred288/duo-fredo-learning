@@ -1,0 +1,434 @@
+# A1-06: Familie (Possessivsuffixe, Genitiv, Genitiv-Possessiv-Verbindung). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u06
+level: A1
+title: Familie
+grammar_focus: [possessiv, genitiv, genitiv-possessiv]
+explainer: explainers/a1-familie.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u06-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u06-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „anne“?
+        options: [Mutter, Vater, Schwester]
+        answer: Mutter
+      - id: a1-u06-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Vater
+        answers: [baba]
+      - id: a1-u06-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „kardeş“?
+        options: [Geschwister (Bruder oder Schwester), nur Bruder, Cousin]
+        answer: Geschwister (Bruder oder Schwester)
+        explanation: „kardeş“ ist Bruder oder Schwester, meist jünger. Genauer sagt man „erkek kardeş“ (Bruder) und „kız kardeş“ (Schwester).
+      - id: a1-u06-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „abla“?
+        options: [ältere Schwester, jüngere Schwester, Tante]
+        answer: ältere Schwester
+        explanation: abla ist die ältere Schwester. Man nennt so auch ältere Frauen, freundlich und respektvoll.
+      - id: a1-u06-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „ağabey“ (gesprochen meist „abi“)?
+        options: [älterer Bruder, Onkel, Großvater]
+        answer: älterer Bruder
+      - id: a1-u06-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Sohn
+        answers: [oğul]
+      - id: a1-u06-l1-e7
+        type: free_text
+        direction: tr_de
+        prompt: kız
+        answers: [Tochter, Mädchen, die Tochter, das Mädchen]
+        explanation: kız heißt Mädchen und Tochter.
+      - id: a1-u06-l1-e8
+        type: multiple_choice
+        prompt: Wer ist „teyze“?
+        options: [Schwester der Mutter, Schwester des Vaters, Bruder der Mutter]
+        answer: Schwester der Mutter
+        explanation: teyze (Schwester der Mutter), hala (Schwester des Vaters), dayı (Bruder der Mutter), amca (Bruder des Vaters).
+      - id: a1-u06-l1-e9
+        type: multiple_choice
+        prompt: Wer ist „amca“?
+        options: [Bruder des Vaters, Bruder der Mutter, Großvater]
+        answer: Bruder des Vaters
+      - id: a1-u06-l1-e10
+        type: multiple_choice
+        prompt: Wer ist „dayı“?
+        options: [Bruder der Mutter, Bruder des Vaters, Vater]
+        answer: Bruder der Mutter
+      - id: a1-u06-l1-e11
+        type: multiple_choice
+        prompt: Wer ist „hala“?
+        options: [Schwester des Vaters, Schwester der Mutter, Großmutter]
+        answer: Schwester des Vaters
+      - id: a1-u06-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: Familie
+        answers: [aile]
+      - id: a1-u06-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „dede“?
+        options: [Großvater, Onkel, Vater]
+        answer: Großvater
+      - id: a1-u06-l1-e14
+        type: free_text
+        direction: tr_de
+        prompt: eş
+        answers: [Ehepartner, Ehefrau, Ehemann, Frau, Mann, Partner, Partnerin]
+      - id: a1-u06-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „isim“?
+        options: [Name, Alter, Familie]
+        answer: Name
+        explanation: Für „Name“ gibt es zwei Wörter, isim und ad (Adın ne? aus Unit 1).
+      - id: a1-u06-l1-e16
+        type: multiple_choice
+        prompt: Wer ist „anneanne“?
+        options: [Mutter der Mutter, Mutter des Vaters, Schwester der Mutter]
+        answer: Mutter der Mutter
+        explanation: anneanne (Mutter der Mutter), babaanne (Mutter des Vaters). Umgangssprachlich auch nine.
+      - id: a1-u06-l1-e17
+        type: multiple_choice
+        prompt: Wer ist „babaanne“?
+        options: [Mutter des Vaters, Mutter der Mutter, Tante]
+        answer: Mutter des Vaters
+
+  - id: a1-u06-l2
+    type: grammar
+    title: mein, dein, sein …
+    exercises:
+      - id: a1-u06-l2-e1
+        type: suffix_builder
+        stem: anne
+        suffixes: [POSS_1SG]
+        target: annem
+        gloss_de: meine Mutter
+        explanation: „mein“ ist eine Endung, nach Vokal nur -m.
+      - { id: a1-u06-l2-e2, type: suffix_builder, stem: baba, suffixes: [POSS_2SG], target: baban, gloss_de: dein Vater }
+      - id: a1-u06-l2-e3
+        type: suffix_builder
+        stem: kardeş
+        suffixes: [POSS_1SG]
+        target: kardeşim
+        gloss_de: 'mein Bruder, meine Schwester'
+        explanation: Nach Konsonant mit Vokal, -im nach hellem e.
+      - id: a1-u06-l2-e4
+        type: suffix_builder
+        stem: araba
+        suffixes: [POSS_3SG]
+        target: arabası
+        gloss_de: 'sein, ihr Auto'
+        explanation: „sein/ihr“ nach Vokal mit s, -sı/-si/-su/-sü.
+      - { id: a1-u06-l2-e5, type: suffix_builder, stem: ev, suffixes: [POSS_3SG], target: evi, gloss_de: 'sein, ihr Haus' }
+      - id: a1-u06-l2-e6
+        type: suffix_builder
+        stem: oğul
+        suffixes: [POSS_1SG]
+        target: oğlum
+        gloss_de: mein Sohn
+        explanation: Bei oğul fällt das u vor einer vokalischen Endung weg.
+      - id: a1-u06-l2-e7
+        type: suffix_builder
+        stem: isim
+        suffixes: [POSS_1SG]
+        target: ismim
+        gloss_de: mein Name
+      - { id: a1-u06-l2-e8, type: suffix_builder, stem: aile, suffixes: [POSS_1PL], target: ailemiz, gloss_de: unsere Familie }
+      - { id: a1-u06-l2-e9, type: suffix_builder, stem: ev, suffixes: [POSS_2PL], target: eviniz, gloss_de: 'euer Haus, Ihr Haus' }
+      - id: a1-u06-l2-e10
+        type: suffix_builder
+        stem: kitap
+        suffixes: [POSS_1SG]
+        target: kitabım
+        gloss_de: mein Buch
+        explanation: Vor dem Vokal der Endung wird p zu b.
+      - { id: a1-u06-l2-e11, type: suffix_builder, stem: okul, suffixes: [POSS_3PL], target: okulları, gloss_de: "ihre Schule (sie, Plural)" }
+      - id: a1-u06-l2-e12
+        type: suffix_builder
+        stem: kız
+        suffixes: [POSS_1SG]
+        target: kızım
+        gloss_de: meine Tochter
+      - id: a1-u06-l2-e13
+        type: multiple_choice
+        prompt: Was heißt „Öğretmenim“?
+        options: [mein Lehrer oder ich bin Lehrer, nur mein Lehrer, nur ich bin Lehrer]
+        answer: mein Lehrer oder ich bin Lehrer
+        explanation: Beide Endungen klingen gleich (-im). Der Satz zeigt, was gemeint ist.
+      - id: a1-u06-l2-e14
+        type: suffix_builder
+        stem: çocuk
+        suffixes: [POSS_1PL]
+        target: çocuğumuz
+        gloss_de: unser Kind
+      - { id: a1-u06-l2-e15, type: suffix_builder, stem: kedi, suffixes: [POSS_2SG], target: kedin, gloss_de: deine Katze }
+
+  - id: a1-u06-l3
+    type: grammar
+    title: Wessen? Der Genitiv
+    exercises:
+      - id: a1-u06-l3-e1
+        type: multiple_choice
+        prompt: Was heißt „benim“?
+        options: [mein, dein, sein]
+        answer: mein
+        explanation: benim (mein), senin (dein), onun (sein, ihr), bizim (unser), sizin (euer, Ihr), onların (ihr, Plural).
+      - id: a1-u06-l3-e2
+        type: free_text
+        direction: de_tr
+        prompt: dein (Pronomen)
+        answers: [senin]
+      - id: a1-u06-l3-e3
+        type: multiple_choice
+        prompt: Was heißt „bizim“?
+        options: [unser, euer, ihr]
+        answer: unser
+      - id: a1-u06-l3-e4
+        type: suffix_builder
+        stem: anne
+        suffixes: [GEN]
+        target: annenin
+        gloss_de: der Mutter
+        explanation: Genitiv -ın/-in/-un/-ün, nach Vokal mit n.
+      - { id: a1-u06-l3-e5, type: suffix_builder, stem: baba, suffixes: [GEN], target: babanın, gloss_de: des Vaters }
+      - { id: a1-u06-l3-e6, type: suffix_builder, stem: öğretmen, suffixes: [GEN], target: öğretmenin, gloss_de: des Lehrers, explanation: "öğretmenin kann auch „dein Lehrer“ heißen, der Satz entscheidet." }
+      - id: a1-u06-l3-e7
+        type: suffix_builder
+        stem: Ayşe
+        suffixes: [GEN]
+        target: Ayşe'nin
+        gloss_de: Ayşes
+      - { id: a1-u06-l3-e8, type: suffix_builder, stem: Mehmet, suffixes: [GEN], target: Mehmet'in, gloss_de: Mehmets }
+      - id: a1-u06-l3-e9
+        type: suffix_builder
+        stem: çocuk
+        suffixes: [GEN]
+        target: çocuğun
+        gloss_de: des Kindes
+      - id: a1-u06-l3-e10
+        type: suffix_builder
+        stem: kardeş
+        suffixes: [POSS_1SG, GEN]
+        target: kardeşimin
+        gloss_de: meines Bruders, meiner Schwester
+        explanation: Erst „mein“ (-im), dann der Genitiv (-in).
+      - { id: a1-u06-l3-e11, type: suffix_builder, stem: dede, suffixes: [GEN], target: dedenin, gloss_de: des Großvaters }
+      - id: a1-u06-l3-e12
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (des Hauses)
+        options: [evin, evnin, evun]
+        answer: evin
+        explanation: Nach Konsonant ohne n, -in nach hellem e. evin kann auch „dein Haus“ heißen.
+
+  - id: a1-u06-l4
+    type: grammar
+    title: Ayşes Mutter
+    exercises:
+      - id: a1-u06-l4-e1
+        type: word_bank
+        prompt: Ayşes Mutter
+        answers: [Ayşe'nin annesi]
+        distractors: [annem, Ayşe]
+        explanation: Besitzer mit Genitiv, Besitz mit „sein/ihr“-Endung, wörtlich „Ayşes ihre Mutter“.
+      - id: a1-u06-l4-e2
+        type: word_bank
+        prompt: das Auto des Lehrers
+        answers: [öğretmenin arabası]
+        distractors: [araba, öğretmen]
+      - id: a1-u06-l4-e3
+        type: word_bank
+        prompt: der Name meiner Mutter
+        answers: [annemin adı]
+        distractors: [annem, ad]
+      - id: a1-u06-l4-e4
+        type: word_bank
+        prompt: mein Haus
+        answers: [benim evim, evim]
+        distractors: [senin, ev]
+        explanation: „benim“ kann zur Betonung davorstehen, die Endung -im bleibt.
+      - id: a1-u06-l4-e5
+        type: suffix_builder
+        stem: baba
+        suffixes: [POSS_3SG]
+        target: babası
+        gloss_de: (Mehmets) Vater
+        explanation: Zu „Mehmet'in …“ gehört die Endung „sein/ihr“, also babası.
+      - id: a1-u06-l4-e6
+        type: word_bank
+        prompt: Mehmets Vater ist Arzt.
+        answers: [Mehmet'in babası doktor.]
+        distractors: [babam, Mehmet]
+      - id: a1-u06-l4-e7
+        type: word_bank
+        prompt: Das ist das Haus meines Bruders.
+        answers: [Bu kardeşimin evi.]
+        distractors: [ev, kardeşim]
+      - id: a1-u06-l4-e8
+        type: multiple_choice
+        prompt: Was heißt „Teyzemin kızı“?
+        options: [die Tochter meiner Tante, meine Tante und ihre Tochter, meine Tochter]
+        answer: die Tochter meiner Tante
+      - id: a1-u06-l4-e9
+        type: free_text
+        direction: de_tr
+        prompt: meine Familie
+        answers: [ailem, benim ailem]
+      - id: a1-u06-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Annemin adı Fatma.
+        answers: [Meine Mutter heißt Fatma., Der Name meiner Mutter ist Fatma.]
+      - id: a1-u06-l4-e11
+        type: word_bank
+        prompt: Wie heißt dein Vater?
+        answers: [Babanın adı ne?, Senin babanın adı ne?]
+        distractors: [baban, Benim]
+      - id: a1-u06-l4-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Ali'nin …“ (Alis Haus)
+        options: [evi, evim, ev]
+        answer: evi
+
+  - id: a1-u06-l5
+    type: grammar
+    title: 'Tabellen: mein, dein, sein …'
+    exercises:
+      - id: a1-u06-l5-e1
+        type: paradigm
+        kind: noun
+        lemma: ev
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [evim, evin, evi, evimiz, eviniz, evleri]
+        gloss_de: Haus
+        explanation: Nach Konsonant mit Vokal, alles nach hellem e.
+      - id: a1-u06-l5-e2
+        type: paradigm
+        kind: noun
+        lemma: anne
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [annem, annen, annesi, annemiz, anneniz, anneleri]
+        gloss_de: Mutter
+        explanation: Nach Vokal fällt der Bindevokal weg, bei „sein/ihr“ steht s.
+      - { id: a1-u06-l5-e3, type: paradigm, kind: noun, lemma: araba, rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]], targets: [arabam, araban, arabası, arabamız, arabanız, arabaları], gloss_de: Auto }
+      - id: a1-u06-l5-e4
+        type: paradigm
+        kind: noun
+        lemma: kitap
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [kitabım, kitabın, kitabı, kitabımız, kitabınız, kitapları]
+        gloss_de: Buch
+        explanation: p wird vor Vokal zu b, vor -ları bleibt es.
+      - id: a1-u06-l5-e5
+        type: paradigm
+        kind: noun
+        lemma: oğul
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [oğlum, oğlun, oğlu, oğlumuz, oğlunuz, oğulları]
+        gloss_de: Sohn
+        explanation: Das u fällt vor Vokal weg, vor -ları nicht.
+      - { id: a1-u06-l5-e6, type: paradigm, kind: noun, lemma: okul, rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]], targets: [okulum, okulun, okulu, okulumuz, okulunuz, okulları], gloss_de: Schule }
+      - { id: a1-u06-l5-e7, type: paradigm, kind: noun, lemma: göz, rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]], targets: [gözüm, gözün, gözü, gözümüz, gözünüz, gözleri], gloss_de: Auge }
+      - { id: a1-u06-l5-e8, type: paradigm, kind: noun, lemma: isim, rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG]], targets: [ismim, ismin, ismi], gloss_de: Name }
+      - { id: a1-u06-l5-e9, type: paradigm, kind: noun, lemma: baba, rows: [[POSS_1SG], [POSS_3SG], [GEN], [POSS_1SG, GEN]], targets: [babam, babası, babanın, babamın], gloss_de: Vater }
+      - { id: a1-u06-l5-e10, type: paradigm, kind: noun, lemma: kardeş, rows: [[POSS_1SG], [POSS_3SG], [GEN], [POSS_1SG, GEN]], targets: [kardeşim, kardeşi, kardeşin, kardeşimin], gloss_de: Geschwister }
+
+  - id: a1-u06-l6
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u06-l6-e1
+        type: word_bank
+        prompt: Meine Schwester ist Lehrerin.
+        answers: [Kız kardeşim öğretmen., Ablam öğretmen., Kardeşim öğretmen.]
+        distractors: [kardeşin, öğretmenim]
+      - id: a1-u06-l6-e2
+        type: word_bank
+        prompt: Mein Sohn ist in der Schule.
+        answers: [Oğlum okulda.]
+        distractors: [oğulum, okula]
+      - id: a1-u06-l6-e3
+        type: free_text
+        direction: de_tr
+        prompt: mein Name
+        answers: [ismim, adım, benim ismim, benim adım]
+      - id: a1-u06-l6-e4
+        type: free_text
+        direction: de_tr
+        prompt: unsere Familie
+        answers: [ailemiz, bizim ailemiz]
+      - id: a1-u06-l6-e5
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (mein Sohn)
+        options: [oğlum, oğulum, oğlüm]
+        answer: oğlum
+      - id: a1-u06-l6-e6
+        type: word_bank
+        prompt: der Bruder meines Vaters
+        answers: [babamın erkek kardeşi, babamın kardeşi, amcam]
+        distractors: [babam, kardeşim]
+        explanation: Kürzer und üblicher ist „amcam“ (mein Onkel väterlicherseits). „kardeş“ allein lässt offen, ob Bruder oder Schwester.
+      - id: a1-u06-l6-e7
+        type: free_text
+        direction: tr_de
+        prompt: Dayım İzmir'de.
+        answers: [Mein Onkel ist in Izmir., Mein Onkel wohnt in Izmir., Mein Onkel lebt in Izmir.]
+      - id: a1-u06-l6-e8
+        type: multiple_choice
+        prompt: Was heißt „onun kızı“?
+        options: [seine oder ihre Tochter, meine Tochter, das Mädchen]
+        answer: seine oder ihre Tochter
+      - id: a1-u06-l6-e9
+        type: word_bank
+        prompt: Wie heißt Ihre Mutter?
+        answers: [Annenizin adı ne?, Sizin annenizin adı ne?]
+        distractors: [annen, Senin]
+        register: formal
+      - id: a1-u06-l6-e10
+        type: free_text
+        direction: de_tr
+        prompt: deine Katze
+        answers: [kedin, senin kedin]
+      - id: a1-u06-l6-e11
+        type: multiple_choice
+        prompt: „Ayşe'nin …“ – welches Wort passt? (Ayşes älterer Bruder)
+        options: [ağabeyi, ağabeyim, ağabey]
+        answer: ağabeyi
+      - id: a1-u06-l6-e12
+        type: word_bank
+        prompt: Das ist meine Großmutter.
+        answers: [Bu benim babaannem., Bu babaannem., Bu benim anneannem., Bu anneannem., Bu benim ninem., Bu ninem.]
+        distractors: [nine, senin]
+        explanation: anneanne (Mutter der Mutter), babaanne (Mutter des Vaters); nine ist eher umgangssprachlich.
+
+vocab:
+  - { tr: anne, de: [Mutter], pos: noun }
+  - { tr: baba, de: [Vater], pos: noun }
+  - { tr: kardeş, de: [Geschwister, Bruder, Schwester], pos: noun }
+  - { tr: abla, de: [ältere Schwester], pos: noun }
+  - { tr: ağabey, de: [älterer Bruder], pos: noun }
+  - { tr: oğul, de: [Sohn], pos: noun, drops_vowel: true }
+  - { tr: teyze, de: [Tante (Schwester der Mutter)], pos: noun }
+  - { tr: hala, de: [Tante (Schwester des Vaters)], pos: noun }
+  - { tr: dayı, de: [Onkel (Bruder der Mutter)], pos: noun }
+  - { tr: amca, de: [Onkel (Bruder des Vaters)], pos: noun }
+  - { tr: aile, de: [Familie], pos: noun }
+  - { tr: dede, de: [Großvater, Opa], pos: noun }
+  - { tr: nine, de: [Großmutter, Oma], pos: noun }
+  - { tr: eş, de: [Ehepartner, Ehefrau, Ehemann], pos: noun }
+  - { tr: isim, de: [Name], pos: noun, drops_vowel: true }
+  - { tr: ad, de: [Name, Vorname], pos: noun }
+  - { tr: Ayşe, de: [Ayşe], pos: noun, proper: true }
+  - { tr: Mehmet, de: [Mehmet], pos: noun, proper: true }
+  - { tr: anneanne, de: [Großmutter (Mutter der Mutter)], pos: noun }
+  - { tr: babaanne, de: [Großmutter (Mutter des Vaters)], pos: noun }

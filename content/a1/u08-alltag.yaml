@@ -1,0 +1,416 @@
+# A1-08: Alltag (Präsens -iyor, Personalendungen). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u08
+level: A1
+title: Alltag
+grammar_focus: [praesens-iyor, personalendungen]
+explainer: explainers/a1-alltag.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u08-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u08-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „gelmek“?
+        options: [kommen, gehen, machen]
+        answer: kommen
+        explanation: Verben stehen im Wörterbuch mit -mek/-mak, das ist der Infinitiv.
+      - id: a1-u08-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: gehen
+        answers: [gitmek]
+      - id: a1-u08-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „yapmak“?
+        options: [machen, schreiben, warten]
+        answer: machen
+      - id: a1-u08-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: lesen
+        answers: [okumak]
+      - id: a1-u08-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „içmek“?
+        options: [trinken, essen, schlafen]
+        answer: trinken
+      - id: a1-u08-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: essen
+        answers: [yemek]
+      - id: a1-u08-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „çalışmak“?
+        options: [arbeiten, sprechen, sitzen]
+        answer: arbeiten
+        explanation: çalışmak heißt auch „lernen, üben“ (für die Schule arbeiten).
+      - id: a1-u08-l1-e8
+        type: free_text
+        direction: tr_de
+        prompt: uyumak
+        answers: [schlafen]
+      - id: a1-u08-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „kalkmak“?
+        options: [aufstehen, sich setzen, anfangen]
+        answer: aufstehen
+      - id: a1-u08-l1-e10
+        type: free_text
+        direction: tr_de
+        prompt: beklemek
+        answers: [warten]
+      - id: a1-u08-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „izlemek“?
+        options: [anschauen, zuhören, sprechen]
+        answer: anschauen
+        explanation: izlemek heißt anschauen, z. B. fernsehen (televizyon izlemek).
+      - id: a1-u08-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: sprechen
+        answers: [konuşmak]
+      - id: a1-u08-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „sabah“?
+        options: [Morgen (Tageszeit), Abend, Mittag]
+        answer: Morgen (Tageszeit)
+        explanation: sabah (Morgen), öğle (Mittag), akşam (Abend), gece (Nacht).
+      - id: a1-u08-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: jetzt
+        answers: [şimdi]
+      - id: a1-u08-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „her gün“?
+        options: [jeden Tag, heute, morgen]
+        answer: jeden Tag
+      - id: a1-u08-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „oynamak“?
+        options: [spielen, schlafen, anfangen]
+        answer: spielen
+      - id: a1-u08-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: heute
+        answers: [bugün]
+      - id: a1-u08-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „gazete“?
+        options: [Zeitung, Buch, Fernseher]
+        answer: Zeitung
+      - id: a1-u08-l1-e19
+        type: free_text
+        direction: tr_de
+        prompt: müzik
+        answers: [Musik, die Musik]
+      - id: a1-u08-l1-e20
+        type: multiple_choice
+        prompt: Was heißt „televizyon izlemek“?
+        options: [fernsehen, Radio hören, telefonieren]
+        answer: fernsehen
+
+  - id: a1-u08-l2
+    type: grammar
+    title: ich komme, ich gehe
+    exercises:
+      - id: a1-u08-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        target: geliyorum
+        gloss_de: ich komme
+        explanation: Stamm gel + iyor + um. -yor ändert sich nie.
+      - id: a1-u08-l2-e2
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 1sg
+        target: yapıyorum
+        gloss_de: ich mache
+        explanation: Der Vokal vor -yor folgt der Vierfach-Harmonie, nach a also ı.
+      - { id: a1-u08-l2-e3, type: conjugation, mode: verb, lemma: okumak, person: 1sg, target: okuyorum, gloss_de: ich lese }
+      - id: a1-u08-l2-e4
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1sg
+        target: gidiyorum
+        gloss_de: ich gehe
+        explanation: Das t von git wird vor dem Vokal zu d.
+      - { id: a1-u08-l2-e5, type: conjugation, mode: verb, lemma: içmek, person: 1sg, target: içiyorum, gloss_de: ich trinke }
+      - id: a1-u08-l2-e6
+        type: conjugation
+        mode: verb
+        lemma: beklemek
+        person: 1sg
+        target: bekliyorum
+        gloss_de: ich warte
+        explanation: Endet der Stamm auf e oder a, fällt dieser Vokal weg, bekle → bekl-iyor.
+      - id: a1-u08-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: yemek
+        person: 1sg
+        target: yiyorum
+        gloss_de: ich esse
+        explanation: Unregelmäßig, ye → yiyor.
+      - { id: a1-u08-l2-e8, type: conjugation, mode: verb, lemma: çalışmak, person: 1sg, target: çalışıyorum, gloss_de: ich arbeite }
+      - { id: a1-u08-l2-e9, type: conjugation, mode: verb, lemma: uyumak, person: 1sg, target: uyuyorum, gloss_de: ich schlafe }
+      - { id: a1-u08-l2-e10, type: conjugation, mode: verb, lemma: kalkmak, person: 1sg, target: kalkıyorum, gloss_de: ich stehe auf }
+      - { id: a1-u08-l2-e11, type: conjugation, mode: verb, lemma: izlemek, person: 1sg, target: izliyorum, gloss_de: "ich schaue zu, ich sehe (fern)" }
+      - { id: a1-u08-l2-e12, type: conjugation, mode: verb, lemma: konuşmak, person: 1sg, target: konuşuyorum, gloss_de: ich spreche }
+      - id: a1-u08-l2-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich warte)
+        options: [bekliyorum, bekleyorum, bekleiyorum]
+        answer: bekliyorum
+
+  - id: a1-u08-l3
+    type: grammar
+    title: du, er, wir …
+    exercises:
+      - id: a1-u08-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        target: geliyorsun
+        gloss_de: du kommst
+        explanation: Nach -yor immer die u-Formen, -um, -sun, -uz, -sunuz.
+      - { id: a1-u08-l3-e2, type: conjugation, mode: verb, lemma: okumak, person: 3sg, target: okuyor, gloss_de: 'er, sie liest' }
+      - { id: a1-u08-l3-e3, type: conjugation, mode: verb, lemma: gitmek, person: 1pl, target: gidiyoruz, gloss_de: wir gehen }
+      - { id: a1-u08-l3-e4, type: conjugation, mode: verb, lemma: yapmak, person: 2pl, target: yapıyorsunuz, gloss_de: 'ihr macht, Sie machen' }
+      - { id: a1-u08-l3-e5, type: conjugation, mode: verb, lemma: içmek, person: 3pl, target: içiyorlar, gloss_de: sie trinken }
+      - { id: a1-u08-l3-e6, type: conjugation, mode: verb, lemma: yemek, person: 2sg, target: yiyorsun, gloss_de: du isst }
+      - { id: a1-u08-l3-e7, type: conjugation, mode: verb, lemma: beklemek, person: 3sg, target: bekliyor, gloss_de: 'er, sie wartet' }
+      - { id: a1-u08-l3-e8, type: conjugation, mode: verb, lemma: çalışmak, person: 1pl, target: çalışıyoruz, gloss_de: wir arbeiten }
+      - { id: a1-u08-l3-e9, type: conjugation, mode: verb, lemma: uyumak, person: 3pl, target: uyuyorlar, gloss_de: sie schlafen }
+      - { id: a1-u08-l3-e10, type: conjugation, mode: verb, lemma: konuşmak, person: 2pl, target: konuşuyorsunuz, gloss_de: 'ihr sprecht, Sie sprechen' }
+      - id: a1-u08-l3-e11
+        type: conjugation
+        mode: verb
+        lemma: başlamak
+        person: 3sg
+        target: başlıyor
+        gloss_de: 'er, sie, es fängt an'
+        explanation: başla → başl-ıyor, das a fällt weg.
+      - { id: a1-u08-l3-e12, type: conjugation, mode: verb, lemma: dinlemek, person: 1sg, target: dinliyorum, gloss_de: ich höre zu }
+      - { id: a1-u08-l3-e13, type: conjugation, mode: verb, lemma: oturmak, person: 2sg, target: oturuyorsun, gloss_de: 'du sitzt, du wohnst' }
+      - id: a1-u08-l3-e14
+        type: multiple_choice
+        prompt: Welche Endung gehört zu „sie (Plural)“?
+        options: [-lar, -sunuz, -uz]
+        answer: -lar
+        explanation: -lar ist die Endung für „sie“ (geliyorlar). Steht onlar davor, kann sie auch wegfallen.
+
+  - id: a1-u08-l4
+    type: grammar
+    title: 'Tabellen: alle Personen'
+    exercises:
+      - id: a1-u08-l4-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        targets: [geliyorum, geliyorsun, geliyor, geliyoruz, geliyorsunuz, geliyorlar]
+        gloss_de: kommen
+        explanation: Stamm + iyor + Personalendung. Die Endungen nach -yor sind immer -um, -sun, –, -uz, -sunuz, -lar.
+      - { id: a1-u08-l4-e2, type: paradigm, kind: verb, lemma: okumak, targets: [okuyorum, okuyorsun, okuyor, okuyoruz, okuyorsunuz, okuyorlar], gloss_de: lesen }
+      - id: a1-u08-l4-e3
+        type: paradigm
+        kind: verb
+        lemma: gitmek
+        targets: [gidiyorum, gidiyorsun, gidiyor, gidiyoruz, gidiyorsunuz, gidiyorlar]
+        gloss_de: gehen
+        explanation: git → gid vor dem Vokal, in allen Personen.
+      - { id: a1-u08-l4-e4, type: paradigm, kind: verb, lemma: yapmak, targets: [yapıyorum, yapıyorsun, yapıyor, yapıyoruz, yapıyorsunuz, yapıyorlar], gloss_de: machen }
+      - { id: a1-u08-l4-e5, type: paradigm, kind: verb, lemma: beklemek, targets: [bekliyorum, bekliyorsun, bekliyor, bekliyoruz, bekliyorsunuz, bekliyorlar], gloss_de: warten }
+      - id: a1-u08-l4-e6
+        type: paradigm
+        kind: verb
+        lemma: yemek
+        targets: [yiyorum, yiyorsun, yiyor, yiyoruz, yiyorsunuz, yiyorlar]
+        gloss_de: essen
+        explanation: Unregelmäßig wie demek (sagen) → diyor.
+      - { id: a1-u08-l4-e7, type: paradigm, kind: verb, lemma: içmek, targets: [içiyorum, içiyorsun, içiyor, içiyoruz, içiyorsunuz, içiyorlar], gloss_de: trinken }
+      - { id: a1-u08-l4-e8, type: paradigm, kind: verb, lemma: çalışmak, targets: [çalışıyorum, çalışıyorsun, çalışıyor, çalışıyoruz, çalışıyorsunuz, çalışıyorlar], gloss_de: arbeiten }
+      - { id: a1-u08-l4-e9, type: paradigm, kind: verb, lemma: uyumak, targets: [uyuyorum, uyuyorsun, uyuyor, uyuyoruz, uyuyorsunuz, uyuyorlar], gloss_de: schlafen }
+      - { id: a1-u08-l4-e10, type: paradigm, kind: verb, lemma: izlemek, targets: [izliyorum, izliyorsun, izliyor, izliyoruz, izliyorsunuz, izliyorlar], gloss_de: anschauen }
+
+  - id: a1-u08-l5
+    type: dialog
+    title: Mein Tag
+    exercises:
+      - id: a1-u08-l5-e1
+        type: word_bank
+        prompt: Ich trinke jeden Morgen Tee.
+        answers: [Her sabah çay içiyorum., Ben her sabah çay içiyorum.]
+        distractors: [içiyor, akşam]
+        explanation: Das Verb steht am Satzende.
+      - id: a1-u08-l5-e2
+        type: word_bank
+        prompt: Ahmet geht zur Schule.
+        answers: [Ahmet okula gidiyor.]
+        distractors: [okulda, gidiyorum]
+      - id: a1-u08-l5-e3
+        type: word_bank
+        prompt: Abends sehen wir fern.
+        answers: [Akşam televizyon izliyoruz., Biz akşam televizyon izliyoruz., Akşamları televizyon izliyoruz., Biz akşamları televizyon izliyoruz.]
+        distractors: [izliyorsunuz, sabah]
+        explanation: akşamları betont das Regelmäßige (jeden Abend).
+      - id: a1-u08-l5-e4
+        type: word_bank
+        prompt: Meine Mutter liest ein Buch.
+        answers: [Annem kitap okuyor., Annem bir kitap okuyor.]
+        distractors: [kitabı, okuyorum]
+        explanation: Unbestimmtes Objekt ohne Akkusativ.
+      - id: a1-u08-l5-e5
+        type: word_bank
+        prompt: Was machst du jetzt?
+        answers: [Şimdi ne yapıyorsun?, Ne yapıyorsun şimdi?]
+        distractors: [yapıyorum, nerede]
+        explanation: Das Fragewort steht dort, wo die Antwort stehen würde, vor dem Verb.
+      - id: a1-u08-l5-e6
+        type: word_bank
+        prompt: Ich frühstücke.
+        answers: [Kahvaltı yapıyorum.]
+        distractors: [yiyorum, kahvaltıyı]
+        explanation: Wörtlich „Ich mache Frühstück“. Ebenso üblich ist „Kahvaltı ediyorum“.
+      - id: a1-u08-l5-e7
+        type: word_bank
+        prompt: Mein Vater arbeitet in einer Bank.
+        answers: [Babam bankada çalışıyor., Babam bir bankada çalışıyor.]
+        distractors: [bankaya, çalışıyorum]
+      - id: a1-u08-l5-e8
+        type: word_bank
+        prompt: Die Kinder spielen im Park.
+        answers: [Çocuklar parkta oynuyor., Çocuklar parkta oynuyorlar.]
+        distractors: [parka, oynuyorsun]
+        explanation: Bei Personen im Plural sind beide Formen üblich, oynuyor und oynuyorlar.
+      - id: a1-u08-l5-e9
+        type: word_bank
+        prompt: Ich höre Musik.
+        answers: [Müzik dinliyorum.]
+        distractors: [dinliyor, müziği]
+      - id: a1-u08-l5-e10
+        type: free_text
+        direction: tr_de
+        prompt: Sabah yedide kalkıyorum.
+        answers: [Ich stehe um sieben Uhr morgens auf., Ich stehe morgens um sieben auf., Ich stehe morgens um sieben Uhr auf., Ich stehe um sieben auf., Ich stehe um sieben Uhr auf., Ich stehe um 7 Uhr auf., Ich stehe morgens um 7 Uhr auf., Morgens stehe ich um sieben auf., Morgens stehe ich um sieben Uhr auf.]
+        explanation: yedide = um sieben (Zahl + Lokativ).
+      - id: a1-u08-l5-e11
+        type: word_bank
+        prompt: Wir fahren nach Istanbul.
+        answers: [İstanbul'a gidiyoruz., Biz İstanbul'a gidiyoruz.]
+        distractors: [İstanbul'da, gidiyorlar]
+        explanation: gitmek heißt gehen und fahren.
+      - id: a1-u08-l5-e12
+        type: free_text
+        direction: de_tr
+        prompt: Ich warte.
+        answers: [Bekliyorum., Ben bekliyorum.]
+
+  - id: a1-u08-l6
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u08-l6-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich komme
+        answers: [geliyorum, ben geliyorum]
+      - id: a1-u08-l6-e2
+        type: free_text
+        direction: de_tr
+        prompt: wir gehen
+        answers: [gidiyoruz, biz gidiyoruz]
+      - id: a1-u08-l6-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (du isst)
+        options: [yiyorsun, yeyorsun, yemiyorsun]
+        answer: yiyorsun
+      - id: a1-u08-l6-e4
+        type: word_bank
+        prompt: Mehmet spricht Türkisch.
+        answers: [Mehmet Türkçe konuşuyor.]
+        distractors: [konuşuyorum, Türk]
+      - id: a1-u08-l6-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ne içiyorsunuz?
+        answers: [Was trinkt ihr?, Was trinken Sie?]
+      - id: a1-u08-l6-e6
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er fängt an)
+        options: [başlıyor, başlayor, başlaiyor]
+        answer: başlıyor
+      - id: a1-u08-l6-e7
+        type: word_bank
+        prompt: Ich wohne in Berlin.
+        answers: [Berlin'de oturuyorum., Ben Berlin'de oturuyorum.]
+        distractors: [Berlin'e, oturuyor]
+        explanation: "oturmak heißt sitzen und wohnen. Auch yaşamak (leben) ist üblich: Berlin'de yaşıyorum."
+      - id: a1-u08-l6-e8
+        type: free_text
+        direction: de_tr
+        prompt: sie lesen
+        answers: [okuyorlar, onlar okuyor, onlar okuyorlar]
+      - id: a1-u08-l6-e9
+        type: multiple_choice
+        prompt: Warum heißt es „gidiyorum“ und nicht „gitiyorum“?
+        options: [Das t von git wird vor Vokal zu d., Weil -yor immer ein d braucht., Das ist eine Ausnahme der 1. Person.]
+        answer: Das t von git wird vor Vokal zu d.
+      - id: a1-u08-l6-e10
+        type: word_bank
+        prompt: Was machst du heute?
+        answers: [Bugün ne yapıyorsun?]
+        distractors: [yapıyorum, şimdi]
+      - id: a1-u08-l6-e11
+        type: free_text
+        direction: de_tr
+        prompt: ihr arbeitet
+        answers: [çalışıyorsunuz, siz çalışıyorsunuz]
+      - id: a1-u08-l6-e12
+        type: free_text
+        direction: tr_de
+        prompt: Babam gazete okuyor.
+        answers: [Mein Vater liest Zeitung., Mein Vater liest eine Zeitung., Mein Vater liest die Zeitung.]
+        explanation: gazete = Zeitung.
+
+vocab:
+  - { tr: gelmek, de: [kommen], pos: verb }
+  - { tr: gitmek, de: [gehen, fahren], pos: verb, softens: true }
+  - { tr: yapmak, de: [machen, tun], pos: verb }
+  - { tr: okumak, de: [lesen], pos: verb }
+  - { tr: içmek, de: [trinken], pos: verb }
+  - { tr: yemek, de: [essen], pos: verb }
+  - { tr: çalışmak, de: [arbeiten, lernen], pos: verb }
+  - { tr: uyumak, de: [schlafen], pos: verb }
+  - { tr: kalkmak, de: [aufstehen], pos: verb }
+  - { tr: beklemek, de: [warten], pos: verb }
+  - { tr: izlemek, de: [anschauen, zuschauen], pos: verb }
+  - { tr: konuşmak, de: [sprechen], pos: verb }
+  - { tr: başlamak, de: [anfangen, beginnen], pos: verb }
+  - { tr: dinlemek, de: [zuhören, hören], pos: verb }
+  - { tr: oturmak, de: [sitzen, wohnen], pos: verb }
+  - { tr: oynamak, de: [spielen], pos: verb }
+  - { tr: sabah, de: [Morgen (Tageszeit), morgens], pos: noun }
+  - { tr: öğle, de: [Mittag], pos: noun }
+  - { tr: akşamları, de: [abends, jeden Abend], pos: adv }
+  - { tr: akşam, de: [Abend, abends], pos: noun }
+  - { tr: gece, de: [Nacht], pos: noun }
+  - { tr: şimdi, de: [jetzt], pos: adv }
+  - { tr: bugün, de: [heute], pos: adv }
+  - { tr: her gün, de: [jeden Tag], pos: phrase }
+  - { tr: televizyon, de: [Fernseher, Fernsehen], pos: noun }
+  - { tr: müzik, de: [Musik], pos: noun }
+  - { tr: ne, de: [was], pos: pron }
+  - { tr: gazete, de: [Zeitung], pos: noun }

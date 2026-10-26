@@ -70,10 +70,29 @@ export function solutionOf(ex: Supported): string {
   return ex.answers[0]!;
 }
 
-/** Bausteine der Wortbank: Wörter der kanonischen Lösung plus Ablenker, stabil gemischt. */
+/**
+ * Bausteine der Wortbank: Wörter aller hinterlegten Lösungen (damit jede Variante baubar ist,
+ * z. B. mit und ohne Pronomen) plus Ablenker, stabil gemischt. Groß/Klein gilt als gleiches Wort.
+ */
 export function wordBankTokens(ex: Extract<Exercise, { type: 'word_bank' }>): string[] {
-  const words = ex.answers[0]!.split(/\s+/).map((w) => w.replace(/^[„"«]+|[.,!?;:"“»]+$/g, ''));
-  return seededShuffle([...words, ...(ex.distractors ?? [])], ex.id);
+  const needed = new Map<string, { word: string; count: number }>();
+  for (const answer of ex.answers) {
+    const counts = new Map<string, { word: string; count: number }>();
+    for (const raw of answer.split(/\s+/)) {
+      const word = raw.replace(/^[„"«]+|[.,!?;:"“»]+$/g, '');
+      if (!word) continue;
+      const entry = counts.get(trLower(word)) ?? { word, count: 0 };
+      counts.set(trLower(word), { ...entry, count: entry.count + 1 });
+    }
+    for (const [key, { word, count }] of counts) {
+      const prev = needed.get(key);
+      if (!prev) needed.set(key, { word, count });
+      else if (count > prev.count) needed.set(key, { ...prev, count });
+    }
+  }
+  const words = [...needed.values()].flatMap(({ word, count }) => Array<string>(count).fill(word));
+  const extra = (ex.distractors ?? []).filter((d) => !needed.has(trLower(d)));
+  return seededShuffle([...words, ...extra], ex.id);
 }
 
 export function seededShuffle<T>(items: T[], seed: string): T[] {

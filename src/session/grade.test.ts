@@ -55,6 +55,17 @@ describe('wordBankTokens', () => {
     expect([...wordBankTokens(ex)].sort()).toEqual(['Ben', 'su', 'çay', 'içiyorum'].sort());
   });
 
+  it('macht jede hinterlegte Lösung baubar, ohne Groß/Klein-Dubletten', () => {
+    const alt = {
+      ...ex,
+      answers: ['Bir kedim var.', 'Benim bir kedim var.', 'Güle güle!'],
+      distractors: ['yok', 'Var'],
+    };
+    expect([...wordBankTokens(alt)].sort()).toEqual(
+      ['Bir', 'kedim', 'var', 'Benim', 'Güle', 'Güle', 'yok'].sort(),
+    );
+  });
+
   it('mischt deterministisch je Übungs-ID', () => {
     expect(wordBankTokens(ex)).toEqual(wordBankTokens(ex));
   });

@@ -1,0 +1,509 @@
+# A1-07: Essen und Trinken (var/yok, „haben“, Akkusativ). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u07
+level: A1
+title: Essen und Trinken
+grammar_focus: [var-yok, haben, akkusativ]
+explainer: explainers/a1-essen.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u07-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u07-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „ekmek“?
+        options: [Brot, Käse, Ei]
+        answer: Brot
+      - id: a1-u07-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Käse
+        answers: [peynir]
+      - id: a1-u07-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „zeytin“?
+        options: [Olive, Tomate, Honig]
+        answer: Olive
+      - id: a1-u07-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Ei
+        answers: [yumurta]
+      - id: a1-u07-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „süt“?
+        options: [Milch, Salz, Zucker]
+        answer: Milch
+      - id: a1-u07-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: et
+        answers: [Fleisch, das Fleisch]
+      - id: a1-u07-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „tavuk“?
+        options: [Huhn, Fisch, Rind]
+        answer: Huhn
+        explanation: tavuk ist das Huhn und das Hähnchenfleisch.
+      - id: a1-u07-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Fisch
+        answers: [balık]
+      - id: a1-u07-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „domates“?
+        options: [Tomate, Kartoffel, Orange]
+        answer: Tomate
+      - id: a1-u07-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „portakal“?
+        options: [Orange, Banane, Apfel]
+        answer: Orange
+      - id: a1-u07-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Salz
+        answers: [tuz]
+      - id: a1-u07-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „kahvaltı“?
+        options: [Frühstück, Abendessen, Kaffee]
+        answer: Frühstück
+        explanation: Aus kahve altı, wörtlich „unter dem Kaffee“, also das, was man vor dem Kaffee isst.
+      - id: a1-u07-l1-e13
+        type: free_text
+        direction: tr_de
+        prompt: bal
+        answers: [Honig, der Honig]
+      - id: a1-u07-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „hesap“?
+        options: [Rechnung, Speisekarte, Trinkgeld]
+        answer: Rechnung
+      - id: a1-u07-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „var“?
+        options: [es gibt, es gibt nicht, ich möchte]
+        answer: es gibt
+        explanation: var (es gibt, vorhanden), yok (es gibt nicht).
+      - id: a1-u07-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „ve“?
+        options: [und, oder, aber]
+        answer: und
+      - id: a1-u07-l1-e17
+        type: multiple_choice
+        prompt: Was heißt „ama“?
+        options: [aber, und, auch]
+        answer: aber
+      - id: a1-u07-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „maalesef“?
+        options: [leider, vielleicht, gern]
+        answer: leider
+      - id: a1-u07-l1-e19
+        type: free_text
+        direction: de_tr
+        prompt: Geld
+        answers: [para]
+
+  - id: a1-u07-l2
+    type: grammar
+    title: Es gibt … var und yok
+    exercises:
+      - id: a1-u07-l2-e1
+        type: word_bank
+        prompt: Es gibt Brot.
+        answers: [Ekmek var.]
+        distractors: [yok, Ekmekler]
+        explanation: var steht am Satzende.
+      - id: a1-u07-l2-e2
+        type: word_bank
+        prompt: Es gibt keine Milch.
+        answers: [Süt yok.]
+        distractors: [var, değil]
+        explanation: „Es gibt nicht“ heißt yok, nicht değil.
+      - id: a1-u07-l2-e3
+        type: word_bank
+        prompt: Gibt es Käse?
+        answers: [Peynir var mı?]
+        distractors: [yok, mi]
+        explanation: Fragepartikel nach var, mit a → mı.
+      - id: a1-u07-l2-e4
+        type: word_bank
+        prompt: Zu Hause gibt es Tee.
+        answers: [Evde çay var.]
+        distractors: [Eve, yok]
+      - id: a1-u07-l2-e5
+        type: word_bank
+        prompt: Gibt es hier ein Restaurant?
+        answers: [Burada bir lokanta var mı?, Burada lokanta var mı?]
+        distractors: [orada, yok]
+      - id: a1-u07-l2-e6
+        type: multiple_choice
+        prompt: Antwort auf „Süt var mı?“, wenn keine da ist
+        options: ['Hayır, yok.', 'Hayır, değil.', 'Evet, var.']
+        answer: 'Hayır, yok.'
+      - id: a1-u07-l2-e7
+        type: free_text
+        direction: de_tr
+        prompt: Es gibt keinen Fisch.
+        answers: [Balık yok.]
+      - id: a1-u07-l2-e8
+        type: free_text
+        direction: tr_de
+        prompt: Masada zeytin var.
+        answers: [Auf dem Tisch sind Oliven., Auf dem Tisch gibt es Oliven., Es gibt Oliven auf dem Tisch., Auf dem Tisch ist eine Olive., Auf dem Tisch liegen Oliven.]
+      - id: a1-u07-l2-e9
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Çay yok.“ / „Çay değil.“
+        options: [Es gibt keinen Tee. / Es ist kein Tee., Beides heißt dasselbe., Es ist kein Tee. / Es gibt keinen Tee.]
+        answer: Es gibt keinen Tee. / Es ist kein Tee.
+      - id: a1-u07-l2-e10
+        type: word_bank
+        prompt: Ja, gibt es.
+        answers: ['Evet, var.']
+        distractors: [yok, Hayır]
+      - id: a1-u07-l2-e11
+        type: free_text
+        direction: de_tr
+        prompt: Gibt es Wasser?
+        answers: [Su var mı?]
+      - id: a1-u07-l2-e12
+        type: word_bank
+        prompt: Im Kühlschrank gibt es keine Eier.
+        answers: [Buzdolabında yumurta yok.]
+        distractors: [var, yumurtalar]
+        explanation: buzdolabı heißt Kühlschrank, buzdolabında = im Kühlschrank.
+
+  - id: a1-u07-l3
+    type: grammar
+    title: Ich habe …
+    exercises:
+      - id: a1-u07-l3-e1
+        type: word_bank
+        prompt: Ich habe eine Katze.
+        answers: [Benim bir kedim var., Bir kedim var., Kedim var., Benim kedim var.]
+        distractors: [kedi, yok]
+        explanation: Wörtlich „Meine eine Katze gibt es“. Besitz + var.
+      - id: a1-u07-l3-e2
+        type: word_bank
+        prompt: Ich habe kein Auto.
+        answers: [Arabam yok., Benim arabam yok.]
+        distractors: [var, araba]
+      - id: a1-u07-l3-e3
+        type: word_bank
+        prompt: Hast du Geschwister?
+        answers: [Kardeşin var mı?, Senin kardeşin var mı?]
+        distractors: [kardeşim, yok]
+      - id: a1-u07-l3-e4
+        type: word_bank
+        prompt: Ayşe hat einen Hund.
+        answers: [Ayşe'nin bir köpeği var., Ayşe'nin köpeği var.]
+        distractors: [köpek, Ayşe]
+        explanation: Besitzer im Genitiv, Besitz mit „sein/ihr“-Endung, dann var.
+      - { id: a1-u07-l3-e5, type: suffix_builder, stem: kedi, suffixes: [POSS_1SG], target: kedim, gloss_de: 'meine Katze (ich habe eine Katze)' }
+      - { id: a1-u07-l3-e6, type: suffix_builder, stem: köpek, suffixes: [POSS_3SG], target: köpeği, gloss_de: 'sein, ihr Hund' }
+      - { id: a1-u07-l3-e7, type: suffix_builder, stem: zaman, suffixes: [POSS_1SG], target: zamanım, gloss_de: 'meine Zeit (ich habe Zeit)' }
+      - id: a1-u07-l3-e8
+        type: word_bank
+        prompt: Ich habe keine Zeit.
+        answers: [Zamanım yok., Benim zamanım yok.]
+        distractors: [zaman, var]
+      - id: a1-u07-l3-e9
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe einen Bruder.
+        answers: [Bir erkek kardeşim var., Benim bir erkek kardeşim var., Erkek kardeşim var., Benim erkek kardeşim var., Bir ağabeyim var., Ağabeyim var., Benim bir ağabeyim var., Bir abim var., Abim var., Bir kardeşim var.]
+      - id: a1-u07-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Paran var mı?
+        answers: [Hast du Geld?, Hast du Geld dabei?]
+        explanation: para heißt Geld, paran = dein Geld.
+      - id: a1-u07-l3-e11
+        type: multiple_choice
+        prompt: Wie sagt man „Wir haben ein Haus“?
+        options: [Bizim bir evimiz var., Biz bir ev var., Bizim bir ev var.]
+        answer: Bizim bir evimiz var.
+      - id: a1-u07-l3-e12
+        type: multiple_choice
+        prompt: Was heißt „Hiç vaktim yok“?
+        options: [Ich habe überhaupt keine Zeit., Ich habe viel Zeit., Hast du Zeit?]
+        answer: Ich habe überhaupt keine Zeit.
+        explanation: vakit ist ein anderes Wort für Zeit (vaktim = meine Zeit), hiç verstärkt die Verneinung.
+
+  - id: a1-u07-l4
+    type: grammar
+    title: Den Tee! Der Akkusativ
+    exercises:
+      - id: a1-u07-l4-e1
+        type: suffix_builder
+        stem: çay
+        suffixes: [ACC]
+        target: çayı
+        gloss_de: den Tee (bestimmt)
+        explanation: Bestimmtes Objekt → Akkusativ -ı/-i/-u/-ü.
+      - { id: a1-u07-l4-e2, type: suffix_builder, stem: peynir, suffixes: [ACC], target: peyniri, gloss_de: den Käse }
+      - id: a1-u07-l4-e3
+        type: suffix_builder
+        stem: ekmek
+        suffixes: [ACC]
+        target: ekmeği
+        gloss_de: das Brot
+        explanation: k wird vor Vokal zu ğ.
+      - id: a1-u07-l4-e4
+        type: suffix_builder
+        stem: elma
+        suffixes: [ACC]
+        target: elmayı
+        gloss_de: den Apfel
+        explanation: Nach Vokal steht ein y.
+      - { id: a1-u07-l4-e5, type: suffix_builder, stem: süt, suffixes: [ACC], target: sütü, gloss_de: die Milch }
+      - { id: a1-u07-l4-e6, type: suffix_builder, stem: yumurta, suffixes: [ACC], target: yumurtayı, gloss_de: das Ei }
+      - { id: a1-u07-l4-e7, type: suffix_builder, stem: tavuk, suffixes: [ACC], target: tavuğu, gloss_de: das Huhn }
+      - { id: a1-u07-l4-e8, type: suffix_builder, stem: balık, suffixes: [ACC], target: balığı, gloss_de: den Fisch }
+      - { id: a1-u07-l4-e9, type: suffix_builder, stem: kahve, suffixes: [ACC], target: kahveyi, gloss_de: den Kaffee }
+      - id: a1-u07-l4-e10
+        type: suffix_builder
+        stem: su
+        suffixes: [ACC]
+        target: suyu
+        gloss_de: das Wasser
+        explanation: su nimmt immer ein y, suyu.
+      - { id: a1-u07-l4-e11, type: suffix_builder, stem: hesap, suffixes: [ACC], target: hesabı, gloss_de: die Rechnung }
+      - id: a1-u07-l4-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Çay istiyorum.“ / „Çayı istiyorum.“
+        options: [Ich möchte Tee. / Ich möchte den Tee., Beides heißt dasselbe., Ich möchte den Tee. / Ich möchte Tee.]
+        answer: Ich möchte Tee. / Ich möchte den Tee.
+        explanation: istiyorum heißt „ich möchte“. Unbestimmtes Objekt ohne Endung, bestimmtes mit Akkusativ.
+      - id: a1-u07-l4-e13
+        type: word_bank
+        prompt: Ich möchte einen Kaffee.
+        answers: [Bir kahve istiyorum., Kahve istiyorum.]
+        distractors: [kahveyi, var]
+        explanation: Die Form istiyorum lernst du in Unit 8 genauer. Im Café ist „Bir kahve, lütfen.“ höflicher und üblicher.
+      - id: a1-u07-l4-e14
+        type: word_bank
+        prompt: Ich möchte dieses Brot.
+        answers: [Bu ekmeği istiyorum.]
+        distractors: [ekmek, yok]
+        explanation: Mit „bu“ ist das Objekt bestimmt → ekmeği.
+      - id: a1-u07-l4-e15
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Ich möchte die Rechnung.)
+        options: [Hesabı istiyorum., Hesap istiyorum., Hesapı istiyorum.]
+        answer: Hesabı istiyorum.
+
+  - id: a1-u07-l5
+    type: grammar
+    title: 'Tabellen: fünf Fälle'
+    exercises:
+      - id: a1-u07-l5-e1
+        type: paradigm
+        kind: noun
+        lemma: çay
+        rows: [[ACC], [DAT], [LOC], [ABL], [GEN]]
+        targets: [çayı, çaya, çayda, çaydan, çayın]
+        gloss_de: Tee
+      - id: a1-u07-l5-e2
+        type: paradigm
+        kind: noun
+        lemma: ekmek
+        rows: [[ACC], [DAT], [LOC], [ABL], [GEN]]
+        targets: [ekmeği, ekmeğe, ekmekte, ekmekten, ekmeğin]
+        gloss_de: Brot
+        explanation: k → ğ nur vor Vokal. Vor -te und -ten bleibt k, das d wird zu t.
+      - id: a1-u07-l5-e3
+        type: paradigm
+        kind: noun
+        lemma: elma
+        rows: [[ACC], [DAT], [LOC], [ABL], [GEN]]
+        targets: [elmayı, elmaya, elmada, elmadan, elmanın]
+        gloss_de: Apfel
+        explanation: Nach Vokal y (Akkusativ, Dativ) und n (Genitiv).
+      - { id: a1-u07-l5-e4, type: paradigm, kind: noun, lemma: süt, rows: [[ACC], [DAT], [LOC], [ABL], [GEN]], targets: [sütü, süte, sütte, sütten, sütün], gloss_de: Milch }
+      - { id: a1-u07-l5-e5, type: paradigm, kind: noun, lemma: balık, rows: [[ACC], [DAT], [LOC], [ABL], [GEN]], targets: [balığı, balığa, balıkta, balıktan, balığın], gloss_de: Fisch }
+      - { id: a1-u07-l5-e6, type: paradigm, kind: noun, lemma: peynir, rows: [[ACC], [DAT], [LOC], [ABL], [GEN]], targets: [peyniri, peynire, peynirde, peynirden, peynirin], gloss_de: Käse }
+      - { id: a1-u07-l5-e7, type: paradigm, kind: noun, lemma: kahve, rows: [[ACC], [DAT], [LOC], [ABL], [GEN]], targets: [kahveyi, kahveye, kahvede, kahveden, kahvenin], gloss_de: Kaffee }
+      - { id: a1-u07-l5-e8, type: paradigm, kind: noun, lemma: ev, rows: [[ACC], [DAT], [LOC], [ABL], [GEN]], targets: [evi, eve, evde, evden, evin], gloss_de: Haus }
+      - { id: a1-u07-l5-e9, type: paradigm, kind: noun, lemma: okul, rows: [[ACC], [DAT], [LOC], [ABL], [GEN]], targets: [okulu, okula, okulda, okuldan, okulun], gloss_de: Schule }
+      - id: a1-u07-l5-e10
+        type: paradigm
+        kind: noun
+        lemma: tavuk
+        rows: [[ACC], [DAT], [LOC], [ABL], [GEN]]
+        targets: [tavuğu, tavuğa, tavukta, tavuktan, tavuğun]
+        gloss_de: Huhn
+
+  - id: a1-u07-l6
+    type: dialog
+    title: Im Café
+    exercises:
+      - id: a1-u07-l6-e1
+        type: word_bank
+        prompt: Einen Tee, bitte.
+        answers: [Bir çay lütfen., Bir çay.]
+        distractors: [çayı, iki]
+      - id: a1-u07-l6-e2
+        type: word_bank
+        prompt: Die Rechnung, bitte.
+        answers: [Hesap lütfen.]
+        distractors: [Hesabı, var]
+        explanation: Als Bitte ohne Verb steht hesap ohne Endung.
+      - id: a1-u07-l6-e3
+        type: multiple_choice
+        prompt: Was fragt der Kellner mit „Ne istersiniz?“
+        options: [Was möchten Sie?, Wie geht es Ihnen?, Woher kommen Sie?]
+        answer: Was möchten Sie?
+        register: formal
+        explanation: Feste Frage des Kellners; die Verbform lernst du später.
+      - id: a1-u07-l6-e4
+        type: word_bank
+        prompt: Ich möchte ein Wasser.
+        answers: [Bir su istiyorum., Su istiyorum.]
+        distractors: [suyu, yok]
+      - id: a1-u07-l6-e5
+        type: multiple_choice
+        prompt: Was sagt man vor dem Essen?
+        options: [Afiyet olsun!, Güle güle!, Günaydın!]
+        answer: Afiyet olsun!
+        explanation: „Afiyet olsun“ heißt etwa „Guten Appetit“ und auch „Wohl bekomm's“ nach dem Essen.
+      - id: a1-u07-l6-e6
+        type: word_bank
+        prompt: Zum Frühstück gibt es Käse, Oliven und Brot.
+        answers: ['Kahvaltıda peynir, zeytin ve ekmek var.']
+        distractors: [yok, ekmeği]
+        explanation: ve heißt „und“.
+      - id: a1-u07-l6-e7
+        type: free_text
+        direction: de_tr
+        prompt: Gibt es Fisch?
+        answers: [Balık var mı?]
+      - id: a1-u07-l6-e8
+        type: word_bank
+        prompt: Nein, leider nicht. Aber es gibt Huhn.
+        answers: ['Hayır, maalesef yok. Ama tavuk var.']
+        distractors: [değil, tavuğu]
+        explanation: maalesef = leider, ama = aber.
+      - id: a1-u07-l6-e9
+        type: free_text
+        direction: tr_de
+        prompt: İki çay, bir kahve lütfen.
+        answers: ['Zwei Tee, einen Kaffee, bitte.', 'Zwei Tee und einen Kaffee, bitte.', 'Zwei Tee, ein Kaffee, bitte.']
+      - id: a1-u07-l6-e10
+        type: multiple_choice
+        prompt: Wie bedankst du dich beim Kellner?
+        options: [Teşekkürler!, Afiyet olsun!, Hesap!]
+        answer: Teşekkürler!
+      - id: a1-u07-l6-e11
+        type: word_bank
+        prompt: Mit Zucker?
+        answers: [Şekerli mi?]
+        distractors: [Şeker, var]
+        explanation: şekerli = mit Zucker, şekersiz = ohne Zucker.
+      - id: a1-u07-l6-e12
+        type: multiple_choice
+        prompt: Was heißt „Bir şey değil“?
+        options: [Gern geschehen., Nichts ist da., Kein Problem mit dem Essen.]
+        answer: Gern geschehen.
+        explanation: Antwort auf ein Danke, wörtlich „keine Sache“, wie rica ederim.
+
+  - id: a1-u07-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u07-l7-e1
+        type: word_bank
+        prompt: Ich habe keinen Tee.
+        answers: [Çayım yok., Benim çayım yok.]
+        distractors: [çay, değil]
+      - id: a1-u07-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: den Fisch
+        answers: [balığı]
+      - id: a1-u07-l7-e3
+        type: free_text
+        direction: de_tr
+        prompt: Es gibt kein Salz.
+        answers: [Tuz yok.]
+      - id: a1-u07-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (das Brot, bestimmt)
+        options: [ekmeği, ekmeki, ekmeğı]
+        answer: ekmeği
+      - id: a1-u07-l7-e5
+        type: word_bank
+        prompt: Gibt es Honig?
+        answers: [Bal var mı?]
+        distractors: [mi, yok]
+      - id: a1-u07-l7-e6
+        type: word_bank
+        prompt: Mehmet hat zwei Kinder.
+        answers: [Mehmet'in iki çocuğu var.]
+        distractors: [çocukları, Mehmet]
+        explanation: Nach der Zahl kein Plural, auch nicht beim Besitz.
+      - id: a1-u07-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Buzdolabında süt var mı?
+        answers: [Gibt es Milch im Kühlschrank?, Ist Milch im Kühlschrank?, Ist im Kühlschrank Milch?]
+      - id: a1-u07-l7-e8
+        type: multiple_choice
+        prompt: Was heißt „yok“?
+        options: [es gibt nicht, ja, ich möchte]
+        answer: es gibt nicht
+        explanation: „nein“ heißt hayır, „nicht sein“ değil. Umgangssprachlich wird yok auch als „nein“ verwendet.
+      - id: a1-u07-l7-e9
+        type: free_text
+        direction: de_tr
+        prompt: das Wasser (bestimmt)
+        answers: [suyu]
+      - id: a1-u07-l7-e10
+        type: word_bank
+        prompt: Ich möchte die Milch.
+        answers: [Sütü istiyorum.]
+        distractors: [Süt, var]
+      - id: a1-u07-l7-e11
+        type: free_text
+        direction: de_tr
+        prompt: Frühstück
+        answers: [kahvaltı]
+      - id: a1-u07-l7-e12
+        type: multiple_choice
+        prompt: Was heißt „Zamanın var mı?“
+        options: [Hast du Zeit?, Wie spät ist es?, Hast du eine Uhr?]
+        answer: Hast du Zeit?
+
+vocab:
+  - { tr: ekmek, de: [Brot], pos: noun, softens: true }
+  - { tr: peynir, de: [Käse], pos: noun }
+  - { tr: zeytin, de: [Olive], pos: noun }
+  - { tr: yumurta, de: [Ei], pos: noun }
+  - { tr: süt, de: [Milch], pos: noun }
+  - { tr: et, de: [Fleisch], pos: noun }
+  - { tr: tavuk, de: [Huhn, Hähnchen], pos: noun, softens: true }
+  - { tr: balık, de: [Fisch], pos: noun, softens: true }
+  - { tr: domates, de: [Tomate], pos: noun }
+  - { tr: portakal, de: [Orange], pos: noun }
+  - { tr: tuz, de: [Salz], pos: noun }
+  - { tr: bal, de: [Honig], pos: noun }
+  - { tr: kahvaltı, de: [Frühstück], pos: noun }
+  - { tr: hesap, de: [Rechnung], pos: noun, softens: true }
+  - { tr: var, de: [es gibt, vorhanden], pos: particle }
+  - { tr: yok, de: [es gibt nicht, nicht vorhanden], pos: particle }
+  - { tr: zaman, de: [Zeit], pos: noun }
+  - { tr: para, de: [Geld], pos: noun }
+  - { tr: buzdolabı, de: [Kühlschrank], pos: noun }
+  - { tr: istiyorum, de: [ich möchte, ich will], pos: phrase }
+  - { tr: ve, de: [und], pos: conj }
+  - { tr: ama, de: [aber], pos: conj }
+  - { tr: maalesef, de: [leider], pos: adv }
+  - { tr: afiyet olsun, de: [guten Appetit], pos: phrase }
+  - { tr: şekerli, de: [mit Zucker], pos: adj }
