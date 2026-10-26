@@ -36,7 +36,15 @@ const TYPE2: Record<Person, string> = {
   '3pl': 'lAr',
 };
 
-export const TENSES = ['present', 'past', 'future', 'aorist'] as const;
+export const TENSES = [
+  'present',
+  'past',
+  'future',
+  'aorist',
+  'evidential',
+  'necessitative',
+  'imperative',
+] as const;
 export type Tense = (typeof TENSES)[number];
 
 export interface VerbStem {
@@ -53,10 +61,18 @@ export interface ConjugateOptions {
   person: Person;
   negative?: boolean;
   question?: boolean;
+  /** „können“ -(y)Abil, verneint -(y)AmA (gelebilir, gelemez). */
+  ability?: boolean;
+  /** Imperativ 2. Pl. höflich -(y)InIz (geliniz). */
+  polite?: boolean;
 }
+
+export const COPULA_TENSES = ['present', 'past', 'evidential'] as const;
 
 export interface PredicateOptions {
   person: Person;
+  /** Vergangenheit -(y)DI (öğretmendim) oder -(y)mIş (öğretmenmiş). */
+  tense?: (typeof COPULA_TENSES)[number];
   negative?: boolean;
   question?: boolean;
   /** -DIr in der 3. Person Singular (öğretmendir). */
@@ -170,14 +186,26 @@ function personType2AndQuestion(b: Builder, person: Person, question: boolean) {
   }
 }
 
+export const IMPERATIVE_PERSONS: readonly Person[] = ['2sg', '3sg', '2pl', '3pl'];
+
 export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inflection {
   const verb: VerbStem = typeof input === 'string' ? { form: input } : input;
   const stem = verbStem(verb.form);
   if (!lastVowel(stem)) throw new MorphError(`Verbstamm "${verb.form}" enthält keinen Vokal`);
+  if (opts.ability) return withAbility(verb, stem, opts);
+  if (opts.tense === 'imperative') return imperative(verb, stem, opts);
   const b = new Builder();
   const question = opts.question ?? false;
 
   switch (opts.tense) {
+    case 'evidential':
+    case 'necessitative':
+      b.add('STEM', stem);
+      if (opts.negative) b.suffix('NEG', 'mA');
+      if (opts.tense === 'evidential') b.suffix('EVID', 'mIş');
+      else b.suffix('NEC', 'mAlI');
+      personAndQuestion(b, opts.person, question);
+      break;
     case 'present':
       present(b, verb, stem, opts.negative ?? false);
       personAndQuestion(b, opts.person, question);
@@ -206,6 +234,67 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
       aorist(b, verb, stem, opts.person, opts.negative ?? false, question);
       break;
   }
+  return b.result();
+}
+
+/**
+ * „können“: Stamm + (y)Abil, verneint Stamm + (y)A + Verneinung. Die Zeit wird auf dem
+ * erweiterten Stamm gebildet (gelebil-ir, gele-mez); bil nimmt im Aorist -ir.
+ */
+function withAbility(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
+  if (opts.tense === 'imperative') throw new MorphError('„können“ gibt es nicht im Imperativ');
+  const steps: Step[] = [];
+  let base: string;
+  if (IRREGULAR_FUTURE[stem]) {
+    base = IRREGULAR_FUTURE[stem]!;
+    steps.push({ tag: 'ABIL', rule: 'stem_raising', from: stem.at(-1)!, to: base.at(-1)! });
+  } else {
+    base = softenedStem(verb, stem, 'ABIL', steps);
+  }
+  const tail = realize(opts.negative ? '(y)A' : '(y)Abil', 'ABIL', { base, steps });
+  const inner = conjugate(
+    { form: `${base}${tail}mek`, aorist: opts.negative ? undefined : 'ir' },
+    { ...opts, ability: false },
+  );
+  const [first, ...rest] = inner.segments;
+  if (first?.text !== base + tail) throw new MorphError(`Unerwarteter Stamm "${first?.text}"`);
+  return {
+    form: inner.form,
+    segments: [{ tag: 'STEM', text: base }, { tag: 'ABIL', text: tail }, ...rest],
+    steps: [
+      ...steps,
+      ...inner.steps.map((s) =>
+        s.rule === 'aorist_vowel' && s.kind === 'lexical' ? { ...s, kind: 'ability' as const } : s,
+      ),
+    ],
+  };
+}
+
+/** Imperativ: gel, gelsin, gelin (höflich geliniz), gelsinler; verneint gelme, gelmeyin. */
+function imperative(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
+  if (!IMPERATIVE_PERSONS.includes(opts.person)) {
+    throw new MorphError(`Imperativ gibt es nicht für ${opts.person}`);
+  }
+  const b = new Builder();
+  if (opts.negative) {
+    b.add('STEM', stem);
+    b.suffix('NEG', 'mA');
+  } else if (opts.person === '2pl' && stem === 'ye') {
+    // ye → yiyin; de bleibt (deyin)
+    b.steps.push({ tag: 'IMP', rule: 'stem_raising', from: 'e', to: 'i' });
+    b.add('STEM', 'yi');
+  } else if (opts.person === '2pl') {
+    b.add('STEM', softenedStem(verb, stem, 'IMP', b.steps));
+  } else {
+    b.add('STEM', stem);
+  }
+  const template = {
+    '2sg': '',
+    '3sg': 'sIn',
+    '2pl': opts.polite ? '(y)InIz' : '(y)In',
+    '3pl': 'sInlAr',
+  }[opts.person as '2sg' | '3sg' | '2pl' | '3pl'];
+  b.suffix('IMP', template);
   return b.result();
 }
 
@@ -297,6 +386,7 @@ export function predicate(input: Stem | string, opts: PredicateOptions): Inflect
   const word = stemSpelling(stem);
   const b = new Builder();
   b.add('STEM', word);
+  if (opts.tense === 'past' || opts.tense === 'evidential') return copulaPast(b, stem, opts);
 
   if (opts.negative) b.add('NEG_COP', 'değil', true);
   else if (stem.proper && (TYPE1[opts.person] || opts.dir) && !opts.question) {
@@ -310,5 +400,23 @@ export function predicate(input: Stem | string, opts: PredicateOptions): Inflect
     return b.result();
   }
   personAndQuestion(b, opts.person, opts.question ?? false);
+  return b.result();
+}
+
+/** „war“: -(y)DI + Typ 2 (öğrenciydim), „sei angeblich“: -(y)mIş + Typ 1 (öğretmenmiş). */
+function copulaPast(b: Builder, stem: Stem, opts: PredicateOptions): Inflection {
+  const past = opts.tense === 'past';
+  if (opts.negative) b.add('NEG_COP', 'değil', true);
+  else if (stem.proper && !opts.question) {
+    b.add('STEM', "'");
+    b.segments.pop();
+    b.steps.push({ tag: past ? 'PAST' : 'EVID', rule: 'apostrophe' });
+  }
+  if (opts.question) {
+    const particle = 'm' + realizeVowel('I', lastVowel(trLower(b.current))!, 'Q', b.steps);
+    b.add('Q', particle, true);
+  }
+  b.suffix(past ? 'PAST' : 'EVID', past ? '(y)DI' : '(y)mIş');
+  b.suffix(PERSON_TAG[opts.person], (past ? TYPE2 : TYPE1)[opts.person]);
   return b.result();
 }

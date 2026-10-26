@@ -4,6 +4,7 @@ import type { Exercise } from '../../content/schema';
 import { t } from '../../i18n';
 import { paradigmCells } from '../../session/grade';
 import { SpecialCharBar } from '../SpecialCharBar';
+import { tenseLabels } from './ConjugationInput';
 import { Prompt } from './Prompt';
 
 type ParadigmExercise = Extract<Exercise, { type: 'paradigm' }>;
@@ -63,7 +64,7 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
 
   const formula = [
     ex.lemma,
-    ex.kind === 'verb' && ex.tense && ex.tense !== 'present' && t(`tense.${ex.tense}`),
+    ...(ex.kind === 'noun' ? [] : tenseLabels(ex.kind === 'copula', ex)),
     ex.negative && t('ex.conjugation.negative'),
     ex.question && t('ex.conjugation.question'),
   ]

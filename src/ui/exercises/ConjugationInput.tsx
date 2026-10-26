@@ -12,13 +12,29 @@ interface Props {
   disabled: boolean;
 }
 
+/** Formel-Teile für Zeit, „können“ und Höflichkeit (gemeinsam mit der Tabelle). */
+export function tenseLabels(
+  copula: boolean,
+  ex: { tense?: string; ability?: boolean; polite?: boolean },
+): string[] {
+  if (copula) {
+    return ex.tense === 'past' || ex.tense === 'evidential' ? [t(`copula.${ex.tense}`)] : [];
+  }
+  const tense = ex.tense as Exclude<typeof ex.tense, undefined>;
+  return [
+    ex.ability ? t('ex.conjugation.ability') : '',
+    tense && tense !== 'present' ? t(`tense.${tense as 'past'}`) : '',
+    ex.polite ? t('ex.conjugation.polite') : '',
+  ].filter(Boolean);
+}
+
 export function ConjugationInput({ ex, vocab, onChange, disabled }: Props) {
   const { tokens } = useMemo(() => conjugationTiles(ex, vocab), [ex, vocab]);
   // Aufgabe als Formel: "gelmek · ich · verneint · Frage"
   const formula = [
     ex.lemma,
     t(`person.${ex.person}`),
-    ex.mode === 'verb' && ex.tense && ex.tense !== 'present' && t(`tense.${ex.tense}`),
+    ...tenseLabels(ex.mode === 'copula', ex),
     ex.negative && t('ex.conjugation.negative'),
     ex.question && t('ex.conjugation.question'),
   ]

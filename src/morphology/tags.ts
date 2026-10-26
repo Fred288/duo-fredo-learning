@@ -24,6 +24,10 @@ export const VERB_TAGS = [
   'PAST', // -DI
   'FUT', // -(y)AcAk
   'AOR', // -r / -Ar / -Ir, verneint -z
+  'EVID', // -mIş (auch Kopula -(y)mIş)
+  'NEC', // -mAlI
+  'ABIL', // -(y)Abil, verneint -(y)A
+  'IMP', // Imperativ -sIn, -(y)In, -sInlAr
   'NEG', // -mA (vor -yor: -mI)
   'Q', // Fragepartikel mI (getrennt geschrieben)
   'NEG_COP', // değil

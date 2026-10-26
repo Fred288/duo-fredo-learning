@@ -38,9 +38,18 @@ export function solveExercise(ex: EngineExercise, vocab: readonly Vocab[] = []):
   const stem = stemFromVocab(ex.lemma, vocab);
   const flags = { person: ex.person, negative: ex.negative, question: ex.question };
   return ex.mode === 'verb'
-    ? conjugate(stem, { tense: ex.tense ?? 'present', ...flags })
-    : predicate(stem, { ...flags, dir: ex.dir });
+    ? conjugate(stem, {
+        tense: ex.tense ?? 'present',
+        ability: ex.ability,
+        polite: ex.polite,
+        ...flags,
+      })
+    : predicate(stem, { ...flags, dir: ex.dir, tense: copulaTense(ex.tense) });
 }
+
+/** Schema stellt sicher, dass Kopula-Übungen nur present/past/evidential nutzen. */
+const copulaTense = (tense?: string) =>
+  tense === 'past' || tense === 'evidential' ? tense : undefined;
 
 /** Zeilen einer Tabelle: Tag-Folgen (Nomen) oder Personen (Verb, Kopula). */
 export function paradigmRows(ex: ParadigmExercise): (MorphTag[] | Person)[] {
@@ -54,8 +63,13 @@ export function solveParadigm(ex: ParadigmExercise, vocab: readonly Vocab[] = []
     if (typeof row !== 'string') return inflect(stem, row);
     const flags = { person: row, negative: ex.negative, question: ex.question };
     return ex.kind === 'verb'
-      ? conjugate(stem, { tense: ex.tense ?? 'present', ...flags })
-      : predicate(stem, flags);
+      ? conjugate(stem, {
+          tense: ex.tense ?? 'present',
+          ability: ex.ability,
+          polite: ex.polite,
+          ...flags,
+        })
+      : predicate(stem, { ...flags, tense: copulaTense(ex.tense) });
   });
 }
 

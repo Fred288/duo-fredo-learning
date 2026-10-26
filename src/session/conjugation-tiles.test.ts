@@ -96,3 +96,23 @@ describe('conjugationTiles: Stufe 2', () => {
     expect(grade(ex, 'geldinmi', opts).verdict).toBe('correct');
   });
 });
+
+describe('conjugationTiles: Stufe 3', () => {
+  it('können: -ebil mit Harmonie-Ablenker', () => {
+    const { tokens } = conjugationTiles(
+      conj({ tense: 'aorist', ability: true, target: 'gelebilirim' }),
+    );
+    expect(tokens).toEqual(expect.arrayContaining(['gel', 'ebil', 'ir', 'im', 'abil']));
+  });
+
+  it('Kopula-Vergangenheit und Imperativ: Form ohne Puffer-y als Ablenker', () => {
+    const past = conjugationTiles(
+      conj({ mode: 'copula', lemma: 'öğrenci', tense: 'past', target: 'öğrenciydim' }),
+    );
+    expect(past.tokens).toEqual(expect.arrayContaining(['öğrenci', 'ydi', 'm', 'di']));
+    const imp = conjugationTiles(
+      conj({ lemma: 'okumak', person: '2pl', tense: 'imperative', target: 'okuyun' }),
+    );
+    expect(imp.tokens).toEqual(expect.arrayContaining(['oku', 'yun', 'un']));
+  });
+});

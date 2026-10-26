@@ -217,6 +217,33 @@ describe('LessonRunner', () => {
     expect(status).toContain('Nach stimmlosem „p“ wird d zu t');
   });
 
+  it('Konjugation mit „können“: Formel und Begründung des Aorist-Vokals', () => {
+    const ability: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e4',
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'gelmek',
+          person: '1sg',
+          tense: 'aorist',
+          ability: true,
+          target: 'gelebilirim',
+        },
+      ],
+    };
+    render(<LessonRunner lesson={ability} onExit={() => {}} />);
+    expect(screen.getByText('gelmek · ich · können · Aorist')).toBeTruthy();
+    for (const tile of ['gel', 'ebil', 'ir', 'im']) {
+      fireEvent.click(screen.getByRole('button', { name: tile }));
+    }
+    click('Prüfen');
+    const status = screen.getByRole('status').textContent;
+    expect(status).toContain('Richtig!');
+    expect(status).toContain('-ebil endet auf bil');
+  });
+
   it('Tabelle: markiert falsche Zellen und begründet nur diese', () => {
     const parLesson: Lesson = {
       ...lesson,

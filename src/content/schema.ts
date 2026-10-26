@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { MORPH_TAGS } from '../morphology/tags';
-import { PERSONS, TENSES } from '../morphology/verb';
+import { COPULA_TENSES, IMPERATIVE_PERSONS, PERSONS, TENSES } from '../morphology/verb';
 
 export const LEVELS = ['A1', 'A2', 'B1', 'B2'] as const;
 export const Level = z.enum(LEVELS);
@@ -107,19 +107,54 @@ export const SuffixBuilder = z.strictObject({
   target: nonEmpty,
 });
 
+const COPULA_TENSE_SET: readonly string[] = COPULA_TENSES;
+
+/** Zeit passt zum Modus; Imperativ nur für 2./3. Person. Gemeinsam für Konjugation und Tabelle. */
+function checkVerbForm(
+  e: { tense?: string; ability?: boolean; polite?: boolean },
+  copula: boolean,
+  persons: readonly string[],
+  ctx: z.RefinementCtx,
+) {
+  if (copula && e.tense && !COPULA_TENSE_SET.includes(e.tense)) {
+    ctx.addIssue({ code: 'custom', path: ['tense'], message: `Kopula kennt kein ${e.tense}` });
+  }
+  if (copula && e.ability) {
+    ctx.addIssue({ code: 'custom', path: ['ability'], message: 'ability nur bei Verben' });
+  }
+  if (e.tense === 'imperative') {
+    if (e.ability)
+      ctx.addIssue({ code: 'custom', path: ['ability'], message: 'kein können im Imperativ' });
+    const bad = persons.filter((p) => !IMPERATIVE_PERSONS.includes(p as never));
+    if (bad.length) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['person'],
+        message: `Imperativ nicht für ${bad.join(', ')}`,
+      });
+    }
+  } else if (e.polite) {
+    ctx.addIssue({ code: 'custom', path: ['polite'], message: 'polite nur im Imperativ' });
+  }
+}
+
 /** Verbkonjugation (mode verb, lemma = Infinitiv) oder Nominalsatz mit Kopula (mode copula). */
-export const Conjugation = z.strictObject({
-  ...exerciseBase,
-  type: z.literal('conjugation'),
-  mode: z.enum(['verb', 'copula']),
-  lemma: nonEmpty,
-  person: z.enum(PERSONS),
-  tense: z.enum(TENSES).optional(),
-  negative: z.boolean().optional(),
-  question: z.boolean().optional(),
-  dir: z.boolean().optional(),
-  target: nonEmpty,
-});
+export const Conjugation = z
+  .strictObject({
+    ...exerciseBase,
+    type: z.literal('conjugation'),
+    mode: z.enum(['verb', 'copula']),
+    lemma: nonEmpty,
+    person: z.enum(PERSONS),
+    tense: z.enum(TENSES).optional(),
+    negative: z.boolean().optional(),
+    question: z.boolean().optional(),
+    dir: z.boolean().optional(),
+    ability: z.boolean().optional(),
+    polite: z.boolean().optional(),
+    target: nonEmpty,
+  })
+  .superRefine((e, ctx) => checkVerbForm(e, e.mode === 'copula', [e.person], ctx));
 
 /** Tabelle: ein Wort durchdeklinieren (noun, Zeilen = Tag-Folgen) oder durchkonjugieren (verb/copula). */
 export const Paradigm = z
@@ -134,11 +169,19 @@ export const Paradigm = z
       .optional(),
     persons: z.array(z.enum(PERSONS)).min(2).optional(),
     tense: z.enum(TENSES).optional(),
+    ability: z.boolean().optional(),
+    polite: z.boolean().optional(),
     negative: z.boolean().optional(),
     question: z.boolean().optional(),
     targets: z.array(nonEmpty).min(2),
   })
   .superRefine((e, ctx) => {
+    if (e.kind !== 'noun') {
+      if (e.tense === 'imperative' && !e.persons) {
+        ctx.addIssue({ code: 'custom', path: ['persons'], message: 'Imperativ braucht persons' });
+      }
+      checkVerbForm(e, e.kind === 'copula', e.persons ?? [], ctx);
+    }
     const rows = e.kind === 'noun' ? e.rows?.length : (e.persons ?? PERSONS).length;
     if (rows === undefined) {
       ctx.addIssue({ code: 'custom', path: ['rows'], message: 'noun-Tabelle braucht rows' });

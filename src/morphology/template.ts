@@ -31,7 +31,7 @@ export type Step =
   | {
       tag: AnyTag;
       rule: 'aorist_vowel';
-      kind: 'vowel_stem' | 'monosyllabic' | 'polysyllabic' | 'exception' | 'lexical';
+      kind: 'vowel_stem' | 'monosyllabic' | 'polysyllabic' | 'exception' | 'lexical' | 'ability';
       chose: string;
     };
 

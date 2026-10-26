@@ -45,7 +45,8 @@ export const KNOWN_LIMITS = [
   'Konsonantenverdopplung (hak → hakkı, ret → reddi)',
   'Stumme Endung arabischer Lehnwörter (cami → camii)',
   'ne + Possessiv 3. Sg. ist „nesi“, mit y_stem entstünde „neyi“',
-  'Verbmorphologie ab Stufe 3 (Imperativ, Modalität, -mIş, Kopula-Vergangenheit idi)',
+  'Kopula imiş in der Frage (öğretmen miymiş) ungeprüft',
+  'Verbmorphologie ab Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Passiv/Kausativ)',
 ] as const;
 
 export const asStem = (input: Stem | string): Stem =>
