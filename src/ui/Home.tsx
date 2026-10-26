@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { fetchManifest, type Manifest } from '../content/load';
 import { LEVELS } from '../content/schema';
 import { t } from '../i18n';
+import { dayKey } from '../progress/day';
 import { completedLessonIds, openMistakes, unitProgress } from '../progress/stats';
+import { planRepeat } from '../srs';
 import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
+import { useSettings } from '../store/settings';
 import { DailyGoal } from './DailyGoal';
 
 export function Home() {
@@ -13,6 +16,9 @@ export function Home() {
   const completions = useProgress((s) => s.completions);
   const attempts = useProgress((s) => s.attempts);
   const openMistakesScreen = useApp((s) => s.openMistakes);
+  const openRepeat = useApp((s) => s.openRepeat);
+  const cards = useProgress((s) => s.cards);
+  const newWordsPerDay = useSettings((s) => s.newWordsPerDay);
   const [manifest, setManifest] = useState<Manifest>();
   const [failed, setFailed] = useState(false);
 
@@ -24,10 +30,29 @@ export function Home() {
 
   const completed = completedLessonIds(completions);
   const mistakes = openMistakes(attempts).length;
+  const plan = manifest
+    ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay)
+    : undefined;
+  const repeatCount = [
+    plan?.due ? t('repeat.due', { count: plan.due }) : '',
+    plan?.fresh ? t('repeat.new', { count: plan.fresh }) : '',
+  ]
+    .filter(Boolean)
+    .join(' · ');
 
   return (
     <>
       <DailyGoal />
+      {repeatCount && (
+        <button
+          type="button"
+          onClick={openRepeat}
+          className="mt-4 block min-h-11 w-full rounded-xl border border-teal-300 bg-teal-50 p-4 text-left hover:bg-teal-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-teal-800 dark:bg-teal-950 dark:hover:bg-teal-900"
+        >
+          <span className="block font-medium">{t('repeat.title')}</span>
+          <span className="block text-sm text-stone-600 dark:text-stone-400">{repeatCount}</span>
+        </button>
+      )}
       {mistakes > 0 && (
         <button
           type="button"

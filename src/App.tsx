@@ -4,6 +4,7 @@ import { ExplainerScreen } from './ui/ExplainerScreen';
 import { Home } from './ui/Home';
 import { LessonScreen } from './ui/LessonScreen';
 import { MistakesScreen } from './ui/MistakesScreen';
+import { RepeatScreen } from './ui/RepeatScreen';
 import { Review } from './ui/Review';
 import { Settings } from './ui/Settings';
 import { UpdateBanner } from './ui/UpdateBanner';
@@ -48,6 +49,7 @@ export function App() {
         {screen.name === 'settings' && <Settings />}
         {screen.name === 'review' && <Review />}
         {screen.name === 'mistakes' && <MistakesScreen />}
+        {screen.name === 'repeat' && <RepeatScreen />}
         {screen.name === 'explainer' && <ExplainerScreen unitId={screen.unitId} />}
         {screen.name === 'lesson' && (
           <LessonScreen key={screen.lessonId} unitId={screen.unitId} lessonId={screen.lessonId} />

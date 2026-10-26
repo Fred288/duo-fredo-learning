@@ -5,6 +5,7 @@ export type Screen =
   | { name: 'settings' }
   | { name: 'review' }
   | { name: 'mistakes' }
+  | { name: 'repeat' }
   | { name: 'explainer'; unitId: string }
   | { name: 'lesson'; unitId: string; lessonId: string };
 
@@ -14,6 +15,7 @@ interface AppState {
   openSettings: () => void;
   openReview: () => void;
   openMistakes: () => void;
+  openRepeat: () => void;
   openExplainer: (unitId: string) => void;
   goHome: () => void;
 }
@@ -25,6 +27,7 @@ export const useApp = create<AppState>((set) => ({
   openSettings: () => set({ screen: { name: 'settings' } }),
   openReview: () => set({ screen: { name: 'review' } }),
   openMistakes: () => set({ screen: { name: 'mistakes' } }),
+  openRepeat: () => set({ screen: { name: 'repeat' } }),
   openExplainer: (unitId) => set({ screen: { name: 'explainer', unitId } }),
   goHome: () => set({ screen: { name: 'home' } }),
 }));
