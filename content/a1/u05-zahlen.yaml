@@ -462,7 +462,7 @@ vocab:
   - { tr: bir, de: [eins, ein, eine], pos: num }
   - { tr: iki, de: [zwei], pos: num }
   - { tr: üç, de: [drei], pos: num }
-  - { tr: dört, de: [vier], pos: num }
+  - { tr: dört, de: [vier], pos: num, softens: true }
   - { tr: beş, de: [fünf], pos: num }
   - { tr: altı, de: [sechs], pos: num }
   - { tr: yedi, de: [sieben], pos: num }

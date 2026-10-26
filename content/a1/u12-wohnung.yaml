@@ -1,0 +1,519 @@
+# A1-12: Wohnung und Haus (Wiederholung A1, Ausblick Präteritum -DI). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u12
+level: A1
+title: Wohnung und Haus
+grammar_focus: [wiederholung-a1, lokativ, possessiv, praeteritum-ausblick]
+explainer: explainers/a1-wohnung.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u12-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u12-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „mutfak“?
+        options: [Küche, Bad, Flur]
+        answer: Küche
+      - id: a1-u12-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Badezimmer
+        answers: [banyo]
+      - id: a1-u12-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „salon“?
+        options: [Wohnzimmer, Schlafzimmer, Keller]
+        answer: Wohnzimmer
+        explanation: Auch oturma odası (wörtlich „Sitzzimmer“).
+      - id: a1-u12-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „yatak odası“?
+        options: [Schlafzimmer, Kinderzimmer, Gästezimmer]
+        answer: Schlafzimmer
+        explanation: yatak (Bett) + oda + -sı (Verbindungsendung wie in Ayşe'nin annesi), wörtlich „Zimmer des Betts“.
+      - id: a1-u12-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Bett
+        answers: [yatak]
+      - id: a1-u12-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „dolap“?
+        options: [Schrank, Regal, Tisch]
+        answer: Schrank
+      - id: a1-u12-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Stuhl
+        answers: [sandalye]
+      - id: a1-u12-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „koltuk“?
+        options: [Sessel, Teppich, Lampe]
+        answer: Sessel
+        explanation: koltuk ist der Sessel, oft auch das Sofa. kanepe heißt Sofa.
+      - id: a1-u12-l1-e9
+        type: free_text
+        direction: tr_de
+        prompt: lamba
+        answers: [Lampe, die Lampe]
+      - id: a1-u12-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „halı“?
+        options: [Teppich, Vorhang, Wand]
+        answer: Teppich
+      - id: a1-u12-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „balkon“?
+        options: [Balkon, Garten, Dach]
+        answer: Balkon
+      - id: a1-u12-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: Wohnung
+        answers: [daire, ev]
+        explanation: daire ist die Wohnung in einem Mehrfamilienhaus, ev das Zuhause allgemein.
+      - id: a1-u12-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „kat“?
+        options: [Stockwerk, Treppe, Aufzug]
+        answer: Stockwerk
+      - id: a1-u12-l1-e14
+        type: free_text
+        direction: tr_de
+        prompt: kira
+        answers: [Miete, die Miete]
+      - id: a1-u12-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „asansör“?
+        options: [Aufzug, Treppe, Eingang]
+        answer: Aufzug
+      - id: a1-u12-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: Wand
+        answers: [duvar]
+      - id: a1-u12-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: Sofa
+        answers: [kanepe, koltuk]
+
+  - id: a1-u12-l2
+    type: grammar
+    title: Was ist wo?
+    exercises:
+      - { id: a1-u12-l2-e1, type: suffix_builder, stem: mutfak, suffixes: [LOC], target: mutfakta, gloss_de: in der Küche }
+      - { id: a1-u12-l2-e2, type: suffix_builder, stem: banyo, suffixes: [LOC], target: banyoda, gloss_de: im Bad }
+      - { id: a1-u12-l2-e3, type: suffix_builder, stem: salon, suffixes: [LOC], target: salonda, gloss_de: im Wohnzimmer }
+      - { id: a1-u12-l2-e4, type: suffix_builder, stem: dolap, suffixes: [LOC], target: dolapta, gloss_de: im Schrank }
+      - { id: a1-u12-l2-e5, type: suffix_builder, stem: balkon, suffixes: [LOC], target: balkonda, gloss_de: auf dem Balkon }
+      - { id: a1-u12-l2-e6, type: suffix_builder, stem: yatak, suffixes: [LOC], target: yatakta, gloss_de: im Bett }
+      - id: a1-u12-l2-e7
+        type: word_bank
+        prompt: In der Küche gibt es einen Kühlschrank.
+        answers: [Mutfakta buzdolabı var., Mutfakta bir buzdolabı var.]
+        distractors: [Mutfak, yok]
+      - id: a1-u12-l2-e8
+        type: word_bank
+        prompt: Im Wohnzimmer gibt es zwei Sessel.
+        answers: [Salonda iki koltuk var.]
+        distractors: [koltuklar, yok]
+        explanation: Nach der Zahl kein Plural.
+      - id: a1-u12-l2-e9
+        type: word_bank
+        prompt: Im Bad gibt es kein Fenster.
+        answers: [Banyoda pencere yok.]
+        distractors: [var, değil]
+      - id: a1-u12-l2-e10
+        type: word_bank
+        prompt: Die Bücher sind im Schrank.
+        answers: [Kitaplar dolapta.]
+        distractors: [dolaba, Kitap]
+      - id: a1-u12-l2-e11
+        type: word_bank
+        prompt: Wo ist die Lampe?
+        answers: [Lamba nerede?]
+        distractors: [nereye, Lambada]
+      - id: a1-u12-l2-e12
+        type: word_bank
+        prompt: Die Katze schläft auf dem Sofa.
+        answers: [Kedi kanepede uyuyor.]
+        distractors: [kanepeye, uyuyorum]
+      - id: a1-u12-l2-e13
+        type: free_text
+        direction: tr_de
+        prompt: Balkonda çiçekler var.
+        answers: [Auf dem Balkon sind Blumen., Auf dem Balkon gibt es Blumen., Es gibt Blumen auf dem Balkon.]
+        explanation: çiçek = Blume.
+      - id: a1-u12-l2-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (in der Küche)
+        options: [mutfakta, mutfağta, mutfakda]
+        answer: mutfakta
+        explanation: Vor -ta bleibt das k, das d wird nach k zu t.
+
+  - id: a1-u12-l3
+    type: grammar
+    title: Meine Wohnung
+    exercises:
+      - id: a1-u12-l3-e1
+        type: suffix_builder
+        stem: oda
+        suffixes: [POSS_1SG, LOC]
+        target: odamda
+        gloss_de: in meinem Zimmer
+        explanation: Erst „mein“, dann „wo“, oda + m + da.
+      - { id: a1-u12-l3-e2, type: suffix_builder, stem: ev, suffixes: [POSS_1PL, LOC], target: evimizde, gloss_de: in unserem Haus }
+      - id: a1-u12-l3-e3
+        type: suffix_builder
+        stem: mutfak
+        suffixes: [POSS_1SG]
+        target: mutfağım
+        gloss_de: meine Küche
+        explanation: k → ğ vor Vokal.
+      - { id: a1-u12-l3-e4, type: suffix_builder, stem: daire, suffixes: [POSS_2SG], target: dairen, gloss_de: deine Wohnung }
+      - id: a1-u12-l3-e5
+        type: suffix_builder
+        stem: ev
+        suffixes: [POSS_3SG, LOC]
+        target: evinde
+        gloss_de: in seinem, ihrem Haus
+        explanation: Nach „sein/ihr“ kommt vor dem Lokativ ein n, evi + n + de.
+      - id: a1-u12-l3-e6
+        type: word_bank
+        prompt: In meinem Zimmer gibt es ein Bett und einen Tisch.
+        answers: [Odamda bir yatak ve bir masa var., Odamda yatak ve masa var.]
+        distractors: [yok, odada]
+      - id: a1-u12-l3-e7
+        type: word_bank
+        prompt: Unser Haus ist nicht groß.
+        answers: [Evimiz büyük değil., Bizim evimiz büyük değil.]
+        distractors: [yok, küçük]
+      - id: a1-u12-l3-e8
+        type: word_bank
+        prompt: Meine Wohnung hat einen Balkon.
+        answers: [Dairemin balkonu var., Dairemin bir balkonu var.]
+        distractors: [balkon, yok]
+        explanation: Wörtlich „Meiner Wohnung ihr Balkon ist vorhanden“.
+      - id: a1-u12-l3-e9
+        type: free_text
+        direction: de_tr
+        prompt: in meinem Zimmer
+        answers: [odamda, benim odamda]
+      - id: a1-u12-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Kira çok pahalı.
+        answers: [Die Miete ist sehr teuer., Die Miete ist zu teuer., Die Miete ist sehr hoch., Die Miete ist zu hoch.]
+      - id: a1-u12-l3-e11
+        type: word_bank
+        prompt: Wohnst du in Istanbul?
+        answers: [İstanbul'da oturuyor musun?, Sen İstanbul'da oturuyor musun?]
+        distractors: [İstanbul'a, oturuyorsun]
+      - id: a1-u12-l3-e12
+        type: multiple_choice
+        prompt: Was heißt „evinde“?
+        options: [in seinem/ihrem Haus oder in deinem Haus, nur in meinem Haus, nur im Haus]
+        answer: in seinem/ihrem Haus oder in deinem Haus
+        explanation: evi + n + de (sein Haus) und evin + de (dein Haus) klingen gleich. Der Satz zeigt, wer gemeint ist.
+      - id: a1-u12-l3-e13
+        type: word_bank
+        prompt: Die Wohnung ist im zweiten Stock.
+        answers: [Daire ikinci katta.]
+        distractors: [kat, iki]
+        explanation: ikinci = zweiter. Ordnungszahlen kommen später.
+
+  - id: a1-u12-l4
+    type: grammar
+    title: 'Tabellen: zu Hause'
+    exercises:
+      - id: a1-u12-l4-e1
+        type: paradigm
+        kind: noun
+        lemma: mutfak
+        rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]]
+        targets: [mutfakta, mutfağa, mutfaktan, mutfağım, mutfağımda]
+        gloss_de: Küche
+        explanation: k → ğ nur vor Vokal.
+      - { id: a1-u12-l4-e2, type: paradigm, kind: noun, lemma: oda, rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]], targets: [odada, odaya, odadan, odam, odamda], gloss_de: Zimmer }
+      - { id: a1-u12-l4-e3, type: paradigm, kind: noun, lemma: banyo, rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]], targets: [banyoda, banyoya, banyodan, banyom, banyomda], gloss_de: Bad }
+      - { id: a1-u12-l4-e4, type: paradigm, kind: noun, lemma: salon, rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]], targets: [salonda, salona, salondan, salonum, salonumda], gloss_de: Wohnzimmer }
+      - { id: a1-u12-l4-e5, type: paradigm, kind: noun, lemma: dolap, rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]], targets: [dolapta, dolaba, dolaptan, dolabım, dolabımda], gloss_de: Schrank }
+      - { id: a1-u12-l4-e6, type: paradigm, kind: noun, lemma: yatak, rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]], targets: [yatakta, yatağa, yataktan, yatağım, yatağımda], gloss_de: Bett }
+      - id: a1-u12-l4-e7
+        type: paradigm
+        kind: noun
+        lemma: ev
+        rows: [[POSS_1SG, LOC], [POSS_2SG, LOC], [POSS_1PL, LOC], [POSS_2PL, LOC]]
+        targets: [evimde, evinde, evimizde, evinizde]
+        gloss_de: 'Haus (in meinem, deinem, unserem, eurem)'
+      - { id: a1-u12-l4-e8, type: paradigm, kind: noun, lemma: daire, rows: [[LOC], [DAT], [ABL], [POSS_1SG], [POSS_1SG, LOC]], targets: [dairede, daireye, daireden, dairem, dairemde], gloss_de: Wohnung }
+      - id: a1-u12-l4-e9
+        type: paradigm
+        kind: verb
+        lemma: oturmak
+        targets: [oturuyorum, oturuyorsun, oturuyor, oturuyoruz, oturuyorsunuz, oturuyorlar]
+        gloss_de: wohnen, sitzen
+      - id: a1-u12-l4-e10
+        type: paradigm
+        kind: verb
+        lemma: oturmak
+        question: true
+        targets: [oturuyor muyum?, oturuyor musun?, oturuyor mu?, oturuyor muyuz?, oturuyor musunuz?, oturuyorlar mı?]
+        gloss_de: wohnen? (Frage)
+
+  - id: a1-u12-l5
+    type: grammar
+    title: 'Ausblick: gestern (-dı)'
+    exercises:
+      - id: a1-u12-l5-e1
+        type: multiple_choice
+        prompt: Was heißt „geldim“?
+        options: [ich bin gekommen, ich komme, ich komme nicht]
+        answer: ich bin gekommen
+        explanation: Vergangenheit mit -dı/-di/-du/-dü, dann -m für „ich“, gel + di + m.
+      - id: a1-u12-l5-e2
+        type: multiple_choice
+        prompt: Was heißt „gittin“?
+        options: [du bist gegangen, du gehst, ihr geht]
+        answer: du bist gegangen
+        explanation: Nach t wird d zu t, git + ti + n. In der Vergangenheit erweicht git nicht.
+      - id: a1-u12-l5-e3
+        type: multiple_choice
+        prompt: Was heißt „Dün sinemaya gittik.“?
+        options: [Gestern sind wir ins Kino gegangen., Morgen gehen wir ins Kino., Heute gehen wir ins Kino.]
+        answer: Gestern sind wir ins Kino gegangen.
+        explanation: -k steht für „wir“, gittik.
+      - id: a1-u12-l5-e4
+        type: multiple_choice
+        prompt: Was fragt „Dün ne yaptın?“
+        options: [Was hast du gestern gemacht?, Was machst du morgen?, Was machst du jetzt?]
+        answer: Was hast du gestern gemacht?
+      - id: a1-u12-l5-e5
+        type: multiple_choice
+        prompt: Was heißt „Kitap okudum.“?
+        options: [Ich habe ein Buch gelesen., Ich lese ein Buch., Ich lese kein Buch.]
+        answer: Ich habe ein Buch gelesen.
+      - id: a1-u12-l5-e6
+        type: multiple_choice
+        prompt: Was heißt „Evde oturdum.“?
+        options: [Ich bin zu Hause geblieben., Ich wohne zu Hause., Ich gehe nach Hause.]
+        answer: Ich bin zu Hause geblieben.
+        explanation: oturmak heißt auch „(zu Hause) bleiben, sitzen“.
+      - id: a1-u12-l5-e7
+        type: multiple_choice
+        prompt: Welche Endung hat „wir“ in der Vergangenheit?
+        options: [-k (geldik), -uz (geldiuz), -miz (geldimiz)]
+        answer: -k (geldik)
+        explanation: Die Endungen ähneln teilweise dem Besitz (-m, -n, -nız), aber „wir“ ist -k, nicht -mız.
+      - id: a1-u12-l5-e8
+        type: multiple_choice
+        prompt: Was heißt „Ayşe dün gelmedi.“?
+        options: [Ayşe ist gestern nicht gekommen., Ayşe kommt morgen nicht., Ayşe kommt gestern.]
+        answer: Ayşe ist gestern nicht gekommen.
+        explanation: Verneinung wie immer mit -me, gel + me + di.
+      - id: a1-u12-l5-e9
+        type: multiple_choice
+        prompt: Was heißt „Balık yedik.“?
+        options: [Wir haben Fisch gegessen., Wir essen Fisch., Wir essen keinen Fisch.]
+        answer: Wir haben Fisch gegessen.
+      - id: a1-u12-l5-e10
+        type: multiple_choice
+        prompt: Was heißt „Yeni bir daire aldılar.“?
+        options: [Sie haben eine neue Wohnung gekauft., Sie kaufen eine neue Wohnung., Sie mieten eine neue Wohnung.]
+        answer: Sie haben eine neue Wohnung gekauft.
+      - id: a1-u12-l5-e11
+        type: multiple_choice
+        prompt: Welche Frage ist richtig? (Bist du gekommen?)
+        options: [Geldin mi?, Geldi misin?, Gel mi din?]
+        answer: Geldin mi?
+        explanation: Anders als bei -iyor hängt die Personalendung hier am Verb, die Partikel steht danach.
+      - id: a1-u12-l5-e12
+        type: free_text
+        direction: tr_de
+        prompt: Dün çalıştım.
+        answers: [Gestern habe ich gearbeitet., Ich habe gestern gearbeitet., Gestern arbeitete ich., Ich arbeitete gestern., Gestern habe ich gelernt., Ich habe gestern gelernt.]
+
+  - id: a1-u12-l6
+    type: review
+    title: Rückblick A1
+    exercises:
+      - id: a1-u12-l6-e1
+        type: word_bank
+        prompt: Guten Tag, ich heiße Anna. Ich bin Deutsche.
+        answers: ["İyi günler, benim adım Anna. Ben Almanım.", "İyi günler, adım Anna. Almanım.", "İyi günler, adım Anna. Ben Almanım.", "İyi günler, benim adım Anna. Almanım."]
+        distractors: [Alman, senin]
+      - id: a1-u12-l6-e2
+        type: word_bank
+        prompt: Ich komme aus Berlin, ich wohne jetzt in Izmir.
+        answers: ["Berlin'denim, şimdi İzmir'de oturuyorum.", "Ben Berlin'denim, şimdi İzmir'de oturuyorum."]
+        distractors: ["Berlin'de", "İzmir'e"]
+      - id: a1-u12-l6-e3
+        type: word_bank
+        prompt: Ich habe zwei Kinder, einen Sohn und eine Tochter.
+        answers: ["İki çocuğum var: bir oğlum, bir kızım.", "İki çocuğum var, bir oğlum ve bir kızım var.", "İki çocuğum var, bir oğlum ve bir kızım."]
+        distractors: [çocuklarım, yok]
+      - id: a1-u12-l6-e4
+        type: word_bank
+        prompt: Ich trinke morgens Tee, ich mag keinen Kaffee.
+        answers: ["Sabahları çay içiyorum, kahveyi sevmiyorum.", "Sabahları çay içiyorum, kahve sevmiyorum.", "Sabah çay içiyorum, kahveyi sevmiyorum.", "Sabah çay içiyorum, kahve sevmiyorum."]
+        distractors: [seviyorum, içmiyorum]
+        explanation: sabahları = morgens (regelmäßig).
+      - id: a1-u12-l6-e5
+        type: free_text
+        direction: de_tr
+        prompt: Wie spät ist es?
+        answers: [Saat kaç?]
+      - id: a1-u12-l6-e6
+        type: free_text
+        direction: de_tr
+        prompt: Gibt es hier eine Apotheke?
+        answers: [Burada eczane var mı?, Burada bir eczane var mı?]
+      - id: a1-u12-l6-e7
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (in meinem Haus)
+        options: [evimde, evdeim, evimda]
+        answer: evimde
+      - id: a1-u12-l6-e8
+        type: free_text
+        direction: tr_de
+        prompt: Bu kırmızı elbise ne kadar?
+        answers: [Was kostet dieses rote Kleid?, Wie viel kostet dieses rote Kleid?, Wie teuer ist dieses rote Kleid?]
+      - id: a1-u12-l6-e9
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1pl
+        target: gidiyoruz
+        gloss_de: wir gehen
+      - id: a1-u12-l6-e10
+        type: conjugation
+        mode: copula
+        lemma: öğretmen
+        person: 2sg
+        question: true
+        target: öğretmen misin?
+        gloss_de: Bist du Lehrer?
+      - id: a1-u12-l6-e11
+        type: suffix_builder
+        stem: kitap
+        suffixes: [PL, POSS_1SG, LOC]
+        target: kitaplarımda
+        gloss_de: in meinen Büchern
+        explanation: Reihenfolge Plural → Besitz → Fall.
+      - id: a1-u12-l6-e12
+        type: word_bank
+        prompt: Am Wochenende besuchen wir meine Großmutter.
+        answers: [Hafta sonu anneanneme gidiyoruz., Hafta sonu babaanneme gidiyoruz.]
+        distractors: [anneannem, gidiyorum]
+        explanation: hafta sonu = Wochenende. Wörtlich „zu meiner Großmutter gehen“.
+      - id: a1-u12-l6-e13
+        type: free_text
+        direction: de_tr
+        prompt: Ich verstehe nicht.
+        answers: [Anlamıyorum., Ben anlamıyorum.]
+      - id: a1-u12-l6-e14
+        type: multiple_choice
+        prompt: Was heißt „Mehmet'in arabası yok“?
+        options: [Mehmet hat kein Auto., Mehmets Auto ist nicht hier., Mehmet ist kein Auto.]
+        answer: Mehmet hat kein Auto.
+      - id: a1-u12-l6-e15
+        type: word_bank
+        prompt: Um halb acht stehe ich auf.
+        answers: [Saat yedi buçukta kalkıyorum., Yedi buçukta kalkıyorum.]
+        distractors: [sekiz, kalkıyor]
+
+  - id: a1-u12-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u12-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: Küche
+        answers: [mutfak]
+      - id: a1-u12-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: im Schrank
+        answers: [dolapta]
+      - id: a1-u12-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (mein Bett)
+        options: [yatağım, yatakım, yatağim]
+        answer: yatağım
+      - id: a1-u12-l7-e4
+        type: word_bank
+        prompt: Im Schlafzimmer gibt es einen großen Schrank.
+        answers: [Yatak odasında büyük bir dolap var.]
+        distractors: [yok, dolabı]
+        explanation: yatak odası + n + da → yatak odasında.
+      - id: a1-u12-l7-e5
+        type: free_text
+        direction: tr_de
+        prompt: Banyo nerede?
+        answers: [Wo ist das Bad?, Wo ist das Badezimmer?]
+      - id: a1-u12-l7-e6
+        type: multiple_choice
+        prompt: Was heißt „dün“?
+        options: [gestern, morgen, heute]
+        answer: gestern
+      - id: a1-u12-l7-e7
+        type: word_bank
+        prompt: Die Wohnung ist schön, aber teuer.
+        answers: ['Daire güzel ama pahalı.', 'Daire güzel, ama pahalı.']
+        distractors: [ucuz, değil]
+      - id: a1-u12-l7-e8
+        type: free_text
+        direction: de_tr
+        prompt: in unserem Haus
+        answers: [evimizde, bizim evimizde]
+      - id: a1-u12-l7-e9
+        type: multiple_choice
+        prompt: Was heißt „gittim“?
+        options: [ich bin gegangen, ich gehe, ich gehe nicht]
+        answer: ich bin gegangen
+      - id: a1-u12-l7-e10
+        type: word_bank
+        prompt: Die Lampe ist neu.
+        answers: [Lamba yeni.]
+        distractors: [eski, lambayı]
+      - id: a1-u12-l7-e11
+        type: free_text
+        direction: de_tr
+        prompt: drei Stühle
+        answers: [üç sandalye]
+      - id: a1-u12-l7-e12
+        type: multiple_choice
+        prompt: Was heißt „Asansör yok, merdivenden çıkıyoruz.“?
+        options: ['Es gibt keinen Aufzug, wir nehmen die Treppe.', 'Der Aufzug ist kaputt, wir warten.', 'Es gibt einen Aufzug und eine Treppe.']
+        answer: 'Es gibt keinen Aufzug, wir nehmen die Treppe.'
+        explanation: merdiven = Treppe, çıkmak = hinaufgehen.
+
+vocab:
+  - { tr: mutfak, de: [Küche], pos: noun, softens: true }
+  - { tr: banyo, de: [Bad, Badezimmer], pos: noun }
+  - { tr: salon, de: [Wohnzimmer], pos: noun }
+  - { tr: yatak odası, de: [Schlafzimmer], pos: noun }
+  - { tr: yatak, de: [Bett], pos: noun, softens: true }
+  - { tr: dolap, de: [Schrank], pos: noun, softens: true }
+  - { tr: sandalye, de: [Stuhl], pos: noun }
+  - { tr: koltuk, de: [Sessel, Sofa], pos: noun, softens: true }
+  - { tr: kanepe, de: [Sofa], pos: noun }
+  - { tr: lamba, de: [Lampe], pos: noun }
+  - { tr: halı, de: [Teppich], pos: noun }
+  - { tr: balkon, de: [Balkon], pos: noun }
+  - { tr: daire, de: [Wohnung], pos: noun }
+  - { tr: kat, de: [Stockwerk, Etage], pos: noun }
+  - { tr: kira, de: [Miete], pos: noun }
+  - { tr: asansör, de: [Aufzug], pos: noun }
+  - { tr: merdiven, de: [Treppe], pos: noun }
+  - { tr: duvar, de: [Wand], pos: noun }
+  - { tr: çiçek, de: [Blume], pos: noun, softens: true }
+  - { tr: hafta sonu, de: [Wochenende], pos: noun }
+  - { tr: sabahları, de: [morgens, jeden Morgen], pos: adv }
+  - { tr: çıkmak, de: [hinausgehen, hinaufgehen], pos: verb }

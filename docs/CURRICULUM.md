@@ -19,10 +19,10 @@ Aufbau jeder Unit (SPEC 3.1): Erklärkarte → Wortschatz → Grammatik → ab A
 | a1-u06 | Possessivsuffixe, Genitiv, Genitiv-Possessiv-Verbindung                                    | Familie und Verwandtschaft (Türkisch unterscheidet mehr: abla/abi, teyze/hala, dayı/amca) | `drops_vowel` (oğlum)   | ✅    |
 | a1-u07 | var/yok, „haben“ (benim … var), Akkusativ bestimmt/unbestimmt                              | Essen und Trinken, Obst, im Café                                                          | Unregelmäßigkeiten (su) | ✅    |
 | a1-u08 | Präsens -Iyor, Personalendungen Typ 1                                                      | Alltag, Tagesablauf                                                                       | Verb-Engine Stufe 1     | ✅    |
-| a1-u09 | Verneinung -mA, Ja/Nein-Fragen mit mI                                                      | Vorlieben (seviyorum / sevmiyorum)                                                        | Verneinung, mI am Verb  |       |
-| a1-u10 | Uhrzeit, Wochentage, Zeitangaben (-de, -den … -e kadar)                                    | Zeit, Termine                                                                             | –                       |       |
-| a1-u11 | Demonstrativa bu/şu/o, Adjektiv vor dem Nomen, bir als „ein“                               | Kleidung, Farben, Einkaufen                                                               | –                       |       |
-| a1-u12 | Wiederholung A1, Präteritum -DI als Ausblick                                               | Wohnung und Haus                                                                          | Typ 2 (Ausblick)        |       |
+| a1-u09 | Verneinung -mA, Ja/Nein-Fragen mit mI                                                      | Vorlieben (seviyorum / sevmiyorum)                                                        | Verneinung, mI am Verb  | ✅    |
+| a1-u10 | Uhrzeit, Wochentage, Zeitangaben (-de, -den … -e kadar)                                    | Zeit, Termine                                                                             | –                       | ✅    |
+| a1-u11 | Demonstrativa bu/şu/o, Adjektiv vor dem Nomen, bir als „ein“                               | Kleidung, Farben, Einkaufen                                                               | –                       | ✅    |
+| a1-u12 | Wiederholung A1, Präteritum -DI als Ausblick                                               | Wohnung und Haus                                                                          | Typ 2 (Ausblick)        | ✅    |
 
 ## A2
 

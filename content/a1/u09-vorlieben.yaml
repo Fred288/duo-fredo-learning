@@ -1,0 +1,436 @@
+# A1-09: Vorlieben (Verneinung -mA, Ja-Nein-Fragen mit mI am Verb). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u09
+level: A1
+title: Vorlieben
+grammar_focus: [verneinung, fragepartikel-verb, kurzantworten]
+explainer: explainers/a1-vorlieben.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u09-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u09-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „sevmek“?
+        options: ['lieben, mögen', hassen, wissen]
+        answer: 'lieben, mögen'
+        explanation: sevmek heißt lieben und mögen.
+      - id: a1-u09-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: wollen, möchten
+        answers: [istemek]
+      - id: a1-u09-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „bilmek“?
+        options: [wissen, fragen, sehen]
+        answer: wissen
+        explanation: bilmek heißt wissen und auch kennen (eine Sache, eine Sprache).
+      - id: a1-u09-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: verstehen
+        answers: [anlamak]
+      - id: a1-u09-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „görmek“?
+        options: [sehen, hören, gehen]
+        answer: sehen
+      - id: a1-u09-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: yüzmek
+        answers: [schwimmen]
+      - id: a1-u09-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „koşmak“?
+        options: ['laufen, rennen', sitzen, schlafen]
+        answer: 'laufen, rennen'
+      - id: a1-u09-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: kaufen, nehmen
+        answers: [almak]
+      - id: a1-u09-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „spor“?
+        options: [Sport, Spiel, Park]
+        answer: Sport
+      - id: a1-u09-l1-e10
+        type: free_text
+        direction: tr_de
+        prompt: futbol
+        answers: [Fußball, der Fußball]
+      - id: a1-u09-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „biraz“?
+        options: [ein bisschen, sehr, gar nicht]
+        answer: ein bisschen
+      - id: a1-u09-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „hiç“ in „Hiç sevmiyorum“?
+        options: [gar nicht, ein bisschen, sehr]
+        answer: gar nicht
+        explanation: hiç verstärkt eine Verneinung, gar nicht, überhaupt nicht. sevmiyorum = ich mag nicht, mehr dazu in der nächsten Lektion.
+      - id: a1-u09-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: ich auch
+        answers: [ben de]
+        explanation: de/da (auch) wird getrennt geschrieben und folgt der Hell-dunkel-Harmonie, ben de, sen de, biz de.
+      - id: a1-u09-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „Türkçe biliyorum“?
+        options: [Ich kann Türkisch., Ich lerne Türkisch., Ich höre Türkisch.]
+        answer: Ich kann Türkisch.
+      - id: a1-u09-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „müzik dinlemek“?
+        options: [Musik hören, Musik machen, Musik kaufen]
+        answer: Musik hören
+      - id: a1-u09-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „yavaş“?
+        options: [langsam, schnell, leise]
+        answer: langsam
+        explanation: yavaş (langsam), hızlı (schnell).
+      - id: a1-u09-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: schnell
+        answers: [hızlı]
+
+  - id: a1-u09-l2
+    type: grammar
+    title: nicht … -me, -ma
+    exercises:
+      - id: a1-u09-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: sevmek
+        person: 1sg
+        negative: true
+        target: sevmiyorum
+        gloss_de: ich mag nicht
+        explanation: Verneinung -me/-ma direkt nach dem Stamm. Vor -yor wird sie zu -mi/-mı/-mu/-mü.
+      - { id: a1-u09-l2-e2, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, negative: true, target: gelmiyorsun, gloss_de: du kommst nicht }
+      - id: a1-u09-l2-e3
+        type: conjugation
+        mode: verb
+        lemma: anlamak
+        person: 1sg
+        negative: true
+        target: anlamıyorum
+        gloss_de: ich verstehe nicht
+        explanation: Nach dunklem a → -ma, vor -yor → -mı.
+      - { id: a1-u09-l2-e4, type: conjugation, mode: verb, lemma: bilmek, person: 1sg, negative: true, target: bilmiyorum, gloss_de: ich weiß nicht }
+      - id: a1-u09-l2-e5
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 3sg
+        negative: true
+        target: okumuyor
+        gloss_de: 'er, sie liest nicht'
+        explanation: Nach u → -mu.
+      - id: a1-u09-l2-e6
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1pl
+        negative: true
+        target: gitmiyoruz
+        gloss_de: wir gehen nicht
+        explanation: Das t bleibt, denn nach git folgt jetzt ein Konsonant (m).
+      - { id: a1-u09-l2-e7, type: conjugation, mode: verb, lemma: istemek, person: 1sg, negative: true, target: istemiyorum, gloss_de: ich will nicht }
+      - { id: a1-u09-l2-e8, type: conjugation, mode: verb, lemma: içmek, person: 3pl, negative: true, target: içmiyorlar, gloss_de: sie trinken nicht }
+      - { id: a1-u09-l2-e9, type: conjugation, mode: verb, lemma: görmek, person: 1sg, negative: true, target: görmüyorum, gloss_de: ich sehe nicht }
+      - { id: a1-u09-l2-e10, type: conjugation, mode: verb, lemma: çalışmak, person: 2pl, negative: true, target: çalışmıyorsunuz, gloss_de: 'ihr arbeitet nicht, Sie arbeiten nicht' }
+      - { id: a1-u09-l2-e11, type: conjugation, mode: verb, lemma: yemek, person: 1sg, negative: true, target: yemiyorum, gloss_de: ich esse nicht }
+      - id: a1-u09-l2-e12
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich verstehe nicht)
+        options: [anlamıyorum, anlamayorum, anlamiyorum]
+        answer: anlamıyorum
+      - id: a1-u09-l2-e13
+        type: multiple_choice
+        prompt: Warum heißt es „yemiyorum“ und nicht „yimiyorum“?
+        options: [Das i in yiyor kommt nur ohne Verneinung., Weil -me immer e bleibt., Das ist ein Tippfehler.]
+        answer: Das i in yiyor kommt nur ohne Verneinung.
+        explanation: ye + me + yor → yemiyor; ohne Verneinung ye + yor → yiyor.
+      - id: a1-u09-l2-e14
+        type: free_text
+        direction: de_tr
+        prompt: Ich weiß es nicht.
+        answers: [Bilmiyorum., Ben bilmiyorum.]
+
+  - id: a1-u09-l3
+    type: grammar
+    title: Magst du …? Fragen am Verb
+    exercises:
+      - id: a1-u09-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: sevmek
+        person: 2sg
+        question: true
+        target: seviyor musun?
+        gloss_de: Magst du?
+        explanation: Die Partikel mu steht nach -yor und trägt die Personalendung, seviyor musun.
+      - { id: a1-u09-l3-e2, type: conjugation, mode: verb, lemma: bilmek, person: 2sg, question: true, target: biliyor musun?, gloss_de: Weißt du? }
+      - id: a1-u09-l3-e3
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        question: true
+        target: geliyor mu?
+        gloss_de: 'Kommt er, sie?'
+        explanation: Direkt nach -yor immer mu, weil o der letzte Vokal ist.
+      - { id: a1-u09-l3-e4, type: conjugation, mode: verb, lemma: anlamak, person: 2pl, question: true, target: anlıyor musunuz?, gloss_de: 'Versteht ihr? Verstehen Sie?' }
+      - { id: a1-u09-l3-e5, type: conjugation, mode: verb, lemma: istemek, person: 2sg, question: true, target: istiyor musun?, gloss_de: Willst du? }
+      - id: a1-u09-l3-e6
+        type: conjugation
+        mode: verb
+        lemma: çalışmak
+        person: 1pl
+        question: true
+        target: çalışıyor muyuz?
+        gloss_de: Arbeiten wir?
+        explanation: mu + y + uz, das y trennt die Vokale.
+      - id: a1-u09-l3-e7
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 3pl
+        question: true
+        target: okuyorlar mı?
+        gloss_de: Lesen sie?
+        explanation: Bei „sie“ bleibt -lar am Verb, die Partikel folgt dem a, also mı.
+      - { id: a1-u09-l3-e8, type: conjugation, mode: verb, lemma: görmek, person: 2sg, question: true, target: görüyor musun?, gloss_de: Siehst du? }
+      - { id: a1-u09-l3-e9, type: conjugation, mode: verb, lemma: yüzmek, person: 1sg, question: true, target: yüzüyor muyum?, gloss_de: Schwimme ich? }
+      - id: a1-u09-l3-e10
+        type: conjugation
+        mode: verb
+        lemma: sevmek
+        person: 2sg
+        negative: true
+        question: true
+        target: sevmiyor musun?
+        gloss_de: Magst du nicht?
+      - { id: a1-u09-l3-e11, type: conjugation, mode: verb, lemma: gelmek, person: 2pl, negative: true, question: true, target: gelmiyor musunuz?, gloss_de: 'Kommt ihr nicht? Kommen Sie nicht?' }
+      - id: a1-u09-l3-e12
+        type: multiple_choice
+        prompt: Welche Frage ist richtig? (Kommst du?)
+        options: [Geliyor musun?, Geliyorsun mu?, Geliyor misin?]
+        answer: Geliyor musun?
+        explanation: Die Personalendung wandert an die Partikel.
+      - id: a1-u09-l3-e13
+        type: word_bank
+        prompt: Sprichst du Türkisch?
+        answers: [Türkçe konuşuyor musun?, Sen Türkçe konuşuyor musun?]
+        distractors: [konuşuyorsun, mi]
+      - id: a1-u09-l3-e14
+        type: free_text
+        direction: tr_de
+        prompt: Anlıyor musunuz?
+        answers: [Verstehen Sie?, Versteht ihr?, Verstehen Sie mich?, Versteht ihr mich?]
+
+  - id: a1-u09-l4
+    type: dialog
+    title: Ja, nein, ich auch
+    exercises:
+      - id: a1-u09-l4-e1
+        type: word_bank
+        prompt: Magst du Kaffee? – Ja, ich mag ihn.
+        answers: ['Kahve seviyor musun? Evet, seviyorum.', 'Kahveyi seviyor musun? Evet, seviyorum.']
+        distractors: [sevmiyorum, mi]
+        explanation: Kurzantwort mit dem Verb, nicht nur „evet“.
+      - id: a1-u09-l4-e2
+        type: word_bank
+        prompt: Nein, ich mag ihn nicht.
+        answers: ['Hayır, sevmiyorum.']
+        distractors: [değil, seviyorum]
+      - id: a1-u09-l4-e3
+        type: word_bank
+        prompt: Ich mag Fußball sehr.
+        answers: [Futbolu çok seviyorum.]
+        distractors: [biraz, sevmiyorum]
+        explanation: Mit Akkusativ (futbolu) ist die Wortstellung frei. Ohne Endung muss das Objekt direkt vor dem Verb stehen (Futbol seviyorum).
+      - id: a1-u09-l4-e4
+        type: word_bank
+        prompt: Ich auch.
+        answers: [Ben de.]
+        distractors: [Sen, da]
+        explanation: de/da folgt der Harmonie, ben de, sen de, onlar da.
+      - id: a1-u09-l4-e5
+        type: word_bank
+        prompt: Ich mag Tee überhaupt nicht.
+        answers: [Çayı hiç sevmiyorum., Hiç çay sevmiyorum.]
+        distractors: [çok, seviyorum]
+      - id: a1-u09-l4-e6
+        type: word_bank
+        prompt: Ich verstehe nicht. Bitte langsam!
+        answers: [Anlamıyorum. Yavaş lütfen!, Anlamıyorum. Lütfen yavaş!, Anlamıyorum. Daha yavaş lütfen!]
+        distractors: [Anlıyorum, hızlı]
+        explanation: yavaş = langsam, hızlı = schnell.
+      - id: a1-u09-l4-e7
+        type: multiple_choice
+        prompt: „Türkçe biliyor musun?“ – Was antwortest du, wenn du ein bisschen kannst?
+        options: [Biraz biliyorum., Hiç bilmiyorum., 'Evet, çok iyi.']
+        answer: Biraz biliyorum.
+      - id: a1-u09-l4-e8
+        type: multiple_choice
+        prompt: Was heißt „Yüzmeyi seviyorum“?
+        explanation: "Vorschau: yüzmeyi = das Schwimmen (Verb + -me + Akkusativ). Lerne „… -meyi seviyorum“ vorerst als Muster."
+        options: [Ich schwimme gern., Ich schwimme gerade., Ich mag das Schwimmbad.]
+        answer: Ich schwimme gern.
+      - id: a1-u09-l4-e9
+        type: word_bank
+        prompt: Ich lese gern Bücher.
+        answers: [Kitap okumayı seviyorum., Ben kitap okumayı seviyorum.]
+        distractors: [okuyorum, kitabı]
+      - id: a1-u09-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Sporu sevmiyor musun?
+        answers: [Magst du keinen Sport?, Magst du Sport nicht?, Magst du den Sport nicht?]
+      - id: a1-u09-l4-e11
+        type: word_bank
+        prompt: Möchtest du Tee? – Nein, danke.
+        answers: ['Çay istiyor musun? Hayır, teşekkürler.']
+        distractors: [istemiyorum, mi]
+      - id: a1-u09-l4-e12
+        type: multiple_choice
+        prompt: Wie antwortet man kurz auf „Geliyor musun?“ mit Ja?
+        options: ['Evet, geliyorum.', 'Evet, var.', 'Evet, değil.']
+        answer: 'Evet, geliyorum.'
+
+  - id: a1-u09-l5
+    type: grammar
+    title: 'Tabellen: verneint und als Frage'
+    exercises:
+      - id: a1-u09-l5-e1
+        type: paradigm
+        kind: verb
+        lemma: sevmek
+        negative: true
+        targets: [sevmiyorum, sevmiyorsun, sevmiyor, sevmiyoruz, sevmiyorsunuz, sevmiyorlar]
+        gloss_de: nicht mögen
+        explanation: Stamm + mi + yor + Personalendung.
+      - id: a1-u09-l5-e2
+        type: paradigm
+        kind: verb
+        lemma: anlamak
+        negative: true
+        targets: [anlamıyorum, anlamıyorsun, anlamıyor, anlamıyoruz, anlamıyorsunuz, anlamıyorlar]
+        gloss_de: nicht verstehen
+        explanation: Das a von anla bleibt, weil -ma folgt. Erst vor -yor wird -ma zu -mı.
+      - { id: a1-u09-l5-e3, type: paradigm, kind: verb, lemma: bilmek, negative: true, targets: [bilmiyorum, bilmiyorsun, bilmiyor, bilmiyoruz, bilmiyorsunuz, bilmiyorlar], gloss_de: nicht wissen }
+      - { id: a1-u09-l5-e4, type: paradigm, kind: verb, lemma: okumak, negative: true, targets: [okumuyorum, okumuyorsun, okumuyor, okumuyoruz, okumuyorsunuz, okumuyorlar], gloss_de: nicht lesen }
+      - id: a1-u09-l5-e5
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        question: true
+        targets: [geliyor muyum?, geliyor musun?, geliyor mu?, geliyor muyuz?, geliyor musunuz?, geliyorlar mı?]
+        gloss_de: kommen? (Frage)
+        explanation: Die Partikel trägt die Endung, außer bei „sie“, dort bleibt -lar am Verb.
+      - { id: a1-u09-l5-e6, type: paradigm, kind: verb, lemma: sevmek, question: true, targets: [seviyor muyum?, seviyor musun?, seviyor mu?, seviyor muyuz?, seviyor musunuz?, seviyorlar mı?], gloss_de: mögen? (Frage) }
+      - { id: a1-u09-l5-e7, type: paradigm, kind: verb, lemma: istemek, negative: true, targets: [istemiyorum, istemiyorsun, istemiyor, istemiyoruz, istemiyorsunuz, istemiyorlar], gloss_de: nicht wollen }
+      - { id: a1-u09-l5-e8, type: paradigm, kind: verb, lemma: gitmek, negative: true, targets: [gitmiyorum, gitmiyorsun, gitmiyor, gitmiyoruz, gitmiyorsunuz, gitmiyorlar], gloss_de: nicht gehen }
+      - id: a1-u09-l5-e9
+        type: paradigm
+        kind: verb
+        lemma: bilmek
+        persons: [1sg, 2sg, 3sg]
+        negative: true
+        question: true
+        targets: [bilmiyor muyum?, bilmiyor musun?, bilmiyor mu?]
+        gloss_de: nicht wissen? (Frage)
+      - { id: a1-u09-l5-e10, type: paradigm, kind: verb, lemma: yemek, negative: true, targets: [yemiyorum, yemiyorsun, yemiyor, yemiyoruz, yemiyorsunuz, yemiyorlar], gloss_de: nicht essen }
+
+  - id: a1-u09-l6
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u09-l6-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich verstehe nicht
+        answers: [anlamıyorum, ben anlamıyorum]
+      - id: a1-u09-l6-e2
+        type: free_text
+        direction: de_tr
+        prompt: Weißt du?
+        answers: [Biliyor musun?, Sen biliyor musun?]
+      - id: a1-u09-l6-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er kommt nicht)
+        options: [gelmiyor, gelmeyor, gelmiyormu]
+        answer: gelmiyor
+      - id: a1-u09-l6-e4
+        type: word_bank
+        prompt: Mein Bruder (kardeş) mag keinen Fisch.
+        answers: [Kardeşim balık sevmiyor., Kardeşim balığı sevmiyor., Erkek kardeşim balık sevmiyor., Erkek kardeşim balığı sevmiyor.]
+        distractors: [seviyor, değil]
+      - id: a1-u09-l6-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ayşe bugün gelmiyor.
+        answers: [Ayşe kommt heute nicht., Heute kommt Ayşe nicht.]
+      - id: a1-u09-l6-e6
+        type: multiple_choice
+        prompt: Welche Frage passt? (Lesen sie?)
+        options: [Okuyorlar mı?, Okuyor mular?, Okuyorlar mi?]
+        answer: Okuyorlar mı?
+      - id: a1-u09-l6-e7
+        type: word_bank
+        prompt: Arbeitest du heute nicht?
+        answers: [Bugün çalışmıyor musun?, Sen bugün çalışmıyor musun?]
+        distractors: [çalışıyorsun, mı]
+      - id: a1-u09-l6-e8
+        type: free_text
+        direction: de_tr
+        prompt: wir wollen nicht
+        answers: [istemiyoruz, biz istemiyoruz]
+      - id: a1-u09-l6-e9
+        type: multiple_choice
+        prompt: Was heißt „Ben de sevmiyorum“?
+        options: [Ich mag es auch nicht., Ich mag es nicht so sehr., Ich mag es auch.]
+        answer: Ich mag es auch nicht.
+      - id: a1-u09-l6-e10
+        type: word_bank
+        prompt: Ich trinke keinen Kaffee, ich trinke Tee.
+        answers: ['Kahve içmiyorum, çay içiyorum.', 'Ben kahve içmiyorum, çay içiyorum.']
+        distractors: [değil, yok]
+      - id: a1-u09-l6-e11
+        type: free_text
+        direction: tr_de
+        prompt: Spor yapıyor musunuz?
+        answers: [Machen Sie Sport?, Macht ihr Sport?, Treiben Sie Sport?, Treibt ihr Sport?]
+      - id: a1-u09-l6-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Çay yok“ / „Çay istemiyorum“
+        options: [Es gibt keinen Tee. / Ich möchte keinen Tee., Beides heißt dasselbe., Ich mag keinen Tee. / Es gibt keinen Tee.]
+        answer: Es gibt keinen Tee. / Ich möchte keinen Tee.
+
+vocab:
+  - { tr: sevmek, de: [lieben, mögen], pos: verb }
+  - { tr: istemek, de: [wollen, möchten], pos: verb }
+  - { tr: bilmek, de: [wissen, kennen, können (Sprache)], pos: verb }
+  - { tr: anlamak, de: [verstehen], pos: verb }
+  - { tr: görmek, de: [sehen], pos: verb }
+  - { tr: yüzmek, de: [schwimmen], pos: verb }
+  - { tr: koşmak, de: [laufen, rennen], pos: verb }
+  - { tr: almak, de: [nehmen, kaufen], pos: verb }
+  - { tr: spor, de: [Sport], pos: noun }
+  - { tr: futbol, de: [Fußball], pos: noun }
+  - { tr: biraz, de: [ein bisschen, etwas], pos: adv }
+  - { tr: hiç, de: [gar nicht, überhaupt nicht, nie], pos: adv }
+  - { tr: de, de: [auch], pos: particle }
+  - { tr: yavaş, de: [langsam], pos: adj }
+  - { tr: hızlı, de: [schnell], pos: adj }

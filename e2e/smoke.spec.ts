@@ -28,7 +28,7 @@ test('komplette Lektion a1-u01-l1 durchspielen', async ({ page }) => {
 });
 
 test('alle Lektionen aller Units sind mit den hinterlegten Lösungen lösbar', async ({ page }) => {
-  test.setTimeout(300_000);
+  test.setTimeout(600_000);
   const { units } = JSON.parse(readFileSync('public/content/index.json', 'utf8')) as {
     units: { id: string }[];
   };

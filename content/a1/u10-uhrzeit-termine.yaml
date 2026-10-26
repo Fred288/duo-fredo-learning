@@ -1,0 +1,535 @@
+# A1-10: Uhrzeit und Termine (Uhrzeit, Wochentage, -de, -den … -e kadar). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u10
+level: A1
+title: Uhrzeit und Termine
+grammar_focus: [uhrzeit, wochentage, zeitangaben, kadar]
+explainer: explainers/a1-uhrzeit.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u10-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a1-u10-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „Saat kaç?“
+        options: [Wie spät ist es?, Wie viele Uhren?, Wie lange?]
+        answer: Wie spät ist es?
+        explanation: saat heißt Uhr, Stunde und Uhrzeit.
+      - id: a1-u10-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: halb (bei Uhrzeiten, „drei Uhr dreißig“)
+        answers: [buçuk]
+      - id: a1-u10-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „çeyrek“?
+        options: [Viertel, Hälfte, Minute]
+        answer: Viertel
+      - id: a1-u10-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Minute
+        answers: [dakika]
+      - id: a1-u10-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „pazartesi“?
+        options: [Montag, Dienstag, Sonntag]
+        answer: Montag
+      - id: a1-u10-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „salı“?
+        options: [Dienstag, Mittwoch, Samstag]
+        answer: Dienstag
+      - id: a1-u10-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „çarşamba“?
+        options: [Mittwoch, Donnerstag, Montag]
+        answer: Mittwoch
+        explanation: Aus dem Persischen, etwa „vierter Tag“ (nach dem Samstag gezählt); perşembe ist der „fünfte Tag“.
+      - id: a1-u10-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „perşembe“?
+        options: [Donnerstag, Freitag, Dienstag]
+        answer: Donnerstag
+      - id: a1-u10-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: Freitag
+        answers: [cuma]
+      - id: a1-u10-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „cumartesi“?
+        options: [Samstag, Sonntag, Freitag]
+        answer: Samstag
+        explanation: cumartesi kommt von cuma ertesi, „der Tag nach Freitag“.
+      - id: a1-u10-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Sonntag
+        answers: [pazar]
+        explanation: pazar heißt auch Markt.
+      - id: a1-u10-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „yarın“?
+        options: [morgen, gestern, heute]
+        answer: morgen
+      - id: a1-u10-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: gestern
+        answers: [dün]
+      - id: a1-u10-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „hafta“?
+        options: [Woche, Monat, Tag]
+        answer: Woche
+      - id: a1-u10-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „randevu“?
+        options: [Termin, Rechnung, Ausflug]
+        answer: Termin
+      - id: a1-u10-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „erken“?
+        options: [früh, spät, pünktlich]
+        answer: früh
+        explanation: erken (früh), geç (spät).
+      - id: a1-u10-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: spät
+        answers: [geç]
+      - id: a1-u10-l1-e18
+        type: multiple_choice
+        prompt: Was heißt „gün“?
+        options: [Tag, Woche, Stunde]
+        answer: Tag
+      - id: a1-u10-l1-e19
+        type: multiple_choice
+        prompt: Was heißt „mağaza“?
+        options: [Geschäft, Lager, Magazin (Zeitschrift)]
+        answer: Geschäft
+      - id: a1-u10-l1-e20
+        type: multiple_choice
+        prompt: Was heißt „açık“?
+        options: [offen, geschlossen, voll]
+        answer: offen
+        explanation: açık (offen), kapalı (geschlossen).
+      - id: a1-u10-l1-e21
+        type: multiple_choice
+        prompt: Was heißt „ders“?
+        options: [Unterricht, Pause, Prüfung]
+        answer: Unterricht
+      - id: a1-u10-l1-e22
+        type: multiple_choice
+        prompt: Was heißt „yemek“ in „yemek yemek“?
+        options: [Essen (Mahlzeit), Küche, Hunger]
+        answer: Essen (Mahlzeit)
+        explanation: yemek ist das Nomen „Essen“ und das Verb „essen“. yemek yemek = essen (eine Mahlzeit).
+
+  - id: a1-u10-l2
+    type: grammar
+    title: Wie spät ist es?
+    exercises:
+      - id: a1-u10-l2-e1
+        type: word_bank
+        prompt: Es ist drei Uhr.
+        answers: [Saat üç.]
+        distractors: [üçte, kaç]
+        explanation: Wörtlich „Die Uhr (ist) drei“.
+      - id: a1-u10-l2-e2
+        type: word_bank
+        prompt: Es ist halb vier. (3:30)
+        answers: [Saat üç buçuk.]
+        distractors: [dört, yarım]
+        explanation: Anders als im Deutschen sagt man „drei und halb“, also üç buçuk.
+      - id: a1-u10-l2-e3
+        type: multiple_choice
+        prompt: Wie sagt man 7:30?
+        options: [Saat yedi buçuk., Saat sekiz buçuk., Saat yarım sekiz.]
+        answer: Saat yedi buçuk.
+        explanation: Die volle Stunde zuerst, dann buçuk.
+      - id: a1-u10-l2-e4
+        type: free_text
+        direction: de_tr
+        prompt: Es ist zehn Uhr.
+        answers: [Saat on.]
+      - id: a1-u10-l2-e5
+        type: free_text
+        direction: tr_de
+        prompt: Saat iki buçuk.
+        answers: [Es ist halb drei., Es ist zwei Uhr dreißig., Es ist 2:30., Halb drei.]
+      - id: a1-u10-l2-e6
+        type: multiple_choice
+        prompt: Was heißt „Saat yarım“?
+        options: [Es ist halb eins. (12:30), Es ist halb zwölf., Es ist Mittag.]
+        answer: Es ist halb eins. (12:30)
+        explanation: Für 12:30 sagt man oft yarım, on iki buçuk ist ebenso richtig.
+      - id: a1-u10-l2-e7
+        type: word_bank
+        prompt: Es ist zwölf Uhr.
+        answers: [Saat on iki.]
+        distractors: [yirmi, bir]
+      - id: a1-u10-l2-e8
+        type: free_text
+        direction: de_tr
+        prompt: Wie spät ist es?
+        answers: [Saat kaç?]
+      - id: a1-u10-l2-e9
+        type: multiple_choice
+        prompt: Wie sagt man 9:30?
+        options: [Saat dokuz buçuk., Saat on buçuk., Saat buçuk dokuz.]
+        answer: Saat dokuz buçuk.
+      - id: a1-u10-l2-e10
+        type: word_bank
+        prompt: Es ist ein Uhr.
+        answers: [Saat bir.]
+        distractors: [on, birde]
+      - id: a1-u10-l2-e11
+        type: free_text
+        direction: tr_de
+        prompt: Saat sekiz.
+        answers: [Es ist acht Uhr., Es ist acht., Acht Uhr.]
+      - id: a1-u10-l2-e12
+        type: multiple_choice
+        prompt: „Affedersiniz, saat kaç?“ – Wer fragt das?
+        options: ['Jemand, der höflich nach der Uhrzeit fragt.', 'Jemand, der eine Uhr kaufen will.', 'Jemand, der einen Termin absagt.']
+        answer: 'Jemand, der höflich nach der Uhrzeit fragt.'
+      - id: a1-u10-l2-e13
+        type: word_bank
+        prompt: Es ist halb sechs. (5:30)
+        answers: [Saat beş buçuk.]
+        distractors: [altı, beşte]
+
+  - id: a1-u10-l3
+    type: grammar
+    title: Viertel nach, Viertel vor
+    exercises:
+      - id: a1-u10-l3-e1
+        type: suffix_builder
+        stem: üç
+        suffixes: [ACC]
+        target: üçü
+        gloss_de: (Viertel nach) drei
+        explanation: „nach“ → Stunde im Akkusativ + geçiyor, Saat üçü çeyrek geçiyor.
+      - id: a1-u10-l3-e2
+        type: word_bank
+        prompt: Es ist Viertel nach drei. (3:15)
+        answers: [Saat üçü çeyrek geçiyor.]
+        distractors: [üçe, var]
+      - id: a1-u10-l3-e3
+        type: suffix_builder
+        stem: dört
+        suffixes: [DAT]
+        target: dörde
+        gloss_de: (Viertel vor) vier
+        explanation: „vor“ → Stunde im Dativ + var. Bei dört wird t vor Vokal zu d.
+      - id: a1-u10-l3-e4
+        type: word_bank
+        prompt: Es ist Viertel vor vier. (3:45)
+        answers: [Saat dörde çeyrek var.]
+        distractors: [dördü, geçiyor]
+      - { id: a1-u10-l3-e5, type: suffix_builder, stem: beş, suffixes: [ACC], target: beşi, gloss_de: (zehn nach) fünf }
+      - id: a1-u10-l3-e6
+        type: word_bank
+        prompt: Es ist zehn nach fünf. (5:10)
+        answers: [Saat beşi on geçiyor.]
+        distractors: [beşe, var]
+      - id: a1-u10-l3-e7
+        type: suffix_builder
+        stem: altı
+        suffixes: [DAT]
+        target: altıya
+        gloss_de: (fünf vor) sechs
+        explanation: Nach Vokal steht ein y vor der Dativendung.
+      - id: a1-u10-l3-e8
+        type: word_bank
+        prompt: Es ist fünf vor sechs. (5:55)
+        answers: [Saat altıya beş var.]
+        distractors: [altıyı, geçiyor]
+      - { id: a1-u10-l3-e9, type: suffix_builder, stem: yedi, suffixes: [ACC], target: yediyi, gloss_de: (zwanzig nach) sieben }
+      - { id: a1-u10-l3-e10, type: suffix_builder, stem: dokuz, suffixes: [DAT], target: dokuza, gloss_de: (zehn vor) neun }
+      - id: a1-u10-l3-e11
+        type: multiple_choice
+        prompt: Was heißt „Saat ikiyi yirmi geçiyor“?
+        options: [Es ist zwanzig nach zwei., Es ist zwanzig vor zwei., Es ist zwei Uhr zwanzig Minuten lang.]
+        answer: Es ist zwanzig nach zwei.
+      - id: a1-u10-l3-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Saat … çeyrek var.“ (Viertel vor eins)
+        options: [bire, biri, birde]
+        answer: bire
+        explanation: Bei „vor“ steht der Dativ, bir → bire.
+      - id: a1-u10-l3-e13
+        type: free_text
+        direction: tr_de
+        prompt: Saat sekize çeyrek var.
+        answers: [Es ist Viertel vor acht., Viertel vor acht., Es ist 7:45., Es ist dreiviertel acht., Dreiviertel acht., Es ist sieben Uhr fünfundvierzig.]
+      - id: a1-u10-l3-e14
+        type: multiple_choice
+        prompt: Was gehört zu „geçiyor“ (nach)?
+        options: [Stunde im Akkusativ (üçü), Stunde im Dativ (üçe), Stunde im Lokativ (üçte)]
+        answer: Stunde im Akkusativ (üçü)
+
+  - id: a1-u10-l4
+    type: grammar
+    title: Um wie viel Uhr?
+    exercises:
+      - id: a1-u10-l4-e1
+        type: suffix_builder
+        stem: üç
+        suffixes: [LOC]
+        target: üçte
+        gloss_de: um drei
+        explanation: „um … Uhr“ → Lokativ, saat üçte. Nach ç wird d zu t.
+      - { id: a1-u10-l4-e2, type: suffix_builder, stem: yedi, suffixes: [LOC], target: yedide, gloss_de: um sieben }
+      - { id: a1-u10-l4-e3, type: suffix_builder, stem: dört, suffixes: [LOC], target: dörtte, gloss_de: um vier }
+      - { id: a1-u10-l4-e4, type: suffix_builder, stem: altı, suffixes: [LOC], target: altıda, gloss_de: um sechs }
+      - { id: a1-u10-l4-e5, type: suffix_builder, stem: on, suffixes: [LOC], target: onda, gloss_de: um zehn }
+      - id: a1-u10-l4-e6
+        type: suffix_builder
+        stem: buçuk
+        suffixes: [LOC]
+        target: buçukta
+        gloss_de: um halb (saat üç buçukta = um halb vier)
+        explanation: Bei „halb“ bekommt buçuk die Endung, üç buçukta.
+      - id: a1-u10-l4-e7
+        type: word_bank
+        prompt: Um wie viel Uhr?
+        answers: [Saat kaçta?]
+        distractors: [kaç, nerede]
+        explanation: kaç + -ta, auch hier der Lokativ.
+      - id: a1-u10-l4-e8
+        type: word_bank
+        prompt: Ich stehe um sieben Uhr auf.
+        answers: [Saat yedide kalkıyorum., Yedide kalkıyorum.]
+        distractors: [yedi, kalkıyor]
+      - id: a1-u10-l4-e9
+        type: word_bank
+        prompt: Der Film beginnt um halb neun.
+        answers: [Film saat sekiz buçukta başlıyor., Film sekiz buçukta başlıyor., Saat sekiz buçukta film başlıyor.]
+        distractors: [dokuz, başlıyorum]
+        explanation: film = Film.
+      - id: a1-u10-l4-e10
+        type: free_text
+        direction: de_tr
+        prompt: um zehn Uhr
+        answers: [saat onda, onda]
+      - id: a1-u10-l4-e11
+        type: free_text
+        direction: tr_de
+        prompt: Saat kaçta geliyorsun?
+        answers: [Um wie viel Uhr kommst du?, Wann kommst du?, Um welche Uhrzeit kommst du?]
+      - id: a1-u10-l4-e12
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (um vier)
+        options: [dörtte, dördte, dörde]
+        answer: dörtte
+        explanation: Vor -te bleibt das t, nur vor Vokal wird es zu d (dörde).
+      - id: a1-u10-l4-e13
+        type: word_bank
+        prompt: Wir essen um zwölf.
+        answers: [Saat on ikide yemek yiyoruz., On ikide yemek yiyoruz.]
+        distractors: [on iki, yiyorlar]
+        explanation: yemek ist auch das Nomen „Essen“, yemek yemek = essen.
+
+  - id: a1-u10-l5
+    type: grammar
+    title: 'Tabellen: Stunden mit Endungen'
+    exercises:
+      - id: a1-u10-l5-e1
+        type: paradigm
+        kind: noun
+        lemma: üç
+        rows: [[ACC], [DAT], [LOC], [ABL]]
+        targets: [üçü, üçe, üçte, üçten]
+        gloss_de: drei (nach, vor, um, ab)
+        explanation: üçü çeyrek geçiyor, üçe çeyrek var, üçte, üçten.
+      - id: a1-u10-l5-e2
+        type: paradigm
+        kind: noun
+        lemma: dört
+        rows: [[ACC], [DAT], [LOC], [ABL]]
+        targets: [dördü, dörde, dörtte, dörtten]
+        gloss_de: vier
+        explanation: t → d nur vor Vokal.
+      - { id: a1-u10-l5-e3, type: paradigm, kind: noun, lemma: beş, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [beşi, beşe, beşte, beşten], gloss_de: fünf }
+      - id: a1-u10-l5-e4
+        type: paradigm
+        kind: noun
+        lemma: altı
+        rows: [[ACC], [DAT], [LOC], [ABL]]
+        targets: [altıyı, altıya, altıda, altıdan]
+        gloss_de: sechs
+        explanation: Nach Vokal y bei Akkusativ und Dativ.
+      - { id: a1-u10-l5-e5, type: paradigm, kind: noun, lemma: yedi, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [yediyi, yediye, yedide, yediden], gloss_de: sieben }
+      - { id: a1-u10-l5-e6, type: paradigm, kind: noun, lemma: sekiz, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [sekizi, sekize, sekizde, sekizden], gloss_de: acht }
+      - { id: a1-u10-l5-e7, type: paradigm, kind: noun, lemma: dokuz, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [dokuzu, dokuza, dokuzda, dokuzdan], gloss_de: neun }
+      - { id: a1-u10-l5-e8, type: paradigm, kind: noun, lemma: on, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [onu, ona, onda, ondan], gloss_de: zehn }
+      - { id: a1-u10-l5-e9, type: paradigm, kind: noun, lemma: iki, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [ikiyi, ikiye, ikide, ikiden], gloss_de: zwei }
+      - { id: a1-u10-l5-e10, type: paradigm, kind: noun, lemma: bir, rows: [[ACC], [DAT], [LOC], [ABL]], targets: [biri, bire, birde, birden], gloss_de: eins }
+
+  - id: a1-u10-l6
+    type: dialog
+    title: Wochentage und Termine
+    exercises:
+      - id: a1-u10-l6-e1
+        type: word_bank
+        prompt: Ich arbeite von Montag bis Freitag.
+        answers: [Pazartesiden cumaya kadar çalışıyorum.]
+        distractors: [pazartesiye, cumadan]
+        explanation: von … bis → Ablativ … Dativ + kadar.
+      - id: a1-u10-l6-e2
+        type: word_bank
+        prompt: von neun bis fünf
+        answers: [dokuzdan beşe kadar]
+        distractors: [dokuza, beşten]
+      - { id: a1-u10-l6-e3, type: suffix_builder, stem: pazartesi, suffixes: [ABL], target: pazartesiden, gloss_de: ab Montag }
+      - { id: a1-u10-l6-e4, type: suffix_builder, stem: cuma, suffixes: [DAT], target: cumaya, gloss_de: (bis) Freitag }
+      - id: a1-u10-l6-e5
+        type: word_bank
+        prompt: Am Samstag gehen wir ins Kino.
+        answers: [Cumartesi sinemaya gidiyoruz., Cumartesi günü sinemaya gidiyoruz.]
+        distractors: [sinemada, cumartesiden]
+        explanation: "Wochentage ohne Endung, oft mit günü: cumartesi günü = am Samstag (wörtlich „Samstagstag“)."
+      - id: a1-u10-l6-e6
+        type: word_bank
+        prompt: Ich habe morgen einen Termin.
+        answers: [Yarın randevum var., Yarın bir randevum var.]
+        distractors: [yok, randevu]
+      - id: a1-u10-l6-e7
+        type: free_text
+        direction: tr_de
+        prompt: Bugün günlerden ne?
+        answers: [Welcher Tag ist heute?, Was für ein Tag ist heute?, Was ist heute für ein Tag?, Welchen Tag haben wir heute?]
+        explanation: Feste Frage, wörtlich „Heute ist von den Tagen was?“.
+      - id: a1-u10-l6-e8
+        type: word_bank
+        prompt: Heute ist Mittwoch.
+        answers: [Bugün çarşamba.]
+        distractors: [yarın, perşembe]
+      - id: a1-u10-l6-e9
+        type: multiple_choice
+        prompt: Welcher Tag kommt nach „salı“?
+        options: [çarşamba, perşembe, pazartesi]
+        answer: çarşamba
+      - id: a1-u10-l6-e10
+        type: word_bank
+        prompt: Kommst du am Sonntag?
+        answers: [Pazar geliyor musun?, Pazar günü geliyor musun?]
+        distractors: [geliyorsun, mi]
+      - id: a1-u10-l6-e11
+        type: free_text
+        direction: de_tr
+        prompt: bis morgen (zeitlich, z. B. bis morgen warten)
+        answers: [yarına kadar]
+        explanation: yarın + Dativ (yarına) + kadar.
+      - id: a1-u10-l6-e12
+        type: word_bank
+        prompt: Ich komme etwas später.
+        answers: [Biraz geç geliyorum.]
+        distractors: [erken, çok]
+        explanation: Für „sich verspäten“ sagt man eher geç kalıyorum oder gecikiyorum.
+      - id: a1-u10-l6-e13
+        type: multiple_choice
+        prompt: Was heißt „Görüşürüz, yarın saat onda!“?
+        options: [Bis morgen um zehn!, Bis heute um zehn!, Wir sehen uns um halb zehn!]
+        answer: Bis morgen um zehn!
+
+  - id: a1-u10-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u10-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: Es ist halb zwei.
+        answers: [Saat bir buçuk., Saat bir otuz.]
+      - id: a1-u10-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: um acht Uhr
+        answers: [saat sekizde, sekizde]
+      - id: a1-u10-l7-e3
+        type: multiple_choice
+        prompt: Wie sagt man 10:15?
+        options: [Saat onu çeyrek geçiyor., Saat ona çeyrek var., Saat on çeyrek.]
+        answer: Saat onu çeyrek geçiyor.
+      - id: a1-u10-l7-e4
+        type: word_bank
+        prompt: Es ist zwanzig vor elf. (10:40)
+        answers: [Saat on bire yirmi var.]
+        distractors: [on biri, geçiyor]
+      - id: a1-u10-l7-e5
+        type: free_text
+        direction: de_tr
+        prompt: Dienstag
+        answers: [salı]
+      - id: a1-u10-l7-e6
+        type: free_text
+        direction: tr_de
+        prompt: perşembe
+        answers: [Donnerstag]
+      - id: a1-u10-l7-e7
+        type: word_bank
+        prompt: Das Geschäft ist von zehn bis acht geöffnet.
+        answers: [Mağaza ondan sekize kadar açık., Mağaza saat ondan sekize kadar açık.]
+        distractors: [ona, sekizden]
+        explanation: mağaza = Geschäft, açık = offen.
+      - id: a1-u10-l7-e8
+        type: multiple_choice
+        prompt: Was gehört zu „var“ bei der Uhrzeit (vor)?
+        options: [Stunde im Dativ (dörde), Stunde im Akkusativ (dördü), Stunde im Lokativ (dörtte)]
+        answer: Stunde im Dativ (dörde)
+      - id: a1-u10-l7-e9
+        type: free_text
+        direction: tr_de
+        prompt: Yarın çalışmıyorum.
+        answers: [Morgen arbeite ich nicht., Ich arbeite morgen nicht.]
+        explanation: -iyor kann auch etwas Geplantes ausdrücken, wie „morgen arbeite ich nicht“.
+      - id: a1-u10-l7-e10
+        type: word_bank
+        prompt: Um wie viel Uhr beginnt der Unterricht?
+        answers: [Ders saat kaçta başlıyor?, Ders kaçta başlıyor?]
+        distractors: [kaç, başlıyorsun]
+        explanation: ders = Unterricht, Unterrichtsstunde.
+      - id: a1-u10-l7-e11
+        type: free_text
+        direction: de_tr
+        prompt: Woche
+        answers: [hafta]
+      - id: a1-u10-l7-e12
+        type: multiple_choice
+        prompt: Welcher Tag ist „pazar“?
+        options: [Sonntag, Samstag, Montag]
+        answer: Sonntag
+
+vocab:
+  - { tr: çeyrek, de: [Viertel], pos: noun }
+  - { tr: buçuk, de: [halb (nach einer Zahl)], pos: noun }
+  - { tr: yarım, de: [halb, halbe Stunde], pos: adj }
+  - { tr: dakika, de: [Minute], pos: noun }
+  - { tr: geçiyor, de: [nach (Uhrzeit), geht vorbei], pos: phrase }
+  - { tr: pazartesi, de: [Montag], pos: noun }
+  - { tr: salı, de: [Dienstag], pos: noun }
+  - { tr: çarşamba, de: [Mittwoch], pos: noun }
+  - { tr: perşembe, de: [Donnerstag], pos: noun }
+  - { tr: cuma, de: [Freitag], pos: noun }
+  - { tr: cumartesi, de: [Samstag], pos: noun }
+  - { tr: pazar, de: [Sonntag, Markt], pos: noun }
+  - { tr: yarın, de: [morgen], pos: adv }
+  - { tr: dün, de: [gestern], pos: adv }
+  - { tr: hafta, de: [Woche], pos: noun }
+  - { tr: gün, de: [Tag], pos: noun }
+  - { tr: randevu, de: [Termin], pos: noun }
+  - { tr: erken, de: [früh], pos: adv }
+  - { tr: geç, de: [spät], pos: adv }
+  - { tr: kadar, de: [bis], pos: postp }
+  - { tr: film, de: [Film], pos: noun }
+  - { tr: ders, de: [Unterricht, Unterrichtsstunde], pos: noun }
+  - { tr: mağaza, de: [Geschäft, Laden], pos: noun }
+  - { tr: açık, de: [offen, geöffnet], pos: adj }
+  - { id: yemek-essen, tr: yemek, de: [Essen, Mahlzeit], pos: noun }

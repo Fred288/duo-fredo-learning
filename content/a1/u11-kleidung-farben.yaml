@@ -1,0 +1,532 @@
+# A1-11: Kleidung und Farben (bu/şu/o, Adjektiv vor dem Nomen, bir als „ein“). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a1-u11
+level: A1
+title: Kleidung und Farben
+grammar_focus: [demonstrativa, adjektiv, bir, einkaufen]
+explainer: explainers/a1-kleidung.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a1-u11-l1
+    type: vocab
+    title: Kleidung
+    exercises:
+      - id: a1-u11-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „gömlek“?
+        options: [Hemd, Hose, Rock]
+        answer: Hemd
+      - id: a1-u11-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Hose
+        answers: [pantolon]
+      - id: a1-u11-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „etek“?
+        options: [Rock, Kleid, Jacke]
+        answer: Rock
+      - id: a1-u11-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Kleid
+        answers: [elbise]
+        explanation: elbise heißt Kleid, im Plural elbiseler auch „Kleidung“.
+      - id: a1-u11-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „ayakkabı“?
+        options: [Schuh, Socke, Mütze]
+        answer: Schuh
+        explanation: Aus ayak (Fuß) und kap (Behälter), wörtlich „Fußbehälter“.
+      - id: a1-u11-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: çorap
+        answers: [Socke, Socken, Strumpf, Strümpfe, die Socke, der Strumpf]
+      - id: a1-u11-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „kazak“?
+        options: [Pullover, Mantel, Hemd]
+        answer: Pullover
+      - id: a1-u11-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Jacke, Sakko
+        answers: [ceket]
+      - id: a1-u11-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „şapka“?
+        options: [Hut, Tasche, Schal]
+        answer: Hut
+      - id: a1-u11-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „büyük“?
+        options: [groß, klein, neu]
+        answer: groß
+        explanation: büyük (groß), küçük (klein).
+      - id: a1-u11-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: klein
+        answers: [küçük]
+      - id: a1-u11-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „yeni“?
+        options: [neu, alt, schön]
+        answer: neu
+        explanation: yeni (neu), eski (alt bei Dingen).
+      - id: a1-u11-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „ucuz“?
+        options: [billig, teuer, schön]
+        answer: billig
+        explanation: ucuz (billig), pahalı (teuer).
+      - id: a1-u11-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: schön
+        answers: [güzel]
+      - id: a1-u11-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „uzun“?
+        options: [lang, kurz, breit]
+        answer: lang
+        explanation: uzun (lang), kısa (kurz).
+
+  - id: a1-u11-l2
+    type: vocab
+    title: Farben
+    exercises:
+      - id: a1-u11-l2-e1
+        type: multiple_choice
+        prompt: Was heißt „kırmızı“?
+        options: [rot, gelb, blau]
+        answer: rot
+      - id: a1-u11-l2-e2
+        type: free_text
+        direction: de_tr
+        prompt: blau
+        answers: [mavi]
+      - id: a1-u11-l2-e3
+        type: multiple_choice
+        prompt: Was heißt „yeşil“?
+        options: [grün, grau, gelb]
+        answer: grün
+      - id: a1-u11-l2-e4
+        type: free_text
+        direction: de_tr
+        prompt: gelb
+        answers: [sarı]
+      - id: a1-u11-l2-e5
+        type: multiple_choice
+        prompt: Was heißt „siyah“?
+        options: [schwarz, weiß, braun]
+        answer: schwarz
+      - id: a1-u11-l2-e6
+        type: free_text
+        direction: de_tr
+        prompt: weiß
+        answers: [beyaz]
+      - id: a1-u11-l2-e7
+        type: multiple_choice
+        prompt: Was heißt „kahverengi“?
+        options: [braun, orange, rosa]
+        answer: braun
+        explanation: Wörtlich „Kaffeefarbe“, aus kahve und renk (Farbe).
+      - id: a1-u11-l2-e8
+        type: free_text
+        direction: tr_de
+        prompt: gri
+        answers: [grau]
+      - id: a1-u11-l2-e9
+        type: multiple_choice
+        prompt: Was heißt „pembe“?
+        options: [rosa, lila, rot]
+        answer: rosa
+      - id: a1-u11-l2-e10
+        type: free_text
+        direction: tr_de
+        prompt: turuncu
+        answers: [orange]
+        explanation: Von turunç (Bitterorange).
+      - id: a1-u11-l2-e11
+        type: multiple_choice
+        prompt: Was heißt „renk“?
+        options: [Farbe, Größe, Preis]
+        answer: Farbe
+      - id: a1-u11-l2-e12
+        type: word_bank
+        prompt: Welche Farbe?
+        answers: [Hangi renk?, Ne renk?]
+        distractors: [nerede, rengi]
+        explanation: hangi = welcher, welche, welches.
+      - id: a1-u11-l2-e13
+        type: word_bank
+        prompt: Das Hemd ist weiß.
+        answers: [Gömlek beyaz.]
+        distractors: [siyah, Gömleği]
+        explanation: Wie bei „sein“, in der 3. Person ohne Endung.
+      - id: a1-u11-l2-e14
+        type: multiple_choice
+        prompt: Welche Farbe hat der Himmel an einem sonnigen Tag?
+        options: [mavi, yeşil, kırmızı]
+        answer: mavi
+
+  - id: a1-u11-l3
+    type: grammar
+    title: dies, das, jenes – bu, şu, o
+    exercises:
+      - id: a1-u11-l3-e1
+        type: multiple_choice
+        prompt: Was ist der Unterschied zwischen bu, şu und o?
+        options: ['bu nah, şu etwas weiter (zeigend), o weit weg', Kein Unterschied, 'bu Plural, şu Singular']
+        answer: 'bu nah, şu etwas weiter (zeigend), o weit weg'
+      - id: a1-u11-l3-e2
+        type: word_bank
+        prompt: Was ist das? (hier bei mir)
+        answers: [Bu ne?]
+        distractors: [Şu, nerede]
+      - id: a1-u11-l3-e3
+        type: word_bank
+        prompt: Das ist ein Hut.
+        answers: [Bu bir şapka.]
+        distractors: [şapkalar, var]
+      - id: a1-u11-l3-e4
+        type: word_bank
+        prompt: dieses Hemd
+        answers: [bu gömlek]
+        distractors: [gömleği, bir]
+        explanation: bu, şu, o stehen vor dem Nomen und verändern sich nicht.
+      - id: a1-u11-l3-e5
+        type: word_bank
+        prompt: die Schuhe da (zeigend)
+        answers: [şu ayakkabılar]
+        distractors: [bu, ayakkabı]
+      - id: a1-u11-l3-e6
+        type: multiple_choice
+        prompt: Was heißt „bunlar“?
+        options: [diese (Plural), das hier, dort]
+        answer: diese (Plural)
+        explanation: bu → bunlar, şu → şunlar, o → onlar (allein stehend, ohne Nomen).
+      - id: a1-u11-l3-e7
+        type: free_text
+        direction: de_tr
+        prompt: diese Jacke (hier)
+        answers: [bu ceket]
+      - id: a1-u11-l3-e8
+        type: multiple_choice
+        prompt: Was heißt „bunu“?
+        options: [dieses (Akkusativ), hier, darin]
+        answer: dieses (Akkusativ)
+        explanation: bu → bunu, şu → şunu, o → onu. Die Demonstrativa haben eigene Formen mit n.
+      - id: a1-u11-l3-e9
+        type: word_bank
+        prompt: Ich möchte das hier (in meiner Hand).
+        answers: [Bunu istiyorum.]
+        distractors: [Bu, istiyor]
+      - id: a1-u11-l3-e10
+        type: word_bank
+        prompt: Was ist das dort?
+        answers: [O ne?, Şu ne?]
+        distractors: [Bu, nerede]
+      - id: a1-u11-l3-e11
+        type: multiple_choice
+        prompt: Welche Form passt? „… ne kadar?“ (Was kostet das hier?)
+        options: [Bu, Bunu, Buna]
+        answer: Bu
+      - id: a1-u11-l3-e12
+        type: free_text
+        direction: tr_de
+        prompt: Şu elbise çok güzel.
+        answers: [Das Kleid da ist sehr schön., Dieses Kleid ist sehr schön., Das Kleid dort ist sehr schön., Jenes Kleid ist sehr schön.]
+      - id: a1-u11-l3-e13
+        type: multiple_choice
+        prompt: Was heißt „Bunlar ne?“
+        options: [Was ist das hier? (mehrere Dinge), Wer sind sie?, Wo sind sie?]
+        answer: Was ist das hier? (mehrere Dinge)
+
+  - id: a1-u11-l4
+    type: grammar
+    title: ein rotes Kleid
+    exercises:
+      - id: a1-u11-l4-e1
+        type: word_bank
+        prompt: ein rotes Kleid
+        answers: [kırmızı bir elbise, bir kırmızı elbise]
+        distractors: [kırmızılar, elbiseyi]
+        explanation: Üblich ist Adjektiv + bir + Nomen. Das Adjektiv ändert sich nie.
+      - id: a1-u11-l4-e2
+        type: word_bank
+        prompt: ein großes Haus
+        answers: [büyük bir ev, bir büyük ev]
+        distractors: [büyükler, evi]
+      - id: a1-u11-l4-e3
+        type: word_bank
+        prompt: die neuen Schuhe
+        answers: [yeni ayakkabılar]
+        distractors: [yeniler, bir]
+        explanation: Plural nur am Nomen, nicht am Adjektiv.
+      - id: a1-u11-l4-e4
+        type: word_bank
+        prompt: Das Kleid ist sehr schön.
+        answers: [Elbise çok güzel.]
+        distractors: [güzeli, bir]
+      - id: a1-u11-l4-e5
+        type: word_bank
+        prompt: Diese Schuhe sind teuer.
+        answers: [Bu ayakkabılar pahalı.]
+        distractors: [ucuz, pahalıyı]
+        explanation: Nach einem Plural-Nomen bleibt das Prädikat ohne -lar.
+      - id: a1-u11-l4-e6
+        type: multiple_choice
+        prompt: Welche Reihenfolge ist richtig? (ein schwarzer Pullover)
+        options: [siyah bir kazak, kazak siyah bir, bir kazak siyah]
+        answer: siyah bir kazak
+      - id: a1-u11-l4-e7
+        type: free_text
+        direction: de_tr
+        prompt: ein blaues Hemd
+        answers: [mavi bir gömlek, bir mavi gömlek]
+      - id: a1-u11-l4-e8
+        type: free_text
+        direction: tr_de
+        prompt: eski bir ceket
+        answers: [eine alte Jacke, ein altes Sakko]
+      - id: a1-u11-l4-e9
+        type: word_bank
+        prompt: Der Rock ist zu kurz.
+        answers: [Etek çok kısa.]
+        distractors: [uzun, eteği]
+        explanation: çok heißt hier „zu“ oder „sehr“, je nach Situation. Genauer ist fazla kısa (zu kurz).
+      - id: a1-u11-l4-e10
+        type: word_bank
+        prompt: Ich habe ein neues Auto.
+        answers: [Yeni bir arabam var., Benim yeni bir arabam var.]
+        distractors: [yok, araba]
+      - id: a1-u11-l4-e11
+        type: multiple_choice
+        prompt: Was heißt „Bu gömlek beyaz.“?
+        options: [Dieses Hemd ist weiß., dieses weiße Hemd, Das ist ein weißes Hemd.]
+        answer: Dieses Hemd ist weiß.
+        explanation: Adjektiv nach dem Nomen = Aussage (ist weiß). Davor = Beschreibung (bu beyaz gömlek, dieses weiße Hemd).
+      - id: a1-u11-l4-e12
+        type: word_bank
+        prompt: dieses weiße Hemd
+        answers: [bu beyaz gömlek]
+        distractors: [beyazı, bir]
+      - id: a1-u11-l4-e13
+        type: free_text
+        direction: de_tr
+        prompt: ein kleiner Hund
+        answers: [küçük bir köpek, bir küçük köpek]
+
+  - id: a1-u11-l5
+    type: dialog
+    title: Im Geschäft
+    exercises:
+      - id: a1-u11-l5-e1
+        type: suffix_builder
+        stem: gömlek
+        suffixes: [ACC]
+        target: gömleği
+        gloss_de: das Hemd (bestimmt)
+        explanation: k wird vor Vokal zu ğ.
+      - { id: a1-u11-l5-e2, type: suffix_builder, stem: etek, suffixes: [ACC], target: eteği, gloss_de: den Rock }
+      - { id: a1-u11-l5-e3, type: suffix_builder, stem: kazak, suffixes: [ACC], target: kazağı, gloss_de: den Pullover }
+      - id: a1-u11-l5-e4
+        type: suffix_builder
+        stem: çorap
+        suffixes: [ACC]
+        target: çorabı
+        gloss_de: die Socke
+        explanation: p wird vor Vokal zu b.
+      - id: a1-u11-l5-e5
+        type: suffix_builder
+        stem: ayakkabı
+        suffixes: [ACC]
+        target: ayakkabıyı
+        gloss_de: den Schuh
+      - { id: a1-u11-l5-e6, type: suffix_builder, stem: ceket, suffixes: [ACC], target: ceketi, gloss_de: die Jacke }
+      - id: a1-u11-l5-e7
+        type: word_bank
+        prompt: Ich möchte diesen Pullover.
+        answers: [Bu kazağı istiyorum.]
+        distractors: [kazak, şunu]
+      - id: a1-u11-l5-e8
+        type: word_bank
+        prompt: Was kostet diese Hose?
+        answers: [Bu pantolon ne kadar?]
+        distractors: [pantolonu, kaç]
+      - id: a1-u11-l5-e9
+        type: word_bank
+        prompt: Gibt es eine andere Farbe?
+        answers: [Başka renk var mı?, Başka bir renk var mı?, Başka rengi var mı?]
+        distractors: [renkler, yok]
+        explanation: başka = anderer, andere.
+      - id: a1-u11-l5-e10
+        type: word_bank
+        prompt: Haben Sie das in Schwarz?
+        answers: [Siyahı var mı?, Siyah var mı?]
+        distractors: [Siyahta, yok]
+        explanation: siyah + ı ist hier „sein Schwarzes (davon)“, wie Mehmet'in arabası. Auch „Siyah var mı?“ ist üblich.
+      - id: a1-u11-l5-e11
+        type: word_bank
+        prompt: Das ist zu teuer.
+        answers: [Bu çok pahalı.]
+        distractors: [ucuz, pahalılar]
+      - id: a1-u11-l5-e12
+        type: multiple_choice
+        prompt: Die Verkäuferin fragt „Yardımcı olabilir miyim?“. Was heißt das?
+        options: [Kann ich Ihnen helfen?, Möchten Sie bezahlen?, Haben Sie eine Tasche?]
+        answer: Kann ich Ihnen helfen?
+        explanation: Feste Wendung, die Verbform lernst du später.
+      - id: a1-u11-l5-e13
+        type: word_bank
+        prompt: Ich schaue nur, danke.
+        answers: ['Sadece bakıyorum, teşekkürler.']
+        distractors: [istiyorum, lütfen]
+        explanation: sadece = nur, bakmak = schauen.
+      - id: a1-u11-l5-e14
+        type: free_text
+        direction: de_tr
+        prompt: den Schuh (bestimmt)
+        answers: [ayakkabıyı]
+
+  - id: a1-u11-l6
+    type: grammar
+    title: 'Tabellen: Kleidung'
+    exercises:
+      - id: a1-u11-l6-e1
+        type: paradigm
+        kind: noun
+        lemma: gömlek
+        rows: [[PL], [ACC], [POSS_1SG], [LOC]]
+        targets: [gömlekler, gömleği, gömleğim, gömlekte]
+        gloss_de: Hemd
+        explanation: k → ğ nur vor Vokal, vor -ler und -te bleibt es.
+      - { id: a1-u11-l6-e2, type: paradigm, kind: noun, lemma: kazak, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [kazaklar, kazağı, kazağım, kazakta], gloss_de: Pullover }
+      - { id: a1-u11-l6-e3, type: paradigm, kind: noun, lemma: çorap, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [çoraplar, çorabı, çorabım, çorapta], gloss_de: Socke }
+      - id: a1-u11-l6-e4
+        type: paradigm
+        kind: noun
+        lemma: ayakkabı
+        rows: [[PL], [ACC], [POSS_1SG], [LOC]]
+        targets: [ayakkabılar, ayakkabıyı, ayakkabım, ayakkabıda]
+        gloss_de: Schuh
+        explanation: Nach Vokal y beim Akkusativ, beim Possessiv nur -m.
+      - { id: a1-u11-l6-e5, type: paradigm, kind: noun, lemma: ceket, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [ceketler, ceketi, ceketim, cekette], gloss_de: Jacke }
+      - { id: a1-u11-l6-e6, type: paradigm, kind: noun, lemma: elbise, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [elbiseler, elbiseyi, elbisem, elbisede], gloss_de: Kleid }
+      - { id: a1-u11-l6-e7, type: paradigm, kind: noun, lemma: şapka, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [şapkalar, şapkayı, şapkam, şapkada], gloss_de: Hut }
+      - id: a1-u11-l6-e8
+        type: paradigm
+        kind: noun
+        lemma: renk
+        rows: [[PL], [ACC], [POSS_2SG], [LOC]]
+        targets: [renkler, rengi, rengin, renkte]
+        gloss_de: Farbe
+        explanation: nk wird vor Vokal zu ng.
+      - { id: a1-u11-l6-e9, type: paradigm, kind: noun, lemma: etek, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [etekler, eteği, eteğim, etekte], gloss_de: Rock }
+      - { id: a1-u11-l6-e10, type: paradigm, kind: noun, lemma: pantolon, rows: [[PL], [ACC], [POSS_1SG], [LOC]], targets: [pantolonlar, pantolonu, pantolonum, pantolonda], gloss_de: Hose }
+
+  - id: a1-u11-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a1-u11-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: rot
+        answers: [kırmızı]
+      - id: a1-u11-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: ein schwarzer Hut
+        answers: [siyah bir şapka, bir siyah şapka]
+      - id: a1-u11-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (den Pullover)
+        options: [kazağı, kazakı, kazağu]
+        answer: kazağı
+      - id: a1-u11-l7-e4
+        type: word_bank
+        prompt: Diese Socken sind billig.
+        answers: [Bu çoraplar ucuz.]
+        distractors: [pahalı, çorabı]
+      - id: a1-u11-l7-e5
+        type: free_text
+        direction: tr_de
+        prompt: Yeşil bir etek istiyorum.
+        answers: [Ich möchte einen grünen Rock., Ich will einen grünen Rock., Ich hätte gern einen grünen Rock.]
+      - id: a1-u11-l7-e6
+        type: multiple_choice
+        prompt: Was heißt „şunu“?
+        options: [das da (Akkusativ), dort, so]
+        answer: das da (Akkusativ)
+      - id: a1-u11-l7-e7
+        type: word_bank
+        prompt: Welche Farbe magst du?
+        answers: [Hangi rengi seviyorsun?]
+        distractors: [renk, ne]
+        explanation: Mit hangi ist das Objekt bestimmt, rengi.
+      - id: a1-u11-l7-e8
+        type: free_text
+        direction: de_tr
+        prompt: die alten Schuhe
+        answers: [eski ayakkabılar]
+      - id: a1-u11-l7-e9
+        type: multiple_choice
+        prompt: Was heißt „kahverengi bir ceket“?
+        options: [eine braune Jacke, eine Kaffeejacke, eine Jacke für Kaffee]
+        answer: eine braune Jacke
+      - id: a1-u11-l7-e10
+        type: word_bank
+        prompt: Mein Pullover ist blau.
+        answers: [Kazağım mavi., Benim kazağım mavi.]
+        distractors: [kazak, mavisi]
+      - id: a1-u11-l7-e11
+        type: free_text
+        direction: de_tr
+        prompt: Was kostet das?
+        answers: [Bu ne kadar?, Ne kadar?, Bu kaç lira?, Kaç lira?, Bu kaça?]
+      - id: a1-u11-l7-e12
+        type: multiple_choice
+        prompt: Wo steht das Adjektiv bei „ein“?
+        options: [vor bir (kırmızı bir elbise), nach dem Nomen (elbise kırmızı bir), am Satzende]
+        answer: vor bir (kırmızı bir elbise)
+
+vocab:
+  - { tr: gömlek, de: [Hemd], pos: noun, softens: true }
+  - { tr: pantolon, de: [Hose], pos: noun }
+  - { tr: etek, de: [Rock], pos: noun, softens: true }
+  - { tr: elbise, de: [Kleid], pos: noun }
+  - { tr: ayakkabı, de: [Schuh], pos: noun }
+  - { tr: çorap, de: [Socke, Strumpf], pos: noun, softens: true }
+  - { tr: kazak, de: [Pullover], pos: noun, softens: true }
+  - { tr: ceket, de: [Jacke, Sakko], pos: noun }
+  - { tr: şapka, de: [Hut, Mütze], pos: noun }
+  - { tr: büyük, de: [groß], pos: adj }
+  - { tr: küçük, de: [klein], pos: adj, softens: true }
+  - { tr: yeni, de: [neu], pos: adj }
+  - { tr: eski, de: [alt (Dinge)], pos: adj }
+  - { tr: güzel, de: [schön], pos: adj }
+  - { tr: ucuz, de: [billig, günstig], pos: adj }
+  - { tr: pahalı, de: [teuer], pos: adj }
+  - { tr: uzun, de: [lang], pos: adj }
+  - { tr: kısa, de: [kurz], pos: adj }
+  - { tr: kırmızı, de: [rot], pos: adj }
+  - { tr: mavi, de: [blau], pos: adj }
+  - { tr: yeşil, de: [grün], pos: adj }
+  - { tr: sarı, de: [gelb], pos: adj }
+  - { tr: siyah, de: [schwarz], pos: adj }
+  - { tr: beyaz, de: [weiß], pos: adj }
+  - { tr: kahverengi, de: [braun], pos: adj }
+  - { tr: gri, de: [grau], pos: adj }
+  - { tr: pembe, de: [rosa], pos: adj }
+  - { tr: turuncu, de: [orange], pos: adj }
+  - { tr: renk, de: [Farbe], pos: noun, softens: true }
+  - { tr: hangi, de: [welcher, welche, welches], pos: adj }
+  - { tr: şu, de: [das da, dieser da], pos: pron }
+  - { tr: başka, de: [anderer, andere, anderes], pos: adj }
+  - { tr: sadece, de: [nur], pos: adv }
+  - { tr: bakmak, de: [schauen, ansehen], pos: verb }
