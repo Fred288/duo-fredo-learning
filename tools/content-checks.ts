@@ -1,7 +1,8 @@
 import { parse as parseYaml } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { sameForm, solveExercise, solveParadigm } from '../src/content/lexicon';
-import { MorphError } from '../src/morphology';
+import { MorphError, type Step } from '../src/morphology';
+import { explainSteps } from '../src/i18n/explain';
 
 export interface LoadedUnit {
   file: string;
@@ -71,16 +72,30 @@ export function checkUnits(units: LoadedUnit[], fileExists: (path: string) => bo
   return { errors, warnings };
 }
 
+/** Jeder Engine-Schritt braucht einen Begründungstext, sonst bricht das Feedback ab. */
+function unexplained(steps: Step[]): boolean {
+  try {
+    explainSteps(steps);
+    return false;
+  } catch {
+    return true;
+  }
+}
+
 /** Grammatik-Lösungen (Suffix-Builder, Konjugation) müssen mit der Morphologie-Engine übereinstimmen. */
 export function checkSuffixTargets(units: LoadedUnit[]): string[] {
   const lexicon = units.flatMap(({ unit }) => unit.vocab ?? []);
   const errors: string[] = [];
+  const noReason = (file: string, id: string) =>
+    errors.push(`${file}: ${id}: Engine-Schritt ohne Begründungstext (i18n)`);
   for (const { file, unit } of units) {
     for (const lesson of unit.lessons) {
       for (const ex of lesson.exercises) {
         if (ex.type === 'paradigm') {
           try {
-            solveParadigm(ex, lexicon).forEach(({ form }, i) => {
+            const rows = solveParadigm(ex, lexicon);
+            if (unexplained(rows.flatMap((r) => r.steps))) noReason(file, ex.id);
+            rows.forEach(({ form }, i) => {
               if (!sameForm(form, ex.targets[i]!)) {
                 errors.push(
                   `${file}: ${ex.id}: Zeile ${i + 1}: target "${ex.targets[i]}", Engine erwartet "${form}"`,
@@ -95,7 +110,8 @@ export function checkSuffixTargets(units: LoadedUnit[]): string[] {
         }
         if (ex.type !== 'suffix_builder' && ex.type !== 'conjugation') continue;
         try {
-          const { form } = solveExercise(ex, lexicon);
+          const { form, steps } = solveExercise(ex, lexicon);
+          if (unexplained(steps)) noReason(file, ex.id);
           if (!sameForm(form, ex.target)) {
             errors.push(`${file}: ${ex.id}: target "${ex.target}", Engine erwartet "${form}"`);
           }

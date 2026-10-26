@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { fetchUnit } from '../content/load';
+import { sectionFor } from '../content/explainer-section';
+import { fetchExplainer, fetchUnit } from '../content/load';
 import type { Lesson, Vocab } from '../content/schema';
 import { t } from '../i18n';
 import { useApp } from '../store/app';
@@ -14,6 +15,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
   const [vocab, setVocab] = useState<Vocab[]>([]);
   const [unitReviewed, setUnitReviewed] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [explainer, setExplainer] = useState<string>();
 
   useEffect(() => {
     fetchUnit(unitId)
@@ -23,6 +25,8 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
           setVocab([...(unit.vocab ?? []), ...(unit.lexicon ?? [])]);
           setUnitReviewed(unit.reviewed);
           setLesson(found);
+          // Ohne Erklärkarte (oder offline nicht geladen) läuft die Lektion ohne Grammatik-Hinweis.
+          if (unit.explainer) fetchExplainer(unit.explainer).then(setExplainer, () => {});
         } else setFailed(true);
       })
       .catch(() => setFailed(true));
@@ -39,6 +43,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       onExit={goHome}
       onAttempt={(exerciseId, verdict) => recordAttempt(exerciseId, lessonId, verdict)}
       onComplete={(correct, total) => recordCompletion(unitId, lessonId, correct, total)}
+      grammarFor={explainer ? (ex) => sectionFor(explainer, ex, lesson.title) : undefined}
     />
   );
 }

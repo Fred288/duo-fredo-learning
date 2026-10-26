@@ -505,7 +505,7 @@ vocab:
   - { tr: kazak, de: [Pullover], pos: noun, softens: true }
   - { tr: ceket, de: [Jacke, Sakko], pos: noun }
   - { tr: şapka, de: [Hut, Mütze], pos: noun }
-  - { tr: büyük, de: [groß], pos: adj }
+  - { tr: büyük, de: [groß], pos: adj, softens: true }
   - { tr: küçük, de: [klein], pos: adj, softens: true }
   - { tr: yeni, de: [neu], pos: adj }
   - { tr: eski, de: [alt (Dinge)], pos: adj }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { fetchUnit } from '../content/load';
-import type { Exercise, Lesson, Vocab } from '../content/schema';
+import { sectionFor } from '../content/explainer-section';
+import { fetchExplainer, fetchUnit } from '../content/load';
+import type { Exercise, Lesson, Unit, Vocab } from '../content/schema';
 import { t } from '../i18n';
 import { openMistakes, unitOfLesson } from '../progress/stats';
 import { useApp } from '../store/app';
@@ -14,7 +15,13 @@ interface Run {
   lesson: Lesson;
   vocab: Vocab[];
   lessonOf: Map<string, string>;
+  /** Erklärkarte und Lektionstitel je Übung, für den Grammatik-Hinweis. */
+  grammar: Map<string, { markdown: string; lessonTitle: string }>;
 }
+
+// Fehlende Erklärkarte stört den Durchgang nicht.
+const explainerOf = (u: Unit) =>
+  u.explainer ? fetchExplainer(u.explainer).catch(() => '') : Promise.resolve('');
 
 export function MistakesScreen() {
   const goHome = useApp((s) => s.goHome);
@@ -27,7 +34,8 @@ export function MistakesScreen() {
     const open = openMistakes(useProgress.getState().attempts).slice(0, MAX);
     const unitIds = [...new Set(open.map((m) => unitOfLesson(m.lessonId)))];
     Promise.all(unitIds.map(fetchUnit))
-      .then((units) => {
+      .then((units) => Promise.all(units.map(explainerOf)).then((mds) => ({ units, mds })))
+      .then(({ units, mds }) => {
         const byId = new Map<string, Exercise>(
           units.flatMap((u) => u.lessons.flatMap((l) => l.exercises.map((e) => [e.id, e]))),
         );
@@ -38,6 +46,15 @@ export function MistakesScreen() {
           lesson: { id: 'mistakes', type: 'review', title: t('mistakes.title'), exercises },
           vocab: units.flatMap((u) => [...(u.vocab ?? []), ...(u.lexicon ?? [])]),
           lessonOf: new Map(open.map((m) => [m.exerciseId, m.lessonId])),
+          grammar: new Map(
+            units.flatMap((u, i) =>
+              u.lessons.flatMap((l) =>
+                l.exercises.map(
+                  (e) => [e.id, { markdown: mds[i]!, lessonTitle: l.title }] as const,
+                ),
+              ),
+            ),
+          ),
         });
       })
       .catch(() => setFailed(true));
@@ -66,6 +83,10 @@ export function MistakesScreen() {
       vocab={run.vocab}
       onExit={goHome}
       doneTitle={t('mistakes.done')}
+      grammarFor={(ex) => {
+        const g = run.grammar.get(ex.id);
+        return g?.markdown ? sectionFor(g.markdown, ex, g.lessonTitle) : undefined;
+      }}
       // Versuche zählen für die echte Lektion; kein Lektionsabschluss, kein Tagesziel.
       onAttempt={(exerciseId, verdict) =>
         recordAttempt(exerciseId, run.lessonOf.get(exerciseId)!, verdict)

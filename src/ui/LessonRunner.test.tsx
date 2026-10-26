@@ -280,3 +280,21 @@ describe('LessonRunner', () => {
     expect(screen.getByRole('status').textContent).toContain('Richtig!');
   });
 });
+
+describe('LessonRunner Grammatik-Hinweis', () => {
+  const section = { title: 'Begrüßen', body: '- **Merhaba** – Hallo' };
+
+  it('zeigt den Abschnitt der Erklärkarte nur nach einer falschen Antwort', () => {
+    const grammarFor = vi.fn(() => section);
+    render(<LessonRunner lesson={lesson} onExit={() => {}} grammarFor={grammarFor} />);
+    fireEvent.click(screen.getByLabelText(/Hayır/));
+    click('Prüfen');
+    expect(screen.getByText('Grammatik: Begrüßen')).toBeTruthy();
+    expect(screen.getByText('Merhaba', { selector: 'strong' })).toBeTruthy();
+    click('Weiter');
+
+    fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Teşekkürler' } });
+    click('Prüfen');
+    expect(screen.queryByText('Grammatik: Begrüßen')).toBeNull();
+  });
+});

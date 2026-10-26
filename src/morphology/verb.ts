@@ -108,12 +108,16 @@ class Builder {
     if (text || newWord) this.add(tag, text, newWord);
     return text;
   }
-  /** Letzten Konsonanten des letzten Bausteins erweichen (-acak → -acağ vor Vokal). */
-  softenLast() {
+  /**
+   * Letzten Konsonanten des letzten Bausteins erweichen (-acak → -acağ vor Vokal).
+   * Beim Stamm (çocuğum) nennt die Begründung die auslösende Endung.
+   */
+  softenLast(cause: AnyTag) {
     const seg = this.segments.at(-1)!;
     const s = soften(seg.text);
     if (!s) return;
-    this.steps.push({ tag: seg.tag as AnyTag, rule: 'softening', from: s.from, to: s.to });
+    const tag = seg.tag === 'STEM' ? cause : (seg.tag as AnyTag);
+    this.steps.push({ tag, rule: 'softening', from: s.from, to: s.to });
     const word = this.words.at(-1)!;
     this.words[this.words.length - 1] = word.slice(0, word.length - seg.text.length) + s.form;
     seg.text = s.form;
@@ -136,7 +140,7 @@ function personAndQuestion(
   const tag = PERSON_TAG[person];
   if (!question) {
     const ending = realize(TYPE1[person], tag, { base: b.current, steps: [] });
-    if (softenBefore && isVowel(ending[0] ?? '')) b.softenLast();
+    if (softenBefore && isVowel(ending[0] ?? '')) b.softenLast(tag);
     b.suffix(tag, TYPE1[person]);
     return;
   }
@@ -439,7 +443,10 @@ export function predicate(input: Stem | string, opts: PredicateOptions): Inflect
     b.suffix('DIR', 'DIr');
     return b.result();
   }
-  personAndQuestion(b, opts.person, opts.question ?? false);
+  // Erweichende Nomen erweichen vor -(y)Im/-(y)Iz: çocuğum, gencim (aber çocuksun, çocuktum).
+  personAndQuestion(b, opts.person, opts.question ?? false, {
+    softenBefore: !!stem.softens && !stem.proper && !opts.negative,
+  });
   return b.result();
 }
 

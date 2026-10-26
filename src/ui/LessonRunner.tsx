@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Verdict } from '../lib/answer';
-import type { Lesson, Vocab } from '../content/schema';
+import type { Exercise, Lesson, Vocab } from '../content/schema';
+import type { ExplainerSection } from '../content/explainer-section';
 import { t } from '../i18n';
 import { explainSteps } from '../i18n/explain';
 import { grade, isSupported, paradigmCells, solutionOf, type Supported } from '../session/grade';
@@ -16,6 +17,7 @@ import { useSettings } from '../store/settings';
 import { solveExercise, solveParadigm } from '../content/lexicon';
 import { ConjugationInput } from './exercises/ConjugationInput';
 import { Feedback } from './Feedback';
+import { GrammarHint } from './GrammarHint';
 import { ReportError } from './ReportError';
 import { FreeTextInput } from './exercises/FreeTextInput';
 import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
@@ -40,6 +42,8 @@ interface Props {
   onComplete?: (correct: number, total: number) => void;
   /** Überschrift am Ende, Default „Lektion geschafft“. */
   doneTitle?: string;
+  /** Passender Abschnitt der Erklärkarte; erscheint nach einer falschen Antwort. */
+  grammarFor?: (ex: Exercise) => ExplainerSection | undefined;
 }
 
 /** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
@@ -62,6 +66,7 @@ export function LessonRunner({
   onAttempt,
   onComplete,
   doneTitle = t('done.title'),
+  grammarFor,
 }: Props) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(() => lesson.exercises.filter(isSupported), [lesson]);
@@ -139,6 +144,7 @@ export function LessonRunner({
 
   if (!supported) return null;
   const answering = session.phase === 'answering';
+  const grammar = answering ? undefined : grammarFor?.(supported);
   const total = session.queue.length;
 
   return (
@@ -236,6 +242,8 @@ export function LessonRunner({
           >
             {t('runner.continue')}
           </button>
+          {/* Unter „Weiter“: der Fokus auf dem Knopf lässt Ergebnis und Lösung im Blick. */}
+          {session.last!.verdict === 'wrong' && grammar && <GrammarHint section={grammar} />}
         </div>
       )}
     </section>

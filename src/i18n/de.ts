@@ -73,6 +73,7 @@ export const de = {
   'feedback.solution': 'Lösung: {answer}',
   'feedback.hint.diacritics': 'Achte auf die Sonderzeichen.',
   'feedback.hint.typo': 'Kleiner Tippfehler.',
+  'grammar.title': 'Grammatik: {section}',
   'feedback.retry': 'Diese Aufgabe kommt am Ende noch einmal.',
   'ex.multiple_choice': 'Wähle die richtige Antwort',
   'ex.word_bank': 'Übersetze mit den Bausteinen',

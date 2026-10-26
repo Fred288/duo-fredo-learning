@@ -48,6 +48,7 @@ export const KNOWN_LIMITS = [
   'Kopula imiş in der Frage (öğretmen miymiş) ungeprüft',
   'Verbmorphologie ab Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Kausativ)',
   'benimki/seninki: Pronomen + -ki nur als Text, nicht über die Engine',
+  'Unregelmäßiges Passiv (anlamak → anlaşılmak) nicht abgedeckt',
 ] as const;
 
 export const asStem = (input: Stem | string): Stem =>

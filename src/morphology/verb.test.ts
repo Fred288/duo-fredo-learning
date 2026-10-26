@@ -113,6 +113,24 @@ describe('Kopula (Nominalsatz)', () => {
     expect(predicate({ form: 'Alman', capitalized: true }, { person }).form).toBe(form);
   });
 
+  it('erweichende Nomen vor -(y)Im/-(y)Iz: çocuğum, gencim, aber çocuksun, çocuk muyum', () => {
+    const p = (form: string, person: Person, o = {}) =>
+      predicate({ form, softens: true }, { person, ...o }).form;
+    expect(p('çocuk', '1sg')).toBe('çocuğum');
+    expect(p('genç', '1pl')).toBe('genciz');
+    expect(p('çocuk', '2sg')).toBe('çocuksun');
+    expect(p('çocuk', '1sg', { question: true })).toBe('çocuk muyum');
+    expect(p('çocuk', '1sg', { negative: true })).toBe('çocuk değilim');
+    expect(p('çocuk', '1sg', { tense: 'past' })).toBe('çocuktum');
+    // Die Begründung nennt die Endung, nicht den Stamm (sonst fehlt der Text dazu).
+    expect(predicate({ form: 'çocuk', softens: true }, { person: '1sg' }).steps[0]).toEqual({
+      tag: 'P1SG',
+      rule: 'softening',
+      from: 'k',
+      to: 'ğ',
+    });
+  });
+
   it.each([
     ['öğrenci', '1sg', {}, 'öğrenciyim'],
     ['öğrenci', '1pl', {}, 'öğrenciyiz'],
