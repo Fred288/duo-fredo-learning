@@ -1,0 +1,556 @@
+# A2-03: Aorist (Gewohnheit, Angebot, Verneinung -mAz; Freizeit, Hobbys, Sport). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u03
+level: A2
+title: Freizeit und Hobbys
+grammar_focus: [aorist, verneinung-maz, angebote, haeufigkeit]
+explainer: explainers/a2-aorist.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u03-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u03-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „boş zaman“?
+        options: [Freizeit, Arbeitszeit, Urlaub]
+        answer: Freizeit
+        explanation: Wörtlich „leere Zeit“.
+      - id: a2-u03-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: immer
+        answers: [her zaman, hep, daima]
+      - id: a2-u03-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „bazen“?
+        options: [manchmal, oft, nie]
+        answer: manchmal
+      - id: a2-u03-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „sık sık“?
+        options: [oft, selten, jetzt]
+        answer: oft
+      - id: a2-u03-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: meistens, normalerweise
+        answers: [genelde, genellikle, normalde, çoğunlukla]
+      - id: a2-u03-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „asla“?
+        options: [nie, immer, manchmal]
+        answer: nie
+        explanation: "asla = niemals (nachdrücklich, auch allein: Asla!). hiç = gar nicht, nie mit Verneinung; in Fragen ohne Verneinung heißt hiç „jemals“."
+      - id: a2-u03-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „çalmak“ in „gitar çalmak“?
+        options: [spielen (Instrument), kaufen, singen]
+        answer: spielen (Instrument)
+        explanation: çalmak heißt auch „stehlen“ und „klingeln“ (telefon çalıyor).
+      - id: a2-u03-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: singen (ein Lied)
+        answers: [şarkı söylemek]
+        explanation: şarkı = Lied, söylemek = sagen, singen.
+      - id: a2-u03-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „resim yapmak“?
+        options: [malen, kochen, fotografieren]
+        answer: malen
+        explanation: resim yapmak heißt malen und zeichnen.
+      - id: a2-u03-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: tanzen
+        answers: [dans etmek]
+      - id: a2-u03-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „bisiklet“?
+        options: [Fahrrad, Motorrad, Auto]
+        answer: Fahrrad
+        explanation: bisiklete binmek = Fahrrad fahren.
+      - id: a2-u03-l1-e12
+        type: free_text
+        direction: tr_de
+        prompt: fotoğraf çekmek
+        answers: [fotografieren, Fotos machen, ein Foto machen, Fotos schießen, ein Foto schießen, Bilder machen]
+      - id: a2-u03-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „maç“?
+        options: [Spiel (Sport), Mannschaft, Stadion]
+        answer: Spiel (Sport)
+      - id: a2-u03-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: Mannschaft
+        answers: [takım]
+      - id: a2-u03-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „yürüyüş yapmak“?
+        options: [spazieren gehen, wandern lernen, joggen]
+        answer: spazieren gehen
+        explanation: Auch „wandern“, je nach Strecke.
+      - id: a2-u03-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: helfen
+        answers: [yardım etmek]
+        explanation: Mit Dativ, bana yardım eder misin? = Hilfst du mir?
+
+  - id: a2-u03-l2
+    type: grammar
+    title: Was ich gewöhnlich tue
+    exercises:
+      - id: a2-u03-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 1sg
+        tense: aorist
+        target: okurum
+        gloss_de: ich lese (gewöhnlich)
+        explanation: Stamm auf Vokal → nur -r, dann die Endungen wie bei „sein“.
+      - id: a2-u03-l2-e2
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 3sg
+        tense: aorist
+        target: yapar
+        gloss_de: 'er, sie macht (gewöhnlich)'
+        explanation: Einsilbiger Stamm auf Konsonant → -ar/-er (außer den 13 Ausnahmen).
+      - id: a2-u03-l2-e3
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: aorist
+        target: gelirim
+        gloss_de: ich komme (gewöhnlich)
+        explanation: gel gehört zu den 13 Ausnahmen mit -ir.
+      - id: a2-u03-l2-e4
+        type: conjugation
+        mode: verb
+        lemma: çalışmak
+        person: 1pl
+        tense: aorist
+        target: çalışırız
+        gloss_de: wir arbeiten (gewöhnlich)
+        explanation: Mehrsilbiger Stamm → -ır/-ir/-ur/-ür.
+      - { id: a2-u03-l2-e5, type: conjugation, mode: verb, lemma: içmek, person: 2sg, tense: aorist, target: içersin, gloss_de: du trinkst (gewöhnlich) }
+      - { id: a2-u03-l2-e6, type: conjugation, mode: verb, lemma: oynamak, person: 3pl, tense: aorist, target: oynarlar, gloss_de: sie spielen (gewöhnlich) }
+      - id: a2-u03-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1sg
+        tense: aorist
+        target: giderim
+        gloss_de: ich gehe (gewöhnlich)
+        explanation: git → gid vor Vokal, einsilbig → -er.
+      - { id: a2-u03-l2-e8, type: conjugation, mode: verb, lemma: almak, person: 3sg, tense: aorist, target: alır, gloss_de: 'er, sie nimmt, kauft', explanation: al gehört zu den 13 Ausnahmen mit -ır. }
+      - { id: a2-u03-l2-e9, type: conjugation, mode: verb, lemma: yüzmek, person: 1pl, tense: aorist, target: yüzeriz, gloss_de: wir schwimmen (gewöhnlich) }
+      - { id: a2-u03-l2-e10, type: conjugation, mode: verb, lemma: çalmak, person: 1sg, tense: aorist, target: çalarım, gloss_de: ich spiele (ein Instrument) }
+      - { id: a2-u03-l2-e11, type: conjugation, mode: verb, lemma: dans etmek, person: 2pl, tense: aorist, target: dans edersiniz, gloss_de: 'ihr tanzt, Sie tanzen' }
+      - { id: a2-u03-l2-e12, type: conjugation, mode: verb, lemma: görmek, person: 3sg, tense: aorist, target: görür, gloss_de: 'er, sie sieht', explanation: gör gehört zu den 13 Ausnahmen mit -ür. }
+      - id: a2-u03-l2-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er liest gewöhnlich)
+        options: [okur, okar, okuyur]
+        answer: okur
+      - id: a2-u03-l2-e14
+        type: word_bank
+        prompt: Am Wochenende spiele ich Fußball.
+        answers: [Hafta sonları futbol oynarım.]
+        distractors: [oynarsın, akşamları]
+        explanation: hafta sonları = an den Wochenenden (regelmäßig).
+
+  - id: a2-u03-l3
+    type: grammar
+    title: Das mache ich nie
+    exercises:
+      - id: a2-u03-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: aorist
+        negative: true
+        target: gelmez
+        gloss_de: 'er, sie kommt nicht (gewöhnlich)'
+        explanation: Verneinter Aorist -mez/-maz.
+      - id: a2-u03-l3-e2
+        type: conjugation
+        mode: verb
+        lemma: içmek
+        person: 1sg
+        tense: aorist
+        negative: true
+        target: içmem
+        gloss_de: ich trinke nicht
+        explanation: Bei „ich“ fällt das z weg, içmem.
+      - id: a2-u03-l3-e3
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 1pl
+        tense: aorist
+        negative: true
+        target: yapmayız
+        gloss_de: wir machen nicht
+        explanation: Bei „wir“ steht -ma + y + ız, ohne z.
+      - { id: a2-u03-l3-e4, type: conjugation, mode: verb, lemma: gitmek, person: 2sg, tense: aorist, negative: true, target: gitmezsin, gloss_de: du gehst nicht }
+      - { id: a2-u03-l3-e5, type: conjugation, mode: verb, lemma: sevmek, person: 3pl, tense: aorist, negative: true, target: sevmezler, gloss_de: sie mögen nicht }
+      - { id: a2-u03-l3-e6, type: conjugation, mode: verb, lemma: yemek, person: 1sg, tense: aorist, negative: true, target: yemem, gloss_de: ich esse nicht }
+      - { id: a2-u03-l3-e7, type: conjugation, mode: verb, lemma: oynamak, person: 2pl, tense: aorist, negative: true, target: oynamazsınız, gloss_de: 'ihr spielt nicht, Sie spielen nicht' }
+      - id: a2-u03-l3-e8
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich gehe nicht)
+        options: [gitmem, gitmezim, gitmeyim]
+        answer: gitmem
+        explanation: Der verneinte Aorist bei „ich“ ist gitmem, ohne z.
+      - id: a2-u03-l3-e9
+        type: word_bank
+        prompt: Ich trinke nie Kaffee.
+        answers: [Asla kahve içmem., Hiç kahve içmem.]
+        distractors: [içerim, her]
+      - id: a2-u03-l3-e10
+        type: word_bank
+        prompt: Mein Vater sieht nie fern.
+        answers: [Babam asla televizyon izlemez., Babam hiç televizyon izlemez.]
+        distractors: [izler, her]
+      - id: a2-u03-l3-e11
+        type: free_text
+        direction: tr_de
+        prompt: Ben et yemem.
+        answers: [Ich esse kein Fleisch., Ich esse nie Fleisch., Ich esse grundsätzlich kein Fleisch., Fleisch esse ich nicht.]
+      - id: a2-u03-l3-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Bugün çay içmiyorum.“ / „Çay içmem.“
+        options: [Heute trinke ich keinen Tee. / Ich trinke grundsätzlich keinen Tee., Beides heißt dasselbe., Ich trinke keinen Tee. / Ich habe keinen Tee getrunken.]
+        answer: Heute trinke ich keinen Tee. / Ich trinke grundsätzlich keinen Tee.
+      - id: a2-u03-l3-e13
+        type: free_text
+        direction: de_tr
+        prompt: wir schwimmen nicht (gewöhnlich)
+        answers: [yüzmeyiz, biz yüzmeyiz]
+      - id: a2-u03-l3-e14
+        type: conjugation
+        mode: verb
+        lemma: bilmek
+        person: 1sg
+        tense: aorist
+        negative: true
+        target: bilmem
+        gloss_de: ich weiß nicht (das weiß ich nicht)
+        explanation: bilmem ist lockerer, eher „keine Ahnung“; bilmiyorum ist das neutrale „ich weiß es nicht“.
+
+  - id: a2-u03-l4
+    type: dialog
+    title: Möchtest du …? Angebote und Bitten
+    exercises:
+      - id: a2-u03-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: içmek
+        person: 2sg
+        tense: aorist
+        question: true
+        target: içer misin?
+        gloss_de: Trinkst du (etwas)? / Möchtest du trinken?
+        explanation: Mit dem Aorist bietet man etwas an, Çay içer misin? = Möchtest du Tee?
+      - { id: a2-u03-l4-e2, type: conjugation, mode: verb, lemma: yardım etmek, person: 2pl, tense: aorist, question: true, target: yardım eder misiniz?, gloss_de: Helfen Sie (mir)? / Würden Sie (mir) helfen? }
+      - { id: a2-u03-l4-e3, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: aorist, question: true, target: gelir misin?, gloss_de: 'Kommst du (mit)?' }
+      - { id: a2-u03-l4-e4, type: conjugation, mode: verb, lemma: almak, person: 2pl, tense: aorist, question: true, target: alır mısınız?, gloss_de: 'Nehmen Sie …? Möchten Sie …?' }
+      - id: a2-u03-l4-e5
+        type: word_bank
+        prompt: Möchtest du einen Tee?
+        answers: [Çay içer misin?, Bir çay içer misin?, Çay ister misin?, Bir çay ister misin?]
+        distractors: [içtin, musun]
+      - id: a2-u03-l4-e6
+        type: word_bank
+        prompt: Hilfst du mir? (Bitte)
+        answers: [Bana yardım eder misin?]
+        distractors: [beni, ediyor]
+        explanation: yardım etmek steht mit Dativ, bana = mir (Dativ von ben).
+      - id: a2-u03-l4-e7
+        type: multiple_choice
+        prompt: Wie sagst du „Sehr gern!“ auf eine Bitte?
+        explanation: "seve seve = sehr gern. Ebenso üblich: Tabii! (natürlich), Olur! (geht klar), Memnuniyetle! (mit Vergnügen)."
+        options: [Seve seve!, Hayır., Belki.]
+        answer: Seve seve!
+      - id: a2-u03-l4-e8
+        type: word_bank
+        prompt: Kommst du am Samstag mit ins Kino?
+        answers: [Cumartesi sinemaya gelir misin?, Cumartesi bizimle sinemaya gelir misin?]
+        distractors: [geliyorsun, sinemada]
+        explanation: bizimle = mit uns.
+      - id: a2-u03-l4-e9
+        type: multiple_choice
+        prompt: Jemand fragt „Kahve alır mısınız?“. Wie lehnst du höflich ab?
+        options: ['Hayır, teşekkür ederim.', 'Evet, lütfen.', 'Hayır, almam!']
+        answer: 'Hayır, teşekkür ederim.'
+      - id: a2-u03-l4-e10
+        type: multiple_choice
+        prompt: Was heißt „Pencereyi açar mısın?“
+        options: [Machst du bitte das Fenster auf?, Machst du das Fenster zu?, Hast du das Fenster aufgemacht?]
+        answer: Machst du bitte das Fenster auf?
+        explanation: açmak = öffnen. Die Aorist-Frage ist eine höfliche Bitte.
+      - id: a2-u03-l4-e11
+        type: word_bank
+        prompt: Was machst du in deiner Freizeit?
+        answers: [Boş zamanlarında ne yaparsın?]
+        distractors: [yaparım, yaptın]
+        explanation: boş zamanlarında = in deinen freien Zeiten.
+      - id: a2-u03-l4-e12
+        type: word_bank
+        prompt: Ich spiele meistens Gitarre.
+        answers: [Genelde gitar çalarım.]
+        distractors: [çalarsın, bazen]
+      - id: a2-u03-l4-e13
+        type: free_text
+        direction: tr_de
+        prompt: Spor yapar mısın?
+        answers: [Machst du Sport?, Treibst du Sport?]
+      - id: a2-u03-l4-e14
+        type: free_text
+        direction: de_tr
+        prompt: Möchtest du Tee?
+        answers: [Çay ister misin?, Çay içer misin?, Bir çay ister misin?, Bir çay içer misin?]
+        explanation: ister misin? (von istemek) ist die häufigste Angebotsfrage.
+
+  - id: a2-u03-l5
+    type: grammar
+    title: 'Tabellen: Aorist'
+    exercises:
+      - id: a2-u03-l5-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        targets: [gelirim, gelirsin, gelir, geliriz, gelirsiniz, gelirler]
+        gloss_de: kommen
+        explanation: Ausnahme mit -ir.
+      - id: a2-u03-l5-e2
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: aorist
+        targets: [yaparım, yaparsın, yapar, yaparız, yaparsınız, yaparlar]
+        gloss_de: machen
+        explanation: Einsilbig → -ar.
+      - id: a2-u03-l5-e3
+        type: paradigm
+        kind: verb
+        lemma: okumak
+        tense: aorist
+        targets: [okurum, okursun, okur, okuruz, okursunuz, okurlar]
+        gloss_de: lesen
+        explanation: Vokalischer Stamm → -r.
+      - id: a2-u03-l5-e4
+        type: paradigm
+        kind: verb
+        lemma: çalışmak
+        tense: aorist
+        targets: [çalışırım, çalışırsın, çalışır, çalışırız, çalışırsınız, çalışırlar]
+        gloss_de: arbeiten
+        explanation: Mehrsilbig → -ır.
+      - { id: a2-u03-l5-e5, type: paradigm, kind: verb, lemma: gitmek, tense: aorist, targets: [giderim, gidersin, gider, gideriz, gidersiniz, giderler], gloss_de: gehen }
+      - id: a2-u03-l5-e6
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        negative: true
+        targets: [gelmem, gelmezsin, gelmez, gelmeyiz, gelmezsiniz, gelmezler]
+        gloss_de: nicht kommen
+        explanation: Bei ich und wir ohne z, sonst -mez.
+      - { id: a2-u03-l5-e7, type: paradigm, kind: verb, lemma: yapmak, tense: aorist, negative: true, targets: [yapmam, yapmazsın, yapmaz, yapmayız, yapmazsınız, yapmazlar], gloss_de: nicht machen }
+      - id: a2-u03-l5-e8
+        type: paradigm
+        kind: verb
+        lemma: içmek
+        tense: aorist
+        question: true
+        targets: [içer miyim?, içer misin?, içer mi?, içer miyiz?, içer misiniz?, içerler mi?]
+        gloss_de: trinken? (Frage)
+      - id: a2-u03-l5-e9
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        negative: true
+        question: true
+        targets: [gelmez miyim?, gelmez misin?, gelmez mi?, gelmez miyiz?, gelmez misiniz?, gelmezler mi?]
+        gloss_de: nicht kommen? (Frage)
+        explanation: In der Frage auch bei ich und wir mit z, gelmez miyim.
+      - { id: a2-u03-l5-e10, type: paradigm, kind: verb, lemma: almak, tense: aorist, targets: [alırım, alırsın, alır, alırız, alırsınız, alırlar], gloss_de: nehmen }
+
+  - id: a2-u03-l6
+    type: reading
+    title: 'Lesetext: Meine Freizeit'
+    exercises:
+      - id: a2-u03-l6-e1
+        type: multiple_choice
+        prompt: '„Hafta içi çok çalışırım. Akşamları genelde evde kitap okurum.“ – Was macht die Person abends meistens?'
+        options: [Sie liest zu Hause., Sie arbeitet lange., Sie geht aus.]
+        answer: Sie liest zu Hause.
+        explanation: hafta içi = unter der Woche.
+      - id: a2-u03-l6-e2
+        type: multiple_choice
+        prompt: '„Hafta sonları arkadaşlarımla futbol oynarım. Bazen bisiklete bineriz.“ – Was machen sie manchmal?'
+        options: [Fahrrad fahren, Fußball spielen, schwimmen]
+        answer: Fahrrad fahren
+      - id: a2-u03-l6-e3
+        type: multiple_choice
+        prompt: '„Hafta sonları arkadaşlarımla futbol oynarım.“ – Wann spielt die Person Fußball?'
+        options: [an den Wochenenden, jeden Abend, unter der Woche]
+        answer: an den Wochenenden
+      - id: a2-u03-l6-e4
+        type: multiple_choice
+        prompt: „Kız kardeşim spor sevmez, ama çok güzel resim yapar.“ – Was stimmt über die Schwester?
+        options: ["Sie mag keinen Sport, malt aber sehr schön.", Sie treibt viel Sport., Sie malt nicht gern.]
+        answer: Sie mag keinen Sport, malt aber sehr schön.
+      - id: a2-u03-l6-e5
+        type: multiple_choice
+        prompt: '„Annem her sabah yürüyüş yapar, asla asansöre binmez.“ – Was macht die Mutter nie?'
+        options: [den Aufzug nehmen, spazieren gehen, früh aufstehen]
+        answer: den Aufzug nehmen
+      - id: a2-u03-l6-e6
+        type: word_bank
+        prompt: Unter der Woche arbeite ich viel.
+        answers: [Hafta içi çok çalışırım.]
+        distractors: [çalışırsın, az]
+      - id: a2-u03-l6-e7
+        type: word_bank
+        prompt: Meine Schwester mag keinen Sport.
+        answers: [Kız kardeşim spor sevmez., Kız kardeşim sporu sevmez.]
+        distractors: [sever, sevmiyorum]
+      - id: a2-u03-l6-e8
+        type: free_text
+        direction: tr_de
+        prompt: Bazen bisiklete bineriz.
+        answers: [Manchmal fahren wir Fahrrad., Wir fahren manchmal Fahrrad., Manchmal fahren wir Rad., Wir fahren manchmal Rad.]
+      - id: a2-u03-l6-e9
+        type: multiple_choice
+        prompt: Warum steht im Text der Aorist (okurum, oynarım)?
+        options: [Er beschreibt Gewohnheiten., Er beschreibt, was gerade passiert., Er beschreibt die Zukunft.]
+        answer: Er beschreibt Gewohnheiten.
+      - id: a2-u03-l6-e10
+        type: word_bank
+        prompt: Meine Mutter geht jeden Morgen spazieren.
+        answers: [Annem her sabah yürüyüş yapar.]
+        distractors: [yapıyorum, akşam]
+
+  - id: a2-u03-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u03-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich lese (gewöhnlich)
+        answers: [okurum, ben okurum]
+      - id: a2-u03-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: er kommt nicht (gewöhnlich)
+        answers: [gelmez, o gelmez]
+      - id: a2-u03-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich weiß, gewöhnlich)
+        options: [bilirim, bilerim, bilim]
+        answer: bilirim
+        explanation: bil gehört zu den 13 Ausnahmen mit -ir.
+      - id: a2-u03-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er macht, gewöhnlich)
+        options: [yapar, yapır, yaparır]
+        answer: yapar
+      - id: a2-u03-l7-e5
+        type: word_bank
+        prompt: Wir gehen manchmal ins Kino.
+        answers: [Bazen sinemaya gideriz., Biz bazen sinemaya gideriz.]
+        distractors: [gidersin, sinemada]
+      - id: a2-u03-l7-e6
+        type: free_text
+        direction: tr_de
+        prompt: Bir kahve daha alır mısınız?
+        answers: [Möchten Sie noch einen Kaffee?, Nehmen Sie noch einen Kaffee?, Möchtet ihr noch einen Kaffee?, Möchtest du noch einen Kaffee?, Möchten Sie noch einen Kaffee haben?, Hätten Sie gern noch einen Kaffee?, Wollen Sie noch einen Kaffee?, Nehmt ihr noch einen Kaffee?]
+        explanation: bir … daha = noch ein …
+      - id: a2-u03-l7-e7
+        type: conjugation
+        mode: verb
+        lemma: şarkı söylemek
+        person: 3sg
+        tense: aorist
+        target: şarkı söyler
+        gloss_de: 'er, sie singt (gewöhnlich)'
+      - id: a2-u03-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: fotoğraf çekmek
+        person: 1sg
+        tense: aorist
+        target: fotoğraf çekerim
+        gloss_de: ich fotografiere (gewöhnlich)
+      - id: a2-u03-l7-e9
+        type: multiple_choice
+        prompt: Welche Zeit passt? „Şu anda müzik …“ (gerade jetzt)
+        options: [dinliyorum, dinlerim, dinledim]
+        answer: dinliyorum
+        explanation: şu anda = gerade jetzt → -iyor. Für Gewohnheiten steht der Aorist.
+      - id: a2-u03-l7-e10
+        type: word_bank
+        prompt: Ich spiele nie Tennis.
+        answers: [Asla tenis oynamam., Hiç tenis oynamam.]
+        distractors: [oynarım, bazen]
+      - id: a2-u03-l7-e11
+        type: free_text
+        direction: de_tr
+        prompt: Hilfst du mir?
+        answers: [Bana yardım eder misin?, Yardım eder misin?, Yardım eder misin bana?]
+      - id: a2-u03-l7-e12
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wir machen nicht, gewöhnlich)
+        options: [yapmayız, yapmazız, yapmıyız]
+        answer: yapmayız
+      - id: a2-u03-l7-e13
+        type: word_bank
+        prompt: Was machst du normalerweise am Sonntag?
+        answers: [Pazar günleri genelde ne yaparsın?]
+        distractors: [yaparım, yaptın]
+        explanation: pazar günleri = sonntags (regelmäßig).
+
+vocab:
+  - { tr: boş zaman, de: [Freizeit], pos: noun }
+  - { tr: her zaman, de: [immer], pos: adv }
+  - { tr: bazen, de: [manchmal], pos: adv }
+  - { tr: sık sık, de: [oft], pos: adv }
+  - { tr: genelde, de: [meistens, normalerweise], pos: adv }
+  - { tr: asla, de: [nie], pos: adv }
+  - { tr: çalmak, de: [spielen (Instrument), stehlen, klingeln], pos: verb }
+  - { tr: şarkı söylemek, de: [singen], pos: verb }
+  - { tr: söylemek, de: [sagen], pos: verb }
+  - { tr: şarkı, de: [Lied], pos: noun }
+  - { tr: resim, de: [Bild], pos: noun, drops_vowel: true }
+  - { tr: resim yapmak, de: [malen], pos: verb }
+  - { tr: dans etmek, de: [tanzen], pos: verb, softens: true }
+  - { tr: bisiklet, de: [Fahrrad], pos: noun }
+  - { tr: fotoğraf çekmek, de: [fotografieren], pos: verb }
+  - { tr: maç, de: [Spiel (Sport)], pos: noun }
+  - { tr: takım, de: [Mannschaft, Team], pos: noun }
+  - { tr: yürüyüş yapmak, de: [spazieren gehen, wandern], pos: verb }
+  - { tr: yardım etmek, de: [helfen], pos: verb, softens: true }
+  - { tr: gitar, de: [Gitarre], pos: noun }
+  - { tr: tenis, de: [Tennis], pos: noun }
+  - { tr: hafta içi, de: [unter der Woche], pos: phrase }
+  - { tr: açmak, de: [öffnen], pos: verb }
+  - { tr: daha, de: [noch, mehr], pos: adv }
+  - { tr: hep, de: [immer], pos: adv }
+  - { tr: seve seve, de: [sehr gern], pos: phrase }
+  - { tr: tabii, de: [natürlich, klar], pos: interj }

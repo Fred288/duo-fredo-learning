@@ -1,0 +1,518 @@
+# A2-01: Präteritum -DI (Wochenende, Ereignisse im Leben). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u01
+level: A2
+title: Was hast du gemacht?
+grammar_focus: [praeteritum, personalendungen-typ2, zeitangaben-vergangenheit]
+explainer: explainers/a2-praeteritum.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u01-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u01-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „dönmek“?
+        options: [zurückkehren, abfahren, bleiben]
+        answer: zurückkehren
+      - id: a2-u01-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: sich treffen (mit jemandem)
+        answers: [buluşmak]
+        explanation: Ali ile buluşmak = sich mit Ali treffen.
+      - id: a2-u01-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „ziyaret etmek“?
+        options: [besuchen, einladen, anrufen]
+        answer: besuchen
+      - id: a2-u01-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: einkaufen
+        answers: [alışveriş yapmak]
+      - id: a2-u01-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „doğmak“?
+        options: [geboren werden, sterben, wachsen]
+        answer: geboren werden
+      - id: a2-u01-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: evlenmek
+        answers: [heiraten]
+      - id: a2-u01-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „taşınmak“?
+        options: [umziehen, reisen, aufräumen]
+        answer: umziehen
+      - id: a2-u01-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: lernen (etwas Neues)
+        answers: [öğrenmek]
+        explanation: öğrenmek = lernen, erfahren; çalışmak = lernen im Sinne von üben, für die Schule arbeiten.
+      - id: a2-u01-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „unutmak“?
+        options: [vergessen, sich erinnern, verlieren]
+        answer: vergessen
+      - id: a2-u01-l1-e10
+        type: free_text
+        direction: tr_de
+        prompt: tanışmak
+        answers: [kennenlernen, sich kennenlernen]
+      - id: a2-u01-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „yaşamak“?
+        options: [leben, warten, sterben]
+        answer: leben
+        explanation: "yaşamak heißt auch wohnen: İstanbul'da yaşıyorum."
+      - id: a2-u01-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: Freund, Freundin
+        answers: [arkadaş]
+      - id: a2-u01-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „doğum günü“?
+        options: [Geburtstag, Feiertag, Hochzeit]
+        answer: Geburtstag
+      - id: a2-u01-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „geçen hafta“?
+        options: [letzte Woche, nächste Woche, diese Woche]
+        answer: letzte Woche
+        explanation: geçen = vergangen, letzte; gelecek = kommend, nächste.
+      - id: a2-u01-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: Jahr
+        answers: [yıl, sene]
+      - id: a2-u01-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „iki gün önce“?
+        options: [vor zwei Tagen, in zwei Tagen, zwei Tage lang]
+        answer: vor zwei Tagen
+        explanation: önce steht nach der Zeitangabe, iki gün önce = vor zwei Tagen.
+
+  - id: a2-u01-l2
+    type: grammar
+    title: ich kam, ich ging
+    exercises:
+      - id: a2-u01-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: past
+        target: geldim
+        gloss_de: ich bin gekommen
+        explanation: Stamm + di + m. Die Endungen nach -di sind m, n, –, k, niz, ler.
+      - id: a2-u01-l2-e2
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 2sg
+        tense: past
+        target: yaptın
+        gloss_de: du hast gemacht
+        explanation: Nach p wird d zu t, nach a steht ı.
+      - { id: a2-u01-l2-e3, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: past, target: okudu, gloss_de: 'er, sie hat gelesen' }
+      - id: a2-u01-l2-e4
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1pl
+        tense: past
+        target: gittik
+        gloss_de: wir sind gegangen
+        explanation: Kein Wechsel zu gid, denn -ti beginnt mit einem Konsonanten. Nach t wird d zu t.
+      - { id: a2-u01-l2-e5, type: conjugation, mode: verb, lemma: görmek, person: 2pl, tense: past, target: gördünüz, gloss_de: 'ihr habt gesehen, Sie haben gesehen' }
+      - { id: a2-u01-l2-e6, type: conjugation, mode: verb, lemma: içmek, person: 3pl, tense: past, target: içtiler, gloss_de: sie haben getrunken }
+      - id: a2-u01-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: yemek
+        person: 1sg
+        tense: past
+        target: yedim
+        gloss_de: ich habe gegessen
+        explanation: Anders als im Präsens (yiyorum) bleibt ye unverändert.
+      - { id: a2-u01-l2-e8, type: conjugation, mode: verb, lemma: beklemek, person: 1sg, tense: past, target: bekledim, gloss_de: ich habe gewartet }
+      - { id: a2-u01-l2-e9, type: conjugation, mode: verb, lemma: dönmek, person: 3sg, tense: past, target: döndü, gloss_de: 'er, sie ist zurückgekehrt' }
+      - { id: a2-u01-l2-e10, type: conjugation, mode: verb, lemma: buluşmak, person: 1pl, tense: past, target: buluştuk, gloss_de: wir haben uns getroffen }
+      - { id: a2-u01-l2-e11, type: conjugation, mode: verb, lemma: ziyaret etmek, person: 1sg, tense: past, target: ziyaret ettim, gloss_de: ich habe besucht }
+      - { id: a2-u01-l2-e12, type: conjugation, mode: verb, lemma: doğmak, person: 1sg, tense: past, target: doğdum, gloss_de: ich bin geboren }
+      - id: a2-u01-l2-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wir haben gearbeitet)
+        options: [çalıştık, çalışdık, çalıştımız]
+        answer: çalıştık
+        explanation: Nach ş wird d zu t, „wir“ ist -k.
+      - id: a2-u01-l2-e14
+        type: free_text
+        direction: de_tr
+        prompt: ich habe gelernt (etwas Neues)
+        answers: [öğrendim, ben öğrendim]
+
+  - id: a2-u01-l3
+    type: grammar
+    title: nicht und Fragen
+    exercises:
+      - id: a2-u01-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: past
+        negative: true
+        target: gelmedi
+        gloss_de: 'er, sie ist nicht gekommen'
+        explanation: Verneinung -me/-ma vor -di. Hier wird nichts verengt, anders als vor -yor.
+      - { id: a2-u01-l3-e2, type: conjugation, mode: verb, lemma: yapmak, person: 1sg, tense: past, negative: true, target: yapmadım, gloss_de: ich habe nicht gemacht }
+      - { id: a2-u01-l3-e3, type: conjugation, mode: verb, lemma: anlamak, person: 1sg, tense: past, negative: true, target: anlamadım, gloss_de: ich habe nicht verstanden }
+      - { id: a2-u01-l3-e4, type: conjugation, mode: verb, lemma: unutmak, person: 1sg, tense: past, negative: true, target: unutmadım, gloss_de: ich habe nicht vergessen }
+      - id: a2-u01-l3-e5
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: past
+        question: true
+        target: geldin mi?
+        gloss_de: Bist du gekommen?
+        explanation: Die Endung bleibt am Verb (geldin), die Partikel mi folgt getrennt und ohne Endung.
+      - { id: a2-u01-l3-e6, type: conjugation, mode: verb, lemma: yemek, person: 2pl, tense: past, question: true, target: yediniz mi?, gloss_de: 'Habt ihr gegessen? Haben Sie gegessen?' }
+      - id: a2-u01-l3-e7
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 2sg
+        tense: past
+        question: true
+        target: yaptın mı?
+        gloss_de: Hast du gemacht?
+        explanation: Die Partikel folgt dem letzten Vokal ı, also mı.
+      - { id: a2-u01-l3-e8, type: conjugation, mode: verb, lemma: görmek, person: 3pl, tense: past, question: true, target: gördüler mi?, gloss_de: Haben sie gesehen? }
+      - id: a2-u01-l3-e9
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 2sg
+        tense: past
+        negative: true
+        question: true
+        target: gitmedin mi?
+        gloss_de: Bist du nicht gegangen?
+      - id: a2-u01-l3-e10
+        type: multiple_choice
+        prompt: Welche Frage ist richtig? (Hast du verstanden?)
+        options: [Anladın mı?, Anladı mısın?, Anladın mısın?]
+        answer: Anladın mı?
+        explanation: Anders als bei -iyor trägt im Präteritum das Verb die Endung, nicht die Partikel.
+      - id: a2-u01-l3-e11
+        type: word_bank
+        prompt: Hast du Ali gesehen? – Nein, ich habe ihn nicht gesehen.
+        answers: ['Ali''yi gördün mü? Hayır, görmedim.']
+        distractors: [görmüyorum, mi]
+      - id: a2-u01-l3-e12
+        type: free_text
+        direction: tr_de
+        prompt: Kahvaltı yaptın mı?
+        answers: [Hast du gefrühstückt?, Hast du schon gefrühstückt?]
+      - id: a2-u01-l3-e13
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe es nicht vergessen.
+        answers: [Unutmadım., Ben unutmadım., Onu unutmadım.]
+      - id: a2-u01-l3-e14
+        type: multiple_choice
+        prompt: Was heißt „Dün hiç uyumadım.“?
+        options: [Ich habe gestern gar nicht geschlafen., Ich habe gestern lange geschlafen., Ich schlafe heute nicht.]
+        answer: Ich habe gestern gar nicht geschlafen.
+
+  - id: a2-u01-l4
+    type: grammar
+    title: 'Tabellen: Präteritum'
+    exercises:
+      - id: a2-u01-l4-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: past
+        targets: [geldim, geldin, geldi, geldik, geldiniz, geldiler]
+        gloss_de: kommen
+        explanation: Stamm + di + m, n, –, k, niz, ler.
+      - id: a2-u01-l4-e2
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: past
+        targets: [yaptım, yaptın, yaptı, yaptık, yaptınız, yaptılar]
+        gloss_de: machen
+        explanation: Nach p wird d zu t.
+      - { id: a2-u01-l4-e3, type: paradigm, kind: verb, lemma: okumak, tense: past, targets: [okudum, okudun, okudu, okuduk, okudunuz, okudular], gloss_de: lesen }
+      - { id: a2-u01-l4-e4, type: paradigm, kind: verb, lemma: gitmek, tense: past, targets: [gittim, gittin, gitti, gittik, gittiniz, gittiler], gloss_de: gehen }
+      - { id: a2-u01-l4-e5, type: paradigm, kind: verb, lemma: görmek, tense: past, targets: [gördüm, gördün, gördü, gördük, gördünüz, gördüler], gloss_de: sehen }
+      - { id: a2-u01-l4-e6, type: paradigm, kind: verb, lemma: içmek, tense: past, targets: [içtim, içtin, içti, içtik, içtiniz, içtiler], gloss_de: trinken }
+      - id: a2-u01-l4-e7
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: past
+        negative: true
+        targets: [gelmedim, gelmedin, gelmedi, gelmedik, gelmediniz, gelmediler]
+        gloss_de: nicht kommen
+      - id: a2-u01-l4-e8
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: past
+        question: true
+        targets: [yaptım mı?, yaptın mı?, yaptı mı?, yaptık mı?, yaptınız mı?, yaptılar mı?]
+        gloss_de: machen? (Frage)
+        explanation: Endung am Verb, Partikel mı danach.
+      - { id: a2-u01-l4-e9, type: paradigm, kind: verb, lemma: çalışmak, tense: past, targets: [çalıştım, çalıştın, çalıştı, çalıştık, çalıştınız, çalıştılar], gloss_de: arbeiten }
+      - { id: a2-u01-l4-e10, type: paradigm, kind: verb, lemma: beklemek, tense: past, negative: true, targets: [beklemedim, beklemedin, beklemedi, beklemedik, beklemediniz, beklemediler], gloss_de: nicht warten }
+
+  - id: a2-u01-l5
+    type: grammar
+    title: Gestern, letzte Woche, vor zwei Jahren
+    exercises:
+      - id: a2-u01-l5-e1
+        type: word_bank
+        prompt: Gestern bin ich ins Kino gegangen.
+        answers: [Dün sinemaya gittim., Ben dün sinemaya gittim., Dün ben sinemaya gittim.]
+        distractors: [gidiyorum, sinemada]
+      - id: a2-u01-l5-e2
+        type: word_bank
+        prompt: Letzte Woche haben wir meine Großmutter besucht.
+        answers: [Geçen hafta anneannemi ziyaret ettik., Geçen hafta babaannemi ziyaret ettik.]
+        distractors: [anneanneme, ediyoruz]
+        explanation: ziyaret etmek verlangt ein Objekt im Akkusativ, anneannemi.
+      - id: a2-u01-l5-e3
+        type: word_bank
+        prompt: Vor zwei Jahren bin ich nach Berlin umgezogen.
+        answers: [İki yıl önce Berlin'e taşındım.]
+        distractors: ["Berlin'de", sonra]
+      - id: a2-u01-l5-e4
+        type: word_bank
+        prompt: Ich bin 1990 in Izmir geboren.
+        answers: [1990'da İzmir'de doğdum., Ben 1990'da İzmir'de doğdum., İzmir'de 1990'da doğdum.]
+        distractors: ["İzmir'e", doğuyorum]
+        explanation: Jahreszahlen mit Lokativ, 1990'da (bin dokuz yüz doksanda).
+      - id: a2-u01-l5-e5
+        type: word_bank
+        prompt: Am Wochenende habe ich mich mit Freunden getroffen.
+        answers: [Hafta sonu arkadaşlarımla buluştum.]
+        distractors: [arkadaşlarım, buluşuyorum]
+        explanation: arkadaşlarımla = mit meinen Freunden (-la/-le = mit).
+      - id: a2-u01-l5-e6
+        type: multiple_choice
+        prompt: Wo steht „önce“ (vor)?
+        options: [nach der Zeitangabe (üç gün önce), vor der Zeitangabe (önce üç gün), am Satzende]
+        answer: nach der Zeitangabe (üç gün önce)
+      - id: a2-u01-l5-e7
+        type: free_text
+        direction: de_tr
+        prompt: vor drei Tagen
+        answers: [üç gün önce]
+      - id: a2-u01-l5-e8
+        type: word_bank
+        prompt: Wir haben vor fünf Jahren geheiratet.
+        answers: [Beş yıl önce evlendik., Biz beş yıl önce evlendik.]
+        distractors: [evleniyoruz, sonra]
+      - id: a2-u01-l5-e9
+        type: word_bank
+        prompt: Zuerst haben wir gegessen, dann sind wir ins Kino gegangen.
+        answers: ["Önce yemek yedik, sonra sinemaya gittik."]
+        distractors: [yiyoruz, gidiyoruz]
+        explanation: önce … sonra = zuerst … dann.
+      - id: a2-u01-l5-e10
+        type: free_text
+        direction: tr_de
+        prompt: Geçen yıl Türkiye'ye gittik.
+        answers: [Letztes Jahr sind wir in die Türkei gefahren., Letztes Jahr sind wir in die Türkei gereist., Wir sind letztes Jahr in die Türkei gefahren., Wir sind letztes Jahr in die Türkei gereist., Letztes Jahr fuhren wir in die Türkei.]
+      - id: a2-u01-l5-e11
+        type: multiple_choice
+        prompt: Was passt? „Dün akşam televizyon …“
+        options: [izledim, izliyorum, izliyor]
+        answer: izledim
+        explanation: dün (gestern) verlangt die Vergangenheit.
+      - id: a2-u01-l5-e12
+        type: word_bank
+        prompt: Wann bist du zurückgekommen?
+        answers: [Ne zaman döndün?]
+        distractors: [dönüyorsun, nerede]
+        explanation: ne zaman = wann.
+      - id: a2-u01-l5-e13
+        type: free_text
+        direction: de_tr
+        prompt: letzte Woche
+        answers: [geçen hafta]
+
+  - id: a2-u01-l6
+    type: reading
+    title: 'Lesetext: Mein Wochenende'
+    exercises:
+      - id: a2-u01-l6-e1
+        type: multiple_choice
+        prompt: „Cumartesi sabahı geç kalktım. Kahvaltıdan sonra pazara gittim ve alışveriş yaptım.“ – Was hat die Person nach dem Frühstück gemacht?
+        options: [Sie ist auf den Markt gegangen und hat eingekauft., Sie hat lange geschlafen., Sie hat Freunde getroffen.]
+        answer: Sie ist auf den Markt gegangen und hat eingekauft.
+        explanation: kahvaltıdan sonra = nach dem Frühstück (Ablativ + sonra).
+      - id: a2-u01-l6-e2
+        type: multiple_choice
+        prompt: „Cumartesi sabahı geç kalktım.“ – Wann ist die Person aufgestanden?
+        options: ["am Samstagmorgen, spät", am Sonntag früh, am Samstagabend]
+        answer: am Samstagmorgen, spät
+      - id: a2-u01-l6-e3
+        type: multiple_choice
+        prompt: '„Akşam Ayşe ile buluştuk. Bir lokantada balık yedik.“ – Was haben sie gegessen?'
+        options: [Fisch, Huhn, Fleisch]
+        answer: Fisch
+      - id: a2-u01-l6-e4
+        type: multiple_choice
+        prompt: '„Akşam Ayşe ile buluştuk. Bir lokantada balık yedik.“ – Wo waren sie?'
+        options: [in einem Restaurant, zu Hause, im Kino]
+        answer: in einem Restaurant
+      - id: a2-u01-l6-e5
+        type: multiple_choice
+        prompt: '„Pazar günü hiç evden çıkmadım. Kitap okudum ve müzik dinledim.“ – Was hat die Person am Sonntag nicht gemacht?'
+        options: [Sie ist nicht aus dem Haus gegangen., Sie hat nicht gelesen., Sie hat keine Musik gehört.]
+        answer: Sie ist nicht aus dem Haus gegangen.
+      - id: a2-u01-l6-e6
+        type: word_bank
+        prompt: Am Sonntag bin ich gar nicht aus dem Haus gegangen.
+        answers: [Pazar günü hiç evden çıkmadım.]
+        distractors: [evde, çıktım]
+      - id: a2-u01-l6-e7
+        type: free_text
+        direction: tr_de
+        prompt: Kitap okudum ve müzik dinledim.
+        answers: [Ich habe ein Buch gelesen und Musik gehört., Ich habe gelesen und Musik gehört., Ich las ein Buch und hörte Musik.]
+      - id: a2-u01-l6-e8
+        type: word_bank
+        prompt: Was hast du am Wochenende gemacht?
+        answers: [Hafta sonu ne yaptın?]
+        distractors: [yapıyorsun, nerede]
+      - id: a2-u01-l6-e9
+        type: word_bank
+        prompt: Ich habe meine Eltern besucht.
+        answers: [Annemi ve babamı ziyaret ettim., Annemle babamı ziyaret ettim.]
+        distractors: [anneme, ediyorum]
+        explanation: Annemle babamı = meine Mutter und meinen Vater (-le = und, mit).
+      - id: a2-u01-l6-e10
+        type: multiple_choice
+        prompt: '„Geçen ay yeni bir daireye taşındık.“ – Was ist passiert?'
+        options: [Sie sind letzten Monat in eine neue Wohnung umgezogen., Sie suchen eine neue Wohnung., Sie haben letzten Monat eine Wohnung gekauft.]
+        answer: Sie sind letzten Monat in eine neue Wohnung umgezogen.
+
+  - id: a2-u01-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u01-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich bin gekommen
+        answers: [geldim, ben geldim]
+      - id: a2-u01-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: wir haben gegessen
+        answers: [yedik, biz yedik]
+      - id: a2-u01-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (sie sind gegangen)
+        options: [gittiler, gidtiler, gittilar]
+        answer: gittiler
+      - id: a2-u01-l7-e4
+        type: word_bank
+        prompt: Ich habe meinen Schlüssel vergessen.
+        answers: [Anahtarımı unuttum.]
+        distractors: [anahtar, unutuyorum]
+        explanation: anahtar = Schlüssel.
+      - id: a2-u01-l7-e5
+        type: free_text
+        direction: tr_de
+        prompt: Nerede doğdun?
+        answers: [Wo bist du geboren?, Wo wurdest du geboren?]
+      - id: a2-u01-l7-e6
+        type: multiple_choice
+        prompt: Was heißt „Onunla geçen yıl tanıştım.“?
+        options: [Ich habe ihn letztes Jahr kennengelernt., Ich lerne ihn nächstes Jahr kennen., Ich kenne ihn seit einem Jahr.]
+        answer: Ich habe ihn letztes Jahr kennengelernt.
+        explanation: onunla = mit ihm, mit ihr.
+      - id: a2-u01-l7-e7
+        type: word_bank
+        prompt: Hast du deine Hausaufgaben gemacht?
+        answers: [Ödevini yaptın mı?, Ödevlerini yaptın mı?]
+        distractors: [yapıyor, musun]
+        explanation: ödev = Hausaufgabe.
+      - id: a2-u01-l7-e8
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe nicht verstanden.
+        answers: [Anlamadım., Ben anlamadım.]
+      - id: a2-u01-l7-e9
+        type: conjugation
+        mode: verb
+        lemma: taşınmak
+        person: 1pl
+        tense: past
+        target: taşındık
+        gloss_de: wir sind umgezogen
+      - id: a2-u01-l7-e10
+        type: conjugation
+        mode: verb
+        lemma: evlenmek
+        person: 3pl
+        tense: past
+        target: evlendiler
+        gloss_de: sie haben geheiratet
+      - id: a2-u01-l7-e11
+        type: multiple_choice
+        prompt: Welche Endung hat „wir“ im Präteritum?
+        options: [-k (geldik), -iz (geldiz), -miz (geldimiz)]
+        answer: -k (geldik)
+      - id: a2-u01-l7-e12
+        type: word_bank
+        prompt: Die Party war gestern sehr schön.
+        answers: [Parti dün çok güzeldi., Dün parti çok güzeldi.]
+        distractors: [güzel, gitti]
+        explanation: Vorschau, güzel + di = war schön. Die Vergangenheit von „sein“ kommt später.
+      - id: a2-u01-l7-e13
+        type: free_text
+        direction: tr_de
+        prompt: Dün ne yediniz?
+        answers: [Was habt ihr gestern gegessen?, Was haben Sie gestern gegessen?]
+
+vocab:
+  - { tr: dönmek, de: [zurückkehren, zurückkommen], pos: verb }
+  - { tr: buluşmak, de: [sich treffen], pos: verb }
+  - { tr: ziyaret etmek, de: [besuchen], pos: verb, softens: true }
+  - { tr: alışveriş yapmak, de: [einkaufen], pos: verb }
+  - { tr: doğmak, de: [geboren werden], pos: verb }
+  - { tr: evlenmek, de: [heiraten], pos: verb }
+  - { tr: taşınmak, de: [umziehen], pos: verb }
+  - { tr: öğrenmek, de: [lernen, erfahren], pos: verb }
+  - { tr: unutmak, de: [vergessen], pos: verb }
+  - { tr: tanışmak, de: [kennenlernen], pos: verb }
+  - { tr: yaşamak, de: [leben, wohnen], pos: verb }
+  - { tr: arkadaş, de: [Freund, Freundin], pos: noun }
+  - { tr: doğum günü, de: [Geburtstag], pos: noun }
+  - { tr: geçen, de: [letzte, vergangene], pos: adj }
+  - { tr: önce, de: ['vor (zeitlich)', zuerst], pos: postp }
+  - { tr: sonra, de: [danach, dann, nach], pos: postp }
+  - { tr: yıl, de: [Jahr], pos: noun }
+  - { tr: ay, de: [Monat, Mond], pos: noun }
+  - { tr: ne zaman, de: [wann], pos: phrase }
+  - { tr: anahtar, de: [Schlüssel], pos: noun }
+  - { tr: ödev, de: [Hausaufgabe], pos: noun }
+  - { tr: parti, de: [Party], pos: noun }
+  - { tr: ile, de: [mit, und], pos: postp }
+  - { tr: sene, de: [Jahr], pos: noun }

@@ -26,18 +26,18 @@ Aufbau jeder Unit (SPEC 3.1): Erklärkarte → Wortschatz → Grammatik → ab A
 
 ## A2
 
-| Grammatik                                                                         | Thema / Wortfeld                    |
-| --------------------------------------------------------------------------------- | ----------------------------------- |
-| Präteritum -DI (Personalendungen Typ 2), Zeitangaben der Vergangenheit            | Wochenende, Ereignisse im Leben     |
-| Futur -(y)AcAk (k → ğ)                                                            | Pläne, Ferien, Reise                |
-| Aorist (Gewohnheit, Angebot), Verneinung -mAz                                     | Freizeit, Hobbys, Sport             |
-| Perfekt/Evidential -mIş                                                           | Erzählen, Gehörtes weitergeben      |
-| Modalität -(y)Abil, -mAlI, lazım/gerek                                            | Gesundheit, Arztbesuch, Apotheke    |
-| Imperativ, Voluntativ, Optativ                                                    | Wegbeschreibung, Unterwegs, Verkehr |
-| Komparation daha/en, Intensivierung                                               | Menschen beschreiben, Wetter        |
-| Postpositionen (ile, için, gibi, -den sonra/önce, Ortsnomina üst/alt/yan/ön/arka) | Wohnung, Garten, Innenstadt         |
-| Zugehörigkeit -ki, Ableitungen -lI, -sIz, -lIk, -CI                               | Berufe, Arbeitswelt, Einkaufen      |
-| Reflexiv/Passiv (Grundlagen)                                                      | Post, Telefon, Kommunikation        |
+| Unit   | Grammatik                                                                         | Thema / Wortfeld                    | Stand |
+| ------ | --------------------------------------------------------------------------------- | ----------------------------------- | ----- |
+| a2-u01 | Präteritum -DI (Personalendungen Typ 2), Zeitangaben der Vergangenheit            | Wochenende, Ereignisse im Leben     | ✅    |
+| a2-u02 | Futur -(y)AcAk (k → ğ)                                                            | Pläne, Ferien, Reise                | ✅    |
+| a2-u03 | Aorist (Gewohnheit, Angebot), Verneinung -mAz                                     | Freizeit, Hobbys, Sport             | ✅    |
+|        | Perfekt/Evidential -mIş                                                           | Erzählen, Gehörtes weitergeben      |       |
+|        | Modalität -(y)Abil, -mAlI, lazım/gerek                                            | Gesundheit, Arztbesuch, Apotheke    |       |
+|        | Imperativ, Voluntativ, Optativ                                                    | Wegbeschreibung, Unterwegs, Verkehr |       |
+|        | Komparation daha/en, Intensivierung                                               | Menschen beschreiben, Wetter        |       |
+|        | Postpositionen (ile, için, gibi, -den sonra/önce, Ortsnomina üst/alt/yan/ön/arka) | Wohnung, Garten, Innenstadt         |       |
+|        | Zugehörigkeit -ki, Ableitungen -lI, -sIz, -lIk, -CI                               | Berufe, Arbeitswelt, Einkaufen      |       |
+|        | Reflexiv/Passiv (Grundlagen)                                                      | Post, Telefon, Kommunikation        |       |
 
 ## B1
 

@@ -235,11 +235,13 @@ function aorist(
     b.add('STEM', stem);
     b.add('AOR', 'r');
   } else {
+    // Bei Verbverbindungen (ziyaret et-, alışveriş yap-) zählt nur das Verb selbst.
+    const head = stem.split(' ').at(-1)!;
     const kind = verb.aorist
       ? 'lexical'
-      : AORIST_IR.has(stem)
+      : AORIST_IR.has(head)
         ? 'exception'
-        : vowelCount(stem) === 1
+        : vowelCount(head) === 1
           ? 'monosyllabic'
           : 'polysyllabic';
     const archi = (verb.aorist ?? (kind === 'monosyllabic' ? 'ar' : 'ir')) === 'ar' ? 'A' : 'I';

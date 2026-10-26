@@ -167,6 +167,16 @@ describe('Aorist', () => {
     expect(conjugate(et, { tense: 'aorist', person: '1sg' }).form).toBe('ederim');
   });
 
+  it('Verbverbindungen: nur das letzte Wort zählt', () => {
+    const visit = { form: 'ziyaret etmek', softens: true };
+    expect(conjugate(visit, { tense: 'aorist', person: '1sg' }).form).toBe('ziyaret ederim');
+    expect(conjugate('alışveriş yapmak', { tense: 'aorist', person: '3sg' }).form).toBe(
+      'alışveriş yapar',
+    );
+    expect(conjugate(visit, { tense: 'past', person: '1pl' }).form).toBe('ziyaret ettik');
+    expect(conjugate(visit, { tense: 'future', person: '1sg' }).form).toBe('ziyaret edeceğim');
+  });
+
   it('lexikalischer Override', () => {
     expect(conjugate({ form: 'sanmak' }, { tense: 'aorist', person: '3sg' }).form).toBe('sanır');
     expect(

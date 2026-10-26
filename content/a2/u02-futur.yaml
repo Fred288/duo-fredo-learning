@@ -1,0 +1,527 @@
+# A2-02: Futur -(y)AcAk (Pläne, Ferien, Reise). Claude-Entwurf, ungeprüft (reviewed: false).
+id: a2-u02
+level: A2
+title: Pläne und Reisen
+grammar_focus: [futur, erweichung-k-g, zeitangaben-zukunft]
+explainer: explainers/a2-futur.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: a2-u02-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: a2-u02-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „tatil“?
+        options: [Urlaub, Reise, Ausflug]
+        answer: Urlaub
+        explanation: tatil heißt Urlaub, Ferien und auch Feiertag.
+      - id: a2-u02-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Meer
+        answers: [deniz]
+      - id: a2-u02-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „uçak“?
+        options: [Flugzeug, Zug, Schiff]
+        answer: Flugzeug
+      - id: a2-u02-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Zug
+        answers: [tren]
+      - id: a2-u02-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „otobüs“?
+        options: [Bus, Auto, Taxi]
+        answer: Bus
+      - id: a2-u02-l1-e6
+        type: free_text
+        direction: tr_de
+        prompt: bilet
+        answers: [Fahrkarte, Ticket, Eintrittskarte, Karte]
+      - id: a2-u02-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „valiz“?
+        options: [Koffer, Tasche, Rucksack]
+        answer: Koffer
+      - id: a2-u02-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Reisepass
+        answers: [pasaport]
+      - id: a2-u02-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „kalmak“?
+        options: [bleiben, fahren, kommen]
+        answer: bleiben
+      - id: a2-u02-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „gezmek“?
+        options: ['herumgehen, besichtigen', schlafen, arbeiten]
+        answer: 'herumgehen, besichtigen'
+        explanation: gezmek = umhergehen, bummeln, eine Stadt besichtigen.
+      - id: a2-u02-l1-e11
+        type: free_text
+        direction: tr_de
+        prompt: binmek
+        answers: [einsteigen, nehmen, steigen, fahren mit]
+        explanation: Mit Dativ und für Verkehrsmittel, otobüse binmek = in den Bus steigen, den Bus nehmen.
+      - id: a2-u02-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „hazırlamak“?
+        options: [vorbereiten, abholen, buchen]
+        answer: vorbereiten
+      - id: a2-u02-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: sich ausruhen, sich erholen
+        answers: [dinlenmek]
+      - id: a2-u02-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „gelecek hafta“?
+        options: [nächste Woche, letzte Woche, jede Woche]
+        answer: nächste Woche
+      - id: a2-u02-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „belki“?
+        options: [vielleicht, sicher, nie]
+        answer: vielleicht
+      - id: a2-u02-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: reisen
+        answers: [seyahat etmek, yolculuk etmek]
+
+  - id: a2-u02-l2
+    type: grammar
+    title: ich werde …
+    exercises:
+      - id: a2-u02-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: future
+        target: geleceğim
+        gloss_de: ich werde kommen
+        explanation: Stamm + ecek + im. Vor dem Vokal von -im wird k zu ğ.
+      - id: a2-u02-l2-e2
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: future
+        target: geleceksin
+        gloss_de: du wirst kommen
+        explanation: Vor -sin bleibt das k, die Endung beginnt mit einem Konsonanten.
+      - { id: a2-u02-l2-e3, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: future, target: yapacak, gloss_de: 'er, sie wird machen' }
+      - id: a2-u02-l2-e4
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 1pl
+        tense: future
+        target: okuyacağız
+        gloss_de: wir werden lesen
+        explanation: Nach Vokal steht ein y vor -acak.
+      - id: a2-u02-l2-e5
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1sg
+        tense: future
+        target: gideceğim
+        gloss_de: ich werde gehen
+        explanation: git wird vor dem Vokal zu gid, wie im Präsens.
+      - { id: a2-u02-l2-e6, type: conjugation, mode: verb, lemma: kalmak, person: 2pl, tense: future, target: kalacaksınız, gloss_de: 'ihr werdet bleiben, Sie werden bleiben' }
+      - { id: a2-u02-l2-e7, type: conjugation, mode: verb, lemma: gezmek, person: 3pl, tense: future, target: gezecekler, gloss_de: "sie werden sich umsehen, herumreisen" }
+      - id: a2-u02-l2-e8
+        type: conjugation
+        mode: verb
+        lemma: yemek
+        person: 1sg
+        tense: future
+        target: yiyeceğim
+        gloss_de: ich werde essen
+        explanation: Unregelmäßig, ye → yi + yecek.
+      - { id: a2-u02-l2-e9, type: conjugation, mode: verb, lemma: beklemek, person: 1sg, tense: future, target: bekleyeceğim, gloss_de: ich werde warten }
+      - { id: a2-u02-l2-e10, type: conjugation, mode: verb, lemma: binmek, person: 1pl, tense: future, target: bineceğiz, gloss_de: wir werden einsteigen }
+      - { id: a2-u02-l2-e11, type: conjugation, mode: verb, lemma: hazırlamak, person: 1sg, tense: future, target: hazırlayacağım, gloss_de: ich werde vorbereiten }
+      - { id: a2-u02-l2-e12, type: conjugation, mode: verb, lemma: seyahat etmek, person: 1pl, tense: future, target: seyahat edeceğiz, gloss_de: wir werden reisen }
+      - id: a2-u02-l2-e13
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich werde machen)
+        options: [yapacağım, yapacakım, yapaceğim]
+        answer: yapacağım
+      - id: a2-u02-l2-e14
+        type: free_text
+        direction: de_tr
+        prompt: wir werden bleiben
+        answers: [kalacağız, biz kalacağız]
+
+  - id: a2-u02-l3
+    type: grammar
+    title: nicht und Fragen
+    exercises:
+      - id: a2-u02-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: future
+        negative: true
+        target: gelmeyeceğim
+        gloss_de: ich werde nicht kommen
+        explanation: me + y + ecek + im, nach der Verneinung steht ein y.
+      - { id: a2-u02-l3-e2, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: future, negative: true, target: yapmayacak, gloss_de: 'er, sie wird nicht machen' }
+      - id: a2-u02-l3-e3
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1pl
+        tense: future
+        negative: true
+        target: gitmeyeceğiz
+        gloss_de: wir werden nicht gehen
+        explanation: Nach git folgt -me, darum bleibt das t.
+      - { id: a2-u02-l3-e4, type: conjugation, mode: verb, lemma: kalmak, person: 2sg, tense: future, negative: true, target: kalmayacaksın, gloss_de: du wirst nicht bleiben }
+      - id: a2-u02-l3-e5
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: future
+        question: true
+        target: gelecek misin?
+        gloss_de: Wirst du kommen?
+        explanation: Wie im Präsens trägt die Partikel die Endung, gelecek misin.
+      - { id: a2-u02-l3-e6, type: conjugation, mode: verb, lemma: yapmak, person: 2pl, tense: future, question: true, target: yapacak mısınız?, gloss_de: 'Werdet ihr machen? Werden Sie machen?' }
+      - { id: a2-u02-l3-e7, type: conjugation, mode: verb, lemma: gitmek, person: 3sg, tense: future, question: true, target: gidecek mi?, gloss_de: 'Wird er, sie gehen?' }
+      - id: a2-u02-l3-e8
+        type: conjugation
+        mode: verb
+        lemma: kalmak
+        person: 1sg
+        tense: future
+        question: true
+        target: kalacak mıyım?
+        gloss_de: Werde ich bleiben?
+        explanation: In der Frage bleibt das k, denn die Endung hängt an der Partikel.
+      - { id: a2-u02-l3-e9, type: conjugation, mode: verb, lemma: gezmek, person: 3pl, tense: future, question: true, target: gezecekler mi?, gloss_de: Werden sie sich umsehen? }
+      - { id: a2-u02-l3-e10, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: future, negative: true, question: true, target: gelmeyecek misin?, gloss_de: Wirst du nicht kommen? }
+      - id: a2-u02-l3-e11
+        type: multiple_choice
+        prompt: Welche Frage ist richtig? (Wirst du kommen?)
+        options: [Gelecek misin?, Geleceksin mi?, Geleceğin mi?]
+        answer: Gelecek misin?
+      - id: a2-u02-l3-e12
+        type: word_bank
+        prompt: Wirst du morgen kommen? – Nein, ich werde nicht kommen.
+        answers: ['Yarın gelecek misin? Hayır, gelmeyeceğim.']
+        distractors: [gelmedim, mi]
+      - id: a2-u02-l3-e13
+        type: free_text
+        direction: tr_de
+        prompt: Bu yaz tatile gidecek misiniz?
+        answers: [Werdet ihr diesen Sommer in den Urlaub fahren?, Fahren Sie diesen Sommer in den Urlaub?, Werden Sie diesen Sommer in den Urlaub fahren?, Fahrt ihr diesen Sommer in den Urlaub?, Fahrt ihr diesen Sommer in Urlaub?, Macht ihr diesen Sommer Urlaub?]
+        explanation: bu yaz = diesen Sommer, tatile gitmek = in den Urlaub fahren.
+      - id: a2-u02-l3-e14
+        type: free_text
+        direction: de_tr
+        prompt: Ich werde nicht warten.
+        answers: [Beklemeyeceğim., Ben beklemeyeceğim.]
+
+  - id: a2-u02-l4
+    type: grammar
+    title: 'Tabellen: Futur'
+    exercises:
+      - id: a2-u02-l4-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: future
+        targets: [geleceğim, geleceksin, gelecek, geleceğiz, geleceksiniz, gelecekler]
+        gloss_de: kommen
+        explanation: k → ğ nur vor -im und -iz.
+      - { id: a2-u02-l4-e2, type: paradigm, kind: verb, lemma: yapmak, tense: future, targets: [yapacağım, yapacaksın, yapacak, yapacağız, yapacaksınız, yapacaklar], gloss_de: machen }
+      - { id: a2-u02-l4-e3, type: paradigm, kind: verb, lemma: okumak, tense: future, targets: [okuyacağım, okuyacaksın, okuyacak, okuyacağız, okuyacaksınız, okuyacaklar], gloss_de: lesen }
+      - { id: a2-u02-l4-e4, type: paradigm, kind: verb, lemma: gitmek, tense: future, targets: [gideceğim, gideceksin, gidecek, gideceğiz, gideceksiniz, gidecekler], gloss_de: gehen }
+      - { id: a2-u02-l4-e5, type: paradigm, kind: verb, lemma: kalmak, tense: future, targets: [kalacağım, kalacaksın, kalacak, kalacağız, kalacaksınız, kalacaklar], gloss_de: bleiben }
+      - id: a2-u02-l4-e6
+        type: paradigm
+        kind: verb
+        lemma: yemek
+        tense: future
+        targets: [yiyeceğim, yiyeceksin, yiyecek, yiyeceğiz, yiyeceksiniz, yiyecekler]
+        gloss_de: essen
+      - id: a2-u02-l4-e7
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: future
+        negative: true
+        targets: [gelmeyeceğim, gelmeyeceksin, gelmeyecek, gelmeyeceğiz, gelmeyeceksiniz, gelmeyecekler]
+        gloss_de: nicht kommen
+      - id: a2-u02-l4-e8
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: future
+        question: true
+        targets: [yapacak mıyım?, yapacak mısın?, yapacak mı?, yapacak mıyız?, yapacak mısınız?, yapacaklar mı?]
+        gloss_de: machen? (Frage)
+      - { id: a2-u02-l4-e9, type: paradigm, kind: verb, lemma: beklemek, tense: future, targets: [bekleyeceğim, bekleyeceksin, bekleyecek, bekleyeceğiz, bekleyeceksiniz, bekleyecekler], gloss_de: warten }
+      - { id: a2-u02-l4-e10, type: paradigm, kind: verb, lemma: binmek, tense: future, negative: true, targets: [binmeyeceğim, binmeyeceksin, binmeyecek, binmeyeceğiz, binmeyeceksiniz, binmeyecekler], gloss_de: nicht einsteigen }
+
+  - id: a2-u02-l5
+    type: grammar
+    title: Morgen, nächste Woche, nächstes Jahr
+    exercises:
+      - id: a2-u02-l5-e1
+        type: word_bank
+        prompt: Morgen werde ich nach Istanbul fahren.
+        answers: [Yarın İstanbul'a gideceğim., Ben yarın İstanbul'a gideceğim.]
+        distractors: ["İstanbul'da", gittim]
+      - id: a2-u02-l5-e2
+        type: word_bank
+        prompt: Nächste Woche werden wir das Museum besuchen.
+        answers: [Gelecek hafta müzeyi ziyaret edeceğiz.]
+        distractors: [müzeye, ettik]
+      - id: a2-u02-l5-e3
+        type: word_bank
+        prompt: Nächstes Jahr werde ich Türkisch lernen.
+        answers: [Seneye Türkçe öğreneceğim., Gelecek yıl Türkçe öğreneceğim.]
+        distractors: [öğrendim, geçen]
+        explanation: seneye = nächstes Jahr, auch gelecek yıl.
+      - id: a2-u02-l5-e4
+        type: word_bank
+        prompt: Im Sommer fahren wir ans Meer.
+        answers: [Yazın denize gideceğiz.]
+        distractors: [denizde, gittik]
+        explanation: yazın = im Sommer, kışın = im Winter.
+      - id: a2-u02-l5-e5
+        type: word_bank
+        prompt: Vielleicht werde ich nicht kommen.
+        answers: [Belki gelmeyeceğim.]
+        distractors: [gelmedim, yarın]
+      - id: a2-u02-l5-e6
+        type: word_bank
+        prompt: In zwei Tagen fahren wir zurück.
+        answers: [İki gün sonra döneceğiz.]
+        distractors: [önce, döndük]
+        explanation: … sonra = in, nach (zeitlich), iki gün sonra = in zwei Tagen.
+      - id: a2-u02-l5-e7
+        type: multiple_choice
+        prompt: Was heißt „üç gün sonra“?
+        options: [in drei Tagen, vor drei Tagen, drei Tage lang]
+        answer: in drei Tagen
+      - id: a2-u02-l5-e8
+        type: free_text
+        direction: de_tr
+        prompt: nächste Woche
+        answers: [gelecek hafta, haftaya, önümüzdeki hafta]
+        explanation: haftaya ist umgangssprachlich für nächste Woche.
+      - id: a2-u02-l5-e9
+        type: word_bank
+        prompt: Was wirst du am Wochenende machen?
+        answers: [Hafta sonu ne yapacaksın?]
+        distractors: [yaptın, nerede]
+      - id: a2-u02-l5-e10
+        type: free_text
+        direction: tr_de
+        prompt: Akşam evde dinleneceğim.
+        answers: [Am Abend werde ich mich zu Hause ausruhen., Abends werde ich mich zu Hause ausruhen., Heute Abend ruhe ich mich zu Hause aus., Am Abend ruhe ich mich zu Hause aus., Heute Abend werde ich mich zu Hause ausruhen., Am Abend werde ich mich zu Hause erholen.]
+      - id: a2-u02-l5-e11
+        type: multiple_choice
+        prompt: Was passt? „Yarın sabah erken …“
+        options: [kalkacağım, kalktım, kalkmadım]
+        answer: kalkacağım
+      - id: a2-u02-l5-e12
+        type: multiple_choice
+        prompt: Wofür steht das Präsens -iyor in „Yarın geliyorum.“?
+        options: [für einen festen Plan, für die Vergangenheit, für eine Gewohnheit]
+        answer: für einen festen Plan
+        explanation: Wie im Deutschen („Morgen komme ich“) kann -iyor feste Pläne ausdrücken. -ecek betont Absicht oder Vorhersage.
+      - id: a2-u02-l5-e13
+        type: free_text
+        direction: de_tr
+        prompt: in zwei Tagen
+        answers: [iki gün sonra]
+
+  - id: a2-u02-l6
+    type: dialog
+    title: Eine Reise planen
+    exercises:
+      - id: a2-u02-l6-e1
+        type: word_bank
+        prompt: Wohin fährst du in den Urlaub?
+        answers: [Tatile nereye gideceksin?, Tatilde nereye gideceksin?]
+        distractors: [nerede, gittin]
+      - id: a2-u02-l6-e2
+        type: word_bank
+        prompt: Ich werde nach Antalya fliegen.
+        answers: [Antalya'ya uçacağım., Uçakla Antalya'ya gideceğim., Antalya'ya uçakla gideceğim.]
+        distractors: ["Antalya'da", uçtum]
+        explanation: uçmak = fliegen, uçakla = mit dem Flugzeug.
+      - id: a2-u02-l6-e3
+        type: word_bank
+        prompt: Wir werden mit dem Bus fahren.
+        answers: [Otobüsle gideceğiz., Otobüse bineceğiz.]
+        distractors: [otobüste, gittik]
+        explanation: -le/-la = mit (Verkehrsmittel), otobüsle.
+      - id: a2-u02-l6-e4
+        type: word_bank
+        prompt: Ich werde zwei Wochen in einem Hotel bleiben.
+        answers: [İki hafta bir otelde kalacağım., Bir otelde iki hafta kalacağım.]
+        distractors: [otele, haftalar]
+      - id: a2-u02-l6-e5
+        type: word_bank
+        prompt: Hast du das Ticket gekauft?
+        answers: [Bileti aldın mı?]
+        distractors: [bilet, alacak]
+      - id: a2-u02-l6-e6
+        type: word_bank
+        prompt: Nein, ich kaufe es morgen.
+        answers: ['Hayır, yarın alacağım.', 'Hayır, yarın alıyorum.']
+        distractors: [aldım, dün]
+      - id: a2-u02-l6-e7
+        type: multiple_choice
+        prompt: Am Schalter sagt man „İstanbul'a bir bilet, lütfen.“ Was möchtest du?
+        options: [ein Ticket nach Istanbul, ein Ticket aus Istanbul, Informationen über Istanbul]
+        answer: ein Ticket nach Istanbul
+      - id: a2-u02-l6-e8
+        type: word_bank
+        prompt: Wann fährt der Zug ab?
+        answers: [Tren ne zaman kalkacak?, Tren saat kaçta kalkacak?, Tren ne zaman kalkıyor?, Tren saat kaçta kalkıyor?]
+        distractors: [kalktı, nerede]
+        explanation: kalkmak heißt auch „abfahren, abfliegen“. Für Fahrpläne ist das Präsens üblich, kalkıyor.
+      - id: a2-u02-l6-e9
+        type: free_text
+        direction: tr_de
+        prompt: Pasaportunu unutma!
+        answers: [Vergiss deinen Pass nicht!, Vergiss deinen Reisepass nicht!]
+        explanation: unutma = vergiss nicht. Der Imperativ kommt in einer späteren Unit.
+      - id: a2-u02-l6-e10
+        type: word_bank
+        prompt: Ich werde meinen Koffer heute Abend packen.
+        answers: [Valizimi bu akşam hazırlayacağım., Bu akşam valizimi hazırlayacağım., Valizi bu akşam hazırlayacağım., Bu akşam valizi hazırlayacağım.]
+        distractors: [valiz, hazırladım]
+        explanation: valiz hazırlamak = den Koffer packen.
+      - id: a2-u02-l6-e11
+        type: multiple_choice
+        prompt: Was heißt „İyi yolculuklar!“?
+        options: [Gute Reise!, Guten Appetit!, Gute Besserung!]
+        answer: Gute Reise!
+      - id: a2-u02-l6-e12
+        type: word_bank
+        prompt: Wir werden viel besichtigen.
+        answers: [Çok gezeceğiz.]
+        distractors: [gezdik, az]
+
+  - id: a2-u02-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: a2-u02-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich werde kommen
+        answers: [geleceğim, ben geleceğim]
+      - id: a2-u02-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: du wirst gehen
+        answers: [gideceksin, sen gideceksin]
+      - id: a2-u02-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wir werden essen)
+        options: [yiyeceğiz, yeyeceğiz, yiyecekiz]
+        answer: yiyeceğiz
+      - id: a2-u02-l7-e4
+        type: multiple_choice
+        prompt: Warum heißt es „geleceğim“, aber „geleceksin“?
+        options: [k wird nur vor einem Vokal zu ğ., Bei „du“ gibt es keine Erweichung., Das ist eine Ausnahme von gelmek.]
+        answer: k wird nur vor einem Vokal zu ğ.
+      - id: a2-u02-l7-e5
+        type: word_bank
+        prompt: Mein Bruder (kardeş) wird in Deutschland studieren.
+        answers: [Kardeşim Almanya'da okuyacak., Erkek kardeşim Almanya'da okuyacak.]
+        distractors: ["Almanya'ya", okudu]
+        explanation: okumak heißt auch „studieren, zur Schule gehen“.
+      - id: a2-u02-l7-e6
+        type: free_text
+        direction: tr_de
+        prompt: Ne zaman döneceksiniz?
+        answers: [Wann werdet ihr zurückkommen?, Wann kommen Sie zurück?, Wann werden Sie zurückkommen?, Wann kommt ihr zurück?]
+      - id: a2-u02-l7-e7
+        type: conjugation
+        mode: verb
+        lemma: dinlenmek
+        person: 1sg
+        tense: future
+        target: dinleneceğim
+        gloss_de: ich werde mich ausruhen
+      - id: a2-u02-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: uçmak
+        person: 1pl
+        tense: future
+        target: uçacağız
+        gloss_de: wir werden fliegen
+      - id: a2-u02-l7-e9
+        type: word_bank
+        prompt: Dieses Jahr werden wir nicht in den Urlaub fahren.
+        answers: [Bu yıl tatile gitmeyeceğiz.]
+        distractors: [gidiyoruz, geçen]
+      - id: a2-u02-l7-e10
+        type: multiple_choice
+        prompt: Welche Zeit passt? „Geçen yaz Antalya'ya …“
+        options: [gittik, gideceğiz, gidiyoruz]
+        answer: gittik
+        explanation: geçen yaz (letzten Sommer) verlangt -dı.
+      - id: a2-u02-l7-e11
+        type: free_text
+        direction: de_tr
+        prompt: Wirst du kommen?
+        answers: [Gelecek misin?, Sen gelecek misin?]
+      - id: a2-u02-l7-e12
+        type: word_bank
+        prompt: Ich werde den Zug nehmen.
+        answers: [Trene bineceğim.]
+        distractors: [trende, bindim]
+      - id: a2-u02-l7-e13
+        type: free_text
+        direction: tr_de
+        prompt: Belki yarın yağmur yağacak.
+        answers: [Vielleicht wird es morgen regnen., Vielleicht regnet es morgen.]
+        explanation: yağmur yağmak = regnen.
+
+vocab:
+  - { tr: tatil, de: [Urlaub, Ferien], pos: noun }
+  - { tr: deniz, de: [Meer], pos: noun }
+  - { tr: uçak, de: [Flugzeug], pos: noun, softens: true }
+  - { tr: tren, de: [Zug], pos: noun }
+  - { tr: otobüs, de: [Bus], pos: noun }
+  - { tr: bilet, de: [Fahrkarte, Ticket], pos: noun }
+  - { tr: valiz, de: [Koffer], pos: noun }
+  - { tr: pasaport, de: [Reisepass], pos: noun }
+  - { tr: kalmak, de: [bleiben], pos: verb }
+  - { tr: gezmek, de: [herumgehen, bummeln, herumreisen, besichtigen], pos: verb }
+  - { tr: binmek, de: [einsteigen, nehmen (Verkehrsmittel)], pos: verb }
+  - { tr: hazırlamak, de: [vorbereiten, packen], pos: verb }
+  - { tr: dinlenmek, de: [sich ausruhen], pos: verb }
+  - { tr: uçmak, de: [fliegen], pos: verb }
+  - { tr: seyahat etmek, de: [reisen], pos: verb, softens: true }
+  - { tr: gelecek, de: [nächste, kommende], pos: adj }
+  - { tr: seneye, de: [nächstes Jahr], pos: adv }
+  - { tr: belki, de: [vielleicht], pos: adv }
+  - { tr: yaz, de: [Sommer], pos: noun }
+  - { tr: yolculuk, de: [Reise, Fahrt], pos: noun, softens: true }
+  - { tr: yazın, de: [im Sommer], pos: adv }
+  - { tr: kışın, de: [im Winter], pos: adv }
+  - { tr: yağmur, de: [Regen], pos: noun }
