@@ -30,7 +30,13 @@ const exCard = (id: string, due: string): Card => {
 
 describe('planRepeat', () => {
   it('ist leer ohne abgeschlossene Lektion und ohne Karten', () => {
-    expect(planRepeat(units, [], [], '2026-05-01', 10)).toEqual({ queue: [], due: 0, fresh: 0 });
+    expect(planRepeat(units, [], [], '2026-05-01', 10)).toMatchObject({
+      queue: [],
+      due: 0,
+      fresh: 0,
+      gone: [],
+      moved: [],
+    });
   });
 
   it('zählt fällige Karten und neue Wörter getrennt', () => {

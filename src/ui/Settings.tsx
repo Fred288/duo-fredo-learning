@@ -80,6 +80,7 @@ export function Settings() {
           </button>
         </div>
       </div>
+      <p className="-mt-4 text-sm text-stone-500">{t('settings.newWords.hint')}</p>
 
       <label className="flex min-h-11 items-center justify-between gap-4">
         <span>{t('settings.streak')}</span>

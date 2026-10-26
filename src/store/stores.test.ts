@@ -1,6 +1,7 @@
 import 'fake-indexeddb/auto';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { db } from '../db/db';
+import { cardId } from '../srs/card';
 import { useProgress } from './progress';
 import { DEFAULT_SETTINGS, useSettings } from './settings';
 
@@ -147,6 +148,35 @@ describe('SRS-Karten im Progress-Store', () => {
     await flush();
     expect(getState().cards).toHaveLength(1);
     expect(await db.cards.count()).toBe(1);
+  });
+
+  it('wartet mit Bewertungen, bis die gespeicherten Karten geladen sind', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    day('2026-05-01');
+    const ref = { kind: 'vocab', vocabId: 'ev', dir: 'tr_de' } as const;
+    const stored = {
+      id: cardId(ref),
+      ref,
+      unitId: 'a1-u02',
+      box: 4,
+      due: '2026-05-01',
+      introduced: '2026-04-01',
+      lastAt: 0,
+      lapses: 0,
+    };
+    await db.cards.put(stored);
+
+    const loading = getState().load();
+    getState().recordVocab(ref, 'a1-u02', 'correct'); // vor dem Ende von load()
+    getState().recordCompletion('a1-u02', 'a1-u02-l1', 1, 1);
+    expect(getState().completions).toEqual([]); // noch zurückgestellt
+    await loading;
+    await flush();
+
+    expect(getState().cards).toMatchObject([{ box: 5, due: '2026-05-31' }]);
+    expect(await db.cards.get(stored.id)).toMatchObject({ box: 5, introduced: '2026-04-01' });
+    expect(getState().completions).toHaveLength(1);
+    expect(await db.completions.count()).toBe(1);
   });
 
   it('behält vor dem Laden erfasste Karten', async () => {

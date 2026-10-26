@@ -26,12 +26,14 @@ interface UnitVocab {
 
 /**
  * Noch nicht eingeführte Vokabelkarten aus Units mit mindestens einer abgeschlossenen Lektion.
- * Erst Erkennen (tr→de); Abrufen (de→tr) kommt dazu, sobald tr→de in Box 2 angekommen ist.
+ * Erst Erkennen (tr→de); Abrufen (de→tr) kommt dazu, sobald tr→de in Box 2 angekommen ist
+ * und die Karte nicht erst heute eingeführt wurde (also nach dem ersten Tag).
  */
 export function vocabCandidates(
   units: readonly UnitVocab[],
   completedLessons: ReadonlySet<string>,
   cards: readonly Card[],
+  today: string,
 ): VocabCandidate[] {
   const byId = new Map(cards.map((c) => [c.id, c]));
   return units
@@ -41,7 +43,7 @@ export function vocabCandidates(
         const ref = (dir: VocabRef['dir']): VocabRef => ({ kind: 'vocab', vocabId, dir });
         const recognize = byId.get(cardId(ref('tr_de')));
         if (!recognize) return [{ ref: ref('tr_de'), unitId: u.id }];
-        if (recognize.box >= 2 && !byId.has(cardId(ref('de_tr'))))
+        if (recognize.box >= 2 && recognize.introduced < today && !byId.has(cardId(ref('de_tr'))))
           return [{ ref: ref('de_tr'), unitId: u.id }];
         return [];
       }),
@@ -51,13 +53,15 @@ export function vocabCandidates(
 export interface QueueOptions {
   /** Höchstzahl Karten pro Durchgang. */
   max: number;
-  /** Neue Vokabelkarten pro Tag (0 = keine). */
+  /** Neue Wörter pro Tag (0 = keine neuen; schon eingeführte bleiben fällig). */
   newPerDay: number;
 }
 
 /**
  * Warteschlange eines Durchgangs: fällige Karten und heute noch erlaubte neue Vokabeln.
  * Neue Wörter bekommen bei vollem Rückstau ein Viertel der Plätze, damit sie nicht verhungern.
+ * Das Tageslimit zählt tr→de-Erst-Einführungen; die de→tr-Karte eines bekannten Worts hat ein
+ * eigenes, gleich großes Limit und verdrängt so keine neuen Wörter.
  * Übungen und Vokabeln wechseln sich ab.
  */
 export function buildQueue(
@@ -67,12 +71,20 @@ export function buildQueue(
   { max, newPerDay }: QueueOptions,
 ): QueueEntry[] {
   const due = dueCards(cards, today);
-  const introducedToday = cards.filter(
-    (c) => c.ref.kind === 'vocab' && c.introduced === today,
-  ).length;
-  const freshWanted = Math.min(Math.max(newPerDay - introducedToday, 0), candidates.length);
+  const room = (dir: VocabRef['dir']) =>
+    Math.max(
+      newPerDay -
+        cards.filter((c) => c.ref.kind === 'vocab' && c.ref.dir === dir && c.introduced === today)
+          .length,
+      0,
+    );
+  const allowed = [
+    ...candidates.filter((c) => c.ref.dir === 'de_tr').slice(0, room('de_tr')),
+    ...candidates.filter((c) => c.ref.dir === 'tr_de').slice(0, room('tr_de')),
+  ];
+  const freshWanted = allowed.length;
   const reviewSlots = Math.min(due.length, max - Math.min(freshWanted, Math.ceil(max / 4)));
-  const fresh = candidates.slice(0, Math.min(freshWanted, max - reviewSlots));
+  const fresh = allowed.slice(0, Math.min(freshWanted, max - reviewSlots));
   const picked: QueueEntry[] = [...due.slice(0, reviewSlots), ...fresh];
 
   const exercises = picked.filter((e) => e.ref.kind === 'exercise');

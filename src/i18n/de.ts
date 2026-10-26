@@ -56,6 +56,8 @@ export const de = {
   'settings.goal.dec': 'Tagesziel verringern',
   'settings.goal.inc': 'Tagesziel erhöhen',
   'settings.newWords': 'Neue Wörter pro Tag (Wiederholen)',
+  'settings.newWords.hint':
+    'Bei 0 kommen keine neuen Wörter dazu; bereits eingeführte werden weiter wiederholt.',
   'settings.newWords.dec': 'Neue Wörter verringern',
   'settings.newWords.inc': 'Neue Wörter erhöhen',
   'settings.streak': 'Serie anzeigen',

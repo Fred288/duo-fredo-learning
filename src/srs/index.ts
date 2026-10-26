@@ -5,3 +5,4 @@ export * from './queue';
 export * from './seed';
 export * from './vocab-exercise';
 export * from './plan';
+export * from './reconcile';

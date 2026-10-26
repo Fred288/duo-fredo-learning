@@ -26,13 +26,20 @@ const explainerOf = (u: Unit) =>
 const lessonOfExercise = (exerciseId: string) => exerciseId.replace(/-e\d+$/, '');
 
 async function buildRun(): Promise<Run | null> {
-  const { completions, cards, removeCards } = useProgress.getState();
+  const { completions, cards, removeCards, putCards } = useProgress.getState();
   const { newWordsPerDay } = useSettings.getState();
   const manifest = await fetchManifest();
   // Momentaufnahme beim Öffnen; neue Antworten ändern den laufenden Durchgang nicht.
-  const { queue } = planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay);
+  const plan = planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay);
+  // Karten zu entfernten Units/Vokabeln aufräumen, verschobene Vokabeln behalten ihren Stand.
+  removeCards(plan.gone);
+  putCards(plan.moved);
+  const { queue } = plan;
   const unitIds = [...new Set(queue.map((e) => e.unitId))];
-  const units = await Promise.all(unitIds.map(fetchUnit));
+  // Eine nicht ladbare Unit (z. B. offline nicht im Cache) nimmt nur ihre Karten mit.
+  const loaded = await Promise.allSettled(unitIds.map(fetchUnit));
+  const units = loaded.flatMap((r) => (r.status === 'fulfilled' ? [r.value] : []));
+  const loadedIds = new Set(units.map((u) => u.id));
   const mds = await Promise.all(units.map(explainerOf));
 
   const exercises = new Map<string, Exercise>();
@@ -54,6 +61,7 @@ async function buildRun(): Promise<Run | null> {
   const gone: string[] = [];
   for (const entry of queue) {
     const { ref } = entry;
+    if (!loadedIds.has(entry.unitId)) continue;
     if (ref.kind === 'exercise') {
       const ex = exercises.get(ref.exerciseId);
       if (!ex) gone.push(cardId(ref));

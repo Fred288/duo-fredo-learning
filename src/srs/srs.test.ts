@@ -4,6 +4,8 @@ import type { Verdict } from '../lib/answer';
 import type { Attempt } from '../progress/stats';
 import {
   buildQueue,
+  reconcileCards,
+  planRepeat,
   cardId,
   dueCards,
   glossOf,
@@ -181,7 +183,7 @@ describe('vocabCandidates', () => {
   ];
 
   it('nimmt nur Units mit abgeschlossener Lektion, in Inhaltsreihenfolge', () => {
-    const got = vocabCandidates(units, new Set(['a1-u02-l2', 'a1-u01-l1']), []);
+    const got = vocabCandidates(units, new Set(['a1-u02-l2', 'a1-u01-l1']), [], '2026-05-01');
     expect(got.map((c) => cardId(c.ref))).toEqual([
       'vo:tr_de:merhaba',
       'vo:tr_de:evet',
@@ -198,8 +200,17 @@ describe('vocabCandidates', () => {
       card(voRef('merhaba'), { box: 3 }),
       card(voRef('merhaba', 'de_tr')),
     ];
-    const got = vocabCandidates(units, new Set(['a1-u01-l1', 'a1-u02-l1']), cards);
+    const got = vocabCandidates(units, new Set(['a1-u01-l1', 'a1-u02-l1']), cards, '2026-05-01');
     expect(got.map((c) => cardId(c.ref))).toEqual(['vo:tr_de:evet', 'vo:de_tr:göz']);
+  });
+
+  it('bietet de→tr nicht am Tag der Einführung an, sondern erst danach', () => {
+    const cards = [card(voRef('göz'), { box: 2, introduced: '2026-05-01', due: '2026-05-04' })];
+    const open = new Set(['a1-u02-l1']);
+    const ids = (today: string) =>
+      vocabCandidates(units, open, cards, today).map((c) => cardId(c.ref));
+    expect(ids('2026-05-01')).toEqual(['vo:tr_de:ev']);
+    expect(ids('2026-05-02')).toEqual(['vo:tr_de:ev', 'vo:de_tr:göz']);
   });
 });
 
@@ -245,6 +256,25 @@ describe('buildQueue', () => {
     );
     const q = buildQueue(introducedToday, cands(30), today, { max: 20, newPerDay: 10 });
     expect(ids(q)).toEqual(['vo:tr_de:neu0', 'vo:tr_de:neu1', 'vo:tr_de:neu2']);
+  });
+
+  it('de→tr hat ein eigenes Limit und verdrängt keine neuen Wörter', () => {
+    const deTr = Array.from({ length: 4 }, (_, i) => ({
+      ref: voRef(`alt${i}`, 'de_tr'),
+      unitId: 'a1-u01',
+    }));
+    const q = buildQueue([], [...deTr, ...cands(10)], today, { max: 20, newPerDay: 3 });
+    expect(ids(q).filter((id) => id.startsWith('vo:de_tr'))).toHaveLength(3);
+    expect(ids(q).filter((id) => id.startsWith('vo:tr_de'))).toHaveLength(3);
+    const heute = [card(voRef('x', 'de_tr'), { introduced: today, due: '2026-05-04' })];
+    const q2 = buildQueue(heute, [...deTr, ...cands(10)], today, { max: 20, newPerDay: 3 });
+    expect(ids(q2).filter((id) => id.startsWith('vo:de_tr'))).toHaveLength(2);
+    expect(ids(q2).filter((id) => id.startsWith('vo:tr_de'))).toHaveLength(3);
+  });
+
+  it('mit 0 neuen Wörtern bleiben schon eingeführte Vokabeln fällig', () => {
+    const q = buildQueue(dueVo(2), cands(5), today, { max: 20, newPerDay: 0 });
+    expect(ids(q)).toEqual(['vo:tr_de:w0', 'vo:tr_de:w1']);
   });
 
   it('ohne neue Wörter (0) nur fällige Karten; leer, wenn nichts ansteht', () => {
@@ -390,5 +420,48 @@ describe('vocabExercise', () => {
     ]);
     expect(ex).toMatchObject({ register: 'formal', answers: ['siz'] });
     expect(glossOf(siz)).toBe('ihr, Sie');
+  });
+});
+
+describe('vocabExercise: Homonyme', () => {
+  it('bietet kein Homonym (gleiche tr, andere Bedeutung) als Ablenker an', () => {
+    const verb: Vocab = { tr: 'yemek', de: ['essen'], pos: 'verb' };
+    const noun: Vocab = { id: 'yemek-essen', tr: 'Yemek', de: ['Essen', 'Mahlzeit'], pos: 'noun' };
+    const others = ['gelmek', 'gitmek', 'görmek'].map((tr) => ({
+      tr,
+      de: [tr],
+      pos: 'verb' as const,
+    }));
+    const ex = vocabExercise(voRef('yemek'), verb, [verb, noun, ...others]);
+    if (ex.type !== 'multiple_choice') throw new Error('MC erwartet');
+    expect(ex.options).not.toContain('Essen, Mahlzeit');
+    expect(ex.options).toHaveLength(4);
+  });
+});
+
+describe('reconcileCards', () => {
+  const units = [
+    { id: 'a1-u01', vocab: ['merhaba'] },
+    { id: 'a1-u03', vocab: ['ev'] },
+  ];
+
+  it('behält Karten vorhandener Units, entfernt verwaiste und führt verschobene Vokabeln nach', () => {
+    const keep = card(exRef('a1-u01-l1-e1'), { unitId: 'a1-u01' });
+    const orphanEx = card(exRef('a1-u09-l1-e1'), { unitId: 'a1-u09' });
+    const orphanVo = card(voRef('weg'), { unitId: 'a1-u01' });
+    const moved = card(voRef('ev'), { unitId: 'a1-u01', box: 4 });
+    const got = reconcileCards(units, [keep, orphanEx, orphanVo, moved]);
+    expect(got.gone).toEqual([orphanEx.id, orphanVo.id]);
+    expect(got.moved).toEqual([{ ...moved, unitId: 'a1-u03' }]);
+    expect(got.cards).toEqual([keep, { ...moved, unitId: 'a1-u03' }]);
+  });
+});
+
+describe('planRepeat: verwaiste Karten', () => {
+  it('zählen nicht als fällig und werden gemeldet', () => {
+    const units = [{ id: 'a1-u01', lessons: [{ id: 'a1-u01-l1' }], vocab: [] }];
+    const orphan = card(exRef('a1-u09-l1-e1'), { unitId: 'a1-u09', due: '2026-05-01' });
+    const plan = planRepeat(units, [], [orphan], '2026-05-01', 10);
+    expect(plan).toMatchObject({ queue: [], due: 0, fresh: 0, gone: [orphan.id], moved: [] });
   });
 });

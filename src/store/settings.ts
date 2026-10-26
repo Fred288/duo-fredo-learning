@@ -7,7 +7,7 @@ export interface Settings {
   tolerateDiacritics: boolean;
   /** Ziel: abgeschlossene Lektionen pro Tag. */
   dailyGoal: number;
-  /** Neue Vokabelkarten pro Tag im Wiederholen; 0 schaltet Vokabelkarten ab. */
+  /** Neue Wörter pro Tag im Wiederholen; 0 = keine neuen, schon eingeführte bleiben fällig. */
   newWordsPerDay: number;
   showStreak: boolean;
   theme: Theme;

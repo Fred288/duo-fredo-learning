@@ -2,7 +2,11 @@ import { expect, test, type Page } from '@playwright/test';
 import type { Exercise, Unit } from '../src/content/schema';
 import { answer, loadUnit, playLesson } from './solve';
 
-/** Beantwortet einen Wiederholen-Durchgang richtig: Lektionsübungen und Vokabelkarten. */
+/**
+ * Beantwortet einen Wiederholen-Durchgang richtig: Lektionsübungen (über den Prompt gefunden, bei
+ * Multiple Choice nur wenn die Lösung als Option dasteht) und Vokabelkarten. Grammatikübungen
+ * ohne Prompt (Suffix-Builder, Konjugation, Tabelle) kann der Löser hier nicht zuordnen.
+ */
 async function playRepeat(page: Page, unit: Unit) {
   const byPrompt = new Map<string, Exercise>(
     unit.lessons.flatMap((l) =>
@@ -14,7 +18,12 @@ async function playRepeat(page: Page, unit: Unit) {
     if (await page.getByRole('heading', { name: 'Wiederholung geschafft' }).isVisible()) return;
     const prompt = (await page.locator('p[lang]').first().textContent())!;
     const ex = byPrompt.get(prompt);
-    if (ex?.type === 'multiple_choice') await answer(page, ex, unit);
+    const isExercise =
+      ex !== undefined &&
+      (ex.type !== 'multiple_choice' ||
+        (await page.locator('label', { has: page.getByText(ex.answer, { exact: true }) }).count()) >
+          0);
+    if (isExercise) await answer(page, ex, unit);
     else {
       const asked = vocab.find((v) => v.tr === prompt);
       if (asked) {
@@ -40,6 +49,7 @@ test('Wiederholen: neue Wörter nach einer Lektion, zählt wie eine Lektion für
   page,
 }) => {
   const unit = loadUnit('a1-u01');
+  await page.clock.setFixedTime(new Date('2026-05-01T10:00:00'));
   await page.goto('/');
   await expect(tile(page)).toHaveCount(0); // ohne abgeschlossene Lektion keine neuen Wörter
 

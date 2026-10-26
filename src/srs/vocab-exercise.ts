@@ -1,4 +1,5 @@
 import { vocabId, type Exercise, type Vocab } from '../content/schema';
+import { trLower } from '../lib/turkish';
 import { cardId, type VocabRef } from './card';
 
 /** Deutsche Bedeutungen wie in der Vokabelliste: „Land, Staat“. */
@@ -36,7 +37,11 @@ export function vocabExercise(ref: VocabRef, vocab: Vocab, pool: readonly Vocab[
   }
 
   const answer = glossOf(vocab);
-  const distinct = others.filter((o) => !sharesMeaning(o, vocab) && glossOf(o) !== answer);
+  // Homonyme (gleiche tr, andere Bedeutung, z. B. yemek Verb/Nomen) sind keine Ablenker: ihre
+  // Bedeutung wäre eine ebenfalls richtige Antwort.
+  const distinct = others.filter(
+    (o) => trLower(o.tr) !== trLower(vocab.tr) && !sharesMeaning(o, vocab) && glossOf(o) !== answer,
+  );
   const ranked = [
     ...stableShuffle(
       distinct.filter((o) => o.pos === vocab.pos),
