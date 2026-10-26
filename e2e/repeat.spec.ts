@@ -1,40 +1,39 @@
+import { readdirSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
-import type { Exercise, Unit } from '../src/content/schema';
+import type { Unit } from '../src/content/schema';
 import { answer, loadUnit, playLesson } from './solve';
 
 /**
- * Beantwortet einen Wiederholen-Durchgang richtig: Lektionsübungen (über den Prompt gefunden, bei
- * Multiple Choice nur wenn die Lösung als Option dasteht) und Vokabelkarten. Grammatikübungen
- * ohne Prompt (Suffix-Builder, Konjugation, Tabelle) kann der Löser hier nicht zuordnen.
+ * Beantwortet einen Wiederholen-Durchgang richtig. Die Karte wird über die Übungs-ID erkannt, die
+ * der Runner als `data-exercise-id` setzt: `srs-vo:<Richtung>:<Vokabel-ID>` für Vokabeln, sonst die
+ * ID einer Lektionsübung (beliebiger Typ, Unit aus dem ID-Präfix).
  */
-async function playRepeat(page: Page, unit: Unit) {
-  const byPrompt = new Map<string, Exercise>(
-    unit.lessons.flatMap((l) =>
-      l.exercises.flatMap((e) => ('prompt' in e ? [[e.prompt, e] as const] : [])),
-    ),
-  );
-  const vocab = unit.vocab ?? [];
-  for (let guard = 0; guard < 40; guard++) {
+const allVocab = () =>
+  readdirSync('public/content/units').flatMap((f) => loadUnit(f.replace('.json', '')).vocab ?? []);
+
+async function playRepeat(page: Page) {
+  const units = new Map<string, Unit>();
+  const unitOf = (id: string) => {
+    const unitId = /^[ab][12]-u\d{2}/.exec(id)![0];
+    if (!units.has(unitId)) units.set(unitId, loadUnit(unitId));
+    return units.get(unitId)!;
+  };
+  for (let guard = 0; guard < 60; guard++) {
     if (await page.getByRole('heading', { name: 'Wiederholung geschafft' }).isVisible()) return;
-    const prompt = (await page.locator('p[lang]').first().textContent())!;
-    const ex = byPrompt.get(prompt);
-    const isExercise =
-      ex !== undefined &&
-      (ex.type !== 'multiple_choice' ||
-        (await page.locator('label', { has: page.getByText(ex.answer, { exact: true }) }).count()) >
-          0);
-    if (isExercise) await answer(page, ex, unit);
-    else {
-      const asked = vocab.find((v) => v.tr === prompt);
-      if (asked) {
+    const id = (await page.locator('[data-exercise-id]').getAttribute('data-exercise-id'))!;
+    const vocabCard = /^srs-vo:(tr_de|de_tr):(.+)$/.exec(id);
+    if (vocabCard) {
+      const [, dir, key] = vocabCard as unknown as [string, string, string];
+      const v = allVocab().find((x) => (x.id ?? x.tr) === key)!;
+      if (dir === 'tr_de') {
         await page
-          .locator('label', { has: page.getByText(asked.de.join(', '), { exact: true }) })
+          .locator('label', { has: page.getByText(v.de.join(', '), { exact: true }) })
           .click();
-      } else {
-        const target = vocab.find((v) => v.de.join(', ') === prompt);
-        if (!target) throw new Error(`Unbekannte Karte: ${prompt}`);
-        await page.getByLabel('Deine Antwort').fill(target.tr);
-      }
+      } else await page.getByLabel('Deine Antwort').fill(v.tr);
+    } else {
+      const unit = unitOf(id);
+      const ex = unit.lessons.flatMap((l) => l.exercises).find((e) => e.id === id)!;
+      await answer(page, ex, unit);
     }
     await page.getByRole('button', { name: 'Prüfen' }).click();
     await expect(page.getByRole('status')).toContainText('Richtig!');
@@ -48,7 +47,6 @@ const tile = (page: Page) => page.getByRole('button', { name: /^Wiederholen / })
 test('Wiederholen: neue Wörter nach einer Lektion, zählt wie eine Lektion fürs Tagesziel', async ({
   page,
 }) => {
-  const unit = loadUnit('a1-u01');
   await page.clock.setFixedTime(new Date('2026-05-01T10:00:00'));
   await page.goto('/');
   await expect(tile(page)).toHaveCount(0); // ohne abgeschlossene Lektion keine neuen Wörter
@@ -65,7 +63,7 @@ test('Wiederholen: neue Wörter nach einer Lektion, zählt wie eine Lektion für
   await expect(tile(page)).toContainText('10 neue Wörter');
 
   await tile(page).click();
-  await playRepeat(page, unit);
+  await playRepeat(page);
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
   await expect(page.getByText('Heute: 2 von 3 Lektionen')).toBeVisible();
   await expect(page.getByText('1 von 4 Lektionen')).toBeVisible(); // Unit-Fortschritt unberührt
@@ -107,7 +105,7 @@ test('Wiederholen: falsch beantwortete Übung kommt am nächsten Tag zurück', a
   await expect(tile(page)).toContainText('1 fällig · 10 neue Wörter');
 
   await tile(page).click();
-  await playRepeat(page, unit);
+  await playRepeat(page);
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
   await expect(tile(page)).toHaveCount(0);
   await expect(page.getByRole('button', { name: /Fehler wiederholen/ })).toHaveCount(0);

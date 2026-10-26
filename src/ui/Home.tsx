@@ -34,7 +34,7 @@ export function Home() {
     ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay)
     : undefined;
   const repeatCount = [
-    plan?.due ? t('repeat.due', { count: plan.due }) : '',
+    plan && plan.due + plan.recall ? t('repeat.due', { count: plan.due + plan.recall }) : '',
     plan?.fresh ? t('repeat.new', { count: plan.fresh }) : '',
   ]
     .filter(Boolean)

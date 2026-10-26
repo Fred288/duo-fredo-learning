@@ -179,6 +179,21 @@ describe('SRS-Karten im Progress-Store', () => {
     expect(await db.completions.count()).toBe(1);
   });
 
+  it('lädt idempotent: ein zweites load() verdoppelt nichts', async () => {
+    getState().recordCompletion('a1-u01', 'a1-u01-l1', 1, 1);
+    getState().recordAttempt('a1-u01-l1-e1', 'a1-u01-l1', 'wrong');
+    await flush();
+    useProgress.setState({ completions: [], attempts: [], cards: [] });
+    const first = getState().load();
+    const second = getState().load(); // läuft noch: dasselbe Promise
+    expect(second).toBe(first);
+    await first;
+    await getState().load(); // schon geladen: nichts zu tun
+    expect(getState().completions).toHaveLength(1);
+    expect(getState().attempts).toHaveLength(1);
+    expect(getState().cards).toHaveLength(1);
+  });
+
   it('behält vor dem Laden erfasste Karten', async () => {
     getState().recordAttempt('a1-u01-l1-e2', 'a1-u01-l1', 'wrong');
     await flush();

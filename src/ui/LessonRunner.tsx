@@ -172,7 +172,7 @@ export function LessonRunner({
         </div>
       </header>
 
-      <div key={`${supported.id}-${session.index}`}>
+      <div key={`${supported.id}-${session.index}`} data-exercise-id={supported.id}>
         {supported.type === 'multiple_choice' && (
           <MultipleChoiceInput
             ex={supported}

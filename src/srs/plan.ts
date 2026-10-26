@@ -10,8 +10,10 @@ export interface RepeatPlan {
   queue: QueueEntry[];
   /** Fällige Karten im Durchgang. */
   due: number;
-  /** Neu eingeführte Vokabelkarten im Durchgang. */
+  /** Neue Wörter (erste tr→de-Karte) im Durchgang. */
   fresh: number;
+  /** Erstmals abgefragte Rückrichtungen (de→tr) bekannter Wörter im Durchgang. */
+  recall: number;
   /** Karten, deren Inhalt entfernt wurde; der Aufrufer räumt sie ab. */
   gone: string[];
   /** Vokabelkarten mit geänderter Unit; der Aufrufer speichert sie. */
@@ -33,6 +35,14 @@ export function planRepeat(
   const candidates = vocabCandidates(units, completedLessonIds(completions), cards, today);
   const queue = buildQueue(cards, candidates, today, { max: SESSION_MAX, newPerDay });
   const known = new Set(cards.map((c) => c.id));
-  const due = queue.filter((e) => known.has(cardId(e.ref))).length;
-  return { queue, due, fresh: queue.length - due, gone, moved };
+  const fresh = queue.filter((e) => !known.has(cardId(e.ref)));
+  const recall = fresh.filter((e) => e.ref.kind === 'vocab' && e.ref.dir === 'de_tr').length;
+  return {
+    queue,
+    due: queue.length - fresh.length,
+    fresh: fresh.length - recall,
+    recall,
+    gone,
+    moved,
+  };
 }

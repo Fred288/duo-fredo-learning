@@ -272,6 +272,18 @@ describe('buildQueue', () => {
     expect(ids(q2).filter((id) => id.startsWith('vo:tr_de'))).toHaveLength(3);
   });
 
+  it('vergibt freie Plätze bei Rückstau abwechselnd an neue Wörter und Rückrichtungen', () => {
+    const recall = Array.from({ length: 10 }, (_, i) => ({
+      ref: voRef(`alt${i}`, 'de_tr'),
+      unitId: 'a1-u01',
+    }));
+    const q = buildQueue(dueVo(15), [...recall, ...cands(10)], today, { max: 20, newPerDay: 10 });
+    expect(q).toHaveLength(20);
+    const fresh = ids(q).filter((id) => /neu|alt/.test(id));
+    expect(fresh.filter((id) => id.startsWith('vo:tr_de'))).toHaveLength(3);
+    expect(fresh.filter((id) => id.startsWith('vo:de_tr'))).toHaveLength(2);
+  });
+
   it('mit 0 neuen Wörtern bleiben schon eingeführte Vokabeln fällig', () => {
     const q = buildQueue(dueVo(2), cands(5), today, { max: 20, newPerDay: 0 });
     expect(ids(q)).toEqual(['vo:tr_de:w0', 'vo:tr_de:w1']);
@@ -425,17 +437,17 @@ describe('vocabExercise', () => {
 
 describe('vocabExercise: Homonyme', () => {
   it('bietet kein Homonym (gleiche tr, andere Bedeutung) als Ablenker an', () => {
-    const verb: Vocab = { tr: 'yemek', de: ['essen'], pos: 'verb' };
-    const noun: Vocab = { id: 'yemek-essen', tr: 'Yemek', de: ['Essen', 'Mahlzeit'], pos: 'noun' };
-    const others = ['gelmek', 'gitmek', 'görmek'].map((tr) => ({
-      tr,
-      de: [tr],
-      pos: 'verb' as const,
-    }));
-    const ex = vocabExercise(voRef('yemek'), verb, [verb, noun, ...others]);
+    // Gleiche Wortart: ohne den Filter stünde das Homonym unter den Ablenkern.
+    const hundert: Vocab = { tr: 'yüz', de: ['hundert'], pos: 'noun' };
+    const gesicht: Vocab = { id: 'yüz-gesicht', tr: 'Yüz', de: ['Gesicht'], pos: 'noun' };
+    const others: Vocab[] = [
+      { tr: 'ev', de: ['Haus'], pos: 'noun' },
+      { tr: 'göz', de: ['Auge'], pos: 'noun' },
+    ];
+    const ex = vocabExercise(voRef('yüz'), hundert, [hundert, gesicht, ...others]);
     if (ex.type !== 'multiple_choice') throw new Error('MC erwartet');
-    expect(ex.options).not.toContain('Essen, Mahlzeit');
-    expect(ex.options).toHaveLength(4);
+    expect(ex.options).not.toContain('Gesicht');
+    expect(ex.options).toEqual(expect.arrayContaining(['hundert', 'Haus', 'Auge']));
   });
 });
 

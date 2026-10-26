@@ -84,6 +84,8 @@ async function buildRun(): Promise<Run | null> {
   }
   // Entfernte Übungen und Vokabeln kommen nicht zurück: Karten aufräumen.
   removeCards(gone);
+  // Nur weil Units nicht ladbar waren (offline): Fehler zeigen statt „nichts zu wiederholen“.
+  if (!run.length && loadedIds.size < unitIds.length) throw new Error('units unavailable');
   if (!run.length) return null;
   return {
     lesson: { id: REVIEW_ID, type: 'review', title: t('repeat.title'), exercises: run },

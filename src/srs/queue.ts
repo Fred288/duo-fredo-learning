@@ -78,10 +78,14 @@ export function buildQueue(
           .length,
       0,
     );
-  const allowed = [
-    ...candidates.filter((c) => c.ref.dir === 'de_tr').slice(0, room('de_tr')),
-    ...candidates.filter((c) => c.ref.dir === 'tr_de').slice(0, room('tr_de')),
-  ];
+  // Abwechselnd, tr→de zuerst: bei Rückstau reichen die freien Plätze sonst nur für eine Richtung.
+  const recognize = candidates.filter((c) => c.ref.dir === 'tr_de').slice(0, room('tr_de'));
+  const recall = candidates.filter((c) => c.ref.dir === 'de_tr').slice(0, room('de_tr'));
+  const allowed: VocabCandidate[] = [];
+  for (let i = 0; i < Math.max(recognize.length, recall.length); i++) {
+    if (recognize[i]) allowed.push(recognize[i]!);
+    if (recall[i]) allowed.push(recall[i]!);
+  }
   const freshWanted = allowed.length;
   const reviewSlots = Math.min(due.length, max - Math.min(freshWanted, Math.ceil(max / 4)));
   const fresh = allowed.slice(0, Math.min(freshWanted, max - reviewSlots));

@@ -64,6 +64,8 @@ export const useProgress = create<ProgressState>((set, get) => {
     cards: [],
     loaded: false,
     load: () => {
+      if (loading) return loading;
+      if (get().loaded) return Promise.resolve();
       const run = async () => {
         const [rows, attempts, cards] = await Promise.all([
           safely(() => db.completions.toArray(), []),
