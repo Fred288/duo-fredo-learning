@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
-import { loadUnit, playLesson } from './solve';
+import type { Exercise } from '../src/content/schema';
+import { answer, loadUnit, playLesson } from './solve';
 
 test('Startseite listet die Units', async ({ page }) => {
   await page.goto('/');
@@ -116,4 +117,39 @@ test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page 
   await page.getByRole('button', { name: 'Prüfen' }).click();
   await expect(page.getByRole('status')).toContainText('Leider falsch.');
   await expect(page.getByRole('status')).toContainText('Lösung: okullar');
+});
+
+test('Fehler wiederholen: falsche Antwort bleibt offen, bis sie gelöst ist', async ({ page }) => {
+  const unit = loadUnit('a1-u01');
+  const lesson = unit.lessons[0]!;
+  const [first, ...rest] = lesson.exercises;
+  if (first?.type !== 'multiple_choice') throw new Error('Test erwartet MC als erste Aufgabe');
+  const step = async (ex: Exercise) => {
+    await answer(page, ex, unit);
+    await page.getByRole('button', { name: 'Prüfen' }).click();
+    await expect(page.getByRole('status')).toContainText('Richtig!');
+    await page.getByRole('button', { name: 'Weiter' }).click();
+  };
+  const card = page.getByRole('button', { name: /Fehler wiederholen/ });
+
+  await page.goto('/');
+  await expect(card).toHaveCount(0);
+  await page
+    .getByRole('listitem')
+    .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
+    .getByRole('button', { name: lesson.title })
+    .click();
+  const wrong = first.options.find((o) => o !== first.answer)!;
+  await page.locator('label', { has: page.getByText(wrong, { exact: true }) }).click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await page.getByRole('button', { name: 'Weiter' }).click();
+  for (const ex of [...rest, first]) await step(ex); // innerhalb der Lektion einmal wiederholt
+  await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+
+  await expect(card).toContainText('Zuletzt falsch beantwortet: 1');
+  await card.click();
+  await step(first);
+  await expect(page.getByRole('heading', { name: 'Durchgang geschafft' })).toBeVisible();
+  await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+  await expect(card).toHaveCount(0);
 });

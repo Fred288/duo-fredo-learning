@@ -3,7 +3,7 @@ import type { Verdict } from '../lib/answer';
 import type { Lesson, Vocab } from '../content/schema';
 import { t } from '../i18n';
 import { explainSteps } from '../i18n/explain';
-import { grade, isSupported, solutionOf } from '../session/grade';
+import { grade, isSupported, paradigmCells, solutionOf, type Supported } from '../session/grade';
 import {
   createSession,
   currentExercise,
@@ -13,12 +13,13 @@ import {
   type Session,
 } from '../session/session';
 import { useSettings } from '../store/settings';
-import { solveExercise } from '../content/lexicon';
+import { solveExercise, solveParadigm } from '../content/lexicon';
 import { ConjugationInput } from './exercises/ConjugationInput';
 import { Feedback } from './Feedback';
 import { ReportError } from './ReportError';
 import { FreeTextInput } from './exercises/FreeTextInput';
 import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
+import { ParadigmInput } from './exercises/ParadigmInput';
 import { SuffixBuilderInput } from './exercises/SuffixBuilderInput';
 import { WordBankInput } from './exercises/WordBankInput';
 
@@ -37,6 +38,19 @@ interface Props {
   onAttempt?: (exerciseId: string, verdict: Verdict) => void;
   /** Einmal pro abgeschlossenem Lauf; zählt den ersten Versuch je Übung. */
   onComplete?: (correct: number, total: number) => void;
+  /** Überschrift am Ende, Default „Lektion geschafft“. */
+  doneTitle?: string;
+}
+
+/** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
+function reasonsFor(ex: Supported, answer: string, vocab: readonly Vocab[]): string[] | undefined {
+  if (ex.type === 'suffix_builder' || ex.type === 'conjugation') {
+    return explainSteps(solveExercise(ex, vocab).steps);
+  }
+  if (ex.type !== 'paradigm') return undefined;
+  const ok = paradigmCells(ex, answer);
+  const steps = solveParadigm(ex, vocab).flatMap((row, i) => (ok[i] ? [] : row.steps));
+  return [...new Set(explainSteps(steps))];
 }
 
 export function LessonRunner({
@@ -47,6 +61,7 @@ export function LessonRunner({
   onExit,
   onAttempt,
   onComplete,
+  doneTitle = t('done.title'),
 }: Props) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(() => lesson.exercises.filter(isSupported), [lesson]);
@@ -96,7 +111,7 @@ export function LessonRunner({
     return (
       <section aria-labelledby="done-title" className="space-y-4 text-center">
         <h2 id="done-title" className="text-xl font-semibold">
-          {exercises.length ? t('done.title') : t('runner.empty')}
+          {exercises.length ? doneTitle : t('runner.empty')}
         </h2>
         {exercises.length > 0 && <p>{t('done.score', { correct, total })}</p>}
         <div className="space-y-2">
@@ -174,6 +189,9 @@ export function LessonRunner({
             disabled={!answering}
           />
         )}
+        {supported.type === 'paradigm' && (
+          <ParadigmInput ex={supported} onChange={setAnswer} disabled={!answering} />
+        )}
         {supported.type === 'suffix_builder' && (
           <SuffixBuilderInput
             ex={supported}
@@ -198,11 +216,7 @@ export function LessonRunner({
           <Feedback
             result={session.last!}
             solution={solutionOf(supported)}
-            reasons={
-              supported.type === 'suffix_builder' || supported.type === 'conjugation'
-                ? explainSteps(solveExercise(supported, vocab).steps)
-                : undefined
-            }
+            reasons={reasonsFor(supported, answer, vocab)}
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
           />

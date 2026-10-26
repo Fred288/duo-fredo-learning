@@ -1,6 +1,6 @@
 import { parse as parseYaml } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
-import { sameForm, solveExercise } from '../src/content/lexicon';
+import { sameForm, solveExercise, solveParadigm } from '../src/content/lexicon';
 import { MorphError } from '../src/morphology';
 
 export interface LoadedUnit {
@@ -78,6 +78,21 @@ export function checkSuffixTargets(units: LoadedUnit[]): string[] {
   for (const { file, unit } of units) {
     for (const lesson of unit.lessons) {
       for (const ex of lesson.exercises) {
+        if (ex.type === 'paradigm') {
+          try {
+            solveParadigm(ex, lexicon).forEach(({ form }, i) => {
+              if (!sameForm(form, ex.targets[i]!)) {
+                errors.push(
+                  `${file}: ${ex.id}: Zeile ${i + 1}: target "${ex.targets[i]}", Engine erwartet "${form}"`,
+                );
+              }
+            });
+          } catch (e) {
+            if (!(e instanceof MorphError)) throw e;
+            errors.push(`${file}: ${ex.id}: ${e.message}`);
+          }
+          continue;
+        }
         if (ex.type !== 'suffix_builder' && ex.type !== 'conjugation') continue;
         try {
           const { form } = solveExercise(ex, lexicon);
@@ -105,7 +120,11 @@ export function foreignLexicon(unit: Unit, units: LoadedUnit[]): Vocab[] {
     unit.lessons
       .flatMap((l) => l.exercises)
       .flatMap((ex) =>
-        ex.type === 'suffix_builder' ? [ex.stem] : ex.type === 'conjugation' ? [ex.lemma] : [],
+        ex.type === 'suffix_builder'
+          ? [ex.stem]
+          : ex.type === 'conjugation' || ex.type === 'paradigm'
+            ? [ex.lemma]
+            : [],
       )
       .filter((form) => !own.has(form)),
   );

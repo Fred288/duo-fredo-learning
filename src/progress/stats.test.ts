@@ -4,6 +4,9 @@ import {
   activeDays,
   completedLessonIds,
   lessonsOnDay,
+  openMistakes,
+  unitOfLesson,
+  type Attempt,
   streak,
   unitProgress,
   type Completion,
@@ -63,5 +66,30 @@ describe('Fortschritt', () => {
   it('wertet Lektionen als erledigt, auch bei mehrfachem Abschluss', () => {
     const done = completedLessonIds(completions);
     expect(unitProgress(['a1-u01-l1', 'a1-u01-l2'], done)).toEqual({ done: 1, total: 2 });
+  });
+});
+
+describe('openMistakes', () => {
+  const a = (exerciseId: string, verdict: Attempt['verdict'], at: number): Attempt => ({
+    exerciseId,
+    lessonId: 'a1-u03-l2',
+    verdict,
+    at,
+  });
+
+  it('liefert Übungen, deren letzter Versuch falsch war, ältester zuerst', () => {
+    const attempts = [
+      a('e2', 'wrong', 5),
+      a('e1', 'wrong', 1),
+      a('e1', 'correct', 3), // später gelöst
+      a('e3', 'almost', 4), // fast richtig zählt als gelöst
+      a('e4', 'correct', 2),
+      a('e4', 'wrong', 6), // später wieder falsch
+    ];
+    expect(openMistakes(attempts).map((m) => m.exerciseId)).toEqual(['e2', 'e4']);
+  });
+
+  it('leitet die Unit aus der Lektions-ID ab', () => {
+    expect(unitOfLesson('a1-u03-l12')).toBe('a1-u03');
   });
 });

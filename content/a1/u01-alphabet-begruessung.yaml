@@ -71,6 +71,27 @@ lessons:
         answer: Hallo (vertraut)
         register: informal
         explanation: „Selam“ ist lockerer als „Merhaba“, unter Freunden und Gleichaltrigen üblich.
+      - id: a1-u01-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Guten Abend!
+        answers: [İyi akşamlar]
+      - id: a1-u01-l1-e12
+        type: multiple_choice
+        prompt: Es ist 8 Uhr morgens. Du betrittst eine Bäckerei. Was sagst du?
+        options: [Günaydın, İyi geceler, Güle güle]
+        answer: Günaydın
+      - id: a1-u01-l1-e13
+        type: word_bank
+        prompt: Auf Wiedersehen! (du gehst, höflich)
+        answers: [Hoşça kalın!]
+        distractors: [kal, Güle]
+        register: formal
+      - id: a1-u01-l1-e14
+        type: free_text
+        direction: tr_de
+        prompt: Merhaba!
+        answers: [Hallo, Guten Tag, Hi, Servus, Grüß Gott, Moin]
 
   - id: a1-u01-l2
     type: vocab
@@ -139,6 +160,23 @@ lessons:
         prompt: Zucker
         answers: [şeker]
         hint: ş klingt wie „sch“.
+      - id: a1-u01-l2-e12
+        type: free_text
+        direction: de_tr
+        prompt: Wasser
+        answers: [su]
+      - id: a1-u01-l2-e13
+        type: free_text
+        direction: de_tr
+        prompt: Berg
+        answers: [dağ]
+        hint: Das ğ am Ende dehnt das a.
+      - id: a1-u01-l2-e14
+        type: multiple_choice
+        prompt: Wie heißt „Weg“?
+        options: [yol, yöl, jol]
+        answer: yol
+        explanation: Das türkische y klingt wie deutsches j, j selbst kommt fast nur in Fremdwörtern vor.
 
   - id: a1-u01-l3
     type: dialog
@@ -211,6 +249,22 @@ lessons:
         prompt: Es tut mir leid. (Entschuldigung)
         answers: [Özür dilerim, Kusura bakma, Kusura bakmayın, Pardon]
         explanation: „Kusura bakma“ (sen) / „Kusura bakmayın“ (siz) heißt wörtlich „Schau nicht auf den Fehler“.
+      - id: a1-u01-l3-e12
+        type: word_bank
+        prompt: Wie geht es dir?
+        answers: [Nasılsın?]
+        distractors: [Nasılsınız, İyiyim]
+        register: informal
+      - id: a1-u01-l3-e13
+        type: free_text
+        direction: tr_de
+        prompt: İyiyim.
+        answers: [Mir geht es gut., Mir geht's gut., Gut., Es geht mir gut., "Gut, danke.", "Danke, gut."]
+      - id: a1-u01-l3-e14
+        type: multiple_choice
+        prompt: Jemand sagt „Teşekkürler!“. Was antwortest du?
+        options: [Rica ederim., Lütfen., Affedersiniz.]
+        answer: Rica ederim.
 
   - id: a1-u01-l4
     type: review
@@ -247,6 +301,49 @@ lessons:
         direction: de_tr
         prompt: ja
         answers: [evet]
+      - id: a1-u01-l4-e7
+        type: word_bank
+        prompt: Hallo, wie geht es dir?
+        answers: ['Merhaba, nasılsın?', 'Selam, nasılsın?']
+        distractors: [nasılsınız, Selam]
+        register: informal
+      - id: a1-u01-l4-e8
+        type: free_text
+        direction: de_tr
+        prompt: Entschuldigen Sie! (um jemanden anzusprechen)
+        answers: [Affedersiniz, Pardon]
+        register: formal
+      - id: a1-u01-l4-e9
+        type: multiple_choice
+        prompt: Was heißt „Görüşürüz“?
+        options: [Wir sehen uns, Freut mich, Gute Nacht]
+        answer: Wir sehen uns
+      - id: a1-u01-l4-e10
+        type: word_bank
+        prompt: Freut mich, ich heiße Mehmet.
+        answers: ['Memnun oldum, benim adım Mehmet.', 'Memnun oldum, adım Mehmet.']
+        distractors: [Senin, nasılsın]
+      - id: a1-u01-l4-e11
+        type: free_text
+        direction: tr_de
+        prompt: İyi geceler!
+        answers: [Gute Nacht]
+      - id: a1-u01-l4-e12
+        type: multiple_choice
+        prompt: Welche Form ist die höfliche Anrede?
+        options: [Nasılsınız?, Nasılsın?]
+        answer: Nasılsınız?
+        explanation: -sınız gehört zu siz (Sie, ihr), -sın zu sen (du).
+      - id: a1-u01-l4-e13
+        type: free_text
+        direction: de_tr
+        prompt: bitte (bei einer Bitte)
+        answers: [lütfen]
+      - id: a1-u01-l4-e14
+        type: multiple_choice
+        prompt: Wie schreibt man „Tee“?
+        options: [çay, cay, tschay]
+        answer: çay
 
 vocab:
   - { tr: merhaba, de: [hallo], pos: interj }

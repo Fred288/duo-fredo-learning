@@ -1,4 +1,22 @@
+import type { Verdict } from '../lib/answer';
 import { addDays } from './day';
+
+export interface Attempt {
+  exerciseId: string;
+  lessonId: string;
+  verdict: Verdict;
+  at: number;
+}
+
+/** Übungen, deren letzter Versuch falsch war, ältester Fehler zuerst. "Fast richtig" zählt als gelöst. */
+export function openMistakes(attempts: readonly Attempt[]): Attempt[] {
+  const last = new Map<string, Attempt>();
+  for (const a of [...attempts].sort((x, y) => x.at - y.at)) last.set(a.exerciseId, a);
+  return [...last.values()].filter((a) => a.verdict === 'wrong').sort((x, y) => x.at - y.at);
+}
+
+/** a1-u03-l2 → a1-u03 */
+export const unitOfLesson = (lessonId: string): string => lessonId.replace(/-l\d+$/, '');
 
 export interface Completion {
   lessonId: string;

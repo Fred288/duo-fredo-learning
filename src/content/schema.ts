@@ -18,7 +18,7 @@ const provenanceFields = {
 };
 const provenanceOverride = z.object(provenanceFields).partial().shape;
 
-export const Vocab = z.object({
+export const Vocab = z.strictObject({
   id: nonEmpty.optional(),
   tr: nonEmpty,
   de: z.array(nonEmpty).min(1),
@@ -66,7 +66,7 @@ const exerciseBase = {
 };
 
 export const MultipleChoice = z
-  .object({
+  .strictObject({
     ...exerciseBase,
     type: z.literal('multiple_choice'),
     prompt: nonEmpty,
@@ -78,7 +78,7 @@ export const MultipleChoice = z
     path: ['answer'],
   });
 
-export const WordBank = z.object({
+export const WordBank = z.strictObject({
   ...exerciseBase,
   type: z.literal('word_bank'),
   prompt: nonEmpty,
@@ -87,7 +87,7 @@ export const WordBank = z.object({
   distractors: z.array(nonEmpty).optional(),
 });
 
-export const FreeText = z.object({
+export const FreeText = z.strictObject({
   ...exerciseBase,
   type: z.literal('free_text'),
   prompt: nonEmpty,
@@ -95,7 +95,7 @@ export const FreeText = z.object({
   answers: z.array(nonEmpty).min(1),
 });
 
-export const SuffixBuilder = z.object({
+export const SuffixBuilder = z.strictObject({
   ...exerciseBase,
   type: z.literal('suffix_builder'),
   stem: nonEmpty,
@@ -104,7 +104,7 @@ export const SuffixBuilder = z.object({
 });
 
 /** Verbkonjugation (mode verb, lemma = Infinitiv) oder Nominalsatz mit Kopula (mode copula). */
-export const Conjugation = z.object({
+export const Conjugation = z.strictObject({
   ...exerciseBase,
   type: z.literal('conjugation'),
   mode: z.enum(['verb', 'copula']),
@@ -117,14 +117,43 @@ export const Conjugation = z.object({
   target: nonEmpty,
 });
 
-export const Segment = z.object({
+/** Tabelle: ein Wort durchdeklinieren (noun, Zeilen = Tag-Folgen) oder durchkonjugieren (verb/copula). */
+export const Paradigm = z
+  .strictObject({
+    ...exerciseBase,
+    type: z.literal('paradigm'),
+    kind: z.enum(['noun', 'verb', 'copula']),
+    lemma: nonEmpty,
+    rows: z
+      .array(z.array(z.enum(MORPH_TAGS)))
+      .min(2)
+      .optional(),
+    persons: z.array(z.enum(PERSONS)).min(2).optional(),
+    negative: z.boolean().optional(),
+    question: z.boolean().optional(),
+    targets: z.array(nonEmpty).min(2),
+  })
+  .superRefine((e, ctx) => {
+    const rows = e.kind === 'noun' ? e.rows?.length : (e.persons ?? PERSONS).length;
+    if (rows === undefined) {
+      ctx.addIssue({ code: 'custom', path: ['rows'], message: 'noun-Tabelle braucht rows' });
+    } else if (rows !== e.targets.length) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['targets'],
+        message: `${e.targets.length} targets für ${rows} Zeilen`,
+      });
+    }
+  });
+
+export const Segment = z.strictObject({
   ...exerciseBase,
   type: z.literal('segment'),
   word: nonEmpty,
   segments: z.array(z.object({ text: nonEmpty, role: nonEmpty })).min(2),
 });
 
-export const SovPuzzle = z.object({
+export const SovPuzzle = z.strictObject({
   ...exerciseBase,
   type: z.literal('sov_puzzle'),
   tokens: z.array(nonEmpty).min(2),
@@ -137,11 +166,12 @@ export const Exercise = z.discriminatedUnion('type', [
   FreeText,
   SuffixBuilder,
   Conjugation,
+  Paradigm,
   Segment,
   SovPuzzle,
 ]);
 
-export const Lesson = z.object({
+export const Lesson = z.strictObject({
   id: nonEmpty,
   type: z.enum(['vocab', 'grammar', 'dialog', 'reading', 'review']),
   title: nonEmpty,
@@ -149,7 +179,7 @@ export const Lesson = z.object({
 });
 
 export const Unit = z
-  .object({
+  .strictObject({
     id: z.string().regex(/^(a1|a2|b1|b2)-u\d{2}$/, 'Unit-ID wie a1-u01'),
     level: Level,
     title: nonEmpty,

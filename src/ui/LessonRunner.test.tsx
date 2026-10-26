@@ -190,6 +190,35 @@ describe('LessonRunner', () => {
     expect(status).toContain('Vor -yor wird die Verneinung -me/-ma zu „mi“');
   });
 
+  it('Tabelle: markiert falsche Zellen und begründet nur diese', () => {
+    const parLesson: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e6',
+          type: 'paradigm',
+          kind: 'noun',
+          lemma: 'park',
+          rows: [['LOC'], ['DAT'], ['ABL']],
+          targets: ['parkta', 'parka', 'parktan'],
+        },
+      ],
+    };
+    render(<LessonRunner lesson={parLesson} onExit={() => {}} />);
+    const check = screen.getByRole('button', { name: 'Prüfen' });
+    fireEvent.change(screen.getByLabelText('Lokativ'), { target: { value: 'parkda' } });
+    fireEvent.change(screen.getByLabelText('Dativ'), { target: { value: 'parka' } });
+    expect(check.hasAttribute('disabled')).toBe(true); // noch ein Feld leer
+    fireEvent.change(screen.getByLabelText('Ablativ'), { target: { value: 'parktan' } });
+    click('Prüfen');
+    const status = screen.getByRole('status').textContent;
+    expect(status).toContain('Leider falsch.');
+    expect(status).toContain('Lokativ');
+    expect(status).not.toContain('Ablativ');
+    expect(screen.getByText('✗ richtig: parkta')).toBeTruthy();
+    expect(screen.getByLabelText('Dativ').getAttribute('aria-invalid')).toBe('false');
+  });
+
   it('wählt MC-Optionen per Zifferntaste und prüft mit Enter', () => {
     render(<LessonRunner lesson={lesson} onExit={() => {}} />);
     fireEvent.keyDown(window, { key: '1' });

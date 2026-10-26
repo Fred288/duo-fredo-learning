@@ -11,14 +11,18 @@ export function loadUnit(unitId: string): Unit {
 
 const stripPunctuation = (w: string) => w.replace(/^[„"«]+|[.,!?;:"“»]+$/g, '');
 
-async function answer(page: Page, ex: Exercise, unit: Unit) {
+export async function answer(page: Page, ex: Exercise, unit: Unit) {
   switch (ex.type) {
     case 'multiple_choice':
       await page.locator('label', { has: page.getByText(ex.answer, { exact: true }) }).click();
       break;
     case 'word_bank':
       for (const word of ex.answers[0]!.split(/\s+/).map(stripPunctuation)) {
-        await page.getByRole('button', { name: word, exact: true }).click();
+        // Gleiche Wörter (güle güle) oder gleichlautende Ablenker: ersten freien Baustein nehmen.
+        await page
+          .getByRole('button', { name: word, exact: true, disabled: false })
+          .first()
+          .click();
       }
       break;
     case 'free_text':
@@ -26,10 +30,18 @@ async function answer(page: Page, ex: Exercise, unit: Unit) {
       break;
     case 'suffix_builder':
     case 'conjugation':
-      for (const { text } of solveExercise(ex, [...(unit.vocab ?? []), ...(unit.lexicon ?? [])]).segments.filter((s) => s.text)) {
+      for (const { text } of solveExercise(ex, [
+        ...(unit.vocab ?? []),
+        ...(unit.lexicon ?? []),
+      ]).segments.filter((s) => s.text)) {
         await page.getByRole('button', { name: text, exact: true }).click();
       }
       break;
+    case 'paradigm': {
+      const cells = page.getByRole('textbox');
+      for (const [i, target] of ex.targets.entries()) await cells.nth(i).fill(target);
+      break;
+    }
     default:
       throw new Error(`Übungstyp ${ex.type} wird vom Löser nicht unterstützt`);
   }
@@ -43,8 +55,10 @@ export async function playLesson(page: Page, unitId: string, lessonId: string) {
   const card = page
     .getByRole('listitem')
     .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) });
-  // String-Name = Teilstring-Treffer, damit Titel wie „Wo? …“ nicht als Regex gelesen werden.
-  await card.getByRole('button', { name: lesson.title }).click();
+  // Der Button-Name beginnt mit dem Lektionstyp; der Titel steht am Ende („Plural und Ort“ ≠ „Tabellen: Plural und Ort“).
+  const title = lesson.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const name = new RegExp(`^\\p{L}+(\\s*abgeschlossen)?\\s*${title}$`, 'u');
+  await card.getByRole('button', { name }).click();
   for (const ex of lesson.exercises) {
     await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
     await answer(page, ex, unit);

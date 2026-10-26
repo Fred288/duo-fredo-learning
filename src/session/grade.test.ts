@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { grade, wordBankTokens } from './grade';
+import type { Exercise } from '../content/schema';
+import { grade, paradigmCells, solutionOf, wordBankTokens } from './grade';
 
 const opts = { tolerateDiacritics: false };
 
@@ -56,5 +57,48 @@ describe('wordBankTokens', () => {
 
   it('mischt deterministisch je Übungs-ID', () => {
     expect(wordBankTokens(ex)).toEqual(wordBankTokens(ex));
+  });
+});
+
+describe('grade paradigm', () => {
+  type Par = Extract<Exercise, { type: 'paradigm' }>;
+  const ex: Par = {
+    id: 'x-p',
+    type: 'paradigm',
+    kind: 'noun',
+    lemma: 'ev',
+    rows: [['LOC'], ['DAT'], ['ABL']],
+    targets: ['evde', 'eve', 'evden'],
+  };
+
+  it('ist nur richtig, wenn jede Zelle stimmt', () => {
+    expect(grade(ex, 'evde\neve\nevden', { tolerateDiacritics: true }).verdict).toBe('correct');
+    expect(grade(ex, 'evde\neva\nevden', { tolerateDiacritics: true }).verdict).toBe('wrong');
+    expect(paradigmCells(ex, 'evde\neva\nevden')).toEqual([true, false, true]);
+  });
+
+  it('ignoriert Leerzeichen, Apostroph und Groß/Klein (I gilt als İ)', () => {
+    const cop: Par = {
+      ...ex,
+      kind: 'copula',
+      lemma: 'Alman',
+      rows: undefined,
+      persons: ['1sg', '2sg'],
+      question: true,
+      targets: ['Alman mıyım?', 'Alman mısın?'],
+    };
+    expect(paradigmCells(cop, 'Almanmıyım\nalman misin')).toEqual([true, false]);
+    const city: Par = {
+      ...ex,
+      lemma: 'İstanbul',
+      targets: ["İstanbul'da", "İstanbul'a", "İstanbul'dan"],
+    };
+    // Groß/Klein egal, deutsches I gilt als İ; falsche Harmonie bleibt falsch.
+    expect(paradigmCells(city, "Istanbul'da\nistanbula\nİstanbul'den")).toEqual([
+      true,
+      true,
+      false,
+    ]);
+    expect(solutionOf(ex)).toBe('evde, eve, evden');
   });
 });

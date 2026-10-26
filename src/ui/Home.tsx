@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchManifest, type Manifest } from '../content/load';
 import { LEVELS } from '../content/schema';
 import { t } from '../i18n';
-import { completedLessonIds, unitProgress } from '../progress/stats';
+import { completedLessonIds, openMistakes, unitProgress } from '../progress/stats';
 import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
 import { DailyGoal } from './DailyGoal';
@@ -11,6 +11,8 @@ export function Home() {
   const openLesson = useApp((s) => s.openLesson);
   const openExplainer = useApp((s) => s.openExplainer);
   const completions = useProgress((s) => s.completions);
+  const attempts = useProgress((s) => s.attempts);
+  const openMistakesScreen = useApp((s) => s.openMistakes);
   const [manifest, setManifest] = useState<Manifest>();
   const [failed, setFailed] = useState(false);
 
@@ -21,10 +23,23 @@ export function Home() {
   }, []);
 
   const completed = completedLessonIds(completions);
+  const mistakes = openMistakes(attempts).length;
 
   return (
     <>
       <DailyGoal />
+      {mistakes > 0 && (
+        <button
+          type="button"
+          onClick={openMistakesScreen}
+          className="mt-4 block min-h-11 w-full rounded-xl border border-amber-300 bg-amber-50 p-4 text-left hover:bg-amber-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-amber-800 dark:bg-amber-950 dark:hover:bg-amber-900"
+        >
+          <span className="block font-medium">{t('mistakes.title')}</span>
+          <span className="block text-sm text-stone-600 dark:text-stone-400">
+            {t('mistakes.count', { count: mistakes })}
+          </span>
+        </button>
+      )}
       {failed ? (
         <p className="mt-6 text-rose-700 dark:text-rose-400">{t('home.error')}</p>
       ) : !manifest ? (

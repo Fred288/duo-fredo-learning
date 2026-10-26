@@ -64,6 +64,32 @@ lessons:
         options: [hier, dort, da drüben]
         answer: hier
         explanation: burada (hier), şurada (da, in Sichtweite), orada (dort).
+      - id: a1-u03-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „eczane“?
+        options: [Apotheke, Bäckerei, Post]
+        answer: Apotheke
+      - id: a1-u03-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: Museum
+        answers: [müze]
+      - id: a1-u03-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „sokak“?
+        options: ['Straße, Gasse', Brücke, Platz]
+        answer: 'Straße, Gasse'
+        explanation: sokak ist die normale (oft kleinere) Straße, cadde die breite Hauptstraße.
+      - id: a1-u03-l1-e14
+        type: free_text
+        direction: tr_de
+        prompt: sinema
+        answers: [Kino, das Kino, ein Kino]
+      - id: a1-u03-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „şurada“?
+        options: [da (drüben), hier, woher]
+        answer: da (drüben)
 
   - id: a1-u03-l2
     type: grammar
@@ -94,6 +120,17 @@ lessons:
         options: [caddede, caddeda, caddete]
         answer: caddede
         explanation: Letzter Vokal e ist hell → -de. Nach Vokal bleibt d.
+      - { id: a1-u03-l2-e10, type: suffix_builder, stem: eczane, suffixes: [LOC], target: eczanede, gloss_de: in der Apotheke }
+      - { id: a1-u03-l2-e11, type: suffix_builder, stem: müze, suffixes: [LOC], target: müzede, gloss_de: im Museum }
+      - id: a1-u03-l2-e12
+        type: suffix_builder
+        stem: sokak
+        suffixes: [LOC]
+        target: sokakta
+        gloss_de: auf der Straße
+        explanation: Vor -ta bleibt das k, es wird nur vor einem Vokal weich.
+      - { id: a1-u03-l2-e13, type: suffix_builder, stem: sinema, suffixes: [LOC], target: sinemada, gloss_de: im Kino }
+      - { id: a1-u03-l2-e14, type: suffix_builder, stem: ülke, suffixes: [LOC], target: ülkede, gloss_de: im Land }
 
   - id: a1-u03-l3
     type: grammar
@@ -117,7 +154,7 @@ lessons:
         gloss_de: in die Stadt
         explanation: Bei şehir fällt das i vor einer vokalischen Endung weg (şehre, şehri), vor -de bleibt es (şehirde).
       - { id: a1-u03-l3-e6, type: suffix_builder, stem: okul, suffixes: [DAT], target: okula, gloss_de: zur Schule }
-      - { id: a1-u03-l3-e7, type: suffix_builder, stem: ev, suffixes: [ABL], target: evden, gloss_de: von zu Hause, aus dem Haus }
+      - { id: a1-u03-l3-e7, type: suffix_builder, stem: ev, suffixes: [ABL], target: evden, gloss_de: 'von zu Hause, aus dem Haus' }
       - id: a1-u03-l3-e8
         type: suffix_builder
         stem: park
@@ -127,6 +164,17 @@ lessons:
         explanation: Woher? → -den/-dan, nach stimmlosem Konsonanten -ten/-tan.
       - { id: a1-u03-l3-e9, type: suffix_builder, stem: market, suffixes: [ABL], target: marketten, gloss_de: aus dem Supermarkt }
       - { id: a1-u03-l3-e10, type: suffix_builder, stem: lokanta, suffixes: [ABL], target: lokantadan, gloss_de: aus dem Restaurant }
+      - id: a1-u03-l3-e11
+        type: suffix_builder
+        stem: sokak
+        suffixes: [DAT]
+        target: sokağa
+        gloss_de: auf die Straße
+        explanation: Vor dem Vokal der Endung wird k zu ğ.
+      - { id: a1-u03-l3-e12, type: suffix_builder, stem: müze, suffixes: [DAT], target: müzeye, gloss_de: ins Museum }
+      - { id: a1-u03-l3-e13, type: suffix_builder, stem: eczane, suffixes: [ABL], target: eczaneden, gloss_de: aus der Apotheke }
+      - { id: a1-u03-l3-e14, type: suffix_builder, stem: sinema, suffixes: [ABL], target: sinemadan, gloss_de: aus dem Kino }
+      - { id: a1-u03-l3-e15, type: suffix_builder, stem: şehir, suffixes: [ABL], target: şehirden, gloss_de: aus der Stadt }
 
   - id: a1-u03-l4
     type: grammar
@@ -163,6 +211,76 @@ lessons:
         options: [Frankfurt'a, Frankfurta, frankfurt'a]
         answer: Frankfurt'a
         explanation: Großschreibung und Apostroph, die Endung -a folgt dem dunklen u.
+      - { id: a1-u03-l4-e11, type: suffix_builder, stem: Hamburg, suffixes: [LOC], target: Hamburg'da, gloss_de: in Hamburg }
+      - { id: a1-u03-l4-e12, type: suffix_builder, stem: Antalya, suffixes: [DAT], target: Antalya'ya, gloss_de: nach Antalya }
+      - id: a1-u03-l4-e13
+        type: suffix_builder
+        stem: Paris
+        suffixes: [ABL]
+        target: Paris'ten
+        gloss_de: aus Paris
+        explanation: Paris endet auf s, also -ten. Der letzte Vokal i ist hell.
+      - { id: a1-u03-l4-e14, type: suffix_builder, stem: Münih, suffixes: [DAT], target: Münih'e, gloss_de: nach München }
+      - { id: a1-u03-l4-e15, type: suffix_builder, stem: Viyana, suffixes: [LOC], target: Viyana'da, gloss_de: in Wien }
+
+  - id: a1-u03-l6
+    type: grammar
+    title: 'Tabellen: wo, wohin, woher'
+    exercises:
+      - id: a1-u03-l6-e1
+        type: paradigm
+        kind: noun
+        lemma: ev
+        rows: [[LOC], [DAT], [ABL]]
+        targets: [evde, eve, evden]
+        gloss_de: Haus
+        explanation: wo? -de, wohin? -e, woher? -den
+      - { id: a1-u03-l6-e2, type: paradigm, kind: noun, lemma: okul, rows: [[LOC], [DAT], [ABL]], targets: [okulda, okula, okuldan], gloss_de: Schule }
+      - id: a1-u03-l6-e3
+        type: paradigm
+        kind: noun
+        lemma: park
+        rows: [[LOC], [DAT], [ABL]]
+        targets: [parkta, parka, parktan]
+        gloss_de: Park
+        explanation: Nach k wird -da/-dan zu -ta/-tan. Der Dativ -a hat keinen Konsonanten, also parka.
+      - id: a1-u03-l6-e4
+        type: paradigm
+        kind: noun
+        lemma: banka
+        rows: [[LOC], [DAT], [ABL]]
+        targets: [bankada, bankaya, bankadan]
+        gloss_de: Bank
+        explanation: Nur der Dativ braucht nach Vokal ein y.
+      - id: a1-u03-l6-e5
+        type: paradigm
+        kind: noun
+        lemma: şehir
+        rows: [[LOC], [DAT], [ABL]]
+        targets: [şehirde, şehre, şehirden]
+        gloss_de: Stadt
+        explanation: Das i fällt nur vor der vokalischen Endung -e weg.
+      - { id: a1-u03-l6-e6, type: paradigm, kind: noun, lemma: otel, rows: [[LOC], [DAT], [ABL]], targets: [otelde, otele, otelden], gloss_de: Hotel }
+      - id: a1-u03-l6-e7
+        type: paradigm
+        kind: noun
+        lemma: sokak
+        rows: [[LOC], [DAT], [ABL]]
+        targets: [sokakta, sokağa, sokaktan]
+        gloss_de: Straße
+        explanation: k wird nur vor dem Vokal des Dativs zu ğ.
+      - { id: a1-u03-l6-e8, type: paradigm, kind: noun, lemma: hastane, rows: [[LOC], [DAT], [ABL]], targets: [hastanede, hastaneye, hastaneden], gloss_de: Krankenhaus }
+      - { id: a1-u03-l6-e9, type: paradigm, kind: noun, lemma: İstanbul, rows: [[LOC], [DAT], [ABL]], targets: ["İstanbul'da", "İstanbul'a", "İstanbul'dan"], gloss_de: Istanbul }
+      - { id: a1-u03-l6-e10, type: paradigm, kind: noun, lemma: Almanya, rows: [[LOC], [DAT], [ABL]], targets: ["Almanya'da", "Almanya'ya", "Almanya'dan"], gloss_de: Deutschland }
+      - id: a1-u03-l6-e11
+        type: paradigm
+        kind: noun
+        lemma: Frankfurt
+        rows: [[LOC], [DAT], [ABL]]
+        targets: ["Frankfurt'ta", "Frankfurt'a", "Frankfurt'tan"]
+        gloss_de: Frankfurt
+        explanation: "Eigennamen werden nie erweicht. Die Endung steht nach dem Apostroph: Frankfurt'a."
+      - { id: a1-u03-l6-e12, type: paradigm, kind: noun, lemma: Türkiye, rows: [[LOC], [DAT], [ABL]], targets: ["Türkiye'de", "Türkiye'ye", "Türkiye'den"], gloss_de: Türkei }
 
   - id: a1-u03-l5
     type: review
@@ -208,6 +326,43 @@ lessons:
         prompt: Welche Endung beantwortet „nereye?“ (wohin)?
         options: [-e/-a, -de/-da, -den/-dan]
         answer: -e/-a
+      - id: a1-u03-l5-e9
+        type: word_bank
+        prompt: Die Apotheke ist dort.
+        answers: [Eczane orada.]
+        distractors: [burada, Eczanede]
+      - id: a1-u03-l5-e10
+        type: word_bank
+        prompt: Mehmet ist in Berlin.
+        answers: [Mehmet Berlin'de.]
+        distractors: [Berlin'e, nerede]
+      - id: a1-u03-l5-e11
+        type: word_bank
+        prompt: Wo ist das Museum?
+        answers: [Müze nerede?]
+        distractors: [nereden, Müzede]
+      - id: a1-u03-l5-e12
+        type: free_text
+        direction: de_tr
+        prompt: nach Istanbul
+        answers: [İstanbul'a]
+      - id: a1-u03-l5-e13
+        type: free_text
+        direction: de_tr
+        prompt: aus der Stadt
+        answers: [şehirden]
+      - id: a1-u03-l5-e14
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (auf die Straße)
+        options: [sokağa, sokaka, sokağe]
+        answer: sokağa
+        explanation: k wird vor Vokal zu ğ, und a ist dunkel → -a.
+      - id: a1-u03-l5-e15
+        type: free_text
+        direction: tr_de
+        prompt: parktan
+        answers: [aus dem Park, vom Park]
+        hint: -tan antwortet auf „woher?“
 
 vocab:
   - { tr: şehir, de: [Stadt], pos: noun, drops_vowel: true }
@@ -233,3 +388,12 @@ vocab:
   - { tr: İzmir, de: [Izmir], pos: noun, proper: true }
   - { tr: Berlin, de: [Berlin], pos: noun, proper: true }
   - { tr: Frankfurt, de: [Frankfurt], pos: noun, proper: true }
+  - { tr: eczane, de: [Apotheke], pos: noun }
+  - { tr: müze, de: [Museum], pos: noun }
+  - { tr: sokak, de: [Straße, Gasse], pos: noun, softens: true }
+  - { tr: sinema, de: [Kino], pos: noun }
+  - { tr: Hamburg, de: [Hamburg], pos: noun, proper: true }
+  - { tr: Antalya, de: [Antalya], pos: noun, proper: true }
+  - { tr: Paris, de: [Paris], pos: noun, proper: true }
+  - { tr: Münih, de: [München], pos: noun, proper: true }
+  - { tr: Viyana, de: [Wien], pos: noun, proper: true }

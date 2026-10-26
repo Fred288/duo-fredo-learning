@@ -1,8 +1,18 @@
 import { trLower } from '../lib/turkish';
-import { conjugate, inflect, predicate, type Inflection, type Stem } from '../morphology';
+import {
+  conjugate,
+  inflect,
+  PERSONS,
+  predicate,
+  type Inflection,
+  type MorphTag,
+  type Person,
+  type Stem,
+} from '../morphology';
 import type { Exercise, Vocab } from './schema';
 
 export type EngineExercise = Extract<Exercise, { type: 'suffix_builder' | 'conjugation' }>;
+export type ParadigmExercise = Extract<Exercise, { type: 'paradigm' }>;
 
 /** Stamm samt lexikalischer Flags (Erweichung, Harmonie, Vokalausfall, Eigenname) aus dem Wortschatz. */
 export function stemFromVocab(form: string, vocab: readonly Vocab[] = []): Stem {
@@ -25,6 +35,23 @@ export function solveExercise(ex: EngineExercise, vocab: readonly Vocab[] = []):
   return ex.mode === 'verb'
     ? conjugate(stem, { tense: 'present', ...flags })
     : predicate(stem, { ...flags, dir: ex.dir });
+}
+
+/** Zeilen einer Tabelle: Tag-Folgen (Nomen) oder Personen (Verb, Kopula). */
+export function paradigmRows(ex: ParadigmExercise): (MorphTag[] | Person)[] {
+  return ex.kind === 'noun' ? (ex.rows ?? []) : (ex.persons ?? [...PERSONS]);
+}
+
+/** Engine-Lösung je Tabellenzeile. */
+export function solveParadigm(ex: ParadigmExercise, vocab: readonly Vocab[] = []): Inflection[] {
+  const stem = stemFromVocab(ex.lemma, vocab);
+  return paradigmRows(ex).map((row) => {
+    if (typeof row !== 'string') return inflect(stem, row);
+    const flags = { person: row, negative: ex.negative, question: ex.question };
+    return ex.kind === 'verb'
+      ? conjugate(stem, { tense: 'present', ...flags })
+      : predicate(stem, flags);
+  });
 }
 
 /**

@@ -59,6 +59,41 @@ lessons:
         direction: tr_de
         prompt: göz
         answers: [Auge, das Auge, ein Auge]
+      - id: a1-u02-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „masa“?
+        options: [Tisch, Stuhl, Tür]
+        answer: Tisch
+      - id: a1-u02-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Zimmer
+        answers: [oda]
+      - id: a1-u02-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „Hund“?
+        options: [köpek, kedi, kuş]
+        answer: köpek
+      - id: a1-u02-l1-e13
+        type: free_text
+        direction: tr_de
+        prompt: kapı
+        answers: [Tür, die Tür, eine Tür, Tor]
+      - id: a1-u02-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „ağaç“?
+        options: [Baum, Blume, Fenster]
+        answer: Baum
+      - id: a1-u02-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: Stift
+        answers: [kalem]
+      - id: a1-u02-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „bahçe“?
+        options: [Garten, Wald, Strand]
+        answer: Garten
 
   - id: a1-u02-l2
     type: grammar
@@ -117,6 +152,39 @@ lessons:
         options: [saatler, saatlar]
         answer: saatler
         explanation: Ausnahme! saat ist ein Lehnwort aus dem Arabischen und nimmt helle Endungen.
+      - id: a1-u02-l2-e10
+        type: multiple_choice
+        prompt: Plural von „masa“ (Tisch)?
+        options: [masalar, masaler]
+        answer: masalar
+        explanation: Letzter Vokal a ist dunkel → -lar.
+      - id: a1-u02-l2-e11
+        type: multiple_choice
+        prompt: Plural von „kalem“ (Stift)?
+        options: [kalemler, kalemlar]
+        answer: kalemler
+        explanation: Nur der letzte Vokal zählt, e ist hell → -ler.
+      - id: a1-u02-l2-e12
+        type: multiple_choice
+        prompt: Plural von „kapı“ (Tür)?
+        options: [kapılar, kapıler]
+        answer: kapılar
+      - id: a1-u02-l2-e13
+        type: multiple_choice
+        prompt: Plural von „pencere“ (Fenster)?
+        options: [pencereler, pencerelar]
+        answer: pencereler
+      - id: a1-u02-l2-e14
+        type: multiple_choice
+        prompt: Welche Vokale sind dunkel?
+        options: ['a, ı, o, u', 'e, i, ö, ü', 'a, e, o, u']
+        answer: 'a, ı, o, u'
+      - id: a1-u02-l2-e15
+        type: multiple_choice
+        prompt: Welche Pluralform ist falsch?
+        options: [ağaçler, ağaçlar]
+        answer: ağaçler
+        explanation: ağaç endet auf dunklem a, also ağaçlar.
 
   - id: a1-u02-l3
     type: grammar
@@ -144,6 +212,11 @@ lessons:
         target: saatler
         gloss_de: die Uhren
         explanation: Ausnahme, saat nimmt helle Endungen.
+      - { id: a1-u02-l3-e11, type: suffix_builder, stem: masa, suffixes: [PL], target: masalar, gloss_de: die Tische }
+      - { id: a1-u02-l3-e12, type: suffix_builder, stem: kalem, suffixes: [PL], target: kalemler, gloss_de: die Stifte }
+      - { id: a1-u02-l3-e13, type: suffix_builder, stem: köpek, suffixes: [PL], target: köpekler, gloss_de: die Hunde }
+      - { id: a1-u02-l3-e14, type: suffix_builder, stem: oda, suffixes: [PL], target: odalar, gloss_de: die Zimmer }
+      - { id: a1-u02-l3-e15, type: suffix_builder, stem: ağaç, suffixes: [PL], target: ağaçlar, gloss_de: die Bäume }
 
   - id: a1-u02-l4
     type: grammar
@@ -167,6 +240,62 @@ lessons:
         target: kitaplarda
         gloss_de: in den Büchern
         explanation: Die Reihenfolge ist fest. Erst Plural, dann Ort.
+      - { id: a1-u02-l4-e7, type: suffix_builder, stem: masa, suffixes: [LOC], target: masada, gloss_de: auf dem Tisch }
+      - { id: a1-u02-l4-e8, type: suffix_builder, stem: oda, suffixes: [LOC], target: odada, gloss_de: im Zimmer }
+      - id: a1-u02-l4-e9
+        type: suffix_builder
+        stem: ağaç
+        suffixes: [LOC]
+        target: ağaçta
+        gloss_de: auf dem Baum
+        explanation: Nach ç wird -da zu -ta.
+      - { id: a1-u02-l4-e10, type: suffix_builder, stem: pencere, suffixes: [LOC], target: pencerede, gloss_de: am Fenster }
+      - { id: a1-u02-l4-e11, type: suffix_builder, stem: oda, suffixes: [PL, LOC], target: odalarda, gloss_de: in den Zimmern }
+      - { id: a1-u02-l4-e12, type: suffix_builder, stem: bahçe, suffixes: [PL, LOC], target: bahçelerde, gloss_de: in den Gärten }
+      - id: a1-u02-l4-e13
+        type: multiple_choice
+        prompt: Welche Form heißt „in den Häusern“?
+        options: [evlerde, evdeler, evlerda]
+        answer: evlerde
+        explanation: Erst der Plural, dann der Ort. „evdeler“ gibt es auch, es heißt aber „sie sind zu Hause“.
+
+  - id: a1-u02-l6
+    type: grammar
+    title: 'Tabellen: Plural und Ort'
+    exercises:
+      - id: a1-u02-l6-e1
+        type: paradigm
+        kind: noun
+        lemma: ev
+        rows: [[PL], [LOC], [PL, LOC]]
+        targets: [evler, evde, evlerde]
+        gloss_de: Haus
+        explanation: Alle Endungen richten sich nach dem letzten Vokal e → hell.
+      - { id: a1-u02-l6-e2, type: paradigm, kind: noun, lemma: okul, rows: [[PL], [LOC], [PL, LOC]], targets: [okullar, okulda, okullarda], gloss_de: Schule }
+      - { id: a1-u02-l6-e3, type: paradigm, kind: noun, lemma: araba, rows: [[PL], [LOC], [PL, LOC]], targets: [arabalar, arabada, arabalarda], gloss_de: Auto }
+      - { id: a1-u02-l6-e4, type: paradigm, kind: noun, lemma: kedi, rows: [[PL], [LOC], [PL, LOC]], targets: [kediler, kedide, kedilerde], gloss_de: Katze }
+      - id: a1-u02-l6-e5
+        type: paradigm
+        kind: noun
+        lemma: kitap
+        rows: [[PL], [LOC], [PL, LOC]]
+        targets: [kitaplar, kitapta, kitaplarda]
+        gloss_de: Buch
+        explanation: Nach p wird -da zu -ta. Vor -lar und -ta bleibt das p.
+      - { id: a1-u02-l6-e6, type: paradigm, kind: noun, lemma: oda, rows: [[PL], [LOC], [PL, LOC]], targets: [odalar, odada, odalarda], gloss_de: Zimmer }
+      - { id: a1-u02-l6-e7, type: paradigm, kind: noun, lemma: göz, rows: [[PL], [LOC], [PL, LOC]], targets: [gözler, gözde, gözlerde], gloss_de: Auge }
+      - { id: a1-u02-l6-e8, type: paradigm, kind: noun, lemma: ağaç, rows: [[PL], [LOC], [PL, LOC]], targets: [ağaçlar, ağaçta, ağaçlarda], gloss_de: Baum }
+      - id: a1-u02-l6-e9
+        type: paradigm
+        kind: noun
+        lemma: saat
+        rows: [[PL], [LOC], [PL, LOC]]
+        targets: [saatler, saatte, saatlerde]
+        gloss_de: Uhr
+        explanation: Ausnahme, saat nimmt helle Endungen. Nach t wird -de zu -te. „saatte“ allein ist selten, üblich ist z. B. „saat üçte“ (um drei Uhr).
+      - { id: a1-u02-l6-e10, type: paradigm, kind: noun, lemma: masa, rows: [[PL], [LOC], [PL, LOC]], targets: [masalar, masada, masalarda], gloss_de: Tisch }
+      - { id: a1-u02-l6-e11, type: paradigm, kind: noun, lemma: köpek, rows: [[PL], [LOC], [PL, LOC]], targets: [köpekler, köpekte, köpeklerde], gloss_de: Hund }
+      - { id: a1-u02-l6-e12, type: paradigm, kind: noun, lemma: kapı, rows: [[PL], [LOC], [PL, LOC]], targets: [kapılar, kapıda, kapılarda], gloss_de: Tür }
 
   - id: a1-u02-l5
     type: review
@@ -194,6 +323,46 @@ lessons:
         options: [çocuklar, çocuğlar, çocukler]
         answer: çocuklar
         explanation: Das k wird nur vor einem Vokal zu ğ (çocuğu). Vor -lar bleibt es.
+      - id: a1-u02-l5-e5
+        type: word_bank
+        prompt: Die Katzen sind im Haus.
+        answers: [Kediler evde.]
+        distractors: [evlerde, Kedi]
+      - id: a1-u02-l5-e6
+        type: word_bank
+        prompt: Das Buch ist auf dem Tisch.
+        answers: [Kitap masada.]
+        distractors: [masalarda, Kitaplar]
+      - id: a1-u02-l5-e7
+        type: word_bank
+        prompt: Die Kinder sind in den Zimmern.
+        answers: [Çocuklar odalarda.]
+        distractors: [odada, Çocuk]
+      - id: a1-u02-l5-e8
+        type: free_text
+        direction: de_tr
+        prompt: die Bäume
+        answers: [ağaçlar]
+      - id: a1-u02-l5-e9
+        type: free_text
+        direction: de_tr
+        prompt: auf den Tischen
+        answers: [masalarda]
+      - id: a1-u02-l5-e10
+        type: free_text
+        direction: tr_de
+        prompt: Köpek bahçede.
+        answers: [Der Hund ist im Garten., Ein Hund ist im Garten.]
+      - id: a1-u02-l5-e11
+        type: multiple_choice
+        prompt: Plural von „bahçe“ (Garten)?
+        options: [bahçeler, bahçelar, bahçler]
+        answer: bahçeler
+      - id: a1-u02-l5-e12
+        type: multiple_choice
+        prompt: Was heißt „kalemler masada“?
+        options: [Die Stifte sind auf dem Tisch., Der Stift ist auf den Tischen., Die Stifte sind auf den Tischen.]
+        answer: Die Stifte sind auf dem Tisch.
 
 vocab:
   - { tr: ev, de: [Haus, Wohnung, Zuhause], pos: noun }
@@ -208,3 +377,11 @@ vocab:
   - { tr: elma, de: [Apfel], pos: noun }
   - { tr: kitap, de: [Buch], pos: noun, softens: true }
   - { tr: saat, de: [Uhr, Stunde], pos: noun, harmony_vowel: e }
+  - { tr: masa, de: [Tisch], pos: noun }
+  - { tr: oda, de: [Zimmer, Raum], pos: noun }
+  - { tr: kapı, de: [Tür, Tor], pos: noun }
+  - { tr: pencere, de: [Fenster], pos: noun }
+  - { tr: kalem, de: [Stift], pos: noun }
+  - { tr: köpek, de: [Hund], pos: noun, softens: true }
+  - { tr: ağaç, de: [Baum], pos: noun, softens: true }
+  - { tr: bahçe, de: [Garten], pos: noun }

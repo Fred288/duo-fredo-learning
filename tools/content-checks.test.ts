@@ -174,3 +174,34 @@ ${vocab}
     expect(foreignLexicon(a.unit, [a, b])).toEqual([]);
   });
 });
+
+describe('checkSuffixTargets: Tabelle', () => {
+  const unit = (targets: string) => `
+id: a1-u03
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+lessons:
+  - id: a1-u03-l1
+    type: grammar
+    title: Tabelle
+    exercises:
+      - { id: a1-u03-l1-e1, type: paradigm, kind: noun, lemma: şehir, rows: [[LOC], [DAT]], targets: ${targets} }
+vocab:
+  - { tr: şehir, de: [Stadt], pos: noun, drops_vowel: true }
+`;
+
+  it('prüft jede Zelle gegen die Engine', () => {
+    expect(checkSuffixTargets([load('a.yaml', unit('[şehirde, şehre]'))])).toEqual([]);
+    expect(checkSuffixTargets([load('a.yaml', unit('[şehirde, şehire]'))])).toEqual([
+      'a.yaml: a1-u03-l1-e1: Zeile 2: target "şehire", Engine erwartet "şehre"',
+    ]);
+  });
+
+  it('verlangt so viele targets wie Zeilen', () => {
+    expect(parseUnitFile('a.yaml', unit('[şehirde, şehre, şehirden]')).errors[0]).toContain(
+      '3 targets für 2 Zeilen',
+    );
+  });
+});

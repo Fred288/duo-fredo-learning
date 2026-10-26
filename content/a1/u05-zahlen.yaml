@@ -63,6 +63,26 @@ lessons:
         direction: de_tr
         prompt: zehn
         answers: [on]
+      - id: a1-u05-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „sıfır“?
+        options: ['null', zehn, eins]
+        answer: 'null'
+      - id: a1-u05-l1-e12
+        type: free_text
+        direction: tr_de
+        prompt: üç
+        answers: [drei, '3']
+      - id: a1-u05-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: acht
+        answers: [sekiz]
+      - id: a1-u05-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „beş“?
+        options: [fünf, vier, sechs]
+        answer: fünf
 
   - id: a1-u05-l2
     type: vocab
@@ -115,6 +135,36 @@ lessons:
         direction: de_tr
         prompt: '1000'
         answers: [bin]
+      - id: a1-u05-l2-e10
+        type: free_text
+        direction: de_tr
+        prompt: '70'
+        answers: [yetmiş]
+      - id: a1-u05-l2-e11
+        type: multiple_choice
+        prompt: Was heißt „doksan“?
+        options: ['90', '80', '19']
+        answer: '90'
+      - id: a1-u05-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: elli
+        answers: ['50', fünfzig]
+      - id: a1-u05-l2-e13
+        type: free_text
+        direction: tr_de
+        prompt: bin
+        answers: ['1000', tausend, eintausend]
+      - id: a1-u05-l2-e14
+        type: multiple_choice
+        prompt: Was heißt „kahve“?
+        options: [Kaffee, Tee, Wasser]
+        answer: Kaffee
+      - id: a1-u05-l2-e15
+        type: free_text
+        direction: de_tr
+        prompt: viel, viele
+        answers: [çok]
 
   - id: a1-u05-l3
     type: grammar
@@ -167,6 +217,31 @@ lessons:
         direction: tr_de
         prompt: kırk iki
         answers: ['42', zweiundvierzig]
+      - id: a1-u05-l3-e10
+        type: word_bank
+        prompt: '99'
+        answers: [doksan dokuz]
+        distractors: [doksan, on]
+      - id: a1-u05-l3-e11
+        type: free_text
+        direction: de_tr
+        prompt: '16'
+        answers: [on altı]
+      - id: a1-u05-l3-e12
+        type: word_bank
+        prompt: '365'
+        answers: [üç yüz altmış beş]
+        distractors: [otuz, bir]
+      - id: a1-u05-l3-e13
+        type: free_text
+        direction: tr_de
+        prompt: elli beş
+        answers: ['55', fünfundfünfzig]
+      - id: a1-u05-l3-e14
+        type: free_text
+        direction: de_tr
+        prompt: '2000'
+        answers: [iki bin]
 
   - id: a1-u05-l4
     type: grammar
@@ -204,6 +279,42 @@ lessons:
         prompt: Zwei Tee, bitte.
         answers: [İki çay lütfen., İki çay., Lütfen iki çay.]
         distractors: [çaylar]
+      - id: a1-u05-l4-e7
+        type: word_bank
+        prompt: zwei Katzen
+        answers: [iki kedi]
+        distractors: [kediler, üç]
+      - id: a1-u05-l4-e8
+        type: free_text
+        direction: de_tr
+        prompt: sieben Bücher
+        answers: [yedi kitap]
+      - id: a1-u05-l4-e9
+        type: multiple_choice
+        prompt: Wie fragt man „Wie viele Kinder?“
+        options: [Kaç çocuk?, Kaç çocuklar?, Kaç tane çocuklar?]
+        answer: Kaç çocuk?
+      - id: a1-u05-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: dört kedi
+        answers: [vier Katzen]
+      - id: a1-u05-l4-e11
+        type: multiple_choice
+        prompt: Was heißt „çok kitap“?
+        options: [viele Bücher, ein Buch, kein Buch]
+        answer: viele Bücher
+        explanation: "Nach „çok“ steht kein Plural: çok kitap. „çok kitaplar“ gilt als fehlerhaft."
+      - id: a1-u05-l4-e12
+        type: word_bank
+        prompt: Wie viele Äpfel?
+        answers: [Kaç elma?]
+        distractors: [elmalar, ne]
+      - id: a1-u05-l4-e13
+        type: free_text
+        direction: de_tr
+        prompt: drei Häuser
+        answers: [üç ev]
 
   - id: a1-u05-l5
     type: dialog
@@ -245,6 +356,36 @@ lessons:
         direction: de_tr
         prompt: hundert Lira
         answers: [yüz lira]
+      - id: a1-u05-l5-e8
+        type: word_bank
+        prompt: Ein Tee kostet zehn Lira.
+        answers: [Bir çay on lira.]
+        distractors: [liralar, çaylar]
+      - id: a1-u05-l5-e9
+        type: word_bank
+        prompt: Wie alt ist er?
+        answers: [O kaç yaşında?, Kaç yaşında?]
+        distractors: [yaşındasın, ne]
+      - id: a1-u05-l5-e10
+        type: word_bank
+        prompt: Er ist sechzig (Jahre alt).
+        answers: [Altmış yaşında., O altmış yaşında.]
+        distractors: [yaşındayım, O]
+      - id: a1-u05-l5-e11
+        type: free_text
+        direction: de_tr
+        prompt: Ich bin dreißig Jahre alt.
+        answers: [Otuz yaşındayım., Ben otuz yaşındayım.]
+      - id: a1-u05-l5-e12
+        type: word_bank
+        prompt: Zwei Kaffee, bitte.
+        answers: [İki kahve lütfen., Lütfen iki kahve., İki kahve.]
+        distractors: [kahveler, bir]
+      - id: a1-u05-l5-e13
+        type: multiple_choice
+        prompt: Die Verkäuferin sagt „Yirmi lira.“ Wie viel kostet es?
+        options: [20 Lira, 12 Lira, 2 Lira]
+        answer: 20 Lira
 
   - id: a1-u05-l6
     type: review
@@ -280,6 +421,41 @@ lessons:
         direction: de_tr
         prompt: sechs Autos
         answers: [altı araba]
+      - id: a1-u05-l6-e7
+        type: free_text
+        direction: de_tr
+        prompt: '33'
+        answers: [otuz üç]
+      - id: a1-u05-l6-e8
+        type: word_bank
+        prompt: '1984'
+        answers: [bin dokuz yüz seksen dört]
+        distractors: [bir, on]
+      - id: a1-u05-l6-e9
+        type: free_text
+        direction: de_tr
+        prompt: neun Bücher
+        answers: [dokuz kitap]
+      - id: a1-u05-l6-e10
+        type: free_text
+        direction: tr_de
+        prompt: yüz yirmi
+        answers: ['120', hundertzwanzig, einhundertzwanzig]
+      - id: a1-u05-l6-e11
+        type: free_text
+        prompt: fünf Kinder
+        direction: de_tr
+        answers: [beş çocuk]
+      - id: a1-u05-l6-e12
+        type: free_text
+        direction: de_tr
+        prompt: zwanzig Lira
+        answers: [yirmi lira]
+      - id: a1-u05-l6-e13
+        type: word_bank
+        prompt: Wie viel kostet der Kaffee?
+        answers: [Kahve ne kadar?]
+        distractors: [kaç, nerede]
 
 vocab:
   - { tr: sıfır, de: ['null'], pos: num }
@@ -309,3 +485,5 @@ vocab:
   - { id: yaş-alter, tr: yaş, de: [Alter, Lebensjahr], pos: noun }
   - { tr: bu, de: [das, dies, dieser], pos: pron }
   - { tr: yaşında, de: [… Jahre alt], pos: phrase }
+  - { tr: çok, de: [viel, viele, sehr], pos: adv }
+  - { tr: kahve, de: [Kaffee], pos: noun }

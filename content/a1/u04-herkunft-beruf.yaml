@@ -61,6 +61,34 @@ lessons:
         options: [Woher kommst du?, Wo bist du?, Wer bist du?]
         answer: Woher kommst du?
         explanation: Wörtlich „Von wo bist du?“. nereli = von wo stammend.
+      - id: a1-u04-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „avukat“?
+        options: [Anwalt, Arzt, Polizist]
+        answer: Anwalt
+      - id: a1-u04-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Polizist, Polizistin
+        answers: [polis, polis memuru]
+        explanation: „polis“ heißt auch „Polizei“.
+      - id: a1-u04-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „hemşire“?
+        options: ["Pflegekraft (Krankenpfleger, Krankenschwester)", Köchin, Lehrerin]
+        answer: Pflegekraft (Krankenpfleger, Krankenschwester)
+        explanation: hemşire ist die Pflegekraft im Krankenhaus, für Frauen und Männer.
+      - id: a1-u04-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: Englisch (die Sprache)
+        answers: [İngilizce]
+      - id: a1-u04-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „Türk“?
+        options: ['Türke, Türkin', Türkei, Türkisch (Sprache)]
+        answer: 'Türke, Türkin'
+        explanation: Türk (Türke, Türkin), Türkiye (Türkei), Türkçe (Türkisch).
 
   - id: a1-u04-l2
     type: grammar
@@ -104,6 +132,37 @@ lessons:
         options: [Wenn die Endung die Person schon zeigt, Nie, Nur bei Fragen]
         answer: Wenn die Endung die Person schon zeigt
         explanation: „Almanım“ heißt schon „ich bin Deutscher“. „Ben Almanım“ betont das „ich“.
+      - id: a1-u04-l2-e8
+        type: free_text
+        direction: tr_de
+        prompt: biz
+        answers: [wir]
+      - id: a1-u04-l2-e9
+        type: multiple_choice
+        prompt: Was heißt „sie“ (mehrere Personen)?
+        options: [onlar, o, siz]
+        answer: onlar
+      - id: a1-u04-l2-e10
+        type: multiple_choice
+        prompt: „siz“ kann heißen …
+        options: [ihr oder Sie, nur ihr, nur Sie]
+        answer: ihr oder Sie
+      - id: a1-u04-l2-e11
+        type: multiple_choice
+        prompt: Du sprichst mit deiner Ärztin. Welches Pronomen ist höflich?
+        options: [siz, sen, o]
+        answer: siz
+        register: formal
+      - id: a1-u04-l2-e12
+        type: free_text
+        direction: de_tr
+        prompt: ich
+        answers: [ben]
+      - id: a1-u04-l2-e13
+        type: free_text
+        direction: tr_de
+        prompt: o
+        answers: [er, sie, es, 'er, sie, es', er/sie/es]
 
   - id: a1-u04-l3
     type: grammar
@@ -117,9 +176,9 @@ lessons:
         target: Almanım
         gloss_de: ich bin Deutscher, Deutsche
         explanation: „sein“ ist eine Endung. Sie folgt der Vierfach-Harmonie (ı, i, u, ü).
-      - { id: a1-u04-l3-e2, type: conjugation, mode: copula, lemma: Türk, person: 2sg, target: Türksün, gloss_de: du bist Türke, Türkin }
+      - { id: a1-u04-l3-e2, type: conjugation, mode: copula, lemma: Türk, person: 2sg, target: Türksün, gloss_de: 'du bist Türke, Türkin' }
       - { id: a1-u04-l3-e3, type: conjugation, mode: copula, lemma: öğretmen, person: 1pl, target: öğretmeniz, gloss_de: wir sind Lehrer }
-      - { id: a1-u04-l3-e4, type: conjugation, mode: copula, lemma: doktor, person: 2pl, target: doktorsunuz, gloss_de: ihr seid Ärzte, Sie sind Arzt }
+      - { id: a1-u04-l3-e4, type: conjugation, mode: copula, lemma: doktor, person: 2pl, target: doktorsunuz, gloss_de: 'ihr seid Ärzte, Sie sind Arzt' }
       - id: a1-u04-l3-e5
         type: conjugation
         mode: copula
@@ -137,7 +196,19 @@ lessons:
         answer: O mühendis.
         explanation: In der 3. Person Singular gibt es keine Endung.
       - { id: a1-u04-l3-e9, type: conjugation, mode: copula, lemma: garson, person: 2sg, target: garsonsun, gloss_de: du bist Kellner }
-      - { id: a1-u04-l3-e10, type: conjugation, mode: copula, lemma: Fransız, person: 1sg, target: Fransızım, gloss_de: ich bin Franzose, Französin }
+      - { id: a1-u04-l3-e10, type: conjugation, mode: copula, lemma: Fransız, person: 1sg, target: Fransızım, gloss_de: 'ich bin Franzose, Französin' }
+      - { id: a1-u04-l3-e11, type: conjugation, mode: copula, lemma: avukat, person: 1sg, target: avukatım, gloss_de: 'ich bin Anwalt, Anwältin' }
+      - { id: a1-u04-l3-e12, type: conjugation, mode: copula, lemma: polis, person: 2pl, target: polissiniz, gloss_de: 'ihr seid Polizisten, Sie sind Polizist' }
+      - id: a1-u04-l3-e13
+        type: conjugation
+        mode: copula
+        lemma: hemşire
+        person: 1sg
+        target: hemşireyim
+        gloss_de: ich bin Krankenpfleger, Krankenschwester
+        explanation: Nach Vokal steht ein y vor -im.
+      - { id: a1-u04-l3-e14, type: conjugation, mode: copula, lemma: Türk, person: 1pl, target: Türküz, gloss_de: wir sind Türken }
+      - { id: a1-u04-l3-e15, type: conjugation, mode: copula, lemma: öğretmen, person: 2sg, target: öğretmensin, gloss_de: du bist Lehrer }
 
   - id: a1-u04-l4
     type: grammar
@@ -153,7 +224,7 @@ lessons:
         gloss_de: Bist du Deutscher?
         explanation: Die Frage-Partikel mı/mi/mu/mü steht getrennt und trägt die Personalendung (außer bei „sie“ im Plural, Öğrenciler mi?).
       - { id: a1-u04-l4-e2, type: conjugation, mode: copula, lemma: Türk, person: 2pl, question: true, target: Türk müsünüz?, gloss_de: Sind Sie Türke? }
-      - { id: a1-u04-l4-e3, type: conjugation, mode: copula, lemma: öğrenci, person: 3sg, question: true, target: öğrenci mi?, gloss_de: Ist er, sie Schüler? }
+      - { id: a1-u04-l4-e3, type: conjugation, mode: copula, lemma: öğrenci, person: 3sg, question: true, target: öğrenci mi?, gloss_de: 'Ist er, sie Schüler?' }
       - { id: a1-u04-l4-e4, type: conjugation, mode: copula, lemma: doktor, person: 1sg, question: true, target: doktor muyum?, gloss_de: Bin ich Arzt? }
       - id: a1-u04-l4-e5
         type: conjugation
@@ -165,7 +236,7 @@ lessons:
         gloss_de: ich bin kein Lehrer
         explanation: Verneint wird mit „değil“. Die Personalendung hängt an „değil“.
       - { id: a1-u04-l4-e6, type: conjugation, mode: copula, lemma: Türk, person: 1sg, negative: true, target: Türk değilim, gloss_de: ich bin kein Türke }
-      - { id: a1-u04-l4-e7, type: conjugation, mode: copula, lemma: aşçı, person: 3sg, negative: true, target: aşçı değil, gloss_de: er, sie ist kein Koch }
+      - { id: a1-u04-l4-e7, type: conjugation, mode: copula, lemma: aşçı, person: 3sg, negative: true, target: aşçı değil, gloss_de: 'er, sie ist kein Koch' }
       - id: a1-u04-l4-e8
         type: conjugation
         mode: copula
@@ -185,6 +256,74 @@ lessons:
         gloss_de: Woher kommst du?
         explanation: Fragen mit Fragewort brauchen keine Partikel mi.
       - { id: a1-u04-l4-e10, type: conjugation, mode: copula, lemma: nereli, person: 2pl, target: nerelisiniz?, gloss_de: Woher kommen Sie? }
+      - { id: a1-u04-l4-e11, type: conjugation, mode: copula, lemma: avukat, person: 2sg, question: true, target: avukat mısın?, gloss_de: Bist du Anwalt? }
+      - { id: a1-u04-l4-e12, type: conjugation, mode: copula, lemma: polis, person: 3sg, negative: true, target: polis değil, gloss_de: 'er, sie ist kein Polizist' }
+      - id: a1-u04-l4-e13
+        type: conjugation
+        mode: copula
+        lemma: öğrenci
+        person: 1pl
+        question: true
+        target: öğrenci miyiz?
+        gloss_de: Sind wir Studenten?
+        explanation: mi + y + iz, das y trennt die beiden Vokale.
+      - { id: a1-u04-l4-e14, type: conjugation, mode: copula, lemma: Alman, person: 2pl, negative: true, target: Alman değilsiniz, gloss_de: 'ihr seid keine Deutschen, Sie sind kein Deutscher' }
+
+  - id: a1-u04-l6
+    type: grammar
+    title: 'Tabellen: „sein“ in allen Personen'
+    exercises:
+      - id: a1-u04-l6-e1
+        type: paradigm
+        kind: copula
+        lemma: Alman
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [Almanım, Almansın, Alman, Almanız, Almansınız]
+        gloss_de: Deutscher, Deutsche
+        explanation: Die Personalendungen folgen der Vierfach-Harmonie, nach a also ı. In der 3. Person ist auch -dir möglich (Almandır), hier ohne Endung eintragen.
+      - id: a1-u04-l6-e2
+        type: paradigm
+        kind: copula
+        lemma: öğrenci
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [öğrenciyim, öğrencisin, öğrenci, öğrenciyiz, öğrencisiniz]
+        gloss_de: Schüler, Student
+        explanation: Nach Vokal steht bei ich und wir ein y.
+      - { id: a1-u04-l6-e3, type: paradigm, kind: copula, lemma: doktor, persons: [1sg, 2sg, 3sg, 1pl, 2pl], targets: [doktorum, doktorsun, doktor, doktoruz, doktorsunuz], gloss_de: 'Arzt, Ärztin' }
+      - { id: a1-u04-l6-e4, type: paradigm, kind: copula, lemma: aşçı, persons: [1sg, 2sg, 3sg, 1pl, 2pl], targets: [aşçıyım, aşçısın, aşçı, aşçıyız, aşçısınız], gloss_de: 'Koch, Köchin' }
+      - id: a1-u04-l6-e5
+        type: paradigm
+        kind: copula
+        lemma: öğretmen
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        negative: true
+        targets: [öğretmen değilim, öğretmen değilsin, öğretmen değil, öğretmen değiliz, öğretmen değilsiniz]
+        gloss_de: kein Lehrer sein
+        explanation: Die Endungen hängen an değil, das Nomen bleibt unverändert.
+      - id: a1-u04-l6-e6
+        type: paradigm
+        kind: copula
+        lemma: Türk
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        question: true
+        targets: [Türk müyüm?, Türk müsün?, Türk mü?, Türk müyüz?, Türk müsünüz?]
+        gloss_de: Türke sein? (Frage)
+        explanation: Die Partikel trägt die Endung. Nach ü heißt sie mü.
+      - id: a1-u04-l6-e7
+        type: paradigm
+        kind: copula
+        lemma: avukat
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        question: true
+        targets: [avukat mıyım?, avukat mısın?, avukat mı?, avukat mıyız?, avukat mısınız?]
+        gloss_de: Anwalt sein? (Frage)
+      - { id: a1-u04-l6-e8, type: paradigm, kind: copula, lemma: hemşire, persons: [1sg, 2sg, 3sg, 1pl, 2pl], targets: [hemşireyim, hemşiresin, hemşire, hemşireyiz, hemşiresiniz], gloss_de: Pflegekraft }
+      - id: a1-u04-l6-e9
+        type: multiple_choice
+        prompt: Wie heißt „Sie sind Ärzte“ (onlar)?
+        options: [„Onlar doktor.“ und „Onlar doktorlar.“ sind beide richtig, Nur „Onlar doktorlar.“, Nur „Onlar doktorsunuz.“]
+        answer: „Onlar doktor.“ und „Onlar doktorlar.“ sind beide richtig
+        explanation: Ohne -lar ist es häufiger. Deshalb fehlt die Zeile „sie“ in den Tabellen.
 
   - id: a1-u04-l5
     type: review
@@ -233,6 +372,37 @@ lessons:
         options: [misin, mısın, musun]
         answer: misin
         explanation: Letzter Vokal i → mi, mit Endung misin.
+      - id: a1-u04-l5-e9
+        type: word_bank
+        prompt: Wir sind Studenten.
+        answers: [Biz öğrenciyiz., Öğrenciyiz.]
+        distractors: [öğrencisiniz, Siz]
+      - id: a1-u04-l5-e10
+        type: word_bank
+        prompt: Ist sie Ärztin?
+        answers: [O doktor mu?, Doktor mu?]
+        distractors: [mı, musun]
+      - id: a1-u04-l5-e11
+        type: free_text
+        direction: de_tr
+        prompt: Ich bin kein Arzt.
+        answers: [Doktor değilim., Ben doktor değilim.]
+      - id: a1-u04-l5-e12
+        type: multiple_choice
+        prompt: „Fransız…“ (wir sind Franzosen). Welche Endung passt?
+        options: [Fransızız, Fransızüz, Fransızuz]
+        answer: Fransızız
+        explanation: Letzter Vokal ı → Endung mit ı.
+      - id: a1-u04-l5-e13
+        type: free_text
+        direction: tr_de
+        prompt: Fransız mısınız?
+        answers: [Sind Sie Franzose?, Sind Sie Französin?, Seid ihr Franzosen?, Sind Sie Franzosen?, Seid ihr Französinnen?, Sind Sie Französinnen?]
+      - id: a1-u04-l5-e14
+        type: word_bank
+        prompt: Ich bin Krankenpfleger, ich bin kein Arzt.
+        answers: ['Hemşireyim, doktor değilim.', 'Ben hemşireyim, doktor değilim.']
+        distractors: [değil, Ben]
 
 vocab:
   - { tr: ben, de: [ich], pos: pron }
@@ -255,3 +425,6 @@ vocab:
   - { tr: Türkçe, de: [Türkisch], pos: noun, capitalized: true }
   - { tr: Almanca, de: [Deutsch], pos: noun, capitalized: true }
   - { tr: İngilizce, de: [Englisch], pos: noun, capitalized: true }
+  - { tr: avukat, de: [Anwalt, Anwältin], pos: noun }
+  - { tr: polis, de: [Polizist, Polizistin, Polizei], pos: noun }
+  - { tr: hemşire, de: [Krankenpfleger, Krankenschwester, Pflegekraft], pos: noun }

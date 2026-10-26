@@ -1,6 +1,7 @@
 import type { Exercise } from '../content/schema';
 import { sameForm } from '../content/lexicon';
 import { checkAnswer, type AnswerResult } from '../lib/answer';
+import { trLower } from '../lib/turkish';
 
 export const SUPPORTED_TYPES = [
   'multiple_choice',
@@ -8,8 +9,9 @@ export const SUPPORTED_TYPES = [
   'free_text',
   'suffix_builder',
   'conjugation',
+  'paradigm',
 ] as const;
-type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
+export type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
 
 export const isSupported = (ex: Exercise): ex is Supported =>
   (SUPPORTED_TYPES as readonly string[]).includes(ex.type);
@@ -33,20 +35,38 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
     case 'suffix_builder':
       // Genau die Form zählt: kein Tippfehler-Spielraum, sonst wäre evda ≈ evde.
       return checkAnswer(answer, [ex.target], { allowTypos: false });
-    case 'conjugation': {
-      // Fragepartikel und değil sind eigene Bausteine; Leerzeichen und Apostroph zählen nicht.
-      const squash = (s: string) => s.replace(/[\s'’?]/g, '');
+    case 'conjugation':
       return sameForm(squash(ex.target), squash(answer))
         ? { verdict: 'correct', matched: ex.target, hints: [] }
         : { verdict: 'wrong', hints: [] };
-    }
+    case 'paradigm':
+      return paradigmCells(ex, answer).every(Boolean)
+        ? { verdict: 'correct', matched: ex.targets.join(', '), hints: [] }
+        : { verdict: 'wrong', hints: [] };
   }
+}
+
+// Fragepartikel und değil sind eigene Bausteine; Leerzeichen und Apostroph zählen nicht.
+const squash = (s: string) => s.replace(/[\s'’?]/g, '');
+
+/**
+ * Tabelle: Zellen sind mit Zeilenumbruch verbunden; je Zelle richtig oder falsch.
+ * Groß/Klein zählt hier nicht (Felder ohne Autokorrektur), ein deutsches I gilt als İ.
+ */
+export function paradigmCells(ex: Extract<Exercise, { type: 'paradigm' }>, answer: string) {
+  const cells = answer.split('\n');
+  return ex.targets.map((target, i) => {
+    const given = squash(cells[i] ?? '');
+    const dotted = target.includes('İ') ? given.replaceAll('I', 'İ') : given;
+    return trLower(squash(target)) === trLower(dotted);
+  });
 }
 
 /** Kanonische Lösung zur Anzeige im Feedback. */
 export function solutionOf(ex: Supported): string {
   if (ex.type === 'multiple_choice') return ex.answer;
   if (ex.type === 'suffix_builder' || ex.type === 'conjugation') return ex.target;
+  if (ex.type === 'paradigm') return ex.targets.join(', ');
   return ex.answers[0]!;
 }
 
