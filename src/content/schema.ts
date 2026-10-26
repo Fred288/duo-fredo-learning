@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { MORPH_TAGS } from '../morphology/tags';
-import { PERSONS } from '../morphology/verb';
+import { PERSONS, TENSES } from '../morphology/verb';
 
 export const LEVELS = ['A1', 'A2', 'B1', 'B2'] as const;
 export const Level = z.enum(LEVELS);
@@ -50,6 +50,10 @@ export const Vocab = z.strictObject({
   proper: z.boolean().optional(),
   // großgeschrieben ohne Apostroph (Nationalitäten: Almanlar)
   capitalized: z.boolean().optional(),
+  // y vor Genitiv und Possessiv (su → suyun, suyum)
+  y_stem: z.boolean().optional(),
+  // Aorist-Vokal von Verben, wenn die Regel nicht greift (ar: yapar, ir: gelir)
+  aorist: z.enum(['ar', 'ir']).optional(),
   register: register.optional(),
   reviewed: z.boolean().optional(),
   ...provenanceOverride,
@@ -110,7 +114,7 @@ export const Conjugation = z.strictObject({
   mode: z.enum(['verb', 'copula']),
   lemma: nonEmpty,
   person: z.enum(PERSONS),
-  tense: z.literal('present').optional(),
+  tense: z.enum(TENSES).optional(),
   negative: z.boolean().optional(),
   question: z.boolean().optional(),
   dir: z.boolean().optional(),
@@ -129,6 +133,7 @@ export const Paradigm = z
       .min(2)
       .optional(),
     persons: z.array(z.enum(PERSONS)).min(2).optional(),
+    tense: z.enum(TENSES).optional(),
     negative: z.boolean().optional(),
     question: z.boolean().optional(),
     targets: z.array(nonEmpty).min(2),

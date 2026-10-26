@@ -25,7 +25,7 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 | Eigennamen mit Apostroph (Berlin'de, Frankfurt'ta), keine geschriebene Erweichung (Mehmet'e, nicht *Mehmede) | ✅     | Vokabel-Flag `proper`; Nationalitäten ohne Apostroph über `capitalized` (Türkler, Almanım)                                           | **A1** (Herkunft, Orte)              |
 | Zirkumflex (kâr, hala vs. hâlâ)                                                                              | ❌     | nur Orthografie in Inhalten; Antwortprüfung sollte `â` ≈ `a` tolerieren (Hinweis statt Fehler)                                       | A2                                   |
 | Betonung (meist letzte Silbe; Ausnahmen bei Ortsnamen, -mA-Verneinung, Fragepartikel)                        | ❌     | kein Engine-Thema; Audio und Erklärkarten                                                                                            | später                               |
-| Unregelmäßige Stämme (su → suyun/suyu, ne → neyi)                                                            | 🟡     | su + ACC zufällig richtig (suyu); Gen. und Poss. 3. Sg. falsch. Ausnahmeliste mit festen Formen je Tag                               | A1 (Essen und Trinken)               |
+| Unregelmäßige Stämme (su → suyun/suyu, ne → neyi)                                                            | ✅     | Vokabel-Flag `y_stem`: y vor Genitiv und Possessiv (suyun, suyum, neyin); offen: ne + Poss. 3. Sg. (nesi)                            | –                                    |
 
 ## 2. Nominalmorphologie
 
@@ -41,7 +41,9 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 
 ## 3. Verbmorphologie
 
-**Stufe 1 umgesetzt** (`src/morphology/verb.ts`): Präsens -Iyor mit Stammvokal-Ausfall und Verbstamm-Erweichung, de-/ye- unregelmäßig, Verneinung mit Verengung, Personalendungen Typ 1, Fragepartikel mI (getrennt, mit Personalendung; 3. Pl. am Verb), Kopula im Nominalsatz inkl. değil und -DIr. Übungstyp `conjugation`. Offen ab hier: Stufe 2.
+**Stufe 1 umgesetzt** (`src/morphology/verb.ts`): Präsens -Iyor mit Stammvokal-Ausfall und Verbstamm-Erweichung, de-/ye- unregelmäßig, Verneinung mit Verengung, Personalendungen Typ 1, Fragepartikel mI (getrennt, mit Personalendung; 3. Pl. am Verb), Kopula im Nominalsatz inkl. değil und -DIr. Übungstyp `conjugation`.
+
+**Stufe 2 umgesetzt**: Präteritum -DI mit Personalendungen Typ 2 (Frage: geldin mi?), Futur -(y)AcAk mit k → ğ vor vokalischer Endung und ye-/de- → yiyecek/diyecek, Aorist (-r / -Ar / -Ir mit der Liste der 13 Einsilber, Override `aorist: ar|ir`, Verneinung gelmem/gelmez/gelmeyiz). `tense` in `conjugation` und `paradigm`. Offen ab hier: Stufe 3 (Imperativ, -(y)Abil, -mAlI, -mIş, idi/imiş).
 
 Die Grammatiken unterscheiden vier Typen von Personalendungen; die Engine braucht sie als
 eigene Template-Gruppen:
@@ -67,8 +69,9 @@ Zusätzlich nötig:
 
 1. ✅ `proper`, `drops_vowel`, Personalpronomen-Tabelle
 2. ✅ Verb-Engine Stufe 1: Kopula Typ 1, Präsens -Iyor, Verneinung -mA, Fragepartikel mI, Verbstamm-Erweichung
-3. Unregelmäßigkeiten-Liste (su, ne, de-/ye-: diyor, yiyor)
-4. Stufe 2 (A2): -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag, -(y)Abil, -mAlI, Imperativ; `C`/`G`; `doubles`, `consonant_final`; -ki, Ableitungen
+3. ✅ Unregelmäßigkeiten (su, ne über `y_stem`; de-/ye-: diyor, yiyor, yiyecek)
+4. ✅ Stufe 2: -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag
+5. Stufe 3 (A2): -(y)Abil, -mAlI, Imperativ, -mIş; `C`/`G`; `doubles`, `consonant_final`; -ki, Ableitungen
 
 Jede Regel bekommt Tabellentests nach dem Muster von `src/morphology/inflect.test.ts`; offene
 Punkte stehen dort als `it.todo`.

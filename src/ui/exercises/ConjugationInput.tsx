@@ -18,6 +18,7 @@ export function ConjugationInput({ ex, vocab, onChange, disabled }: Props) {
   const formula = [
     ex.lemma,
     t(`person.${ex.person}`),
+    ex.mode === 'verb' && ex.tense && ex.tense !== 'present' && t(`tense.${ex.tense}`),
     ex.negative && t('ex.conjugation.negative'),
     ex.question && t('ex.conjugation.question'),
   ]

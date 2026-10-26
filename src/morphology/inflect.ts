@@ -18,7 +18,19 @@ export interface Stem {
   proper?: boolean;
   /** Großgeschrieben, aber ohne Apostroph (Nationalitäten: Türkler, Almanım). */
   capitalized?: boolean;
+  /** Stamm mit y vor Genitiv und Possessiv (su → suyun, suyum; ne → neyin). */
+  yStem?: boolean;
 }
+
+// Suffixe, vor denen ein y-Stamm sein y zeigt (nicht POSS_3PL: suları).
+const Y_STEM_TAGS: ReadonlySet<MorphTag> = new Set([
+  'GEN',
+  'POSS_1SG',
+  'POSS_2SG',
+  'POSS_3SG',
+  'POSS_1PL',
+  'POSS_2PL',
+]);
 
 export interface Inflection {
   form: string;
@@ -32,8 +44,8 @@ export class MorphError extends Error {}
 export const KNOWN_LIMITS = [
   'Konsonantenverdopplung (hak → hakkı, ret → reddi)',
   'Stumme Endung arabischer Lehnwörter (cami → camii)',
-  'Unregelmäßige Stämme (su → suyun, ne → neyi)',
-  'Verbmorphologie ab Stufe 2 (Präteritum, Futur, Aorist, Modalität)',
+  'ne + Possessiv 3. Sg. ist „nesi“, mit y_stem entstünde „neyi“',
+  'Verbmorphologie ab Stufe 3 (Imperativ, Modalität, -mIş, Kopula-Vergangenheit idi)',
 ] as const;
 
 export const asStem = (input: Stem | string): Stem =>
@@ -68,7 +80,16 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
       steps.push({ tag, rule: 'pronominal_n' });
     }
 
-    const out = realize(template, tag, { base: stemForm + suffixTexts.join(''), steps, harmonyOf });
+    // y-Stamm: das y gehört zum Suffix-Baustein (su-yun), danach gilt der Stamm als konsonantisch.
+    const yPrefix = i === 0 && stem.yStem && Y_STEM_TAGS.has(tag) ? 'y' : '';
+    if (yPrefix) steps.push({ tag, rule: 'buffer', letter: 'y' });
+    const out =
+      yPrefix +
+      realize(template, tag, {
+        base: stemForm + suffixTexts.join('') + yPrefix,
+        steps,
+        harmonyOf,
+      });
 
     // Lautwandel am Stamm nur vor vokalisch anlautendem erstem Suffix.
     if (i === 0 && isVowel(out[0] ?? '')) {

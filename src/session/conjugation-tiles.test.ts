@@ -64,3 +64,35 @@ describe('grade conjugation', () => {
     expect(grade(name, 'Ayşeyim', opts).verdict).toBe('correct');
   });
 });
+
+describe('conjugationTiles: Stufe 2', () => {
+  it('Präteritum: d/t-Verwechslung und verengte Verneinung als Ablenker', () => {
+    const vocab: Vocab[] = [{ tr: 'gitmek', de: ['gehen'], pos: 'verb', softens: true }];
+    const { tokens } = conjugationTiles(
+      conj({ lemma: 'gitmek', tense: 'past', target: 'gittim' }),
+      vocab,
+    );
+    expect(tokens).toEqual(expect.arrayContaining(['git', 'ti', 'm', 'di']));
+    const neg = conjugationTiles(conj({ tense: 'past', negative: true, target: 'gelmedim' }));
+    expect(neg.tokens).toEqual(expect.arrayContaining(['gel', 'me', 'di', 'm', 'mi']));
+  });
+
+  it('Futur: unerweichtes -ecek als Ablenker', () => {
+    const { tokens } = conjugationTiles(conj({ tense: 'future', target: 'geleceğim' }));
+    expect(tokens).toEqual(expect.arrayContaining(['gel', 'eceğ', 'im', 'ecek']));
+  });
+
+  it('Aorist: andere Vokalklasse und gelmezim als Ablenker', () => {
+    expect(conjugationTiles(conj({ tense: 'aorist', target: 'gelirim' })).tokens).toEqual(
+      expect.arrayContaining(['gel', 'ir', 'im', 'er']),
+    );
+    expect(
+      conjugationTiles(conj({ tense: 'aorist', negative: true, target: 'gelmem' })).tokens,
+    ).toEqual(expect.arrayContaining(['gel', 'me', 'm', 'zim']));
+  });
+
+  it('Bewertung über die Engine-Form', () => {
+    const ex = conj({ tense: 'past', person: '2sg', question: true, target: 'geldin mi?' });
+    expect(grade(ex, 'geldinmi', opts).verdict).toBe('correct');
+  });
+});

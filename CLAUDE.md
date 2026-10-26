@@ -25,7 +25,7 @@ Spec: `SPEC.md`. Strategie und Modellwahl: `STRATEGY.md`. Curriculum: `docs/CURR
 - Übungstyp `paradigm`: Tabelle durchdeklinieren (`kind: noun`, `rows` = Tag-Folgen) oder durchkonjugieren (`verb`/`copula`, `persons`). Copula-Tabellen ohne 3pl (-lar optional). Zellen ohne Groß/Klein-Strenge (`paradigmCells` in `src/session/grade.ts`).
 - „Fehler wiederholen“: reine Funktion `openMistakes` in `src/progress/stats.ts` (letzter Versuch je Übung falsch); Screen `MistakesScreen`, kein Lektionsabschluss.
 - Neue Übungen hinten an die Lektion anhängen, neue Lektionen dürfen mit höherer Nummer vor der Wiederholung stehen; IDs nie umnummerieren.
-- Verben: Vokabel `tr` = Infinitiv (gelmek), Engine `conjugate()`; Nominalsatz `predicate()`; Pronomen als Tabelle (`pronouns.ts`). Weitere Vokabel-Flags: `drops_vowel` (oğul → oğlum), `proper` (İstanbul'da), `capitalized` (Almanlar).
+- Verben: Vokabel `tr` = Infinitiv (gelmek), Engine `conjugate()` mit `tense` present/past/future/aorist (in `conjugation` und `paradigm`); Nominalsatz `predicate()`; Pronomen als Tabelle (`pronouns.ts`). Weitere Vokabel-Flags: `drops_vowel` (oğul → oğlum), `proper` (İstanbul'da), `capitalized` (Almanlar), `y_stem` (su → suyun), `aorist: ar|ir` (Override der Aorist-Regel).
 - UI-Texte als i18n-Schlüssel, nicht hartcodiert.
 - Keine Gamification (siehe SPEC Abschnitt 2).
 - PWA: `vite-plugin-pwa` (`registerType: 'prompt'`), Inhalte (`public/content/*.json`) sind im Precache. `BASE_PATH` setzt die Basis für GitHub Pages. Icons: `npx tsx tools/make-icons.ts` (rendert `public/icon.svg`).

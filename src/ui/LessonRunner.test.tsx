@@ -190,6 +190,33 @@ describe('LessonRunner', () => {
     expect(status).toContain('Vor -yor wird die Verneinung -me/-ma zu „mi“');
   });
 
+  it('Konjugation im Präteritum: Zeit in der Formel, Begründung der Angleichung', () => {
+    const past: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e5',
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'yapmak',
+          person: '1sg',
+          tense: 'past',
+          target: 'yaptım',
+          gloss_de: 'ich habe gemacht',
+        },
+      ],
+    };
+    render(<LessonRunner lesson={past} onExit={() => {}} />);
+    expect(screen.getByText('yapmak · ich · Präteritum')).toBeTruthy();
+    for (const tile of ['yap', 'tı', 'm']) {
+      fireEvent.click(screen.getByRole('button', { name: tile }));
+    }
+    click('Prüfen');
+    const status = screen.getByRole('status').textContent;
+    expect(status).toContain('Richtig!');
+    expect(status).toContain('Nach stimmlosem „p“ wird d zu t');
+  });
+
   it('Tabelle: markiert falsche Zellen und begründet nur diese', () => {
     const parLesson: Lesson = {
       ...lesson,

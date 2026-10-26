@@ -412,5 +412,5 @@ vocab:
   - { tr: her gün, de: [jeden Tag], pos: phrase }
   - { tr: televizyon, de: [Fernseher, Fernsehen], pos: noun }
   - { tr: müzik, de: [Musik], pos: noun }
-  - { tr: ne, de: [was], pos: pron }
+  - { tr: ne, de: [was], pos: pron, y_stem: true }
   - { tr: gazete, de: [Zeitung], pos: noun }

@@ -63,6 +63,7 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
 
   const formula = [
     ex.lemma,
+    ex.kind === 'verb' && ex.tense && ex.tense !== 'present' && t(`tense.${ex.tense}`),
     ex.negative && t('ex.conjugation.negative'),
     ex.question && t('ex.conjugation.question'),
   ]

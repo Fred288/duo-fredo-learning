@@ -375,4 +375,4 @@ vocab:
   - { tr: cam, de: [Glas, Fensterscheibe], pos: noun }
   - { tr: dağ, de: [Berg], pos: noun }
   - { tr: yol, de: [Weg, Straße], pos: noun }
-  - { tr: su, de: [Wasser], pos: noun }
+  - { tr: su, de: [Wasser], pos: noun, y_stem: true }

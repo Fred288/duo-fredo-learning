@@ -173,5 +173,39 @@ describe('inflect', () => {
   // Bekannte Grenzen, siehe KNOWN_LIMITS in inflect.ts und docs/ENGINE_GAPS.md
   it.todo('Konsonantenverdopplung: hak → hakkı, his → hissi, ret → reddi');
   it.todo('Stumme Endung (arab. ʿain): cami → camii (umgangssprachlich auch camisi)');
-  it.todo('Unregelmäßig: su → suyun (Gen.), suyu (Poss. 3. Sg.); ne → neyi');
+  it.todo('ne + Possessiv 3. Sg.: nesi (mit y_stem entstünde neyi)');
+});
+
+describe('y-Stamm (su, ne)', () => {
+  const su = { form: 'su', yStem: true };
+  it.each([
+    [['GEN'], 'suyun'],
+    [['POSS_1SG'], 'suyum'],
+    [['POSS_2SG'], 'suyun'],
+    [['POSS_3SG'], 'suyu'],
+    [['POSS_1PL'], 'suyumuz'],
+    [['POSS_2PL'], 'suyunuz'],
+    [['POSS_3PL'], 'suları'],
+    [['ACC'], 'suyu'],
+    [['DAT'], 'suya'],
+    [['LOC'], 'suda'],
+    [['ABL'], 'sudan'],
+    [['PL'], 'sular'],
+    [['POSS_3SG', 'LOC'], 'suyunda'],
+  ] as const)('su + %s → %s', (tags, form) => {
+    expect(inflect(su, [...tags]).form).toBe(form);
+  });
+
+  it('ne: neyin, neyi, neye', () => {
+    const ne = { form: 'ne', yStem: true };
+    expect(inflect(ne, ['GEN']).form).toBe('neyin');
+    expect(inflect(ne, ['ACC']).form).toBe('neyi');
+    expect(inflect(ne, ['DAT']).form).toBe('neye');
+  });
+
+  it('Baustein und Begründung: su + yun', () => {
+    const r = inflect(su, ['GEN']);
+    expect(r.segments.map((s) => s.text)).toEqual(['su', 'yun']);
+    expect(r.steps).toContainEqual({ tag: 'GEN', rule: 'buffer', letter: 'y' });
+  });
 });

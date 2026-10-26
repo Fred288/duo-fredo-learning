@@ -15,7 +15,10 @@ export type EngineExercise = Extract<Exercise, { type: 'suffix_builder' | 'conju
 export type ParadigmExercise = Extract<Exercise, { type: 'paradigm' }>;
 
 /** Stamm samt lexikalischer Flags (Erweichung, Harmonie, Vokalausfall, Eigenname) aus dem Wortschatz. */
-export function stemFromVocab(form: string, vocab: readonly Vocab[] = []): Stem {
+export function stemFromVocab(
+  form: string,
+  vocab: readonly Vocab[] = [],
+): Stem & { aorist?: 'ar' | 'ir' } {
   const v = vocab.find((x) => x.tr === form);
   return {
     form,
@@ -24,6 +27,8 @@ export function stemFromVocab(form: string, vocab: readonly Vocab[] = []): Stem 
     dropsVowel: v?.drops_vowel,
     proper: v?.proper,
     capitalized: v?.capitalized,
+    yStem: v?.y_stem,
+    aorist: v?.aorist,
   };
 }
 
@@ -33,7 +38,7 @@ export function solveExercise(ex: EngineExercise, vocab: readonly Vocab[] = []):
   const stem = stemFromVocab(ex.lemma, vocab);
   const flags = { person: ex.person, negative: ex.negative, question: ex.question };
   return ex.mode === 'verb'
-    ? conjugate(stem, { tense: 'present', ...flags })
+    ? conjugate(stem, { tense: ex.tense ?? 'present', ...flags })
     : predicate(stem, { ...flags, dir: ex.dir });
 }
 
@@ -49,7 +54,7 @@ export function solveParadigm(ex: ParadigmExercise, vocab: readonly Vocab[] = []
     if (typeof row !== 'string') return inflect(stem, row);
     const flags = { person: row, negative: ex.negative, question: ex.question };
     return ex.kind === 'verb'
-      ? conjugate(stem, { tense: 'present', ...flags })
+      ? conjugate(stem, { tense: ex.tense ?? 'present', ...flags })
       : predicate(stem, flags);
   });
 }

@@ -26,7 +26,14 @@ export type Step =
   | { tag: AnyTag; rule: 'vowel_drop'; vowel: string }
   | { tag: AnyTag; rule: 'stem_vowel_drop'; vowel: string }
   | { tag: AnyTag; rule: 'narrowing'; chose: string }
-  | { tag: AnyTag; rule: 'apostrophe' };
+  | { tag: AnyTag; rule: 'apostrophe' }
+  | { tag: AnyTag; rule: 'stem_raising'; from: string; to: string }
+  | {
+      tag: AnyTag;
+      rule: 'aorist_vowel';
+      kind: 'vowel_stem' | 'monosyllabic' | 'polysyllabic' | 'exception' | 'lexical';
+      chose: string;
+    };
 
 export interface RealizeContext {
   /** Bisher gebildete Form vor diesem Suffix (Groß/Klein egal). */

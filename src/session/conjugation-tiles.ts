@@ -7,6 +7,9 @@ import { seededShuffle } from './grade';
 type Conjugation = Extract<Exercise, { type: 'conjugation' }>;
 
 const GROUPS = ['ıiuü', 'ea'];
+// e/a → i/ı (verengte Verneinung als typischer Fehler außerhalb des Präsens)
+const NARROW: Record<string, string> = { e: 'i', a: 'ı' };
+const OTHER_AORIST: Record<string, string> = { i: 'e', ü: 'e', ı: 'a', u: 'a', e: 'i', a: 'ı' };
 
 /** Alle Formen, in denen ein Vokal des Bausteins durch einen anderen seiner Gruppe ersetzt ist. */
 function harmonyVariants(text: string): string[] {
@@ -35,8 +38,24 @@ export function conjugationTiles(
       // Ungeänderter Stamm (bekle statt bekl, git statt gid) als typischer Fehler
       add([verbStem(ex.lemma)], seed);
     } else if (seg.tag === 'NEG') {
-      // Unverengte Verneinung: gel-me-yor
-      add([`m${harmony2(seg.text.at(-1)!)}`], seed);
+      // Präsens: unverengtes gel-me-yor; sonst die verengte Form als Fehler (gel-mi-di).
+      const v = seg.text.at(-1)!;
+      add([NARROW[v] ? `m${NARROW[v]}` : `m${harmony2(v)}`], seed);
+      // Aorist 1. Person: gelmezim statt gelmem
+      if (ex.tense === 'aorist' && (ex.person === '1sg' || ex.person === '1pl')) {
+        add([`z${NARROW[v] ?? 'i'}${ex.person === '1sg' ? 'm' : 'z'}`], `${seed}-z`);
+      }
+    } else if (seg.tag === 'PAST') {
+      // d/t-Verwechslung (gitdi) neben falscher Harmonie
+      const swapped = (seg.text[0] === 't' ? 'd' : 't') + seg.text.slice(1);
+      add([swapped], seed);
+      add(harmonyVariants(seg.text), `${seed}-h`);
+    } else if (seg.tag === 'FUT' && seg.text.endsWith('ğ')) {
+      // ohne Erweichung: gelecekim
+      add([seg.text.slice(0, -1) + 'k'], seed);
+    } else if (seg.tag === 'AOR' && seg.text.length === 2) {
+      // andere Aorist-Klasse: geler statt gelir, yapır statt yapar
+      add([OTHER_AORIST[seg.text[0]!]! + 'r'], seed);
     } else if (seg.tag !== 'STEM' && seg.tag !== 'NEG_COP') {
       add(harmonyVariants(seg.text), seed);
     }

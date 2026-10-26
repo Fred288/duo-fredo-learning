@@ -21,6 +21,9 @@ export type MorphTag = (typeof MORPH_TAGS)[number];
 // Verbale Bausteine (Präsens, Verneinung, Frage, Kopula) und Personalendungen.
 export const VERB_TAGS = [
   'PRES', // -Iyor
+  'PAST', // -DI
+  'FUT', // -(y)AcAk
+  'AOR', // -r / -Ar / -Ir, verneint -z
   'NEG', // -mA (vor -yor: -mI)
   'Q', // Fragepartikel mI (getrennt geschrieben)
   'NEG_COP', // değil
