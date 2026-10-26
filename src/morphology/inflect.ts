@@ -1,6 +1,6 @@
 import { trLower } from '../lib/turkish';
 import { isVowel, lastVowel, normalize, soften, VOWELS } from './phonology';
-import { POSS_3PL_AFTER_PL, PRONOMINAL_N, SUFFIXES } from './suffixes';
+import { DERIVATIONS, KI_ROUNDED, POSS_3PL_AFTER_PL, PRONOMINAL_N, SUFFIXES } from './suffixes';
 import type { AnyTag, MorphTag } from './tags';
 import { realize, type Step } from './template';
 
@@ -46,7 +46,8 @@ export const KNOWN_LIMITS = [
   'Stumme Endung arabischer Lehnwörter (cami → camii)',
   'ne + Possessiv 3. Sg. ist „nesi“, mit y_stem entstünde „neyi“',
   'Kopula imiş in der Frage (öğretmen miymiş) ungeprüft',
-  'Verbmorphologie ab Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Passiv/Kausativ)',
+  'Verbmorphologie ab Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Kausativ)',
+  'benimki/seninki: Pronomen + -ki nur als Text, nicht über die Engine',
 ] as const;
 
 export const asStem = (input: Stem | string): Stem =>
@@ -76,7 +77,8 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
     const prev = tags[i - 1];
     let template = SUFFIXES[tag].template;
     if (tag === 'POSS_3PL' && prev === 'PL') template = POSS_3PL_AFTER_PL;
-    if ((prev === 'POSS_3SG' || prev === 'POSS_3PL') && PRONOMINAL_N[tag]) {
+    if (tag === 'KI' && i === 0 && KI_ROUNDED.has(normalize(stemForm))) template = 'kü';
+    if ((prev === 'POSS_3SG' || prev === 'POSS_3PL' || prev === 'KI') && PRONOMINAL_N[tag]) {
       template = PRONOMINAL_N[tag]!;
       steps.push({ tag, rule: 'pronominal_n' });
     }
@@ -91,6 +93,15 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
         steps,
         harmonyOf,
       });
+
+    // -lık erweicht vor vokalischer Endung: güzellik → güzelliği.
+    if (prev === 'LIK' && isVowel(out[0] ?? '')) {
+      const s = soften(suffixTexts[i - 1]!);
+      if (s) {
+        suffixTexts[i - 1] = s.form;
+        steps.push({ tag: prev, rule: 'softening', from: s.from, to: s.to });
+      }
+    }
 
     // Lautwandel am Stamm nur vor vokalisch anlautendem erstem Suffix.
     if (i === 0 && isVowel(out[0] ?? '')) {
@@ -113,7 +124,8 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
     suffixTexts.push(out);
   });
 
-  const apostrophe = stem.proper && tags.length > 0 ? "'" : '';
+  // Ableitungen bilden ein neues Wort ohne Apostroph: Ankaralı, Berlinliler.
+  const apostrophe = stem.proper && tags.length > 0 && !DERIVATIONS.has(tags[0]!) ? "'" : '';
   if (apostrophe) steps.push({ tag: tags[0]!, rule: 'apostrophe' });
   return {
     form: stemForm + apostrophe + suffixTexts.join(''),
@@ -134,12 +146,13 @@ function dropLastVowel(form: string): { form: string; vowel: string } | undefine
 }
 
 function checkOrder(tags: MorphTag[]): void {
-  let lastSlot = 0;
+  let lastSlot = -1;
   for (const tag of tags) {
     const { slot } = SUFFIXES[tag];
-    if (slot <= lastSlot) {
-      throw new MorphError(`Ungültige Suffixreihenfolge: ${tags.join(' + ')}`);
-    }
-    lastSlot = slot;
+    // Ableitungen dürfen sich stapeln (kitap-çı-lık).
+    const ok = slot > lastSlot || (slot === 0 && lastSlot === 0);
+    if (!ok) throw new MorphError(`Ungültige Suffixreihenfolge: ${tags.join(' + ')}`);
+    // Nach -ki beginnt ein neues Wort: evde-ki-ler, odada-ki-ni.
+    lastSlot = tag === 'KI' ? 0 : slot;
   }
 }

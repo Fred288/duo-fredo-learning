@@ -42,6 +42,7 @@ export function solveExercise(ex: EngineExercise, vocab: readonly Vocab[] = []):
         tense: ex.tense ?? 'present',
         ability: ex.ability,
         polite: ex.polite,
+        passive: ex.passive,
         ...flags,
       })
     : predicate(stem, { ...flags, dir: ex.dir, tense: copulaTense(ex.tense) });
@@ -67,6 +68,7 @@ export function solveParadigm(ex: ParadigmExercise, vocab: readonly Vocab[] = []
           tense: ex.tense ?? 'present',
           ability: ex.ability,
           polite: ex.polite,
+          passive: ex.passive,
           ...flags,
         })
       : predicate(stem, { ...flags, tense: copulaTense(ex.tense) });

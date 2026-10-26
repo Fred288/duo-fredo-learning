@@ -5,10 +5,13 @@ const EXPANSIONS: Record<string, string[]> = {
   A: ['e', 'a'],
   I: ['i', 'ı', 'ü', 'u'],
   D: ['d', 't'],
+  C: ['c', 'ç'],
 };
 
 /** Alle Oberflächenformen eines Suffix-Templates, inkl. mit/ohne Pufferlaut. */
 export function suffixVariants(tag: MorphTag): string[] {
+  // -ki harmonisiert nicht: die harmonisierten Formen sind typische Fehler.
+  if (tag === 'KI') return ['ki', 'kı', 'ku', 'kü'];
   const template = SUFFIXES[tag].template;
   let forms = [''];
   for (let i = 0; i < template.length; i++) {

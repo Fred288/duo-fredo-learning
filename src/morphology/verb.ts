@@ -65,6 +65,8 @@ export interface ConjugateOptions {
   ability?: boolean;
   /** Imperativ 2. Pl. höflich -(y)InIz (geliniz). */
   polite?: boolean;
+  /** Passiv: -Il nach Konsonant, -In nach l, -n nach Vokal (yapıl-, bilin-, okun-). */
+  passive?: boolean;
 }
 
 export const COPULA_TENSES = ['present', 'past', 'evidential'] as const;
@@ -192,6 +194,7 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
   const verb: VerbStem = typeof input === 'string' ? { form: input } : input;
   const stem = verbStem(verb.form);
   if (!lastVowel(stem)) throw new MorphError(`Verbstamm "${verb.form}" enthält keinen Vokal`);
+  if (opts.passive) return withPassive(verb, stem, opts);
   if (opts.ability) return withAbility(verb, stem, opts);
   if (opts.tense === 'imperative') return imperative(verb, stem, opts);
   const b = new Builder();
@@ -265,6 +268,43 @@ function withAbility(verb: VerbStem, stem: string, opts: ConjugateOptions): Infl
       ...steps,
       ...inner.steps.map((s) =>
         s.rule === 'aorist_vowel' && s.kind === 'lexical' ? { ...s, kind: 'ability' as const } : s,
+      ),
+    ],
+  };
+}
+
+/**
+ * Passiv: Der Passivstamm (yapıl-, okun-, bilin-) wird wie ein eigenes Verb konjugiert.
+ * Passivstämme nehmen im Aorist immer -Ir (yapılır, yenir).
+ */
+function withPassive(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
+  const steps: Step[] = [];
+  let base = stem;
+  let template: string;
+  if (isVowel(stem.at(-1)!)) template = 'n';
+  else {
+    template = stem.at(-1) === 'l' ? 'In' : 'Il';
+    base = softenedStem(verb, stem, 'PASS', steps);
+  }
+  const tail = realize(template, 'PASS', { base, steps });
+  const inner = conjugate({ form: `${base}${tail}mek`, aorist: 'ir' }, { ...opts, passive: false });
+  const [first, ...rest] = inner.segments;
+  // Mit „können“ ist das erste Segment bereits gesplittet (yapıl + abil).
+  const firstText = first?.text ?? '';
+  if (!firstText.startsWith(base + tail)) throw new MorphError(`Unerwarteter Stamm "${firstText}"`);
+  const own = firstText.slice((base + tail).length);
+  return {
+    form: inner.form,
+    segments: [
+      { tag: 'STEM', text: base },
+      { tag: 'PASS', text: tail },
+      ...(own ? [{ tag: first!.tag, text: own }] : []),
+      ...rest,
+    ],
+    steps: [
+      ...steps,
+      ...inner.steps.map((s) =>
+        s.rule === 'aorist_vowel' && s.kind === 'lexical' ? { ...s, kind: 'passive' as const } : s,
       ),
     ],
   };

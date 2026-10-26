@@ -15,7 +15,7 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 | Harmonie nach Gehör statt Schrift (Lehnwörter: saat, gol, kabul)                                             | ✅     | `harmony_vowel` in der Vokabel; Tests für saat, gol, kabul                                                                           | –                                    |
 | Puffer y/n/s gegen Vokalzusammenstoß                                                                         | ✅     | Klammer-Templates `(y)`, `(n)`, `(s)`                                                                                                | –                                    |
 | Stimmlos-Assimilation d→t                                                                                    | ✅     | Archiphonem `D`                                                                                                                      | –                                    |
-| Assimilation c→ç, g→k (Suffixe -ci, -ce, -gen …)                                                             | ❌     | Archiphoneme `C`, `G` ergänzen, sobald Ableitungssuffixe kommen (Türkçe, kitapçı)                                                    | A2                                   |
+| Assimilation c→ç, g→k (Suffixe -ci, -ce, -gen …)                                                             | ◐      | Archiphonem `C` umgesetzt (kitapçı, gazeteci); `G` offen bis -gen/-gil gebraucht werden                                              | B1                                   |
 | Erweichung p/ç/t/k → b/c/d/ğ vor Vokal                                                                       | ✅     | lexikalisch über `softens` (nicht jedes Wort erweicht: at → atı)                                                                     | –                                    |
 | nk → ng                                                                                                      | ✅     | in `soften()`                                                                                                                        | –                                    |
 | Erweichung bei Verbstämmen (et-, git-, tat- → ed-, gid-, tad-)                                               | ✅     | `softens` am Verb (gidiyor, ediyor)                                                                                                  | A1 (Präsens: gidiyorum)              |
@@ -34,8 +34,8 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 | Plural, Possessiv 1.–3. Person Sg./Pl., sechs Kasus                            | ✅     | –                                                                                           | –         |
 | Pronominales n nach Possessiv 3. Person                                        | ✅     | –                                                                                           | –         |
 | Possessiv-Kompositum (Genitiv-Possessiv-Verbindung: okul müdürü, Türk kahvesi) | ❌     | zwei Wörter, das zweite mit POSS_3SG; als eigener Übungsfall, keine neue Engine-Regel nötig | A1/A2     |
-| Zugehörigkeitssuffix -ki (evdeki, benimki)                                     | ❌     | neuer Tag `KI` (harmonisiert nicht, außer bugünkü)                                          | A2        |
-| Ableitungen -lI, -sIz, -lIk, -CI                                               | ❌     | neue Tags; brauchen `C` für -ci                                                             | A2        |
+| Zugehörigkeitssuffix -ki (evdeki, benimki)                                     | ✅     | Tag `KI` (bugünkü, dünkü); danach Plural/Kasus mit pronominalem n; benimki nur als Text     | –         |
+| Ableitungen -lI, -sIz, -lIk, -CI                                               | ✅     | Tags `LI`, `SIZ`, `LIK`, `CI` (Slot 0, stapelbar, ohne Apostroph: Ankaralı)                 | –         |
 | Personalpronomen mit Kasus (bana, sana, beni, benim)                           | ✅     | Tabelle `pronouns.ts` (inkl. bu, şu)                                                        | **A1**    |
 | Kein Plural nach Zahlen und çok/birkaç                                         | –      | keine Engine-Regel; in Inhalten und Erklärkarte (A1-02 erledigt)                            | –         |
 
@@ -45,7 +45,9 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 
 **Stufe 2 umgesetzt**: Präteritum -DI mit Personalendungen Typ 2 (Frage: geldin mi?), Futur -(y)AcAk mit k → ğ vor vokalischer Endung und ye-/de- → yiyecek/diyecek, Aorist (-r / -Ar / -Ir mit der Liste der 13 Einsilber, Override `aorist: ar|ir`, Verneinung gelmem/gelmez/gelmeyiz). `tense` in `conjugation` und `paradigm`.
 
-**Stufe 3 umgesetzt**: Perfekt/Evidential -mIş, Notwendigkeit -mAlI, Imperativ (gel, gelsin, gelin/geliniz, gelsinler; verneint gelme, gelmeyin; git → gidin, ye → yiyin), „können“ -(y)Abil als Option `ability` in allen Zeiten (gelebilirim, gelebildim; verneint gelemem, gelemiyorum, gidemem, yiyemem), Kopula-Vergangenheit -(y)DI mit Typ 2 (öğrenciydim, Türktüm, değildim, öğretmen miydin?) und -(y)mIş. Offen ab hier: Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Passiv/Kausativ).
+**Stufe 3 umgesetzt**: Perfekt/Evidential -mIş, Notwendigkeit -mAlI, Imperativ (gel, gelsin, gelin/geliniz, gelsinler; verneint gelme, gelmeyin; git → gidin, ye → yiyin), „können“ -(y)Abil als Option `ability` in allen Zeiten (gelebilirim, gelebildim; verneint gelemem, gelemiyorum, gidemem, yiyemem), Kopula-Vergangenheit -(y)DI mit Typ 2 (öğrenciydim, Türktüm, değildim, öğretmen miydin?) und -(y)mIş. Offen ab hier: Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Kausativ).
+
+**Passiv umgesetzt** (Option `passive` in `conjugate()`, `conjugation` und `paradigm`): -Il nach Konsonant, -In nach l, -n nach Vokal (yapılıyor, bilinir, okunur, yenir), Aorist immer -Ir, kombinierbar mit `ability` (yapılabilir). Reflexiv ist lexikalisch (yıkanmak, giyinmek) und über das Pronomen kendi (kendim, kendine).
 
 Die Grammatiken unterscheiden vier Typen von Personalendungen; die Engine braucht sie als
 eigene Template-Gruppen:
@@ -74,7 +76,8 @@ Zusätzlich nötig:
 3. ✅ Unregelmäßigkeiten (su, ne über `y_stem`; de-/ye-: diyor, yiyor, yiyecek)
 4. ✅ Stufe 2: -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag
 5. ✅ Stufe 3: -(y)Abil, -mAlI, Imperativ, -mIş, idi/imiş
-6. Stufe 4: Voluntativ, -Iyordu, -sA, Partizipien; `C`/`G`; `doubles`, `consonant_final`; -ki, Ableitungen
+6. ✅ -ki, Ableitungen -lI/-sIz/-lIk/-CI mit `C`, Passiv
+7. Stufe 4: Voluntativ, -Iyordu, -sA, Partizipien, Kausativ; `G`; `doubles`, `consonant_final`
 
 Jede Regel bekommt Tabellentests nach dem Muster von `src/morphology/inflect.test.ts`; offene
 Punkte stehen dort als `it.todo`.

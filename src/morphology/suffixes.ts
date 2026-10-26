@@ -1,13 +1,23 @@
 import type { MorphTag } from './tags';
 
-// Templates in Archiphonem-Notation: A = e/a, I = i/ı/ü/u, D = d/t.
+// Templates in Archiphonem-Notation: A = e/a, I = i/ı/ü/u, D = d/t, C = c/ç.
 // Klammer: (Vokal) nur nach Konsonant, (Konsonant) nur nach Vokal.
 export interface SuffixDef {
   template: string;
-  slot: 1 | 2 | 3; // 1 Plural, 2 Possessiv, 3 Kasus
+  slot: 0 | 1 | 2 | 3 | 4; // 0 Ableitung, 1 Plural, 2 Possessiv, 3 Kasus, 4 -ki
 }
 
+/** Ableitungssuffixe bilden ein neues Wort: mehrere hintereinander erlaubt, kein Apostroph. */
+export const DERIVATIONS: ReadonlySet<MorphTag> = new Set(['LI', 'SIZ', 'LIK', 'CI']);
+
+/** -ki harmonisiert nicht; nur nach diesen Zeitwörtern -kü (bugünkü, dünkü, öbürkü). */
+export const KI_ROUNDED: ReadonlySet<string> = new Set(['bugün', 'dün', 'öbür']);
+
 export const SUFFIXES: Record<MorphTag, SuffixDef> = {
+  LI: { template: 'lI', slot: 0 },
+  SIZ: { template: 'sIz', slot: 0 },
+  LIK: { template: 'lIk', slot: 0 },
+  CI: { template: 'CI', slot: 0 },
   PL: { template: 'lAr', slot: 1 },
   POSS_1SG: { template: '(I)m', slot: 2 },
   POSS_2SG: { template: '(I)n', slot: 2 },
@@ -21,6 +31,7 @@ export const SUFFIXES: Record<MorphTag, SuffixDef> = {
   ABL: { template: 'DAn', slot: 3 },
   GEN: { template: '(n)In', slot: 3 },
   INS: { template: '(y)lA', slot: 3 },
+  KI: { template: 'ki', slot: 4 },
 };
 
 /** Nach Plural trägt die 3. Person Plural keinen zweiten Pluralmarker (evler-i). */

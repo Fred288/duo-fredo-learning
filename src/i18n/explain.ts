@@ -22,7 +22,7 @@ export function explainSteps(steps: Step[]): string[] {
           tag,
         });
       case 'assimilation':
-        return t(step.chose === 't' ? 'explain.assimilation.t' : 'explain.assimilation.d', {
+        return t(`explain.assimilation.${step.chose}`, {
           after: step.after,
           tag,
         });

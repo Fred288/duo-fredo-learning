@@ -19,7 +19,7 @@ export type Step =
       rounded: boolean;
       chose: string;
     }
-  | { tag: AnyTag; rule: 'assimilation'; after: string; chose: 'd' | 't' }
+  | { tag: AnyTag; rule: 'assimilation'; after: string; chose: 'd' | 't' | 'c' | 'ç' }
   | { tag: AnyTag; rule: 'buffer'; letter: string }
   | { tag: AnyTag; rule: 'softening'; from: string; to: string }
   | { tag: AnyTag; rule: 'pronominal_n' }
@@ -31,7 +31,14 @@ export type Step =
   | {
       tag: AnyTag;
       rule: 'aorist_vowel';
-      kind: 'vowel_stem' | 'monosyllabic' | 'polysyllabic' | 'exception' | 'lexical' | 'ability';
+      kind:
+        | 'vowel_stem'
+        | 'monosyllabic'
+        | 'polysyllabic'
+        | 'exception'
+        | 'lexical'
+        | 'ability'
+        | 'passive';
       chose: string;
     };
 
@@ -72,6 +79,12 @@ export function realize(template: string, tag: AnyTag, ctx: RealizeContext): str
     }
     if (ch === 'A' || ch === 'I') {
       out += realizeVowel(ch, harmonyOf(current), tag, ctx.steps);
+      continue;
+    }
+    if (ch === 'C') {
+      const chose = isVoiceless(prevChar) ? 'ç' : 'c';
+      ctx.steps.push({ tag, rule: 'assimilation', after: prevChar, chose });
+      out += chose;
       continue;
     }
     if (ch === 'D') {

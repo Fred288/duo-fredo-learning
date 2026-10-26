@@ -15,13 +15,14 @@ interface Props {
 /** Formel-Teile für Zeit, „können“ und Höflichkeit (gemeinsam mit der Tabelle). */
 export function tenseLabels(
   copula: boolean,
-  ex: { tense?: string; ability?: boolean; polite?: boolean },
+  ex: { tense?: string; ability?: boolean; polite?: boolean; passive?: boolean },
 ): string[] {
   if (copula) {
     return ex.tense === 'past' || ex.tense === 'evidential' ? [t(`copula.${ex.tense}`)] : [];
   }
   const tense = ex.tense as Exclude<typeof ex.tense, undefined>;
   return [
+    ex.passive ? t('ex.conjugation.passive') : '',
     ex.ability ? t('ex.conjugation.ability') : '',
     tense && tense !== 'present' ? t(`tense.${tense as 'past'}`) : '',
     ex.polite ? t('ex.conjugation.polite') : '',

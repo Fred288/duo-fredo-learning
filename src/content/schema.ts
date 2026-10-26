@@ -111,7 +111,7 @@ const COPULA_TENSE_SET: readonly string[] = COPULA_TENSES;
 
 /** Zeit passt zum Modus; Imperativ nur für 2./3. Person. Gemeinsam für Konjugation und Tabelle. */
 function checkVerbForm(
-  e: { tense?: string; ability?: boolean; polite?: boolean },
+  e: { tense?: string; ability?: boolean; polite?: boolean; passive?: boolean },
   copula: boolean,
   persons: readonly string[],
   ctx: z.RefinementCtx,
@@ -119,7 +119,7 @@ function checkVerbForm(
   if (copula && e.tense && !COPULA_TENSE_SET.includes(e.tense)) {
     ctx.addIssue({ code: 'custom', path: ['tense'], message: `Kopula kennt kein ${e.tense}` });
   }
-  if (copula && e.ability) {
+  if (copula && (e.ability || e.passive)) {
     ctx.addIssue({ code: 'custom', path: ['ability'], message: 'ability nur bei Verben' });
   }
   if (e.tense === 'imperative') {
@@ -152,6 +152,7 @@ export const Conjugation = z
     dir: z.boolean().optional(),
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
+    passive: z.boolean().optional(),
     target: nonEmpty,
   })
   .superRefine((e, ctx) => checkVerbForm(e, e.mode === 'copula', [e.person], ctx));
@@ -171,6 +172,7 @@ export const Paradigm = z
     tense: z.enum(TENSES).optional(),
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
+    passive: z.boolean().optional(),
     negative: z.boolean().optional(),
     question: z.boolean().optional(),
     targets: z.array(nonEmpty).min(2),
