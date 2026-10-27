@@ -5,6 +5,7 @@ import {
   completedLessonIds,
   lessonsOnDay,
   openMistakes,
+  progressLessons,
   unitOfLesson,
   type Attempt,
   streak,
@@ -91,5 +92,14 @@ describe('openMistakes', () => {
 
   it('leitet die Unit aus der Lektions-ID ab', () => {
     expect(unitOfLesson('a1-u03-l12')).toBe('a1-u03');
+    expect(unitOfLesson('a1-u03-h1')).toBe('a1-u03');
+  });
+
+  it('Hörlektionen zählen nicht zum Unit-Fortschritt', () => {
+    const lessons = [
+      { id: 'a1-u03-l1', type: 'vocab' },
+      { id: 'a1-u03-h1', type: 'listening' },
+    ];
+    expect(progressLessons(lessons).map((l) => l.id)).toEqual(['a1-u03-l1']);
   });
 });

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Exercise } from '../content/schema';
-import { grade, paradigmCells, solutionOf, wordBankTokens } from './grade';
+import { grade, paradigmCells, solutionOf, tileTokens, wordBankTokens } from './grade';
 
 const opts = { tolerateDiacritics: false };
 
@@ -113,5 +113,38 @@ describe('grade paradigm', () => {
       false,
     ]);
     expect(solutionOf(ex)).toBe('evde, eve, evden');
+  });
+
+  it('Hören: nur der gehörte Satz zählt; Bausteine streng, Diktat wie Freitext', () => {
+    const base = { id: 'x', type: 'listen' as const, text: 'Bir çay lütfen.' };
+    const tiles = { ...base, mode: 'tiles' as const };
+    expect(grade(tiles, 'Bir çay lütfen', opts).verdict).toBe('correct');
+    expect(grade(tiles, 'Bir çay', opts).verdict).toBe('wrong');
+    expect(grade(tiles, 'Bir çay lütfn', opts).verdict).toBe('wrong');
+
+    const dictation = { ...base, mode: 'dictation' as const };
+    expect(grade(dictation, 'bir çay lütfen', opts).verdict).toBe('correct');
+    expect(grade(dictation, 'Bir çay lütfn', opts).verdict).toBe('almost');
+    expect(grade(dictation, 'Bir cay lutfen', { tolerateDiacritics: true })).toMatchObject({
+      verdict: 'correct',
+      hints: ['diacritics'],
+    });
+    expect(solutionOf(dictation)).toBe('Bir çay lütfen.');
+
+    const meaning = {
+      ...base,
+      mode: 'meaning' as const,
+      options: ['Einen Tee, bitte.', 'Einen Kaffee.'],
+      answer: 'Einen Tee, bitte.',
+    };
+    expect(grade(meaning, 'Einen Tee, bitte.', opts).verdict).toBe('correct');
+    expect(grade(meaning, 'Einen Kaffee.', opts).verdict).toBe('wrong');
+    expect(solutionOf(meaning)).toBe('Einen Tee, bitte.');
+  });
+
+  it('Bausteine für Hörübungen: Wörter des Satzes plus Ablenker', () => {
+    expect(tileTokens(['Bir çay lütfen.'], ['kahve'], 'x').sort()).toEqual(
+      ['Bir', 'çay', 'kahve', 'lütfen'].sort(),
+    );
   });
 });

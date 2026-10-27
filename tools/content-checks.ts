@@ -3,6 +3,7 @@ import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { sameForm, solveExercise, solveParadigm } from '../src/content/lexicon';
 import { MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
+import { speechText } from '../src/audio/speech-text';
 
 export interface LoadedUnit {
   file: string;
@@ -162,8 +163,34 @@ export function manifestEntry(unit: Unit) {
   };
 }
 
-/** Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag). */
+/**
+ * Hörübungen nach dem Erzeugen: Text sprechbar, IDs über alle Units eindeutig (auch gegenüber
+ * handgeschriebenen Übungen).
+ */
+export function checkListen(units: LoadedUnit[]): string[] {
+  const errors: string[] = [];
+  const seen = new Map<string, string>();
+  for (const { file, unit } of units) {
+    for (const ex of unit.lessons.flatMap((l) => l.exercises)) {
+      const prev = seen.get(ex.id);
+      if (prev && ex.type === 'listen')
+        errors.push(`${file}: Hörübung "${ex.id}" doppelt (${prev})`);
+      seen.set(ex.id, file);
+      if (ex.type === 'listen' && !speechText(ex.text)) {
+        errors.push(`${file}: ${ex.id}: Text "${ex.text}" ist nicht sprechbar`);
+      }
+    }
+  }
+  return errors;
+}
+
+/**
+ * Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag).
+ * Erzeugte Hörübungen (`from`) zählen nicht extra: ihr Stand folgt der Quelle.
+ */
 export function countUnreviewed(unit: Unit): number {
-  const exercises = unit.lessons.flatMap((l) => l.exercises);
+  const exercises = unit.lessons
+    .flatMap((l) => l.exercises)
+    .filter((e) => !(e.type === 'listen' && e.from));
   return [...exercises, ...(unit.vocab ?? [])].filter((i) => !(i.reviewed ?? unit.reviewed)).length;
 }

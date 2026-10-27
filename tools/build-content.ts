@@ -10,8 +10,12 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
+import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
+import { withListening } from '../src/content/listening';
+import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import {
+  checkListen,
   checkSuffixTargets,
   checkUnits,
   foreignLexicon,
@@ -40,6 +44,18 @@ for (const file of files) {
 const report = checkUnits(units, (p) => existsSync(join(CONTENT_DIR, p)));
 errors.push(...report.errors, ...checkSuffixTargets(units));
 
+// Hörlektionen (src/content/listening.ts) erst einschalten, wenn die App sie anzeigen kann.
+const LISTENING_LESSONS = false;
+const words = courseWords(units.map(({ unit }) => unit));
+const built: LoadedUnit[] = units.map(({ file, unit }) => ({
+  file,
+  unit: annotateSpeech(
+    LISTENING_LESSONS ? withListening(unit, t('listen.lessonTitle')) : unit,
+    words,
+  ),
+}));
+errors.push(...checkListen(built));
+
 const explainers = new Map<string, string>();
 for (const { file, unit } of units) {
   if (!unit.explainer || !existsSync(join(CONTENT_DIR, unit.explainer))) continue;
@@ -59,7 +75,7 @@ if (errors.length > 0) {
 
 rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(join(OUT_DIR, 'units'), { recursive: true });
-for (const { unit } of units) {
+for (const { unit } of built) {
   const lexicon = foreignLexicon(unit, units);
   const out = lexicon.length > 0 ? { ...unit, lexicon } : unit;
   writeFileSync(join(OUT_DIR, 'units', `${unit.id}.json`), JSON.stringify(out));
@@ -70,7 +86,7 @@ for (const { unit } of units) {
   mkdirSync(dirname(target), { recursive: true });
   copyFileSync(join(CONTENT_DIR, unit.explainer), target);
 }
-const manifest = units.map(({ unit }) => manifestEntry(unit));
+const manifest = built.map(({ unit }) => manifestEntry(unit));
 writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));
 const lookup = JSON.stringify(
   buildLookup(
@@ -82,4 +98,11 @@ writeFileSync(join(OUT_DIR, 'lookup.json'), lookup);
 if (lookup.length > LOOKUP_WARN_BYTES) {
   console.warn(`⚠ lookup.json ist ${Math.round(lookup.length / 1000)} KB groß (Precache)`);
 }
+const mc = built
+  .flatMap(({ unit }) => unit.lessons.flatMap((l) => l.exercises))
+  .filter((e) => e.type === 'multiple_choice');
+console.log(
+  `ℹ Vorlesen bei Multiple Choice: ${mc.filter((e) => e.speak_prompt).length} Prompts, ` +
+    `${mc.filter((e) => e.speak_answer).length} Lösungen von ${mc.length}`,
+);
 console.log(`✔ ${units.length} Unit(s) validiert und nach ${OUT_DIR} geschrieben.`);

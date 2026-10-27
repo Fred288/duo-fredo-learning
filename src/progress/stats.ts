@@ -15,8 +15,8 @@ export function openMistakes(attempts: readonly Attempt[]): Attempt[] {
   return [...last.values()].filter((a) => a.verdict === 'wrong').sort((x, y) => x.at - y.at);
 }
 
-/** a1-u03-l2 → a1-u03 */
-export const unitOfLesson = (lessonId: string): string => lessonId.replace(/-l\d+$/, '');
+/** a1-u03-l2 → a1-u03, Hörlektion a1-u03-h1 → a1-u03 */
+export const unitOfLesson = (lessonId: string): string => lessonId.replace(/-[lh]\d+$/, '');
 
 export interface Completion {
   lessonId: string;
@@ -47,6 +47,10 @@ export const lessonsOnDay = (completions: readonly Completion[], day: string): n
 
 export const completedLessonIds = (completions: readonly Completion[]): Set<string> =>
   new Set(completions.map((c) => c.lessonId));
+
+/** Lektionen, die zum Unit-Fortschritt zählen: Hören ist optional und hängt am Gerät (Stimme). */
+export const progressLessons = <L extends { type: string }>(lessons: readonly L[]): L[] =>
+  lessons.filter((l) => l.type !== 'listening');
 
 export function unitProgress(
   lessonIds: readonly string[],

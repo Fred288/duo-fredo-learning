@@ -36,6 +36,8 @@ export const Vocab = z.strictObject({
     'phrase',
   ]),
   tags: z.array(nonEmpty).optional(),
+  // Aufnahme in content/audio/ (Name = Vokabel-ID); synthetisch = per TTS erzeugte Datei.
+  // Ohne audio spricht die App per Laufzeit-TTS, das gilt immer als synthetisch.
   audio: nonEmpty.optional(),
   audio_synthetic: z.boolean().optional(),
   // Morphologie-Ausnahmen: kitap → kitabı, saat → saati (harmonisiert wie hell).
@@ -76,6 +78,10 @@ export const MultipleChoice = z
     prompt: nonEmpty,
     options: z.array(nonEmpty).min(2),
     answer: nonEmpty,
+    // Türkischer Teil des Prompts zum Vorlesen ("" = nichts vorlesen); der Build ergänzt beides.
+    speak_prompt: z.string().trim().optional(),
+    // Antwort ist türkisch: das Feedback liest die Lösung vor (falsche Formen in Optionen nie).
+    speak_answer: z.boolean().optional(),
   })
   .refine((e) => e.options.includes(e.answer), {
     message: 'answer muss in options enthalten sein',
@@ -210,6 +216,41 @@ export const SovPuzzle = z.strictObject({
   order: z.array(nonEmpty).min(2),
 });
 
+/**
+ * Hörübung: `text` wird vorgelesen und ist die Lösung. tiles = aus Bausteinen bauen,
+ * dictation = tippen, meaning = deutsche Bedeutung wählen (options/answer).
+ */
+export const Listen = z
+  .strictObject({
+    ...exerciseBase,
+    type: z.literal('listen'),
+    mode: z.enum(['tiles', 'dictation', 'meaning']),
+    text: nonEmpty,
+    distractors: z.array(nonEmpty).optional(),
+    options: z.array(nonEmpty).min(2).optional(),
+    answer: nonEmpty.optional(),
+    // ID der Übung bzw. Vokabel, aus der die Hörübung erzeugt wurde.
+    from: nonEmpty.optional(),
+  })
+  .superRefine((e, ctx) => {
+    if (e.mode === 'meaning') {
+      if (!e.options || !e.answer || !e.options.includes(e.answer)) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['answer'],
+          message: 'meaning braucht options mit answer',
+        });
+      } else if (new Set(e.options).size !== e.options.length) {
+        ctx.addIssue({ code: 'custom', path: ['options'], message: 'options doppelt' });
+      }
+      if (e.distractors) {
+        ctx.addIssue({ code: 'custom', path: ['distractors'], message: 'nur für tiles' });
+      }
+    } else if (e.options || e.answer) {
+      ctx.addIssue({ code: 'custom', path: ['options'], message: 'options nur für meaning' });
+    }
+  });
+
 export const Exercise = z.discriminatedUnion('type', [
   MultipleChoice,
   WordBank,
@@ -219,11 +260,21 @@ export const Exercise = z.discriminatedUnion('type', [
   Paradigm,
   Segment,
   SovPuzzle,
+  Listen,
 ]);
+
+export const LESSON_TYPES = [
+  'vocab',
+  'grammar',
+  'dialog',
+  'reading',
+  'review',
+  'listening',
+] as const;
 
 export const Lesson = z.strictObject({
   id: nonEmpty,
-  type: z.enum(['vocab', 'grammar', 'dialog', 'reading', 'review']),
+  type: z.enum(LESSON_TYPES),
   title: nonEmpty,
   exercises: z.array(Exercise).min(1),
 });

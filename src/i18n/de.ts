@@ -115,6 +115,8 @@ export const de = {
   'lesson.type.dialog': 'Dialog',
   'lesson.type.reading': 'Lesetext',
   'lesson.type.review': 'Wiederholung',
+  'lesson.type.listening': 'Hören',
+  'listen.lessonTitle': 'Hören und verstehen',
   'runner.back': 'Zurück',
   'runner.progress': 'Aufgabe {current} von {total}',
   'runner.check': 'Prüfen',

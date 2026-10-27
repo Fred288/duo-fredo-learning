@@ -1,18 +1,13 @@
 import { vocabId, type Exercise, type Vocab } from '../content/schema';
+import { fnv1a } from '../lib/hash';
 import { trLower } from '../lib/turkish';
 import { cardId, type VocabRef } from './card';
 
 /** Deutsche Bedeutungen wie in der Vokabelliste: „Land, Staat“. */
 export const glossOf = (v: Vocab): string => v.de.join(', ');
 
-// FNV-1a: stabile Pseudo-Zufallsreihenfolge ohne Math.random, gleich bei jedem Aufruf.
-function hash(s: string): number {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 0x01000193);
-  return h >>> 0;
-}
-const stableShuffle = <T>(items: readonly T[], key: (t: T) => string, seed: string): T[] =>
-  [...items].sort((a, b) => hash(seed + key(a)) - hash(seed + key(b)));
+export const stableShuffle = <T>(items: readonly T[], key: (t: T) => string, seed: string): T[] =>
+  [...items].sort((a, b) => fnv1a(seed + key(a)) - fnv1a(seed + key(b)));
 
 const sharesMeaning = (a: Vocab, b: Vocab) => a.de.some((d) => b.de.includes(d));
 
@@ -37,10 +32,33 @@ export function vocabExercise(ref: VocabRef, vocab: Vocab, pool: readonly Vocab[
   }
 
   const answer = glossOf(vocab);
-  // Homonyme (gleiche tr, andere Bedeutung, z. B. yemek Verb/Nomen) sind keine Ablenker: ihre
-  // Bedeutung wäre eine ebenfalls richtige Antwort.
-  const distinct = others.filter(
-    (o) => trLower(o.tr) !== trLower(vocab.tr) && !sharesMeaning(o, vocab) && glossOf(o) !== answer,
+  const distractors = glossDistractors(vocab, others);
+  if (!distractors.length) {
+    return { id, type: 'free_text', direction: 'tr_de', prompt: vocab.tr, answers: vocab.de };
+  }
+  return {
+    id,
+    type: 'multiple_choice',
+    prompt: vocab.tr,
+    options: stableShuffle([answer, ...distractors], (o) => o, vocab.tr),
+    answer,
+    speak_prompt: vocab.tr,
+  };
+}
+
+/**
+ * Bis zu drei deutsche Bedeutungen anderer Vokabeln als Ablenker, gleiche Wortart zuerst, stabil
+ * gemischt. Homonyme (gleiche tr, andere Bedeutung, z. B. yemek Verb/Nomen) sind keine Ablenker:
+ * ihre Bedeutung wäre eine ebenfalls richtige Antwort.
+ */
+export function glossDistractors(vocab: Vocab, pool: readonly Vocab[], count = 3): string[] {
+  const answer = glossOf(vocab);
+  const distinct = pool.filter(
+    (o) =>
+      vocabId(o) !== vocabId(vocab) &&
+      trLower(o.tr) !== trLower(vocab.tr) &&
+      !sharesMeaning(o, vocab) &&
+      glossOf(o) !== answer,
   );
   const ranked = [
     ...stableShuffle(
@@ -54,15 +72,5 @@ export function vocabExercise(ref: VocabRef, vocab: Vocab, pool: readonly Vocab[
       vocab.tr,
     ),
   ];
-  const distractors = [...new Set(ranked.map(glossOf))].slice(0, 3);
-  if (!distractors.length) {
-    return { id, type: 'free_text', direction: 'tr_de', prompt: vocab.tr, answers: vocab.de };
-  }
-  return {
-    id,
-    type: 'multiple_choice',
-    prompt: vocab.tr,
-    options: stableShuffle([answer, ...distractors], (o) => o, vocab.tr),
-    answer,
-  };
+  return [...new Set(ranked.map(glossOf))].slice(0, count);
 }

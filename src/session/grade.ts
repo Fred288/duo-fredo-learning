@@ -10,6 +10,7 @@ export const SUPPORTED_TYPES = [
   'suffix_builder',
   'conjugation',
   'paradigm',
+  'listen',
 ] as const;
 export type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
 
@@ -43,6 +44,20 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
       return paradigmCells(ex, answer).every(Boolean)
         ? { verdict: 'correct', matched: ex.targets.join(', '), hints: [] }
         : { verdict: 'wrong', hints: [] };
+    case 'listen':
+      if (ex.mode === 'meaning') {
+        return answer === ex.answer
+          ? { verdict: 'correct', matched: ex.answer, hints: [] }
+          : { verdict: 'wrong', hints: [] };
+      }
+      // Gehört ist genau ein Satz: nur er zählt. Bausteine ohne Tippfehler, Diktat wie Freitext.
+      return checkAnswer(
+        answer,
+        [ex.text],
+        ex.mode === 'tiles'
+          ? { allowTypos: false }
+          : { tolerateDiacritics: opts.tolerateDiacritics },
+      );
   }
 }
 
@@ -67,6 +82,7 @@ export function solutionOf(ex: Supported): string {
   if (ex.type === 'multiple_choice') return ex.answer;
   if (ex.type === 'suffix_builder' || ex.type === 'conjugation') return ex.target;
   if (ex.type === 'paradigm') return ex.targets.join(', ');
+  if (ex.type === 'listen') return ex.mode === 'meaning' ? ex.answer! : ex.text;
   return ex.answers[0]!;
 }
 
@@ -75,10 +91,19 @@ export function solutionOf(ex: Supported): string {
  * z. B. mit und ohne Pronomen) plus Ablenker, stabil gemischt. Groß/Klein gilt als gleiches Wort.
  */
 export function wordBankTokens(ex: Extract<Exercise, { type: 'word_bank' }>): string[] {
+  return tileTokens(ex.answers, ex.distractors, ex.id);
+}
+
+/** Bausteine aus Lösungen und Ablenkern; auch für Hörübungen (tiles) mit dem gehörten Satz. */
+export function tileTokens(
+  answers: readonly string[],
+  distractors: readonly string[] = [],
+  seed: string,
+): string[] {
   // Je Wort (ohne Groß/Klein) die Schreibungen der Antwort mit den meisten Vorkommen:
   // „Bir varmış, bir yokmuş“ braucht Bir und bir.
   const needed = new Map<string, string[]>();
-  for (const answer of ex.answers) {
+  for (const answer of answers) {
     const spellings = new Map<string, string[]>();
     for (const raw of answer.split(/\s+/)) {
       const word = raw.replace(/^[„"«]+|[.,!?;:"“»]+$/g, '');
@@ -90,8 +115,8 @@ export function wordBankTokens(ex: Extract<Exercise, { type: 'word_bank' }>): st
     }
   }
   const words = [...needed.values()].flat();
-  const extra = (ex.distractors ?? []).filter((d) => !needed.has(trLower(d)));
-  return seededShuffle([...words, ...extra], ex.id);
+  const extra = distractors.filter((d) => !needed.has(trLower(d)));
+  return seededShuffle([...words, ...extra], seed);
 }
 
 export function seededShuffle<T>(items: T[], seed: string): T[] {

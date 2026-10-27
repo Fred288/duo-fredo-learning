@@ -22,6 +22,14 @@ Siehe `SPEC.md` 7.2: Wikibooks Türkisch/Turkish, Tatoeba (CC BY 2.0 FR), Wiktio
 (CC BY-SA), FrequencyWords (CC BY-SA 4.0). Noch nicht importiert; geplant über
 `tools/build_vocab.ts` und `tools/import_tatoeba.ts` (SPEC 9).
 
+## Audio
+
+Keine Aufnahmen aus Lehrwerken oder Apps. Heute spricht die App per Web Speech API (`tr-TR`)
+mit den Stimmen des Geräts; daraus entstehen keine Dateien im Repo. Spätere Aufnahmen (SPEC 7.4):
+eigene oder von Muttersprachlern geprüfte, sonst Tatoeba/Wiktionary/Forvo nur mit passender
+Lizenz, Dateien in `content/audio/` (Name = Daten-ID), per TTS erzeugte Dateien mit
+`audio_synthetic: true`.
+
 ## Weiterführend (Referenzgrammatik zum Nachschlagen)
 
 Göksel/Kerslake: _Turkish. A Comprehensive Grammar_ (Routledge) als englischsprachige

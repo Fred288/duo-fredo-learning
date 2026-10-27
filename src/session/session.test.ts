@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Exercise } from '../content/schema';
-import { createSession, currentExercise, next, submit, summary } from './session';
+import { createSession, currentExercise, next, skip, submit, summary } from './session';
 
 const ex = (id: string): Exercise => ({
   id,
@@ -50,5 +50,27 @@ describe('Session', () => {
 
   it('ist bei leerer Lektion sofort fertig', () => {
     expect(createSession([]).phase).toBe('done');
+  });
+
+  it('überspringt ohne Versuch, auch die Wiederholung am Ende', () => {
+    let s = createSession([ex('a'), ex('b')]);
+    s = next(submit(s, wrong));
+    s = skip(next(submit(s, ok)));
+    expect(s.phase).toBe('done');
+    expect(summary(s)).toEqual({ correct: 1, total: 2 });
+
+    s = skip(createSession([ex('a'), ex('b')]));
+    expect(currentExercise(s)?.id).toBe('b');
+    expect(s.firstTry).toEqual({});
+  });
+
+  it('überspringt mit sameType alle folgenden Übungen desselben Typs', () => {
+    const listen = (id: string): Exercise => ({ id, type: 'listen', mode: 'dictation', text: id });
+    let s = createSession([listen('h1'), ex('a'), listen('h2')]);
+    s = skip(s, { sameType: true });
+    expect(s.queue.map((e) => e.id)).toEqual(['a']);
+    s = next(submit(s, ok));
+    expect(s.phase).toBe('done');
+    expect(skip(s)).toBe(s);
   });
 });
