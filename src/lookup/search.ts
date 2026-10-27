@@ -4,7 +4,9 @@ import { exactKey, searchKey } from './key';
 import type { LookupIndex, SectionEntry, VocabEntry } from './types';
 
 // Rangstufen, kleiner ist besser. Abschnitte bilden eine eigene Liste mit eigenen Stufen.
-export const TIER = { exact: 0, prefix: 1, wordPrefix: 2, infix: 3, form: 4 } as const;
+// Eine vollständige gebeugte Form (evi, ona, ister) steht vor bloßen Präfix- und Teilwort-Treffern
+// (sevinmek, Glosse „Monat“), sonst verdrängt Rauschen gerade die kurzen, häufigen Wörter.
+export const TIER = { exact: 0, form: 1, prefix: 2, wordPrefix: 3, infix: 4 } as const;
 export type Tier = (typeof TIER)[keyof typeof TIER];
 
 /** Teilwortsuche (mitten im Wort) erst ab dieser Länge, sonst trifft fast alles. */
@@ -25,6 +27,8 @@ interface PreparedVocab {
   de: Key[];
   /** Mögliche Stämme (gefaltet), deren Präfix eine gebeugte Form haben muss. */
   stems: string[];
+  /** Gefaltete Form → Schreibung und Lesarten; wird beim ersten Bedarf aus der Engine gebaut. */
+  forms?: Map<string, FormMatch>;
 }
 
 interface PreparedSection {
@@ -52,6 +56,7 @@ function glossKeys(gloss: string): Key[] {
 /**
  * Stammanfänge, mit denen jede gebeugte Form beginnt: Erweichung ändert den letzten Laut
  * (kitap → kitab-), Vokalausfall die letzten zwei (oğul → oğl-), de-/ye- werden di-/yi-.
+ * Verbstämme auf -a/-e verlieren den Vokal vor dem Präsens -Iyor (anla- → anlıyor, bekle- → bekliyor).
  */
 function stemsOf(e: VocabEntry): string[] {
   const kind = formKind(e);
@@ -60,7 +65,23 @@ function stemsOf(e: VocabEntry): string[] {
   const base = searchKey(kind === 'verb' ? verbStem(e.tr) : e.tr);
   const irregular = kind === 'verb' && /^[dy]e$/.test(base);
   const cut = e.drops_vowel ? 2 : e.softens || irregular ? 1 : 0;
-  return [base.slice(0, base.length - cut)].filter(Boolean);
+  const stems = [base.slice(0, base.length - cut)];
+  if (kind === 'verb' && /[ae]$/.test(base)) stems.push(base.slice(0, -1));
+  return stems.filter(Boolean);
+}
+
+/** Alle Engine-Formen der Vokabel nach Suchschlüssel, einmal je Vokabel berechnet. */
+function formsOf(v: PreparedVocab): Map<string, FormMatch> {
+  if (!v.forms) {
+    v.forms = new Map();
+    for (const f of allForms(v.entry)) {
+      const k = searchKey(f.form);
+      const known = v.forms.get(k);
+      if (known) known.labels.push(f.label);
+      else v.forms.set(k, { form: f.form, labels: [f.label] });
+    }
+  }
+  return v.forms;
 }
 
 /** Einmal nach dem Laden: Suchschlüssel aller Einträge (wenige Millisekunden). */
@@ -140,10 +161,8 @@ export function lemmatize(
   if (q.length < MIN_FORM) return [];
   return prepared.vocab.flatMap((v) => {
     if (!v.stems.some((s) => q.startsWith(s)) || q === v.tr.fold) return [];
-    const found = allForms(v.entry).filter((f) => searchKey(f.form) === q);
-    return found.length
-      ? [{ entry: v.entry, form: found[0]!.form, labels: found.map((f) => f.label) }]
-      : [];
+    const found = formsOf(v).get(q);
+    return found ? [{ entry: v.entry, ...found }] : [];
   });
 }
 
@@ -190,7 +209,8 @@ export function search(prepared: PreparedLookup, query: string, limit = MAX_RESU
     if (hit) hits.set(v.entry.id, hit);
   }
   for (const f of lemmatize(prepared, query)) {
-    if (hits.has(f.entry.id)) continue;
+    // Ein direkter Treffer ohne Formbezug (Teilwort, Präfix) weicht dem genaueren Formtreffer.
+    if ((hits.get(f.entry.id)?.tier ?? Infinity) <= TIER.form) continue;
     const v = prepared.vocab.find((x) => x.entry.id === f.entry.id)!;
     hits.set(f.entry.id, {
       entry: f.entry,

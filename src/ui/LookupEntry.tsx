@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { t, type MessageKey } from '../i18n';
 import { formTable, type FormLabel } from '../lookup/forms';
 import type { LookupIndex, VocabEntry } from '../lookup/types';
@@ -152,10 +153,14 @@ export function LookupEntry({
 }) {
   const openExplainer = useApp((s) => s.openExplainer);
   const unit = index.units.find((u) => u.id === entry.unit);
+  // Das Suchfeld verschwindet beim Öffnen: Fokus auf die Überschrift, damit Tastatur und
+  // Screenreader im Eintrag ankommen.
+  const heading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => heading.current?.focus(), [entry.id]);
   return (
     <article className="space-y-4">
       <header>
-        <h2 className="text-2xl font-semibold" lang="tr">
+        <h2 ref={heading} tabIndex={-1} className="text-2xl font-semibold outline-none" lang="tr">
           {entry.tr}
         </h2>
         <p className="mt-1">{entry.de.join(', ')}</p>

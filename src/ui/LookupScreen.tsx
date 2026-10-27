@@ -1,4 +1,4 @@
-import { useDeferredValue, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchLookup } from '../content/load';
 import { t } from '../i18n';
 import { prepareLookup, search, type PreparedLookup } from '../lookup/search';
@@ -34,13 +34,22 @@ export function LookupScreen() {
     };
   }, []);
 
-  const deferred = useDeferredValue(query);
+  // Die Suche braucht unter 3 ms; ohne Verzögerung entspricht Enter immer dem sichtbaren Text.
   const result = useMemo(
-    () => (prepared ? search(prepared, deferred) : { vocab: [], sections: [] }),
-    [prepared, deferred],
+    () => (prepared ? search(prepared, query) : { vocab: [], sections: [] }),
+    [prepared, query],
   );
   const entry = entryId ? prepared?.index.vocab.find((v) => v.id === entryId) : undefined;
   const total = result.vocab.length + result.sections.length;
+
+  // Escape schließt einen geöffneten Eintrag (das Suchfeld ist dann nicht im DOM).
+  const hasEntry = !!entry;
+  useEffect(() => {
+    if (!hasEntry) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setLookup(query);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [hasEntry, query, setLookup]);
 
   const openSection = (unit: string, slug: string) =>
     openExplainer(unit, { section: slug, from: 'lookup' });
@@ -99,17 +108,22 @@ export function LookupScreen() {
               input.current?.focus();
             }}
           />
-          {!deferred.trim() ? (
+          {/* Dauerhaft im DOM, sonst lesen Screenreader die erste Trefferzahl nicht vor. */}
+          <p
+            role="status"
+            aria-live="polite"
+            className="text-sm text-stone-600 dark:text-stone-400"
+          >
+            {!query.trim()
+              ? ''
+              : total === 0
+                ? t('lookup.none')
+                : t('lookup.count', { count: total })}
+          </p>
+          {!query.trim() ? (
             <Register prepared={prepared} onOpen={openSection} />
           ) : (
             <>
-              <p
-                role="status"
-                aria-live="polite"
-                className="text-sm text-stone-600 dark:text-stone-400"
-              >
-                {total === 0 ? t('lookup.none') : t('lookup.count', { count: total })}
-              </p>
               {result.vocab.length > 0 && (
                 <ul className="space-y-2" aria-label={t('lookup.words')}>
                   {result.vocab.map((h) => (

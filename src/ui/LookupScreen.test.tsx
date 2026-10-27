@@ -93,6 +93,33 @@ describe('LookupScreen', () => {
     expect((screen.getByRole('searchbox') as HTMLInputElement).value).toBe('ev');
   });
 
+  it('fokussiert beim Öffnen die Überschrift, Escape kehrt zur Liste zurück', async () => {
+    render(<LookupScreen />);
+    await type('ev');
+    fireEvent.keyDown(screen.getByRole('searchbox'), { key: 'Enter' });
+    const heading = await screen.findByRole('heading', { name: 'ev' });
+    expect(document.activeElement).toBe(heading);
+    fireEvent.keyDown(window, { key: 'Escape' });
+    expect((await screen.findByRole('searchbox')) as HTMLInputElement).toBeTruthy();
+    expect(useApp.getState().lookupEntry).toBeUndefined();
+    expect(useApp.getState().lookupQuery).toBe('ev');
+  });
+
+  it('Enter öffnet immer den Treffer des aktuellen Suchtexts', async () => {
+    render(<LookupScreen />);
+    await type('kit');
+    await type('ev');
+    fireEvent.keyDown(screen.getByRole('searchbox'), { key: 'Enter' });
+    expect(useApp.getState().lookupEntry).toBe('ev');
+  });
+
+  it('Live-Region ist von Anfang an im DOM', async () => {
+    render(<LookupScreen />);
+    expect((await screen.findByRole('status')).textContent).toBe('');
+    await type('ev');
+    expect(screen.getByRole('status').textContent).toMatch(/Treffer/);
+  });
+
   it('Eintrag ohne Karte: „noch nicht im Wiederholen“', async () => {
     useProgress.setState({ cards: [] });
     useApp.setState({ lookupEntry: 'kitap' });

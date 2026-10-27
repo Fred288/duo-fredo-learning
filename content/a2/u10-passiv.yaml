@@ -734,7 +734,7 @@ vocab:
   - { tr: kullanmak, de: [benutzen], pos: verb }
   - { tr: satmak, de: [verkaufen], pos: verb }
   - { tr: dağıtmak, de: [verteilen, austragen], pos: verb }
-  - { tr: hissetmek, de: [fühlen], pos: verb, softens: true }
+  - { tr: hissetmek, de: [fühlen], pos: verb, softens: true, aorist: ar }
   - { tr: tanıtmak, de: [vorstellen], pos: verb }
   - { tr: kendi, de: [selbst, eigen], pos: pron }
   - { tr: yıkanmak, de: [sich waschen], pos: verb }

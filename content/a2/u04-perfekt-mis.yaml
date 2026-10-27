@@ -622,7 +622,7 @@ vocab:
   - { tr: haber, de: [Nachricht], pos: noun }
   - { tr: komşu, de: [Nachbar, Nachbarin], pos: noun }
   - { tr: kaza, de: [Unfall], pos: noun }
-  - { tr: kaybetmek, de: [verlieren], pos: verb, softens: true }
+  - { tr: kaybetmek, de: [verlieren], pos: verb, softens: true, aorist: ar }
   - { tr: kazanmak, de: [gewinnen, verdienen], pos: verb }
   - { tr: bulmak, de: [finden], pos: verb }
   - { tr: düşmek, de: [fallen], pos: verb }

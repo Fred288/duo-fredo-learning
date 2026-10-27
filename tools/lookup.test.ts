@@ -3,9 +3,10 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { vocabId } from '../src/content/schema';
-import { formTable } from '../src/lookup/forms';
+import { allForms, formTable } from '../src/lookup/forms';
+import { searchKey } from '../src/lookup/key';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
-import { prepareLookup, search } from '../src/lookup/search';
+import { lemmatize, prepareLookup, search } from '../src/lookup/search';
 import { parseUnitFile } from './content-checks';
 
 const units = readdirSync('content', { recursive: true, encoding: 'utf8' })
@@ -68,6 +69,46 @@ describe('Suche über die echten Inhalte', () => {
   it('Grammatikbegriffe finden Abschnitte', () => {
     expect(search(prepared, 'Vokalharmonie').sections.length).toBeGreaterThan(0);
     expect(search(prepared, 'değil').sections[0]!.section.title).toMatch(/değil/);
+  });
+
+  it('Rundlauf: jede Engine-Form führt auf ihre Vokabel zurück', () => {
+    // Formen, die auch Grundform eines anderen Eintrags sind, sind vom Treffer-Test ausgenommen.
+    const bare = new Set(index.vocab.map((v) => searchKey(v.tr)));
+    const failures: string[] = [];
+    for (const entry of index.vocab) {
+      for (const f of allForms(entry)) {
+        const q = searchKey(f.form);
+        if (q.length < 3 || bare.has(q)) continue;
+        const found = lemmatize(prepared, f.form).some((h) => h.entry.id === entry.id);
+        if (!found) failures.push(`${entry.id}: ${f.form}`);
+      }
+    }
+    expect(failures.slice(0, 20)).toEqual([]);
+  });
+
+  it('kurze Stämme: die gebeugte Form steht vor Präfix- und Teilwort-Rauschen', () => {
+    expect(top('evi', 1)).toEqual(['ev']);
+    expect(top('ona', 1)).toEqual(['o']);
+    expect(top('ister', 1)).toEqual(['istemek']);
+    expect(top('üçü', 1)).toEqual(['üç']);
+    expect(top('eve', 1)).toEqual(['ev']);
+  });
+
+  it('Präsens von Verben auf -a/-e', () => {
+    for (const [q, id] of [
+      ['anlıyorum', 'anlamak'],
+      ['bekliyorum', 'beklemek'],
+      ['istiyorum', 'istemek'],
+      ['söylüyorum', 'söylemek'],
+      ['yaşıyorum', 'yaşamak'],
+    ] as const)
+      expect(top(q)).toContain(id);
+  });
+
+  it('Aorist von kaybetmek und hissetmek', () => {
+    expect(top('kaybederim')).toContain('kaybetmek');
+    expect(top('hissederim')).toContain('hissetmek');
+    expect(top('hissedirim')).not.toContain('hissetmek');
   });
 
   it('jede Formtabelle lässt sich bilden (keine Engine-Ausnahme)', () => {
