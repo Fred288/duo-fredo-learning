@@ -1,4 +1,5 @@
 import { Fragment, type ReactNode } from 'react';
+import { sectionSlug } from '../content/explainer-section';
 
 // Kleines Markdown-Subset für Erklärkarten: #-Überschriften, Absätze, - Listen,
 // Pipe-Tabellen, **fett**, `code`. Es werden nur React-Elemente gebaut, nie HTML.
@@ -55,7 +56,12 @@ export function Markdown({ source }: { source: string }) {
       const level = (heading[1] ?? '#').length;
       const Tag = `h${level}` as 'h1' | 'h2' | 'h3';
       blocks.push(
-        <Tag key={key} className={HEADING_CLASS[level] ?? ''}>
+        <Tag
+          key={key}
+          id={level === 2 ? sectionSlug(heading[2] ?? '') : undefined}
+          tabIndex={level === 2 ? -1 : undefined}
+          className={`${HEADING_CLASS[level] ?? ''} scroll-mt-4 outline-none`}
+        >
           {inline(heading[2] ?? '')}
         </Tag>,
       );

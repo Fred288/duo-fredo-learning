@@ -6,7 +6,8 @@ export type Screen =
   | { name: 'review' }
   | { name: 'mistakes' }
   | { name: 'repeat' }
-  | { name: 'explainer'; unitId: string }
+  | { name: 'lookup' }
+  | { name: 'explainer'; unitId: string; section?: string; from?: 'lookup' }
   | { name: 'lesson'; unitId: string; lessonId: string };
 
 interface AppState {
@@ -16,7 +17,12 @@ interface AppState {
   openReview: () => void;
   openMistakes: () => void;
   openRepeat: () => void;
-  openExplainer: (unitId: string) => void;
+  openExplainer: (unitId: string, opts?: { section?: string; from?: 'lookup' }) => void;
+  openLookup: () => void;
+  /** Suchtext und geöffneter Eintrag bleiben erhalten, wenn man aus einer Erklärkarte zurückkehrt. */
+  lookupQuery: string;
+  lookupEntry?: string;
+  setLookup: (query: string, entry?: string) => void;
   goHome: () => void;
 }
 
@@ -28,6 +34,10 @@ export const useApp = create<AppState>((set) => ({
   openReview: () => set({ screen: { name: 'review' } }),
   openMistakes: () => set({ screen: { name: 'mistakes' } }),
   openRepeat: () => set({ screen: { name: 'repeat' } }),
-  openExplainer: (unitId) => set({ screen: { name: 'explainer', unitId } }),
+  openExplainer: (unitId, opts) => set({ screen: { name: 'explainer', unitId, ...opts } }),
+  openLookup: () => set({ screen: { name: 'lookup' } }),
+  lookupQuery: '',
+  lookupEntry: undefined,
+  setLookup: (lookupQuery, lookupEntry) => set({ lookupQuery, lookupEntry }),
   goHome: () => set({ screen: { name: 'home' } }),
 }));

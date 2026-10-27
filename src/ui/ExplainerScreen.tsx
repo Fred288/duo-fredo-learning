@@ -5,8 +5,16 @@ import { useApp } from '../store/app';
 import { Markdown } from './Markdown';
 
 /** Zeigt die Erklärkarte (Markdown) einer Unit. */
-export function ExplainerScreen({ unitId }: { unitId: string }) {
-  const goHome = useApp((s) => s.goHome);
+export function ExplainerScreen({
+  unitId,
+  section,
+  from,
+}: {
+  unitId: string;
+  section?: string;
+  from?: 'lookup';
+}) {
+  const goBack = useApp((s) => (from === 'lookup' ? s.openLookup : s.goHome));
   const [text, setText] = useState<string>();
   const [failed, setFailed] = useState(false);
 
@@ -25,14 +33,22 @@ export function ExplainerScreen({ unitId }: { unitId: string }) {
     };
   }, [unitId]);
 
+  // Sprung aus dem Nachschlagewerk: zur Überschrift scrollen und sie fokussieren (Screenreader).
+  useEffect(() => {
+    if (text === undefined || !section) return;
+    const heading = document.getElementById(section);
+    heading?.scrollIntoView?.();
+    heading?.focus({ preventScroll: true });
+  }, [text, section]);
+
   return (
     <section className="space-y-4">
       <button
         type="button"
-        onClick={goHome}
+        onClick={goBack}
         className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-stone-400 dark:hover:bg-stone-800"
       >
-        ← {t('explainer.back')}
+        ← {t(from === 'lookup' ? 'lookup.title' : 'explainer.back')}
       </button>
       {failed ? (
         <p className="text-rose-700 dark:text-rose-400">{t('explainer.error')}</p>
