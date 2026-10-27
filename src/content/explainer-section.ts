@@ -1,10 +1,15 @@
 import { trLower } from '../lib/turkish';
+import { searchKey } from '../lookup/key';
 import type { Exercise } from './schema';
 
 export interface ExplainerSection {
   title: string;
   body: string;
 }
+
+/** Anker einer Überschrift („mit: ile / -le, -la“ → `mit-ile-le-la`), innerhalb einer Karte eindeutig. */
+export const sectionSlug = (title: string): string =>
+  searchKey(title.replaceAll('**', '')).replaceAll(' ', '-');
 
 /** Abschnitte einer Erklärkarte an den ##-Überschriften; Titel und Einleitung davor entfallen. */
 export function explainerSections(markdown: string): ExplainerSection[] {

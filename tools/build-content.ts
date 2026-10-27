@@ -10,6 +10,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
+import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import {
   checkSuffixTargets,
   checkUnits,
@@ -39,6 +40,16 @@ for (const file of files) {
 const report = checkUnits(units, (p) => existsSync(join(CONTENT_DIR, p)));
 errors.push(...report.errors, ...checkSuffixTargets(units));
 
+const explainers = new Map<string, string>();
+for (const { file, unit } of units) {
+  if (!unit.explainer || !existsSync(join(CONTENT_DIR, unit.explainer))) continue;
+  const md = readFileSync(join(CONTENT_DIR, unit.explainer), 'utf8');
+  explainers.set(unit.explainer, md);
+  for (const slug of duplicateSlugs(md)) {
+    errors.push(`${file}: ${unit.explainer}: Überschrift doppelt (Anker "${slug}")`);
+  }
+}
+
 for (const w of report.warnings) console.warn(`⚠ ${w}`);
 if (errors.length > 0) {
   for (const e of errors) console.error(`✖ ${e}`);
@@ -61,4 +72,14 @@ for (const { unit } of units) {
 }
 const manifest = units.map(({ unit }) => manifestEntry(unit));
 writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));
+const lookup = JSON.stringify(
+  buildLookup(
+    units.map(({ unit }) => unit),
+    explainers,
+  ),
+);
+writeFileSync(join(OUT_DIR, 'lookup.json'), lookup);
+if (lookup.length > LOOKUP_WARN_BYTES) {
+  console.warn(`⚠ lookup.json ist ${Math.round(lookup.length / 1000)} KB groß (Precache)`);
+}
 console.log(`✔ ${units.length} Unit(s) validiert und nach ${OUT_DIR} geschrieben.`);
