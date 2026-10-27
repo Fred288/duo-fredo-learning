@@ -1,6 +1,7 @@
 import { parse as parseYaml } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
-import { sameForm, solveExercise, solveParadigm } from '../src/content/lexicon';
+import { sameForm, solveExercise, solveForm, solveParadigm } from '../src/content/lexicon';
+import { isAmbiguous, pieces } from '../src/content/segmenting';
 import { MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
 import { speechText } from '../src/audio/speech-text';
@@ -126,6 +127,45 @@ export function checkSuffixTargets(units: LoadedUnit[]): string[] {
   return errors;
 }
 
+const SEGMENT_SOURCES = new Set(['suffix_builder', 'conjugation', 'paradigm']);
+
+/**
+ * Zerlege-Übungen (erzeugt oder handgeschrieben): Quelle vorhanden, Engine bildet dieselbe Form
+ * mit denselben Stücken und Rollen, die Form ist nicht mehrdeutig, jeder Schritt begründbar.
+ */
+export function checkSegments(units: LoadedUnit[]): string[] {
+  const lexicon = units.flatMap(({ unit }) => unit.vocab ?? []);
+  const errors: string[] = [];
+  for (const { file, unit } of units) {
+    const exercises = unit.lessons.flatMap((l) => l.exercises);
+    const ids = new Set(exercises.filter((e) => SEGMENT_SOURCES.has(e.type)).map((e) => e.id));
+    for (const ex of exercises) {
+      if (ex.type !== 'segment') continue;
+      const fail = (msg: string) => errors.push(`${file}: ${ex.id}: ${msg}`);
+      if (!ids.has(ex.from)) fail(`Quelle "${ex.from}" ist keine Grammatikübung dieser Unit`);
+      try {
+        const inf = solveForm(ex.analysis, lexicon);
+        const expected = pieces(inf, ex.analysis.kind === 'noun' ? undefined : ex.analysis.person);
+        const got = ex.segments;
+        if (!sameForm(inf.form, ex.word)) fail(`word "${ex.word}", Engine erwartet "${inf.form}"`);
+        if (
+          expected.length !== got.length ||
+          expected.some((p, i) => p.text !== got[i]!.text || p.tag !== got[i]!.tag)
+        ) {
+          const show = (s: typeof got) => s.map((p) => `${p.text}:${p.tag}`).join(' ');
+          fail(`Stücke "${show(got)}", Engine erwartet "${show(expected)}"`);
+        }
+        if (isAmbiguous(ex.analysis, inf, lexicon)) fail(`"${ex.word}" ist mehrdeutig`);
+        if (unexplained(inf.steps)) fail('Engine-Schritt ohne Begründungstext (i18n)');
+      } catch (e) {
+        if (!(e instanceof MorphError)) throw e;
+        fail(e.message);
+      }
+    }
+  }
+  return errors;
+}
+
 /**
  * Vokabeln aus anderen Units, deren Flags (softens, proper …) die Grammatikübungen dieser Unit
  * brauchen. Zur Laufzeit wird nur eine Unit geladen, daher schreibt der Build sie mit aus.
@@ -141,7 +181,9 @@ export function foreignLexicon(unit: Unit, units: LoadedUnit[]): Vocab[] {
           ? [ex.stem]
           : ex.type === 'conjugation' || ex.type === 'paradigm'
             ? [ex.lemma]
-            : [],
+            : ex.type === 'segment'
+              ? [ex.analysis.lemma]
+              : [],
       )
       .filter((form) => !own.has(form)),
   );
@@ -186,11 +228,11 @@ export function checkListen(units: LoadedUnit[]): string[] {
 
 /**
  * Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag).
- * Erzeugte Hörübungen (`from`) zählen nicht extra: ihr Stand folgt der Quelle.
+ * Erzeugte Übungen (Hören, Zerlegen; mit `from`) zählen nicht extra: ihr Stand folgt der Quelle.
  */
 export function countUnreviewed(unit: Unit): number {
   const exercises = unit.lessons
     .flatMap((l) => l.exercises)
-    .filter((e) => !(e.type === 'listen' && e.from));
+    .filter((e) => !((e.type === 'listen' || e.type === 'segment') && e.from));
   return [...exercises, ...(unit.vocab ?? [])].filter((i) => !(i.reviewed ?? unit.reviewed)).length;
 }

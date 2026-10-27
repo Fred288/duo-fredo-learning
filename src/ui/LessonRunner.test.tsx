@@ -30,12 +30,9 @@ const lesson: Lesson = {
     // Noch nicht unterstützt (Phase 2) → wird übersprungen
     {
       id: 'a1-u01-l1-e3',
-      type: 'segment',
-      word: 'evde',
-      segments: [
-        { text: 'ev', role: 'Stamm' },
-        { text: 'de', role: 'Lokativ' },
-      ],
+      type: 'sov_puzzle',
+      tokens: ['Ben', 'çay', 'içiyorum'],
+      order: ['Ben', 'çay', 'içiyorum'],
     },
   ],
 };

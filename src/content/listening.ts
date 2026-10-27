@@ -1,5 +1,6 @@
 import { speechText } from '../audio/speech-text';
 import { fnv1a } from '../lib/hash';
+import { inherited, insertLesson, localId, sample } from './generated';
 import { trLower } from '../lib/turkish';
 import type { Card } from '../srs/card';
 import { glossDistractors, glossOf, stableShuffle } from '../srs/vocab-exercise';
@@ -23,26 +24,6 @@ export const listeningLessonId = (unitId: string): string => `${unitId}-h1`;
 export const isListeningCard = (card: Card): boolean =>
   card.ref.kind === 'exercise' && /^[ab][12]-u\d{2}-h\d+-/.test(card.ref.exerciseId);
 
-/** Die n Einträge mit dem kleinsten Hash, in ursprünglicher Reihenfolge. */
-function sample<T>(items: readonly T[], key: (t: T) => string, n: number): T[] {
-  const chosen = new Set(
-    [...items]
-      .sort((a, b) => fnv1a(key(a)) - fnv1a(key(b)) || key(a).localeCompare(key(b)))
-      .slice(0, n),
-  );
-  return items.filter((t) => chosen.has(t));
-}
-
-/** Herkunft und Prüfstand der Quelle, nur wo dort gesetzt (sonst gilt die Unit). */
-function inherited(src: Exercise | Vocab) {
-  const keys = ['reviewed', 'register', 'source', 'license', 'attribution', 'author', 'tatoeba_id'];
-  return Object.fromEntries(
-    keys.flatMap((k) =>
-      src[k as keyof typeof src] === undefined ? [] : [[k, src[k as keyof typeof src]]],
-    ),
-  ) as Partial<Listen>;
-}
-
 function sentenceExercise(
   lessonId: string,
   unitId: string,
@@ -51,7 +32,7 @@ function sentenceExercise(
 ): Listen {
   const text = src.answers[0]!;
   const base = {
-    id: `${lessonId}-${src.id.slice(unitId.length + 1)}`,
+    id: `${lessonId}-${localId(unitId, src.id)}`,
     type: 'listen' as const,
     text,
     from: src.id,
@@ -143,12 +124,5 @@ export function listeningLesson(unit: Unit, title: string): Lesson | undefined {
 
 /** Fügt die Hörlektion vor der Wiederholung ein (sonst am Ende); eine handgeschriebene bleibt. */
 export function withListening(unit: Unit, title: string): Unit {
-  const id = listeningLessonId(unit.id);
-  if (unit.lessons.some((l) => l.id === id)) return unit;
-  const lesson = listeningLesson(unit, title);
-  if (!lesson) return unit;
-  const at = unit.lessons.findIndex((l) => l.type === 'review');
-  const lessons = [...unit.lessons];
-  lessons.splice(at < 0 ? lessons.length : at, 0, lesson);
-  return { ...unit, lessons };
+  return insertLesson(unit, listeningLesson(unit, title));
 }

@@ -34,6 +34,7 @@ export const GRAMMAR_TYPES: readonly Exercise['type'][] = [
   'suffix_builder',
   'conjugation',
   'paradigm',
+  'segment',
 ];
 
 /**

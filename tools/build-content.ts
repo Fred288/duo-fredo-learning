@@ -12,10 +12,12 @@ import {
 import { dirname, join, relative } from 'node:path';
 import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
 import { withListening } from '../src/content/listening';
+import { withSegments } from '../src/content/segmenting';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import {
   checkListen,
+  checkSegments,
   checkSuffixTargets,
   checkUnits,
   foreignLexicon,
@@ -44,18 +46,28 @@ for (const file of files) {
 const report = checkUnits(units, (p) => existsSync(join(CONTENT_DIR, p)));
 errors.push(...report.errors, ...checkSuffixTargets(units));
 
-// Hörlektionen (src/content/listening.ts) aus vorhandenen Inhalten; die App blendet sie ohne
-// türkische Stimme aus.
+// Erzeugte Lektionen aus vorhandenen Inhalten, je vor der Wiederholung: Wörter zerlegen
+// (src/content/segmenting.ts), Hören (src/content/listening.ts; die App blendet es ohne
+// türkische Stimme aus).
+const SEGMENT_LESSONS = false;
 const LISTENING_LESSONS = true;
 const words = courseWords(units.map(({ unit }) => unit));
-const built: LoadedUnit[] = units.map(({ file, unit }) => ({
-  file,
-  unit: annotateSpeech(
-    LISTENING_LESSONS ? withListening(unit, t('listen.lessonTitle')) : unit,
-    words,
-  ),
-}));
-errors.push(...checkListen(built));
+const allVocab = units.flatMap(({ unit }) => unit.vocab ?? []);
+const built: LoadedUnit[] = units.map(({ file, unit }) => {
+  let out = unit;
+  if (SEGMENT_LESSONS) out = withSegments(out, t('segment.lessonTitle'), allVocab);
+  if (LISTENING_LESSONS) out = withListening(out, t('listen.lessonTitle'));
+  return { file, unit: annotateSpeech(out, words) };
+});
+errors.push(...checkListen(built), ...checkSegments(built));
+if (SEGMENT_LESSONS) {
+  const counts = built.map(
+    ({ unit }) => unit.lessons.find((l) => l.type === 'segmenting')?.exercises.length ?? 0,
+  );
+  console.info(
+    `Wörter zerlegen: ${counts.reduce((a, b) => a + b, 0)} Formen (${counts.join(' ')})`,
+  );
+}
 
 const explainers = new Map<string, string>();
 for (const { file, unit } of units) {

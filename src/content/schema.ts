@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MORPH_TAGS } from '../morphology/tags';
+import { MORPH_TAGS, VERB_TAGS } from '../morphology/tags';
 import { COPULA_TENSES, IMPERATIVE_PERSONS, PERSONS, TENSES } from '../morphology/verb';
 
 export const LEVELS = ['A1', 'A2', 'B1', 'B2'] as const;
@@ -202,12 +202,53 @@ export const Paradigm = z
     }
   });
 
-export const Segment = z.strictObject({
-  ...exerciseBase,
-  type: z.literal('segment'),
-  word: nonEmpty,
-  segments: z.array(z.object({ text: nonEmpty, role: nonEmpty })).min(2),
-});
+/** Bausteine einer zerlegten Form: Stamm, nominale und verbale Suffixe. */
+export const SEGMENT_TAGS = ['STEM', ...MORPH_TAGS, ...VERB_TAGS] as const;
+export type SegmentTag = (typeof SEGMENT_TAGS)[number];
+
+/** Eingabe der Engine für genau eine Form: Nomen mit Tags oder Verb/Kopula mit Person und Zeit. */
+export const FormSpec = z.discriminatedUnion('kind', [
+  z.strictObject({
+    kind: z.literal('noun'),
+    lemma: nonEmpty,
+    tags: z.array(z.enum(MORPH_TAGS)).min(1),
+  }),
+  z.strictObject({
+    kind: z.enum(['verb', 'copula']),
+    lemma: nonEmpty,
+    person: z.enum(PERSONS),
+    tense: z.enum(TENSES).optional(),
+    negative: z.boolean().optional(),
+    question: z.boolean().optional(),
+    dir: z.boolean().optional(),
+    ability: z.boolean().optional(),
+    polite: z.boolean().optional(),
+    passive: z.boolean().optional(),
+  }),
+]);
+
+/**
+ * Wort zerlegen: Grenzen setzen und jedem Stück seine Rolle geben. Wird im Build aus
+ * Grammatikübungen erzeugt (`from`); `analysis` bildet die Form in der Engine neu.
+ * Leerzeichen (Fragepartikel) und Apostroph sind feste Grenzen, keine Bausteine.
+ */
+export const Segment = z
+  .strictObject({
+    ...exerciseBase,
+    type: z.literal('segment'),
+    word: nonEmpty,
+    segments: z.array(z.strictObject({ text: nonEmpty, tag: z.enum(SEGMENT_TAGS) })).min(2),
+    analysis: FormSpec,
+    from: nonEmpty,
+  })
+  .superRefine((e, ctx) => {
+    if (e.segments[0]!.tag !== 'STEM' || e.segments.slice(1).some((s) => s.tag === 'STEM')) {
+      ctx.addIssue({ code: 'custom', path: ['segments'], message: 'nur das erste Stück ist STEM' });
+    }
+    if (e.segments.map((s) => s.text).join('') !== e.word.replace(/[\s'’]/g, '')) {
+      ctx.addIssue({ code: 'custom', path: ['segments'], message: `ergeben nicht "${e.word}"` });
+    }
+  });
 
 export const SovPuzzle = z.strictObject({
   ...exerciseBase,
@@ -270,6 +311,8 @@ export const LESSON_TYPES = [
   'reading',
   'review',
   'listening',
+  'segmenting',
+  'word_order',
 ] as const;
 
 export const Lesson = z.strictObject({
@@ -322,6 +365,7 @@ export type Vocab = z.infer<typeof Vocab>;
 export type Exercise = z.infer<typeof Exercise>;
 export type Lesson = z.infer<typeof Lesson>;
 export type Unit = z.infer<typeof Unit>;
+export type FormSpec = z.infer<typeof FormSpec>;
 
 /** Vokabel-ID für SRS; Default ist das türkische Lemma. */
 export const vocabId = (v: Vocab): string => v.id ?? v.tr;

@@ -1,7 +1,11 @@
 import type { Exercise } from '../content/schema';
 import { sameForm } from '../content/lexicon';
 import { checkAnswer, type AnswerResult } from '../lib/answer';
+import { seededShuffle } from '../lib/shuffle';
 import { trLower } from '../lib/turkish';
+import { gradeSegment, solutionOfSegment } from './segment';
+
+export { seededShuffle };
 
 export const SUPPORTED_TYPES = [
   'multiple_choice',
@@ -11,6 +15,7 @@ export const SUPPORTED_TYPES = [
   'conjugation',
   'paradigm',
   'listen',
+  'segment',
 ] as const;
 export type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
 
@@ -44,6 +49,8 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
       return paradigmCells(ex, answer).every(Boolean)
         ? { verdict: 'correct', matched: ex.targets.join(', '), hints: [] }
         : { verdict: 'wrong', hints: [] };
+    case 'segment':
+      return gradeSegment(ex, answer);
     case 'listen':
       if (ex.mode === 'meaning') {
         return answer === ex.answer
@@ -83,6 +90,7 @@ export function solutionOf(ex: Supported): string {
   if (ex.type === 'suffix_builder' || ex.type === 'conjugation') return ex.target;
   if (ex.type === 'paradigm') return ex.targets.join(', ');
   if (ex.type === 'listen') return ex.mode === 'meaning' ? ex.answer! : ex.text;
+  if (ex.type === 'segment') return solutionOfSegment(ex);
   return ex.answers[0]!;
 }
 
@@ -117,20 +125,4 @@ export function tileTokens(
   const words = [...needed.values()].flat();
   const extra = distractors.filter((d) => !needed.has(trLower(d)));
   return seededShuffle([...words, ...extra], seed);
-}
-
-export function seededShuffle<T>(items: T[], seed: string): T[] {
-  let h = 2166136261;
-  for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
-  const rand = () => {
-    h = Math.imul(h ^ (h >>> 15), 2246822507);
-    h = Math.imul(h ^ (h >>> 13), 3266489909);
-    return ((h ^= h >>> 16) >>> 0) / 4294967296;
-  };
-  const out = [...items];
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [out[i], out[j]] = [out[j]!, out[i]!];
-  }
-  return out;
 }

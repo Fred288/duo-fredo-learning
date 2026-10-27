@@ -84,7 +84,8 @@ describe('Suche über die echten Inhalte', () => {
       }
     }
     expect(failures.slice(0, 20)).toEqual([]);
-  });
+    // Läuft über alle Formen des Kurses: im parallelen Gesamtlauf langsamer als der Standard.
+  }, 30_000);
 
   it('kurze Stämme: die gebeugte Form steht vor Präfix- und Teilwort-Rauschen', () => {
     expect(top('evi', 1)).toEqual(['ev']);

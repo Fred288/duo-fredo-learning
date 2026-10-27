@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import {
+  checkSegments,
   checkSuffixTargets,
+  countUnreviewed,
   checkUnits,
   foreignLexicon,
   manifestEntry,
@@ -223,5 +225,86 @@ describe('manifestEntry', () => {
       lessons: [{ id: 'a1-u01-l1', type: 'vocab', title: 'Wörter' }],
       vocab: ['ev', 'yüz-sayı'],
     });
+  });
+});
+
+describe('checkSegments', () => {
+  const unit = (segment: string) => `
+id: a1-u02
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+lessons:
+  - id: a1-u02-l1
+    type: grammar
+    title: Suffixe
+    exercises:
+      - { id: a1-u02-l1-e1, type: suffix_builder, stem: kitap, suffixes: [PL, LOC], target: kitaplarda }
+  - id: a1-u02-z1
+    type: segmenting
+    title: Zerlegen
+    exercises:
+      - id: a1-u02-z1-l1-e1
+        type: segment
+${segment}
+vocab:
+  - { tr: kitap, de: [Buch], pos: noun, softens: true }
+  - { tr: ev, de: [Haus], pos: noun }
+`;
+  const ok = `        word: kitaplarda
+        segments: [{ text: kitap, tag: STEM }, { text: lar, tag: PL }, { text: da, tag: LOC }]
+        analysis: { kind: noun, lemma: kitap, tags: [PL, LOC] }
+        from: a1-u02-l1-e1`;
+
+  it('akzeptiert eine Zerlegung, die die Engine bestätigt', () => {
+    expect(checkSegments([load('a.yaml', unit(ok))])).toEqual([]);
+  });
+
+  it('meldet falsche Rollen, fremde Quelle und mehrdeutige Formen', () => {
+    const wrongTag = ok.replace('tag: LOC', 'tag: DAT');
+    expect(checkSegments([load('a.yaml', unit(wrongTag))])).toEqual([
+      'a.yaml: a1-u02-z1-l1-e1: Stücke "kitap:STEM lar:PL da:DAT", Engine erwartet "kitap:STEM lar:PL da:LOC"',
+    ]);
+    const foreign = ok.replace('from: a1-u02-l1-e1', 'from: a1-u02-l9-e9');
+    expect(checkSegments([load('a.yaml', unit(foreign))])).toEqual([
+      'a.yaml: a1-u02-z1-l1-e1: Quelle "a1-u02-l9-e9" ist keine Grammatikübung dieser Unit',
+    ]);
+    const evi = `        word: evi
+        segments: [{ text: ev, tag: STEM }, { text: i, tag: ACC }]
+        analysis: { kind: noun, lemma: ev, tags: [ACC] }
+        from: a1-u02-l1-e1`;
+    expect(checkSegments([load('a.yaml', unit(evi))])).toEqual([
+      'a.yaml: a1-u02-z1-l1-e1: "evi" ist mehrdeutig',
+    ]);
+  });
+
+  it('Schema: Stücke müssen das Wort ergeben', () => {
+    const broken = ok.replace('text: da', 'text: de');
+    expect(parseUnitFile('a.yaml', unit(broken)).errors[0]).toContain('ergeben nicht');
+  });
+});
+
+describe('countUnreviewed', () => {
+  it('zählt erzeugte Zerlege-Übungen nicht', () => {
+    const { unit } = load(
+      'a.yaml',
+      yamlUnit('a1-u01').replace(
+        'vocab:\n',
+        `  - id: a1-u01-z1
+    type: segmenting
+    title: Z
+    exercises:
+      - id: a1-u01-z1-l1-e1
+        type: segment
+        word: evde
+        segments: [{ text: ev, tag: STEM }, { text: de, tag: LOC }]
+        analysis: { kind: noun, lemma: ev, tags: [LOC] }
+        from: a1-u01-l1-e1
+vocab:
+`,
+      ),
+    );
+    expect(countUnreviewed(unit)).toBe(2);
   });
 });

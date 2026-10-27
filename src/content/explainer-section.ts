@@ -76,6 +76,9 @@ function exerciseText(ex: Exercise): string {
     case 'listen':
       parts.push(ex.text);
       break;
+    case 'segment':
+      parts.push(ex.analysis.lemma, ex.word);
+      break;
   }
   return parts.filter(Boolean).join(' ');
 }
