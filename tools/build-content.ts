@@ -44,8 +44,9 @@ for (const file of files) {
 const report = checkUnits(units, (p) => existsSync(join(CONTENT_DIR, p)));
 errors.push(...report.errors, ...checkSuffixTargets(units));
 
-// Hörlektionen (src/content/listening.ts) erst einschalten, wenn die App sie anzeigen kann.
-const LISTENING_LESSONS = false;
+// Hörlektionen (src/content/listening.ts) aus vorhandenen Inhalten; die App blendet sie ohne
+// türkische Stimme aus.
+const LISTENING_LESSONS = true;
 const words = courseWords(units.map(({ unit }) => unit));
 const built: LoadedUnit[] = units.map(({ file, unit }) => ({
   file,

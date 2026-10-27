@@ -41,6 +41,20 @@ export async function answer(page: Page, ex: Exercise, unit: Unit) {
           .click();
       }
       break;
+    case 'listen':
+      if (ex.mode === 'tiles') {
+        for (const word of ex.text.split(/\s+/).map(stripPunctuation)) {
+          await page
+            .getByRole('button', { name: word, exact: true, disabled: false })
+            .first()
+            .click();
+        }
+      } else if (ex.mode === 'dictation') {
+        await page.getByLabel('Deine Antwort').fill(ex.text);
+      } else {
+        await page.locator('label', { has: page.getByText(ex.answer!, { exact: true }) }).click();
+      }
+      break;
     case 'paradigm': {
       const cells = page.getByRole('textbox');
       for (const [i, target] of ex.targets.entries()) await cells.nth(i).fill(target);

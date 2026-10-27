@@ -10,11 +10,12 @@ import {
   createSession,
   currentExercise,
   next,
+  skip,
   submit,
   summary,
   type Session,
 } from '../session/session';
-import { stopSpeaking, useAutoplay } from '../store/audio';
+import { stopSpeaking, useAudio, useAutoplay, useCanSpeak } from '../store/audio';
 import { useSettings } from '../store/settings';
 import { solveExercise, solveParadigm } from '../content/lexicon';
 import { ConjugationInput } from './exercises/ConjugationInput';
@@ -22,6 +23,7 @@ import { Feedback } from './Feedback';
 import { GrammarHint } from './GrammarHint';
 import { ReportError } from './ReportError';
 import { FreeTextInput } from './exercises/FreeTextInput';
+import { ListenInput } from './exercises/ListenInput';
 import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
 import { ParadigmInput } from './exercises/ParadigmInput';
 import { SuffixBuilderInput } from './exercises/SuffixBuilderInput';
@@ -59,7 +61,20 @@ function reasonsFor(ex: Supported, answer: string, vocab: readonly Vocab[]): str
   return [...new Set(explainSteps(steps))];
 }
 
-export function LessonRunner({
+/**
+ * Hörübungen brauchen eine Stimme: ohne sie fehlen sie im Durchgang (sie werden nicht gewertet).
+ * Solange die Stimmen laden, wartet der Durchgang kurz, damit er sie nicht vorschnell verliert.
+ */
+export function LessonRunner(props: Props) {
+  const can = useCanSpeak();
+  const loading = useAudio((s) => s.status === 'loading');
+  const needsVoice = props.lesson.exercises.some((e) => e.type === 'listen');
+  if (needsVoice && loading) return <p className="text-stone-500">{t('audio.status.loading')}</p>;
+  return <Runner {...props} canListen={can} />;
+}
+
+function Runner({
+  canListen,
   lesson,
   vocab = [],
   unitId,
@@ -69,9 +84,12 @@ export function LessonRunner({
   onComplete,
   doneTitle = t('done.title'),
   grammarFor,
-}: Props) {
+}: Props & { canListen: boolean }) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
-  const exercises = useMemo(() => lesson.exercises.filter(isSupported), [lesson]);
+  const exercises = useMemo(
+    () => lesson.exercises.filter((e) => isSupported(e) && (canListen || e.type !== 'listen')),
+    [lesson, canListen],
+  );
   const [session, setSession] = useState(() => createSession(exercises));
   const [answer, setAnswer] = useState('');
 
@@ -80,7 +98,11 @@ export function LessonRunner({
 
   // Optional: türkischen Prompt beim Anzeigen und die Lösung im Feedback vorlesen.
   const spoken = supported ? speakables(supported, session.last?.matched) : {};
-  useAutoplay(spoken.prompt, session.phase === 'answering');
+  // Hörübungen spielen ihren Satz selbst (ListenInput), sonst käme er doppelt.
+  useAutoplay(
+    supported?.type === 'listen' ? undefined : spoken.prompt,
+    session.phase === 'answering',
+  );
   useAutoplay(spoken.solution, session.phase === 'feedback');
 
   const check = useCallback(() => {
@@ -96,6 +118,8 @@ export function LessonRunner({
     if (session.phase !== 'done' || exercises.length === 0 || reported.current === session) return;
     reported.current = session;
     const { correct, total } = summary(session);
+    // Alles übersprungen (Hörübungen ohne Ton): keine Lektion geschafft.
+    if (total === 0) return;
     onComplete?.(correct, total);
   }, [session, exercises.length, onComplete]);
 
@@ -124,9 +148,15 @@ export function LessonRunner({
     return (
       <section aria-labelledby="done-title" className="space-y-4 text-center">
         <h2 id="done-title" className="text-xl font-semibold">
-          {exercises.length ? doneTitle : t('runner.empty')}
+          {!exercises.length
+            ? lesson.exercises.some((e) => e.type === 'listen')
+              ? t('home.listen.unavailable')
+              : t('runner.empty')
+            : total === 0
+              ? t('runner.skipped')
+              : doneTitle}
         </h2>
-        {exercises.length > 0 && <p>{t('done.score', { correct, total })}</p>}
+        {total > 0 && <p>{t('done.score', { correct, total })}</p>}
         <div className="space-y-2">
           {exercises.length > 0 && (
             <button
@@ -203,6 +233,9 @@ export function LessonRunner({
             disabled={!answering}
           />
         )}
+        {supported.type === 'listen' && (
+          <ListenInput ex={supported} value={answer} onChange={setAnswer} disabled={!answering} />
+        )}
         {supported.type === 'paradigm' && (
           <ParadigmInput ex={supported} onChange={setAnswer} disabled={!answering} />
         )}
@@ -217,14 +250,29 @@ export function LessonRunner({
       </div>
 
       {answering ? (
-        <button
-          type="button"
-          onClick={check}
-          disabled={!answer.trim()}
-          className={`${buttonBase} bg-teal-700 text-white`}
-        >
-          {t('runner.check')}
-        </button>
+        <div className="space-y-2">
+          <button
+            type="button"
+            onClick={check}
+            disabled={!answer.trim()}
+            className={`${buttonBase} bg-teal-700 text-white`}
+          >
+            {t('runner.check')}
+          </button>
+          {supported.type === 'listen' && (
+            <button
+              type="button"
+              onClick={() => {
+                stopSpeaking();
+                setAnswer('');
+                setSession((s) => skip(s, { sameType: true }));
+              }}
+              className={`${buttonBase} bg-stone-200 dark:bg-stone-800`}
+            >
+              {t('ex.listen.skip')}
+            </button>
+          )}
+        </div>
       ) : (
         <div className="space-y-4">
           <Feedback

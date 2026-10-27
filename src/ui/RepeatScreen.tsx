@@ -8,6 +8,8 @@ import { cardId, planRepeat, vocabExercise, type QueueEntry } from '../srs';
 import { useApp } from '../store/app';
 import { REVIEW_ID, useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
+import { canSpeak } from '../audio/types';
+import { getSpeaker } from '../store/audio';
 import { LessonRunner } from './LessonRunner';
 
 interface Run {
@@ -15,6 +17,8 @@ interface Run {
   vocab: Vocab[];
   /** Karte je Übungs-ID des Durchgangs. */
   entryOf: Map<string, QueueEntry>;
+  /** Lektions-ID je Übung (Hörlektionen haben eigene IDs). */
+  lessonOf: Map<string, string>;
   /** Erklärkarte und Lektionstitel je Übung, für den Grammatik-Hinweis. */
   grammar: Map<string, { markdown: string; lessonTitle: string }>;
 }
@@ -22,8 +26,6 @@ interface Run {
 // Fehlende Erklärkarte stört den Durchgang nicht.
 const explainerOf = (u: Unit) =>
   u.explainer ? fetchExplainer(u.explainer).catch(() => '') : Promise.resolve('');
-
-const lessonOfExercise = (exerciseId: string) => exerciseId.replace(/-e\d+$/, '');
 
 async function buildRun(): Promise<Run | null> {
   const { completions, cards, removeCards, putCards } = useProgress.getState();
@@ -35,6 +37,7 @@ async function buildRun(): Promise<Run | null> {
   removeCards(plan.gone);
   putCards(plan.moved);
   const { queue } = plan;
+  const canListen = useSettings.getState().audioEnabled && canSpeak(getSpeaker().status());
   const unitIds = [...new Set(queue.map((e) => e.unitId))];
   // Eine nicht ladbare Unit (z. B. offline nicht im Cache) nimmt nur ihre Karten mit.
   const loaded = await Promise.allSettled(unitIds.map(fetchUnit));
@@ -43,6 +46,7 @@ async function buildRun(): Promise<Run | null> {
   const mds = await Promise.all(units.map(explainerOf));
 
   const exercises = new Map<string, Exercise>();
+  const lessonOf = new Map<string, string>();
   const grammar: Run['grammar'] = new Map();
   const vocabById = new Map<string, Vocab>();
   units.forEach((u, i) => {
@@ -50,6 +54,7 @@ async function buildRun(): Promise<Run | null> {
     for (const l of u.lessons)
       for (const e of l.exercises) {
         exercises.set(e.id, e);
+        lessonOf.set(e.id, l.id);
         grammar.set(e.id, { markdown: mds[i]!, lessonTitle: l.title });
       }
   });
@@ -65,6 +70,8 @@ async function buildRun(): Promise<Run | null> {
     if (ref.kind === 'exercise') {
       const ex = exercises.get(ref.exerciseId);
       if (!ex) gone.push(cardId(ref));
+      // Hörübungen ohne Stimme bleiben fällig, kommen aber erst mit Stimme wieder dran.
+      else if (ex.type === 'listen' && !canListen) continue;
       else {
         run.push(ex);
         entryOf.set(ex.id, entry);
@@ -91,6 +98,7 @@ async function buildRun(): Promise<Run | null> {
     lesson: { id: REVIEW_ID, type: 'review', title: t('repeat.title'), exercises: run },
     vocab: units.flatMap((u) => [...(u.vocab ?? []), ...(u.lexicon ?? [])]),
     entryOf,
+    lessonOf,
     grammar,
   };
 }
@@ -139,7 +147,7 @@ export function RepeatScreen() {
         if (!entry) return;
         if (entry.ref.kind === 'vocab') recordVocab(entry.ref, entry.unitId, verdict);
         // Übungen zählen auch als Versuch, damit „Fehler wiederholen“ den Stand kennt.
-        else recordAttempt(ex.id, lessonOfExercise(ex.id), verdict, ex.type);
+        else recordAttempt(ex.id, run.lessonOf.get(ex.id) ?? '', verdict, ex.type);
       }}
       onComplete={(correct, total) => {
         if (completed.current) return;

@@ -1,6 +1,8 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Lesson } from '../content/schema';
+import { FakeSpeaker } from '../audio/fake';
+import { setSpeaker } from '../store/audio';
 import { LessonRunner } from './LessonRunner';
 
 afterEach(cleanup);
@@ -296,5 +298,67 @@ describe('LessonRunner Grammatik-Hinweis', () => {
     fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Teşekkürler' } });
     click('Prüfen');
     expect(screen.queryByText('Grammatik: Begrüßen')).toBeNull();
+  });
+
+  describe('Hörübungen', () => {
+    const listening: Lesson = {
+      id: 'a1-u01-h1',
+      type: 'listening',
+      title: 'Hören',
+      exercises: [
+        {
+          id: 'a1-u01-h1-e1',
+          type: 'listen',
+          mode: 'dictation',
+          text: 'Günaydın',
+          gloss_de: 'Guten Morgen',
+        },
+        {
+          id: 'a1-u01-h1-e2',
+          type: 'listen',
+          mode: 'meaning',
+          text: 'Merhaba',
+          options: ['Hallo', 'Danke'],
+          answer: 'Hallo',
+        },
+      ],
+    };
+
+    it('mit Stimme: Diktat lösen, Text erscheint erst nach der Antwort', () => {
+      const speaker = new FakeSpeaker('ready');
+      setSpeaker(speaker);
+      render(<LessonRunner lesson={listening} onExit={() => {}} />);
+      expect(screen.queryByText('Günaydın')).toBeNull();
+      click('Anhören');
+      expect(speaker.spoken).toEqual([{ text: 'Günaydın', rate: 'normal' }]);
+      fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'günaydin' } });
+      click('Prüfen');
+      expect(screen.getAllByText('Günaydın').length).toBeGreaterThan(0);
+      expect(screen.getByText('„Guten Morgen“')).toBeTruthy();
+    });
+
+    it('ohne Stimme: Hörübungen fehlen im Durchgang', () => {
+      setSpeaker(new FakeSpeaker('no-voice'));
+      render(<LessonRunner lesson={listening} onExit={() => {}} />);
+      expect(screen.getByRole('heading', { name: /brauchen eine türkische Stimme/ })).toBeTruthy();
+    });
+
+    it('Jetzt nicht hören beendet ohne Abschluss und ohne Versuch', () => {
+      setSpeaker(new FakeSpeaker('ready'));
+      const onAttempt = vi.fn();
+      const onComplete = vi.fn();
+      render(
+        <LessonRunner
+          lesson={listening}
+          onExit={() => {}}
+          onAttempt={onAttempt}
+          onComplete={onComplete}
+        />,
+      );
+      click('Jetzt nicht hören');
+      expect(screen.getByRole('heading', { name: 'Übersprungen' })).toBeTruthy();
+      expect(onAttempt).not.toHaveBeenCalled();
+      expect(onComplete).not.toHaveBeenCalled();
+    });
   });
 });

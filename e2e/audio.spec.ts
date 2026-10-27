@@ -1,57 +1,7 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { speakables } from '../src/audio/speakables';
-import { answer, loadUnit } from './solve';
-
-// speechSynthesis wird gefälscht: Es gibt Stimmen (oder keine) und jede Wiedergabe landet in
-// window.__spoken. So lässt sich Audio ohne echte Sprachausgabe prüfen.
-interface Spoken {
-  text: string;
-  rate: number;
-  lang: string;
-}
-declare global {
-  interface Window {
-    __spoken: Spoken[];
-  }
-}
-
-async function fakeSpeech(page: Page, voices: { name: string; lang: string; local: boolean }[]) {
-  await page.addInitScript((list) => {
-    window.__spoken = [];
-    class Utterance {
-      lang = '';
-      rate = 1;
-      voice: unknown = null;
-      onend: (() => void) | null = null;
-      onerror: (() => void) | null = null;
-      constructor(public text: string) {}
-    }
-    const native = list.map((v) => ({
-      voiceURI: v.name,
-      name: v.name,
-      lang: v.lang,
-      localService: v.local,
-      default: false,
-    }));
-    const synth = {
-      getVoices: () => native,
-      speak(u: Utterance) {
-        window.__spoken.push({ text: u.text, rate: u.rate, lang: u.lang });
-        setTimeout(() => u.onend?.(), 0);
-      },
-      cancel() {},
-      addEventListener() {},
-    };
-    Object.defineProperty(window, 'speechSynthesis', { value: synth, configurable: true });
-    Object.defineProperty(window, 'SpeechSynthesisUtterance', {
-      value: Utterance,
-      configurable: true,
-    });
-  }, voices);
-}
-
-const TURKISH = [{ name: 'Test Türkçe', lang: 'tr-TR', local: true }];
-const spokenTexts = (page: Page) => page.evaluate(() => window.__spoken.map((s) => s.text));
+import { fakeSpeech, spokenTexts, TURKISH_VOICE as TURKISH } from './speech';
+import { answer, loadUnit, playLesson } from './solve';
 
 test('Nachschlagewerk: Anhören normal und langsam', async ({ page }) => {
   await fakeSpeech(page, TURKISH);
@@ -161,4 +111,61 @@ test('Automatisch abspielen: Prompt beim Anzeigen, Lösung im Feedback, standard
   }
   expect(expected.length).toBeGreaterThan(0);
   await expect.poll(() => spokenTexts(page)).toEqual(expected);
+});
+
+test.describe('Hörlektion', () => {
+  const unit = loadUnit('a1-u05');
+  const lesson = unit.lessons.find((l) => l.type === 'listening')!;
+
+  test('mit Stimme: Lektion erscheint, spielt den Satz und ist lösbar', async ({ page }) => {
+    await fakeSpeech(page, TURKISH);
+    await page.goto('/');
+    await playLesson(page, 'a1-u05', lesson.id);
+    await expect(
+      page.getByText(`${lesson.exercises.length} von ${lesson.exercises.length}`),
+    ).toBeVisible();
+    // Jeder Satz wurde beim Anzeigen einmal von selbst gespielt (Autoplay-Einstellung ist aus).
+    const spoken = await spokenTexts(page);
+    for (const ex of lesson.exercises) {
+      if (ex.type === 'listen') expect(spoken).toContain(ex.text);
+    }
+  });
+
+  test('Text bleibt bis zur Antwort verborgen, danach mit Bedeutung sichtbar', async ({ page }) => {
+    await fakeSpeech(page, TURKISH);
+    await page.goto('/');
+    const first = lesson.exercises[0]!;
+    if (first.type !== 'listen') throw new Error('Hörübung erwartet');
+    await page
+      .getByRole('listitem')
+      .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
+      .getByRole('button', { name: new RegExp(`${lesson.title}$`) })
+      .click();
+    await expect(page.getByRole('button', { name: 'Anhören', exact: true })).toBeVisible();
+    await expect(page.getByText(first.text, { exact: true })).toHaveCount(0);
+    await answer(page, first, unit);
+    await page.getByRole('button', { name: 'Prüfen' }).click();
+    await expect(page.getByText(first.text, { exact: true }).first()).toBeVisible();
+  });
+
+  test('ohne Stimme: ausgeblendet mit Hinweis', async ({ page }) => {
+    await fakeSpeech(page, []);
+    await page.goto('/');
+    await expect(page.getByText(/Hörübungen brauchen eine türkische Stimme/).first()).toBeVisible();
+    await expect(page.getByRole('button', { name: /^Hören/ })).toHaveCount(0);
+  });
+
+  test('Jetzt nicht hören: Lektion endet ohne Wertung und ohne Abschluss', async ({ page }) => {
+    await fakeSpeech(page, TURKISH);
+    await page.goto('/');
+    await page
+      .getByRole('listitem')
+      .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
+      .getByRole('button', { name: new RegExp(`${lesson.title}$`) })
+      .click();
+    await page.getByRole('button', { name: 'Jetzt nicht hören' }).click();
+    await expect(page.getByRole('heading', { name: 'Übersprungen' })).toBeVisible();
+    await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+    await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
+  });
 });

@@ -3,9 +3,10 @@ import { fetchManifest, type Manifest } from '../content/load';
 import { LEVELS } from '../content/schema';
 import { t } from '../i18n';
 import { dayKey } from '../progress/day';
-import { completedLessonIds, openMistakes, unitProgress } from '../progress/stats';
+import { completedLessonIds, openMistakes, progressLessons, unitProgress } from '../progress/stats';
 import { planRepeat } from '../srs';
 import { useApp } from '../store/app';
+import { useAudio, useCanSpeak } from '../store/audio';
 import { useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
 import { DailyGoal } from './DailyGoal';
@@ -17,6 +18,9 @@ export function Home() {
   const attempts = useProgress((s) => s.attempts);
   const openMistakesScreen = useApp((s) => s.openMistakes);
   const openRepeat = useApp((s) => s.openRepeat);
+  // Hörlektionen brauchen eine Stimme; währenddessen laden die Stimmen noch.
+  const canListen = useCanSpeak();
+  const voicesLoading = useAudio((s) => s.status === 'loading');
   const cards = useProgress((s) => s.cards);
   const newWordsPerDay = useSettings((s) => s.newWordsPerDay);
   const [manifest, setManifest] = useState<Manifest>();
@@ -85,7 +89,7 @@ export function Home() {
                 <ul className="mt-3 space-y-4">
                   {units.map((unit) => {
                     const { done, total } = unitProgress(
-                      unit.lessons.map((l) => l.id),
+                      progressLessons(unit.lessons).map((l) => l.id),
                       completed,
                     );
                     const label = t('home.unitProgress', { done, total });
@@ -121,25 +125,34 @@ export function Home() {
                               {t('home.explainer')}
                             </button>
                           )}
-                          {unit.lessons.map((lesson) => (
-                            <button
-                              key={lesson.id}
-                              type="button"
-                              onClick={() => openLesson(unit.id, lesson.id)}
-                              className="min-h-11 rounded-lg bg-stone-100 px-4 text-left hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:bg-stone-800 dark:hover:bg-stone-700"
-                            >
-                              <span className="block text-xs text-stone-500">
-                                {t(`lesson.type.${lesson.type}`)}
-                                {completed.has(lesson.id) && (
-                                  <span role="img" aria-label={t('home.lessonDone')}>
-                                    {' '}
-                                    ✓
-                                  </span>
-                                )}
-                              </span>
-                              {lesson.title}
-                            </button>
-                          ))}
+                          {unit.lessons
+                            .filter((l) => l.type !== 'listening' || canListen)
+                            .map((lesson) => (
+                              <button
+                                key={lesson.id}
+                                type="button"
+                                onClick={() => openLesson(unit.id, lesson.id)}
+                                className="min-h-11 rounded-lg bg-stone-100 px-4 text-left hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:bg-stone-800 dark:hover:bg-stone-700"
+                              >
+                                <span className="block text-xs text-stone-500">
+                                  {t(`lesson.type.${lesson.type}`)}
+                                  {completed.has(lesson.id) && (
+                                    <span role="img" aria-label={t('home.lessonDone')}>
+                                      {' '}
+                                      ✓
+                                    </span>
+                                  )}
+                                </span>
+                                {lesson.title}
+                              </button>
+                            ))}
+                          {!canListen &&
+                            !voicesLoading &&
+                            unit.lessons.some((l) => l.type === 'listening') && (
+                              <p className="w-full text-sm text-stone-500">
+                                {t('home.listen.unavailable')}
+                              </p>
+                            )}
                         </div>
                       </li>
                     );
