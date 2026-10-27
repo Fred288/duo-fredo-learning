@@ -40,7 +40,7 @@ Kritischer Pfad: M1 → M3 → M5. M2 kann parallel zu M3 laufen, M0 vor allem a
 ### Phasen 2–4
 Wie SPEC 11. Pro Phase wiederholt sich: neue Übungstypen (jeweils Engine-Funktion + Komponente + Test) → Content-Batch → Review → Release. Phase 2 startet mit SRS (SM-2 oder Leitner; Empfehlung **Leitner vereinfacht**, später austauschbar hinter Interface), da alles Weitere (Schwächen üben, Nachschlagewerk) darauf aufbaut.
 
-**Stand Phase 2:** SRS umgesetzt (Leitner hinter `Scheduler`, Karten für Grammatikübungen, Fehler und Vokabeln, Screen „Wiederholen“; Details in `CLAUDE.md`). Offen: Nachschlagewerk, Audio, Hörübungen, Segmentierungsübungen.
+**Stand Phase 2:** SRS umgesetzt (Leitner hinter `Scheduler`, Karten für Grammatikübungen, Fehler und Vokabeln, Screen „Wiederholen“; Details in `CLAUDE.md`). Nachschlagewerk umgesetzt (Index im Build, Suche in beiden Richtungen mit Rückführung gebeugter Formen, Formtabellen, SRS-Stand; Details in `CLAUDE.md`). Offen: Audio, Hörübungen, Segmentierungsübungen; Nachschlagewerk als Overlay während einer Lektion.
 
 ## 4. Modellwahl pro Entwicklungsphase
 

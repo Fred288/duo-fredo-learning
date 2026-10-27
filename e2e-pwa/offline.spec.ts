@@ -23,6 +23,23 @@ test('App und Lektion laufen nach dem ersten Besuch offline', async ({ page, con
   await expect(page.getByText('Was heißt „Hallo“?')).toBeVisible();
 });
 
+test('Nachschlagewerk läuft offline (lookup.json im Precache)', async ({ page, context }) => {
+  await page.goto('/');
+  await page.evaluate(async () => {
+    await navigator.serviceWorker.ready;
+  });
+  await page.reload();
+  await expect
+    .poll(() => page.evaluate(() => navigator.serviceWorker.controller !== null))
+    .toBe(true);
+
+  await context.setOffline(true);
+  await page.reload();
+  await page.getByRole('button', { name: 'Nachschlagen' }).click();
+  await page.getByRole('searchbox').fill('evlerde');
+  await expect(page.getByText('evlerde = Plural + Lokativ')).toBeVisible();
+});
+
 test('Manifest ist installierbar konfiguriert', async ({ page, request }) => {
   await page.goto('/');
   const href = await page.locator('link[rel="manifest"]').getAttribute('href');
