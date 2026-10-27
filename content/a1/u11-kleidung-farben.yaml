@@ -206,6 +206,7 @@ lessons:
       - id: a1-u11-l3-e6
         type: multiple_choice
         prompt: Was heißt „bunlar“?
+        speak_prompt: "bunlar"
         options: [diese (Plural), das hier, dort]
         answer: diese (Plural)
         explanation: bu → bunlar, şu → şunlar, o → onlar (allein stehend, ohne Nomen).
@@ -243,6 +244,7 @@ lessons:
       - id: a1-u11-l3-e13
         type: multiple_choice
         prompt: Was heißt „Bunlar ne?“
+        speak_prompt: "Bunlar ne?"
         options: [Was ist das hier? (mehrere Dinge), Wer sind sie?, Wo sind sie?]
         answer: Was ist das hier? (mehrere Dinge)
 

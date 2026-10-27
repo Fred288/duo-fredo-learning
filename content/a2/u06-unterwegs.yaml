@@ -302,6 +302,7 @@ lessons:
       - id: a2-u06-l4-e9
         type: multiple_choice
         prompt: Was heißt „Allah korusun!“?
+        speak_prompt: "Allah korusun!"
         options: [Gott bewahre!, Gute Nacht!, Herzlichen Glückwunsch!]
         answer: Gott bewahre!
         explanation: korumak = schützen. Die 3. Person drückt hier einen Wunsch aus.
@@ -319,6 +320,7 @@ lessons:
       - id: a2-u06-l4-e12
         type: multiple_choice
         prompt: Was heißt „Gidelim!“?
+        speak_prompt: "Gidelim!"
         options: [Lass uns gehen!, Geht!, Er soll gehen!]
         answer: Lass uns gehen!
         explanation: Vorschau, -elim/-alım = lass uns, gidelim, bakalım.

@@ -56,8 +56,8 @@ export function courseWords(units: readonly Unit[]): CourseWords {
   return { tr: new Set(tr.flatMap(wordsOf)), de: new Set(de.flatMap(wordsOf)) };
 }
 
-// Buchstaben, die es im Deutschen nicht gibt bzw. im Türkischen nicht.
-const TURKISH_ONLY = /[ığşİĞŞ]/;
+// Buchstaben, die es im Deutschen nicht gibt (ç auch nicht) bzw. im Türkischen nicht.
+const TURKISH_ONLY = /[ığşçİĞŞÇ]/;
 const GERMAN_ONLY = /[äÄß]/;
 
 const germanOnlyWord = (words: string[], c: CourseWords) =>

@@ -239,6 +239,7 @@ lessons:
       - id: a2-u09-l3-e15
         type: multiple_choice
         prompt: Was heißt „renkli“?
+        speak_prompt: "renkli"
         options: [bunt, farblos, schwarz-weiß]
         answer: bunt
         explanation: renk erweicht vor Vokal (rengi), vor -li nicht, renkli.

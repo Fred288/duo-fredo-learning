@@ -451,6 +451,7 @@ lessons:
       - id: a2-u07-l6-e4
         type: multiple_choice
         prompt: Was heißt „mavi gözlü“?
+        speak_prompt: "mavi gözlü"
         options: [blauäugig, mit blauem Hemd, mit blauer Brille]
         answer: blauäugig
         explanation: göz + lü = mit Augen, mavi gözlü = mit blauen Augen; ebenso sarı saçlı (blond).

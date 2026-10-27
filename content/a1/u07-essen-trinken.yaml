@@ -359,6 +359,7 @@ lessons:
       - id: a1-u07-l6-e3
         type: multiple_choice
         prompt: Was fragt der Kellner mit „Ne istersiniz?“
+        speak_prompt: "Ne istersiniz?"
         options: [Was möchten Sie?, Wie geht es Ihnen?, Woher kommen Sie?]
         answer: Was möchten Sie?
         register: formal

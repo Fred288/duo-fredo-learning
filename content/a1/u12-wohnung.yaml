@@ -301,6 +301,7 @@ lessons:
       - id: a1-u12-l5-e6
         type: multiple_choice
         prompt: Was heißt „Evde oturdum.“?
+        speak_prompt: "Evde oturdum."
         options: [Ich bin zu Hause geblieben., Ich wohne zu Hause., Ich gehe nach Hause.]
         answer: Ich bin zu Hause geblieben.
         explanation: oturmak heißt auch „(zu Hause) bleiben, sitzen“.

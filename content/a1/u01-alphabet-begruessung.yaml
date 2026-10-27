@@ -135,6 +135,7 @@ lessons:
       - id: a1-u01-l2-e7
         type: multiple_choice
         prompt: Wie klingt das z in „zor“ (schwer)?
+        speak_prompt: "zor"
         options: ['stimmhaft wie „s“ in „Sonne“ (norddeutsche Aussprache)', wie „ts“ in „Zeit“]
         answer: 'stimmhaft wie „s“ in „Sonne“ (norddeutsche Aussprache)'
         explanation: Das türkische s ist dagegen immer stimmlos, wie „ss“ in „Wasser“.

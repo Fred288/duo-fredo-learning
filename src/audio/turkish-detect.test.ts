@@ -60,6 +60,8 @@ describe('Türkisch erkennen', () => {
     expect(isTurkish('o', words)).toBe(true);
     expect(isTurkish('Bulmuş mu?', words)).toBe(true);
     expect(isTurkish('Ben yorgunum.', words)).toBe(true);
+    // ç gibt es im Deutschen nicht: auch unbekannte Formen wie „temizlikçi“ sind türkisch.
+    expect(isTurkish('temizlikçi', words)).toBe(true);
   });
 
   it('deutsche Wörter und Buchstaben sind nicht türkisch', () => {
