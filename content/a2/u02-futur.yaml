@@ -381,7 +381,7 @@ lessons:
         prompt: Wohin fährst du in den Urlaub?
         answers: [Tatile nereye gideceksin?, Tatilde nereye gideceksin?]
         chunks:
-          - { text: "Tatile", role: complement }
+          - { text: "Tatile", role: place }
           - { text: "nereye", role: question }
           - { text: "gideceksin", role: predicate }
         distractors: [nerede, gittin]

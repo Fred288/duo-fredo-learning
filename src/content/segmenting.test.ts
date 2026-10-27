@@ -110,6 +110,23 @@ describe('isAmbiguous', () => {
     const spec = { kind: 'copula' as const, lemma: 'ev', person: '1sg' as const };
     expect(isAmbiguous(spec, solveForm(spec, vocab), vocab)).toBe(true);
   });
+
+  it('vergleicht Nomen ohne Bedeutung mit der Kopula (kitabım), mit Bedeutung nicht', () => {
+    const spec = { kind: 'noun' as const, lemma: 'kitap', tags: ['POSS_1SG' as const] };
+    const inf = solveForm(spec, vocab);
+    expect(isAmbiguous(spec, inf, vocab)).toBe(true);
+    expect(isAmbiguous(spec, inf, vocab, { glossed: true })).toBe(false);
+    // kitaplar: Kopula 3. Person Plural zählt nicht (wie in den Kopula-Tabellen)
+    expect(check('kitap', ['PL'])).toBe(false);
+  });
+
+  it('nimmt abgeleitete Stämme heraus (evli = ev-li)', () => {
+    const withEvli: Vocab[] = [...vocab, { tr: 'evli', de: ['verheiratet'], pos: 'adj' }];
+    const spec = { kind: 'copula' as const, lemma: 'evli', person: '2sg' as const, question: true };
+    expect(isAmbiguous(spec, solveForm(spec, withEvli), withEvli)).toBe(true);
+    const plain = { kind: 'copula' as const, lemma: 'ev', person: '2sg' as const, question: true };
+    expect(isAmbiguous(plain, solveForm(plain, withEvli), withEvli)).toBe(false);
+  });
 });
 
 describe('segmentCandidates', () => {

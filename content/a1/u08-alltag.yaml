@@ -373,7 +373,7 @@ lessons:
         answers: [Mehmet Türkçe konuşuyor.]
         chunks:
           - { text: "Mehmet", role: subject }
-          - { text: "Türkçe", role: complement }
+          - { text: "Türkçe", role: object_bare }
           - { text: "konuşuyor", role: predicate }
         distractors: [konuşuyorum, Türk]
       - id: a1-u08-l6-e5

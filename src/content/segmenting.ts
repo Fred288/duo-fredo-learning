@@ -1,7 +1,15 @@
 import { allForms } from '../lookup/forms';
 import type { VocabEntry } from '../lookup/types';
 import { trLower } from '../lib/turkish';
-import { conjugate, MorphError, type Inflection, type Person } from '../morphology';
+import {
+  conjugate,
+  inflect,
+  MorphError,
+  predicate,
+  type Inflection,
+  type MorphTag,
+  type Person,
+} from '../morphology';
 import { inherited, insertLesson, localId, sample } from './generated';
 import { formSpecOf, paradigmRows, solveForm, stemFromVocab } from './lexicon';
 import type { Exercise, FormSpec, Lesson, SegmentTag, Unit, Vocab } from './schema';
@@ -74,14 +82,59 @@ function entryOf(spec: FormSpec, vocab: readonly Vocab[]): VocabEntry {
   };
 }
 
+const DERIVATIONS: MorphTag[] = ['LI', 'SIZ', 'LIK', 'CI'];
+
+/** Engine-Form oder undefined, wo die Engine die Kombination ablehnt. */
+function attempt(fn: () => Inflection): string | undefined {
+  try {
+    return trLower(fn().form);
+  } catch (e) {
+    if (e instanceof MorphError) return undefined;
+    throw e;
+  }
+}
+
+/**
+ * Ist der Stamm selbst eine Ableitung eines Kurs-Nomens (evli = ev-li, işsiz = iş-siz)? Dann ist
+ * die feinere Zerlegung ebenso richtig, gerade in der Unit, die die Ableitungen lehrt.
+ */
+function derivedStem(lemma: string, vocab: readonly Vocab[]): boolean {
+  const word = trLower(lemma);
+  return vocab.some(
+    (v) =>
+      v.pos !== 'verb' &&
+      v.tr !== lemma &&
+      word.startsWith(trLower(v.tr)) &&
+      DERIVATIONS.some((tag) => attempt(() => inflect(stemFromVocab(v.tr, vocab), [tag])) === word),
+  );
+}
+
+// Kopula-Personen, die als Lesart einer Nomenform in Frage kommen (kızım: meine Tochter / ich bin
+// ein Mädchen). Die 3. Person Plural fehlt wie in den Kopula-Tabellen des Kurses (-lar optional).
+const COPULA_PERSONS: Person[] = ['1sg', '2sg', '1pl', '2pl'];
+
 /**
  * Lässt sich dieselbe Form desselben Stamms anders zerlegen oder benennen? evleri ist PL+ACC,
  * PL+POSS_3SG oder POSS_3PL; evim ist „mein Haus“ oder „ich bin ein Haus“. Solche Formen
  * fallen weg, denn ohne Satz ist keine Zerlegung die einzig richtige. Verglichen wird mit allen
- * Formen des Nachschlagewerks (Nomen: Plural × Possessiv × Kasus, Verben: alle Zeiten).
+ * Formen des Nachschlagewerks (Nomen: Plural × Possessiv × Kasus, Verben: alle Zeiten), bei
+ * Nomen ohne deutsche Bedeutung (`glossed`) auch mit der Kopula. Ableitungen kennt das
+ * Formenraster nicht; ein Stamm, der selbst abgeleitet ist (evli), gilt daher als mehrdeutig.
  */
-export function isAmbiguous(spec: FormSpec, inf: Inflection, vocab: readonly Vocab[]): boolean {
+export function isAmbiguous(
+  spec: FormSpec,
+  inf: Inflection,
+  vocab: readonly Vocab[],
+  { glossed = false } = {},
+): boolean {
   const form = trLower(inf.form);
+  if (spec.kind !== 'verb' && derivedStem(spec.lemma, vocab)) return true;
+  if (spec.kind === 'noun' && !glossed) {
+    const stem = stemFromVocab(spec.lemma, vocab);
+    if (COPULA_PERSONS.some((person) => attempt(() => predicate(stem, { person })) === form)) {
+      return true;
+    }
+  }
   const own = suffixTags(inf, personOf(spec));
   const entry = entryOf(spec, vocab);
   for (const other of allForms(entry)) {
@@ -155,7 +208,10 @@ export function segmentCandidates(
       const key = trLower(made.exercise.word);
       if (seen.has(key)) continue;
       seen.add(key);
-      if (!isAmbiguous(made.exercise.analysis, made.inflection, vocab)) out.push(made.exercise);
+      const glossed = !!made.exercise.gloss_de;
+      if (!isAmbiguous(made.exercise.analysis, made.inflection, vocab, { glossed })) {
+        out.push(made.exercise);
+      }
     }
   }
   return out;

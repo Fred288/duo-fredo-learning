@@ -56,10 +56,10 @@ interface Props {
 
 /** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
 function reasonsFor(ex: Supported, answer: string, vocab: readonly Vocab[]): string[] | undefined {
+  // Gleiche Schritte (Harmonie zweimal in -iniz, -ecek) nur einmal nennen.
   if (ex.type === 'suffix_builder' || ex.type === 'conjugation') {
-    return explainSteps(solveExercise(ex, vocab).steps);
+    return [...new Set(explainSteps(solveExercise(ex, vocab).steps))];
   }
-  // Gleiche Schritte (Harmonie zweimal in -iniz) nur einmal nennen.
   if (ex.type === 'segment') return [...new Set(explainSteps(segmentSolution(ex, vocab).steps))];
   if (ex.type !== 'paradigm') return undefined;
   const ok = paradigmCells(ex, answer);

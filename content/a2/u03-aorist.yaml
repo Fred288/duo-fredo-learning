@@ -472,12 +472,14 @@ lessons:
       - id: a2-u03-l6-e10
         type: word_bank
         prompt: Meine Mutter geht jeden Morgen spazieren.
-        answers: [Annem her sabah yürüyüş yapar.]
+        answers: [Annem her sabah yürüyüş yapar., Her sabah annem yürüyüş yapar.]
         chunks:
           - { text: "Annem", role: subject }
           - { text: "her sabah", role: time }
           - { text: "yürüyüş", role: object_bare }
           - { text: "yapar", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [yapıyorum, akşam]
 
   - id: a2-u03-l7

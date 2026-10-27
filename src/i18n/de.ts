@@ -153,7 +153,7 @@ export const de = {
   'sov.role.place': 'Ort',
   'sov.role.object': 'Objekt (bestimmt)',
   'sov.role.object_bare': 'Objekt (unbestimmt)',
-  'sov.role.complement': 'Ergänzung',
+  'sov.role.complement': 'Angabe',
   'sov.role.question': 'Fragewort',
   'sov.role.predicate': 'Prädikat',
   'runner.back': 'Zurück',

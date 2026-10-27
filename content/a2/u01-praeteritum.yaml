@@ -409,12 +409,14 @@ lessons:
       - id: a2-u01-l6-e6
         type: word_bank
         prompt: Am Sonntag bin ich gar nicht aus dem Haus gegangen.
-        answers: [Pazar günü hiç evden çıkmadım.]
+        answers: [Pazar günü hiç evden çıkmadım., Pazar günü evden hiç çıkmadım.]
         chunks:
           - { text: "Pazar günü", role: time }
           - { text: "hiç", role: complement }
           - { text: "evden", role: place }
           - { text: "çıkmadım", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3], note: "Auch üblich: „hiç“ direkt vor dem verneinten Verb; so wird das „gar nicht“ betont." }
         distractors: [evde, çıktım]
       - id: a2-u01-l6-e7
         type: free_text

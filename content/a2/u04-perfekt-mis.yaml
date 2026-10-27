@@ -222,12 +222,14 @@ lessons:
       - id: a2-u04-l3-e9
         type: word_bank
         prompt: Mehmet ist angeblich gestern nicht zur Arbeit gegangen.
-        answers: [Mehmet dün işe gitmemiş.]
+        answers: [Mehmet dün işe gitmemiş., Dün Mehmet işe gitmemiş.]
         chunks:
           - { text: "Mehmet", role: subject }
           - { text: "dün", role: time }
           - { text: "işe", role: place }
           - { text: "gitmemiş", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [gitmedi, işte]
         explanation: işe = zur Arbeit (iş + Dativ).
       - id: a2-u04-l3-e10

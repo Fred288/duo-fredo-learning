@@ -160,7 +160,8 @@ export function checkSegments(units: LoadedUnit[]): string[] {
           const show = (s: typeof got) => s.map((p) => `${p.text}:${p.tag}`).join(' ');
           fail(`Stücke "${show(got)}", Engine erwartet "${show(expected)}"`);
         }
-        if (isAmbiguous(ex.analysis, inf, lexicon)) fail(`"${ex.word}" ist mehrdeutig`);
+        if (isAmbiguous(ex.analysis, inf, lexicon, { glossed: !!ex.gloss_de }))
+          fail(`"${ex.word}" ist mehrdeutig`);
         if (unexplained(inf.steps)) fail('Engine-Schritt ohne Begründungstext (i18n)');
       } catch (e) {
         if (!(e instanceof MorphError)) throw e;
