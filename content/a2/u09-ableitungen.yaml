@@ -156,6 +156,10 @@ lessons:
         type: word_bank
         prompt: Die Fahrgäste warten auf den Bus.
         answers: [Yolcular otobüsü bekliyor., Yolcular otobüsü bekliyorlar.]
+        chunks:
+          - { text: "Yolcular", role: subject }
+          - { text: "otobüsü", role: object }
+          - { text: "bekliyor", role: predicate }
         distractors: [yollar, otobüse]
       - id: a2-u09-l2-e14
         type: multiple_choice
@@ -338,6 +342,13 @@ lessons:
         type: word_bank
         prompt: Mein Freund in Istanbul ruft mich oft an.
         answers: [İstanbul'daki arkadaşım beni sık sık arıyor., İstanbul'daki arkadaşım sık sık beni arıyor.]
+        chunks:
+          - { text: "İstanbul'daki arkadaşım", role: subject }
+          - { text: "beni", role: object }
+          - { text: "sık sık", role: complement }
+          - { text: "arıyor", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3], note: "Auch möglich: dann ist „beni“ betont (gerade mich)." }
         distractors: ["İstanbul'da", bana]
       - id: a2-u09-l5-e11
         type: word_bank

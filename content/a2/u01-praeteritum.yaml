@@ -286,28 +286,50 @@ lessons:
         type: word_bank
         prompt: Gestern bin ich ins Kino gegangen.
         answers: [Dün sinemaya gittim., Ben dün sinemaya gittim., Dün ben sinemaya gittim.]
+        chunks:
+          - { text: "Dün", role: time }
+          - { text: "sinemaya", role: place }
+          - { text: "gittim", role: predicate }
         distractors: [gidiyorum, sinemada]
       - id: a2-u01-l5-e2
         type: word_bank
         prompt: Letzte Woche haben wir meine Großmutter besucht.
         answers: [Geçen hafta anneannemi ziyaret ettik., Geçen hafta babaannemi ziyaret ettik.]
+        chunks:
+          - { text: "Geçen hafta", role: time }
+          - { text: "anneannemi", role: object }
+          - { text: "ziyaret ettik", role: predicate }
         distractors: [anneanneme, ediyoruz]
         explanation: ziyaret etmek verlangt ein Objekt im Akkusativ, anneannemi.
       - id: a2-u01-l5-e3
         type: word_bank
         prompt: Vor zwei Jahren bin ich nach Berlin umgezogen.
         answers: [İki yıl önce Berlin'e taşındım.]
+        chunks:
+          - { text: "İki yıl önce", role: time }
+          - { text: "Berlin'e", role: place }
+          - { text: "taşındım", role: predicate }
         distractors: ["Berlin'de", sonra]
       - id: a2-u01-l5-e4
         type: word_bank
         prompt: Ich bin 1990 in Izmir geboren.
         answers: [1990'da İzmir'de doğdum., Ben 1990'da İzmir'de doğdum., İzmir'de 1990'da doğdum.]
+        chunks:
+          - { text: "1990'da", role: time }
+          - { text: "İzmir'de", role: place }
+          - { text: "doğdum", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich: Ort vor Zeit; betont ist das Glied direkt vor dem Verb, hier das Jahr." }
         distractors: ["İzmir'e", doğuyorum]
         explanation: Jahreszahlen mit Lokativ, 1990'da (bin dokuz yüz doksanda).
       - id: a2-u01-l5-e5
         type: word_bank
         prompt: Am Wochenende habe ich mich mit Freunden getroffen.
         answers: [Hafta sonu arkadaşlarımla buluştum.]
+        chunks:
+          - { text: "Hafta sonu", role: time }
+          - { text: "arkadaşlarımla", role: complement }
+          - { text: "buluştum", role: predicate }
         distractors: [arkadaşlarım, buluşuyorum]
         explanation: arkadaşlarımla = mit meinen Freunden (-la/-le = mit).
       - id: a2-u01-l5-e6
@@ -388,6 +410,11 @@ lessons:
         type: word_bank
         prompt: Am Sonntag bin ich gar nicht aus dem Haus gegangen.
         answers: [Pazar günü hiç evden çıkmadım.]
+        chunks:
+          - { text: "Pazar günü", role: time }
+          - { text: "hiç", role: complement }
+          - { text: "evden", role: place }
+          - { text: "çıkmadım", role: predicate }
         distractors: [evde, çıktım]
       - id: a2-u01-l6-e7
         type: free_text
@@ -483,6 +510,12 @@ lessons:
         type: word_bank
         prompt: Die Party war gestern sehr schön.
         answers: [Parti dün çok güzeldi., Dün parti çok güzeldi.]
+        chunks:
+          - { text: "Parti", role: subject }
+          - { text: "dün", role: time }
+          - { text: "çok güzeldi", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [güzel, gitti]
         explanation: Vorschau, güzel + di = war schön. Die Vergangenheit von „sein“ kommt später.
       - id: a2-u01-l7-e13

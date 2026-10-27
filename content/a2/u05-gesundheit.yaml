@@ -267,6 +267,10 @@ lessons:
         type: word_bank
         prompt: Kann ich hier rauchen?
         answers: [Burada sigara içebilir miyim?]
+        chunks:
+          - { text: "Burada", role: place }
+          - { text: "sigara", role: object_bare }
+          - { text: "içebilir miyim", role: predicate }
         distractors: [içer, misin]
         explanation: sigara içmek = rauchen.
       - id: a2-u05-l3-e13
@@ -359,6 +363,10 @@ lessons:
         type: word_bank
         prompt: Ich konnte gestern nicht zur Arbeit gehen.
         answers: [Dün işe gidemedim.]
+        chunks:
+          - { text: "Dün", role: time }
+          - { text: "işe", role: place }
+          - { text: "gidemedim", role: predicate }
         distractors: [gitmedim, işte]
       - id: a2-u05-l4-e12
         type: multiple_choice
@@ -454,6 +462,10 @@ lessons:
         type: word_bank
         prompt: Sie müssen dieses Medikament dreimal am Tag nehmen.
         answers: [Bu ilacı günde üç kere almalısınız.]
+        chunks:
+          - { text: "Bu ilacı", role: object }
+          - { text: "günde üç kere", role: complement }
+          - { text: "almalısınız", role: predicate }
         distractors: [ilaç, alıyorsunuz]
         explanation: günde üç kere = dreimal am Tag. ilaç → ilacı (ç → c).
       - id: a2-u05-l5-e13
@@ -534,6 +546,10 @@ lessons:
         type: word_bank
         prompt: Seit drei Tagen habe ich Fieber.
         answers: [Üç gündür ateşim var.]
+        chunks:
+          - { text: "Üç gündür", role: time }
+          - { text: "ateşim", role: subject }
+          - { text: "var", role: predicate }
         distractors: [önce, yok]
         explanation: üç gündür = seit drei Tagen (-dir an der Zeitangabe).
       - id: a2-u05-l7-e3
@@ -592,6 +608,12 @@ lessons:
         type: word_bank
         prompt: Wann kann ich wieder arbeiten?
         answers: [Ne zaman tekrar çalışabilirim?, Tekrar ne zaman çalışabilirim?]
+        chunks:
+          - { text: "Ne zaman", role: question }
+          - { text: "tekrar", role: complement }
+          - { text: "çalışabilirim", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: „tekrar“ zuerst, dann steht das Fragewort direkt vor dem Verb." }
         distractors: [çalışıyorum, nerede]
         explanation: tekrar = wieder.
       - id: a2-u05-l7-e13

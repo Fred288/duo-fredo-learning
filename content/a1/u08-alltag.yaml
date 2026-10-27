@@ -253,29 +253,51 @@ lessons:
         type: word_bank
         prompt: Ich trinke jeden Morgen Tee.
         answers: [Her sabah çay içiyorum., Ben her sabah çay içiyorum.]
+        chunks:
+          - { text: "Her sabah", role: time }
+          - { text: "çay", role: object_bare }
+          - { text: "içiyorum", role: predicate }
         distractors: [içiyor, akşam]
         explanation: Das Verb steht am Satzende.
       - id: a1-u08-l5-e2
         type: word_bank
         prompt: Ahmet geht zur Schule.
         answers: [Ahmet okula gidiyor.]
+        chunks:
+          - { text: "Ahmet", role: subject }
+          - { text: "okula", role: place }
+          - { text: "gidiyor", role: predicate }
         distractors: [okulda, gidiyorum]
       - id: a1-u08-l5-e3
         type: word_bank
         prompt: Abends sehen wir fern.
         answers: [Akşam televizyon izliyoruz., Biz akşam televizyon izliyoruz., Akşamları televizyon izliyoruz., Biz akşamları televizyon izliyoruz.]
+        chunks:
+          - { text: "Akşam", role: time }
+          - { text: "televizyon", role: object_bare }
+          - { text: "izliyoruz", role: predicate }
         distractors: [izliyorsunuz, sabah]
         explanation: akşamları betont das Regelmäßige (jeden Abend).
       - id: a1-u08-l5-e4
         type: word_bank
         prompt: Meine Mutter liest ein Buch.
         answers: [Annem kitap okuyor., Annem bir kitap okuyor.]
+        chunks:
+          - { text: "Annem", role: subject }
+          - { text: "kitap", role: object_bare }
+          - { text: "okuyor", role: predicate }
         distractors: [kitabı, okuyorum]
         explanation: Unbestimmtes Objekt ohne Akkusativ.
       - id: a1-u08-l5-e5
         type: word_bank
         prompt: Was machst du jetzt?
         answers: [Şimdi ne yapıyorsun?, Ne yapıyorsun şimdi?]
+        chunks:
+          - { text: "Şimdi", role: time }
+          - { text: "ne", role: question }
+          - { text: "yapıyorsun", role: predicate }
+        orders:
+          - { order: [1, 2, 0], note: "Auch möglich: „şimdi“ als Nachtrag hinter dem Verb, wie im gesprochenen Türkisch." }
         distractors: [yapıyorum, nerede]
         explanation: Das Fragewort steht dort, wo die Antwort stehen würde, vor dem Verb.
       - id: a1-u08-l5-e6
@@ -288,11 +310,19 @@ lessons:
         type: word_bank
         prompt: Mein Vater arbeitet in einer Bank.
         answers: [Babam bankada çalışıyor., Babam bir bankada çalışıyor.]
+        chunks:
+          - { text: "Babam", role: subject }
+          - { text: "bankada", role: place }
+          - { text: "çalışıyor", role: predicate }
         distractors: [bankaya, çalışıyorum]
       - id: a1-u08-l5-e8
         type: word_bank
         prompt: Die Kinder spielen im Park.
         answers: [Çocuklar parkta oynuyor., Çocuklar parkta oynuyorlar.]
+        chunks:
+          - { text: "Çocuklar", role: subject }
+          - { text: "parkta", role: place }
+          - { text: "oynuyor", role: predicate }
         distractors: [parka, oynuyorsun]
         explanation: Bei Personen im Plural sind beide Formen üblich, oynuyor und oynuyorlar.
       - id: a1-u08-l5-e9
@@ -341,6 +371,10 @@ lessons:
         type: word_bank
         prompt: Mehmet spricht Türkisch.
         answers: [Mehmet Türkçe konuşuyor.]
+        chunks:
+          - { text: "Mehmet", role: subject }
+          - { text: "Türkçe", role: complement }
+          - { text: "konuşuyor", role: predicate }
         distractors: [konuşuyorum, Türk]
       - id: a1-u08-l6-e5
         type: free_text
@@ -372,6 +406,10 @@ lessons:
         type: word_bank
         prompt: Was machst du heute?
         answers: [Bugün ne yapıyorsun?]
+        chunks:
+          - { text: "Bugün", role: time }
+          - { text: "ne", role: question }
+          - { text: "yapıyorsun", role: predicate }
         distractors: [yapıyorum, şimdi]
       - id: a1-u08-l6-e11
         type: free_text

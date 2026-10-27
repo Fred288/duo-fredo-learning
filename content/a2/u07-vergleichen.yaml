@@ -149,6 +149,10 @@ lessons:
         type: word_bank
         prompt: Ali ist größer als Ayşe.
         answers: [Ali Ayşe'den daha uzun., Ali Ayşe'den uzun.]
+        chunks:
+          - { text: "Ali", role: subject }
+          - { text: "Ayşe'den", role: complement }
+          - { text: "daha uzun", role: predicate }
         distractors: [Ayşe'ye, en]
         explanation: Bei Menschen heißt „groß“ uzun (lang). daha kann wegfallen, der Ablativ reicht.
       - id: a2-u07-l2-e8
@@ -160,6 +164,10 @@ lessons:
         type: word_bank
         prompt: Der Zug ist schneller als der Bus.
         answers: [Tren otobüsten daha hızlı., Tren otobüsten hızlı.]
+        chunks:
+          - { text: "Tren", role: subject }
+          - { text: "otobüsten", role: complement }
+          - { text: "daha hızlı", role: predicate }
         distractors: [otobüse, yavaş]
       - id: a2-u07-l2-e10
         type: word_bank
@@ -185,6 +193,10 @@ lessons:
         type: word_bank
         prompt: Mein Bruder ist drei Jahre jünger als ich.
         answers: [Kardeşim benden üç yaş küçük.]
+        chunks:
+          - { text: "Kardeşim", role: subject }
+          - { text: "benden", role: complement }
+          - { text: "üç yaş küçük", role: predicate }
         distractors: [büyük, bana]
         explanation: üç yaş küçük = drei Jahre jünger, der Altersunterschied steht vor dem Adjektiv.
       - id: a2-u07-l2-e14
@@ -196,6 +208,13 @@ lessons:
         type: word_bank
         prompt: Ankara ist im Winter kälter als Istanbul.
         answers: [Ankara kışın İstanbul'dan daha soğuk., Kışın Ankara İstanbul'dan daha soğuk., Ankara kışın İstanbul'dan soğuk., Kışın Ankara İstanbul'dan soğuk.]
+        chunks:
+          - { text: "Ankara", role: subject }
+          - { text: "kışın", role: time }
+          - { text: "İstanbul'dan", role: complement }
+          - { text: "daha soğuk", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: die Jahreszeit am Satzanfang." }
         distractors: ["İstanbul'da", kış]
       - id: a2-u07-l2-e16
         type: free_text
@@ -293,6 +312,10 @@ lessons:
         type: word_bank
         prompt: Ali ist so groß wie Mehmet.
         answers: [Ali Mehmet kadar uzun.]
+        chunks:
+          - { text: "Ali", role: subject }
+          - { text: "Mehmet kadar", role: complement }
+          - { text: "uzun", role: predicate }
         distractors: ["Mehmet'ten", daha]
         explanation: X kadar = so … wie X. Ohne Ablativ, das Nomen bleibt in der Grundform.
       - id: a2-u07-l4-e2
@@ -473,6 +496,10 @@ lessons:
         type: word_bank
         prompt: Du siehst heute müde aus.
         answers: [Bugün yorgun görünüyorsun.]
+        chunks:
+          - { text: "Bugün", role: time }
+          - { text: "yorgun", role: complement }
+          - { text: "görünüyorsun", role: predicate }
         distractors: [yorgunsun, görüyorsun]
       - id: a2-u07-l6-e8
         type: word_bank
@@ -540,6 +567,10 @@ lessons:
         type: word_bank
         prompt: Gestern hat es geschneit.
         answers: [Dün kar yağdı.]
+        chunks:
+          - { text: "Dün", role: time }
+          - { text: "kar", role: subject }
+          - { text: "yağdı", role: predicate }
         distractors: [yağıyor, yağmur]
       - { id: a2-u07-l7-e6, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: future, target: yağacak, gloss_de: 'es wird regnen, schneien' }
       - id: a2-u07-l7-e7
@@ -560,6 +591,13 @@ lessons:
         type: word_bank
         prompt: Morgen wird es in Istanbul bewölkt sein.
         answers: [Yarın İstanbul'da hava bulutlu olacak., İstanbul'da yarın hava bulutlu olacak., Yarın İstanbul'da bulutlu olacak., İstanbul'da yarın bulutlu olacak.]
+        chunks:
+          - { text: "Yarın", role: time }
+          - { text: "İstanbul'da", role: place }
+          - { text: "hava", role: subject }
+          - { text: "bulutlu olacak", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: der Ort zuerst." }
         distractors: ["İstanbul'a", oldu]
         explanation: olacak = wird sein (olmak im Futur).
       - id: a2-u07-l7-e10
@@ -592,6 +630,13 @@ lessons:
         type: word_bank
         prompt: Im Herbst ist es in Istanbul kühl und windig.
         answers: [Sonbaharda İstanbul'da hava serin ve rüzgârlı., İstanbul'da sonbaharda hava serin ve rüzgârlı.]
+        chunks:
+          - { text: "Sonbaharda", role: time }
+          - { text: "İstanbul'da", role: place }
+          - { text: "hava", role: subject }
+          - { text: "serin ve rüzgârlı", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: der Ort zuerst." }
         distractors: [kış, sıcak]
 
   - id: a2-u07-l8

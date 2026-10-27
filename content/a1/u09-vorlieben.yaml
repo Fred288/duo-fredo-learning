@@ -258,6 +258,10 @@ lessons:
         type: word_bank
         prompt: Ich mag Fußball sehr.
         answers: [Futbolu çok seviyorum.]
+        chunks:
+          - { text: "Futbolu", role: object }
+          - { text: "çok", role: complement }
+          - { text: "seviyorum", role: predicate }
         distractors: [biraz, sevmiyorum]
         explanation: Mit Akkusativ (futbolu) ist die Wortstellung frei. Ohne Endung muss das Objekt direkt vor dem Verb stehen (Futbol seviyorum).
       - id: a1-u09-l4-e4
@@ -270,6 +274,10 @@ lessons:
         type: word_bank
         prompt: Ich mag Tee überhaupt nicht.
         answers: [Çayı hiç sevmiyorum., Hiç çay sevmiyorum.]
+        chunks:
+          - { text: "Çayı", role: object }
+          - { text: "hiç", role: complement }
+          - { text: "sevmiyorum", role: predicate }
         distractors: [çok, seviyorum]
       - id: a1-u09-l4-e6
         type: word_bank
@@ -376,6 +384,10 @@ lessons:
         type: word_bank
         prompt: Mein Bruder (kardeş) mag keinen Fisch.
         answers: [Kardeşim balık sevmiyor., Kardeşim balığı sevmiyor., Erkek kardeşim balık sevmiyor., Erkek kardeşim balığı sevmiyor.]
+        chunks:
+          - { text: "Kardeşim", role: subject }
+          - { text: "balık", role: object_bare }
+          - { text: "sevmiyor", role: predicate }
         distractors: [seviyor, değil]
       - id: a1-u09-l6-e5
         type: free_text

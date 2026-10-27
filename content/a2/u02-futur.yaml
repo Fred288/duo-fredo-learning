@@ -285,22 +285,38 @@ lessons:
         type: word_bank
         prompt: Morgen werde ich nach Istanbul fahren.
         answers: [Yarın İstanbul'a gideceğim., Ben yarın İstanbul'a gideceğim.]
+        chunks:
+          - { text: "Yarın", role: time }
+          - { text: "İstanbul'a", role: place }
+          - { text: "gideceğim", role: predicate }
         distractors: ["İstanbul'da", gittim]
       - id: a2-u02-l5-e2
         type: word_bank
         prompt: Nächste Woche werden wir das Museum besuchen.
         answers: [Gelecek hafta müzeyi ziyaret edeceğiz.]
+        chunks:
+          - { text: "Gelecek hafta", role: time }
+          - { text: "müzeyi", role: object }
+          - { text: "ziyaret edeceğiz", role: predicate }
         distractors: [müzeye, ettik]
       - id: a2-u02-l5-e3
         type: word_bank
         prompt: Nächstes Jahr werde ich Türkisch lernen.
         answers: [Seneye Türkçe öğreneceğim., Gelecek yıl Türkçe öğreneceğim.]
+        chunks:
+          - { text: "Seneye", role: time }
+          - { text: "Türkçe", role: object_bare }
+          - { text: "öğreneceğim", role: predicate }
         distractors: [öğrendim, geçen]
         explanation: seneye = nächstes Jahr, auch gelecek yıl.
       - id: a2-u02-l5-e4
         type: word_bank
         prompt: Im Sommer fahren wir ans Meer.
         answers: [Yazın denize gideceğiz.]
+        chunks:
+          - { text: "Yazın", role: time }
+          - { text: "denize", role: place }
+          - { text: "gideceğiz", role: predicate }
         distractors: [denizde, gittik]
         explanation: yazın = im Sommer, kışın = im Winter.
       - id: a2-u02-l5-e5
@@ -329,6 +345,10 @@ lessons:
         type: word_bank
         prompt: Was wirst du am Wochenende machen?
         answers: [Hafta sonu ne yapacaksın?]
+        chunks:
+          - { text: "Hafta sonu", role: time }
+          - { text: "ne", role: question }
+          - { text: "yapacaksın", role: predicate }
         distractors: [yaptın, nerede]
       - id: a2-u02-l5-e10
         type: free_text
@@ -360,6 +380,10 @@ lessons:
         type: word_bank
         prompt: Wohin fährst du in den Urlaub?
         answers: [Tatile nereye gideceksin?, Tatilde nereye gideceksin?]
+        chunks:
+          - { text: "Tatile", role: complement }
+          - { text: "nereye", role: question }
+          - { text: "gideceksin", role: predicate }
         distractors: [nerede, gittin]
       - id: a2-u02-l6-e2
         type: word_bank
@@ -377,6 +401,12 @@ lessons:
         type: word_bank
         prompt: Ich werde zwei Wochen in einem Hotel bleiben.
         answers: [İki hafta bir otelde kalacağım., Bir otelde iki hafta kalacağım.]
+        chunks:
+          - { text: "İki hafta", role: time }
+          - { text: "bir otelde", role: place }
+          - { text: "kalacağım", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich: der Ort zuerst; dann liegt der Ton auf der Dauer." }
         distractors: [otele, haftalar]
       - id: a2-u02-l6-e5
         type: word_bank
@@ -409,6 +439,12 @@ lessons:
         type: word_bank
         prompt: Ich werde meinen Koffer heute Abend packen.
         answers: [Valizimi bu akşam hazırlayacağım., Bu akşam valizimi hazırlayacağım., Valizi bu akşam hazırlayacağım., Bu akşam valizi hazırlayacağım.]
+        chunks:
+          - { text: "Valizimi", role: object }
+          - { text: "bu akşam", role: time }
+          - { text: "hazırlayacağım", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [valiz, hazırladım]
         explanation: valiz hazırlamak = den Koffer packen.
       - id: a2-u02-l6-e11
@@ -450,6 +486,10 @@ lessons:
         type: word_bank
         prompt: Mein Bruder (kardeş) wird in Deutschland studieren.
         answers: [Kardeşim Almanya'da okuyacak., Erkek kardeşim Almanya'da okuyacak.]
+        chunks:
+          - { text: "Kardeşim", role: subject }
+          - { text: "Almanya'da", role: place }
+          - { text: "okuyacak", role: predicate }
         distractors: ["Almanya'ya", okudu]
         explanation: okumak heißt auch „studieren, zur Schule gehen“.
       - id: a2-u02-l7-e6
@@ -477,6 +517,10 @@ lessons:
         type: word_bank
         prompt: Dieses Jahr werden wir nicht in den Urlaub fahren.
         answers: [Bu yıl tatile gitmeyeceğiz.]
+        chunks:
+          - { text: "Bu yıl", role: time }
+          - { text: "tatile", role: place }
+          - { text: "gitmeyeceğiz", role: predicate }
         distractors: [gidiyoruz, geçen]
       - id: a2-u02-l7-e10
         type: multiple_choice

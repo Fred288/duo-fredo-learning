@@ -1,7 +1,13 @@
 import { foldDiacritics, levenshtein, normalizeAnswer } from './turkish';
 
 export type Verdict = 'correct' | 'almost' | 'wrong';
-export type AnswerHint = 'diacritics' | 'typo';
+export type AnswerHint =
+  | 'diacritics'
+  | 'typo'
+  // Satzbau: Regeln, an denen die falsche Reihenfolge scheitert
+  | 'predicate_last'
+  | 'bare_object'
+  | 'question_word';
 
 export interface AnswerResult {
   verdict: Verdict;

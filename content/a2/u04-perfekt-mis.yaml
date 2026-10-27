@@ -178,6 +178,10 @@ lessons:
         type: word_bank
         prompt: Ali hat angeblich ein Auto gekauft.
         answers: [Ali bir araba almış., Ali araba almış.]
+        chunks:
+          - { text: "Ali", role: subject }
+          - { text: "bir araba", role: object_bare }
+          - { text: "almış", role: predicate }
         distractors: [aldı, alıyor]
         explanation: Mit -miş gibt man wieder, was man gehört hat.
 
@@ -219,6 +223,11 @@ lessons:
         type: word_bank
         prompt: Mehmet ist angeblich gestern nicht zur Arbeit gegangen.
         answers: [Mehmet dün işe gitmemiş.]
+        chunks:
+          - { text: "Mehmet", role: subject }
+          - { text: "dün", role: time }
+          - { text: "işe", role: place }
+          - { text: "gitmemiş", role: predicate }
         distractors: [gitmedi, işte]
         explanation: işe = zur Arbeit (iş + Dativ).
       - id: a2-u04-l3-e10
@@ -281,6 +290,10 @@ lessons:
         type: word_bank
         prompt: Laut Nachrichten gab es einen Unfall.
         answers: [Haberlere göre bir kaza olmuş.]
+        chunks:
+          - { text: "Haberlere göre", role: complement }
+          - { text: "bir kaza", role: subject }
+          - { text: "olmuş", role: predicate }
         distractors: [olacak, kazada]
         explanation: haberlere göre = laut Nachrichten, … göre = laut, gemäß.
       - id: a2-u04-l4-e6

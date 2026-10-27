@@ -13,11 +13,13 @@ import { dirname, join, relative } from 'node:path';
 import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
 import { withListening } from '../src/content/listening';
 import { withSegments } from '../src/content/segmenting';
+import { caseHints, withWordOrder } from '../src/content/word-order';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import {
   checkListen,
   checkSegments,
+  checkWordOrder,
   checkSuffixTargets,
   checkUnits,
   foreignLexicon,
@@ -47,19 +49,22 @@ const report = checkUnits(units, (p) => existsSync(join(CONTENT_DIR, p)));
 errors.push(...report.errors, ...checkSuffixTargets(units));
 
 // Erzeugte Lektionen aus vorhandenen Inhalten, je vor der Wiederholung: Wörter zerlegen
-// (src/content/segmenting.ts), Hören (src/content/listening.ts; die App blendet es ohne
+// (src/content/segmenting.ts), Satzbau aus annotierten Wortbank-Sätzen (word-order.ts), Hören (src/content/listening.ts; die App blendet es ohne
 // türkische Stimme aus).
 const SEGMENT_LESSONS = false;
+const ORDER_LESSONS = false;
 const LISTENING_LESSONS = true;
 const words = courseWords(units.map(({ unit }) => unit));
 const allVocab = units.flatMap(({ unit }) => unit.vocab ?? []);
+const cases = caseHints(units.map(({ unit }) => unit));
 const built: LoadedUnit[] = units.map(({ file, unit }) => {
   let out = unit;
   if (SEGMENT_LESSONS) out = withSegments(out, t('segment.lessonTitle'), allVocab);
+  if (ORDER_LESSONS) out = withWordOrder(out, t('word_order.lessonTitle'), cases);
   if (LISTENING_LESSONS) out = withListening(out, t('listen.lessonTitle'));
   return { file, unit: annotateSpeech(out, words) };
 });
-errors.push(...checkListen(built), ...checkSegments(built));
+errors.push(...checkListen(built), ...checkSegments(built), ...checkWordOrder(built));
 if (SEGMENT_LESSONS) {
   const counts = built.map(
     ({ unit }) => unit.lessons.find((l) => l.type === 'segmenting')?.exercises.length ?? 0,

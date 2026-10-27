@@ -166,6 +166,10 @@ lessons:
         type: word_bank
         prompt: Am Wochenende spiele ich Fußball.
         answers: [Hafta sonları futbol oynarım.]
+        chunks:
+          - { text: "Hafta sonları", role: time }
+          - { text: "futbol", role: object_bare }
+          - { text: "oynarım", role: predicate }
         distractors: [oynarsın, akşamları]
         explanation: hafta sonları = an den Wochenenden (regelmäßig).
 
@@ -217,11 +221,20 @@ lessons:
         type: word_bank
         prompt: Ich trinke nie Kaffee.
         answers: [Asla kahve içmem., Hiç kahve içmem.]
+        chunks:
+          - { text: "Asla", role: complement }
+          - { text: "kahve", role: object_bare }
+          - { text: "içmem", role: predicate }
         distractors: [içerim, her]
       - id: a2-u03-l3-e10
         type: word_bank
         prompt: Mein Vater sieht nie fern.
         answers: [Babam asla televizyon izlemez., Babam hiç televizyon izlemez.]
+        chunks:
+          - { text: "Babam", role: subject }
+          - { text: "asla", role: complement }
+          - { text: "televizyon", role: object_bare }
+          - { text: "izlemez", role: predicate }
         distractors: [izler, her]
       - id: a2-u03-l3-e11
         type: free_text
@@ -287,6 +300,10 @@ lessons:
         type: word_bank
         prompt: Kommst du am Samstag mit ins Kino?
         answers: [Cumartesi sinemaya gelir misin?, Cumartesi bizimle sinemaya gelir misin?]
+        chunks:
+          - { text: "Cumartesi", role: time }
+          - { text: "sinemaya", role: place }
+          - { text: "gelir misin", role: predicate }
         distractors: [geliyorsun, sinemada]
         explanation: bizimle = mit uns.
       - id: a2-u03-l4-e9
@@ -304,12 +321,20 @@ lessons:
         type: word_bank
         prompt: Was machst du in deiner Freizeit?
         answers: [Boş zamanlarında ne yaparsın?]
+        chunks:
+          - { text: "Boş zamanlarında", role: time }
+          - { text: "ne", role: question }
+          - { text: "yaparsın", role: predicate }
         distractors: [yaparım, yaptın]
         explanation: boş zamanlarında = in deinen freien Zeiten.
       - id: a2-u03-l4-e12
         type: word_bank
         prompt: Ich spiele meistens Gitarre.
         answers: [Genelde gitar çalarım.]
+        chunks:
+          - { text: "Genelde", role: complement }
+          - { text: "gitar", role: object_bare }
+          - { text: "çalarım", role: predicate }
         distractors: [çalarsın, bazen]
       - id: a2-u03-l4-e13
         type: free_text
@@ -429,6 +454,10 @@ lessons:
         type: word_bank
         prompt: Meine Schwester mag keinen Sport.
         answers: [Kız kardeşim spor sevmez., Kız kardeşim sporu sevmez.]
+        chunks:
+          - { text: "Kız kardeşim", role: subject }
+          - { text: "spor", role: object_bare }
+          - { text: "sevmez", role: predicate }
         distractors: [sever, sevmiyorum]
       - id: a2-u03-l6-e8
         type: free_text
@@ -444,6 +473,11 @@ lessons:
         type: word_bank
         prompt: Meine Mutter geht jeden Morgen spazieren.
         answers: [Annem her sabah yürüyüş yapar.]
+        chunks:
+          - { text: "Annem", role: subject }
+          - { text: "her sabah", role: time }
+          - { text: "yürüyüş", role: object_bare }
+          - { text: "yapar", role: predicate }
         distractors: [yapıyorum, akşam]
 
   - id: a2-u03-l7
@@ -475,6 +509,10 @@ lessons:
         type: word_bank
         prompt: Wir gehen manchmal ins Kino.
         answers: [Bazen sinemaya gideriz., Biz bazen sinemaya gideriz.]
+        chunks:
+          - { text: "Bazen", role: complement }
+          - { text: "sinemaya", role: place }
+          - { text: "gideriz", role: predicate }
         distractors: [gidersin, sinemada]
       - id: a2-u03-l7-e6
         type: free_text
@@ -523,6 +561,11 @@ lessons:
         type: word_bank
         prompt: Was machst du normalerweise am Sonntag?
         answers: [Pazar günleri genelde ne yaparsın?]
+        chunks:
+          - { text: "Pazar günleri", role: time }
+          - { text: "genelde", role: complement }
+          - { text: "ne", role: question }
+          - { text: "yaparsın", role: predicate }
         distractors: [yaparım, yaptın]
         explanation: pazar günleri = sonntags (regelmäßig).
 

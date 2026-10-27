@@ -181,6 +181,10 @@ lessons:
         type: word_bank
         prompt: Die Katze ist unter das Bett gekrochen.
         answers: [Kedi yatağın altına girdi.]
+        chunks:
+          - { text: "Kedi", role: subject }
+          - { text: "yatağın altına", role: place }
+          - { text: "girdi", role: predicate }
         distractors: [altında, çıktı]
         explanation: girmek = hineingehen, mit Dativ.
       - id: a2-u08-l2-e14
@@ -290,17 +294,35 @@ lessons:
         type: word_bank
         prompt: Ich fahre mit dem Bus zur Arbeit.
         answers: [İşe otobüsle gidiyorum., Otobüsle işe gidiyorum., İşe otobüs ile gidiyorum., Otobüs ile işe gidiyorum.]
+        chunks:
+          - { text: "İşe", role: place }
+          - { text: "otobüsle", role: complement }
+          - { text: "gidiyorum", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich: dann ist das Ziel betont (zur Arbeit, nicht anderswohin)." }
         distractors: [otobüse, işte]
       - id: a2-u08-l4-e8
         type: word_bank
         prompt: Mit wem bist du ins Kino gegangen?
         answers: [Sinemaya kiminle gittin?, Kiminle sinemaya gittin?]
+        chunks:
+          - { text: "Sinemaya", role: place }
+          - { text: "kiminle", role: question }
+          - { text: "gittin", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich; meist steht das Fragewort direkt vor dem Verb." }
         distractors: [kime, sinemada]
         explanation: kim + le → kiminle (mit wem), ne + yle → neyle (womit).
       - id: a2-u08-l4-e9
         type: word_bank
         prompt: Ich bin mit Ayşe ins Kino gegangen.
         answers: [Ayşe'yle sinemaya gittim., Ayşe ile sinemaya gittim., Sinemaya Ayşe'yle gittim., Sinemaya Ayşe ile gittim.]
+        chunks:
+          - { text: "Ayşe'yle", role: complement }
+          - { text: "sinemaya", role: place }
+          - { text: "gittim", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich: dann ist „mit Ayşe“ betont, es antwortet auf „mit wem?“." }
         distractors: ["Ayşe'ye", gittin]
       - id: a2-u08-l4-e10
         type: word_bank
@@ -338,6 +360,10 @@ lessons:
         type: word_bank
         prompt: Ich habe ein Geschenk für meine Mutter gekauft.
         answers: [Annem için bir hediye aldım., Anneme bir hediye aldım., Annem için hediye aldım., Anneme hediye aldım.]
+        chunks:
+          - { text: "Annem için", role: complement }
+          - { text: "bir hediye", role: object_bare }
+          - { text: "aldım", role: predicate }
         distractors: [annemin, gibi]
       - id: a2-u08-l5-e3
         type: word_bank
@@ -412,6 +438,10 @@ lessons:
         type: word_bank
         prompt: Nach dem Essen trinken wir Tee.
         answers: [Yemekten sonra çay içeriz., Yemekten sonra çay içiyoruz.]
+        chunks:
+          - { text: "Yemekten sonra", role: time }
+          - { text: "çay", role: object_bare }
+          - { text: "içeriz", role: predicate }
         distractors: [yemek, önce]
       - id: a2-u08-l6-e6
         type: word_bank
@@ -516,6 +546,10 @@ lessons:
         type: word_bank
         prompt: Hinter dem Haus ist ein großer Baum.
         answers: [Evin arkasında büyük bir ağaç var.]
+        chunks:
+          - { text: "Evin arkasında", role: place }
+          - { text: "büyük bir ağaç", role: subject }
+          - { text: "var", role: predicate }
         distractors: [önünde, ağaçta]
         explanation: Bei „es gibt“ steht der Ort vorne, Evin arkasında … var.
       - id: a2-u08-l8-e5
@@ -527,6 +561,10 @@ lessons:
         type: word_bank
         prompt: Der Hund schläft unter dem Tisch.
         answers: [Köpek masanın altında uyuyor.]
+        chunks:
+          - { text: "Köpek", role: subject }
+          - { text: "masanın altında", role: place }
+          - { text: "uyuyor", role: predicate }
         distractors: [üstünde, masaya]
       - id: a2-u08-l8-e7
         type: free_text
@@ -583,6 +621,12 @@ lessons:
         type: word_bank
         prompt: Ich warte vor dem Museum auf dich.
         answers: [Seni müzenin önünde bekliyorum., Müzenin önünde seni bekliyorum., Seni müzenin önünde bekleyeceğim., Müzenin önünde seni bekleyeceğim.]
+        chunks:
+          - { text: "Seni", role: object }
+          - { text: "müzenin önünde", role: place }
+          - { text: "bekliyorum", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich: der Ort zuerst; dann ist „seni“ betont." }
         distractors: [sana, müzede]
         explanation: beklemek mit Akkusativ, seni beklemek = auf dich warten.
       - id: a2-u08-l9-e5
@@ -655,6 +699,10 @@ lessons:
         type: word_bank
         prompt: Wir sind nach dem Film nach Hause gegangen.
         answers: [Filmden sonra eve gittik.]
+        chunks:
+          - { text: "Filmden sonra", role: time }
+          - { text: "eve", role: place }
+          - { text: "gittik", role: predicate }
         distractors: [önce, film]
       - { id: a2-u08-l10-e6, type: suffix_builder, stem: karşı, suffixes: [POSS_3SG, LOC], target: karşısında, gloss_de: gegenüber }
       - { id: a2-u08-l10-e7, type: suffix_builder, stem: arkadaş, suffixes: [POSS_1PL, INS], target: arkadaşımızla, gloss_de: mit unserem Freund }

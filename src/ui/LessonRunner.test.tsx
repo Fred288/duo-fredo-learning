@@ -31,8 +31,13 @@ const lesson: Lesson = {
     {
       id: 'a1-u01-l1-e3',
       type: 'sov_puzzle',
-      tokens: ['Ben', 'çay', 'içiyorum'],
-      order: ['Ben', 'çay', 'içiyorum'],
+      prompt: 'Ich trinke Tee.',
+      text: 'Ben çay içiyorum.',
+      chunks: [
+        { text: 'ben', role: 'subject' },
+        { text: 'çay', role: 'object_bare' },
+        { text: 'içiyorum', role: 'predicate' },
+      ],
     },
   ],
 };

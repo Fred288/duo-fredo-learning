@@ -88,14 +88,42 @@ export const MultipleChoice = z
     path: ['answer'],
   });
 
-export const WordBank = z.strictObject({
-  ...exerciseBase,
-  type: z.literal('word_bank'),
-  prompt: nonEmpty,
-  // Erste Antwort ist kanonisch, aus ihr werden die Bausteine gebildet.
-  answers: z.array(nonEmpty).min(1),
-  distractors: z.array(nonEmpty).optional(),
+/** Rollen der Satzglieder im Satzbau; object_bare = unbestimmtes Objekt ohne Akkusativ. */
+export const CHUNK_ROLES = [
+  'subject',
+  'time',
+  'place',
+  'object',
+  'object_bare',
+  'complement',
+  'question',
+  'predicate',
+] as const;
+export type ChunkRole = (typeof CHUNK_ROLES)[number];
+
+const Chunk = z.strictObject({ text: nonEmpty, role: z.enum(CHUNK_ROLES) });
+/** Weitere gültige Reihenfolge der Satzglieder (Indizes in `chunks`); note = deutscher Fokus-Hinweis. */
+const ChunkOrder = z.strictObject({
+  order: z.array(z.number().int().min(0)).min(2),
+  note: nonEmpty.optional(),
 });
+
+export const WordBank = z
+  .strictObject({
+    ...exerciseBase,
+    type: z.literal('word_bank'),
+    prompt: nonEmpty,
+    // Erste Antwort ist kanonisch, aus ihr werden die Bausteine gebildet.
+    answers: z.array(nonEmpty).min(1),
+    distractors: z.array(nonEmpty).optional(),
+    // Satzglieder der ersten Antwort in Grundreihenfolge; daraus entsteht die Satzbau-Übung.
+    chunks: z.array(Chunk).min(3).optional(),
+    orders: z.array(ChunkOrder).min(1).optional(),
+  })
+  .refine((e) => !e.orders || e.chunks, {
+    message: 'orders nur mit chunks',
+    path: ['orders'],
+  });
 
 export const FreeText = z.strictObject({
   ...exerciseBase,
@@ -250,11 +278,19 @@ export const Segment = z
     }
   });
 
+/**
+ * Satzbau: Satzglieder in türkische Reihenfolge bringen. `chunks` in Grundreihenfolge (Anzeige:
+ * erstes Wort klein, außer Namen), `text` = ganzer Satz; richtig sind nur Grundreihenfolge und
+ * `orders`. Wird im Build aus annotierten Wortbank-Sätzen erzeugt (`from`).
+ */
 export const SovPuzzle = z.strictObject({
   ...exerciseBase,
   type: z.literal('sov_puzzle'),
-  tokens: z.array(nonEmpty).min(2),
-  order: z.array(nonEmpty).min(2),
+  prompt: nonEmpty,
+  text: nonEmpty,
+  chunks: z.array(Chunk).min(3),
+  orders: z.array(ChunkOrder).min(1).optional(),
+  from: nonEmpty.optional(),
 });
 
 /**

@@ -31,7 +31,7 @@ export function speakables(ex: Exercise, matched?: string): Speakables {
     case 'segment':
       return { solution: say(ex.word) };
     case 'sov_puzzle':
-      return { solution: say(ex.order.join(' ')) };
+      return { solution: say(matched ?? ex.text) };
     case 'paradigm':
       return {};
   }

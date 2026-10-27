@@ -5,6 +5,7 @@ import { isAmbiguous, pieces } from '../src/content/segmenting';
 import { MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
 import { speechText } from '../src/audio/speech-text';
+import { trLower } from '../src/lib/turkish';
 
 export interface LoadedUnit {
   file: string;
@@ -166,6 +167,83 @@ export function checkSegments(units: LoadedUnit[]): string[] {
   return errors;
 }
 
+type Chunk = { text: string; role: string };
+type ChunkOrder = { order: number[]; note?: string };
+
+/** Fehler einer Satzglied-Folge samt Varianten (Wortbank-Annotation und Satzbau-Übung). */
+function chunkErrors(chunks: Chunk[], orders: ChunkOrder[] = []): string[] {
+  const errors: string[] = [];
+  const predicates = chunks.filter((c) => c.role === 'predicate').length;
+  if (predicates !== 1) errors.push(`${predicates} Prädikate, erwartet genau eins`);
+  else if (chunks.at(-1)!.role !== 'predicate') errors.push('Prädikat steht nicht am Ende');
+  const keys = chunks.map((c) => trLower(c.text));
+  if (new Set(keys).size !== keys.length) errors.push('Satzglieder doppelt');
+  const seen = new Set([chunks.map((_, i) => i).join(',')]);
+  for (const { order } of orders) {
+    const key = order.join(',');
+    const perm = [...order].sort((a, b) => a - b).join(',');
+    if (perm !== chunks.map((_, i) => i).join(',')) {
+      errors.push(`orders [${key}] ist keine Umstellung von ${chunks.length} Satzgliedern`);
+    } else if (seen.has(key)) {
+      errors.push(`orders [${key}] doppelt oder gleich der Grundreihenfolge`);
+    }
+    seen.add(key);
+  }
+  return errors;
+}
+
+const words = (s: string) =>
+  s
+    .replace(/[.!?…,]+$/, '')
+    .split(/\s+/)
+    .filter(Boolean);
+
+/**
+ * Satzbau: Satzglieder ergeben genau den ersten Wortbank-Satz, ein Prädikat am Ende der
+ * Grundreihenfolge, Varianten sind echte Umstellungen. Jede weitere Wortbank-Lösung, die nur
+ * die Satzglieder umstellt, muss als Variante hinterlegt sein (sonst widersprechen sich
+ * Wortbank und Satzbau). Erzeugte Übungen: Satzglieder ergeben `text`.
+ */
+export function checkWordOrder(units: LoadedUnit[]): string[] {
+  const errors: string[] = [];
+  for (const { file, unit } of units) {
+    for (const ex of unit.lessons.flatMap((l) => l.exercises)) {
+      const fail = (msg: string) => errors.push(`${file}: ${ex.id}: ${msg}`);
+      if (ex.type === 'sov_puzzle') {
+        chunkErrors(ex.chunks, ex.orders).forEach(fail);
+        const joined = ex.chunks.map((c) => c.text).join(' ');
+        if (trLower(joined) !== trLower(words(ex.text).join(' '))) {
+          fail(`Satzglieder ergeben "${joined}", nicht "${ex.text}"`);
+        }
+        continue;
+      }
+      if (ex.type !== 'word_bank' || !ex.chunks) continue;
+      chunkErrors(ex.chunks, ex.orders).forEach(fail);
+      const joined = ex.chunks.map((c) => c.text).join(' ');
+      const sentence = words(ex.answers[0]!).join(' ');
+      if (joined.normalize('NFC') !== sentence.normalize('NFC')) {
+        fail(`Satzglieder ergeben "${joined}", erste Antwort ist "${sentence}"`);
+        continue;
+      }
+      const listed = new Set([
+        ex.chunks.map((c) => trLower(c.text)).join(' '),
+        ...(ex.orders ?? []).map((o) =>
+          o.order.map((i) => trLower(ex.chunks![i]?.text ?? '')).join(' '),
+        ),
+      ]);
+      const sorted = (s: string) => [...words(trLower(s))].sort().join(' ');
+      const chunkWords = sorted(sentence);
+      for (const answer of ex.answers.slice(1)) {
+        const text = trLower(words(answer).join(' '));
+        if (sorted(answer) === chunkWords && !listed.has(text)) {
+          fail(`Antwort "${answer}" stellt nur Satzglieder um und fehlt in orders`);
+        }
+      }
+    }
+  }
+  return errors;
+}
+
 /**
  * Vokabeln aus anderen Units, deren Flags (softens, proper …) die Grammatikübungen dieser Unit
  * brauchen. Zur Laufzeit wird nur eine Unit geladen, daher schreibt der Build sie mit aus.
@@ -228,11 +306,13 @@ export function checkListen(units: LoadedUnit[]): string[] {
 
 /**
  * Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag).
- * Erzeugte Übungen (Hören, Zerlegen; mit `from`) zählen nicht extra: ihr Stand folgt der Quelle.
+ * Erzeugte Übungen (Hören, Zerlegen, Satzbau; mit `from`) zählen nicht extra: ihr Stand folgt der Quelle.
  */
 export function countUnreviewed(unit: Unit): number {
   const exercises = unit.lessons
     .flatMap((l) => l.exercises)
-    .filter((e) => !((e.type === 'listen' || e.type === 'segment') && e.from));
+    .filter(
+      (e) => !((e.type === 'listen' || e.type === 'segment' || e.type === 'sov_puzzle') && e.from),
+    );
   return [...exercises, ...(unit.vocab ?? [])].filter((i) => !(i.reviewed ?? unit.reviewed)).length;
 }

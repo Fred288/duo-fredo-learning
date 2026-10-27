@@ -291,6 +291,12 @@ lessons:
         type: word_bank
         prompt: Ali soll morgen anrufen.
         answers: [Ali yarın arasın., Yarın Ali arasın.]
+        chunks:
+          - { text: "Ali", role: subject }
+          - { text: "yarın", role: time }
+          - { text: "arasın", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch möglich: die Zeit zuerst; dann ist „Ali“ betont (gerade Ali soll anrufen)." }
         distractors: [arıyor, aradı]
         explanation: aramak = anrufen, suchen.
       - id: a2-u06-l4-e8
@@ -462,6 +468,12 @@ lessons:
         type: word_bank
         prompt: Welcher Bus fährt nach Taksim?
         answers: [Hangi otobüs Taksim'e gidiyor?, Hangi otobüs Taksim'e gider?, Taksim'e hangi otobüs gidiyor?, Taksim'e hangi otobüs gider?]
+        chunks:
+          - { text: "Hangi otobüs", role: question }
+          - { text: "Taksim'e", role: place }
+          - { text: "gidiyor", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: das Ziel zuerst, dann steht die Frage direkt vor dem Verb." }
         distractors: ["Taksim'de", nereye]
       - id: a2-u06-l7-e2
         type: word_bank
@@ -472,6 +484,10 @@ lessons:
         type: word_bank
         prompt: Wo kann ich das Ticket kaufen?
         answers: [Bileti nereden alabilirim?, Nereden bilet alabilirim?, Bilet nereden alabilirim?]
+        chunks:
+          - { text: "Bileti", role: object }
+          - { text: "nereden", role: question }
+          - { text: "alabilirim", role: predicate }
         distractors: [nereye, alıyorum]
       - id: a2-u06-l7-e4
         type: word_bank

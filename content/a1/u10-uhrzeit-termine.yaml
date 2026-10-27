@@ -311,6 +311,12 @@ lessons:
         type: word_bank
         prompt: Der Film beginnt um halb neun.
         answers: [Film saat sekiz buçukta başlıyor., Film sekiz buçukta başlıyor., Saat sekiz buçukta film başlıyor.]
+        chunks:
+          - { text: "Film", role: subject }
+          - { text: "saat sekiz buçukta", role: time }
+          - { text: "başlıyor", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: die Uhrzeit zuerst, dann rückt „film“ näher ans Verb und wird betont." }
         distractors: [dokuz, başlıyorum]
         explanation: film = Film.
       - id: a1-u10-l4-e10
@@ -333,6 +339,10 @@ lessons:
         type: word_bank
         prompt: Wir essen um zwölf.
         answers: [Saat on ikide yemek yiyoruz., On ikide yemek yiyoruz.]
+        chunks:
+          - { text: "Saat on ikide", role: time }
+          - { text: "yemek", role: object_bare }
+          - { text: "yiyoruz", role: predicate }
         distractors: [on iki, yiyorlar]
         explanation: yemek ist auch das Nomen „Essen“, yemek yemek = essen.
 
@@ -393,12 +403,20 @@ lessons:
         type: word_bank
         prompt: Am Samstag gehen wir ins Kino.
         answers: [Cumartesi sinemaya gidiyoruz., Cumartesi günü sinemaya gidiyoruz.]
+        chunks:
+          - { text: "Cumartesi", role: time }
+          - { text: "sinemaya", role: place }
+          - { text: "gidiyoruz", role: predicate }
         distractors: [sinemada, cumartesiden]
         explanation: "Wochentage ohne Endung, oft mit günü: cumartesi günü = am Samstag (wörtlich „Samstagstag“)."
       - id: a1-u10-l6-e6
         type: word_bank
         prompt: Ich habe morgen einen Termin.
         answers: [Yarın randevum var., Yarın bir randevum var.]
+        chunks:
+          - { text: "Yarın", role: time }
+          - { text: "randevum", role: subject }
+          - { text: "var", role: predicate }
         distractors: [yok, randevu]
       - id: a1-u10-l6-e7
         type: free_text
@@ -477,6 +495,10 @@ lessons:
         type: word_bank
         prompt: Das Geschäft ist von zehn bis acht geöffnet.
         answers: [Mağaza ondan sekize kadar açık., Mağaza saat ondan sekize kadar açık.]
+        chunks:
+          - { text: "Mağaza", role: subject }
+          - { text: "ondan sekize kadar", role: time }
+          - { text: "açık", role: predicate }
         distractors: [ona, sekizden]
         explanation: mağaza = Geschäft, açık = offen.
       - id: a1-u10-l7-e8
@@ -494,6 +516,10 @@ lessons:
         type: word_bank
         prompt: Um wie viel Uhr beginnt der Unterricht?
         answers: [Ders saat kaçta başlıyor?, Ders kaçta başlıyor?]
+        chunks:
+          - { text: "Ders", role: subject }
+          - { text: "saat kaçta", role: question }
+          - { text: "başlıyor", role: predicate }
         distractors: [kaç, başlıyorsun]
         explanation: ders = Unterricht, Unterrichtsstunde.
       - id: a1-u10-l7-e11

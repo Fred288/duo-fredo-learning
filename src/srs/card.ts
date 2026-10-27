@@ -35,6 +35,7 @@ export const GRAMMAR_TYPES: readonly Exercise['type'][] = [
   'conjugation',
   'paradigm',
   'segment',
+  'sov_puzzle',
 ];
 
 /**

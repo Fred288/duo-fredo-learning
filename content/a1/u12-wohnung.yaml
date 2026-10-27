@@ -116,17 +116,29 @@ lessons:
         type: word_bank
         prompt: In der Küche gibt es einen Kühlschrank.
         answers: [Mutfakta buzdolabı var., Mutfakta bir buzdolabı var.]
+        chunks:
+          - { text: "Mutfakta", role: place }
+          - { text: "buzdolabı", role: subject }
+          - { text: "var", role: predicate }
         distractors: [Mutfak, yok]
       - id: a1-u12-l2-e8
         type: word_bank
         prompt: Im Wohnzimmer gibt es zwei Sessel.
         answers: [Salonda iki koltuk var.]
+        chunks:
+          - { text: "Salonda", role: place }
+          - { text: "iki koltuk", role: subject }
+          - { text: "var", role: predicate }
         distractors: [koltuklar, yok]
         explanation: Nach der Zahl kein Plural.
       - id: a1-u12-l2-e9
         type: word_bank
         prompt: Im Bad gibt es kein Fenster.
         answers: [Banyoda pencere yok.]
+        chunks:
+          - { text: "Banyoda", role: place }
+          - { text: "pencere", role: subject }
+          - { text: "yok", role: predicate }
         distractors: [var, değil]
       - id: a1-u12-l2-e10
         type: word_bank
@@ -142,6 +154,10 @@ lessons:
         type: word_bank
         prompt: Die Katze schläft auf dem Sofa.
         answers: [Kedi kanepede uyuyor.]
+        chunks:
+          - { text: "Kedi", role: subject }
+          - { text: "kanepede", role: place }
+          - { text: "uyuyor", role: predicate }
         distractors: [kanepeye, uyuyorum]
       - id: a1-u12-l2-e13
         type: free_text
@@ -187,6 +203,10 @@ lessons:
         type: word_bank
         prompt: In meinem Zimmer gibt es ein Bett und einen Tisch.
         answers: [Odamda bir yatak ve bir masa var., Odamda yatak ve masa var.]
+        chunks:
+          - { text: "Odamda", role: place }
+          - { text: "bir yatak ve bir masa", role: subject }
+          - { text: "var", role: predicate }
         distractors: [yok, odada]
       - id: a1-u12-l3-e7
         type: word_bank
@@ -410,6 +430,10 @@ lessons:
         type: word_bank
         prompt: Am Wochenende besuchen wir meine Großmutter.
         answers: [Hafta sonu anneanneme gidiyoruz., Hafta sonu babaanneme gidiyoruz.]
+        chunks:
+          - { text: "Hafta sonu", role: time }
+          - { text: "anneanneme", role: place }
+          - { text: "gidiyoruz", role: predicate }
         distractors: [anneannem, gidiyorum]
         explanation: hafta sonu = Wochenende. Wörtlich „zu meiner Großmutter gehen“.
       - id: a1-u12-l6-e13
@@ -451,6 +475,10 @@ lessons:
         type: word_bank
         prompt: Im Schlafzimmer gibt es einen großen Schrank.
         answers: [Yatak odasında büyük bir dolap var.]
+        chunks:
+          - { text: "Yatak odasında", role: place }
+          - { text: "büyük bir dolap", role: subject }
+          - { text: "var", role: predicate }
         distractors: [yok, dolabı]
         explanation: yatak odası + n + da → yatak odasında.
       - id: a1-u12-l7-e5

@@ -180,6 +180,12 @@ lessons:
         type: word_bank
         prompt: Der Brief wurde gestern geschickt.
         answers: [Mektup dün gönderildi., Dün mektup gönderildi.]
+        chunks:
+          - { text: "Mektup", role: subject }
+          - { text: "dün", role: time }
+          - { text: "gönderildi", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [gönderdi, mektubu]
         explanation: Im Passiv steht das Objekt ohne Akkusativ, es ist jetzt Subjekt.
       - id: a2-u10-l2-e11
@@ -192,11 +198,21 @@ lessons:
         type: word_bank
         prompt: Das Paket wird morgen zugestellt.
         answers: [Paket yarın teslim edilecek., Yarın paket teslim edilecek.]
+        chunks:
+          - { text: "Paket", role: subject }
+          - { text: "yarın", role: time }
+          - { text: "teslim edilecek", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [paketi, etti]
       - id: a2-u10-l2-e13
         type: word_bank
         prompt: Der Brief wurde von Ali geschrieben.
         answers: [Mektup Ali tarafından yazıldı.]
+        chunks:
+          - { text: "Mektup", role: subject }
+          - { text: "Ali tarafından", role: complement }
+          - { text: "yazıldı", role: predicate }
         distractors: [yazdı, "Ali'ye"]
         explanation: tarafından = von (beim Passiv). Meist lässt man es weg.
       - id: a2-u10-l2-e14
@@ -269,6 +285,13 @@ lessons:
         type: word_bank
         prompt: Wie kommt man von hier zum Museum?
         answers: [Buradan müzeye nasıl gidilir?, Müzeye buradan nasıl gidilir?]
+        chunks:
+          - { text: "Buradan", role: place }
+          - { text: "müzeye", role: place }
+          - { text: "nasıl", role: question }
+          - { text: "gidilir", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: das Ziel zuerst." }
         distractors: [gider, müzede]
       - id: a2-u10-l3-e9
         type: word_bank
@@ -288,6 +311,10 @@ lessons:
         type: word_bank
         prompt: Die Post öffnet um neun Uhr.
         answers: [Postane saat dokuzda açılır., Postane dokuzda açılır., Postane saat dokuzda açılıyor., Postane dokuzda açılıyor.]
+        chunks:
+          - { text: "Postane", role: subject }
+          - { text: "saat dokuzda", role: time }
+          - { text: "açılır", role: predicate }
         distractors: [açtı, dokuza]
         explanation: Wörtlich „wird geöffnet“ (Passiv im Aorist); umgangssprachlich geht auch Postane dokuzda açar.
       - id: a2-u10-l3-e12

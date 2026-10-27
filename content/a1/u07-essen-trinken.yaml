@@ -137,11 +137,19 @@ lessons:
         type: word_bank
         prompt: Zu Hause gibt es Tee.
         answers: [Evde çay var.]
+        chunks:
+          - { text: "Evde", role: place }
+          - { text: "çay", role: subject }
+          - { text: "var", role: predicate }
         distractors: [Eve, yok]
       - id: a1-u07-l2-e5
         type: word_bank
         prompt: Gibt es hier ein Restaurant?
         answers: [Burada bir lokanta var mı?, Burada lokanta var mı?]
+        chunks:
+          - { text: "Burada", role: place }
+          - { text: "bir lokanta", role: subject }
+          - { text: "var mı", role: predicate }
         distractors: [orada, yok]
       - id: a1-u07-l2-e6
         type: multiple_choice
@@ -177,6 +185,10 @@ lessons:
         type: word_bank
         prompt: Im Kühlschrank gibt es keine Eier.
         answers: [Buzdolabında yumurta yok.]
+        chunks:
+          - { text: "Buzdolabında", role: place }
+          - { text: "yumurta", role: subject }
+          - { text: "yok", role: predicate }
         distractors: [var, yumurtalar]
         explanation: buzdolabı heißt Kühlschrank, buzdolabında = im Kühlschrank.
 

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   checkSegments,
+  checkWordOrder,
   checkSuffixTargets,
   countUnreviewed,
   checkUnits,
@@ -306,5 +307,65 @@ vocab:
       ),
     );
     expect(countUnreviewed(unit)).toBe(2);
+  });
+});
+
+describe('checkWordOrder', () => {
+  const unit = (fields: string, answers = '[Şimdi ne yapıyorsun?, Ne yapıyorsun şimdi?]') => `
+id: a1-u08
+level: A1
+title: Test
+source: eigene Formulierung
+license: CC BY-SA 4.0
+lessons:
+  - id: a1-u08-l1
+    type: dialog
+    title: Fragen
+    exercises:
+      - id: a1-u08-l1-e1
+        type: word_bank
+        prompt: Was machst du jetzt?
+        answers: ${answers}
+${fields}
+`;
+  const chunks = `        chunks:
+          - { text: Şimdi, role: time }
+          - { text: ne, role: question }
+          - { text: yapıyorsun, role: predicate }`;
+  const variant = `
+        orders: [{ order: [1, 2, 0], note: Nachtrag }]`;
+
+  it('akzeptiert Satzglieder, die den ersten Satz ergeben, mit allen Umstellungen', () => {
+    expect(checkWordOrder([load('a.yaml', unit(chunks + variant))])).toEqual([]);
+  });
+
+  it('verlangt Wortbank-Umstellungen als Variante', () => {
+    expect(checkWordOrder([load('a.yaml', unit(chunks))])).toEqual([
+      'a.yaml: a1-u08-l1-e1: Antwort "Ne yapıyorsun şimdi?" stellt nur Satzglieder um und fehlt in orders',
+    ]);
+  });
+
+  it('meldet abweichenden Text, Prädikat nicht am Ende und kaputte Varianten', () => {
+    const typo = chunks.replace('text: ne,', 'text: neyi,');
+    expect(checkWordOrder([load('a.yaml', unit(typo + variant))])).toEqual([
+      'a.yaml: a1-u08-l1-e1: Satzglieder ergeben "Şimdi neyi yapıyorsun", erste Antwort ist "Şimdi ne yapıyorsun"',
+    ]);
+    const order = `        chunks:
+          - { text: Şimdi, role: time }
+          - { text: ne, role: predicate }
+          - { text: yapıyorsun, role: question }`;
+    expect(
+      checkWordOrder([load('a.yaml', unit(order + variant, '[Şimdi ne yapıyorsun?]'))]),
+    ).toEqual(['a.yaml: a1-u08-l1-e1: Prädikat steht nicht am Ende']);
+    const bad = `
+        orders: [{ order: [0, 1, 2] }, { order: [0, 0, 2] }]`;
+    expect(checkWordOrder([load('a.yaml', unit(chunks + bad, '[Şimdi ne yapıyorsun?]'))])).toEqual([
+      'a.yaml: a1-u08-l1-e1: orders [0,1,2] doppelt oder gleich der Grundreihenfolge',
+      'a.yaml: a1-u08-l1-e1: orders [0,0,2] ist keine Umstellung von 3 Satzgliedern',
+    ]);
+  });
+
+  it('Schema: orders nur mit chunks', () => {
+    expect(parseUnitFile('a.yaml', unit(variant)).errors[0]).toContain('orders nur mit chunks');
   });
 });

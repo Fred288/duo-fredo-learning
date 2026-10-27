@@ -35,6 +35,18 @@ Das Pronomen fällt meist weg, weil die Endung die Person zeigt: (Ben) müzik di
 
 Fragewörter stehen vor dem Verb, dort, wo die Antwort stehen würde: Şimdi **ne** yapıyorsun? – Şimdi **kahvaltı** yapıyorum.
 
+Die Grundreihenfolge der Satzglieder ist **Subjekt – Zeit – Ort – Objekt – Verb**:
+
+| Subjekt | Zeit | Ort | Objekt | Verb |
+|---|---|---|---|---|
+| Babam | | bankada | | çalışıyor. |
+| | Her sabah | | çay | içiyorum. |
+| Annem | | | kitap | okuyor. |
+
+- Ein **unbestimmtes Objekt** ohne Endung (çay, kitap) klebt direkt am Verb.
+- Betont ist das Satzglied **direkt vor dem Verb**. Zeit und Ort dürfen darum auch einmal tauschen; dann verschiebt sich der Ton, nicht der Sinn.
+- Die Satzbau-Übungen nehmen nur die Grundreihenfolge und die bei der Aufgabe hinterlegten Varianten an; bei einer Variante sagt der Hinweis, was sich verschiebt.
+
 ## Tageszeiten
 
 | sabah           | öğle (öğlen) | akşam         | gece  |
