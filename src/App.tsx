@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { t } from './i18n';
 import { useApp } from './store/app';
+import { useAudioSetup } from './store/audio';
 import { ExplainerScreen } from './ui/ExplainerScreen';
 import { Home } from './ui/Home';
 import { LookupScreen } from './ui/LookupScreen';
@@ -16,6 +17,7 @@ export function App() {
   const openSettings = useApp((s) => s.openSettings);
   const openLookup = useApp((s) => s.openLookup);
   const onHome = screen.name === 'home';
+  useAudioSetup();
 
   // Taste „/“ öffnet auf der Startseite das Nachschlagewerk (nicht beim Tippen in Feldern).
   useEffect(() => {

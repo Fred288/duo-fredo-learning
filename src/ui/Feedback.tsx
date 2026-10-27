@@ -1,4 +1,5 @@
 import { t } from '../i18n';
+import { SpeakButton } from './SpeakButton';
 import type { AnswerResult } from '../lib/answer';
 
 const tone = {
@@ -17,9 +18,11 @@ interface Props {
   /** Regelbegründungen aus der Morphologie-Engine. */
   reasons?: string[];
   retry: boolean;
+  /** Türkische Lösung zum Anhören. */
+  speak?: string;
 }
 
-export function Feedback({ result, solution, explanation, reasons = [], retry }: Props) {
+export function Feedback({ result, solution, explanation, reasons = [], retry, speak }: Props) {
   const shown = result.matched ?? solution;
   return (
     <div
@@ -27,7 +30,14 @@ export function Feedback({ result, solution, explanation, reasons = [], retry }:
       aria-live="polite"
       className={`rounded-xl border p-4 ${tone[result.verdict]}`}
     >
-      <p className="font-semibold">{t(`feedback.${result.verdict}`)}</p>
+      <p className="font-semibold">
+        {t(`feedback.${result.verdict}`)}
+        {speak && (
+          <span className="ml-1 align-middle">
+            <SpeakButton text={speak} />
+          </span>
+        )}
+      </p>
       {result.verdict !== 'correct' || result.hints.length > 0 ? (
         <p className="mt-1" lang="tr">
           {t('feedback.solution', { answer: shown })}

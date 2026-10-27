@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Verdict } from '../lib/answer';
 import type { Exercise, Lesson, Vocab } from '../content/schema';
 import type { ExplainerSection } from '../content/explainer-section';
+import { speakables } from '../audio/speakables';
 import { t } from '../i18n';
 import { explainSteps } from '../i18n/explain';
 import { grade, isSupported, paradigmCells, solutionOf, type Supported } from '../session/grade';
@@ -13,6 +14,7 @@ import {
   summary,
   type Session,
 } from '../session/session';
+import { stopSpeaking, useAutoplay } from '../store/audio';
 import { useSettings } from '../store/settings';
 import { solveExercise, solveParadigm } from '../content/lexicon';
 import { ConjugationInput } from './exercises/ConjugationInput';
@@ -76,6 +78,11 @@ export function LessonRunner({
   const ex = currentExercise(session);
   const supported = ex && isSupported(ex) ? ex : undefined;
 
+  // Optional: türkischen Prompt beim Anzeigen und die Lösung im Feedback vorlesen.
+  const spoken = supported ? speakables(supported, session.last?.matched) : {};
+  useAutoplay(spoken.prompt, session.phase === 'answering');
+  useAutoplay(spoken.solution, session.phase === 'feedback');
+
   const check = useCallback(() => {
     if (!supported || !answer.trim()) return;
     const result = grade(supported, answer, { tolerateDiacritics });
@@ -93,6 +100,7 @@ export function LessonRunner({
   }, [session, exercises.length, onComplete]);
 
   const proceed = useCallback(() => {
+    stopSpeaking();
     setAnswer('');
     setSession((s) => next(s));
   }, []);
@@ -225,6 +233,7 @@ export function LessonRunner({
             reasons={reasonsFor(supported, answer, vocab)}
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
+            speak={spoken.solution}
           />
           {unitId && (
             <ReportError

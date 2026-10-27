@@ -1,5 +1,7 @@
-import { t } from '../i18n';
+import { canSpeak } from '../audio/types';
+import { t, type MessageKey } from '../i18n';
 import { useApp } from '../store/app';
+import { speak, useAudio } from '../store/audio';
 import { GOAL_RANGE, NEW_WORDS_RANGE, useSettings, type Theme } from '../store/settings';
 
 const THEMES: Theme[] = ['system', 'light', 'dark'];
@@ -10,7 +12,19 @@ const stepButton =
 export function Settings() {
   const goHome = useApp((s) => s.goHome);
   const openReview = useApp((s) => s.openReview);
-  const { dailyGoal, newWordsPerDay, showStreak, tolerateDiacritics, theme, set } = useSettings();
+  const {
+    dailyGoal,
+    newWordsPerDay,
+    showStreak,
+    tolerateDiacritics,
+    theme,
+    audioEnabled,
+    autoplay,
+    voiceURI,
+    set,
+  } = useSettings();
+  const { status, voices } = useAudio();
+  const current = voices.find((v) => v.voiceURI === voiceURI) ?? voices[0];
 
   return (
     <section className="space-y-6" aria-labelledby="settings-title">
@@ -106,6 +120,60 @@ export function Settings() {
           {t('settings.tolerate.hint')}
         </p>
       </div>
+
+      <fieldset className="space-y-2">
+        <legend className="mb-1 font-medium">{t('settings.audio')}</legend>
+        <label className="flex min-h-11 items-center justify-between gap-4">
+          <span>{t('settings.audio.enabled')}</span>
+          <input
+            type="checkbox"
+            checked={audioEnabled}
+            onChange={(e) => set('audioEnabled', e.target.checked)}
+            className="size-6 accent-teal-700"
+          />
+        </label>
+        <p className="text-sm text-stone-500" role="status">
+          {t(`audio.status.${status}` as MessageKey, { name: current?.name ?? '' })}
+        </p>
+        {audioEnabled && canSpeak(status) && (
+          <>
+            <div>
+              <label className="flex min-h-11 items-center justify-between gap-4">
+                <span>{t('settings.audio.autoplay')}</span>
+                <input
+                  type="checkbox"
+                  checked={autoplay}
+                  onChange={(e) => set('autoplay', e.target.checked)}
+                  className="size-6 accent-teal-700"
+                />
+              </label>
+              <p className="text-sm text-stone-500">{t('settings.audio.autoplay.hint')}</p>
+            </div>
+            <label className="flex min-h-11 items-center justify-between gap-4">
+              <span>{t('settings.audio.voice')}</span>
+              <select
+                value={voiceURI}
+                onChange={(e) => set('voiceURI', e.target.value)}
+                className="min-h-11 max-w-[60%] rounded-lg border border-stone-300 bg-white px-2 dark:border-stone-700 dark:bg-stone-900"
+              >
+                <option value="">{t('settings.audio.voice.auto')}</option>
+                {voices.map((v) => (
+                  <option key={v.voiceURI} value={v.voiceURI}>
+                    {v.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <button
+              type="button"
+              onClick={() => void speak(t('audio.sample'))}
+              className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+            >
+              {t('settings.audio.test')}
+            </button>
+          </>
+        )}
+      </fieldset>
 
       <button
         type="button"

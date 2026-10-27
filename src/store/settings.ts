@@ -11,6 +11,12 @@ export interface Settings {
   newWordsPerDay: number;
   showStreak: boolean;
   theme: Theme;
+  /** Türkisch vorlesen (Knöpfe, Hörübungen). */
+  audioEnabled: boolean;
+  /** Türkische Prompts und Lösungen von selbst vorlesen. */
+  autoplay: boolean;
+  /** Gewählte Stimme; '' = automatisch. */
+  voiceURI: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -19,6 +25,9 @@ export const DEFAULT_SETTINGS: Settings = {
   newWordsPerDay: 10,
   showStreak: true,
   theme: 'system',
+  audioEnabled: true,
+  autoplay: false,
+  voiceURI: '',
 };
 
 export const GOAL_RANGE = { min: 1, max: 10 } as const;
@@ -61,6 +70,9 @@ function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.tolerateDiacritics === 'boolean')
     out.tolerateDiacritics = stored.tolerateDiacritics;
   if (typeof stored.showStreak === 'boolean') out.showStreak = stored.showStreak;
+  if (typeof stored.audioEnabled === 'boolean') out.audioEnabled = stored.audioEnabled;
+  if (typeof stored.autoplay === 'boolean') out.autoplay = stored.autoplay;
+  if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
   if (
     typeof stored.dailyGoal === 'number' &&
     stored.dailyGoal >= GOAL_RANGE.min &&

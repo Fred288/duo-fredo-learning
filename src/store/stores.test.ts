@@ -32,6 +32,21 @@ describe('Settings-Store', () => {
     expect(useSettings.getState().loaded).toBe(true);
   });
 
+  it('speichert Audio-Einstellungen und ignoriert Werte falschen Typs', async () => {
+    useSettings.getState().set('audioEnabled', false);
+    useSettings.getState().set('autoplay', true);
+    useSettings.getState().set('voiceURI', 'Yelda');
+    await flush();
+    await db.settings.put({ key: 'autoplay', value: 'ja' });
+    useSettings.setState({ ...DEFAULT_SETTINGS });
+    await useSettings.getState().load();
+    expect(useSettings.getState()).toMatchObject({
+      audioEnabled: false,
+      autoplay: false,
+      voiceURI: 'Yelda',
+    });
+  });
+
   it('speichert neue Wörter pro Tag und verwirft Werte außerhalb des Bereichs', async () => {
     expect(useSettings.getState().newWordsPerDay).toBe(10);
     useSettings.getState().set('newWordsPerDay', 0);

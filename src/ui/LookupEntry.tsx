@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { speechText } from '../audio/speech-text';
 import { t, type MessageKey } from '../i18n';
 import { formTable, type FormLabel } from '../lookup/forms';
 import type { LookupIndex, VocabEntry } from '../lookup/types';
 import { INTERVALS, vocabStatus, type Card, type VocabDir } from '../srs';
 import { dayKey } from '../progress/day';
 import { useApp } from '../store/app';
+import { SpeakButton } from './SpeakButton';
 
 /** „Plural + Lokativ“, „Präsens, ich, verneint“ … aus den strukturierten Form-Angaben. */
 export function formLabelText(label: FormLabel): string {
@@ -160,9 +162,12 @@ export function LookupEntry({
   return (
     <article className="space-y-4">
       <header>
-        <h2 ref={heading} tabIndex={-1} className="text-2xl font-semibold outline-none" lang="tr">
-          {entry.tr}
-        </h2>
+        <div className="flex items-center gap-1">
+          <h2 ref={heading} tabIndex={-1} className="text-2xl font-semibold outline-none" lang="tr">
+            {entry.tr}
+          </h2>
+          {speechText(entry.tr) && <SpeakButton text={speechText(entry.tr)!} />}
+        </div>
         <p className="mt-1">{entry.de.join(', ')}</p>
         <p className="text-sm text-stone-600 dark:text-stone-400">
           {t(`pos.${entry.pos}`)}
