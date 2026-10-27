@@ -116,8 +116,10 @@ export function segmentExercise(
     throw e;
   }
   const segments = pieces(inflection, personOf(analysis));
-  // Ein Stamm ohne Vokal (ye- → y-iyor) taugt nicht zum Zerlegen.
+  // Ein Stamm ohne Vokal (ye- → y-iyor) taugt nicht zum Zerlegen, ein Stamm aus mehreren
+  // Wörtern (seyahat et-) auch nicht: Leerzeichen sind feste Grenzen zwischen Stücken.
   if (segments.length < 2 || !/[aeıioöuü]/i.test(trLower(segments[0]!.text))) return undefined;
+  if (segments.some((s) => /\s/.test(s.text))) return undefined;
   const suffix = row === undefined ? '' : `-r${row + 1}`;
   return {
     exercise: {

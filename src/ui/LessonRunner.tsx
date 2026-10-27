@@ -18,6 +18,10 @@ import {
 import { stopSpeaking, useAudio, useAutoplay, useCanSpeak } from '../store/audio';
 import { useSettings } from '../store/settings';
 import { solveExercise, solveParadigm } from '../content/lexicon';
+import { segmentSolution } from '../session/segment';
+import { SegmentInput } from './exercises/SegmentInput';
+import { SentenceOrderInput } from './exercises/SentenceOrderInput';
+import { OrderFeedback, SegmentFeedback } from './StructureFeedback';
 import { ConjugationInput } from './exercises/ConjugationInput';
 import { Feedback } from './Feedback';
 import { GrammarHint } from './GrammarHint';
@@ -55,6 +59,8 @@ function reasonsFor(ex: Supported, answer: string, vocab: readonly Vocab[]): str
   if (ex.type === 'suffix_builder' || ex.type === 'conjugation') {
     return explainSteps(solveExercise(ex, vocab).steps);
   }
+  // Gleiche Schritte (Harmonie zweimal in -iniz) nur einmal nennen.
+  if (ex.type === 'segment') return [...new Set(explainSteps(segmentSolution(ex, vocab).steps))];
   if (ex.type !== 'paradigm') return undefined;
   const ok = paradigmCells(ex, answer);
   const steps = solveParadigm(ex, vocab).flatMap((row, i) => (ok[i] ? [] : row.steps));
@@ -243,6 +249,12 @@ function Runner({
         {supported.type === 'paradigm' && (
           <ParadigmInput ex={supported} onChange={setAnswer} disabled={!answering} />
         )}
+        {supported.type === 'segment' && (
+          <SegmentInput ex={supported} onChange={setAnswer} disabled={!answering} />
+        )}
+        {supported.type === 'sov_puzzle' && (
+          <SentenceOrderInput ex={supported} onChange={setAnswer} disabled={!answering} />
+        )}
         {supported.type === 'suffix_builder' && (
           <SuffixBuilderInput
             ex={supported}
@@ -286,6 +298,13 @@ function Runner({
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
             speak={spoken.solution}
+            details={
+              supported.type === 'segment' ? (
+                <SegmentFeedback ex={supported} answer={answer} />
+              ) : supported.type === 'sov_puzzle' ? (
+                <OrderFeedback ex={supported} answer={answer} />
+              ) : undefined
+            }
           />
           {unitId && (
             <ReportError

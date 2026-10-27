@@ -2,6 +2,7 @@ import { parse as parseYaml } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { sameForm, solveExercise, solveForm, solveParadigm } from '../src/content/lexicon';
 import { isAmbiguous, pieces } from '../src/content/segmenting';
+import { segmentLetters } from '../src/session/segment';
 import { MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
 import { speechText } from '../src/audio/speech-text';
@@ -149,6 +150,9 @@ export function checkSegments(units: LoadedUnit[]): string[] {
         const expected = pieces(inf, ex.analysis.kind === 'noun' ? undefined : ex.analysis.person);
         const got = ex.segments;
         if (!sameForm(inf.form, ex.word)) fail(`word "${ex.word}", Engine erwartet "${inf.form}"`);
+        if (got.map((p) => p.text).join('') !== segmentLetters(ex.word)) {
+          fail(`Stücke ergeben nicht "${ex.word}" (ohne Leerzeichen und Apostroph)`);
+        }
         if (
           expected.length !== got.length ||
           expected.some((p, i) => p.text !== got[i]!.text || p.tag !== got[i]!.tag)

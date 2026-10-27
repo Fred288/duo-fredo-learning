@@ -6,14 +6,14 @@ const tile =
 
 interface Props {
   tokens: string[];
-  /** Verbindet die gewählten Bausteine: Leerzeichen bei Wörtern, nichts bei Wortteilen. */
-  joiner: ' ' | '';
+  /** Verbindet die gewählten Bausteine: Leerzeichen bei Wörtern, nichts bei Wortteilen, | bei Satzgliedern. */
+  joiner: string;
   emptyLabel: string;
   onChange: (answer: string) => void;
   disabled: boolean;
 }
 
-/** Bausteine antippen und in Reihenfolge ablegen (Wortbank, Suffix-Builder). */
+/** Bausteine antippen und in Reihenfolge ablegen (Wortbank, Suffix-Builder, Satzbau). */
 export function TileBuilder({ tokens, joiner, emptyLabel, onChange, disabled }: Props) {
   const [picked, setPicked] = useState<number[]>([]);
 

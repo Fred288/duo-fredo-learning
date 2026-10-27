@@ -144,6 +144,25 @@ describe('segmentCandidates', () => {
     expect(segmentCandidates(unit, vocab).map((e) => e.word)).toEqual(['evde']);
   });
 
+  it('lässt Verben mit Mehrwort-Stamm aus (seyahat ed-eceğ-iz)', () => {
+    const unit = makeUnit([
+      {
+        id: 'a1-u03-l2-e1',
+        type: 'conjugation',
+        mode: 'verb',
+        lemma: 'seyahat etmek',
+        person: '1pl',
+        tense: 'future',
+        target: 'seyahat edeceğiz',
+      },
+    ]);
+    const travel = [
+      ...vocab,
+      { tr: 'seyahat etmek', de: ['reisen'], pos: 'verb' as const, softens: true },
+    ];
+    expect(segmentCandidates(unit, travel)).toEqual([]);
+  });
+
   it('nimmt Tabellenzeilen mit Zeilennummer in der ID, ohne Bedeutung', () => {
     const unit = makeUnit([
       {

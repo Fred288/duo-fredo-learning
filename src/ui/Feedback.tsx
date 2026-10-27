@@ -1,5 +1,6 @@
 import { t } from '../i18n';
 import { SpeakButton } from './SpeakButton';
+import type { ReactNode } from 'react';
 import type { AnswerResult } from '../lib/answer';
 
 const tone = {
@@ -20,9 +21,19 @@ interface Props {
   retry: boolean;
   /** Türkische Lösung zum Anhören. */
   speak?: string;
+  /** Aufbau der Lösung (Zerlegen: Stücke mit Rollen, Satzbau: Satzglieder mit Rollen). */
+  details?: ReactNode;
 }
 
-export function Feedback({ result, solution, explanation, reasons = [], retry, speak }: Props) {
+export function Feedback({
+  result,
+  solution,
+  explanation,
+  reasons = [],
+  retry,
+  speak,
+  details,
+}: Props) {
   const shown = result.matched ?? solution;
   return (
     <div
@@ -48,6 +59,7 @@ export function Feedback({ result, solution, explanation, reasons = [], retry, s
           {t(`feedback.hint.${h}`)}
         </p>
       ))}
+      {details}
       {reasons.length > 0 && (
         <div className="mt-2 text-sm">
           <p className="font-medium">{t('explain.title')}</p>

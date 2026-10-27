@@ -4,6 +4,8 @@ import { readFileSync } from 'node:fs';
 import { expect, type Page } from '@playwright/test';
 import type { Exercise, Unit } from '../src/content/schema';
 import { solveExercise } from '../src/content/lexicon';
+import { t } from '../src/i18n';
+import { fixedBoundaries, segmentLetters } from '../src/session/segment';
 
 export function loadUnit(unitId: string): Unit {
   return JSON.parse(readFileSync(`public/content/units/${unitId}.json`, 'utf8')) as Unit;
@@ -55,13 +57,44 @@ export async function answer(page: Page, ex: Exercise, unit: Unit) {
         await page.locator('label', { has: page.getByText(ex.answer!, { exact: true }) }).click();
       }
       break;
+    case 'segment': {
+      // Grenzen nach jedem Stück außer dem letzten; feste Grenzen (Leerzeichen, Apostroph) gibt es schon.
+      const letters = segmentLetters(ex.word);
+      const fixed = new Set(fixedBoundaries(ex.word));
+      let at = 0;
+      for (const { text } of ex.segments.slice(0, -1)) {
+        at += text.length;
+        if (fixed.has(at)) continue;
+        await page
+          .getByRole('button', { name: t('ex.segment.cut', { prefix: letters.slice(0, at) }) })
+          .click();
+      }
+      for (const [i, { text, tag }] of ex.segments.entries()) {
+        if (i === 0) continue;
+        await page
+          .getByLabel(t('ex.segment.role', { n: i + 1, piece: text }))
+          .selectOption({ label: t(`tag.${tag}`) });
+      }
+      break;
+    }
+    case 'sov_puzzle':
+      for (const { text } of ex.chunks) {
+        await page
+          .getByRole('button', { name: text, exact: true, disabled: false })
+          .first()
+          .click();
+      }
+      break;
     case 'paradigm': {
       const cells = page.getByRole('textbox');
       for (const [i, target] of ex.targets.entries()) await cells.nth(i).fill(target);
       break;
     }
     default:
-      throw new Error(`Übungstyp ${ex.type} wird vom Löser nicht unterstützt`);
+      // Neuer Übungstyp ohne Zweig: Typfehler hier, zur Laufzeit klare Meldung.
+      throw new Error(
+        `Übungstyp ${(ex satisfies never as Exercise).type} wird vom Löser nicht unterstützt`,
+      );
   }
 }
 

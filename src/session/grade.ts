@@ -4,6 +4,7 @@ import { checkAnswer, type AnswerResult } from '../lib/answer';
 import { seededShuffle } from '../lib/shuffle';
 import { trLower } from '../lib/turkish';
 import { gradeSegment, solutionOfSegment } from './segment';
+import { gradeOrder } from './word-order';
 
 export { seededShuffle };
 
@@ -16,6 +17,7 @@ export const SUPPORTED_TYPES = [
   'paradigm',
   'listen',
   'segment',
+  'sov_puzzle',
 ] as const;
 export type Supported = Extract<Exercise, { type: (typeof SUPPORTED_TYPES)[number] }>;
 
@@ -51,6 +53,8 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
         : { verdict: 'wrong', hints: [] };
     case 'segment':
       return gradeSegment(ex, answer);
+    case 'sov_puzzle':
+      return gradeOrder(ex, answer);
     case 'listen':
       if (ex.mode === 'meaning') {
         return answer === ex.answer
@@ -91,6 +95,7 @@ export function solutionOf(ex: Supported): string {
   if (ex.type === 'paradigm') return ex.targets.join(', ');
   if (ex.type === 'listen') return ex.mode === 'meaning' ? ex.answer! : ex.text;
   if (ex.type === 'segment') return solutionOfSegment(ex);
+  if (ex.type === 'sov_puzzle') return ex.text;
   return ex.answers[0]!;
 }
 

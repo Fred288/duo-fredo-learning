@@ -51,8 +51,8 @@ errors.push(...report.errors, ...checkSuffixTargets(units));
 // Erzeugte Lektionen aus vorhandenen Inhalten, je vor der Wiederholung: Wörter zerlegen
 // (src/content/segmenting.ts), Satzbau aus annotierten Wortbank-Sätzen (word-order.ts), Hören (src/content/listening.ts; die App blendet es ohne
 // türkische Stimme aus).
-const SEGMENT_LESSONS = false;
-const ORDER_LESSONS = false;
+const SEGMENT_LESSONS = true;
+const ORDER_LESSONS = true;
 const LISTENING_LESSONS = true;
 const words = courseWords(units.map(({ unit }) => unit));
 const allVocab = units.flatMap(({ unit }) => unit.vocab ?? []);

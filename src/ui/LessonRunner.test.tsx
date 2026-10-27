@@ -27,18 +27,6 @@ const lesson: Lesson = {
       answers: ['Teşekkürler'],
       hint: '„Sağ ol“ ist informell.',
     },
-    // Noch nicht unterstützt (Phase 2) → wird übersprungen
-    {
-      id: 'a1-u01-l1-e3',
-      type: 'sov_puzzle',
-      prompt: 'Ich trinke Tee.',
-      text: 'Ben çay içiyorum.',
-      chunks: [
-        { text: 'ben', role: 'subject' },
-        { text: 'çay', role: 'object_bare' },
-        { text: 'içiyorum', role: 'predicate' },
-      ],
-    },
   ],
 };
 
@@ -371,5 +359,94 @@ describe('LessonRunner Grammatik-Hinweis', () => {
       expect(onAttempt).not.toHaveBeenCalled();
       expect(onComplete).not.toHaveBeenCalled();
     });
+  });
+});
+
+describe('LessonRunner Zerlegen und Satzbau', () => {
+  const structure: Lesson = {
+    id: 'a1-u03-z1',
+    type: 'segmenting',
+    title: 'Wörter zerlegen',
+    exercises: [
+      {
+        id: 'a1-u03-z1-l2-e1',
+        type: 'segment',
+        word: 'evlerden',
+        segments: [
+          { text: 'ev', tag: 'STEM' },
+          { text: 'ler', tag: 'PL' },
+          { text: 'den', tag: 'ABL' },
+        ],
+        analysis: { kind: 'noun', lemma: 'ev', tags: ['PL', 'ABL'] },
+        from: 'a1-u03-l2-e1',
+        gloss_de: 'aus den Häusern',
+      },
+      {
+        id: 'a1-u08-s1-l5-e5',
+        type: 'sov_puzzle',
+        prompt: 'Was machst du jetzt?',
+        text: 'Şimdi ne yapıyorsun?',
+        chunks: [
+          { text: 'şimdi', role: 'time' },
+          { text: 'ne', role: 'question' },
+          { text: 'yapıyorsun', role: 'predicate' },
+        ],
+        orders: [{ order: [1, 2, 0], note: 'Nachtrag hinter dem Verb.' }],
+      },
+    ],
+  };
+  const vocab = [{ tr: 'ev', de: ['Haus'], pos: 'noun' as const }];
+
+  it('Zerlegen: Grenzen antippen, Rollen wählen, Begründung im Feedback', () => {
+    render(<LessonRunner lesson={structure} vocab={vocab} onExit={() => {}} />);
+    const prufen = () => screen.getByRole('button', { name: 'Prüfen' }) as HTMLButtonElement;
+    expect(screen.getByText('„aus den Häusern“')).toBeTruthy();
+    click('Grenze nach „ev“');
+    click('Grenze nach „evler“');
+    expect(
+      screen.getByRole('button', { name: 'Grenze nach „ev“' }).getAttribute('aria-pressed'),
+    ).toBe('true');
+    // Ohne Rollen noch keine Antwort
+    expect(prufen().disabled).toBe(true);
+    fireEvent.change(screen.getByLabelText('Rolle von Teil 2 („ler“)'), {
+      target: { value: 'ABL' },
+    });
+    fireEvent.change(screen.getByLabelText('Rolle von Teil 3 („den“)'), {
+      target: { value: 'PL' },
+    });
+    expect(prufen().disabled).toBe(false);
+    click('Prüfen');
+    const status = screen.getByRole('status');
+    expect(status.textContent).toContain('Leider falsch.');
+    expect(status.textContent).toContain('ev-ler-den');
+    expect(status.textContent).toContain('Ablativ');
+    expect(status.textContent).toContain('Warum?');
+  });
+
+  it('Satzbau: Satzglieder ordnen, Variante mit Hinweis, Rollen im Feedback', () => {
+    const second: Lesson = { ...structure, exercises: [structure.exercises[1]!] };
+    render(<LessonRunner lesson={second} onExit={() => {}} />);
+    expect(screen.getByText('Was machst du jetzt?')).toBeTruthy();
+    click('ne');
+    click('yapıyorsun');
+    click('şimdi');
+    click('Prüfen');
+    const status = screen.getByRole('status');
+    expect(status.textContent).toContain('Richtig!');
+    expect(status.textContent).toContain('Nachtrag hinter dem Verb.');
+    expect(status.textContent).toContain('Fragewort');
+  });
+
+  it('Satzbau: falsche Reihenfolge mit Regelhinweis', () => {
+    const second: Lesson = { ...structure, exercises: [structure.exercises[1]!] };
+    render(<LessonRunner lesson={second} onExit={() => {}} />);
+    click('ne');
+    click('şimdi');
+    click('yapıyorsun');
+    click('Prüfen');
+    const status = screen.getByRole('status');
+    expect(status.textContent).toContain('Leider falsch.');
+    expect(status.textContent).toContain('Lösung: Şimdi ne yapıyorsun?');
+    expect(status.textContent).toContain('direkt vor dem Verb');
   });
 });
