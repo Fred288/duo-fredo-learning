@@ -7,6 +7,8 @@ import { cardId, type Card, type CardRef } from '../srs';
 import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
 import { DEFAULT_SETTINGS, useSettings } from '../store/settings';
+import { FakeSpeaker } from '../audio/fake';
+import { setSpeaker } from '../store/audio';
 import { RepeatScreen } from './RepeatScreen';
 
 const unit = (id: string, extra: Partial<Unit> = {}): Unit => ({
@@ -136,5 +138,52 @@ describe('RepeatScreen', () => {
     answerCorrectly();
     expect(screen.getByRole('heading', { name: 'Wiederholung geschafft' })).toBeTruthy();
     expect(useProgress.getState().completions.filter((c) => c.lessonId === 'srs')).toHaveLength(1);
+  });
+
+  describe('Hörkarten', () => {
+    const listening = unit('a1-u05', {
+      lessons: [
+        ...unit('a1-u05').lessons,
+        {
+          id: 'a1-u05-h1',
+          type: 'listening',
+          title: 'Hören',
+          exercises: [
+            {
+              id: 'a1-u05-h1-l1-e1',
+              type: 'listen',
+              mode: 'meaning',
+              text: 'Merhaba',
+              options: ['Hallo', 'Danke'],
+              answer: 'Hallo',
+            },
+          ],
+        },
+      ],
+    });
+    const listenCard = card({ kind: 'exercise', exerciseId: 'a1-u05-h1-l1-e1' }, 'a1-u05');
+    afterEach(() => setSpeaker(new FakeSpeaker('unsupported')));
+
+    it('wartet auf die Stimmen, statt fällige Hörkarten zu verlieren', async () => {
+      const speaker = new FakeSpeaker('loading');
+      setSpeaker(speaker);
+      serve([listening]);
+      useProgress.setState({ cards: [listenCard] });
+      render(<RepeatScreen />);
+      expect(screen.getByText('Stimmen werden geladen …')).toBeTruthy();
+      speaker.setStatus('ready');
+      expect(await screen.findByRole('radio', { name: /Hallo/ })).toBeTruthy();
+    });
+
+    it('ohne Stimme bleiben sie fällig, belegen aber keinen Platz', async () => {
+      setSpeaker(new FakeSpeaker('no-voice'));
+      serve([listening]);
+      useProgress.setState({ cards: [listenCard, exCard('a1-u05')] });
+      render(<RepeatScreen />);
+      await screen.findByText('Frage a1-u05');
+      answerCorrectly();
+      expect(screen.getByRole('heading', { name: 'Wiederholung geschafft' })).toBeTruthy();
+      expect(useProgress.getState().cards.map((c) => c.id)).toContain(listenCard.id);
+    });
   });
 });

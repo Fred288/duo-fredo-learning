@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchManifest, type Manifest } from '../content/load';
+import { isListeningCard } from '../content/listening';
 import { LEVELS } from '../content/schema';
 import { t } from '../i18n';
 import { dayKey } from '../progress/day';
@@ -35,7 +36,10 @@ export function Home() {
   const completed = completedLessonIds(completions);
   const mistakes = openMistakes(attempts).length;
   const plan = manifest
-    ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay)
+    ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay, {
+        // Hörkarten ohne Stimme bleiben fällig, zählen aber nicht: Wiederholen zeigt sie nicht.
+        skip: canListen ? undefined : isListeningCard,
+      })
     : undefined;
   const repeatCount = [
     plan && plan.due + plan.recall ? t('repeat.due', { count: plan.due + plan.recall }) : '',

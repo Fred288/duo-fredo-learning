@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Completion } from '../progress/stats';
+import { isListeningCard } from '../content/listening';
 import { cardId, planRepeat, SESSION_MAX, type Card } from '.';
 
 const units = [
@@ -52,5 +53,16 @@ describe('planRepeat', () => {
       exCard(`a1-u01-l1-e${i}`, '2026-05-01'),
     );
     expect(planRepeat(units, [], many, '2026-05-01', 10).queue).toHaveLength(SESSION_MAX);
+  });
+
+  it('skip hält Karten zurück: kein Platz im Durchgang, nicht fällig, nicht verwaist', () => {
+    const listen = exCard('a1-u01-h1-l1-e1', '2026-05-01');
+    const other = exCard('a1-u01-l1-e1', '2026-05-01');
+    const plan = planRepeat(units, [], [listen, other], '2026-05-01', 10, {
+      skip: isListeningCard,
+    });
+    expect(plan.queue.map((e) => cardId(e.ref))).toEqual([other.id]);
+    expect(plan).toMatchObject({ due: 1, gone: [] });
+    expect(planRepeat(units, [], [listen, other], '2026-05-01', 10).due).toBe(2);
   });
 });

@@ -9,7 +9,8 @@ import { useApp } from '../store/app';
 import { REVIEW_ID, useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
 import { canSpeak } from '../audio/types';
-import { getSpeaker } from '../store/audio';
+import { getSpeaker, useAudio } from '../store/audio';
+import { isListeningCard } from '../content/listening';
 import { LessonRunner } from './LessonRunner';
 
 interface Run {
@@ -32,12 +33,14 @@ async function buildRun(): Promise<Run | null> {
   const { newWordsPerDay } = useSettings.getState();
   const manifest = await fetchManifest();
   // Momentaufnahme beim Öffnen; neue Antworten ändern den laufenden Durchgang nicht.
-  const plan = planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay);
+  const canListen = useSettings.getState().audioEnabled && canSpeak(getSpeaker().status());
+  const plan = planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay, {
+    skip: canListen ? undefined : isListeningCard,
+  });
   // Karten zu entfernten Units/Vokabeln aufräumen, verschobene Vokabeln behalten ihren Stand.
   removeCards(plan.gone);
   putCards(plan.moved);
   const { queue } = plan;
-  const canListen = useSettings.getState().audioEnabled && canSpeak(getSpeaker().status());
   const unitIds = [...new Set(queue.map((e) => e.unitId))];
   // Eine nicht ladbare Unit (z. B. offline nicht im Cache) nimmt nur ihre Karten mit.
   const loaded = await Promise.allSettled(unitIds.map(fetchUnit));
@@ -111,12 +114,26 @@ export function RepeatScreen() {
   // „Nochmal“ im Runner spielt den Durchgang erneut, zählt fürs Tagesziel aber nur einmal.
   const completed = useRef(false);
 
+  // Erst bauen, wenn feststeht, ob es eine Stimme gibt; sonst fehlen fällige Hörkarten.
+  const audioEnabled = useSettings((s) => s.audioEnabled);
+  const voicesLoading = useAudio((s) => s.status === 'loading');
+  const waitForVoices = audioEnabled && voicesLoading;
+  const started = useRef(false);
   useEffect(() => {
+    getSpeaker(); // legt den Speaker an, falls noch nicht geschehen; der Status folgt im Store
+    if (waitForVoices || started.current) return;
+    started.current = true;
     buildRun().then(setRun, () => setFailed(true));
-  }, []);
+  }, [waitForVoices]);
 
   if (failed) return <p className="text-rose-700 dark:text-rose-400">{t('home.error')}</p>;
-  if (run === undefined) return <p className="text-stone-500">{t('repeat.loading')}</p>;
+  if (run === undefined) {
+    return (
+      <p className="text-stone-500">
+        {t(waitForVoices ? 'audio.status.loading' : 'repeat.loading')}
+      </p>
+    );
+  }
   if (run === null) {
     return (
       <section className="space-y-4 text-center">

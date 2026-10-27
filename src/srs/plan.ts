@@ -22,7 +22,9 @@ export interface RepeatPlan {
 
 /**
  * Was heute ansteht: fällige Karten und neue Wörter aus Units mit abgeschlossener Lektion.
- * Karten zu entfernten Units/Vokabeln zählen nicht mit (verwaiste Karten).
+ * Karten zu entfernten Units/Vokabeln zählen nicht mit (verwaiste Karten). `skip` hält Karten
+ * zurück, die gerade nicht spielbar sind (Hörübungen ohne Stimme): sie bleiben fällig, belegen
+ * aber keinen Platz und zählen nicht als fällig.
  */
 export function planRepeat(
   units: Parameters<typeof vocabCandidates>[0],
@@ -30,10 +32,12 @@ export function planRepeat(
   allCards: readonly Card[],
   today: string,
   newPerDay: number,
+  { skip }: { skip?: (card: Card) => boolean } = {},
 ): RepeatPlan {
   const { cards, gone, moved } = reconcileCards(units, allCards);
   const candidates = vocabCandidates(units, completedLessonIds(completions), cards, today);
-  const queue = buildQueue(cards, candidates, today, { max: SESSION_MAX, newPerDay });
+  const playable = skip ? cards.filter((c) => !skip(c)) : cards;
+  const queue = buildQueue(playable, candidates, today, { max: SESSION_MAX, newPerDay });
   const known = new Set(cards.map((c) => c.id));
   const fresh = queue.filter((e) => !known.has(cardId(e.ref)));
   const recall = fresh.filter((e) => e.ref.kind === 'vocab' && e.ref.dir === 'de_tr').length;

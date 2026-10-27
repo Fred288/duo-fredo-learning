@@ -337,6 +337,15 @@ describe('LessonRunner Grammatik-Hinweis', () => {
       expect(screen.getByText('„Guten Morgen“')).toBeTruthy();
     });
 
+    it('Verlassen bricht eine laufende Ansage ab', () => {
+      const speaker = new FakeSpeaker('ready');
+      setSpeaker(speaker);
+      const { unmount } = render(<LessonRunner lesson={listening} onExit={() => {}} />);
+      const before = speaker.cancelled;
+      unmount();
+      expect(speaker.cancelled).toBeGreaterThan(before);
+    });
+
     it('ohne Stimme: Hörübungen fehlen im Durchgang', () => {
       setSpeaker(new FakeSpeaker('no-voice'));
       render(<LessonRunner lesson={listening} onExit={() => {}} />);

@@ -68,7 +68,8 @@ function reasonsFor(ex: Supported, answer: string, vocab: readonly Vocab[]): str
 export function LessonRunner(props: Props) {
   const can = useCanSpeak();
   const loading = useAudio((s) => s.status === 'loading');
-  const needsVoice = props.lesson.exercises.some((e) => e.type === 'listen');
+  const audioEnabled = useSettings((s) => s.audioEnabled);
+  const needsVoice = audioEnabled && props.lesson.exercises.some((e) => e.type === 'listen');
   if (needsVoice && loading) return <p className="text-stone-500">{t('audio.status.loading')}</p>;
   return <Runner {...props} canListen={can} />;
 }
@@ -122,6 +123,9 @@ function Runner({
     if (total === 0) return;
     onComplete?.(correct, total);
   }, [session, exercises.length, onComplete]);
+
+  // Verlassen (Zurück, Startseite) beendet auch eine noch laufende Ansage.
+  useEffect(() => stopSpeaking, []);
 
   const proceed = useCallback(() => {
     stopSpeaking();

@@ -1,6 +1,7 @@
 import { speechText } from '../audio/speech-text';
 import { fnv1a } from '../lib/hash';
 import { trLower } from '../lib/turkish';
+import type { Card } from '../srs/card';
 import { glossDistractors, glossOf, stableShuffle } from '../srs/vocab-exercise';
 import { vocabId, type Exercise, type Lesson, type Unit, type Vocab } from './schema';
 
@@ -17,6 +18,10 @@ export const LISTEN_WORDS = 6;
 export const DICTATION_MAX_WORDS = 4;
 
 export const listeningLessonId = (unitId: string): string => `${unitId}-h1`;
+
+/** Karte einer Übung aus einer Hörlektion (a1-u05-h1-…); ohne Stimme nicht spielbar. */
+export const isListeningCard = (card: Card): boolean =>
+  card.ref.kind === 'exercise' && /^[ab][12]-u\d{2}-h\d+-/.test(card.ref.exerciseId);
 
 /** Die n Einträge mit dem kleinsten Hash, in ursprünglicher Reihenfolge. */
 function sample<T>(items: readonly T[], key: (t: T) => string, n: number): T[] {
