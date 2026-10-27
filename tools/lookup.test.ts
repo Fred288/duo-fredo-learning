@@ -3,7 +3,9 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { vocabId } from '../src/content/schema';
+import { formTable } from '../src/lookup/forms';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
+import { prepareLookup, search } from '../src/lookup/search';
 import { parseUnitFile } from './content-checks';
 
 const units = readdirSync('content', { recursive: true, encoding: 'utf8' })
@@ -37,5 +39,46 @@ describe('lookup.json aus content/', () => {
 
   it('bleibt unter der Warngrenze für den Precache', () => {
     expect(JSON.stringify(index).length).toBeLessThan(LOOKUP_WARN_BYTES);
+  });
+});
+
+describe('Suche über die echten Inhalte', () => {
+  const prepared = prepareLookup(index);
+  const top = (q: string, n = 3) =>
+    search(prepared, q)
+      .vocab.slice(0, n)
+      .map((h) => h.entry.id);
+
+  it.each([
+    ['kitabi', 'kitap'],
+    ['evlerde', 'ev'],
+    ['Tisch', 'masa'],
+    ['oglum', 'oğul'],
+    ["istanbul'da", 'İstanbul'],
+    ['gidiyorum', 'gitmek'],
+    ['gelmedim', 'gelmek'],
+  ])('%s findet %s weit oben', (q, id) => {
+    expect(top(q)).toContain(id);
+  });
+
+  it('yemek findet Verb und Nomen', () => {
+    expect(top('yemek', 2).sort()).toEqual(['yemek', 'yemek-essen']);
+  });
+
+  it('Grammatikbegriffe finden Abschnitte', () => {
+    expect(search(prepared, 'Vokalharmonie').sections.length).toBeGreaterThan(0);
+    expect(search(prepared, 'değil').sections[0]!.section.title).toMatch(/değil/);
+  });
+
+  it('jede Formtabelle lässt sich bilden (keine Engine-Ausnahme)', () => {
+    for (const v of index.vocab) expect(() => formTable(v)).not.toThrow();
+  });
+
+  it('100 Anfragen in unter 200 ms', () => {
+    const queries = ['ev', 'evlerde', 'kitabı', 'gidiyorum', 'Tisch', 'sch', 'a', 'lokativ', 'ge'];
+    search(prepared, 'warm');
+    const t = performance.now();
+    for (let i = 0; i < 100; i++) search(prepared, queries[i % queries.length]!);
+    expect(performance.now() - t).toBeLessThan(200);
   });
 });

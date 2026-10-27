@@ -1,0 +1,177 @@
+import {
+  conjugate,
+  inflect,
+  MorphError,
+  PERSONS,
+  PRONOUN_CASES,
+  PRONOUN_LEMMAS,
+  pronoun,
+  type MorphTag,
+  type Person,
+  type PronounCase,
+  type PronounLemma,
+  type Stem,
+  type Tense,
+  type VerbStem,
+  TENSES,
+} from '../morphology';
+import type { VocabEntry } from './types';
+
+/** Woraus eine Form entstanden ist; die Beschriftung kommt in der UI aus i18n. */
+export type FormLabel =
+  | { kind: 'noun'; tags: MorphTag[] }
+  | { kind: 'pronoun'; case: PronounCase }
+  | {
+      kind: 'verb';
+      tense: Tense;
+      person: Person;
+      negative?: boolean;
+      ability?: boolean;
+      passive?: boolean;
+    };
+
+export interface Form {
+  form: string;
+  label: FormLabel;
+}
+
+const NOUN_POS: ReadonlySet<VocabEntry['pos']> = new Set(['noun', 'adj', 'num']);
+const POSS: MorphTag[] = ['POSS_1SG', 'POSS_2SG', 'POSS_3SG', 'POSS_1PL', 'POSS_2PL', 'POSS_3PL'];
+const CASES: MorphTag[] = ['ACC', 'DAT', 'LOC', 'ABL', 'GEN', 'INS'];
+
+/** Wie das Wort gebeugt wird; Mehrwort-Nomen (yatak odası) kann die Engine nicht. */
+export function formKind(entry: VocabEntry): 'noun' | 'verb' | 'pronoun' | undefined {
+  if (entry.pos === 'verb') return 'verb';
+  if (entry.pos === 'pron')
+    return PRONOUN_LEMMAS.includes(entry.tr as PronounLemma) ? 'pronoun' : undefined;
+  return NOUN_POS.has(entry.pos) && !entry.tr.includes(' ') ? 'noun' : undefined;
+}
+
+export const nounStem = (e: VocabEntry): Stem => ({
+  form: e.tr,
+  softens: e.softens,
+  harmonyVowel: e.harmony_vowel,
+  dropsVowel: e.drops_vowel,
+  proper: e.proper,
+  capitalized: e.capitalized,
+  yStem: e.y_stem,
+});
+
+const verbStemOf = (e: VocabEntry): VerbStem => ({
+  form: e.tr,
+  softens: e.softens,
+  aorist: e.aorist,
+});
+
+/** Engine-Form oder undefined, wo die Engine die Kombination ablehnt (Imperativ 1sg …). */
+function attempt(fn: () => string): string | undefined {
+  try {
+    return fn();
+  } catch (e) {
+    if (e instanceof MorphError) return undefined;
+    throw e;
+  }
+}
+
+/** Nomen: {∅, PL} × {∅, Possessiv} × {∅, Kasus}, ohne die Grundform. */
+export function nounForms(entry: VocabEntry): Form[] {
+  const stem = nounStem(entry);
+  const out: Form[] = [];
+  for (const pl of [[], ['PL']] as MorphTag[][]) {
+    for (const poss of [[], ...POSS.map((p) => [p])]) {
+      for (const kase of [[], ...CASES.map((c) => [c])]) {
+        const tags = [...pl, ...poss, ...kase];
+        if (!tags.length) continue;
+        const form = attempt(() => inflect(stem, tags).form);
+        if (form) out.push({ form, label: { kind: 'noun', tags } });
+      }
+    }
+  }
+  return out;
+}
+
+export function pronounForms(entry: VocabEntry): Form[] {
+  return PRONOUN_CASES.filter((c) => c !== 'NOM').map((c) => ({
+    form: pronoun(entry.tr as PronounLemma, c),
+    label: { kind: 'pronoun', case: c },
+  }));
+}
+
+type VerbVariant = Pick<
+  Extract<FormLabel, { kind: 'verb' }>,
+  'tense' | 'negative' | 'ability' | 'passive'
+>;
+
+const VERB_VARIANTS: VerbVariant[] = [
+  ...TENSES.flatMap((tense) => [{ tense }, { tense, negative: true }]),
+  ...(['present', 'aorist'] as const).flatMap((tense) =>
+    [{ ability: true }, { passive: true }].flatMap((v) => [
+      { tense, ...v },
+      { tense, ...v, negative: true },
+    ]),
+  ),
+];
+
+/** Verb: alle Zeiten × Personen × bejaht/verneint, dazu „können“ und Passiv in Präsens und Aorist. */
+export function verbForms(entry: VocabEntry): Form[] {
+  const stem = verbStemOf(entry);
+  return VERB_VARIANTS.flatMap((variant) =>
+    PERSONS.flatMap((person) => {
+      const form = attempt(() => conjugate(stem, { ...variant, person }).form);
+      return form ? [{ form, label: { kind: 'verb' as const, person, ...variant } }] : [];
+    }),
+  );
+}
+
+export function allForms(entry: VocabEntry): Form[] {
+  switch (formKind(entry)) {
+    case 'noun':
+      return nounForms(entry);
+    case 'pronoun':
+      return pronounForms(entry);
+    case 'verb':
+      return verbForms(entry);
+    default:
+      return [];
+  }
+}
+
+/** Tabelle im Eintrag: Kasus × Sg/Pl, Pronomen-Kasus oder Zeiten × Personen. */
+export type FormTable =
+  | { kind: 'noun'; rows: { case: PronounCase; sg?: string; pl?: string }[] }
+  | { kind: 'pronoun'; rows: { case: PronounCase; form: string }[] }
+  | { kind: 'verb'; tenses: Tense[]; rows: { person: Person; forms: (string | undefined)[] }[] };
+
+const TABLE_TENSES: Tense[] = ['present', 'past', 'future', 'aorist'];
+const TABLE_CASES: (MorphTag | undefined)[] = [undefined, ...CASES];
+
+export function formTable(entry: VocabEntry): FormTable | undefined {
+  switch (formKind(entry)) {
+    case 'noun': {
+      const stem = nounStem(entry);
+      const rows = TABLE_CASES.map((tag, i) => ({
+        case: PRONOUN_CASES[i]!,
+        sg: tag ? attempt(() => inflect(stem, [tag]).form) : entry.tr,
+        pl: attempt(() => inflect(stem, tag ? ['PL', tag] : ['PL']).form),
+      }));
+      return rows.some((r) => r.pl) ? { kind: 'noun', rows } : undefined;
+    }
+    case 'pronoun':
+      return {
+        kind: 'pronoun',
+        rows: PRONOUN_CASES.map((c) => ({ case: c, form: pronoun(entry.tr as PronounLemma, c) })),
+      };
+    case 'verb': {
+      const stem = verbStemOf(entry);
+      const rows = PERSONS.map((person) => ({
+        person,
+        forms: TABLE_TENSES.map((tense) => attempt(() => conjugate(stem, { tense, person }).form)),
+      }));
+      return rows.some((r) => r.forms.some(Boolean))
+        ? { kind: 'verb', tenses: TABLE_TENSES, rows }
+        : undefined;
+    }
+    default:
+      return undefined;
+  }
+}

@@ -74,7 +74,8 @@ describe('buildLookup', () => {
     }),
     unit('a1-u02', { vocab: [{ tr: 'İstanbul', de: ['Istanbul'], pos: 'noun', proper: true }] }),
   ];
-  const md = '# Titel\n\nEinleitung\n\n## Wo? -de / -da\n\nev**de**, okul**da**\n\n## Plural\n\nevler\n';
+  const md =
+    '# Titel\n\nEinleitung\n\n## Wo? -de / -da\n\nev**de**, okul**da**\n\n## Plural\n\nevler\n';
   const index = buildLookup(units, new Map([['explainers/a.md', md]]));
 
   it('hält Homonyme über vocabId getrennt', () => {
