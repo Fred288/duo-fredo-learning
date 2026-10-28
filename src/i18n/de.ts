@@ -138,6 +138,44 @@ export const de = {
   'audio.status.offline-only-remote':
     'Die türkische Stimme deines Browsers braucht Internet. Offline bleibt die App stumm; installiere eine Stimme im System, um sie auch offline zu hören.',
   'audio.status.unsupported': 'Dein Browser unterstützt keine Sprachausgabe. Die App bleibt stumm.',
+  'backup.title': 'Daten sichern',
+  'backup.privacy':
+    'Dein Lernstand liegt nur in diesem Browser. Die Sicherung ist eine Datei mit deinem Lernverlauf, deinen Wiederholungskarten, Einstellungen und Notizen. Sie wird an keinen Server geschickt; du entscheidest, wo du sie ablegst.',
+  'backup.export': 'Sicherung speichern',
+  'backup.import': 'Sicherung laden',
+  'backup.last': 'Letzte Sicherung: {date}',
+  'backup.last.never': 'Noch keine Sicherung gespeichert.',
+  'backup.date': '{d}.{m}.{y}',
+  'backup.exported': 'Sicherung gespeichert.',
+  'backup.preview': 'Sicherung vom {date}',
+  'backup.counts':
+    '{attempts} Versuche, {completions} abgeschlossene Lektionen, {cards} Wiederholungskarten, {notes} Notizen',
+  'backup.skipped': '{count} ungültige Einträge werden übersprungen.',
+  'backup.mode': 'Wie laden?',
+  'backup.mode.merge': 'Zusammenführen',
+  'backup.mode.merge.hint':
+    'Neues aus der Datei kommt dazu, nichts geht verloren. Bei derselben Karte gilt der zuletzt geübte Stand. Deine Einstellungen bleiben.',
+  'backup.mode.merge.effect':
+    'Kommt dazu: {attempts} Versuche, {completions} Lektionen, {cards} Karten ({updated} aktualisiert), {notes} Notizen.',
+  'backup.mode.replace': 'Ersetzen',
+  'backup.mode.replace.hint':
+    'Der Stand auf diesem Gerät wird durch die Datei ersetzt, Einstellungen eingeschlossen.',
+  'backup.mode.replace.effect':
+    'Geht verloren: {attempts} Versuche, {completions} Lektionen, {cards} Karten, {notes} Notizen.',
+  'backup.apply': 'Laden',
+  'backup.confirm': 'Wirklich ersetzen? Das lässt sich nicht rückgängig machen.',
+  'backup.confirm.yes': 'Ja, ersetzen',
+  'backup.cancel': 'Abbrechen',
+  'backup.imported': 'Sicherung geladen.',
+  'backup.error.too_large': 'Die Datei ist zu groß für eine Sicherung.',
+  'backup.error.not_json': 'Die Datei ist keine Sicherung von Yol (kein JSON).',
+  'backup.error.foreign': 'Die Datei ist keine Sicherung von Yol.',
+  'backup.error.too_new':
+    'Die Sicherung stammt aus einer neueren Version. Bitte zuerst die App aktualisieren.',
+  'backup.error.damaged': 'Die Sicherung ist beschädigt und kann nicht gelesen werden.',
+  'backup.error.nodb':
+    'Dieser Browser erlaubt gerade keine Speicherung (z. B. privates Fenster). Laden ist deshalb nicht möglich.',
+  'backup.error.export': 'Die Sicherung konnte nicht gespeichert werden.',
   'settings.theme': 'Darstellung',
   'settings.theme.system': 'System',
   'settings.theme.light': 'Hell',

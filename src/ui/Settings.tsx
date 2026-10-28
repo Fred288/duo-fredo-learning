@@ -2,6 +2,7 @@ import { canSpeak } from '../audio/types';
 import { t, type MessageKey } from '../i18n';
 import { useApp } from '../store/app';
 import { getSpeaker, speak, useAudio } from '../store/audio';
+import { BackupSection } from './BackupSection';
 import { GOAL_RANGE, NEW_WORDS_RANGE, useSettings, type Theme } from '../store/settings';
 
 const THEMES: Theme[] = ['system', 'light', 'dark'];
@@ -210,6 +211,8 @@ export function Settings() {
           ))}
         </div>
       </fieldset>
+
+      <BackupSection />
     </section>
   );
 }

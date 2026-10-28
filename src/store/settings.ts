@@ -17,6 +17,8 @@ export interface Settings {
   autoplay: boolean;
   /** Gewählte Stimme; '' = automatisch. */
   voiceURI: string;
+  /** Tag der letzten gespeicherten Sicherung, 'YYYY-MM-DD'; '' = noch nie. */
+  lastBackup: string;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -28,6 +30,7 @@ export const DEFAULT_SETTINGS: Settings = {
   audioEnabled: true,
   autoplay: false,
   voiceURI: '',
+  lastBackup: '',
 };
 
 export const GOAL_RANGE = { min: 1, max: 10 } as const;
@@ -73,6 +76,9 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.audioEnabled === 'boolean') out.audioEnabled = stored.audioEnabled;
   if (typeof stored.autoplay === 'boolean') out.autoplay = stored.autoplay;
   if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
+  if (typeof stored.lastBackup === 'string' && /^(\d{4}-\d{2}-\d{2})?$/.test(stored.lastBackup)) {
+    out.lastBackup = stored.lastBackup;
+  }
   if (
     typeof stored.dailyGoal === 'number' &&
     stored.dailyGoal >= GOAL_RANGE.min &&
