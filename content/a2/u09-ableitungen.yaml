@@ -578,6 +578,59 @@ lessons:
         answer: Kolay gelsin! / İyi akşamlar!
         explanation: Kolay gelsin = etwa „frohes Schaffen“, zu jemandem, der (noch) arbeitet. Beim Gehen sagt man es zu den Kollegen, die bleiben.
 
+  - id: a2-u09-r1
+    type: reading
+    title: "Lesetext: Eine neue Stelle"
+    passage:
+      sentences:
+        - { tr: "Ayten otuz yaşında ve İstanbullu.", de: "Ayten ist dreißig Jahre alt und kommt aus Istanbul." }
+        - { tr: "Altı ay işsizdi.", de: "Sie war sechs Monate arbeitslos." }
+        - { tr: "Geçen hafta bir kitapçıda iş buldu.", de: "Letzte Woche hat sie in einer Buchhandlung Arbeit gefunden." }
+        - { tr: "Kitapçı şehrin merkezinde, büyük bir binanın altında.", de: "Die Buchhandlung liegt im Stadtzentrum, unten in einem großen Gebäude." }
+        - { tr: "Maaşı çok yüksek değil ama müdürü çok kibar.", de: "Ihr Gehalt ist nicht sehr hoch, aber ihr Chef ist sehr freundlich." }
+        - { tr: "Müşteriler genelde roman ve çocuk kitapları alıyor.", de: "Die Kunden kaufen meistens Romane und Kinderbücher." }
+        - { tr: "Öğle yemeğinde Ayten simitçiden bir simit ve bir çay alıyor.", de: "In der Mittagspause kauft Ayten beim Simitverkäufer einen Simit und einen Tee." }
+        - { tr: "Müşteriler nakit ya da kredi kartıyla ödüyor.", de: "Die Kunden bezahlen bar oder mit Kreditkarte." }
+        - { tr: "Ayten evli ve bir oğlu var.", de: "Ayten ist verheiratet und hat einen Sohn." }
+        - { tr: "Oğlu da kitapçı olmak istiyor.", de: "Ihr Sohn möchte auch Buchhändler werden." }
+      glossary:
+        - { tr: "Ayten", de: "Ayten (Frauenname)" }
+        - { tr: "işsizdi", de: "war arbeitslos (işsiz + Vergangenheit)", vocab: "işsiz" }
+        - { tr: "roman", de: "Roman" }
+        - { tr: "öğle", de: "Mittag (öğle yemeği = Mittagessen)", vocab: "öğle" }
+        - { tr: "yemeğinde", de: "beim Essen (öğle yemeğinde = in der Mittagspause)", vocab: "yemek" }
+        - { tr: "simitçiden", de: "beim Simitverkäufer (simit + -çi + Ablativ)", vocab: "simit" }
+        - { tr: "ya", de: "ya da = oder" }
+        - { tr: "da", de: "ya da = oder; sonst: auch" }
+        - { tr: "kredi", de: "Kredit (kredi kartı = Kreditkarte)", vocab: "kredi kartı" }
+        - { tr: "kartıyla", de: "mit der Karte (kredi kartıyla = mit Kreditkarte)", vocab: "kredi kartı" }
+    exercises:
+      - id: a2-u09-r1-e1
+        type: multiple_choice
+        prompt: "Woher kommt Ayten?"
+        options: ["aus Istanbul", "aus Ankara", "aus İzmir"]
+        answer: "aus Istanbul"
+      - id: a2-u09-r1-e2
+        type: multiple_choice
+        prompt: "Wie lange war sie arbeitslos?"
+        options: ["sechs Monate", "ein Jahr", "drei Wochen"]
+        answer: "sechs Monate"
+      - id: a2-u09-r1-e3
+        type: multiple_choice
+        prompt: "Wo hat sie Arbeit gefunden?"
+        options: ["in einer Buchhandlung", "in einer Bäckerei", "in einem Büro"]
+        answer: "in einer Buchhandlung"
+      - id: a2-u09-r1-e4
+        type: multiple_choice
+        prompt: "Wie ist ihr Chef?"
+        options: ["sehr freundlich", "sehr streng", "oft müde"]
+        answer: "sehr freundlich"
+      - id: a2-u09-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Ayten evli ve bir oğlu var."
+        answers: ["Ayten ist verheiratet und hat einen Sohn.", "Ayten ist verheiratet und sie hat einen Sohn.", "Ayten ist verheiratet und hat ein Kind."]
+
   - id: a2-u09-l9
     type: review
     title: Wiederholung

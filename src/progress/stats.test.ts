@@ -93,6 +93,9 @@ describe('openMistakes', () => {
   it('leitet die Unit aus der Lektions-ID ab', () => {
     expect(unitOfLesson('a1-u03-l12')).toBe('a1-u03');
     expect(unitOfLesson('a1-u03-h1')).toBe('a1-u03');
+    expect(unitOfLesson('a1-u03-z1')).toBe('a1-u03');
+    expect(unitOfLesson('a1-u03-s1')).toBe('a1-u03');
+    expect(unitOfLesson('a2-u01-r1')).toBe('a2-u01');
   });
 
   it('Hörlektionen zählen nicht zum Unit-Fortschritt', () => {

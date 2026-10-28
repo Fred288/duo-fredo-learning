@@ -317,7 +317,7 @@ export function checkListen(units: LoadedUnit[]): string[] {
 }
 
 /**
- * Anzahl ungeprüfter Übungen und Vokabeln einer Unit (Item-Flag überschreibt Unit-Flag).
+ * Anzahl ungeprüfter Übungen, Vokabeln und Lesetexte einer Unit (Item-Flag überschreibt Unit-Flag).
  * Erzeugte Übungen (Hören, Zerlegen, Satzbau; mit `from`) zählen nicht extra: ihr Stand folgt der Quelle.
  */
 export function countUnreviewed(unit: Unit): number {
@@ -326,5 +326,8 @@ export function countUnreviewed(unit: Unit): number {
     .filter(
       (e) => !((e.type === 'listen' || e.type === 'segment' || e.type === 'sov_puzzle') && e.from),
     );
-  return [...exercises, ...(unit.vocab ?? [])].filter((i) => !(i.reviewed ?? unit.reviewed)).length;
+  const passages = unit.lessons.flatMap((l) => (l.passage ? [l.passage] : []));
+  return [...exercises, ...(unit.vocab ?? []), ...passages].filter(
+    (i) => !(i.reviewed ?? unit.reviewed),
+  ).length;
 }

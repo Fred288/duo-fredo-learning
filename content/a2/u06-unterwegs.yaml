@@ -547,6 +547,58 @@ lessons:
         distractors: [otobüse, binin]
         explanation: inmek steht mit Ablativ, otobüsten inmek = aus dem Bus aussteigen.
 
+  - id: a2-u06-r1
+    type: reading
+    title: "Lesetext: Der Weg zum Museum"
+    passage:
+      sentences:
+        - { tr: "Affedersiniz, müzeye nasıl gidebilirim?", de: "Entschuldigung, wie komme ich zum Museum?" }
+        - { tr: "Müze biraz uzak ama yürüyebilirsiniz.", de: "Das Museum ist etwas weit weg, aber Sie können zu Fuß gehen." }
+        - { tr: "Önce bu caddeden düz gidin.", de: "Gehen Sie zuerst diese Straße geradeaus." }
+        - { tr: "İkinci trafik ışığından sola dönün.", de: "Biegen Sie an der zweiten Ampel links ab." }
+        - { tr: "Sonra köprüyü geçin.", de: "Dann überqueren Sie die Brücke." }
+        - { tr: "Köprünün karşısında büyük bir meydan var.", de: "Gegenüber der Brücke ist ein großer Platz." }
+        - { tr: "Müze meydanın sağ tarafında.", de: "Das Museum ist auf der rechten Seite des Platzes." }
+        - { tr: "Dikkat edin, meydanda trafik çok yoğun.", de: "Passen Sie auf, auf dem Platz ist viel Verkehr." }
+        - { tr: "Yolda bir polise de sorabilirsiniz.", de: "Unterwegs können Sie auch einen Polizisten fragen." }
+        - { tr: "Çok teşekkür ederim! İyi günler!", de: "Vielen Dank! Einen schönen Tag noch!" }
+      glossary:
+        - { tr: "nasıl", de: "wie" }
+        - { tr: "ikinci", de: "zweite(r, s)", vocab: "iki" }
+        - { tr: "trafik", de: "Verkehr (trafik ışığı = Ampel)", vocab: "trafik ışığı" }
+        - { tr: "ışığından", de: "an der Ampel (trafik ışığı + Ablativ)", vocab: "trafik ışığı" }
+        - { tr: "tarafında", de: "auf der Seite (taraf + Possessiv + Lokativ)" }
+        - { tr: "dikkat", de: "Achtung (dikkat etmek = aufpassen)", vocab: "dikkat etmek" }
+        - { tr: "edin", de: "machen Sie (etmek, Imperativ; dikkat edin = passen Sie auf)", vocab: "dikkat etmek" }
+        - { tr: "yoğun", de: "dicht, stark (Verkehr)" }
+        - { tr: "de", de: "auch (nachgestellt, getrennt geschrieben)" }
+    exercises:
+      - id: a2-u06-r1-e1
+        type: multiple_choice
+        prompt: "Wohin möchte die Person?"
+        options: ["zum Museum", "zur Post", "zum Bahnhof"]
+        answer: "zum Museum"
+      - id: a2-u06-r1-e2
+        type: multiple_choice
+        prompt: "Wo soll sie links abbiegen?"
+        options: ["an der zweiten Ampel", "an der ersten Kreuzung", "nach der Brücke"]
+        answer: "an der zweiten Ampel"
+      - id: a2-u06-r1-e3
+        type: multiple_choice
+        prompt: "Was liegt gegenüber der Brücke?"
+        options: ["ein großer Platz", "ein Park", "eine Haltestelle"]
+        answer: "ein großer Platz"
+      - id: a2-u06-r1-e4
+        type: multiple_choice
+        prompt: "Auf welcher Seite des Platzes ist das Museum?"
+        options: ["rechts", "links", "in der Mitte"]
+        answer: "rechts"
+      - id: a2-u06-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Sonra köprüyü geçin."
+        answers: ["Dann überqueren Sie die Brücke.", "Überqueren Sie dann die Brücke.", "Dann gehen Sie über die Brücke.", "Gehen Sie dann über die Brücke.", "Danach überqueren Sie die Brücke.", "Danach gehen Sie über die Brücke."]
+
   - id: a2-u06-l8
     type: review
     title: Wiederholung

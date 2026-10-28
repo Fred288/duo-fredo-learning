@@ -360,12 +360,49 @@ export const LESSON_TYPES = [
   'word_order',
 ] as const;
 
-export const Lesson = z.strictObject({
-  id: nonEmpty,
-  type: z.enum(LESSON_TYPES),
-  title: nonEmpty,
-  exercises: z.array(Exercise).min(1),
+/** Wort im Lesetext, vom Build aufgelöst (`annotatePassage`); Lücken (Leerzeichen, Satzzeichen) ohne `w`. */
+export const PassageToken = z.strictObject({
+  text: z.string().min(1),
+  /** Wort (antippbar); fehlt bei Leerzeichen und Satzzeichen. */
+  w: z.literal(true).optional(),
+  /** Vokabel-ID (`vocabId`) der Grundform. */
+  vocab: nonEmpty.optional(),
+  /** Deutsche Glosse aus dem `glossary` des Textes. */
+  gloss: nonEmpty.optional(),
 });
+
+export const Passage = z.strictObject({
+  title_tr: nonEmpty.optional(),
+  /** Satzweise: türkischer Text und deutsche Übersetzung (auf Wunsch eingeblendet). */
+  sentences: z.array(z.strictObject({ tr: nonEmpty, de: nonEmpty })).min(1),
+  /**
+   * Wörter, die der Kurs nicht als Vokabel führt (Namen, Formen jenseits der Engine). `tr` ist
+   * die Form im Text (oder bei Namen der Teil vor dem Apostroph); `vocab` verweist optional auf
+   * die Grundform (güzeldi → güzel).
+   */
+  glossary: z
+    .array(z.strictObject({ tr: nonEmpty, de: nonEmpty, vocab: nonEmpty.optional() }))
+    .optional(),
+  /** Vom Build erzeugt, je Satz die Wörter mit Auflösung; in der YAML nicht setzen. */
+  tokens: z.array(z.array(PassageToken)).optional(),
+  reviewed: z.boolean().optional(),
+  ...provenanceOverride,
+});
+
+export const Lesson = z
+  .strictObject({
+    id: nonEmpty,
+    type: z.enum(LESSON_TYPES),
+    title: nonEmpty,
+    /** Lesetext (nur `type: reading`); die Übungen sind die Verständnisfragen dazu. */
+    passage: Passage.optional(),
+    exercises: z.array(Exercise).min(1),
+  })
+  .superRefine((lesson, ctx) => {
+    if (lesson.passage && lesson.type !== 'reading') {
+      ctx.addIssue({ code: 'custom', path: ['passage'], message: 'passage nur bei type: reading' });
+    }
+  });
 
 export const Unit = z
   .strictObject({
@@ -409,6 +446,8 @@ export type Level = z.infer<typeof Level>;
 export type Vocab = z.infer<typeof Vocab>;
 export type Exercise = z.infer<typeof Exercise>;
 export type Lesson = z.infer<typeof Lesson>;
+export type Passage = z.infer<typeof Passage>;
+export type PassageToken = z.infer<typeof PassageToken>;
 export type Unit = z.infer<typeof Unit>;
 export type FormSpec = z.infer<typeof FormSpec>;
 

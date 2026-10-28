@@ -670,6 +670,58 @@ lessons:
         target: ortasında
         gloss_de: in der Mitte
 
+  - id: a2-u08-r1
+    type: reading
+    title: "Lesetext: Wo ist mein Schlüssel?"
+    passage:
+      sentences:
+        - { tr: "Bu sabah işe geç kaldım, çünkü anahtarımı bulamadım.", de: "Heute Morgen kam ich zu spät zur Arbeit, weil ich meinen Schlüssel nicht finden konnte." }
+        - { tr: "Önce çantamın içine baktım.", de: "Zuerst habe ich in meine Tasche geschaut." }
+        - { tr: "Anahtar çantada yoktu.", de: "Der Schlüssel war nicht in der Tasche." }
+        - { tr: "Sonra masanın üstüne ve altına baktım.", de: "Dann habe ich auf und unter den Tisch geschaut." }
+        - { tr: "Kitapların arasında da yoktu.", de: "Zwischen den Büchern war er auch nicht." }
+        - { tr: "Kanepenin arkasına ve yatağın yanına da baktım.", de: "Ich habe auch hinter das Sofa und neben das Bett geschaut." }
+        - { tr: "Sonunda kahve içmek için mutfağa gittim.", de: "Schließlich bin ich in die Küche gegangen, um Kaffee zu trinken." }
+        - { tr: "Anahtar buzdolabının içindeydi!", de: "Der Schlüssel war im Kühlschrank!" }
+        - { tr: "Dün akşam sütle birlikte oraya koymuşum.", de: "Gestern Abend habe ich ihn wohl zusammen mit der Milch hineingelegt." }
+        - { tr: "Artık anahtarımı her zaman kapının yanındaki rafa koyuyorum.", de: "Jetzt lege ich meinen Schlüssel immer auf das Regal neben der Tür." }
+      glossary:
+        - { tr: "bulamadım", de: "ich konnte nicht finden (bulmak + -ama- + -dım)", vocab: "bulmak" }
+        - { tr: "yoktu", de: "war nicht da (yok + Vergangenheit)", vocab: "yok" }
+        - { tr: "da", de: "auch (nachgestellt, getrennt geschrieben)" }
+        - { tr: "sonunda", de: "schließlich, am Ende" }
+        - { tr: "içindeydi", de: "war darin (iç + Possessiv + Lokativ + war)", vocab: "iç" }
+        - { tr: "birlikte", de: "zusammen (ile birlikte = zusammen mit)" }
+        - { tr: "oraya", de: "dorthin", vocab: "orada" }
+        - { tr: "artık", de: "jetzt, nun (anders als früher)" }
+        - { tr: "yanındaki", de: "neben … befindlich (yan + Possessiv + Lokativ + -ki)", vocab: "yan" }
+    exercises:
+      - id: a2-u08-r1-e1
+        type: multiple_choice
+        prompt: "Warum kam die Person zu spät?"
+        options: ["Sie konnte ihren Schlüssel nicht finden.", "Der Bus kam nicht.", "Sie hat zu lange geschlafen."]
+        answer: "Sie konnte ihren Schlüssel nicht finden."
+      - id: a2-u08-r1-e2
+        type: multiple_choice
+        prompt: "Wo hat sie zuerst gesucht?"
+        options: ["in der Tasche", "unter dem Bett", "in der Küche"]
+        answer: "in der Tasche"
+      - id: a2-u08-r1-e3
+        type: multiple_choice
+        prompt: "Wo war der Schlüssel?"
+        options: ["im Kühlschrank", "hinter dem Sofa", "zwischen den Büchern"]
+        answer: "im Kühlschrank"
+      - id: a2-u08-r1-e4
+        type: multiple_choice
+        prompt: "Wohin legt sie den Schlüssel jetzt immer?"
+        options: ["auf das Regal neben der Tür", "in die Tasche", "auf den Tisch"]
+        answer: "auf das Regal neben der Tür"
+      - id: a2-u08-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Önce çantamın içine baktım."
+        answers: ["Zuerst habe ich in meine Tasche geschaut.", "Zuerst habe ich in meiner Tasche nachgesehen.", "Zuerst schaute ich in meine Tasche.", "Zuerst habe ich in meine Tasche gesehen.", "Zuerst habe ich in meiner Tasche geschaut.", "Zuerst habe ich in meine Tasche geguckt."]
+
   - id: a2-u08-l10
     type: review
     title: Wiederholung

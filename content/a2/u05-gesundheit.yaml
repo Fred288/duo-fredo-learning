@@ -622,6 +622,54 @@ lessons:
         prompt: Gute Besserung!
         answers: [Geçmiş olsun!]
 
+  - id: a2-u05-r1
+    type: reading
+    title: "Lesetext: Murat ist krank"
+    passage:
+      sentences:
+        - { tr: "Murat iki gündür hasta.", de: "Murat ist seit zwei Tagen krank." }
+        - { tr: "Başı ağrıyor ve ateşi var.", de: "Er hat Kopfschmerzen und Fieber." }
+        - { tr: "Bugün işe gidemedi.", de: "Heute konnte er nicht zur Arbeit gehen." }
+        - { tr: "Öğleden sonra doktora gitti.", de: "Am Nachmittag ist er zum Arzt gegangen." }
+        - { tr: "Doktor, \"Grip olmuşsunuz,\" dedi.", de: "Der Arzt sagte: „Sie haben die Grippe.“" }
+        - { tr: "\"Bol su içmelisiniz ve üç gün yatmalısınız.\"", de: "„Sie müssen viel Wasser trinken und drei Tage im Bett bleiben.“" }
+        - { tr: "\"Bu ilacı günde iki kere alın.\"", de: "„Nehmen Sie dieses Medikament zweimal am Tag.“" }
+        - { tr: "Murat eczaneye gitti ve ilacı aldı.", de: "Murat ist zur Apotheke gegangen und hat das Medikament geholt." }
+        - { tr: "Sigara da içmemeli ama bunu bırakmak zor.", de: "Er sollte auch nicht rauchen, aber das aufzugeben ist schwer." }
+        - { tr: "Annesi telefonda \"Geçmiş olsun!\" dedi.", de: "Seine Mutter sagte am Telefon: „Gute Besserung!“" }
+      glossary:
+        - { tr: "Murat", de: "Murat (Männername)" }
+        - { tr: "gündür", de: "seit … Tagen (iki gündür = seit zwei Tagen)", vocab: "gün" }
+        - { tr: "gidemedi", de: "konnte nicht gehen (gitmek + -eme- + -di)", vocab: "gitmek" }
+        - { tr: "da", de: "auch (nachgestellt, getrennt geschrieben)" }
+        - { tr: "zor", de: "schwer, schwierig" }
+    exercises:
+      - id: a2-u05-r1-e1
+        type: multiple_choice
+        prompt: "Welche Beschwerden hat Murat?"
+        options: ["Kopfschmerzen und Fieber", "Bauchschmerzen", "Zahnschmerzen"]
+        answer: "Kopfschmerzen und Fieber"
+      - id: a2-u05-r1-e2
+        type: multiple_choice
+        prompt: "Was konnte Murat heute nicht?"
+        options: ["zur Arbeit gehen", "schlafen", "essen"]
+        answer: "zur Arbeit gehen"
+      - id: a2-u05-r1-e3
+        type: multiple_choice
+        prompt: "Was soll Murat laut Arzt tun?"
+        options: ["viel Wasser trinken und im Bett bleiben", "viel Sport machen", "sofort ins Krankenhaus gehen"]
+        answer: "viel Wasser trinken und im Bett bleiben"
+      - id: a2-u05-r1-e4
+        type: multiple_choice
+        prompt: "Wie oft soll er das Medikament nehmen?"
+        options: ["zweimal am Tag", "einmal am Tag", "dreimal am Tag"]
+        answer: "zweimal am Tag"
+      - id: a2-u05-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Bol su içmelisiniz."
+        answers: ["Sie müssen viel Wasser trinken.", "Sie sollten viel Wasser trinken.", "Ihr müsst viel Wasser trinken.", "Ihr solltet viel Wasser trinken.", "Sie sollen viel Wasser trinken.", "Ihr sollt viel Wasser trinken."]
+
   - id: a2-u05-l8
     type: review
     title: Wiederholung

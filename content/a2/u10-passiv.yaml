@@ -681,6 +681,64 @@ lessons:
         distractors: [aradım, ikiye]
         explanation: arandım = ich wurde angerufen, aradım = ich habe angerufen.
 
+  - id: a2-u10-r1
+    type: reading
+    title: "Lesetext: Ein Paket aus Deutschland"
+    passage:
+      sentences:
+        - { tr: "Teyzem Almanya'da yaşıyor.", de: "Meine Tante lebt in Deutschland." }
+        - { tr: "Her yıl doğum günümde bana bir paket gönderir.", de: "Jedes Jahr schickt sie mir zu meinem Geburtstag ein Paket." }
+        - { tr: "Bu yıl paket iki hafta gecikti.", de: "Dieses Jahr hat sich das Paket um zwei Wochen verspätet." }
+        - { tr: "Postaneye gittim ve sordum.", de: "Ich bin zur Post gegangen und habe gefragt." }
+        - { tr: "Memur, \"Paketler önce gümrükte kontrol edilir,\" dedi.", de: "Der Beamte sagte: „Pakete werden zuerst beim Zoll kontrolliert.“" }
+        - { tr: "\"Sonra adreslere dağıtılır.\"", de: "„Dann werden sie an die Adressen verteilt.“" }
+        - { tr: "Ertesi gün kapı çalındı.", de: "Am nächsten Tag klingelte es an der Tür." }
+        - { tr: "Kargocu paketi teslim etti ve ben formu imzaladım.", de: "Der Paketbote hat das Paket abgegeben, und ich habe das Formular unterschrieben." }
+        - { tr: "Paketin içinde bir kazak, Alman çikolatası ve bir mektup vardı.", de: "Im Paket waren ein Pullover, deutsche Schokolade und ein Brief." }
+        - { tr: "Mektubu hemen okudum ve teyzemi aradım.", de: "Ich habe den Brief sofort gelesen und meine Tante angerufen." }
+      glossary:
+        - { tr: "her", de: "jede(r, s) (her yıl = jedes Jahr)" }
+        - { tr: "doğum", de: "Geburt (doğum günü = Geburtstag)", vocab: "doğum günü" }
+        - { tr: "gecikti", de: "hat sich verspätet (gecikmek + -ti)" }
+        - { tr: "memur", de: "Beamter, Beamtin" }
+        - { tr: "gümrükte", de: "beim Zoll (gümrük + Lokativ)" }
+        - { tr: "kontrol", de: "Kontrolle (kontrol etmek = kontrollieren)" }
+        - { tr: "edilir", de: "wird gemacht (etmek, Passiv Aorist; kontrol edilir = wird kontrolliert)" }
+        - { tr: "ertesi", de: "der nächste (ertesi gün = am nächsten Tag)" }
+        - { tr: "çalındı", de: "wurde geläutet (çalmak, Passiv; kapı çalındı = es klingelte)", vocab: "çalmak" }
+        - { tr: "kargocu", de: "Paketbote, Paketbotin (kargo + -cu)", vocab: "kargo" }
+        - { tr: "teslim", de: "Übergabe (teslim etmek = abgeben, zustellen)", vocab: "teslim etmek" }
+        - { tr: "etti", de: "hat gemacht (etmek; teslim etti = hat abgegeben)", vocab: "teslim etmek" }
+        - { tr: "çikolatası", de: "Schokolade (Alman çikolatası = deutsche Schokolade)" }
+        - { tr: "vardı", de: "es gab, war darin (var + Vergangenheit)", vocab: "var" }
+        - { tr: "hemen", de: "sofort" }
+    exercises:
+      - id: a2-u10-r1-e1
+        type: multiple_choice
+        prompt: "Wo lebt die Tante?"
+        options: ["in Deutschland", "in Istanbul", "in Ankara"]
+        answer: "in Deutschland"
+      - id: a2-u10-r1-e2
+        type: multiple_choice
+        prompt: "Wann schickt die Tante jedes Jahr ein Paket?"
+        options: ["zum Geburtstag", "zu Neujahr", "im Sommer"]
+        answer: "zum Geburtstag"
+      - id: a2-u10-r1-e3
+        type: multiple_choice
+        prompt: "Was passiert laut dem Beamten zuerst mit den Paketen?"
+        options: ["Sie werden beim Zoll kontrolliert.", "Sie werden sofort verteilt.", "Sie werden zurückgeschickt."]
+        answer: "Sie werden beim Zoll kontrolliert."
+      - id: a2-u10-r1-e4
+        type: multiple_choice
+        prompt: "Was war NICHT im Paket?"
+        options: ["ein Buch", "ein Pullover", "ein Brief"]
+        answer: "ein Buch"
+      - id: a2-u10-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Paketler önce gümrükte kontrol edilir."
+        answers: ["Pakete werden zuerst beim Zoll kontrolliert.", "Die Pakete werden zuerst beim Zoll kontrolliert.", "Pakete werden zuerst am Zoll kontrolliert.", "Die Pakete werden zuerst am Zoll kontrolliert.", "Pakete werden zuerst vom Zoll kontrolliert.", "Die Pakete werden zuerst vom Zoll kontrolliert."]
+
   - id: a2-u10-l9
     type: review
     title: Wiederholung

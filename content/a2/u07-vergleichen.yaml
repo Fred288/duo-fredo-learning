@@ -639,6 +639,57 @@ lessons:
           - { order: [1, 0, 2, 3], note: "Auch üblich: der Ort zuerst." }
         distractors: [kış, sıcak]
 
+  - id: a2-u07-r1
+    type: reading
+    title: "Lesetext: Zwei Schwestern"
+    passage:
+      sentences:
+        - { tr: "Zeynep ile Selin kardeş ama birbirlerine hiç benzemiyorlar.", de: "Zeynep und Selin sind Schwestern, aber sie sehen sich überhaupt nicht ähnlich." }
+        - { tr: "Zeynep, Selin'den iki yaş büyük.", de: "Zeynep ist zwei Jahre älter als Selin." }
+        - { tr: "Selin ablasından daha uzun ve daha zayıf.", de: "Selin ist größer und schlanker als ihre ältere Schwester." }
+        - { tr: "Zeynep'in saçları kısa, Selin'in saçları uzun.", de: "Zeynep hat kurze Haare, Selin hat lange Haare." }
+        - { tr: "Zeynep çok sakin, Selin ise daha neşeli.", de: "Zeynep ist sehr ruhig, Selin dagegen ist fröhlicher." }
+        - { tr: "Zeynep kışı sever, çünkü karı çok güzel bulur.", de: "Zeynep mag den Winter, weil sie Schnee sehr schön findet." }
+        - { tr: "Selin ise yazı daha çok sever.", de: "Selin dagegen mag den Sommer lieber." }
+        - { tr: "Ona göre en güzel hava güneşli ve sıcak hava.", de: "Für sie ist sonniges, warmes Wetter das schönste Wetter." }
+        - { tr: "Ama ikisi de ilkbaharı sever, çünkü hava ne çok sıcak ne çok soğuk.", de: "Aber beide mögen den Frühling, weil das Wetter weder zu heiß noch zu kalt ist." }
+        - { tr: "Hangisi daha akıllı? Bu soruya ikisi de \"Ben!\" der.", de: "Welche ist klüger? Auf diese Frage sagen beide: „Ich!“" }
+      glossary:
+        - { tr: "Zeynep", de: "Zeynep (Frauenname)" }
+        - { tr: "Selin", de: "Selin (Frauenname)" }
+        - { tr: "birbirlerine", de: "einander (birbirlerine benzemek = sich ähneln)" }
+        - { tr: "ise", de: "dagegen, was … betrifft" }
+        - { tr: "ikisi", de: "beide (ikisi de = alle beide)", vocab: "iki" }
+        - { tr: "de", de: "auch (ikisi de = alle beide)" }
+        - { tr: "ne", de: "ne … ne = weder … noch" }
+        - { tr: "soruya", de: "auf die Frage (soru + Dativ)" }
+    exercises:
+      - id: a2-u07-r1-e1
+        type: multiple_choice
+        prompt: "Wer ist älter?"
+        options: ["Zeynep", "Selin", "Beide sind gleich alt."]
+        answer: "Zeynep"
+      - id: a2-u07-r1-e2
+        type: multiple_choice
+        prompt: "Wie ist Selin im Vergleich zu Zeynep?"
+        options: ["größer und schlanker", "kleiner und ruhiger", "älter und klüger"]
+        answer: "größer und schlanker"
+      - id: a2-u07-r1-e3
+        type: multiple_choice
+        prompt: "Welche Jahreszeit mag Zeynep?"
+        options: ["den Winter", "den Sommer", "den Herbst"]
+        answer: "den Winter"
+      - id: a2-u07-r1-e4
+        type: multiple_choice
+        prompt: "Warum mögen beide den Frühling?"
+        options: ["Es ist weder zu heiß noch zu kalt.", "Es regnet viel.", "Sie haben dann Geburtstag."]
+        answer: "Es ist weder zu heiß noch zu kalt."
+      - id: a2-u07-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Selin ablasından daha uzun."
+        answers: ["Selin ist größer als ihre ältere Schwester.", "Selin ist größer als ihre Schwester.", "Selin ist größer als ihre große Schwester.", "Selin ist länger als ihre ältere Schwester."]
+
   - id: a2-u07-l8
     type: review
     title: Wiederholung

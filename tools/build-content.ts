@@ -12,10 +12,13 @@ import {
 import { dirname, join, relative } from 'node:path';
 import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
 import { withListening } from '../src/content/listening';
+import { checkGlossary, withPassages } from '../src/content/reading';
+import { vocabId } from '../src/content/schema';
 import { withSegments } from '../src/content/segmenting';
 import { caseHints, withWordOrder } from '../src/content/word-order';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
+import { prepareLookup } from '../src/lookup/search';
 import {
   checkListen,
   checkSegments,
@@ -54,11 +57,28 @@ errors.push(...report.errors, ...checkSuffixTargets(units));
 const SEGMENT_LESSONS = true;
 const ORDER_LESSONS = true;
 const LISTENING_LESSONS = true;
+// Lesetexte mit `passage` (Lektion <unit>-r1): geprüft und aufgelöst werden sie immer; in die App
+// kommen sie erst, wenn die Lese-Ansicht den Text zeigt (sonst stünden Fragen ohne Text da).
+const READING_LESSONS = false;
 const words = courseWords(units.map(({ unit }) => unit));
 const allVocab = units.flatMap(({ unit }) => unit.vocab ?? []);
 const cases = caseHints(units.map(({ unit }) => unit));
+// Lesetexte: jedes Wort über Vokabeln, Engine-Formen oder das Glossar des Textes auflösen.
+const reading = prepareLookup(
+  buildLookup(
+    units.map(({ unit }) => unit),
+    new Map(),
+  ),
+);
+const vocabIds = new Set(allVocab.map(vocabId));
+const readingWarnings: string[] = [];
 const built: LoadedUnit[] = units.map(({ file, unit }) => {
-  let out = unit;
+  errors.push(...checkGlossary(unit, vocabIds).map((e) => `${file}: ${e}`));
+  const annotated = withPassages(unit, reading);
+  readingWarnings.push(...annotated.warnings.map((w) => `${file}: ${w}`));
+  let out = READING_LESSONS
+    ? annotated.unit
+    : { ...annotated.unit, lessons: annotated.unit.lessons.filter((l) => !l.passage) };
   if (SEGMENT_LESSONS) out = withSegments(out, t('segment.lessonTitle'), allVocab);
   if (ORDER_LESSONS) out = withWordOrder(out, t('word_order.lessonTitle'), cases);
   if (LISTENING_LESSONS) out = withListening(out, t('listen.lessonTitle'));
@@ -84,7 +104,7 @@ for (const { file, unit } of units) {
   }
 }
 
-for (const w of report.warnings) console.warn(`⚠ ${w}`);
+for (const w of [...report.warnings, ...readingWarnings]) console.warn(`⚠ ${w}`);
 if (errors.length > 0) {
   for (const e of errors) console.error(`✖ ${e}`);
   console.error(`\nContent ungültig: ${errors.length} Fehler.`);

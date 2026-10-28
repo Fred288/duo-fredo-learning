@@ -15,8 +15,8 @@ export function openMistakes(attempts: readonly Attempt[]): Attempt[] {
   return [...last.values()].filter((a) => a.verdict === 'wrong').sort((x, y) => x.at - y.at);
 }
 
-/** a1-u03-l2 → a1-u03, Hörlektion a1-u03-h1 → a1-u03 */
-export const unitOfLesson = (lessonId: string): string => lessonId.replace(/-[lh]\d+$/, '');
+/** a1-u03-l2 → a1-u03; ebenso erzeugte Lektionen (-h1, -z1, -s1) und Lesetexte (-r1). */
+export const unitOfLesson = (lessonId: string): string => lessonId.replace(/-[a-z]\d+$/, '');
 
 export interface Completion {
   lessonId: string;

@@ -482,6 +482,58 @@ lessons:
           - { order: [1, 0, 2, 3], note: "Auch üblich: die Zeit am Satzanfang." }
         distractors: [yapıyorum, akşam]
 
+  - id: a2-u03-r1
+    type: reading
+    title: "Lesetext: Mein Großvater"
+    passage:
+      sentences:
+        - { tr: "Dedem yetmiş yaşında ama hiç evde oturmaz.", de: "Mein Großvater ist siebzig, aber er sitzt nie zu Hause herum." }
+        - { tr: "Her sabah erken kalkar ve parkta yürüyüş yapar.", de: "Jeden Morgen steht er früh auf und geht im Park spazieren." }
+        - { tr: "Hafta içi genelde arkadaşlarıyla tavla oynar.", de: "Unter der Woche spielt er meistens mit seinen Freunden Tavla." }
+        - { tr: "Bazen gitar çalar ve eski şarkılar söyler.", de: "Manchmal spielt er Gitarre und singt alte Lieder." }
+        - { tr: "Hafta sonu torunlarına yardım eder.", de: "Am Wochenende hilft er seinen Enkeln." }
+        - { tr: "Ben de bazen onunla bisiklete binerim.", de: "Ich fahre auch manchmal mit ihm Fahrrad." }
+        - { tr: "Dedem asla televizyon izlemez.", de: "Mein Großvater sieht nie fern." }
+        - { tr: "\"Televizyon insanı tembel yapar,\" der.", de: "„Fernsehen macht den Menschen faul“, sagt er." }
+        - { tr: "Akşamları kitap okur ve erken yatar.", de: "Abends liest er und geht früh schlafen." }
+        - { tr: "Ben de onun gibi yaşlanmak isterim.", de: "Ich möchte auch so wie er alt werden." }
+      glossary:
+        - { tr: "her", de: "jede(r, s) (her sabah = jeden Morgen)" }
+        - { tr: "yürüyüş", de: "Spaziergang (yürüyüş yapmak = spazieren gehen)", vocab: "yürüyüş yapmak" }
+        - { tr: "tavla", de: "Tavla (Brettspiel, Backgammon)" }
+        - { tr: "torunlarına", de: "seinen Enkeln (torun = Enkel(in))" }
+        - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
+        - { tr: "eder", de: "macht (etmek, Aorist; yardım eder = hilft)", vocab: "yardım etmek" }
+        - { tr: "insanı", de: "den Menschen (insan + Akkusativ)" }
+        - { tr: "yaşlanmak", de: "alt werden", vocab: "yaşlı" }
+        - { tr: "de", de: "auch (nachgestellt, getrennt geschrieben)" }
+    exercises:
+      - id: a2-u03-r1-e1
+        type: multiple_choice
+        prompt: "Was macht der Großvater jeden Morgen?"
+        options: ["Er geht im Park spazieren.", "Er spielt Tavla.", "Er sieht fern."]
+        answer: "Er geht im Park spazieren."
+      - id: a2-u03-r1-e2
+        type: multiple_choice
+        prompt: "Was macht er manchmal?"
+        options: ["Er spielt Gitarre und singt.", "Er fährt in den Urlaub.", "Er kocht für die Familie."]
+        answer: "Er spielt Gitarre und singt."
+      - id: a2-u03-r1-e3
+        type: multiple_choice
+        prompt: "Was macht der Großvater nie?"
+        options: ["fernsehen", "Fahrrad fahren", "lesen"]
+        answer: "fernsehen"
+      - id: a2-u03-r1-e4
+        type: multiple_choice
+        prompt: "Wann geht er abends schlafen?"
+        options: ["früh", "spät", "nach Mitternacht"]
+        answer: "früh"
+      - id: a2-u03-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Dedem asla televizyon izlemez."
+        answers: ["Mein Großvater sieht nie fern.", "Mein Opa sieht nie fern.", "Mein Großvater schaut nie fern.", "Mein Opa schaut nie fern.", "Mein Großvater sieht niemals fern.", "Mein Opa sieht niemals fern."]
+
   - id: a2-u03-l7
     type: review
     title: Wiederholung

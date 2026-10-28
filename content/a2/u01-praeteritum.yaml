@@ -440,6 +440,63 @@ lessons:
         options: [Sie sind letzten Monat in eine neue Wohnung umgezogen., Sie suchen eine neue Wohnung., Sie haben letzten Monat eine Wohnung gekauft.]
         answer: Sie sind letzten Monat in eine neue Wohnung umgezogen.
 
+  - id: a2-u01-r1
+    type: reading
+    title: "Lesetext: Ein neues Leben in İzmir"
+    passage:
+      sentences:
+        - { tr: "Geçen yıl İzmir'e taşındım.", de: "Letztes Jahr bin ich nach İzmir gezogen." }
+        - { tr: "Önce küçük bir ev buldum.", de: "Zuerst habe ich ein kleines Haus gefunden." }
+        - { tr: "İlk ay hiç arkadaşım yoktu.", de: "Im ersten Monat hatte ich gar keine Freunde." }
+        - { tr: "Sonra bir kafede Elif ile tanıştım.", de: "Dann habe ich in einem Café Elif kennengelernt." }
+        - { tr: "Elif bana şehri gösterdi.", de: "Elif hat mir die Stadt gezeigt." }
+        - { tr: "Hafta sonu birlikte pazara gittik ve balık yedik.", de: "Am Wochenende sind wir zusammen auf den Markt gegangen und haben Fisch gegessen." }
+        - { tr: "Akşam deniz kenarında çay içtik.", de: "Abends haben wir am Meer Tee getrunken." }
+        - { tr: "Geçen ay Elif'in doğum günü vardı.", de: "Letzten Monat hatte Elif Geburtstag." }
+        - { tr: "Ona bir kitap aldım.", de: "Ich habe ihr ein Buch gekauft." }
+        - { tr: "Partiye çok arkadaş geldi ve geç saate kadar dans ettik.", de: "Zur Party kamen viele Freunde, und wir haben bis spät getanzt." }
+        - { tr: "Artık İzmir'de yalnız değilim.", de: "Jetzt bin ich in İzmir nicht mehr allein." }
+      glossary:
+        - { tr: "İzmir", de: "İzmir (Stadt an der Ägäis)" }
+        - { tr: "ilk", de: "erste(r, s)" }
+        - { tr: "yoktu", de: "es gab nicht, war nicht da (yok + Vergangenheit)", vocab: "yok" }
+        - { tr: "kafede", de: "im Café (kafe + Lokativ)" }
+        - { tr: "Elif", de: "Elif (Frauenname)" }
+        - { tr: "birlikte", de: "zusammen" }
+        - { tr: "kenarında", de: "am Rand von (deniz kenarında = am Meer)" }
+        - { tr: "vardı", de: "es gab, war da (var + Vergangenheit)", vocab: "var" }
+        - { tr: "dans", de: "Tanz (dans etmek = tanzen)", vocab: "dans etmek" }
+        - { tr: "ettik", de: "(wir) haben gemacht (etmek; dans ettik = wir haben getanzt)", vocab: "dans etmek" }
+        - { tr: "artık", de: "jetzt, nun (nicht mehr wie früher)" }
+        - { tr: "yalnız", de: "allein" }
+        - { tr: "değilim", de: "ich bin nicht (değil + 1. Sg.)", vocab: "değil" }
+    exercises:
+      - id: a2-u01-r1-e1
+        type: multiple_choice
+        prompt: "Was hat die Person in İzmir zuerst gemacht?"
+        options: ["Sie hat ein kleines Haus gefunden.", "Sie hat Elif kennengelernt.", "Sie ist auf den Markt gegangen."]
+        answer: "Sie hat ein kleines Haus gefunden."
+      - id: a2-u01-r1-e2
+        type: multiple_choice
+        prompt: "Wo hat die Person Elif kennengelernt?"
+        options: ["in einem Café", "auf dem Markt", "auf einer Party"]
+        answer: "in einem Café"
+      - id: a2-u01-r1-e3
+        type: multiple_choice
+        prompt: "Was haben die beiden am Wochenende gegessen?"
+        options: ["Fisch", "Simit", "Suppe"]
+        answer: "Fisch"
+      - id: a2-u01-r1-e4
+        type: multiple_choice
+        prompt: "Was hat die Person Elif zum Geburtstag gekauft?"
+        options: ["ein Buch", "einen Schlüssel", "eine Tasche"]
+        answer: "ein Buch"
+      - id: a2-u01-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: "Önce küçük bir ev buldum."
+        answers: ["Zuerst habe ich ein kleines Haus gefunden.", "Zuerst fand ich ein kleines Haus.", "Zuerst habe ich eine kleine Wohnung gefunden.", "Zuerst habe ich ein kleines Haus gefunden"]
+
   - id: a2-u01-l7
     type: review
     title: Wiederholung
