@@ -466,10 +466,10 @@ lessons:
         - { tr: "Bu yaz tatile gideceğiz.", de: "Diesen Sommer fahren wir in den Urlaub." }
         - { tr: "Önce trenle Ankara'ya gideceğiz.", de: "Zuerst fahren wir mit dem Zug nach Ankara." }
         - { tr: "Orada iki gün teyzemde kalacağız.", de: "Dort bleiben wir zwei Tage bei meiner Tante." }
-        - { tr: "Sonra uçakla Antalya'ya uçacağız.", de: "Dann fliegen wir nach Antalya." }
+        - { tr: "Sonra Antalya'ya uçacağız.", de: "Dann fliegen wir nach Antalya." }
         - { tr: "Antalya'da bir otelde bir hafta kalacağız.", de: "In Antalya bleiben wir eine Woche in einem Hotel." }
         - { tr: "Her sabah denizde yüzeceğim.", de: "Jeden Morgen werde ich im Meer schwimmen." }
-        - { tr: "Annem kumda kitap okuyacak.", de: "Meine Mutter wird am Strand lesen." }
+        - { tr: "Annem plajda kitap okuyacak.", de: "Meine Mutter wird am Strand lesen." }
         - { tr: "Babam şehri gezecek.", de: "Mein Vater wird die Stadt besichtigen." }
         - { tr: "Valizimi şimdiden hazırladım.", de: "Meinen Koffer habe ich schon gepackt." }
         - { tr: "Biletlerimizi de unutmayacağız!", de: "Und unsere Fahrkarten werden wir nicht vergessen!" }
@@ -477,7 +477,7 @@ lessons:
       glossary:
         - { tr: "Antalya", de: "Antalya (Stadt an der Südküste)" }
         - { tr: "her", de: "jede(r, s) (her sabah = jeden Morgen)" }
-        - { tr: "kumda", de: "im Sand, am Strand (kum + Lokativ)" }
+        - { tr: "plajda", de: "am Strand (plaj + Lokativ)" }
         - { tr: "şimdiden", de: "schon jetzt" }
         - { tr: "de", de: "auch, und (nachgestellt, getrennt geschrieben)" }
         - { tr: "yurt", de: "Heimat (yurt dışı = Ausland)" }

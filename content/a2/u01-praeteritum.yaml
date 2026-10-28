@@ -495,7 +495,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: "Önce küçük bir ev buldum."
-        answers: ["Zuerst habe ich ein kleines Haus gefunden.", "Zuerst fand ich ein kleines Haus.", "Zuerst habe ich eine kleine Wohnung gefunden.", "Zuerst habe ich ein kleines Haus gefunden"]
+        answers: ["Zuerst habe ich ein kleines Haus gefunden.", "Zuerst fand ich ein kleines Haus.", "Zuerst habe ich eine kleine Wohnung gefunden.", "Zuerst fand ich eine kleine Wohnung."]
 
   - id: a2-u01-l7
     type: review

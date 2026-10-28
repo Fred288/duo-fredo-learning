@@ -652,7 +652,7 @@ lessons:
         - { tr: "Zeynep kışı sever, çünkü karı çok güzel bulur.", de: "Zeynep mag den Winter, weil sie Schnee sehr schön findet." }
         - { tr: "Selin ise yazı daha çok sever.", de: "Selin dagegen mag den Sommer lieber." }
         - { tr: "Ona göre en güzel hava güneşli ve sıcak hava.", de: "Für sie ist sonniges, warmes Wetter das schönste Wetter." }
-        - { tr: "Ama ikisi de ilkbaharı sever, çünkü hava ne çok sıcak ne çok soğuk.", de: "Aber beide mögen den Frühling, weil das Wetter weder zu heiß noch zu kalt ist." }
+        - { tr: "Ama ikisi de ilkbaharı sever, çünkü hava ne çok sıcak ne de çok soğuk.", de: "Aber beide mögen den Frühling, weil das Wetter weder zu heiß noch zu kalt ist." }
         - { tr: "Hangisi daha akıllı? Bu soruya ikisi de \"Ben!\" der.", de: "Welche ist klüger? Auf diese Frage sagen beide: „Ich!“" }
       glossary:
         - { tr: "Zeynep", de: "Zeynep (Frauenname)" }
@@ -660,8 +660,8 @@ lessons:
         - { tr: "birbirlerine", de: "einander (birbirlerine benzemek = sich ähneln)" }
         - { tr: "ise", de: "dagegen, was … betrifft" }
         - { tr: "ikisi", de: "beide (ikisi de = alle beide)", vocab: "iki" }
-        - { tr: "de", de: "auch (ikisi de = alle beide)" }
-        - { tr: "ne", de: "ne … ne = weder … noch" }
+        - { tr: "de", de: "auch (ikisi de = alle beide; ne … ne de = weder … noch)" }
+        - { tr: "ne", de: "ne … ne de = weder … noch" }
         - { tr: "soruya", de: "auf die Frage (soru + Dativ)" }
     exercises:
       - id: a2-u07-r1-e1
@@ -688,7 +688,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: "Selin ablasından daha uzun."
-        answers: ["Selin ist größer als ihre ältere Schwester.", "Selin ist größer als ihre Schwester.", "Selin ist größer als ihre große Schwester.", "Selin ist länger als ihre ältere Schwester."]
+        answers: ["Selin ist größer als ihre ältere Schwester.", "Selin ist größer als ihre Schwester.", "Selin ist größer als ihre große Schwester."]
 
   - id: a2-u07-l8
     type: review

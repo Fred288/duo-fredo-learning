@@ -557,7 +557,7 @@ lessons:
         - { tr: "Önce bu caddeden düz gidin.", de: "Gehen Sie zuerst diese Straße geradeaus." }
         - { tr: "İkinci trafik ışığından sola dönün.", de: "Biegen Sie an der zweiten Ampel links ab." }
         - { tr: "Sonra köprüyü geçin.", de: "Dann überqueren Sie die Brücke." }
-        - { tr: "Köprünün karşısında büyük bir meydan var.", de: "Gegenüber der Brücke ist ein großer Platz." }
+        - { tr: "Köprünün karşısında büyük bir meydan var.", de: "Auf der anderen Seite der Brücke ist ein großer Platz." }
         - { tr: "Müze meydanın sağ tarafında.", de: "Das Museum ist auf der rechten Seite des Platzes." }
         - { tr: "Dikkat edin, meydanda trafik çok yoğun.", de: "Passen Sie auf, auf dem Platz ist viel Verkehr." }
         - { tr: "Yolda bir polise de sorabilirsiniz.", de: "Unterwegs können Sie auch einen Polizisten fragen." }
@@ -585,7 +585,7 @@ lessons:
         answer: "an der zweiten Ampel"
       - id: a2-u06-r1-e3
         type: multiple_choice
-        prompt: "Was liegt gegenüber der Brücke?"
+        prompt: "Was liegt auf der anderen Seite der Brücke?"
         options: ["ein großer Platz", "ein Park", "eine Haltestelle"]
         answer: "ein großer Platz"
       - id: a2-u06-r1-e4

@@ -629,7 +629,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: "Ayten evli ve bir oğlu var."
-        answers: ["Ayten ist verheiratet und hat einen Sohn.", "Ayten ist verheiratet und sie hat einen Sohn.", "Ayten ist verheiratet und hat ein Kind."]
+        answers: ["Ayten ist verheiratet und hat einen Sohn.", "Ayten ist verheiratet und sie hat einen Sohn."]
 
   - id: a2-u09-l9
     type: review

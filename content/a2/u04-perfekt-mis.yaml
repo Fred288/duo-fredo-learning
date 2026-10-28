@@ -570,7 +570,7 @@ lessons:
         - { tr: "Ama ilk gün arabayla bir ağaca çarpmış!", de: "Aber am ersten Tag ist er mit dem Auto gegen einen Baum gefahren!" }
         - { tr: "Neyse ki kimse yaralanmamış.", de: "Zum Glück wurde niemand verletzt." }
         - { tr: "Annemin kedisi de kaybolmuş.", de: "Auch die Katze meiner Mutter war verschwunden." }
-        - { tr: "Üç gün sonra komşunun bahçesinden çıkmış.", de: "Drei Tage später ist sie aus dem Garten des Nachbarn herausgekommen." }
+        - { tr: "Üç gün sonra komşunun bahçesinden çıkmış.", de: "Drei Tage später ist sie im Garten des Nachbarn wieder aufgetaucht." }
         - { tr: "Annem çok şaşırmış ama çok sevinmiş.", de: "Meine Mutter war sehr überrascht, aber sie hat sich sehr gefreut." }
         - { tr: "Köyde hayat hiç sıkıcı değilmiş!", de: "Das Leben im Dorf ist anscheinend gar nicht langweilig!" }
       glossary:
@@ -616,7 +616,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: "Hemen yeni bir araba almış."
-        answers: ["Er hat sofort ein neues Auto gekauft.", "Er hat sich sofort ein neues Auto gekauft.", "Er hat anscheinend sofort ein neues Auto gekauft.", "Er hat sich anscheinend sofort ein neues Auto gekauft.", "Sofort hat er ein neues Auto gekauft.", "Sie hat sofort ein neues Auto gekauft."]
+        answers: ["Er hat sofort ein neues Auto gekauft.", "Er hat sich sofort ein neues Auto gekauft.", "Er hat anscheinend sofort ein neues Auto gekauft.", "Er hat sich anscheinend sofort ein neues Auto gekauft.", "Sofort hat er ein neues Auto gekauft.", "Er kaufte sofort ein neues Auto.", "Sie hat sofort ein neues Auto gekauft."]
 
   - id: a2-u04-l8
     type: review
