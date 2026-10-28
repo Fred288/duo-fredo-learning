@@ -65,7 +65,7 @@ export const useSettings = create<SettingsState>((set) => ({
 }));
 
 /** Übernimmt nur bekannte Schlüssel mit passendem Typ (robust gegen alte/kaputte Daten). */
-function pickKnown(stored: Partial<Settings>): Partial<Settings> {
+export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   const out: Partial<Settings> = {};
   if (typeof stored.tolerateDiacritics === 'boolean')
     out.tolerateDiacritics = stored.tolerateDiacritics;

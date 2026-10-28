@@ -19,6 +19,8 @@ interface ProgressState {
   cards: Card[];
   loaded: boolean;
   load: () => Promise<void>;
+  /** Verwirft den Speicherstand und lädt neu aus IndexedDB (nach einem Import). */
+  reload: () => Promise<void>;
   /** Protokolliert den Versuch und führt die zugehörige Übungskarte fort. */
   recordAttempt: (
     exerciseId: string,
@@ -85,6 +87,11 @@ export const useProgress = create<ProgressState>((set, get) => {
       });
       loading = pending;
       return pending;
+    },
+    reload: async () => {
+      await loading;
+      set({ completions: [], attempts: [], cards: [], loaded: false });
+      await get().load();
     },
     recordAttempt: (exerciseId, lessonId, verdict, type) =>
       whenReady(() => {

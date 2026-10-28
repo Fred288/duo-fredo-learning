@@ -4,17 +4,23 @@ import { db, safely, type NoteRow } from '../db/db';
 interface NotesState {
   notes: NoteRow[];
   load: () => Promise<void>;
+  /** Verwirft den Speicherstand und lädt neu (nach einem Import; die IDs sind dann neu). */
+  reload: () => Promise<void>;
   add: (itemId: string, unitId: string, text: string) => Promise<void>;
   remove: (id: number) => Promise<void>;
 }
 
-export const useNotes = create<NotesState>((set) => ({
+export const useNotes = create<NotesState>((set, get) => ({
   notes: [],
   load: async () => {
     const rows = await safely(() => db.notes.orderBy('at').reverse().toArray(), []);
     set((s) => ({
       notes: [...s.notes, ...rows.filter((r) => !s.notes.some((n) => n.id === r.id))],
     }));
+  },
+  reload: async () => {
+    set({ notes: [] });
+    await get().load();
   },
   add: async (itemId, unitId, text) => {
     const note: NoteRow = { itemId, unitId, text: text.trim(), at: Date.now() };
