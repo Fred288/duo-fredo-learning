@@ -40,7 +40,25 @@ test('Einstellungen: Probe, Stimme wählen, Audio abschalten', async ({ page }) 
   await page.getByLabel('Türkisch vorlesen').uncheck();
   await expect(page.getByRole('button', { name: 'Probe abspielen' })).toHaveCount(0);
   // bleibt nach dem Neuladen aus (Dexie schreibt asynchron)
-  await page.waitForTimeout(300);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          new Promise<unknown>((resolve) => {
+            const open = indexedDB.open('yol');
+            open.onerror = () => resolve(undefined);
+            open.onsuccess = () => {
+              const get = open.result.transaction('settings').objectStore('settings').get('audioEnabled');
+              get.onsuccess = () => {
+                open.result.close();
+                resolve(get.result?.value);
+              };
+              get.onerror = () => resolve(undefined);
+            };
+          }),
+      ),
+    )
+    .toBe(false);
   await page.reload();
   await page.getByRole('button', { name: 'Einstellungen' }).click();
   await expect(page.getByLabel('Türkisch vorlesen')).not.toBeChecked();
