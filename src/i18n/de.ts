@@ -176,6 +176,7 @@ export const de = {
   'backup.error.nodb':
     'Dieser Browser erlaubt gerade keine Speicherung (z. B. privates Fenster). Laden ist deshalb nicht möglich.',
   'backup.error.export': 'Die Sicherung konnte nicht gespeichert werden.',
+  'backup.error.read': 'Die Datei konnte nicht gelesen werden.',
   'settings.theme': 'Darstellung',
   'settings.theme.system': 'System',
   'settings.theme.light': 'Hell',

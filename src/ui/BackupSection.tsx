@@ -1,5 +1,11 @@
 import { useRef, useState } from 'react';
-import { backupFileName, parseBackup, type Backup, type Skipped } from '../backup/format';
+import {
+  backupFileName,
+  MAX_BACKUP_BYTES,
+  parseBackup,
+  type Backup,
+  type Skipped,
+} from '../backup/format';
 import { exportBackup, importBackup, planImport } from '../backup/io';
 import type { ImportMode, Merged } from '../backup/merge';
 import { t, type MessageKey } from '../i18n';
@@ -78,11 +84,25 @@ export function BackupSection() {
   };
 
   const onFile = async (file: File | undefined) => {
+    // Leeren, damit dieselbe Datei nach einem Fehler erneut gewählt werden kann (sonst kein change).
+    if (fileInput.current) fileInput.current.value = '';
     if (!file) return;
     setMessage(undefined);
     setPending(undefined);
     setConfirming(false);
-    const parsed = parseBackup(await file.text());
+    // Vor dem Lesen prüfen: eine versehentlich gewählte große Datei (Video) nicht in den Speicher holen.
+    if (file.size > MAX_BACKUP_BYTES) {
+      setMessage({ kind: 'error', key: 'backup.error.too_large' });
+      return;
+    }
+    let text: string;
+    try {
+      text = await file.text();
+    } catch {
+      setMessage({ kind: 'error', key: 'backup.error.read' });
+      return;
+    }
+    const parsed = parseBackup(text);
     if (!parsed.ok) {
       setMessage({ kind: 'error', key: `backup.error.${parsed.reason}` });
       return;
