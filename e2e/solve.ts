@@ -110,6 +110,8 @@ export async function playLesson(page: Page, unitId: string, lessonId: string) {
   const title = lesson.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const name = new RegExp(`^\\p{L}+(\\s*abgeschlossen)?\\s*${title}$`, 'u');
   await card.getByRole('button', { name }).click();
+  // Lesetext: erst der Text, dann die Fragen.
+  if (lesson.passage) await page.getByRole('button', { name: 'Zu den Fragen' }).click();
   for (const ex of lesson.exercises) {
     await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
     await answer(page, ex, unit);

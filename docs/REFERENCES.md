@@ -30,6 +30,11 @@ eigene oder von Muttersprachlern geprüfte, sonst Tatoeba/Wiktionary/Forvo nur m
 Lizenz, Dateien in `content/audio/` (Name = Daten-ID), per TTS erzeugte Dateien mit
 `audio_synthetic: true`.
 
+## Lesetexte
+
+Die Lesetexte (`<unit>-r1`) sind eigene Texte (Claude-Entwurf, `reviewed: false`), keine Bearbeitungen
+von Lehrbuch- oder App-Texten; Namen und Situationen sind frei erfunden.
+
 ## Weiterführend (Referenzgrammatik zum Nachschlagen)
 
 Göksel/Kerslake: _Turkish. A Comprehensive Grammar_ (Routledge) als englischsprachige

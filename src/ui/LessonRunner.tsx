@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { Verdict } from '../lib/answer';
 import type { Exercise, Lesson, Vocab } from '../content/schema';
 import type { ExplainerSection } from '../content/explainer-section';
@@ -56,6 +56,8 @@ interface Props {
   doneTitle?: string;
   /** Passender Abschnitt der Erklärkarte; erscheint nach einer falschen Antwort. */
   grammarFor?: (ex: Exercise) => ExplainerSection | undefined;
+  /** Unter der Kopfzeile, solange Aufgaben laufen (Lesetext zum Nachsehen). */
+  aside?: ReactNode;
 }
 
 /** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
@@ -97,6 +99,7 @@ function Runner({
   onComplete,
   doneTitle = t('done.title'),
   grammarFor,
+  aside,
 }: Props & { canListen: boolean }) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(
@@ -231,6 +234,8 @@ function Runner({
           />
         </div>
       </header>
+
+      {aside}
 
       <div key={`${supported.id}-${session.index}`} data-exercise-id={supported.id}>
         {supported.type === 'multiple_choice' && (

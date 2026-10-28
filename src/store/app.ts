@@ -7,6 +7,7 @@ export type Screen =
   | { name: 'mistakes' }
   | { name: 'repeat' }
   | { name: 'lookup' }
+  | { name: 'stats' }
   | { name: 'explainer'; unitId: string; section?: string; from?: 'lookup' }
   | { name: 'lesson'; unitId: string; lessonId: string };
 
@@ -19,6 +20,7 @@ interface AppState {
   openRepeat: () => void;
   openExplainer: (unitId: string, opts?: { section?: string; from?: 'lookup' }) => void;
   openLookup: () => void;
+  openStats: () => void;
   /** Suchtext und geöffneter Eintrag bleiben erhalten, wenn man aus einer Erklärkarte zurückkehrt. */
   lookupQuery: string;
   lookupEntry?: string;
@@ -36,6 +38,7 @@ export const useApp = create<AppState>((set) => ({
   openRepeat: () => set({ screen: { name: 'repeat' } }),
   openExplainer: (unitId, opts) => set({ screen: { name: 'explainer', unitId, ...opts } }),
   openLookup: () => set({ screen: { name: 'lookup' } }),
+  openStats: () => set({ screen: { name: 'stats' } }),
   lookupQuery: '',
   lookupEntry: undefined,
   setLookup: (lookupQuery, lookupEntry) => set({ lookupQuery, lookupEntry }),

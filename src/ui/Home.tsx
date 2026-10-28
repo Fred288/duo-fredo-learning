@@ -19,6 +19,7 @@ export function Home() {
   const attempts = useProgress((s) => s.attempts);
   const openMistakesScreen = useApp((s) => s.openMistakes);
   const openRepeat = useApp((s) => s.openRepeat);
+  const openStats = useApp((s) => s.openStats);
   // Hörlektionen brauchen eine Stimme; währenddessen laden die Stimmen noch.
   const canListen = useCanSpeak();
   const voicesLoading = useAudio((s) => s.status === 'loading');
@@ -51,6 +52,15 @@ export function Home() {
   return (
     <>
       <DailyGoal />
+      <div className="mt-1 text-right">
+        <button
+          type="button"
+          onClick={openStats}
+          className="min-h-11 rounded-lg px-2 text-sm text-teal-700 underline hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-teal-400 dark:hover:bg-stone-800"
+        >
+          {t('stats.open')}
+        </button>
+      </div>
       {repeatCount && (
         <button
           type="button"

@@ -1,3 +1,4 @@
+import { getRecorder } from '../audio/recorder';
 import { canSpeak } from '../audio/types';
 import { t, type MessageKey } from '../i18n';
 import { useApp } from '../store/app';
@@ -13,6 +14,7 @@ const stepButton =
 export function Settings() {
   const goHome = useApp((s) => s.goHome);
   const openReview = useApp((s) => s.openReview);
+  const openStats = useApp((s) => s.openStats);
   const {
     dailyGoal,
     newWordsPerDay,
@@ -22,6 +24,7 @@ export function Settings() {
     audioEnabled,
     autoplay,
     voiceURI,
+    shadowing,
     set,
   } = useSettings();
   const { status, voices } = useAudio();
@@ -178,12 +181,35 @@ export function Settings() {
         )}
       </fieldset>
 
+      {getRecorder().supported() && (
+        <div>
+          <label className="flex min-h-11 items-center justify-between gap-4">
+            <span>{t('settings.shadow')}</span>
+            <input
+              type="checkbox"
+              checked={shadowing}
+              onChange={(e) => set('shadowing', e.target.checked)}
+              className="size-6 accent-teal-700"
+            />
+          </label>
+          <p className="text-sm text-stone-500">{t('settings.shadow.hint')}</p>
+        </div>
+      )}
+
       <button
         type="button"
         onClick={openReview}
         className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
       >
         {t('review.open')}
+      </button>
+
+      <button
+        type="button"
+        onClick={openStats}
+        className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+      >
+        {t('stats.title')}
       </button>
 
       <fieldset>

@@ -6,6 +6,7 @@ import type { LookupIndex, VocabEntry } from '../lookup/types';
 import { INTERVALS, vocabStatus, type Card, type VocabDir } from '../srs';
 import { dayKey } from '../progress/day';
 import { useApp } from '../store/app';
+import { ShadowButton } from './ShadowButton';
 import { SpeakButton } from './SpeakButton';
 
 /** „Plural + Lokativ“, „Präsens, ich, verneint“ … aus den strukturierten Form-Angaben. */
@@ -148,10 +149,13 @@ export function LookupEntry({
   entry,
   index,
   cards,
+  compact = false,
 }: {
   entry: VocabEntry;
   index: LookupIndex;
   cards: readonly Card[];
+  /** Im Lesetext: ohne Sprung zur Erklärkarte (die Lektion bliebe sonst halb liegen). */
+  compact?: boolean;
 }) {
   const openExplainer = useApp((s) => s.openExplainer);
   const unit = index.units.find((u) => u.id === entry.unit);
@@ -167,6 +171,7 @@ export function LookupEntry({
             {entry.tr}
           </h2>
           {speechText(entry.tr) && <SpeakButton text={speechText(entry.tr)!} />}
+          {speechText(entry.tr) && <ShadowButton text={speechText(entry.tr)!} />}
         </div>
         <p className="mt-1">{entry.de.join(', ')}</p>
         <p className="text-sm text-stone-600 dark:text-stone-400">
@@ -180,7 +185,7 @@ export function LookupEntry({
       {unit && (
         <p className="text-sm">
           {t('lookup.unit', { unit: unit.title })}
-          {unit.explainer && (
+          {unit.explainer && !compact && (
             <>
               {' · '}
               <button

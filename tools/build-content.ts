@@ -57,9 +57,9 @@ errors.push(...report.errors, ...checkSuffixTargets(units));
 const SEGMENT_LESSONS = true;
 const ORDER_LESSONS = true;
 const LISTENING_LESSONS = true;
-// Lesetexte mit `passage` (Lektion <unit>-r1): geprüft und aufgelöst werden sie immer; in die App
-// kommen sie erst, wenn die Lese-Ansicht den Text zeigt (sonst stünden Fragen ohne Text da).
-const READING_LESSONS = false;
+// Lesetexte mit `passage` (Lektion <unit>-r1): geprüft und aufgelöst werden sie immer; aus
+// geschaltet fehlen sie in der App (z. B. falls die Lese-Ansicht einmal nicht verfügbar ist).
+const READING_LESSONS = true;
 const words = courseWords(units.map(({ unit }) => unit));
 const allVocab = units.flatMap(({ unit }) => unit.vocab ?? []);
 const cases = caseHints(units.map(({ unit }) => unit));

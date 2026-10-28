@@ -17,6 +17,8 @@ export interface Settings {
   autoplay: boolean;
   /** Gewählte Stimme; '' = automatisch. */
   voiceURI: string;
+  /** Nachsprechen: Mikrofon-Knopf neben Lesetext-Sätzen und Nachschlage-Einträgen. */
+  shadowing: boolean;
   /** Tag der letzten gespeicherten Sicherung, 'YYYY-MM-DD'; '' = noch nie. */
   lastBackup: string;
 }
@@ -30,6 +32,7 @@ export const DEFAULT_SETTINGS: Settings = {
   audioEnabled: true,
   autoplay: false,
   voiceURI: '',
+  shadowing: true,
   lastBackup: '',
 };
 
@@ -75,6 +78,7 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.showStreak === 'boolean') out.showStreak = stored.showStreak;
   if (typeof stored.audioEnabled === 'boolean') out.audioEnabled = stored.audioEnabled;
   if (typeof stored.autoplay === 'boolean') out.autoplay = stored.autoplay;
+  if (typeof stored.shadowing === 'boolean') out.shadowing = stored.shadowing;
   if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
   if (typeof stored.lastBackup === 'string' && /^(\d{4}-\d{2}-\d{2})?$/.test(stored.lastBackup)) {
     out.lastBackup = stored.lastBackup;
