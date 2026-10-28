@@ -2,8 +2,30 @@ import Dexie, { type EntityTable } from 'dexie';
 import type { Verdict } from '../lib/answer';
 import type { Completion } from '../progress/stats';
 import type { Card } from '../srs/card';
-import { leitner } from '../srs/leitner';
+import { addDays } from '../progress/day';
 import { seedFromAttempts } from '../srs/seed';
+import { isDue, type Scheduler } from '../srs/scheduler';
+
+/**
+ * Eingefrorener Stand des Leitner-Verfahrens für das v3-Upgrade: ändert sich der laufende
+ * Scheduler später, seedet das Upgrade bei Nachzüglern trotzdem wie bisher.
+ */
+const LEITNER_V3_DAYS = [1, 3, 7, 14, 30];
+const leitnerV3: Scheduler = {
+  id: 'leitner-v1',
+  introduce: (verdict, today) => {
+    const box = verdict === 'correct' ? 2 : 1;
+    return { box, due: addDays(today, LEITNER_V3_DAYS[box - 1]!), lapses: 0 };
+  },
+  review: (card, verdict, today, at) => {
+    if (verdict === 'wrong') {
+      return { ...card, box: 1, due: addDays(today, LEITNER_V3_DAYS[0]!), lapses: card.lapses + 1, lastAt: at };
+    }
+    if (!isDue(card, today)) return { ...card, lastAt: at };
+    const box = verdict === 'correct' ? Math.min(card.box + 1, LEITNER_V3_DAYS.length) : card.box;
+    return { ...card, box, due: addDays(today, LEITNER_V3_DAYS[box - 1]!), lastAt: at };
+  },
+};
 
 export interface SettingRow {
   key: string;
@@ -57,7 +79,7 @@ class YolDb extends Dexie {
       .stores({ cards: 'id, due, unitId' })
       .upgrade(async (tx) => {
         const attempts = await tx.table<AttemptRow>('attempts').toArray();
-        await tx.table<CardRow>('cards').bulkPut(seedFromAttempts(attempts, leitner));
+        await tx.table<CardRow>('cards').bulkPut(seedFromAttempts(attempts, leitnerV3));
       });
   }
 }

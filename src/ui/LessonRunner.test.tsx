@@ -97,6 +97,40 @@ describe('LessonRunner', () => {
     expect(onComplete).toHaveBeenCalledWith(1, 2);
   });
 
+  it('attemptOnce: „Nochmal“ meldet keinen weiteren Versuch', () => {
+    const onAttempt = vi.fn();
+    render(<LessonRunner lesson={lesson} onExit={() => {}} onAttempt={onAttempt} attemptOnce />);
+    fireEvent.click(screen.getByLabelText(/Hayır/));
+    click('Prüfen');
+    click('Weiter');
+    fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Teşekkürler' } });
+    click('Prüfen');
+    click('Weiter');
+    fireEvent.click(screen.getByLabelText(/Hayır/)); // Wiederholung, wieder falsch
+    click('Prüfen');
+    click('Weiter');
+    expect(onAttempt).toHaveBeenCalledTimes(2);
+
+    click('Nochmal');
+    fireEvent.click(screen.getByLabelText(/Hayır/));
+    click('Prüfen');
+    expect(onAttempt).toHaveBeenCalledTimes(2);
+  });
+
+  it('reportFor: „Fehler melden“ auch ohne feste Unit, mit Prüfstand', () => {
+    render(
+      <LessonRunner
+        lesson={lesson}
+        onExit={() => {}}
+        reportFor={(ex) => ({ unitId: 'a1-u01', unreviewed: ex.id.endsWith('e1') })}
+      />,
+    );
+    fireEvent.click(screen.getByLabelText(/Merhaba/));
+    click('Prüfen');
+    expect(screen.getByText('Noch nicht geprüft')).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Fehler melden/ })).toBeTruthy();
+  });
+
   it('erlaubt Prüfen erst mit Antwort', () => {
     render(<LessonRunner lesson={lesson} onExit={() => {}} />);
     expect(screen.getByRole('button', { name: 'Prüfen' }).hasAttribute('disabled')).toBe(true);

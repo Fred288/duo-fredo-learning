@@ -46,6 +46,10 @@ interface Props {
   onExit: () => void;
   /** Erster Versuch je Übung und Lauf. */
   onAttempt?: (exercise: Exercise, verdict: Verdict) => void;
+  /** Nach „Nochmal“ nicht erneut melden (Wiederholen: sonst zählt ein Fehler doppelt). */
+  attemptOnce?: boolean;
+  /** Meldeziel je Übung, wenn ein Lauf mehrere Units mischt (Wiederholen); sonst `unitId`. */
+  reportFor?: (exercise: Exercise) => { unitId: string; unreviewed: boolean } | undefined;
   /** Einmal pro abgeschlossenem Lauf; zählt den ersten Versuch je Übung. */
   onComplete?: (correct: number, total: number) => void;
   /** Überschrift am Ende, Default „Lektion geschafft“. */
@@ -88,6 +92,8 @@ function Runner({
   unitReviewed = false,
   onExit,
   onAttempt,
+  attemptOnce = false,
+  reportFor,
   onComplete,
   doneTitle = t('done.title'),
   grammarFor,
@@ -99,6 +105,7 @@ function Runner({
   );
   const [session, setSession] = useState(() => createSession(exercises));
   const [answer, setAnswer] = useState('');
+  const attempted = useRef(new Set<string>());
 
   const ex = currentExercise(session);
   const supported = ex && isSupported(ex) ? ex : undefined;
@@ -115,9 +122,11 @@ function Runner({
   const check = useCallback(() => {
     if (!supported || !answer.trim()) return;
     const result = grade(supported, answer, { tolerateDiacritics });
-    if (!(supported.id in session.firstTry)) onAttempt?.(supported, result.verdict);
+    const again = attemptOnce && attempted.current.has(supported.id);
+    if (!(supported.id in session.firstTry) && !again) onAttempt?.(supported, result.verdict);
+    attempted.current.add(supported.id);
     setSession((s) => submit(s, result));
-  }, [supported, answer, tolerateDiacritics, session.firstTry, onAttempt]);
+  }, [supported, answer, tolerateDiacritics, session.firstTry, onAttempt, attemptOnce]);
 
   // Abschluss genau einmal melden, auch unter StrictMode (doppelte Effekte).
   const reported = useRef<Session>(null);
@@ -194,6 +203,9 @@ function Runner({
   const answering = session.phase === 'answering';
   const grammar = answering ? undefined : grammarFor?.(supported);
   const total = session.queue.length;
+  const target =
+    reportFor?.(supported) ??
+    (unitId ? { unitId, unreviewed: !(supported.reviewed ?? unitReviewed) } : undefined);
 
   return (
     <section className="space-y-6">
@@ -306,12 +318,12 @@ function Runner({
               ) : undefined
             }
           />
-          {unitId && (
+          {target && (
             <ReportError
               key={supported.id}
               exerciseId={supported.id}
-              unitId={unitId}
-              unreviewed={!(supported.reviewed ?? unitReviewed)}
+              unitId={target.unitId}
+              unreviewed={target.unreviewed}
             />
           )}
           <button

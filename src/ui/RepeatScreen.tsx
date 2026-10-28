@@ -22,6 +22,8 @@ interface Run {
   lessonOf: Map<string, string>;
   /** Erklärkarte und Lektionstitel je Übung, für den Grammatik-Hinweis. */
   grammar: Map<string, { markdown: string; lessonTitle: string }>;
+  /** Meldeziel für „Fehler melden“ je Übung: Unit und Prüfstand. */
+  reportOf: Map<string, { unitId: string; unreviewed: boolean }>;
 }
 
 // Fehlende Erklärkarte stört den Durchgang nicht.
@@ -34,7 +36,8 @@ async function buildRun(): Promise<Run | null> {
   const manifest = await fetchManifest();
   // Momentaufnahme beim Öffnen; neue Antworten ändern den laufenden Durchgang nicht.
   const canListen = useSettings.getState().audioEnabled && canSpeak(getSpeaker().status());
-  const plan = planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay, {
+  const day = dayKey();
+  const plan = planRepeat(manifest.units, completions, cards, day, newWordsPerDay, {
     skip: canListen ? undefined : isListeningCard,
   });
   // Karten zu entfernten Units/Vokabeln aufräumen, verschobene Vokabeln behalten ihren Stand.
@@ -65,6 +68,8 @@ async function buildRun(): Promise<Run | null> {
   const everyVocab = [...vocabById.values()];
 
   const entryOf = new Map<string, QueueEntry>();
+  const reportOf: Run['reportOf'] = new Map();
+  const unitById = new Map(units.map((u) => [u.id, u]));
   const run: Exercise[] = [];
   const gone: string[] = [];
   for (const entry of queue) {
@@ -78,6 +83,10 @@ async function buildRun(): Promise<Run | null> {
       else {
         run.push(ex);
         entryOf.set(ex.id, entry);
+        reportOf.set(ex.id, {
+          unitId: entry.unitId,
+          unreviewed: !(ex.reviewed ?? unitById.get(entry.unitId)?.reviewed),
+        });
       }
       continue;
     }
@@ -88,9 +97,13 @@ async function buildRun(): Promise<Run | null> {
     }
     const own = unitVocab.get(entry.unitId) ?? [];
     // Zu kleiner Wortschatz der Unit: Ablenker auch aus anderen geladenen Units.
-    const ex = vocabExercise(ref, v, own.length >= 4 ? own : everyVocab);
+    const ex = vocabExercise(ref, v, own.length >= 4 ? own : everyVocab, day);
     run.push(ex);
     entryOf.set(ex.id, entry);
+    reportOf.set(ex.id, {
+      unitId: entry.unitId,
+      unreviewed: !(v.reviewed ?? unitById.get(entry.unitId)?.reviewed),
+    });
   }
   // Entfernte Übungen und Vokabeln kommen nicht zurück: Karten aufräumen.
   removeCards(gone);
@@ -103,6 +116,7 @@ async function buildRun(): Promise<Run | null> {
     entryOf,
     lessonOf,
     grammar,
+    reportOf,
   };
 }
 
@@ -155,6 +169,8 @@ export function RepeatScreen() {
       vocab={run.vocab}
       onExit={goHome}
       doneTitle={t('repeat.done')}
+      attemptOnce
+      reportFor={(ex) => run.reportOf.get(ex.id)}
       grammarFor={(ex) => {
         const g = run.grammar.get(ex.id);
         return g?.markdown ? sectionFor(g.markdown, ex, g.lessonTitle) : undefined;

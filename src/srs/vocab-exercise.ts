@@ -16,7 +16,13 @@ const sharesMeaning = (a: Vocab, b: Vocab) => a.de.some((d) => b.de.includes(d))
  * unverändert bleiben. tr→de: Multiple Choice mit Ablenkern derselben Wortart aus dem Pool;
  * de→tr: Freitext, jedes Lemma mit gleicher Bedeutung gilt als richtig.
  */
-export function vocabExercise(ref: VocabRef, vocab: Vocab, pool: readonly Vocab[]): Exercise {
+export function vocabExercise(
+  ref: VocabRef,
+  vocab: Vocab,
+  pool: readonly Vocab[],
+  /** Heutiger Tag: mischt die Optionen je Tag neu, damit die Position nicht auswendig sitzt. */
+  day = '',
+): Exercise {
   const id = `srs-${cardId(ref)}`;
   const others = pool.filter((o) => vocabId(o) !== vocabId(vocab));
   if (ref.dir === 'de_tr') {
@@ -40,7 +46,7 @@ export function vocabExercise(ref: VocabRef, vocab: Vocab, pool: readonly Vocab[
     id,
     type: 'multiple_choice',
     prompt: vocab.tr,
-    options: stableShuffle([answer, ...distractors], (o) => o, vocab.tr),
+    options: stableShuffle([answer, ...distractors], (o) => o, vocab.tr + day),
     answer,
     speak_prompt: vocab.tr,
   };

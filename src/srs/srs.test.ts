@@ -392,6 +392,19 @@ describe('vocabExercise', () => {
     expect(vocabExercise(voRef('ev'), pool[0]!, [...pool].reverse())).toEqual(ex);
   });
 
+  it('tr→de: die Reihenfolge der Optionen wechselt mit dem Tag, nicht innerhalb eines Tages', () => {
+    const order = (day: string) => {
+      const ex = vocabExercise(voRef('ev'), pool[0]!, pool, day);
+      if (ex.type !== 'multiple_choice') throw new Error('MC erwartet');
+      return ex.options.indexOf(ex.answer);
+    };
+    expect(order('2026-05-01')).toBe(order('2026-05-01'));
+    const positions = new Set(
+      Array.from({ length: 30 }, (_, i) => order(`2026-05-${String(i + 1).padStart(2, '0')}`)),
+    );
+    expect(positions.size).toBeGreaterThan(1);
+  });
+
   it('tr→de: keine Ablenker mit gleicher Bedeutung', () => {
     const ex = vocabExercise(voRef('ülke'), pool[6]!, pool);
     if (ex.type !== 'multiple_choice') throw new Error('MC erwartet');
