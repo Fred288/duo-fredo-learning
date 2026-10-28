@@ -50,11 +50,13 @@ const playWithAudioElement = (url: string, playbackRate: number) =>
     };
     playing = { audio, done };
     audio.onended = done;
-    audio.onerror = () => {
+    const fail = (e: unknown) => {
       if (playing?.audio === audio) playing = undefined;
-      reject(new Error(`Audio ${url}`));
+      reject(e);
     };
-    audio.play().catch(reject);
+    audio.onerror = () => fail(new Error(`Audio ${url}`));
+    // Abgelehntes play() (Autoplay-Sperre) hinterlässt keine laufende Aufnahme.
+    audio.play().catch(fail);
   });
 
 /** Spielt einen Clip; eine fehlende oder kaputte Datei fällt auf TTS zurück. */

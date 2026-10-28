@@ -81,10 +81,14 @@ export function LookupScreen() {
       {failed ? (
         <div className="space-y-2">
           <p className="text-rose-700 dark:text-rose-400">{t('lookup.error')}</p>
-          <button type="button" onClick={() => {
+          <button
+            type="button"
+            onClick={() => {
               setFailed(false);
               setAttempt((n) => n + 1);
-            }} className={backButton}>
+            }}
+            className={backButton}
+          >
             {t('lookup.retry')}
           </button>
         </div>
