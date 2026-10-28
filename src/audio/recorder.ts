@@ -4,16 +4,20 @@
 /** Längste Aufnahme; danach stoppt sie von selbst (ein Satz dauert wenige Sekunden). */
 export const MAX_RECORDING_MS = 15_000;
 
-export type RecordError = 'denied' | 'failed';
+/** `cancelled`: ein Abbruch oder neuer Start kam, während noch nach dem Mikrofon gefragt wurde. */
+export type RecordError = 'denied' | 'failed' | 'cancelled';
 
 export interface Recorder {
   /** Mikrofon und MediaRecorder vorhanden (sagt nichts über die Erlaubnis). */
   supported(): boolean;
-  /** Fragt beim ersten Mal nach dem Mikrofon; wirft `RecordError`. */
-  start(): Promise<void>;
+  /**
+   * Fragt beim ersten Mal nach dem Mikrofon; wirft `RecordError`. Bricht eine laufende Aufnahme
+   * ab. `onLimit` meldet, dass die Höchstdauer erreicht ist (`stop()` liefert sie dann).
+   */
+  start(onLimit?: () => void): Promise<void>;
   /** Beendet die Aufnahme und liefert sie; undefined, wenn keine lief. */
   stop(): Promise<Blob | undefined>;
-  /** Bricht ab und gibt das Mikrofon frei. */
+  /** Bricht ab (auch eine noch offene Mikrofon-Anfrage) und gibt das Mikrofon frei. */
   cancel(): void;
 }
 
@@ -22,9 +26,10 @@ export function createMediaRecorder(
 ): Recorder {
   let recorder: MediaRecorder | undefined;
   let stream: MediaStream | undefined;
-  let chunks: Blob[] = [];
   let timer: ReturnType<typeof setTimeout> | undefined;
   let finished: Promise<Blob | undefined> | undefined;
+  // Jeder Start und Abbruch zählt hoch; ein überholter Start gibt sein Mikrofon sofort zurück.
+  let generation = 0;
 
   const release = () => {
     clearTimeout(timer);
@@ -33,12 +38,24 @@ export function createMediaRecorder(
     recorder = undefined;
   };
 
+  const cancel = () => {
+    generation++;
+    if (recorder?.state === 'recording') {
+      recorder.onstop = null;
+      recorder.stop();
+    }
+    finished = undefined;
+    release();
+  };
+
   return {
     supported: () => typeof MediaRecorder !== 'undefined' && !!nav?.mediaDevices?.getUserMedia,
-    async start() {
-      release();
+    async start(onLimit) {
+      cancel();
+      const mine = generation;
+      let media: MediaStream;
       try {
-        stream = await nav!.mediaDevices.getUserMedia({ audio: true });
+        media = await nav!.mediaDevices.getUserMedia({ audio: true });
       } catch (e) {
         throw (
           e instanceof DOMException && (e.name === 'NotAllowedError' || e.name === 'SecurityError')
@@ -46,21 +63,30 @@ export function createMediaRecorder(
             : 'failed'
         ) satisfies RecordError;
       }
+      if (mine !== generation) {
+        // Seite verlassen oder anderer Satz, während die Erlaubnis-Abfrage offen war.
+        media.getTracks().forEach((track) => track.stop());
+        throw 'cancelled' satisfies RecordError;
+      }
+      stream = media;
       try {
-        const rec = new MediaRecorder(stream);
-        chunks = [];
+        const rec = new MediaRecorder(media);
+        // Je Aufnahme eigene Stücke: ein spätes onstop einer alten Aufnahme greift nicht hinein.
+        const chunks: Blob[] = [];
         rec.ondataavailable = (e) => e.data.size && chunks.push(e.data);
         finished = new Promise((resolve) => {
           rec.onstop = () => {
             const blob = chunks.length ? new Blob(chunks, { type: rec.mimeType }) : undefined;
-            release();
+            if (recorder === rec) release();
             resolve(blob);
           };
         });
         recorder = rec;
         rec.start();
         timer = setTimeout(() => {
-          if (rec.state === 'recording') rec.stop();
+          if (rec.state !== 'recording') return;
+          rec.stop();
+          onLimit?.();
         }, MAX_RECORDING_MS);
       } catch {
         release();
@@ -73,14 +99,7 @@ export function createMediaRecorder(
       finished = undefined;
       return done;
     },
-    cancel() {
-      if (recorder?.state === 'recording') {
-        recorder.onstop = null;
-        recorder.stop();
-      }
-      finished = undefined;
-      release();
-    },
+    cancel,
   };
 }
 

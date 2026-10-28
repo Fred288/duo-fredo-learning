@@ -23,10 +23,11 @@ function WordSheet({
 }) {
   const cards = useProgress((s) => s.cards);
   const entry = token.vocab ? index?.vocab.find((v) => v.id === token.vocab) : undefined;
-  const heading = useRef<HTMLHeadingElement>(null);
+  // Fokus ins Sheet, damit Tastatur und Screenreader es erreichen; Schließen gibt ihn zurück.
+  const dialog = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (!entry) heading.current?.focus();
-  }, [entry]);
+    dialog.current?.focus();
+  }, [token]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
@@ -35,9 +36,11 @@ function WordSheet({
 
   return (
     <div
+      ref={dialog}
       role="dialog"
+      tabIndex={-1}
       aria-label={t('reading.word', { word: token.text })}
-      className="fixed inset-x-0 bottom-0 z-10 max-h-[70dvh] overflow-y-auto rounded-t-2xl border-t border-stone-300 bg-white p-4 shadow-lg dark:border-stone-700 dark:bg-stone-900"
+      className="fixed inset-x-0 bottom-0 z-10 max-h-[70dvh] overflow-y-auto rounded-t-2xl border-t border-stone-300 bg-white p-4 shadow-lg outline-none dark:border-stone-700 dark:bg-stone-900"
     >
       <div className="mx-auto max-w-xl space-y-3">
         <div className="flex items-start justify-between gap-3">
@@ -58,7 +61,7 @@ function WordSheet({
         {entry && index ? (
           <LookupEntry entry={entry} index={index} cards={cards} compact />
         ) : (
-          <h2 ref={heading} tabIndex={-1} className="text-xl font-semibold outline-none" lang="tr">
+          <h2 className="text-xl font-semibold" lang="tr">
             {token.text}
           </h2>
         )}

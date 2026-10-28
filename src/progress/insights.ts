@@ -72,6 +72,17 @@ export function hardItems(cards: readonly Card[], kind: Card['ref']['kind'], lim
     .slice(0, limit);
 }
 
+/**
+ * Lektion einer Übung über das ID-Präfix, nicht über „-e<n>“ abschneiden: erzeugte Übungen
+ * tragen die Quell-ID (a2-u01-z1-l3-e8, a1-u01-h1-v-merhaba).
+ */
+export function lessonOfExercise<L extends { id: string }>(
+  lessons: readonly L[],
+  exerciseId: string,
+): L | undefined {
+  return lessons.find((l) => exerciseId.startsWith(`${l.id}-`));
+}
+
 export interface UnitInsight {
   id: string;
   title: string;

@@ -23,7 +23,10 @@ const Mic = () => (
   </svg>
 );
 
-type State = 'idle' | 'recording' | 'ready' | RecordError;
+type State = 'idle' | 'starting' | 'recording' | 'ready' | Exclude<RecordError, 'cancelled'>;
+
+/** Der Knopf, dem die laufende Aufnahme gehört; startet ein anderer, fällt dieser zurück. */
+let owner: (() => void) | undefined;
 
 /**
  * Nachsprechen ohne Bewertung: aufnehmen, dann eigene Aufnahme und Vorbild nacheinander hören.
@@ -36,19 +39,26 @@ export function ShadowButton({ text }: { text: string }) {
   const [state, setState] = useState<State>('idle');
   const url = useRef<string>(undefined);
   const audio = useRef<HTMLAudioElement>(undefined);
+  const alive = useRef(true);
+  const [reset] = useState(() => () => setState('idle'));
 
   const drop = () => {
     audio.current?.pause();
     if (url.current) URL.revokeObjectURL(url.current);
     url.current = undefined;
   };
-  useEffect(
-    () => () => {
-      getRecorder().cancel();
+  useEffect(() => {
+    alive.current = true;
+    return () => {
+      alive.current = false;
+      // Nur die eigene Aufnahme abbrechen, nicht die eines anderen Satzes.
+      if (owner === reset) {
+        owner = undefined;
+        getRecorder().cancel();
+      }
       drop();
-    },
-    [],
-  );
+    };
+  }, [reset]);
 
   if (!enabled || !getRecorder().supported()) return null;
 
@@ -63,25 +73,35 @@ export function ShadowButton({ text }: { text: string }) {
       a.play().catch(() => resolve());
     });
 
+  const finish = async () => {
+    if (owner === reset) owner = undefined;
+    const blob = await getRecorder().stop();
+    // Inzwischen verlassen: keine Object-URL mehr anlegen, nichts mehr abspielen.
+    if (!alive.current) return;
+    drop();
+    if (!blob) return setState('idle');
+    url.current = URL.createObjectURL(blob);
+    setState('ready');
+    // Erst die eigene Aufnahme, dann das Vorbild: der Vergleich ist der Sinn der Übung.
+    await playOwn();
+    if (alive.current) await speak(text);
+  };
+
   const record = async () => {
-    if (state === 'recording') {
-      const blob = await getRecorder().stop();
-      drop();
-      if (!blob) return setState('idle');
-      url.current = URL.createObjectURL(blob);
-      setState('ready');
-      // Erst die eigene Aufnahme, dann das Vorbild: der Vergleich ist der Sinn der Übung.
-      await playOwn();
-      await speak(text);
-      return;
-    }
+    if (state === 'starting') return;
+    if (state === 'recording') return finish();
     stopSpeaking();
     drop();
+    owner?.();
+    owner = reset;
+    setState('starting');
     try {
-      await getRecorder().start();
+      // Höchstdauer erreicht: wie selbst beendet.
+      await getRecorder().start(() => void finish());
       setState('recording');
     } catch (e) {
-      setState(e === 'denied' ? 'denied' : 'failed');
+      if (owner === reset) owner = undefined;
+      setState(e === 'denied' || e === 'failed' ? e : 'idle');
     }
   };
 

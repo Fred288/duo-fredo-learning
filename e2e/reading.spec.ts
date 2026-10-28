@@ -51,6 +51,7 @@ test('Lesetext: Wort nachschlagen, Übersetzung, Nachsprechen, dann Fragen', asy
   await page.getByRole('button', { name: 'taşındım', exact: true }).click();
   const sheet = page.getByRole('dialog', { name: 'Wort: taşındım' });
   await expect(sheet.getByRole('heading', { name: 'taşınmak' })).toBeVisible();
+  await expect(sheet).toBeFocused();
   await expect(sheet.getByText('umziehen')).toBeVisible();
   // Im Lesetext kein Sprung zur Erklärkarte.
   await expect(sheet.getByRole('button', { name: 'Erklärung' })).toHaveCount(0);
@@ -78,8 +79,19 @@ test('Lesetext: Wort nachschlagen, Übersetzung, Nachsprechen, dann Fragen', asy
 
   await page.getByRole('button', { name: 'Zu den Fragen' }).click();
   await expect(page.getByText('Was hat die Person in İzmir zuerst gemacht?')).toBeVisible();
-  await page.getByText('Text anzeigen').click();
+  // Antwort gewählt, dann Enter auf „Text anzeigen“: klappt auf, prüft nicht.
+  await page.keyboard.press('1');
+  await page.getByText('Text anzeigen').focus();
+  await page.keyboard.press('Enter');
   await expect(page.getByRole('button', { name: 'taşındım', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
+  // Enter im Wort-Sheet prüft ebenfalls nicht.
+  await page.getByRole('button', { name: 'taşındım', exact: true }).click();
+  await expect(page.getByRole('dialog', { name: 'Wort: taşındım' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
 test('Nachsprechen lässt sich in den Einstellungen abschalten', async ({ page }) => {

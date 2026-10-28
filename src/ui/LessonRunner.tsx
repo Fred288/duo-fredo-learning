@@ -235,7 +235,11 @@ function Runner({
         </div>
       </header>
 
-      {aside}
+      {aside && (
+        // Tasten im Lesetext gehören nicht zur Übung: Enter auf „Text anzeigen“ würde prüfen,
+        // Ziffern im Wort-Sheet eine Option wählen. Esc schließt das Sheet und darf durch.
+        <div onKeyDown={(e) => e.key !== 'Escape' && e.stopPropagation()}>{aside}</div>
+      )}
 
       <div key={`${supported.id}-${session.index}`} data-exercise-id={supported.id}>
         {supported.type === 'multiple_choice' && (

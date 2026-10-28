@@ -61,14 +61,47 @@ describe('createMediaRecorder', () => {
     vi.useFakeTimers();
     vi.stubGlobal('MediaRecorder', FakeRecorder);
     const r = createMediaRecorder(nav(stream));
-    await r.start();
+    const onLimit = vi.fn();
+    await r.start(onLimit);
     vi.advanceTimersByTime(MAX_RECORDING_MS);
     expect(FakeRecorder.last?.state).toBe('inactive');
+    expect(onLimit).toHaveBeenCalledOnce();
     expect((await r.stop())?.size).toBe(1);
 
     await r.start();
     r.cancel();
     expect(released).toHaveBeenCalledTimes(2);
     expect(await r.stop()).toBeUndefined();
+  });
+
+  it('gibt das Mikrofon frei, wenn während der Erlaubnis-Abfrage abgebrochen wird', async () => {
+    vi.stubGlobal('MediaRecorder', FakeRecorder);
+    let grant!: () => void;
+    const pending = () =>
+      new Promise((resolve) => {
+        grant = () => resolve({ getTracks: () => [{ stop: released }] });
+      });
+    const r = createMediaRecorder(nav(pending));
+    const started = r.start();
+    r.cancel();
+    grant();
+    await expect(started).rejects.toBe('cancelled');
+    expect(released).toHaveBeenCalledOnce();
+    expect(await r.stop()).toBeUndefined();
+  });
+
+  it('ein neuer Start beendet die alte Aufnahme, ohne die neue zu stören', async () => {
+    vi.stubGlobal('MediaRecorder', FakeRecorder);
+    const r = createMediaRecorder(nav(stream));
+    await r.start();
+    const first = FakeRecorder.last!;
+    await r.start();
+    expect(first.state).toBe('inactive');
+    expect(released).toHaveBeenCalledOnce();
+    // Spätes onstop der alten Aufnahme (Browser feuert asynchron) gibt das neue Mikrofon nicht frei.
+    first.onstop?.();
+    expect(released).toHaveBeenCalledOnce();
+    expect((await r.stop())?.size).toBe(1);
+    expect(released).toHaveBeenCalledTimes(2);
   });
 });

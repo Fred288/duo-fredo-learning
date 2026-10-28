@@ -4,6 +4,7 @@ import {
   dueForecast,
   hardItems,
   insights,
+  lessonOfExercise,
   unitOverview,
   vocabBoxes,
   type InsightUnit,
@@ -97,6 +98,17 @@ describe('hardItems', () => {
     ]);
     expect(hardItems([a, form], 'exercise')).toEqual([form]);
     expect(hardItems([a, b, c], 'vocab', 2)).toHaveLength(2);
+  });
+});
+
+describe('lessonOfExercise', () => {
+  it('findet auch erzeugte Lektionen und verwechselt l1 nicht mit l10', () => {
+    const lessons = ['a2-u01-l1', 'a2-u01-l10', 'a2-u01-z1', 'a2-u01-h1'].map((id) => ({ id }));
+    expect(lessonOfExercise(lessons, 'a2-u01-l10-e2')?.id).toBe('a2-u01-l10');
+    expect(lessonOfExercise(lessons, 'a2-u01-l1-e2')?.id).toBe('a2-u01-l1');
+    expect(lessonOfExercise(lessons, 'a2-u01-z1-l3-e8')?.id).toBe('a2-u01-z1');
+    expect(lessonOfExercise(lessons, 'a2-u01-h1-v-evlenmek')?.id).toBe('a2-u01-h1');
+    expect(lessonOfExercise(lessons, 'a2-u01-l3-e1')).toBeUndefined();
   });
 });
 

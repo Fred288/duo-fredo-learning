@@ -4,7 +4,7 @@ import { fetchLookup, fetchManifest, type Manifest } from '../content/load';
 import { t } from '../i18n';
 import type { LookupIndex } from '../lookup/types';
 import { addDays, dayKey } from '../progress/day';
-import { insights, type BoxCounts } from '../progress/insights';
+import { insights, lessonOfExercise, type BoxCounts } from '../progress/insights';
 import type { Card } from '../srs/card';
 import { INTERVALS } from '../srs/leitner';
 import { useApp } from '../store/app';
@@ -87,9 +87,8 @@ export function StatsScreen() {
   };
   const lessonOf = (c: Card) => {
     if (c.ref.kind !== 'exercise') return undefined;
-    const lessonId = c.ref.exerciseId.replace(/-e\d+$/, '');
     const unit = manifest?.units.find((u) => u.id === c.unitId);
-    const lesson = unit?.lessons.find((l) => l.id === lessonId);
+    const lesson = unit && lessonOfExercise(unit.lessons, c.ref.exerciseId);
     return unit && lesson ? { unit, lesson } : undefined;
   };
   const openWord = (c: Card) => {
