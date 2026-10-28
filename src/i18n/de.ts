@@ -231,6 +231,8 @@ export const de = {
   'ex.segment': 'Zerlege das Wort und benenne die Teile',
   'ex.segment.help':
     'Tippe auf den Buchstaben, nach dem ein neuer Teil beginnt. Wähle dann für jede Endung ihre Rolle.',
+  'ex.segment.letters': 'Buchstaben des Wortes, Pfeiltasten wechseln den Buchstaben',
+  'ex.segment.pieces': 'Teile: {pieces}',
   'ex.segment.cut': 'Grenze nach „{prefix}“',
   'ex.segment.role': 'Rolle von Teil {n} („{piece}“)',
   'ex.segment.choose': 'Rolle wählen',

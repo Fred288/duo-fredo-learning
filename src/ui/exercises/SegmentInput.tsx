@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import type { Exercise, SegmentTag } from '../../content/schema';
 import { t } from '../../i18n';
 import {
@@ -31,6 +31,32 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
   const [cuts, setCuts] = useState<Set<number>>(new Set());
   // Rolle je Stück, über seinen Anfang gemerkt: bleibt beim Verschieben anderer Grenzen stehen.
   const [roles, setRoles] = useState<Map<number, SegmentTag>>(new Map());
+  // Roving tabindex: nur ein Buchstabe ist Tab-Halt, die Pfeiltasten wechseln zwischen den Grenzen.
+  const cuttable = useMemo(
+    () =>
+      Array.from({ length: letters.length - 1 }, (_, i) => i + 1).filter((at) => !fixed.has(at)),
+    [letters, fixed],
+  );
+  const [active, setActive] = useState(cuttable[0] ?? 0);
+  const buttons = useRef(new Map<number, HTMLButtonElement>());
+
+  const onArrow = (e: React.KeyboardEvent, at: number) => {
+    const i = cuttable.indexOf(at);
+    const target =
+      e.key === 'ArrowRight' || e.key === 'ArrowDown'
+        ? cuttable[Math.min(i + 1, cuttable.length - 1)]
+        : e.key === 'ArrowLeft' || e.key === 'ArrowUp'
+          ? cuttable[Math.max(i - 1, 0)]
+          : e.key === 'Home'
+            ? cuttable[0]
+            : e.key === 'End'
+              ? cuttable[cuttable.length - 1]
+              : undefined;
+    if (target === undefined) return;
+    e.preventDefault();
+    setActive(target);
+    buttons.current.get(target)?.focus();
+  };
 
   const pieces = piecesFromCuts(ex.word, cuts);
   const starts = pieces.map((_, i) => pieces.slice(0, i).join('').length);
@@ -71,6 +97,13 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
         ) : (
           <button
             type="button"
+            ref={(el) => {
+              if (el) buttons.current.set(at, el);
+              else buttons.current.delete(at);
+            }}
+            tabIndex={at === active ? 0 : -1}
+            onFocus={() => setActive(at)}
+            onKeyDown={(e) => onArrow(e, at)}
             disabled={disabled}
             aria-pressed={cuts.has(at)}
             aria-label={t('ex.segment.cut', { prefix: letters.slice(0, at) })}
@@ -109,9 +142,18 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
       <Prompt instruction={t('ex.segment')} text={ex.word} ex={ex} lang="tr" />
       {ex.gloss_de && <p className="-mt-2 text-stone-600 dark:text-stone-400">„{ex.gloss_de}“</p>}
       <p className="text-sm text-stone-500">{t('ex.segment.help')}</p>
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1" lang="tr">
+      <div
+        role="group"
+        aria-label={t('ex.segment.letters')}
+        className="flex flex-wrap items-center gap-x-3 gap-y-1"
+        lang="tr"
+      >
         {groups}
       </div>
+      {/* Neue Teile für Screenreader ansagen; ohne Grenze bleibt die Region leer. */}
+      <p aria-live="polite" className="sr-only">
+        {pieces.length > 1 ? t('ex.segment.pieces', { pieces: pieces.join(', ') }) : ''}
+      </p>
       <ul className="flex flex-wrap gap-2">
         {pieces.map((piece, i) => (
           <li

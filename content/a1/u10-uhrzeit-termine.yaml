@@ -316,7 +316,7 @@ lessons:
           - { text: "saat sekiz buçukta", role: time }
           - { text: "başlıyor", role: predicate }
         orders:
-          - { order: [1, 0, 2], note: "Auch üblich: die Uhrzeit zuerst, dann rückt „film“ näher ans Verb und wird betont." }
+          - { order: [1, 0, 2], note: "Auch üblich: die Uhrzeit zuerst, dann rückt „film“ näher ans Verb und kann stärker betont wirken." }
         distractors: [dokuz, başlıyorum]
         explanation: film = Film.
       - id: a1-u10-l4-e10
