@@ -4,6 +4,7 @@ import { Unit, type Exercise, type Vocab } from './schema';
 import {
   isAmbiguous,
   pieces,
+  presentAlternative,
   SEGMENT_WORDS,
   segmentCandidates,
   segmentLesson,
@@ -19,6 +20,10 @@ const vocab: Vocab[] = [
   { tr: 'İstanbul', de: ['Istanbul'], pos: 'noun', proper: true },
   { tr: 'gelmek', de: ['kommen'], pos: 'verb' },
   { tr: 'yemek', de: ['essen'], pos: 'verb' },
+  { tr: 'beklemek', de: ['warten'], pos: 'verb' },
+  { tr: 'aramak', de: ['suchen'], pos: 'verb' },
+  { tr: 'söylemek', de: ['sagen'], pos: 'verb' },
+  { tr: 'okumak', de: ['lesen'], pos: 'verb' },
 ];
 
 const builder = (n: number, stem: string, suffixes: string[], target: string): Exercise =>
@@ -87,6 +92,63 @@ describe('pieces', () => {
     ]);
     const third = solveForm({ kind: 'verb', lemma: 'gelmek', person: '3sg' }, vocab);
     expect(pieces(third, '3sg').map((p) => p.tag)).toEqual(['STEM', 'PRES']);
+  });
+});
+
+describe('presentAlternative', () => {
+  const alt = (spec: Parameters<typeof solveForm>[0]) => {
+    const person = spec.kind === 'noun' ? undefined : spec.person;
+    const a = presentAlternative(pieces(solveForm(spec, vocab), person), spec);
+    return a?.map((p) => `${p.text}:${p.tag}`).join(' ');
+  };
+  const verb = (lemma: string, more: object = {}) =>
+    ({ kind: 'verb', lemma, person: '1sg', ...more }) as const;
+
+  it('Stammauslaut a/e vor -Iyor: auch mit verengtem Vokal am Stamm (bekli-yor)', () => {
+    expect(alt(verb('beklemek'))).toBe('bekli:STEM yor:PRES um:P1SG');
+    expect(alt(verb('aramak'))).toBe('arı:STEM yor:PRES um:P1SG');
+    expect(alt(verb('söylemek'))).toBe('söylü:STEM yor:PRES um:P1SG');
+    expect(alt(verb('beklemek', { person: '2sg', question: true }))).toBe(
+      'bekli:STEM yor:PRES mu:Q sun:P2SG',
+    );
+  });
+
+  it('Verneinung vor -yor: auch gel-m-iyor', () => {
+    expect(alt(verb('gelmek', { negative: true }))).toBe('gel:STEM m:NEG iyor:PRES um:P1SG');
+    expect(alt(verb('beklemek', { negative: true }))).toBe('bekle:STEM m:NEG iyor:PRES um:P1SG');
+  });
+
+  it('keine zweite Zerlegung bei Konsonantstamm, engem Auslaut, anderen Zeiten und Nomen', () => {
+    expect(alt(verb('gelmek'))).toBeUndefined();
+    expect(alt(verb('okumak'))).toBeUndefined();
+    expect(alt(verb('beklemek', { tense: 'future' }))).toBeUndefined();
+    expect(alt(verb('beklemek', { passive: true }))).toBeUndefined();
+    expect(alt({ kind: 'noun', lemma: 'ev', tags: ['LOC'] })).toBeUndefined();
+  });
+
+  it('segmentCandidates trägt sie als alt_segments ein', () => {
+    const unit = makeUnit([
+      {
+        id: 'a1-u03-l2-e1',
+        type: 'conjugation',
+        mode: 'verb',
+        lemma: 'beklemek',
+        person: '1sg',
+        target: 'bekliyorum',
+      },
+      {
+        id: 'a1-u03-l2-e2',
+        type: 'conjugation',
+        mode: 'verb',
+        lemma: 'gelmek',
+        person: '1sg',
+        target: 'geliyorum',
+      },
+    ]);
+    const [wait, come] = segmentCandidates(unit, vocab);
+    expect(segs(wait!)).toBe('bekl:STEM iyor:PRES um:P1SG');
+    expect(wait!.alt_segments?.map((p) => p.text)).toEqual(['bekli', 'yor', 'um']);
+    expect(come).not.toHaveProperty('alt_segments');
   });
 });
 

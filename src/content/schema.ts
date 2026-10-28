@@ -259,22 +259,31 @@ export const FormSpec = z.discriminatedUnion('kind', [
  * Wort zerlegen: Grenzen setzen und jedem Stück seine Rolle geben. Wird im Build aus
  * Grammatikübungen erzeugt (`from`); `analysis` bildet die Form in der Engine neu.
  * Leerzeichen (Fragepartikel) und Apostroph sind feste Grenzen, keine Bausteine.
+ * `alt_segments`: zweite, ebenso übliche Zerlegung mit denselben Rollen (Präsens: bekl-iyor
+ * der Engine, bekli-yor der Lehrbücher); erzeugt der Build, der Build-Check prüft sie.
  */
+const SegmentPieces = z.array(z.strictObject({ text: nonEmpty, tag: z.enum(SEGMENT_TAGS) })).min(2);
+
 export const Segment = z
   .strictObject({
     ...exerciseBase,
     type: z.literal('segment'),
     word: nonEmpty,
-    segments: z.array(z.strictObject({ text: nonEmpty, tag: z.enum(SEGMENT_TAGS) })).min(2),
+    segments: SegmentPieces,
+    alt_segments: SegmentPieces.optional(),
     analysis: FormSpec,
     from: nonEmpty,
   })
   .superRefine((e, ctx) => {
-    if (e.segments[0]!.tag !== 'STEM' || e.segments.slice(1).some((s) => s.tag === 'STEM')) {
-      ctx.addIssue({ code: 'custom', path: ['segments'], message: 'nur das erste Stück ist STEM' });
-    }
-    if (e.segments.map((s) => s.text).join('') !== e.word.replace(/[\s'’]/g, '')) {
-      ctx.addIssue({ code: 'custom', path: ['segments'], message: `ergeben nicht "${e.word}"` });
+    for (const key of ['segments', 'alt_segments'] as const) {
+      const segs = e[key];
+      if (!segs) continue;
+      if (segs[0]!.tag !== 'STEM' || segs.slice(1).some((s) => s.tag === 'STEM')) {
+        ctx.addIssue({ code: 'custom', path: [key], message: 'nur das erste Stück ist STEM' });
+      }
+      if (segs.map((s) => s.text).join('') !== e.word.replace(/[\s'’]/g, '')) {
+        ctx.addIssue({ code: 'custom', path: [key], message: `ergeben nicht "${e.word}"` });
+      }
     }
   });
 

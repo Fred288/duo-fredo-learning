@@ -280,6 +280,36 @@ vocab:
     ]);
   });
 
+  it('verlangt alt_segments genau bei Präsensformen mit zweiter Zerlegung', () => {
+    const wait = (alt: string) =>
+      unit(`        word: bekliyorum
+        segments: [{ text: bekl, tag: STEM }, { text: iyor, tag: PRES }, { text: um, tag: P1SG }]
+${alt}        analysis: { kind: verb, lemma: beklemek, person: 1sg }
+        from: a1-u02-l1-e2`)
+        .replace(
+          '      - { id: a1-u02-l1-e1,',
+          '      - { id: a1-u02-l1-e2, type: conjugation, mode: verb, lemma: beklemek, person: 1sg, target: bekliyorum }\n      - { id: a1-u02-l1-e1,',
+        )
+        .replace('vocab:\n', 'vocab:\n  - { tr: beklemek, de: [warten], pos: verb }\n');
+    const altOk =
+      '        alt_segments: [{ text: bekli, tag: STEM }, { text: yor, tag: PRES }, { text: um, tag: P1SG }]\n';
+    expect(checkSegments([load('a.yaml', wait(altOk))])).toEqual([]);
+    expect(checkSegments([load('a.yaml', wait(''))])).toEqual([
+      'a.yaml: a1-u02-z1-l1-e1: alt_segments "", erwartet "bekli:STEM yor:PRES um:P1SG"',
+    ]);
+    const altWrong = altOk.replace('tag: PRES', 'tag: PAST');
+    expect(checkSegments([load('a.yaml', wait(altWrong))])).toEqual([
+      'a.yaml: a1-u02-z1-l1-e1: alt_segments "bekli:STEM yor:PAST um:P1SG", erwartet "bekli:STEM yor:PRES um:P1SG"',
+    ]);
+    const extra = ok.replace(
+      '        analysis:',
+      '        alt_segments: [{ text: kita, tag: STEM }, { text: plar, tag: PL }, { text: da, tag: LOC }]\n        analysis:',
+    );
+    expect(checkSegments([load('a.yaml', unit(extra))])).toEqual([
+      'a.yaml: a1-u02-z1-l1-e1: alt_segments "kita:STEM plar:PL da:LOC", für diese Form gibt es keine zweite Zerlegung',
+    ]);
+  });
+
   it('Schema: Stücke müssen das Wort ergeben', () => {
     const broken = ok.replace('text: da', 'text: de');
     expect(parseUnitFile('a.yaml', unit(broken)).errors[0]).toContain('ergeben nicht');

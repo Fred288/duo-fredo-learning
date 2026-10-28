@@ -11,6 +11,7 @@ import {
   segmentPieces,
   segmentRoleOptions,
   segmentSolution,
+  segmentVariants,
 } from './segment';
 
 type Segment = Extract<Exercise, { type: 'segment' }>;
@@ -117,6 +118,69 @@ describe('gradeSegment', () => {
   it('läuft über grade und solutionOf', () => {
     expect(grade(evlerimizden, right, { tolerateDiacritics: false }).verdict).toBe('correct');
     expect(solutionOf(evlerimizden)).toBe('ev-ler-imiz-den');
+  });
+});
+
+describe('zwei übliche Zerlegungen (Präsens)', () => {
+  const waiting: Segment = {
+    id: 'a1-u05-z1-l2-e1',
+    type: 'segment',
+    word: 'bekliyorum',
+    segments: [
+      { text: 'bekl', tag: 'STEM' },
+      { text: 'iyor', tag: 'PRES' },
+      { text: 'um', tag: 'P1SG' },
+    ],
+    alt_segments: [
+      { text: 'bekli', tag: 'STEM' },
+      { text: 'yor', tag: 'PRES' },
+      { text: 'um', tag: 'P1SG' },
+    ],
+    analysis: { kind: 'verb', lemma: 'beklemek', person: '1sg' },
+    from: 'a1-u05-l2-e1',
+  };
+
+  it('beide Grenzen gelten, die gefundene steht in matched', () => {
+    expect(gradeSegment(waiting, 'bekl|iyor|um\n;PRES;P1SG')).toEqual({
+      verdict: 'correct',
+      matched: 'bekl-iyor-um',
+      hints: [],
+    });
+    expect(gradeSegment(waiting, 'bekli|yor|um\n;PRES;P1SG')).toEqual({
+      verdict: 'correct',
+      matched: 'bekli-yor-um',
+      hints: [],
+    });
+    expect(grade(waiting, 'bekli|yor|um\n;PRES;P1SG', { tolerateDiacritics: false }).verdict).toBe(
+      'correct',
+    );
+  });
+
+  it('andere Grenzen und falsche Rollen bleiben falsch', () => {
+    expect(gradeSegment(waiting, 'bek|liyor|um\n;PRES;P1SG').verdict).toBe('wrong');
+    expect(gradeSegment(waiting, 'bekli|yor|um\n;PAST;P1SG').verdict).toBe('wrong');
+    expect(gradeSegment(waiting, 'bekl|i|yor|um\n;PRES;PRES;P1SG').verdict).toBe('wrong');
+  });
+
+  it('Rückmeldung je Stück gegen die näher liegende Zerlegung', () => {
+    const alt = segmentPieces(waiting, 'bekli|yor|um\n;PAST;P1SG');
+    expect(alt.map((p) => [p.text, p.found, p.correct])).toEqual([
+      ['bekli', true, true],
+      ['yor', true, false],
+      ['um', true, true],
+    ]);
+    // Gleichstand: die Zerlegung der Engine
+    expect(segmentPieces(waiting, 'bekliyorum\n').map((p) => p.text)).toEqual([
+      'bekl',
+      'iyor',
+      'um',
+    ]);
+  });
+
+  it('ohne alt_segments nur die Zerlegung der Engine', () => {
+    expect(segmentVariants(waiting)).toHaveLength(2);
+    expect(segmentVariants(question)).toEqual([question.segments]);
+    expect(solutionOf(waiting)).toBe('bekl-iyor-um');
   });
 });
 

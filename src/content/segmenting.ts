@@ -53,6 +53,41 @@ export function pieces(inf: Inflection, person?: Person): { text: string; tag: S
   });
 }
 
+type Piece = { text: string; tag: SegmentTag };
+
+/**
+ * Zweite übliche Zerlegung des Präsens: Vor -Iyor fällt der Auslaut a/e des Stamms weg bzw.
+ * verengt sich, und beide Sichtweisen sind in Lehrbüchern verbreitet. Die Engine zerlegt
+ * bekl-iyor, ar-ıyor, söyl-üyor (Ausfall), Lehrbücher oft bekli-yor, arı-yor, söylü-yor
+ * (Verengung). Bei der Verneinung ist es umgekehrt: die Engine trennt gel-mi-yor, ebenso
+ * üblich ist gel-m-iyor. Rollen bleiben gleich, nur die Grenze rückt um einen Buchstaben.
+ * Stämme, die schon auf einen engen Vokal enden (oku-yor), haben keine zweite Zerlegung.
+ */
+export function presentAlternative(
+  segments: readonly Piece[],
+  spec: FormSpec,
+): Piece[] | undefined {
+  if (spec.kind !== 'verb') return undefined;
+  const k = segments.findIndex((s) => s.tag === 'PRES');
+  if (k < 1) return undefined;
+  const prev = segments[k - 1]!;
+  const pres = segments[k]!;
+  const swap = (before: string, after: string): Piece[] =>
+    segments.map((s, i) =>
+      i === k - 1 ? { ...s, text: before } : i === k ? { ...s, text: after } : s,
+    );
+  if (prev.tag === 'STEM' && /^[ıiuü]yor$/.test(pres.text)) {
+    const stem = trLower(spec.lemma).replace(/m[ae]k$/, '');
+    if (/[ae]$/.test(stem) && trLower(prev.text) === stem.slice(0, -1)) {
+      return swap(prev.text + pres.text[0], pres.text.slice(1));
+    }
+  }
+  if (prev.tag === 'NEG' && pres.text === 'yor' && /^m[ıiuü]$/.test(prev.text)) {
+    return swap(prev.text[0]!, prev.text[1]! + pres.text);
+  }
+  return undefined;
+}
+
 const personOf = (spec: FormSpec): Person | undefined =>
   spec.kind === 'noun' ? undefined : spec.person;
 
@@ -174,12 +209,14 @@ export function segmentExercise(
   if (segments.length < 2 || !/[aeıioöuü]/i.test(trLower(segments[0]!.text))) return undefined;
   if (segments.some((s) => /\s/.test(s.text))) return undefined;
   const suffix = row === undefined ? '' : `-r${row + 1}`;
+  const alt = presentAlternative(segments, analysis);
   return {
     exercise: {
       id: `${lessonId}-${localId(unitId, src.id)}${suffix}`,
       type: 'segment',
       word: inflection.form,
       segments,
+      ...(alt && { alt_segments: alt }),
       analysis,
       from: src.id,
       // Die deutsche Bedeutung passt nur zur einzelnen Form, nicht zur ganzen Tabelle.

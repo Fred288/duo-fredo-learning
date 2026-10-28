@@ -1,7 +1,7 @@
 import { parse as parseYaml } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { sameForm, solveExercise, solveForm, solveParadigm } from '../src/content/lexicon';
-import { isAmbiguous, pieces } from '../src/content/segmenting';
+import { isAmbiguous, pieces, presentAlternative } from '../src/content/segmenting';
 import { segmentLetters } from '../src/session/segment';
 import { MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
@@ -133,7 +133,8 @@ const SEGMENT_SOURCES = new Set(['suffix_builder', 'conjugation', 'paradigm']);
 
 /**
  * Zerlege-Übungen (erzeugt oder handgeschrieben): Quelle vorhanden, Engine bildet dieselbe Form
- * mit denselben Stücken und Rollen, die Form ist nicht mehrdeutig, jeder Schritt begründbar.
+ * mit denselben Stücken und Rollen, `alt_segments` genau bei den Präsensformen mit zweiter
+ * üblicher Zerlegung, die Form ist nicht mehrdeutig, jeder Schritt begründbar.
  */
 export function checkSegments(units: LoadedUnit[]): string[] {
   const lexicon = units.flatMap(({ unit }) => unit.vocab ?? []);
@@ -153,12 +154,18 @@ export function checkSegments(units: LoadedUnit[]): string[] {
         if (got.map((p) => p.text).join('') !== segmentLetters(ex.word)) {
           fail(`Stücke ergeben nicht "${ex.word}" (ohne Leerzeichen und Apostroph)`);
         }
-        if (
-          expected.length !== got.length ||
-          expected.some((p, i) => p.text !== got[i]!.text || p.tag !== got[i]!.tag)
-        ) {
-          const show = (s: typeof got) => s.map((p) => `${p.text}:${p.tag}`).join(' ');
+        const show = (s: typeof got) => s.map((p) => `${p.text}:${p.tag}`).join(' ');
+        if (show(expected) !== show(got)) {
           fail(`Stücke "${show(got)}", Engine erwartet "${show(expected)}"`);
+        }
+        // Zweite Zerlegung genau dort, wo das Präsens sie zulässt (bekli-yor neben bekl-iyor).
+        const alt = presentAlternative(expected, ex.analysis);
+        if ((alt ? show(alt) : '') !== (ex.alt_segments ? show(ex.alt_segments) : '')) {
+          fail(
+            alt
+              ? `alt_segments "${ex.alt_segments ? show(ex.alt_segments) : ''}", erwartet "${show(alt)}"`
+              : `alt_segments "${show(ex.alt_segments!)}", für diese Form gibt es keine zweite Zerlegung`,
+          );
         }
         if (isAmbiguous(ex.analysis, inf, lexicon, { glossed: !!ex.gloss_de }))
           fail(`"${ex.word}" ist mehrdeutig`);

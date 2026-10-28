@@ -63,9 +63,13 @@ export interface PieceResult {
   correct: boolean;
 }
 
-/** Vergleicht Stück für Stück; Groß/Klein zählt nicht (İstanbul ↔ istanbul). */
-export function segmentPieces(ex: Segment, answer: string): PieceResult[] {
-  const given = parseSegmentAnswer(answer);
+type Piece = Segment['segments'][number];
+
+/** Die gültigen Zerlegungen: die der Engine, dazu ggf. die zweite übliche (bekli-yor). */
+export const segmentVariants = (ex: Segment): Piece[][] =>
+  ex.alt_segments ? [ex.segments, ex.alt_segments] : [ex.segments];
+
+function compare(solution: readonly Piece[], given: SegmentAnswer): PieceResult[] {
   const starts = new Map<number, number>();
   let at = 0;
   given.pieces.forEach((p, i) => {
@@ -73,7 +77,7 @@ export function segmentPieces(ex: Segment, answer: string): PieceResult[] {
     at += p.length;
   });
   at = 0;
-  return ex.segments.map((seg) => {
+  return solution.map((seg) => {
     const i = starts.get(at);
     at += seg.text.length;
     const found = i !== undefined && trLower(given.pieces[i]!) === trLower(seg.text);
@@ -83,13 +87,26 @@ export function segmentPieces(ex: Segment, answer: string): PieceResult[] {
   });
 }
 
+const score = (r: PieceResult[]) => r.filter((p) => p.correct).length;
+
+/**
+ * Vergleicht Stück für Stück mit der Zerlegung, die der Antwort am nächsten liegt (bei
+ * Gleichstand die der Engine); Groß/Klein zählt nicht (İstanbul ↔ istanbul).
+ */
+export function segmentPieces(ex: Segment, answer: string): PieceResult[] {
+  const given = parseSegmentAnswer(answer);
+  const results = segmentVariants(ex).map((v) => compare(v, given));
+  return results.reduce((best, r) => (score(r) > score(best) ? r : best));
+}
+
 /** Richtig nur, wenn alle Grenzen und alle Rollen stimmen und es keine zusätzlichen Stücke gibt. */
 export function gradeSegment(ex: Segment, answer: string): AnswerResult {
-  const { pieces } = parseSegmentAnswer(answer);
-  const ok =
-    pieces.length === ex.segments.length && segmentPieces(ex, answer).every((p) => p.correct);
-  return ok
-    ? { verdict: 'correct', matched: solutionOfSegment(ex), hints: [] }
+  const given = parseSegmentAnswer(answer);
+  const hit = segmentVariants(ex).find(
+    (v) => given.pieces.length === v.length && compare(v, given).every((p) => p.correct),
+  );
+  return hit
+    ? { verdict: 'correct', matched: hit.map((s) => s.text).join('-'), hints: [] }
     : { verdict: 'wrong', hints: [] };
 }
 

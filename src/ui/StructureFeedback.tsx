@@ -1,9 +1,12 @@
 import type { Exercise } from '../content/schema';
 import { t } from '../i18n';
-import { segmentPieces } from '../session/segment';
+import { segmentPieces, segmentVariants } from '../session/segment';
 import { matchedVariant, orderOf, validOrders } from '../session/word-order';
 
-/** Lösung einer Zerlege-Übung: Stück für Stück mit Rolle, je richtig oder falsch markiert. */
+/**
+ * Lösung einer Zerlege-Übung: Stück für Stück mit Rolle, je richtig oder falsch markiert, in der
+ * Zerlegung, die der Antwort am nächsten liegt. Gibt es zwei übliche (Präsens), steht das dabei.
+ */
 export function SegmentFeedback({
   ex,
   answer,
@@ -12,6 +15,7 @@ export function SegmentFeedback({
   answer: string;
 }) {
   const pieces = segmentPieces(ex, answer);
+  const variants = segmentVariants(ex).map((v) => v.map((s) => s.text).join('-'));
   return (
     <div className="mt-2 text-sm">
       <p className="font-medium">{t('ex.segment.solution')}</p>
@@ -32,6 +36,9 @@ export function SegmentFeedback({
           </li>
         ))}
       </ul>
+      {variants.length > 1 && (
+        <p className="mt-2">{t('ex.segment.both', { a: variants[0]!, b: variants[1]! })}</p>
+      )}
     </div>
   );
 }

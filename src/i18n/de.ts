@@ -237,6 +237,8 @@ export const de = {
   'ex.segment.role': 'Rolle von Teil {n} („{piece}“)',
   'ex.segment.choose': 'Rolle wählen',
   'ex.segment.solution': 'So ist das Wort gebaut:',
+  'ex.segment.both':
+    'Beide Zerlegungen sind üblich und zählen als richtig: {a} und {b}. Vor -iyor fällt das a/e davor entweder weg, oder es wird zu ı, i, u bzw. ü, und die Endung heißt -yor.',
   'ex.sov_puzzle': 'Bringe die Satzglieder in die türkische Reihenfolge',
   'ex.sov_puzzle.empty': 'Tippe die Satzglieder in der richtigen Reihenfolge an.',
   'ex.sov_puzzle.solution': 'Die Satzglieder:',
