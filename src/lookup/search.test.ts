@@ -94,7 +94,7 @@ describe('search: Präfix, Teilwort, Glossen', () => {
   });
 
   it('leere Anfrage liefert nichts', () => {
-    expect(search(prepared, '  ')).toEqual({ vocab: [], sections: [] });
+    expect(search(prepared, '  ')).toEqual({ vocab: [], sections: [], more: false });
   });
 });
 
@@ -137,6 +137,27 @@ describe('lemmatize: gebeugte Formen', () => {
     expect(lemma('eve')).toContain('ev');
     expect(lemma('ev')).toEqual([]);
     expect(lemma('kitap')).toEqual([]);
+  });
+});
+
+describe('search: Obergrenze', () => {
+  it('meldet, wenn Treffer abgeschnitten wurden', () => {
+    const many: LookupIndex = {
+      v: 1,
+      units: [],
+      sections: [],
+      vocab: Array.from({ length: 5 }, (_, i) => ({
+        id: `ev${i}`,
+        tr: `ev${'abcde'[i]}`,
+        de: ['Haus'],
+        pos: 'noun' as const,
+        unit: 'a1-u01',
+      })),
+    };
+    const p = prepareLookup(many);
+    expect(search(p, 'ev', 3)).toMatchObject({ more: true });
+    expect(search(p, 'ev', 3).vocab).toHaveLength(3);
+    expect(search(p, 'ev', 10).more).toBe(false);
   });
 });
 

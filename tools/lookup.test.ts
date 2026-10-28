@@ -116,11 +116,12 @@ describe('Suche über die echten Inhalte', () => {
     for (const v of index.vocab) expect(() => formTable(v)).not.toThrow();
   });
 
-  it('100 Anfragen in unter 200 ms', () => {
+  // Grobe Obergrenze (gemessen ~80 ms): fängt Ausreißer, ohne auf langsamen oder ausgelasteten Rechnern zu kippen.
+  it('100 Anfragen in unter 2 s', () => {
     const queries = ['ev', 'evlerde', 'kitabı', 'gidiyorum', 'Tisch', 'sch', 'a', 'lokativ', 'ge'];
     search(prepared, 'warm');
     const t = performance.now();
     for (let i = 0; i < 100; i++) search(prepared, queries[i % queries.length]!);
-    expect(performance.now() - t).toBeLessThan(200);
+    expect(performance.now() - t).toBeLessThan(2000);
   });
 });

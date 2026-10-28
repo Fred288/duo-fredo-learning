@@ -24,8 +24,10 @@ export function App() {
     if (!onHome) return;
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement | null;
-      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
-      if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+      // Windows meldet AltGr als Strg+Alt; auf Layouts mit „/“ hinter AltGr soll die Taste gelten.
+      const altGr = e.getModifierState?.('AltGraph') ?? false;
+      if (e.key !== '/' || e.metaKey || ((e.ctrlKey || e.altKey) && !altGr)) return;
+      if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
       e.preventDefault();
       openLookup();
     };

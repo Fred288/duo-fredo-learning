@@ -35,6 +35,10 @@ export const fetchManifest = () => getJson<Manifest>('index.json');
 
 // Einmal je Sitzung laden; ein Fehler (z. B. offline ohne Cache) wird beim nächsten Aufruf wiederholt.
 let lookup: Promise<LookupIndex> | undefined;
+/** Verwirft den geladenen Index (Tests). */
+export const clearLookupCache = () => {
+  lookup = undefined;
+};
 export const fetchLookup = (): Promise<LookupIndex> =>
   (lookup ??= getJson<LookupIndex>('lookup.json').catch((e: unknown) => {
     lookup = undefined;

@@ -58,7 +58,7 @@ export function Markdown({ source }: { source: string }) {
       blocks.push(
         <Tag
           key={key}
-          id={level === 2 ? sectionSlug(heading[2] ?? '') : undefined}
+          id={level === 2 ? `sec-${sectionSlug(heading[2] ?? '')}` : undefined}
           tabIndex={level === 2 ? -1 : undefined}
           className={`${HEADING_CLASS[level] ?? ''} scroll-mt-4 outline-none`}
         >

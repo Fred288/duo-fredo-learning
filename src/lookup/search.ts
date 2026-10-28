@@ -136,7 +136,7 @@ function matchVocab(v: PreparedVocab, q: string, qExact: string): VocabHit | und
       entry: v.entry,
       tier,
       lang,
-      exact: k.exact.includes(qExact),
+      exact: ` ${k.exact}`.includes(` ${qExact}`),
       length: k.fold.length,
       order: v.order,
     };
@@ -196,12 +196,14 @@ function matchSection(s: PreparedSection, tokens: string[]): SectionHit | undefi
 export interface SearchResult {
   vocab: VocabHit[];
   sections: SectionHit[];
+  /** Es gab mehr Treffer als `limit`; die Listen sind abgeschnitten. */
+  more: boolean;
 }
 
 /** Sucht in beiden Richtungen (Türkisch, Deutsch) und in den Grammatik-Abschnitten. */
 export function search(prepared: PreparedLookup, query: string, limit = MAX_RESULTS): SearchResult {
   const q = searchKey(query);
-  if (!q) return { vocab: [], sections: [] };
+  if (!q) return { vocab: [], sections: [], more: false };
   const qExact = exactKey(query);
   const hits = new Map<string, VocabHit>();
   for (const v of prepared.vocab) {
@@ -225,8 +227,11 @@ export function search(prepared: PreparedLookup, query: string, limit = MAX_RESU
   const tokens = q.split(' ');
   const sections =
     q.length < 2 ? [] : prepared.sections.flatMap((s) => matchSection(s, tokens) ?? []);
+  const vocab = [...hits.values()].sort(compareVocab);
+  sections.sort((a, b) => a.tier - b.tier || a.order - b.order);
   return {
-    vocab: [...hits.values()].sort(compareVocab).slice(0, limit),
-    sections: sections.sort((a, b) => a.tier - b.tier || a.order - b.order).slice(0, limit),
+    vocab: vocab.slice(0, limit),
+    sections: sections.slice(0, limit),
+    more: vocab.length > limit || sections.length > limit,
   };
 }

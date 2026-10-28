@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchLookup } from '../content/load';
 import { t } from '../i18n';
-import { prepareLookup, search, type PreparedLookup } from '../lookup/search';
+import { MAX_RESULTS, prepareLookup, search, type PreparedLookup } from '../lookup/search';
 import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
 import { LookupEntry, formLabelsText } from './LookupEntry';
@@ -22,6 +22,7 @@ export function LookupScreen() {
   const cards = useProgress((s) => s.cards);
   const [prepared, setPrepared] = useState<PreparedLookup>();
   const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
   const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -32,11 +33,11 @@ export function LookupScreen() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [attempt]);
 
   // Die Suche braucht unter 3 ms; ohne Verzögerung entspricht Enter immer dem sichtbaren Text.
   const result = useMemo(
-    () => (prepared ? search(prepared, query) : { vocab: [], sections: [] }),
+    () => (prepared ? search(prepared, query) : { vocab: [], sections: [], more: false }),
     [prepared, query],
   );
   const entry = entryId ? prepared?.index.vocab.find((v) => v.id === entryId) : undefined;
@@ -78,7 +79,15 @@ export function LookupScreen() {
         ← {t('lookup.back')}
       </button>
       {failed ? (
-        <p className="text-rose-700 dark:text-rose-400">{t('lookup.error')}</p>
+        <div className="space-y-2">
+          <p className="text-rose-700 dark:text-rose-400">{t('lookup.error')}</p>
+          <button type="button" onClick={() => {
+              setFailed(false);
+              setAttempt((n) => n + 1);
+            }} className={backButton}>
+            {t('lookup.retry')}
+          </button>
+        </div>
       ) : !prepared ? (
         <p className="text-stone-500">{t('lookup.loading')}</p>
       ) : entry ? (
@@ -104,8 +113,15 @@ export function LookupScreen() {
           <SpecialCharBar
             disabled={false}
             onInsert={(c) => {
-              setLookup(query + c);
-              input.current?.focus();
+              // An der Cursorposition einfügen, nicht ans Ende.
+              const el = input.current;
+              const start = el?.selectionStart ?? query.length;
+              const end = el?.selectionEnd ?? query.length;
+              setLookup(query.slice(0, start) + c + query.slice(end));
+              requestAnimationFrame(() => {
+                el?.focus();
+                el?.setSelectionRange(start + c.length, start + c.length);
+              });
             }}
           />
           {/* Dauerhaft im DOM, sonst lesen Screenreader die erste Trefferzahl nicht vor. */}
@@ -118,8 +134,13 @@ export function LookupScreen() {
               ? ''
               : total === 0
                 ? t('lookup.none')
-                : t('lookup.count', { count: total })}
+                : result.more
+                  ? t('lookup.countMore', { count: MAX_RESULTS })
+                  : t('lookup.count', { count: total })}
           </p>
+          {query.trim() && total === 0 && (
+            <p className="text-sm text-stone-600 dark:text-stone-400">{t('lookup.noneHint')}</p>
+          )}
           {!query.trim() ? (
             <Register prepared={prepared} onOpen={openSection} />
           ) : (

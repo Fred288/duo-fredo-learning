@@ -114,7 +114,7 @@ function Forms({ entry }: { entry: VocabEntry }) {
 const dueText = (due: string, isDue: boolean): string => {
   if (isDue) return t('lookup.srs.dueNow');
   const [, m, d] = due.split('-');
-  return t('lookup.srs.dueOn', { date: `${d}.${m}.` });
+  return t('lookup.srs.dueOn', { date: t('lookup.srs.date', { d: d ?? '', m: m ?? '' }) });
 };
 
 function SrsStatus({ cards, id }: { cards: readonly Card[]; id: string }) {

@@ -6,6 +6,7 @@ import { cardId, type Card } from '../srs';
 import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
 import { dayKey } from '../progress/day';
+import { clearLookupCache } from '../content/load';
 import { LookupScreen } from './LookupScreen';
 
 const index: LookupIndex = {
@@ -139,6 +140,34 @@ describe('LookupScreen', () => {
       from: 'lookup',
     });
     expect(useApp.getState().lookupQuery).toBe('lokativ');
+  });
+
+  it('Hinweis bei „Nichts gefunden“ nennt die Grenzen der Rückführung', async () => {
+    render(<LookupScreen />);
+    await type('xyzzy');
+    expect(await screen.findByText(/Kopula-Formen/)).toBeTruthy();
+  });
+
+  it('Ladefehler: Meldung und erneutes Laden', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockRejectedValueOnce(new Error('offline'))
+      .mockImplementation(async () => new Response(JSON.stringify(index), { status: 200 }));
+    vi.stubGlobal('fetch', fetchMock);
+    clearLookupCache();
+    render(<LookupScreen />);
+    expect(await screen.findByText('Nachschlagewerk konnte nicht geladen werden.')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: 'Erneut laden' }));
+    expect(await screen.findByRole('searchbox')).toBeTruthy();
+  });
+
+  it('Sonderzeichen-Leiste fügt an der Cursorposition ein', async () => {
+    render(<LookupScreen />);
+    await type('sker');
+    const box = screen.getByRole('searchbox') as HTMLInputElement;
+    box.setSelectionRange(1, 1);
+    fireEvent.click(screen.getByRole('button', { name: /ö/ }));
+    expect(useApp.getState().lookupQuery).toBe('söker');
   });
 
   it('Sonderzeichen-Leiste fügt ins Suchfeld ein', async () => {

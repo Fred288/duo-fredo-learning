@@ -36,7 +36,7 @@ export function ExplainerScreen({
   // Sprung aus dem Nachschlagewerk: zur Überschrift scrollen und sie fokussieren (Screenreader).
   useEffect(() => {
     if (text === undefined || !section) return;
-    const heading = document.getElementById(section);
+    const heading = document.getElementById(`sec-${section}`);
     heading?.scrollIntoView?.();
     heading?.focus({ preventScroll: true });
   }, [text, section]);
