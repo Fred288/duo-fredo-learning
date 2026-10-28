@@ -31,12 +31,29 @@ export interface PlayDeps {
   playFile?: (url: string, playbackRate: number) => Promise<void>;
 }
 
+let playing: { audio: HTMLAudioElement; done: () => void } | undefined;
+
+/** Bricht eine laufende Aufnahme ab (TTS bricht der Speaker selbst ab). */
+export function stopClips(): void {
+  playing?.audio.pause();
+  playing?.done();
+}
+
 const playWithAudioElement = (url: string, playbackRate: number) =>
   new Promise<void>((resolve, reject) => {
+    stopClips();
     const audio = new Audio(url);
     audio.playbackRate = playbackRate;
-    audio.onended = () => resolve();
-    audio.onerror = () => reject(new Error(`Audio ${url}`));
+    const done = () => {
+      if (playing?.audio === audio) playing = undefined;
+      resolve();
+    };
+    playing = { audio, done };
+    audio.onended = done;
+    audio.onerror = () => {
+      if (playing?.audio === audio) playing = undefined;
+      reject(new Error(`Audio ${url}`));
+    };
     audio.play().catch(reject);
   });
 
@@ -47,6 +64,7 @@ export async function playClip(
   { speaker, playFile = playWithAudioElement }: PlayDeps,
 ): Promise<void> {
   speaker.cancel();
+  stopClips();
   if (clip.kind === 'file') {
     try {
       return await playFile(clip.url, PLAYBACK_RATE[rate]);

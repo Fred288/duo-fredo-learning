@@ -79,6 +79,12 @@ export function Home() {
         <p className="mt-6 text-stone-500">{t('home.loading')}</p>
       ) : (
         <div className="mt-6 space-y-8">
+          {/* Einmal oben statt in jeder Unit-Karte. */}
+          {!canListen &&
+            !voicesLoading &&
+            manifest.units.some((u) => u.lessons.some((l) => l.type === 'listening')) && (
+              <p className="text-sm text-stone-500">{t('home.listen.unavailable')}</p>
+            )}
           {LEVELS.map((level) => {
             const units = manifest.units.filter((u) => u.level === level);
             if (!units.length) return null;
@@ -150,13 +156,6 @@ export function Home() {
                                 {lesson.title}
                               </button>
                             ))}
-                          {!canListen &&
-                            !voicesLoading &&
-                            unit.lessons.some((l) => l.type === 'listening') && (
-                              <p className="w-full text-sm text-stone-500">
-                                {t('home.listen.unavailable')}
-                              </p>
-                            )}
                         </div>
                       </li>
                     );

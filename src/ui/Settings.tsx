@@ -1,7 +1,7 @@
 import { canSpeak } from '../audio/types';
 import { t, type MessageKey } from '../i18n';
 import { useApp } from '../store/app';
-import { speak, useAudio } from '../store/audio';
+import { getSpeaker, speak, useAudio } from '../store/audio';
 import { GOAL_RANGE, NEW_WORDS_RANGE, useSettings, type Theme } from '../store/settings';
 
 const THEMES: Theme[] = ['system', 'light', 'dark'];
@@ -24,7 +24,9 @@ export function Settings() {
     set,
   } = useSettings();
   const { status, voices } = useAudio();
-  const current = voices.find((v) => v.voiceURI === voiceURI) ?? voices[0];
+  // Offline nimmt der Speaker die beste lokale Stimme; deren Name zählt, nicht der der Auswahl.
+  const current =
+    getSpeaker().current() ?? voices.find((v) => v.voiceURI === voiceURI) ?? voices[0];
 
   return (
     <section className="space-y-6" aria-labelledby="settings-title">

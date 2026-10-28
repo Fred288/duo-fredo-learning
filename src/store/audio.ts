@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { create } from 'zustand';
-import { playClip, resolveClip } from '../audio/clip';
+import { playClip, resolveClip, stopClips } from '../audio/clip';
 import {
   canSpeak,
   type Rate,
@@ -77,7 +77,10 @@ export function speak(text: string, rate: Rate = 'normal'): Promise<void> {
   return playClip(resolveClip(text), rate, { speaker: s });
 }
 
-export const stopSpeaking = (): void => speaker?.cancel();
+export const stopSpeaking = (): void => {
+  speaker?.cancel();
+  stopClips();
+};
 
 /**
  * Liest `text` von selbst vor, wenn „automatisch abspielen“ an ist und der Nutzer schon

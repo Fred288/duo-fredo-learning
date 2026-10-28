@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import type { Vocab } from '../content/schema';
-import { audioIndex, playClip, resolveClip } from './clip';
+import { audioIndex, playClip, resolveClip, stopClips } from './clip';
 import { FakeSpeaker } from './fake';
 
 const ev: Vocab = { tr: 'ev', de: ['Haus'], pos: 'noun', audio: 'ev.mp3' };
@@ -45,5 +45,26 @@ describe('Audio-Quelle', () => {
 
     await playClip(clip, 'normal', { speaker, playFile: vi.fn().mockRejectedValue(new Error()) });
     expect(speaker.spoken).toEqual([{ text: 'ev', rate: 'normal' }]);
+  });
+
+  it('stopClips bricht eine laufende Aufnahme ab', async () => {
+    const pause = vi.fn();
+    class FakeAudio {
+      playbackRate = 1;
+      onended?: () => void;
+      onerror?: () => void;
+      pause = pause;
+      play = () => Promise.resolve();
+    }
+    vi.stubGlobal('Audio', FakeAudio);
+    try {
+      const clip = resolveClip('ev', audioIndex([ev]));
+      const playing = playClip(clip, 'normal', { speaker: new FakeSpeaker() });
+      stopClips();
+      await playing; // löst nach dem Abbruch auf
+      expect(pause).toHaveBeenCalledTimes(1);
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });
