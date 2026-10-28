@@ -693,7 +693,7 @@ lessons:
         - { tr: "Memur, \"Paketler önce gümrükte kontrol edilir,\" dedi.", de: "Der Beamte sagte: „Pakete werden zuerst beim Zoll kontrolliert.“" }
         - { tr: "\"Sonra adreslere dağıtılır.\"", de: "„Dann werden sie an die Adressen verteilt.“" }
         - { tr: "Ertesi gün kapı çalındı.", de: "Am nächsten Tag klingelte es an der Tür." }
-        - { tr: "Kargocu paketi teslim etti ve ben formu imzaladım.", de: "Der Paketbote hat das Paket abgegeben, und ich habe das Formular unterschrieben." }
+        - { tr: "Postacı paketi teslim etti ve ben formu imzaladım.", de: "Der Postbote hat das Paket abgegeben, und ich habe das Formular unterschrieben." }
         - { tr: "Paketin içinde bir kazak, Alman çikolatası ve bir mektup vardı.", de: "Im Paket waren ein Pullover, deutsche Schokolade und ein Brief." }
         - { tr: "Mektubu hemen okudum ve teyzemi aradım.", de: "Ich habe den Brief sofort gelesen und meine Tante angerufen." }
       glossary:
@@ -706,7 +706,7 @@ lessons:
         - { tr: "edilir", de: "wird gemacht (etmek, Passiv Aorist; kontrol edilir = wird kontrolliert)" }
         - { tr: "ertesi", de: "der nächste (ertesi gün = am nächsten Tag)" }
         - { tr: "çalındı", de: "wurde geläutet (çalmak, Passiv; kapı çalındı = es klingelte)", vocab: "çalmak" }
-        - { tr: "kargocu", de: "Paketbote, Paketbotin (kargo + -cu)", vocab: "kargo" }
+        - { tr: "postacı", de: "Postbote, Postbotin (posta + -cı)", vocab: "postane" }
         - { tr: "teslim", de: "Übergabe (teslim etmek = abgeben, zustellen)", vocab: "teslim etmek" }
         - { tr: "etti", de: "hat gemacht (etmek; teslim etti = hat abgegeben)", vocab: "teslim etmek" }
         - { tr: "çikolatası", de: "Schokolade (Alman çikolatası = deutsche Schokolade)" }

@@ -565,7 +565,7 @@ lessons:
       sentences:
         - { tr: "Dün annem köyden aradı.", de: "Gestern hat meine Mutter aus dem Dorf angerufen." }
         - { tr: "Bana birçok haber anlattı.", de: "Sie hat mir viele Neuigkeiten erzählt." }
-        - { tr: "Komşumuz Hasan Bey piyangoda para kazanmış.", de: "Unser Nachbar Hasan Bey hat anscheinend im Lotto Geld gewonnen." }
+        - { tr: "Komşumuz Hasan Bey piyangodan para kazanmış.", de: "Unser Nachbar Hasan Bey hat anscheinend im Lotto Geld gewonnen." }
         - { tr: "Hemen yeni bir araba almış.", de: "Er hat sich sofort ein neues Auto gekauft." }
         - { tr: "Ama ilk gün arabayla bir ağaca çarpmış!", de: "Aber am ersten Tag ist er mit dem Auto gegen einen Baum gefahren!" }
         - { tr: "Neyse ki kimse yaralanmamış.", de: "Zum Glück wurde niemand verletzt." }
@@ -578,7 +578,7 @@ lessons:
         - { tr: "birçok", de: "viele" }
         - { tr: "Hasan", de: "Hasan (Männername)" }
         - { tr: "Bey", de: "Herr (nach dem Vornamen: Hasan Bey)" }
-        - { tr: "piyangoda", de: "in der Lotterie (piyango + Lokativ)" }
+        - { tr: "piyangodan", de: "in der Lotterie (piyango + Ablativ: aus der Lotterie gewinnen)" }
         - { tr: "hemen", de: "sofort" }
         - { tr: "ilk", de: "erste(r, s)" }
         - { tr: "çarpmış", de: "ist (anscheinend) zusammengestoßen (çarpmak + -mış)" }

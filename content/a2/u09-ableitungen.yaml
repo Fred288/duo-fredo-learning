@@ -589,8 +589,8 @@ lessons:
         - { tr: "Kitapçı şehrin merkezinde, büyük bir binanın altında.", de: "Die Buchhandlung liegt im Stadtzentrum, unten in einem großen Gebäude." }
         - { tr: "Maaşı çok yüksek değil ama müdürü çok kibar.", de: "Ihr Gehalt ist nicht sehr hoch, aber ihr Chef ist sehr freundlich." }
         - { tr: "Müşteriler genelde roman ve çocuk kitapları alıyor.", de: "Die Kunden kaufen meistens Romane und Kinderbücher." }
-        - { tr: "Öğle yemeğinde Ayten simitçiden bir simit ve bir çay alıyor.", de: "In der Mittagspause kauft Ayten beim Simitverkäufer einen Simit und einen Tee." }
         - { tr: "Müşteriler nakit ya da kredi kartıyla ödüyor.", de: "Die Kunden bezahlen bar oder mit Kreditkarte." }
+        - { tr: "Öğle yemeğinde Ayten simitçiden bir simit ve bir çay alıyor.", de: "In der Mittagspause kauft Ayten beim Simitverkäufer einen Simit und einen Tee." }
         - { tr: "Ayten evli ve bir oğlu var.", de: "Ayten ist verheiratet und hat einen Sohn." }
         - { tr: "Oğlu da kitapçı olmak istiyor.", de: "Ihr Sohn möchte auch Buchhändler werden." }
       glossary:
