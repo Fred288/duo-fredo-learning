@@ -9,7 +9,7 @@ Aus A2 kennst du **-miş** für Gehörtes (Ali gelmiş, Ali soll gekommen sein).
 | geliyor       | geliyormuş    | er komme (gerade), er soll kommen         |
 | gelir         | gelirmiş      | er komme (immer), er soll immer kommen    |
 | gelmiş        | gelmişmiş     | er sei gekommen, er soll gekommen sein    |
-| gelecek       | gelecekmiş    | er werde kommen, er soll kommen wollen    |
+| gelecek       | gelecekmiş    | er werde kommen (hat man gesagt)          |
 | gelmeli       | gelmeliymiş   | er müsse kommen (sagt man)                |
 
 Die Endungen sind die von „sein“: geliyormuş**um**, geliyormuş**sun**, geliyormuş, geliyormuş**uz**, geliyormuş**sunuz**, geliyor**lar**mış. Anders als bei idi (-du-**m**) heißt „ich“ hier **-um**: geliyordum, aber geliyormuşum.
@@ -34,22 +34,22 @@ Der Aorist mit imiş erzählt von **Gewohnheiten**, die man nur vom Hörensagen 
 
 **-mişmiş** verdoppelt die Distanz: Man erzählt, was jemand anderes **erzählt hat**, oder betont, dass man nur davon gehört hat. Im Alltag klingt es locker und etwas ungläubig.
 
-- Komşumuz piyangoyu kazanmışmış! (Unser Nachbar soll im Lotto gewonnen haben, sagt man!)
+- Komşumuza piyango çıkmışmış! (Unser Nachbar soll im Lotto gewonnen haben, sagt man!)
 
-Für das bloße „hatte gemacht“ ohne Hörensagen steht dagegen **-mişti** (Lebensgeschichten).
+Für das bloße „soll geheiratet haben“ reicht -miş (evlenmişler). Für das bloße „hatte gemacht“ ohne Hörensagen steht dagegen **-mişti** (Lebensgeschichten).
 
 ## Was geplant gewesen sein soll: -ecekmiş
 
 - Ayşe yarın gelecekmiş. (Ayşe soll morgen kommen, hat sie gesagt.)
 - Babaannemin annesi öğretmen olacakmış ama erken evlenmiş. (Die Mutter meiner Großmutter sollte Lehrerin werden, aber sie hat früh geheiratet.)
 
-Achtung: **büyükanne** ist die Großmutter, **büyük dede** (oder dedemin babası) der Urgroßvater.
+Achtung: **büyükbaba** ist der **Groß**vater, **büyük dede** (oder dedemin babası) der Urgroßvater; **büyükanne** ist die Großmutter.
 
 ## Märchen: Bir varmış, bir yokmuş
 
 Türkische Märchen beginnen mit **Bir varmış, bir yokmuş** (Es war einmal, wörtlich „es gab einmal, es gab einmal nicht“) und werden ganz im -miş erzählt: Padişahın üç kızı varmış. (Der Sultan hatte drei Töchter.)
 
-## war angeblich: -ymiş am Nomen
+## Am Nomen: -ymiş (war angeblich)
 
 Am Nomen und Adjektiv steht imiş wie in A2: Büyük dedem terzi**ymiş**. (Mein Urgroßvater soll Schneider gewesen sein.) Köy çok fakir**miş**. (Das Dorf soll sehr arm gewesen sein.) Verneint: zengin **değilmiş**. „hatte“: Bir dükkânı **varmış**. (Er soll einen Laden gehabt haben.)
 

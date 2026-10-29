@@ -76,7 +76,7 @@ lessons:
         prompt: Was heißt „kirletmek“?
         options: [verschmutzen, reinigen, sammeln]
         answer: verschmutzen
-        explanation: kirli (schmutzig) + -let, wie temiz → temizlemek (reinigen).
+        explanation: kir (Schmutz) + -let; kirli = kir + li (schmutzig).
       - id: b1-u03-l1-e13
         type: free_text
         direction: de_tr
@@ -133,7 +133,7 @@ lessons:
         compound: conditional
         negative: true
         target: kapatmazsanız
-        gloss_de: wenn ihr nicht ausmacht, wenn Sie nicht schließen
+        gloss_de: wenn ihr/Sie nicht ausmacht (schließt)
       - { id: b1-u03-l2-e7, type: conjugation, mode: verb, lemma: tasarruf etmek, person: 1pl, tense: aorist, compound: conditional, target: tasarruf edersek, gloss_de: wenn wir sparen }
       - id: b1-u03-l2-e8
         type: multiple_choice
@@ -144,13 +144,13 @@ lessons:
       - id: b1-u03-l2-e9
         type: word_bank
         prompt: Wenn wir den Müll trennen, schützen wir die Umwelt.
-        answers: [Çöpleri ayırırsak çevreyi koruruz., Çöpü ayırırsak çevreyi koruruz.]
+        answers: [Çöpleri ayırırsak çevreyi koruruz., Çöpü ayırırsak çevreyi koruruz., Çöpleri ayrıştırırsak çevreyi koruruz.]
         chunks:
           - { text: "Çöpleri ayırırsak", role: complement }
           - { text: "çevreyi", role: object }
           - { text: "koruruz", role: predicate }
         distractors: [korursak, ayırırız]
-        explanation: ayırmak = trennen, sortieren.
+        explanation: ayırmak = trennen, sortieren; für Mülltrennung sagt man auch ayrıştırmak.
       - id: b1-u03-l2-e10
         type: free_text
         direction: tr_de
@@ -280,13 +280,19 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: an deiner Stelle (wenn ich du wäre)
-        answers: [ben sen olsam, senin yerinde olsam, yerinde olsam, sen olsam]
+        answers: [ben sen olsam, senin yerinde olsam, yerinde olsam, sen olsam, ben senin yerinde olsam, senin yerinde olsaydım, yerinde olsaydım, ben olsam]
       - id: b1-u03-l4-e14
         type: multiple_choice
         prompt: Welcher Satz beschreibt einen gedachten Fall?
         options: [Param olsa araba alırdım., Param varsa araba alırım., Param olursa araba alırım.]
         answer: Param olsa araba alırdım.
         explanation: olsa … alırdım = wenn ich Geld hätte, würde ich kaufen.
+      - id: b1-u03-l4-e15
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Zenginsem …“ / „Zengin olsam …“
+        options: [Wenn ich reich bin … / Wenn ich reich wäre …, Beides heißt dasselbe., Wenn ich reich war … / Wenn ich reich werde …]
+        answer: Wenn ich reich bin … / Wenn ich reich wäre …
+        explanation: -sa am Nomen ist ein realer Fall (ise); olsa ist der gedachte Fall.
 
   - id: b1-u03-l5
     type: dialog
@@ -331,7 +337,7 @@ lessons:
         answers: [Hava güzelse bisiklete bineriz., Hava güzel olursa bisiklete bineriz.]
         chunks:
           - { text: "Hava güzelse", role: complement }
-          - { text: "bisiklete", role: place }
+          - { text: "bisiklete", role: complement }
           - { text: "bineriz", role: predicate }
         distractors: [bisiklette, güzeldi]
         explanation: güzelse = güzel + se (wenn es schön ist).
@@ -345,7 +351,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Wenn du krank bist, bleib zu Hause.
-        answers: [Hastaysan evde kal., Eğer hastaysan evde kal., Hasta isen evde kal.]
+        answers: [Hastaysan evde kal., Eğer hastaysan evde kal., Hasta isen evde kal., Eğer hasta isen evde kal.]
 
   - id: b1-u03-l6
     type: grammar
@@ -405,7 +411,8 @@ lessons:
         - { tr: "Geçen hafta köyün gençleri bir karar verdi.", de: "Letzte Woche haben die jungen Leute des Dorfes einen Beschluss gefasst." }
         - { tr: "Her pazar ormanda çöp toplayacaklar.", de: "Jeden Sonntag werden sie im Wald Müll sammeln." }
         - { tr: "Ben de onlara yardım edeceğim.", de: "Ich werde ihnen auch helfen." }
-        - { tr: "Herkes biraz dikkat ederse orman yine temiz olur.", de: "Wenn alle ein bisschen aufpassen, wird der Wald wieder sauber." }
+        - { tr: "Yardım etmek istiyorsan pazar günü ormana gel.", de: "Wenn du helfen willst, komm am Sonntag in den Wald." }
+        - { tr: "Herkes biraz dikkat etse orman çok daha temiz olurdu.", de: "Wenn alle ein bisschen aufpassen würden, wäre der Wald viel sauberer." }
         - { tr: "Ağaç dikersek hava da daha temiz olacak.", de: "Wenn wir Bäume pflanzen, wird auch die Luft sauberer." }
         - { tr: "Doğayı korursak kendimizi de koruruz.", de: "Wenn wir die Natur schützen, schützen wir auch uns selbst." }
       glossary:
@@ -417,8 +424,7 @@ lessons:
         - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
         - { tr: "edeceğim", de: "werde machen (etmek, Futur; yardım edeceğim = ich werde helfen)", vocab: "yardım etmek" }
         - { tr: "dikkat", de: "Aufmerksamkeit (dikkat etmek = aufpassen)", vocab: "dikkat etmek" }
-        - { tr: "ederse", de: "wenn … macht (etmek; dikkat ederse = wenn … aufpasst)", vocab: "dikkat etmek" }
-        - { tr: "yine", de: "wieder" }
+        - { tr: "etse", de: "wenn … machen würde (etmek; dikkat etse = wenn … aufpassen würde)", vocab: "dikkat etmek" }
         - { tr: "zarar", de: "Schaden (zarar vermek = schaden)", vocab: "zarar vermek" }
         - { tr: "kendimizi", de: "uns selbst (kendi, Akkusativ)", vocab: "kendi" }
     exercises:
@@ -439,9 +445,9 @@ lessons:
         answer: Jeden Sonntag im Wald Müll zu sammeln.
       - id: b1-u03-r1-e4
         type: multiple_choice
-        prompt: Was passiert laut Text, wenn alle ein bisschen aufpassen?
-        options: [Der Wald wird wieder sauber., Die Tiere gehen weg., Es regnet mehr.]
-        answer: Der Wald wird wieder sauber.
+        prompt: Was wäre laut Text, wenn alle ein bisschen aufpassen würden?
+        options: [Der Wald wäre viel sauberer., Die Tiere würden weggehen., Es würde mehr regnen.]
+        answer: Der Wald wäre viel sauberer.
       - id: b1-u03-r1-e5
         type: free_text
         direction: tr_de
@@ -461,13 +467,13 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: wenn ich es wüsste
-        answers: [bilsem]
+        answers: [bilsem, bunu bilsem, onu bilsem, eğer bilsem]
       - id: b1-u03-l7-e3
         type: multiple_choice
-        prompt: Welche Form ist richtig? (wenn ich nicht komme)
-        options: [gelmezsem, gelmemsem, gelmesem]
+        prompt: Welche Form ist richtig? (falls ich nicht komme – realer Fall)
+        options: [gelmezsem, gelmemsem, gelmiyorsem]
         answer: gelmezsem
-        explanation: gelmesem heißt „wenn ich nicht käme“ (gedacht).
+        explanation: Aorist verneint gelmez + sem. gelmesem (wenn ich nicht käme) ist der gedachte Fall.
       - id: b1-u03-l7-e4
         type: multiple_choice
         prompt: Welche Form ist richtig? (wenn du gehen willst)

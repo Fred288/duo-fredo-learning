@@ -1,6 +1,6 @@
 # Wenn … – Bedingungen mit -se
 
-Das Türkische hat kein eigenes Wort für „wenn“ am Satzanfang. Die Bedingung steckt in einer Endung am Verb des Nebensatzes: **-se/-sa**. Der Nebensatz steht wie immer **vor** dem Hauptsatz.
+Das Türkische braucht kein eigenes Wort für „wenn“ am Satzanfang. Die Bedingung steckt in einer Endung am Verb des Nebensatzes: **-se/-sa**. Der Nebensatz steht wie immer **vor** dem Hauptsatz.
 
 - Yağmur yağ**arsa** evde kalırız. (Wenn es regnet, bleiben wir zu Hause.)
 - Zengin ol**sam** dünyayı gezerdim. (Wenn ich reich wäre, würde ich um die Welt reisen.)
@@ -29,7 +29,7 @@ Für **wirkliche, mögliche** Bedingungen steht der Aorist + ise: **Aorist + se 
 Mit anderen Zeiten + ise geht es um etwas, das **schon feststeht** oder gerade gilt:
 
 - İstiyor**san** gel. (Wenn du (wirklich) willst, komm.)
-- Gidecek**sen** bana söyle. (Wenn du (vorhast zu) gehen, sag mir Bescheid.)
+- Gidecek**sen** bana söyle. (Wenn du gehen willst, sag mir Bescheid.)
 - İşini bitirdi**ysen** gidebilirsin. (Wenn du mit deiner Arbeit fertig bist, kannst du gehen.)
 
 Nach Vokal steht y: bitirdi-**y**-sen. Das k von -ecek bleibt: gidecek**sen**.
@@ -52,7 +52,7 @@ Nach Vokal steht y: bitirdi-**y**-sen. Das k von -ecek bleibt: gidecek**sen**.
 - Verneint: gel**me**sem. Kein Vokalwechsel am Stamm: git**se**, ye**se**.
 - **Ben sen olsam** / **Senin yerinde olsam** = Wenn ich du wäre / An deiner Stelle …
 
-Faustregel: **gelirse** = falls er kommt (gut möglich), **gelse** = wenn er käme (eher gedacht).
+Faustregel: **gelirse** = falls er kommt (gut möglich), **gelse** = wenn er käme (eher gedacht). Umgangssprachlich steht -se auch für Vorschläge und offene Fragen: Biraz dinlensen. (Ruh dich doch etwas aus.) Yarın gelmesem olur mu? (Ist es in Ordnung, wenn ich morgen nicht komme?)
 
 ## ise am Nomen: -sa, -se
 

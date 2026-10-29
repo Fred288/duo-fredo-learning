@@ -17,7 +17,7 @@ lessons:
         prompt: Was heißt „büyük dede“?
         options: [Urgroßvater, Großvater, Onkel]
         answer: Urgroßvater
-        explanation: Großvater ist dede; büyükanne dagegen ist die Großmutter.
+        explanation: Großvater ist dede oder büyükbaba; büyük dede ist eine Generation weiter. büyükanne ist die Großmutter.
       - id: b1-u02-l1-e2
         type: free_text
         direction: de_tr
@@ -115,7 +115,7 @@ lessons:
         gloss_de: 'er, sie arbeite (gerade, sagt man)'
         explanation: çalışıyor + muş. Man gibt weiter, was man gehört hat.
       - { id: b1-u02-l2-e2, type: conjugation, mode: verb, lemma: aramak, person: 3sg, tense: present, compound: evidential, target: arıyormuş, gloss_de: 'er, sie suche angeblich' }
-      - { id: b1-u02-l2-e3, type: conjugation, mode: verb, lemma: yaşamak, person: 3pl, tense: present, compound: evidential, target: yaşıyorlarmış, gloss_de: sie lebten angeblich }
+      - { id: b1-u02-l2-e3, type: conjugation, mode: verb, lemma: yaşamak, person: 3pl, tense: present, compound: evidential, target: yaşıyorlarmış, gloss_de: sie leben (lebten) angeblich }
       - { id: b1-u02-l2-e4, type: conjugation, mode: verb, lemma: beklemek, person: 2sg, tense: present, compound: evidential, target: bekliyormuşsun, gloss_de: du wartest ja (wie ich sehe) }
       - { id: b1-u02-l2-e5, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: present, compound: evidential, target: yağıyormuş, gloss_de: es regnet ja }
       - id: b1-u02-l2-e6
@@ -155,7 +155,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Komşumuz Almanya'da yaşıyormuş.
-        answers: [Unser Nachbar lebt angeblich in Deutschland., Unser Nachbar soll in Deutschland leben., Unsere Nachbarin lebt angeblich in Deutschland., Unsere Nachbarin soll in Deutschland leben., Unser Nachbar soll in Deutschland gelebt haben., Unsere Nachbarin soll in Deutschland gelebt haben., Unser Nachbar lebt anscheinend in Deutschland.]
+        answers: [Unser Nachbar wohnt angeblich in Deutschland., Unsere Nachbarin wohnt angeblich in Deutschland., Unser Nachbar lebt angeblich in Deutschland., Unser Nachbar soll in Deutschland leben., Unsere Nachbarin lebt angeblich in Deutschland., Unsere Nachbarin soll in Deutschland leben., Unser Nachbar soll in Deutschland gelebt haben., Unsere Nachbarin soll in Deutschland gelebt haben., Unser Nachbar lebt anscheinend in Deutschland.]
       - id: b1-u02-l2-e11
         type: conjugation
         mode: verb
@@ -165,7 +165,7 @@ lessons:
         compound: evidential
         question: true
         target: geliyor muymuş?
-        gloss_de: Soll er (denn) kommen?
+        gloss_de: Kommt er angeblich (gerade)?
         explanation: mi steht vor der Kopula, muymuş.
 
   - id: b1-u02-l3
@@ -194,13 +194,15 @@ lessons:
         answer: Mein Urgroßvater soll jeden Morgen im Meer geschwommen sein.
       - id: b1-u02-l3-e8
         type: word_bank
-        prompt: Früher schrieben die Menschen angeblich Briefe.
-        answers: [Eskiden insanlar mektup yazarmış.]
+        prompt: Früher schrieben die Menschen Briefe, heißt es.
+        answers: [Eskiden insanlar mektup yazarmış., İnsanlar eskiden mektup yazarmış.]
         chunks:
           - { text: "Eskiden", role: time }
           - { text: "insanlar", role: subject }
           - { text: "mektup", role: object_bare }
           - { text: "yazarmış", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: das Subjekt zuerst." }
         distractors: [yazardı, mektubu]
       - id: b1-u02-l3-e9
         type: word_bank
@@ -216,7 +218,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Mein Großvater soll nie Kaffee getrunken haben.
-        answers: [Dedem hiç kahve içmezmiş., Dedem asla kahve içmezmiş., Dedem kahve içmezmiş.]
+        answers: [Dedem hiç kahve içmezmiş., Dedem asla kahve içmezmiş., Dedem kahve içmezmiş., Dedem hiç kahve içmemiş.]
       - id: b1-u02-l3-e11
         type: multiple_choice
         prompt: Was ist der Unterschied? „Dedem kahve içmezdi.“ / „Dedem kahve içmezmiş.“
@@ -235,9 +237,9 @@ lessons:
         tense: evidential
         compound: evidential
         target: evlenmişlermiş
-        gloss_de: sie sollen geheiratet haben (sagt man)
-        explanation: -mişmiş gibt weiter, was andere erzählt haben.
-      - { id: b1-u02-l4-e2, type: conjugation, mode: verb, lemma: göç etmek, person: 3sg, tense: evidential, compound: evidential, target: göç etmişmiş, gloss_de: 'er, sie soll ausgewandert sein' }
+        gloss_de: sie sollen geheiratet haben (habe ich gehört, dass man sagt)
+        explanation: Doppelt vom Hörensagen, oft ungläubig; für das bloße „soll geheiratet haben“ reicht evlenmişler.
+      - { id: b1-u02-l4-e2, type: conjugation, mode: verb, lemma: göç etmek, person: 3sg, tense: evidential, compound: evidential, target: göç etmişmiş, gloss_de: 'er, sie soll ausgewandert sein (sagt man)' }
       - id: b1-u02-l4-e3
         type: conjugation
         mode: verb
@@ -271,7 +273,7 @@ lessons:
         type: word_bank
         prompt: Mein Urgroßvater soll Schneider gewesen sein.
         answers: [Büyük dedem terziymiş.]
-        distractors: [terziydi, dedem]
+        distractors: [terziydi, büyükbabam]
       - id: b1-u02-l4-e12
         type: word_bank
         prompt: Es war einmal …
@@ -292,13 +294,13 @@ lessons:
         type: word_bank
         prompt: Wer ist das auf dem Foto?
         answers: [Fotoğraftaki kim?, Bu fotoğraftaki kim?]
-        distractors: [fotoğrafta, ne]
+        distractors: [fotoğrafı, ne]
         explanation: fotoğraftaki = der/die auf dem Foto (-ki).
       - id: b1-u02-l5-e2
         type: word_bank
         prompt: Das ist mein Urgroßvater.
         answers: [Bu benim büyük dedem., Bu büyük dedem.]
-        distractors: [dedemi, şu]
+        distractors: [dedemi, büyükbabam]
       - id: b1-u02-l5-e3
         type: multiple_choice
         prompt: Wie fragst du „Was hat er (angeblich) gemacht?“
@@ -326,13 +328,15 @@ lessons:
       - id: b1-u02-l5-e7
         type: word_bank
         prompt: Wer hat dir das erzählt?
-        answers: [Bunu sana kim anlattı?]
+        answers: [Bunu sana kim anlattı?, Sana bunu kim anlattı?]
         chunks:
           - { text: "Bunu", role: object }
           - { text: "sana", role: complement }
           - { text: "kim", role: question }
           - { text: "anlattı", role: predicate }
-        distractors: [seni, anlatmış]
+        orders:
+          - { order: [1, 0, 2, 3] }
+        distractors: [seni, anlatıyor]
       - id: b1-u02-l5-e8
         type: free_text
         direction: de_tr
@@ -340,7 +344,7 @@ lessons:
         answers: [Babaannem anlattı., Anneannem anlattı., Büyükannem anlattı., Babaannem anlattı bunu., Anneannem anlattı bunu., Bunu babaannem anlattı., Bunu anneannem anlattı.]
       - id: b1-u02-l5-e9
         type: multiple_choice
-        prompt: Jemand erzählt etwas Unglaubliches. Was fragst du nach?
+        prompt: Jemand erzählt, was Ali gesagt hat. Du kannst es kaum glauben. Was fragst du?
         options: [Öyle mi demiş?, Öyle mi dedim?, Öyle mi diyecek?]
         answer: Öyle mi demiş?
         explanation: Öyle mi demiş? = Hat er/sie das (wirklich) gesagt?
@@ -385,11 +389,12 @@ lessons:
       - id: b1-u02-l6-e5
         type: paradigm
         kind: verb
-        lemma: gitmek
-        tense: evidential
+        lemma: gelmek
+        tense: present
         compound: evidential
-        targets: [gitmişmişim, gitmişmişsin, gitmişmiş, gitmişmişiz, gitmişmişsiniz, gitmişlermiş]
-        gloss_de: soll gegangen sein (sagt man)
+        negative: true
+        targets: [gelmiyormuşum, gelmiyormuşsun, gelmiyormuş, gelmiyormuşuz, gelmiyormuşsunuz, gelmiyorlarmış]
+        gloss_de: komme angeblich nicht
 
   - id: b1-u02-r1
     type: reading
@@ -400,12 +405,13 @@ lessons:
         - { tr: "Ailesi çok fakirmiş.", de: "Seine Familie soll sehr arm gewesen sein." }
         - { tr: "On iki yaşında bir terzinin yanında çalışmaya başlamış.", de: "Mit zwölf hat er angeblich bei einem Schneider zu arbeiten begonnen." }
         - { tr: "Her gün sabahtan akşama kadar çalışırmış.", de: "Er soll jeden Tag von morgens bis abends gearbeitet haben." }
-        - { tr: "Yirmi yaşında bir gemiyle İstanbul'a gitmiş.", de: "Mit zwanzig ist er mit einem Schiff nach Istanbul gefahren." }
+        - { tr: "Yirmi yaşında Almanya'ya gidecekmiş.", de: "Mit zwanzig wollte er angeblich nach Deutschland gehen." }
+        - { tr: "Ama sonra bir gemiyle İstanbul'a gitmiş.", de: "Aber dann ist er mit einem Schiff nach Istanbul gefahren." }
         - { tr: "İstanbul'da babaannemin annesiyle tanışmış.", de: "In Istanbul hat er die Mutter meiner Großmutter kennengelernt." }
         - { tr: "İkisi hemen birbirine âşık olmuş ve evlenmişler.", de: "Die beiden sollen sich sofort ineinander verliebt und geheiratet haben." }
         - { tr: "Büyük dedem sonra kendi dükkânını açmış.", de: "Mein Urgroßvater soll später seinen eigenen Laden eröffnet haben." }
         - { tr: "Herkes onun ceketlerini çok severmiş.", de: "Alle sollen seine Jacken sehr gemocht haben." }
-        - { tr: "Ben onu hiç görmedim, ama annem onun hikâyelerini hep anlatır.", de: "Ich habe ihn nie gesehen, aber meine Mutter erzählt immer seine Geschichten." }
+        - { tr: "Ben onu hiç görmedim ama babam onun hikâyelerini hep anlatır.", de: "Ich habe ihn nie gesehen, aber mein Vater erzählt immer seine Geschichten." }
       glossary:
         - { tr: "fakirmiş", de: "soll arm gewesen sein (fakir + miş)", vocab: "fakir" }
         - { tr: "birbirine", de: "einander, ineinander (Dativ)" }
@@ -465,7 +471,7 @@ lessons:
         prompt: Meine Urgroßmutter soll sehr schön gesungen haben.
         answers: [Babaannemin annesi çok güzel şarkı söylermiş., Anneannemin annesi çok güzel şarkı söylermiş.]
         distractors: [söylerdi, söylüyor]
-        explanation: „Urgroßmutter“ umschreibt man, z. B. babaannemin annesi; büyükanne ist die Großmutter.
+        explanation: „Urgroßmutter“ umschreibt man, z. B. babaannemin annesi, oder sagt büyük nine; büyükanne ist die Großmutter.
       - id: b1-u02-l7-e5
         type: free_text
         direction: tr_de

@@ -12,7 +12,7 @@ Mit **idi** (als Endung -di/-dı/-du/-dü, nach Vokal -ydi) wird eine Zeitform i
 | gelecek       | gelecektim   | ich wollte kommen             |
 | gelmeli       | gelmeliydim  | ich hätte kommen sollen       |
 
-Die Endungen sind die von -dı: -m, -n, –, -k, -niz, -ler. Das **k** von -ecek bleibt vor -ti stehen: gelecek**ti**m (nicht *geleceğdim). Nach p, t, k, ç, s, ş, f, h wird d zu t: gelmiş**ti**, gelecek**ti**.
+Die Endungen sind die von -dı: -m, -n, –, -k, -niz; „sie“: -lardı (oder -dılar). Das **k** von -ecek bleibt vor -ti stehen: gelecek**ti**m (nicht *geleceğdim). Nach p, t, k, ç, s, ş, f, h wird d zu t: gelmiş**ti**, gelecek**ti**.
 
 ## Was gerade lief: -iyordu
 
@@ -21,7 +21,7 @@ Die Endungen sind die von -dı: -m, -n, –, -k, -niz, -ler. Das **k** von -ecek
 - Kitap okuyordum, telefon çaldı. (Ich las gerade ein Buch, da klingelte das Telefon.)
 - O zamanlar bir köyde yaşıyorduk. (Damals lebten wir in einem Dorf.)
 
-Im Deutschen steht hier meist einfach das Präteritum. Verneinung: gel**mi**yordum. „sie“: geliyor**lar**dı (auch geliyordular).
+Im Deutschen steht hier meist einfach das Präteritum. -iyordu steht auch für **Zustände und Gewohnheiten über einen Zeitraum** (Eskiden İstanbul'da çalışıyordum. Früher arbeitete ich in Istanbul.); -irdi betont dagegen das Typische, Wiederkehrende. Verneinung: gel**mi**yordum. „sie“: geliyor**lar**dı (auch geliyordular).
 
 ## Was früher immer so war: -irdi
 
@@ -32,7 +32,7 @@ Der Aorist mit idi beschreibt **Gewohnheiten in der Vergangenheit**, wie „frü
 
 Der Aorist-Vokal bleibt wie gewohnt: yap**ar**dım, gel**ir**dim, oku**r**dum. Verneint steht **-mez** auch bei „ich“ und „wir“: içmezdim, gelmezdik (nicht *içmemdim).
 
-Dieselbe Form heißt auch „würde“: Ben olsam gitmezdim. (An meiner Stelle würde ich nicht gehen.) Das kommt bei den Bedingungssätzen wieder.
+Dieselbe Form heißt auch „würde“: Ben olsam gitmezdim. (Ich an deiner Stelle würde nicht gehen.) Das kommt bei den Bedingungssätzen wieder.
 
 ## Was schon passiert war: -mişti
 

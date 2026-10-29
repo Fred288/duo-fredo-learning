@@ -34,7 +34,7 @@ lessons:
         prompt: Was heißt „hatırlamak“?
         options: [sich erinnern, vergessen, erzählen]
         answer: sich erinnern
-        explanation: Was man erinnert, steht im Akkusativ, onu hatırlıyorum = ich erinnere mich daran.
+        explanation: Woran man sich erinnert, steht im Akkusativ, onu hatırlıyorum = ich erinnere mich daran.
       - id: b1-u01-l1-e5
         type: free_text
         direction: de_tr
@@ -90,7 +90,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: plötzlich
-        answers: [aniden, birden]
+        answers: [aniden, birden, birdenbire, ansızın]
       - id: b1-u01-l1-e15
         type: multiple_choice
         prompt: Was heißt „karar vermek“?
@@ -157,13 +157,13 @@ lessons:
           - { text: "O zamanlar", role: time }
           - { text: "bir köyde", role: place }
           - { text: "yaşıyorduk", role: predicate }
-        distractors: [yaşadık, köye]
+        distractors: [yaşıyoruz, köye]
       - id: b1-u01-l2-e11
         type: word_bank
         prompt: Ich schlief gerade, da klopfte es an der Tür.
-        answers: ['Uyuyordum, kapı çaldı.', 'Ben uyuyordum, kapı çaldı.']
+        answers: ['Uyuyordum, kapı çaldı.', 'Ben uyuyordum, kapı çaldı.', 'Uyuyordum, kapı çalındı.', 'Ben uyuyordum, kapı çalındı.']
         distractors: [uyudum, çalıyordu]
-        explanation: kapı çaldı = es klopfte, es klingelte an der Tür.
+        explanation: kapı çaldı = es klopfte, es klingelte an der Tür; normativ auch kapı çalındı (Passiv).
       - id: b1-u01-l2-e12
         type: free_text
         direction: tr_de
@@ -251,7 +251,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Früher trank ich keinen Kaffee.
-        answers: [Eskiden kahve içmezdim., Ben eskiden kahve içmezdim., Eskiden hiç kahve içmezdim.]
+        answers: [Eskiden kahve içmezdim., Ben eskiden kahve içmezdim., Eskiden hiç kahve içmezdim., Eskiden kahve içmiyordum., Ben eskiden kahve içmiyordum.]
       - id: b1-u01-l3-e13
         type: multiple_choice
         prompt: Was bedeutet „Dedem bize her akşam masal anlatırdı.“?
@@ -312,7 +312,7 @@ lessons:
         type: word_bank
         prompt: Ich hatte meinen Schlüssel vergessen.
         answers: [Anahtarımı unutmuştum.]
-        distractors: [anahtarım, unutmuşum]
+        distractors: [anahtarım, unuttum]
       - id: b1-u01-l4-e13
         type: free_text
         direction: tr_de
@@ -351,7 +351,7 @@ lessons:
         answer: Was hast du als Kind (gewöhnlich) gemacht?
       - id: b1-u01-l5-e4
         type: word_bank
-        prompt: Wir spielten immer am Bach.
+        prompt: Wir spielten immer im Bach.
         answers: [Hep derede oynardık.]
         chunks:
           - { text: "Hep", role: complement }
@@ -372,7 +372,7 @@ lessons:
           - { text: "Okuldan sonra", role: time }
           - { text: "ne", role: question }
           - { text: "yaptın", role: predicate }
-        distractors: [yapardın, okula]
+        distractors: [yapıyorsun, okula]
       - id: b1-u01-l5-e7
         type: word_bank
         prompt: Ich habe die Universität abgeschlossen.
@@ -388,7 +388,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Damals war ich noch jung.
-        answers: [O zamanlar daha gençtim., O zamanlar gençtim., O zamanlar ben gençtim., O zamanlar hâlâ gençtim., O zamanlar henüz gençtim.]
+        answers: [O zamanlar daha gençtim., O zamanlar gençtim., O zamanlar ben gençtim., O zamanlar hâlâ gençtim., O zamanlar henüz gençtim., O zamanlar ben daha gençtim., Ben o zamanlar daha gençtim.]
         explanation: gençtim = genç + tim (ich war jung).
       - id: b1-u01-l5-e10
         type: conjugation
@@ -462,15 +462,18 @@ lessons:
         - { tr: "Okuldan sonra derede yüzerdik ya da ağaçlara tırmanırdık.", de: "Nach der Schule schwammen wir im Bach oder kletterten auf Bäume." }
         - { tr: "Akşamları dedem bize masal anlatırdı.", de: "Abends erzählte uns mein Großvater Märchen." }
         - { tr: "Bir akşam masalı ben anlattım, dedem dinledi.", de: "Eines Abends habe ich das Märchen erzählt, und mein Großvater hat zugehört." }
+        - { tr: "Babam üniversiteye gitmemi istiyordu.", de: "Mein Vater wollte, dass ich an die Universität gehe." }
         - { tr: "On sekiz yaşında şehre taşındım.", de: "Mit achtzehn bin ich in die Stadt gezogen." }
-        - { tr: "Önce köyümü çok özledim, ama sonra alıştım.", de: "Zuerst habe ich mein Dorf sehr vermisst, aber dann habe ich mich gewöhnt." }
-        - { tr: "Şimdi emekli oldum ve yine köyde yaşıyorum.", de: "Jetzt bin ich in Rente und lebe wieder im Dorf." }
+        - { tr: "O zamana kadar okulu çoktan bitirmiştim.", de: "Bis dahin hatte ich die Schule längst abgeschlossen." }
+        - { tr: "Önce köyümü çok özledim ama sonra alıştım.", de: "Zuerst habe ich mein Dorf sehr vermisst, aber dann habe ich mich gewöhnt." }
+        - { tr: "Şimdi emekliyim ve yine köyde yaşıyorum.", de: "Jetzt bin ich in Rente und lebe wieder im Dorf." }
       glossary:
         - { tr: "bakardı", de: "kümmerte sich (bakmak + Dativ = sich kümmern um; Aorist mit idi)", vocab: "bakmak" }
         - { tr: "uzaktı", de: "war weit weg (uzak + tı)", vocab: "uzak" }
         - { tr: "yürüyerek", de: "zu Fuß, gehend (yürümek + -erek)", vocab: "yürümek" }
         - { tr: "her", de: "jede(r, s) (her sabah = jeden Morgen)" }
-        - { tr: "emekli", de: "Rentner(in), im Ruhestand (emekli olmak = in Rente gehen)", vocab: "emekli olmak" }
+        - { tr: "emekliyim", de: "ich bin in Rente (emekli + yim)", vocab: "emekli olmak" }
+        - { tr: "zamana", de: "bis zu der Zeit (o zamana kadar = bis dahin)", vocab: "zaman" }
         - { tr: "özledim", de: "ich habe vermisst (özlemek = vermissen)" }
         - { tr: "alıştım", de: "ich habe mich gewöhnt (alışmak = sich gewöhnen)" }
         - { tr: "yine", de: "wieder" }
@@ -530,9 +533,9 @@ lessons:
       - id: b1-u01-l7-e5
         type: multiple_choice
         prompt: Welche Form ist richtig? (ich trank früher nicht)
-        options: [içmezdim, içmemdim, içmiyordum]
+        options: [içmezdim, içmemdim, içmezdım]
         answer: içmezdim
-        explanation: içmiyordum heißt „ich trank gerade nicht“; für Gewohnheiten steht der Aorist.
+        explanation: -mezdi betont die Gewohnheit; içmiyordum geht auch. içmezdım hat die falsche Harmonie.
       - id: b1-u01-l7-e6
         type: word_bank
         prompt: Früher wohnten wir in einer Kleinstadt.
@@ -541,7 +544,7 @@ lessons:
           - { text: "Eskiden", role: time }
           - { text: "bir kasabada", role: place }
           - { text: "yaşıyorduk", role: predicate }
-        distractors: [yaşadık, kasabaya]
+        distractors: [yaşıyoruz, kasabaya]
       - id: b1-u01-l7-e7
         type: free_text
         direction: tr_de
@@ -556,18 +559,20 @@ lessons:
         compound: past
         negative: true
         target: karar vermezdim
-        gloss_de: ich würde mich nicht (so) entscheiden
-        explanation: -mezdi heißt auch „würde nicht“.
+        gloss_de: ich entschied (früher) nicht, ich würde nicht entscheiden
+        explanation: -mezdi heißt „früher nicht“ und auch „würde nicht“.
       - id: b1-u01-l7-e9
         type: word_bank
         prompt: Mein Großvater erzählte uns immer Märchen.
-        answers: [Dedem bize hep masal anlatırdı.]
+        answers: [Dedem bize hep masal anlatırdı., Dedem hep bize masal anlatırdı.]
         chunks:
           - { text: "Dedem", role: subject }
           - { text: "bize", role: complement }
           - { text: "hep", role: complement }
           - { text: "masal", role: object_bare }
           - { text: "anlatırdı", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3, 4] }
         distractors: [anlattı, bizi]
       - id: b1-u01-l7-e10
         type: conjugation
