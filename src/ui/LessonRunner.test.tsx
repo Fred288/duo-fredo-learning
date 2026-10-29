@@ -266,6 +266,63 @@ describe('LessonRunner', () => {
     expect(screen.getByRole('status').textContent).toContain('Richtig!');
   });
 
+  it.each([
+    [
+      { tense: 'optative', person: '1pl', target: 'gelelim' },
+      'gelmek · wir · Optativ (-eyim/-elim)',
+    ],
+    [{ tense: 'conditional', target: 'gelsem' }, 'gelmek · ich · Konditional (-se)'],
+    [
+      { tense: 'aorist', compound: 'conditional', target: 'gelirsem' },
+      'gelmek · ich · Aorist · mit ise (-se)',
+    ],
+    [
+      { tense: 'present', compound: 'evidential', target: 'geliyormuşum' },
+      'gelmek · ich · Präsens · mit imiş (-miş)',
+    ],
+  ] as const)('Konjugationsformel %o', (extra, formula) => {
+    const one: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e1',
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'gelmek',
+          person: '1sg',
+          ...extra,
+        } as Lesson['exercises'][number],
+      ],
+    };
+    render(<LessonRunner lesson={one} onExit={() => {}} />);
+    expect(screen.getByText(formula)).toBeTruthy();
+  });
+
+  it('Suffix-Builder: verneintes Können heißt -eme, nicht -ebil + Verneinung', () => {
+    const cannot: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e1',
+          type: 'suffix_builder',
+          stem: 'gelmek',
+          verbal: 'PART_AN',
+          ability: true,
+          negative: true,
+          suffixes: [],
+          target: 'gelemeyen',
+        },
+      ],
+    };
+    render(<LessonRunner lesson={cannot} onExit={() => {}} />);
+    expect(screen.getByText('gelmek + nicht können -eme + Partizip -en')).toBeTruthy();
+    for (const tile of ['gel', 'e', 'me', 'yen']) {
+      fireEvent.click(screen.getByRole('button', { name: tile }));
+    }
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Richtig!');
+  });
+
   it('Tabelle mit Partizip nennt Passiv in der Formel', () => {
     const table: Lesson = {
       ...lesson,
@@ -284,6 +341,11 @@ describe('LessonRunner', () => {
     };
     render(<LessonRunner lesson={table} onExit={() => {}} />);
     expect(screen.getByText('yapmak · Passiv · Partizip -dik')).toBeTruthy();
+    const cells = screen.getAllByRole('textbox');
+    fireEvent.change(cells[0]!, { target: { value: 'yapıldığım' } });
+    fireEvent.change(cells[1]!, { target: { value: 'yapıldığı' } });
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Richtig!');
   });
 
   it('Konjugation im Präteritum: Zeit in der Formel, Begründung der Angleichung', () => {

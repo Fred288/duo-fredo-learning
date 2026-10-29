@@ -248,7 +248,7 @@ describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
 
   it('gitmek: idi/imiş/ise, Konditional, Optativ', () => {
     const e = verbExtras(entry('gitmek'))!;
-    const col = (c: number) => e.compounds.rows.map((r) => r.forms[c]);
+    const col = (c: number) => e.compounds!.rows.map((r) => r.forms[c]);
     expect(col(0)).toEqual([
       'gidiyordum',
       'gidiyordun',
@@ -257,10 +257,10 @@ describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
       'gidiyordunuz',
       'gidiyorlardı',
     ]);
-    expect(e.compounds.rows[0]!.forms).toContain('gitsem');
-    expect(e.compounds.rows[0]!.forms).toContain('gideyim');
+    expect(e.compounds!.rows[0]!.forms).toContain('gitsem');
+    expect(e.compounds!.rows[0]!.forms).toContain('gideyim');
     // Optativ nur 1. Person: 2. Person bleibt leer
-    const optative = e.compounds.columns.findIndex((c) => c.tense === 'optative');
+    const optative = e.compounds!.columns.findIndex((c) => c.tense === 'optative');
     expect(col(optative)).toEqual([
       'gideyim',
       undefined,
@@ -276,10 +276,11 @@ describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
     const forms = e.verbals.map((v) => v.form);
     expect(forms).toEqual([
       'giden',
+      'gitmeyen',
       'gittiğim',
-      'gideceğim',
+      'gideceği',
       'gitmesi',
-      'gitmek',
+      'gitmekte',
       'gidiş',
       'gidip',
       'giderek',
@@ -287,6 +288,22 @@ describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
       'gideli',
       'gitmeden',
     ]);
+  });
+
+  it('Mehrwortverb und Aorist-Override geben den Stamm weiter', () => {
+    const extra = (tr: string, flags: object) =>
+      verbExtras({ id: tr, unit: 'x', tr, de: ['x'], pos: 'verb', ...flags })!;
+    const help = extra('yardım etmek', { softens: true });
+    expect(help.compounds!.rows[0]!.forms[0]).toBe('yardım ediyordum');
+    const lose = extra('kaybetmek', { softens: true, aorist: 'ar' });
+    const aoristPast = lose.compounds!.columns.findIndex(
+      (c) => c.tense === 'aorist' && c.compound === 'past',
+    );
+    const aoristIf = lose.compounds!.columns.findIndex(
+      (c) => c.tense === 'aorist' && c.compound === 'conditional',
+    );
+    expect(lose.compounds!.rows[0]!.forms[aoristPast]).toBe('kaybederdim');
+    expect(lose.compounds!.rows[0]!.forms[aoristIf]).toBe('kaybedersem');
   });
 
   it('Nomen haben keine zusätzlichen Tabellen', () => {

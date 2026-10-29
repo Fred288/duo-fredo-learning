@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { speechText } from '../audio/speech-text';
 import { t, type MessageKey } from '../i18n';
 import { formTable, verbExtras, type CompoundColumn, type FormLabel } from '../lookup/forms';
 import type { LookupIndex, VocabEntry } from '../lookup/types';
+import type { Person } from '../morphology';
 import { INTERVALS, vocabStatus, type Card, type VocabDir } from '../srs';
 import { dayKey } from '../progress/day';
 import { useApp } from '../store/app';
@@ -19,9 +20,9 @@ export function formLabelText(label: FormLabel): string {
     case 'verbal':
       return [
         [t(`tag.${label.form}`), ...(label.tags ?? []).map((tag) => t(`tag.${tag}`))].join(' + '),
-        label.ability && t('tag.ABIL'),
+        label.ability && t(label.negative ? 'tag.ABIL_NEG' : 'tag.ABIL'),
         label.passive && t('lookup.passive'),
-        label.negative && t('lookup.negative'),
+        label.negative && !label.ability && t('lookup.negative'),
       ]
         .filter(Boolean)
         .join(', ');
@@ -47,143 +48,161 @@ const caseLabel = (c: string): string =>
 
 const th = 'px-2 py-1 text-left font-medium';
 const td = 'px-2 py-1';
+// Zeilenkopf bleibt beim waagerechten Scrollen stehen (breite Verbtabellen auf dem Handy).
+const rowHead = `${th} sticky left-0 bg-white dark:bg-stone-900`;
+const rowLine = 'border-b border-stone-100 dark:border-stone-800';
+
+/** Aufklappbarer Kasten mit einer waagerecht scrollbaren Tabelle (Formen türkisch). */
+function FormDetails({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <details className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
+      <summary className="cursor-pointer font-medium">{title}</summary>
+      <div className="relative mt-2 overflow-x-auto" lang="tr">
+        <table className="w-full text-sm">{children}</table>
+      </div>
+    </details>
+  );
+}
+
+/** Personen × Spalten (Zeiten); Spaltenköpfe deutsch, auf Wunsch kurz mit Langtext für Screenreader. */
+function PersonTable({
+  columns,
+  rows,
+}: {
+  columns: { label: string; full?: string }[];
+  rows: { person: Person; forms: (string | undefined)[] }[];
+}) {
+  return (
+    <>
+      <thead>
+        <tr className="border-b border-stone-200 dark:border-stone-800">
+          <th className={rowHead} lang="de" />
+          {columns.map((c, i) => (
+            <th key={i} className={`${th} whitespace-nowrap`} scope="col" lang="de" title={c.full}>
+              {c.full ? (
+                <>
+                  <span aria-hidden="true">{c.label}</span>
+                  <span className="sr-only">{c.full}</span>
+                </>
+              ) : (
+                c.label
+              )}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr key={r.person} className={rowLine}>
+            <th className={rowHead} scope="row" lang="de">
+              {t(`person.${r.person}`)}
+            </th>
+            {r.forms.map((f, i) => (
+              <td key={i} className={td}>
+                {f ?? '–'}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </>
+  );
+}
 
 function Forms({ entry }: { entry: VocabEntry }) {
   const table = formTable(entry);
   if (!table) return null;
+  if (table.kind === 'verb') {
+    return (
+      <FormDetails title={t('lookup.forms')}>
+        <PersonTable
+          columns={table.tenses.map((tense) => ({ label: t(`tense.${tense}`) }))}
+          rows={table.rows}
+        />
+      </FormDetails>
+    );
+  }
   return (
-    <details className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
-      <summary className="cursor-pointer font-medium">{t('lookup.forms')}</summary>
-      <div className="mt-2 overflow-x-auto" lang="tr">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b border-stone-200 dark:border-stone-800">
-              {table.kind === 'noun' && (
-                <>
-                  <th className={th} lang="de" />
-                  <th className={th} lang="de">
-                    {t('lookup.singular')}
-                  </th>
-                  <th className={th} lang="de">
-                    {t('lookup.plural')}
-                  </th>
-                </>
-              )}
-              {table.kind === 'pronoun' && <th className={th} colSpan={2} lang="de" />}
-              {table.kind === 'verb' && (
-                <>
-                  <th className={th} />
-                  {table.tenses.map((tense) => (
-                    <th key={tense} className={th} lang="de">
-                      {t(`tense.${tense}`)}
-                    </th>
-                  ))}
-                </>
-              )}
+    <FormDetails title={t('lookup.forms')}>
+      <thead>
+        <tr className="border-b border-stone-200 dark:border-stone-800">
+          {table.kind === 'noun' && (
+            <>
+              <th className={th} lang="de" />
+              <th className={th} scope="col" lang="de">
+                {t('lookup.singular')}
+              </th>
+              <th className={th} scope="col" lang="de">
+                {t('lookup.plural')}
+              </th>
+            </>
+          )}
+          {table.kind === 'pronoun' && <th className={th} colSpan={2} lang="de" />}
+        </tr>
+      </thead>
+      <tbody>
+        {table.kind === 'noun' &&
+          table.rows.map((r) => (
+            <tr key={r.case} className={rowLine}>
+              <th className={th} scope="row" lang="de">
+                {caseLabel(r.case)}
+              </th>
+              <td className={td}>{r.sg ?? '–'}</td>
+              <td className={td}>{r.pl ?? '–'}</td>
             </tr>
-          </thead>
-          <tbody>
-            {table.kind === 'noun' &&
-              table.rows.map((r) => (
-                <tr key={r.case} className="border-b border-stone-100 dark:border-stone-800">
-                  <th className={th} scope="row" lang="de">
-                    {caseLabel(r.case)}
-                  </th>
-                  <td className={td}>{r.sg ?? '–'}</td>
-                  <td className={td}>{r.pl ?? '–'}</td>
-                </tr>
-              ))}
-            {table.kind === 'pronoun' &&
-              table.rows.map((r) => (
-                <tr key={r.case} className="border-b border-stone-100 dark:border-stone-800">
-                  <th className={th} scope="row" lang="de">
-                    {caseLabel(r.case)}
-                  </th>
-                  <td className={td}>{r.form}</td>
-                </tr>
-              ))}
-            {table.kind === 'verb' &&
-              table.rows.map((r) => (
-                <tr key={r.person} className="border-b border-stone-100 dark:border-stone-800">
-                  <th className={th} scope="row" lang="de">
-                    {t(`person.${r.person}`)}
-                  </th>
-                  {r.forms.map((f, i) => (
-                    <td key={i} className={td}>
-                      {f ?? '–'}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
-    </details>
+          ))}
+        {table.kind === 'pronoun' &&
+          table.rows.map((r) => (
+            <tr key={r.case} className={rowLine}>
+              <th className={th} scope="row" lang="de">
+                {caseLabel(r.case)}
+              </th>
+              <td className={td}>{r.form}</td>
+            </tr>
+          ))}
+      </tbody>
+    </FormDetails>
   );
 }
 
 const columnLabel = (c: CompoundColumn): string =>
   [t(`tense.${c.tense}`), c.compound && t(`compound.${c.compound}`)].filter(Boolean).join(' · ');
 
+/** Kurzer Spaltenkopf als Musterendung (-iyordu, -irse); der Langtext steht im title. */
+const columnShort = (c: CompoundColumn): string =>
+  t(`lookup.col.${c.tense}${c.compound ? `.${c.compound}` : ''}` as MessageKey);
+
 /** Zusammengesetzte Zeiten und Wünsche, dazu Partizipien, Verbalnomen, Konverbien (nur Verben). */
 function VerbExtras({ entry }: { entry: VocabEntry }) {
   const extras = verbExtras(entry);
   if (!extras) return null;
-  const box =
-    'rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900';
   return (
     <>
-      <details className={box}>
-        <summary className="cursor-pointer font-medium">{t('lookup.compounds')}</summary>
-        <div className="mt-2 overflow-x-auto" lang="tr">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-stone-200 dark:border-stone-800">
-                <th className={th} />
-                {extras.compounds.columns.map((c, i) => (
-                  <th key={i} className={th} lang="de">
-                    {columnLabel(c)}
-                  </th>
-                ))}
+      {extras.compounds && (
+        <FormDetails title={t('lookup.compounds')}>
+          <PersonTable
+            columns={extras.compounds.columns.map((c) => ({
+              label: columnShort(c),
+              full: columnLabel(c),
+            }))}
+            rows={extras.compounds.rows}
+          />
+        </FormDetails>
+      )}
+      {extras.verbals.length > 0 && (
+        <FormDetails title={t('lookup.verbals')}>
+          <tbody>
+            {extras.verbals.map((v) => (
+              <tr key={formLabelText(v.label)} className={rowLine}>
+                <th className={th} scope="row" lang="de">
+                  {formLabelText(v.label)}
+                </th>
+                <td className={td}>{v.form}</td>
               </tr>
-            </thead>
-            <tbody>
-              {extras.compounds.rows.map((r) => (
-                <tr key={r.person} className="border-b border-stone-100 dark:border-stone-800">
-                  <th className={th} scope="row" lang="de">
-                    {t(`person.${r.person}`)}
-                  </th>
-                  {r.forms.map((f, i) => (
-                    <td key={i} className={td}>
-                      {f ?? '–'}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </details>
-      <details className={box}>
-        <summary className="cursor-pointer font-medium">{t('lookup.verbals')}</summary>
-        <div className="mt-2 overflow-x-auto" lang="tr">
-          <table className="w-full text-sm">
-            <tbody>
-              {extras.verbals.map((v) => (
-                <tr
-                  key={formLabelText(v.label)}
-                  className="border-b border-stone-100 dark:border-stone-800"
-                >
-                  <th className={th} scope="row" lang="de">
-                    {formLabelText(v.label)}
-                  </th>
-                  <td className={td}>{v.form}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </details>
+            ))}
+          </tbody>
+        </FormDetails>
+      )}
     </>
   );
 }
@@ -257,7 +276,7 @@ export function LookupEntry({
         </p>
       </header>
       <Forms entry={entry} />
-      <VerbExtras entry={entry} />
+      {!compact && <VerbExtras entry={entry} />}
       <SrsStatus cards={cards} id={entry.id} />
       {unit && (
         <p className="text-sm">

@@ -67,9 +67,14 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
     ...(ex.kind === 'noun'
       ? []
       : ex.kind === 'verbal'
-        ? [ex.passive && t('tag.PASS'), ex.ability && t('tag.ABIL'), t(`tag.${ex.verbal!}`)]
+        ? [
+            ex.passive && t('tag.PASS'),
+            // verneintes Können ist -(y)AmA (gelemeyen), nicht -ebil + verneint
+            ex.ability && t(ex.negative ? 'tag.ABIL_NEG' : 'tag.ABIL'),
+            t(`tag.${ex.verbal!}`),
+          ]
         : tenseLabels(ex.kind === 'copula', ex)),
-    ex.negative && t('ex.conjugation.negative'),
+    ex.negative && !(ex.kind === 'verbal' && ex.ability) && t('ex.conjugation.negative'),
     ex.question && t('ex.conjugation.question'),
   ]
     .filter(Boolean)
@@ -77,7 +82,7 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
 
   return (
     <div className="space-y-4">
-      <Prompt instruction={t(`ex.paradigm.${ex.kind}`)} text={formula} ex={ex} lang="tr" />
+      <Prompt instruction={t(`ex.paradigm.${ex.kind}`)} text={formula} ex={ex} lang="de" />
       {ex.gloss_de && <p className="-mt-2 text-stone-600 dark:text-stone-400">„{ex.gloss_de}“</p>}
       <div className="space-y-2">
         {labels.map((label, i) => (

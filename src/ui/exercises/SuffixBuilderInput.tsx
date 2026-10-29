@@ -18,8 +18,9 @@ export function SuffixBuilderInput({ ex, vocab, onChange, disabled }: Props) {
   const formula = [
     ex.stem,
     ex.passive && t('tag.PASS'),
-    ex.ability && t('tag.ABIL'),
-    ex.negative && t('tag.NEG'),
+    // verneintes Können ist -(y)AmA, nicht -ebil + -me (gelemeyen)
+    ex.ability && t(ex.negative ? 'tag.ABIL_NEG' : 'tag.ABIL'),
+    ex.negative && !ex.ability && t('tag.NEG'),
     ex.verbal && t(`tag.${ex.verbal}`),
     ...ex.suffixes.map((tag) => t(`tag.${tag}`)),
   ]

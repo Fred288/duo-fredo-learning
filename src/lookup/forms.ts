@@ -285,10 +285,13 @@ const COMPOUND_COLUMNS: CompoundColumn[] = [
 /** Beispielzeilen der infiniten Formen im Eintrag: eine Form je Baustein. */
 const VERBAL_SAMPLES: Omit<Extract<FormLabel, { kind: 'verbal' }>, 'kind'>[] = [
   { form: 'PART_AN', tags: [] },
+  { form: 'PART_AN', tags: [], negative: true },
   { form: 'PART_DIK', tags: ['POSS_1SG'] },
-  { form: 'PART_ACAK', tags: ['POSS_1SG'] },
+  // geleceği statt geleceğim: kein Gleichklang mit dem Futur 1sg
+  { form: 'PART_ACAK', tags: ['POSS_3SG'] },
   { form: 'VN_MA', tags: ['POSS_3SG'] },
-  { form: 'VN_MAK', tags: [] },
+  // gelmekte statt des Infinitivs, der schon das Stichwort ist
+  { form: 'VN_MAK', tags: ['LOC'] },
   { form: 'VN_IS', tags: [] },
   { form: 'CV_IP', tags: [] },
   { form: 'CV_ARAK', tags: [] },
@@ -299,7 +302,8 @@ const VERBAL_SAMPLES: Omit<Extract<FormLabel, { kind: 'verbal' }>, 'kind'>[] = [
 
 /** Weitere Tabellen eines Verbs: zusammengesetzte Zeiten/Wünsche und infinite Formen. */
 export interface VerbExtras {
-  compounds: {
+  /** Fehlt, wenn die Engine keine der Formen bildet. */
+  compounds?: {
     columns: CompoundColumn[];
     rows: { person: Person; forms: (string | undefined)[] }[];
   };
@@ -317,5 +321,8 @@ export function verbExtras(entry: VocabEntry): VerbExtras | undefined {
     const form = attempt(() => nonfinite(stem, sample).form);
     return form ? [{ label: { kind: 'verbal' as const, ...sample }, form }] : [];
   });
-  return { compounds: { columns: COMPOUND_COLUMNS, rows }, verbals };
+  const compounds = rows.some((r) => r.forms.some(Boolean))
+    ? { columns: COMPOUND_COLUMNS, rows }
+    : undefined;
+  return compounds || verbals.length ? { compounds, verbals } : undefined;
 }
