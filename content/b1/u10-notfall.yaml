@@ -1,0 +1,549 @@
+# B1-10: Konverbien -ince (als, sobald), -eli (seit), -dikten sonra / -meden önce; indirekte Rede mit -diğini/-eceğini söylemek und diye; Notsituationen, Polizei, Feuerwehr. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u10
+level: B1
+title: Notfälle
+grammar_focus: [ince, eli, dikten-sonra, meden-once, digini-soyledi, diye]
+explainer: explainers/b1-notfall.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u10-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u10-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „itfaiye“?
+        options: [Feuerwehr, Polizei, Krankenwagen]
+        answer: Feuerwehr
+      - id: b1-u10-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Krankenwagen
+        answers: [ambulans, cankurtaran]
+      - id: b1-u10-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „yangın“?
+        options: [Brand, Rauch, Unfall]
+        answer: Brand
+        explanation: yangın çıktı = ein Feuer ist ausgebrochen; ateş = Feuer, auch Fieber.
+      - id: b1-u10-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Rauch
+        answers: [duman]
+      - id: b1-u10-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „acil“?
+        options: [dringend, gefährlich, verletzt]
+        answer: dringend
+        explanation: acil durum = Notfall, acil servis = Notaufnahme.
+      - id: b1-u10-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Dieb
+        answers: [hırsız]
+      - id: b1-u10-l1-e7
+        type: multiple_choice
+        prompt: Was ruft man in Not?
+        options: [İmdat!, Afiyet olsun!, Geçmiş olsun!]
+        answer: İmdat!
+        explanation: İmdat! = Hilfe! Geçmiş olsun = Gute Besserung.
+      - id: b1-u10-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „yaralı“?
+        options: [verletzt, krank, tot]
+        answer: verletzt
+        explanation: yaralanmak = sich verletzen, verletzt werden.
+      - id: b1-u10-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: retten
+        answers: [kurtarmak]
+      - id: b1-u10-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „karakol“?
+        options: [Polizeiwache, Feuerwache, Gefängnis]
+        answer: Polizeiwache
+      - id: b1-u10-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „tanık“?
+        options: [Zeuge, Täter, Opfer]
+        answer: Zeuge
+        explanation: Vor Vokal wird k zu ğ, tanığı.
+      - id: b1-u10-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „söndürmek“?
+        options: [löschen (Feuer), anzünden, ausschalten]
+        answer: löschen (Feuer)
+      - id: b1-u10-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: Geldbörse
+        answers: [cüzdan]
+      - id: b1-u10-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: schreien, rufen
+        answers: [bağırmak]
+      - id: b1-u10-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „ses“?
+        options: [Geräusch, Licht, Rauch]
+        answer: Geräusch
+        explanation: Auch Stimme; ışık = Licht, duman = Rauch.
+      - id: b1-u10-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: sofort
+        answers: [hemen, derhal]
+
+  - id: b1-u10-l2
+    type: grammar
+    title: Als, sobald, seit (-ince, -eli)
+    exercises:
+      - id: b1-u10-l2-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: CV_INCA
+        target: gelince
+        gloss_de: 'als, sobald … kommt (kam)'
+        explanation: -ince heißt „als, sobald“; die Person zeigt der Satz.
+      - { id: b1-u10-l2-e2, type: suffix_builder, stem: görmek, verbal: CV_INCA, target: görünce, gloss_de: 'als, sobald … sieht (sah)' }
+      - { id: b1-u10-l2-e3, type: suffix_builder, stem: duymak, verbal: CV_INCA, target: duyunca, gloss_de: 'als, sobald … hört (hörte)' }
+      - { id: b1-u10-l2-e4, type: suffix_builder, stem: aramak, verbal: CV_INCA, target: arayınca, gloss_de: 'als, sobald … anruft (anrief)' }
+      - id: b1-u10-l2-e5
+        type: suffix_builder
+        stem: demek
+        verbal: CV_INCA
+        target: deyince
+        gloss_de: 'als … sagt (sagte)'
+        explanation: Wie bei deyip bleibt das e, deyince.
+      - id: b1-u10-l2-e6
+        type: suffix_builder
+        stem: taşınmak
+        verbal: CV_ALI
+        target: taşınalı
+        gloss_de: 'seit … umgezogen ist'
+        explanation: -eli heißt „seit“, oft mit beri, taşınalı beri.
+      - { id: b1-u10-l2-e7, type: suffix_builder, stem: başlamak, verbal: CV_ALI, target: başlayalı, gloss_de: 'seit … angefangen hat' }
+      - id: b1-u10-l2-e8
+        type: word_bank
+        prompt: 'Als ich den Rauch sah, rief ich die Feuerwehr.'
+        answers: [Dumanı görünce itfaiyeyi aradım.]
+        chunks:
+          - { text: "Dumanı görünce", role: time }
+          - { text: "itfaiyeyi", role: object }
+          - { text: "aradım", role: predicate }
+        distractors: [gördüm, arayınca]
+      - id: b1-u10-l2-e9
+        type: word_bank
+        prompt: 'Seit wir hierher gezogen sind, sind zwei Jahre vergangen.'
+        answers: [Buraya taşınalı iki yıl oldu.]
+        distractors: [taşınınca, oluyor]
+        explanation: Wörtlich „seit wir hierher gezogen sind, wurden es zwei Jahre“.
+      - id: b1-u10-l2-e10
+        type: multiple_choice
+        prompt: Was bedeutet „Eve gelince beni ara.“?
+        options: ['Ruf mich an, wenn du nach Hause kommst.', 'Ruf mich an, bevor du nach Hause kommst.', 'Ruf mich an, seit du zu Hause bist.']
+        answer: 'Ruf mich an, wenn du nach Hause kommst.'
+      - id: b1-u10-l2-e11
+        type: free_text
+        direction: tr_de
+        prompt: Seni görünce çok sevindim.
+        answers: ['Als ich dich sah, habe ich mich sehr gefreut.', 'Als ich dich sah, freute ich mich sehr.', 'Als ich dich gesehen habe, habe ich mich sehr gefreut.', 'Ich habe mich sehr gefreut, als ich dich sah.', 'Ich habe mich sehr gefreut, als ich dich gesehen habe.', 'Ich habe mich sehr gefreut, dich zu sehen.', 'Ich war sehr froh, als ich dich sah.']
+      - id: b1-u10-l2-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Bu şehre … beri burada çalışıyorum.“ (seit ich gekommen bin)
+        options: [geleli, gelince, gelip]
+        answer: geleli
+      - id: b1-u10-l2-e13
+        type: free_text
+        direction: de_tr
+        prompt: als ich (es) hörte
+        answers: [duyunca, duyduğumda, duyduğum zaman]
+        explanation: duyduğumda (-diğimde) sagt die Person ausdrücklich.
+
+  - id: b1-u10-l3
+    type: grammar
+    title: Nachdem, bevor (-dikten sonra, -meden önce)
+    exercises:
+      - id: b1-u10-l3-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: PART_DIK
+        suffixes: [ABL]
+        target: geldikten
+        gloss_de: '(… sonra) nachdem … gekommen ist'
+        explanation: -dik mit Ablativ, danach sonra; ohne Possessiv.
+      - { id: b1-u10-l3-e2, type: suffix_builder, stem: yemek, verbal: PART_DIK, suffixes: [ABL], target: yedikten, gloss_de: '(… sonra) nachdem … gegessen hat' }
+      - { id: b1-u10-l3-e3, type: suffix_builder, stem: aramak, verbal: PART_DIK, suffixes: [ABL], target: aradıktan, gloss_de: '(… sonra) nachdem … angerufen hat' }
+      - { id: b1-u10-l3-e4, type: suffix_builder, stem: bitirmek, verbal: PART_DIK, suffixes: [ABL], target: bitirdikten, gloss_de: '(… sonra) nachdem … beendet hat' }
+      - id: b1-u10-l3-e5
+        type: suffix_builder
+        stem: gitmek
+        verbal: CV_MADAN
+        target: gitmeden
+        gloss_de: '(… önce) bevor … geht'
+        explanation: Für „bevor“ steht -meden mit önce.
+      - { id: b1-u10-l3-e6, type: suffix_builder, stem: çıkmak, verbal: CV_MADAN, target: çıkmadan, gloss_de: '(… önce) bevor … hinausgeht' }
+      - id: b1-u10-l3-e7
+        type: word_bank
+        prompt: 'Nachdem die Feuerwehr gekommen war, wurde das Feuer gelöscht.'
+        answers: [İtfaiye geldikten sonra yangın söndürüldü., Yangın itfaiye geldikten sonra söndürüldü.]
+        chunks:
+          - { text: "İtfaiye geldikten sonra", role: time }
+          - { text: "yangın", role: subject }
+          - { text: "söndürüldü", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [gelmeden, söndürüyor]
+      - id: b1-u10-l3-e8
+        type: word_bank
+        prompt: 'Bevor du aus dem Haus gehst, mach das Licht aus.'
+        answers: [Evden çıkmadan önce ışıkları kapat., Evden çıkmadan önce ışığı kapat.]
+        chunks:
+          - { text: "Evden çıkmadan önce", role: time }
+          - { text: "ışıkları", role: object }
+          - { text: "kapat", role: predicate }
+        distractors: [çıktıktan, kapattı]
+      - id: b1-u10-l3-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Ders bittikten sonra eve gittim.“?
+        options: ['Nachdem der Unterricht zu Ende war, ging ich nach Hause.', 'Bevor der Unterricht zu Ende war, ging ich nach Hause.', 'Seit der Unterricht zu Ende ist, bin ich zu Hause.']
+        answer: 'Nachdem der Unterricht zu Ende war, ging ich nach Hause.'
+      - id: b1-u10-l3-e10
+        type: free_text
+        direction: de_tr
+        prompt: nachdem ich gegessen hatte
+        answers: [yedikten sonra, yemek yedikten sonra, yemekten sonra]
+      - id: b1-u10-l3-e11
+        type: free_text
+        direction: tr_de
+        prompt: Polisi aradıktan sonra bekledim.
+        answers: ['Nachdem ich die Polizei angerufen hatte, wartete ich.', 'Nachdem ich die Polizei angerufen hatte, habe ich gewartet.', 'Nachdem ich die Polizei angerufen habe, habe ich gewartet.', 'Ich habe gewartet, nachdem ich die Polizei angerufen hatte.', 'Ich wartete, nachdem ich die Polizei angerufen hatte.', Ich habe die Polizei angerufen und dann gewartet., Ich rief die Polizei an und wartete dann.]
+      - id: b1-u10-l3-e12
+        type: multiple_choice
+        prompt: Welches Wort passt? „Yatmadan … dişlerini fırçala.“
+        options: [önce, sonra, beri]
+        answer: önce
+        explanation: -meden önce = bevor, -dikten sonra = nachdem. dişlerini fırçalamak = die Zähne putzen.
+
+  - id: b1-u10-l4
+    type: grammar
+    title: Er sagte, dass … (-diğini, -eceğini, diye)
+    exercises:
+      - id: b1-u10-l4-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: PART_DIK
+        suffixes: [POSS_3SG, ACC]
+        target: geldiğini
+        gloss_de: 'dass er, sie gekommen ist (… söyledi = er sagte, dass …)'
+        explanation: Die Person steht im Possessiv, danach Akkusativ für söylemek.
+      - { id: b1-u10-l4-e2, type: suffix_builder, stem: görmek, verbal: PART_DIK, suffixes: [POSS_1SG, ACC], target: gördüğümü, gloss_de: 'dass ich gesehen habe' }
+      - { id: b1-u10-l4-e3, type: suffix_builder, stem: gelmek, verbal: PART_ACAK, suffixes: [POSS_3SG, ACC], target: geleceğini, gloss_de: 'dass er, sie kommen wird' }
+      - { id: b1-u10-l4-e4, type: suffix_builder, stem: yardım etmek, verbal: PART_ACAK, suffixes: [POSS_3PL, ACC], target: yardım edeceklerini, gloss_de: 'dass sie helfen werden' }
+      - { id: b1-u10-l4-e5, type: suffix_builder, stem: bilmek, verbal: PART_DIK, negative: true, suffixes: [POSS_3SG, ACC], target: bilmediğini, gloss_de: 'dass er, sie nicht weiß' }
+      - id: b1-u10-l4-e6
+        type: suffix_builder
+        stem: çalmak
+        verbal: PART_DIK
+        passive: true
+        suffixes: [POSS_3SG, ACC]
+        target: çalındığını
+        gloss_de: 'dass es gestohlen wurde'
+        explanation: Passiv -ın vor -dik, çal-ın-dığ-ı-nı.
+      - id: b1-u10-l4-e7
+        type: word_bank
+        prompt: 'Er sagte, dass er nach Hause gehen würde.'
+        answers: [Eve gideceğini söyledi.]
+        distractors: [gittiğini, gidecek]
+      - id: b1-u10-l4-e8
+        type: word_bank
+        prompt: 'Der Zeuge sagte, dass er den Dieb gesehen hat.'
+        answers: [Tanık hırsızı gördüğünü söyledi.]
+        chunks:
+          - { text: "Tanık", role: subject }
+          - { text: "hırsızı gördüğünü", role: object }
+          - { text: "söyledi", role: predicate }
+        distractors: [göreceğini, gördü]
+      - id: b1-u10-l4-e9
+        type: multiple_choice
+        prompt: Welches Wort passt? „Ne oldu?“ … sordu.
+        options: [diye, dedi, demek]
+        answer: diye
+        explanation: Nach wörtlicher Rede steht vor einem anderen Verb als demek diye, „Ne oldu?“ diye sordu.
+      - id: b1-u10-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Geç kalmayayım diye koştum.
+        answers: ['Ich bin gerannt, damit ich nicht zu spät komme.', 'Ich bin gerannt, um nicht zu spät zu kommen.', 'Ich rannte, um nicht zu spät zu kommen.', 'Ich rannte, damit ich nicht zu spät komme.', 'Ich bin gelaufen, um nicht zu spät zu kommen.', 'Ich bin gelaufen, damit ich nicht zu spät komme.', 'Um nicht zu spät zu kommen, bin ich gerannt.']
+        explanation: diye nach einem Wunsch heißt „damit, um zu“, wörtlich „sagend, ich soll nicht zu spät kommen“.
+      - id: b1-u10-l4-e11
+        type: multiple_choice
+        prompt: Was bedeutet „Ambulansın geleceğini söylediler.“?
+        options: ['Sie sagten, dass der Krankenwagen kommen wird.', 'Sie sagten, dass der Krankenwagen gekommen ist.', Sie riefen den Krankenwagen.]
+        answer: 'Sie sagten, dass der Krankenwagen kommen wird.'
+        explanation: Wer handelt, steht im Genitiv, ambulansın geleceğini.
+      - id: b1-u10-l4-e12
+        type: free_text
+        direction: de_tr
+        prompt: 'Er sagte, dass er krank ist.'
+        answers: [Hasta olduğunu söyledi., O hasta olduğunu söyledi., Hastayım dedi.]
+        explanation: Beim Nomen steht olduğunu, hasta olduğunu.
+      - id: b1-u10-l4-e13
+        type: multiple_choice
+        prompt: 'Wie sagst du „Sie sagte, dass sie nicht kommen wird.“?'
+        options: [Gelmeyeceğini söyledi., Gelmediğini söyledi., Gelmeyecek söyledi.]
+        answer: Gelmeyeceğini söyledi.
+
+  - id: b1-u10-l5
+    type: dialog
+    title: Der Notruf
+    exercises:
+      - id: b1-u10-l5-e1
+        type: multiple_choice
+        prompt: Welche Nummer wählt man in der Türkei im Notfall?
+        options: ['112', '110', '911']
+        answer: '112'
+        explanation: 112 gilt für Krankenwagen, Feuerwehr und Polizei (Acil Çağrı Merkezi).
+      - id: b1-u10-l5-e2
+        type: word_bank
+        prompt: In unserem Haus brennt es!
+        answers: [Evimizde yangın var!]
+        distractors: [evim, yangını]
+      - id: b1-u10-l5-e3
+        type: word_bank
+        prompt: Bitte schicken Sie sofort einen Krankenwagen!
+        answers: [Lütfen hemen bir ambulans gönderin!, Lütfen hemen ambulans gönderin!]
+        distractors: [gönderdim, ambulansı]
+      - id: b1-u10-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Hilfe!
+        answers: [İmdat!, Yardım edin!, Yardım!]
+      - id: b1-u10-l5-e5
+        type: free_text
+        direction: tr_de
+        prompt: Sakin olun, ambulans geliyor.
+        answers: ['Bleiben Sie ruhig, der Krankenwagen kommt.', 'Beruhigen Sie sich, der Krankenwagen kommt.', 'Bleiben Sie ruhig, der Krankenwagen ist unterwegs.', 'Beruhigen Sie sich, der Krankenwagen ist unterwegs.', 'Bleibt ruhig, der Krankenwagen kommt.', 'Seien Sie ruhig, der Krankenwagen kommt.']
+      - id: b1-u10-l5-e6
+        type: word_bank
+        prompt: Meine Geldbörse ist gestohlen worden.
+        answers: [Cüzdanım çalındı.]
+        distractors: [çaldı, cüzdan]
+      - id: b1-u10-l5-e7
+        type: word_bank
+        prompt: 'Als ich nach Hause kam, war die Tür offen.'
+        answers: [Eve gelince kapı açıktı., Eve geldiğimde kapı açıktı.]
+        chunks:
+          - { text: "Eve gelince", role: time }
+          - { text: "kapı", role: subject }
+          - { text: "açıktı", role: predicate }
+        distractors: [gelmeden, açıyor]
+      - id: b1-u10-l5-e8
+        type: multiple_choice
+        prompt: Was bedeutet „Ne olduğunu anlatır mısınız?“
+        options: ['Können Sie erzählen, was passiert ist?', 'Wissen Sie, wer es war?', Wann ist es passiert?]
+        answer: 'Können Sie erzählen, was passiert ist?'
+      - id: b1-u10-l5-e9
+        type: conjugation
+        mode: verb
+        lemma: çalmak
+        person: 3sg
+        tense: past
+        passive: true
+        target: çalındı
+        gloss_de: es wurde gestohlen
+
+  - id: b1-u10-l6
+    type: grammar
+    title: 'Tabellen: dass … (-diğini, -eceğini)'
+    exercises:
+      - id: b1-u10-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: gelmek
+        rows: [[POSS_1SG, ACC], [POSS_2SG, ACC], [POSS_3SG, ACC], [POSS_1PL, ACC], [POSS_2PL, ACC], [POSS_3PL, ACC]]
+        targets: [geldiğimi, geldiğini, geldiğini, geldiğimizi, geldiğinizi, geldiklerini]
+        gloss_de: 'dass … gekommen ist (Akkusativ)'
+      - id: b1-u10-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: PART_ACAK
+        lemma: gelmek
+        rows: [[POSS_1SG, ACC], [POSS_2SG, ACC], [POSS_3SG, ACC], [POSS_1PL, ACC], [POSS_2PL, ACC], [POSS_3PL, ACC]]
+        targets: [geleceğimi, geleceğini, geleceğini, geleceğimizi, geleceğinizi, geleceklerini]
+        gloss_de: 'dass … kommen wird (Akkusativ)'
+      - id: b1-u10-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: yemek
+        rows: [[ABL], [POSS_1SG, LOC], [POSS_1SG, ACC]]
+        targets: [yedikten, yediğimde, yediğimi]
+        gloss_de: 'essen: nachdem; als ich; dass ich'
+      - id: b1-u10-l6-e4
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        negative: true
+        lemma: görmek
+        rows: [[POSS_1SG, ACC], [POSS_3SG, ACC], [POSS_3PL, ACC]]
+        targets: [görmediğimi, görmediğini, görmediklerini]
+        gloss_de: 'dass … nicht gesehen hat'
+
+  - id: b1-u10-r1
+    type: reading
+    title: 'Lesetext: Feuer beim Nachbarn'
+    passage:
+      sentences:
+        - { tr: "Dün gece saat ikide bir ses duyup uyandım.", de: "Gestern Nacht um zwei Uhr hörte ich ein Geräusch und wachte auf." }
+        - { tr: "Pencereden bakınca komşunun evinden duman çıktığını gördüm.", de: "Als ich aus dem Fenster schaute, sah ich, dass aus dem Haus des Nachbarn Rauch kam." }
+        - { tr: "Hemen 112'yi arayıp yangın olduğunu söyledim.", de: "Ich rief sofort die 112 an und sagte, dass es brennt." }
+        - { tr: "Telefondaki kadın itfaiyenin beş dakika içinde geleceğini söyledi.", de: "Die Frau am Telefon sagte, dass die Feuerwehr in fünf Minuten kommen würde." }
+        - { tr: "Ben de \"Yangın var!\" diye bağırarak komşuları uyandırdım.", de: "Ich weckte die Nachbarn, indem ich „Feuer!“ rief." }
+        - { tr: "Komşum yaşlı bir adam ve yalnız yaşıyor.", de: "Mein Nachbar ist ein alter Mann und lebt allein." }
+        - { tr: "Onunla birlikte dışarı çıktıktan sonra itfaiye geldi.", de: "Nachdem wir zusammen hinausgegangen waren, kam die Feuerwehr." }
+        - { tr: "İtfaiyeciler yangını kısa sürede söndürdü.", de: "Die Feuerwehrleute löschten den Brand in kurzer Zeit." }
+        - { tr: "Neyse ki kimse yaralanmadı.", de: "Zum Glück wurde niemand verletzt." }
+        - { tr: "Komşum ağlayarak bana teşekkür etti.", de: "Mein Nachbar bedankte sich weinend bei mir." }
+        - { tr: "Yangın çıkalı bir hafta oldu ama hâlâ o geceyi düşünüyorum.", de: "Seit dem Brand ist eine Woche vergangen, aber ich denke immer noch an jene Nacht." }
+      glossary:
+        - { tr: "112", de: "112 (Notruf)" }
+        - { tr: "Telefondaki", de: "am Telefon (telefon + da + ki)", vocab: "telefon" }
+        - { tr: "uyandırdım", de: "ich weckte (uyandırmak = wecken)", vocab: "uyanmak" }
+        - { tr: "yalnız", de: "allein" }
+        - { tr: "birlikte", de: "zusammen (onunla birlikte = zusammen mit ihm)" }
+        - { tr: "İtfaiyeciler", de: "die Feuerwehrleute (itfaiye + ci + ler)", vocab: "itfaiye" }
+        - { tr: "sürede", de: "in … Zeit (süre = Dauer; kısa sürede = in kurzer Zeit)" }
+        - { tr: "neyse", de: "wie auch immer (neyse ki = zum Glück)" }
+        - { tr: "ki", de: "(neyse ki = zum Glück)" }
+        - { tr: "kimse", de: "niemand (mit Verneinung)" }
+        - { tr: "teşekkür", de: "Dank (teşekkür etmek = sich bedanken)" }
+        - { tr: "etti", de: "machte (etmek; teşekkür etti = bedankte sich)" }
+        - { tr: "hâlâ", de: "immer noch" }
+    exercises:
+      - id: b1-u10-r1-e1
+        type: multiple_choice
+        prompt: Was hat die Person gemacht, nachdem sie den Rauch gesehen hatte?
+        options: [Sie hat die 112 angerufen., Sie ist sofort hinausgelaufen., Sie hat Wasser geholt.]
+        answer: Sie hat die 112 angerufen.
+      - id: b1-u10-r1-e2
+        type: multiple_choice
+        prompt: Was hat die Frau am Telefon gesagt?
+        options: [Dass die Feuerwehr in fünf Minuten kommt., Dass sie die Polizei schickt., Dass alle im Haus bleiben sollen.]
+        answer: Dass die Feuerwehr in fünf Minuten kommt.
+      - id: b1-u10-r1-e3
+        type: multiple_choice
+        prompt: Wann kam die Feuerwehr?
+        options: [Nachdem die Person mit dem Nachbarn draußen war., Bevor die Person aufgewacht war., Am nächsten Morgen.]
+        answer: Nachdem die Person mit dem Nachbarn draußen war.
+      - id: b1-u10-r1-e4
+        type: multiple_choice
+        prompt: Wurde jemand verletzt?
+        options: ['Nein, niemand.', 'Ja, der Nachbar.', 'Ja, ein Feuerwehrmann.']
+        answer: 'Nein, niemand.'
+      - id: b1-u10-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Pencereden bakınca duman gördüm.
+        answers: ['Als ich aus dem Fenster schaute, sah ich Rauch.', 'Als ich aus dem Fenster sah, sah ich Rauch.', 'Als ich aus dem Fenster geschaut habe, habe ich Rauch gesehen.', 'Als ich aus dem Fenster schaute, habe ich Rauch gesehen.', 'Ich sah Rauch, als ich aus dem Fenster schaute.', 'Ich habe Rauch gesehen, als ich aus dem Fenster geschaut habe.']
+
+  - id: b1-u10-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u10-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: nachdem er gekommen war
+        answers: [geldikten sonra, o geldikten sonra]
+      - id: b1-u10-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: 'Sie sagte, dass sie kommen wird.'
+        answers: [Geleceğini söyledi., O geleceğini söyledi., Geleceğim dedi.]
+      - id: b1-u10-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (als er es sagte)
+        options: [deyince, diyince, deince]
+        answer: deyince
+      - id: b1-u10-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (nachdem ich angerufen hatte)
+        options: [aradıktan sonra, aradığımdan sonra, aramadan sonra]
+        answer: aradıktan sonra
+        explanation: Vor sonra steht -dikten ohne Possessiv; die Person zeigt der Satz.
+      - id: b1-u10-l7-e5
+        type: word_bank
+        prompt: 'Die Polizei sagte, dass der Dieb gefasst worden ist.'
+        answers: [Polis hırsızın yakalandığını söyledi.]
+        chunks:
+          - { text: "Polis", role: subject }
+          - { text: "hırsızın yakalandığını", role: object }
+          - { text: "söyledi", role: predicate }
+        distractors: [hırsız, yakalandı]
+        explanation: yakalanmak = gefasst werden (yakalamak = fangen).
+      - id: b1-u10-l7-e6
+        type: suffix_builder
+        stem: kurtarmak
+        verbal: PART_DIK
+        suffixes: [POSS_3PL, ACC]
+        target: kurtardıklarını
+        gloss_de: 'dass sie gerettet haben (Akkusativ)'
+      - id: b1-u10-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Kazayı görünce hemen ambulansı aradım.
+        answers: ['Als ich den Unfall sah, habe ich sofort den Krankenwagen gerufen.', 'Als ich den Unfall sah, rief ich sofort den Krankenwagen.', 'Als ich den Unfall gesehen habe, habe ich sofort den Krankenwagen gerufen.', 'Als ich den Unfall sah, habe ich sofort den Krankenwagen angerufen.', 'Ich habe sofort den Krankenwagen gerufen, als ich den Unfall sah.', 'Sobald ich den Unfall sah, rief ich den Krankenwagen.', 'Sobald ich den Unfall sah, habe ich den Krankenwagen gerufen.']
+      - id: b1-u10-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: yaralanmak
+        person: 3pl
+        tense: past
+        target: yaralandılar
+        gloss_de: sie wurden verletzt
+      - id: b1-u10-l7-e9
+        type: word_bank
+        prompt: 'Seit das Feuer ausgebrochen ist, ist ein Jahr vergangen.'
+        answers: [Yangın çıkalı bir yıl oldu.]
+        chunks:
+          - { text: "Yangın", role: subject }
+          - { text: "çıkalı", role: time }
+          - { text: "bir yıl oldu", role: predicate }
+        distractors: [çıkınca, oluyor]
+      - id: b1-u10-l7-e10
+        type: suffix_builder
+        stem: söndürmek
+        verbal: PART_DIK
+        suffixes: [ABL]
+        target: söndürdükten
+        gloss_de: '(… sonra) nachdem … gelöscht hat'
+
+vocab:
+  - { tr: itfaiye, de: [Feuerwehr], pos: noun }
+  - { tr: ambulans, de: [Krankenwagen], pos: noun }
+  - { tr: yangın, de: [Brand, Feuer], pos: noun }
+  - { tr: duman, de: [Rauch], pos: noun }
+  - { tr: acil, de: [dringend, Notfall-], pos: adj }
+  - { tr: hırsız, de: [Dieb, Diebin], pos: noun }
+  - { tr: imdat, de: [Hilfe! (Notruf)], pos: interj }
+  - { tr: yaralı, de: [verletzt], pos: adj }
+  - { tr: yaralanmak, de: [sich verletzen, verletzt werden], pos: verb }
+  - { tr: kurtarmak, de: [retten], pos: verb }
+  - { tr: karakol, de: [Polizeiwache], pos: noun }
+  - { tr: tanık, de: [Zeuge, Zeugin], pos: noun, softens: true }
+  - { tr: söndürmek, de: [löschen (Feuer)], pos: verb }
+  - { tr: cüzdan, de: [Geldbörse], pos: noun }
+  - { tr: bağırmak, de: [schreien, rufen], pos: verb }
+  - { tr: ses, de: [Geräusch, Stimme], pos: noun }
+  - { tr: diye, de: [sagend (nach wörtlicher Rede), damit], pos: particle }
+  - { tr: beri, de: [seit], pos: postp }
+  - { tr: yakalamak, de: [fangen, festnehmen], pos: verb }
+  - { tr: kadın, de: [Frau], pos: noun }
+  - { tr: adam, de: [Mann], pos: noun }

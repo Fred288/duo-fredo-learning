@@ -1,0 +1,521 @@
+# B1-08: Partizipien -dik und -ecek mit Possessiv (okuduğum kitap, gideceğim yer), mit Kasus (ne yapacağımı, nerede çalıştığını), -diği için; Bildung und Beruf. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u08
+level: B1
+title: Bildung und Beruf
+grammar_focus: [dik, ecek, digimi, digi-icin]
+explainer: explainers/b1-partizip-dik.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u08-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u08-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „eğitim“?
+        options: [Bildung, Beruf, Erfahrung]
+        answer: Bildung
+        explanation: Auch Ausbildung, Erziehung; meslek = Beruf.
+      - id: b1-u08-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Praktikum
+        answers: [staj]
+        explanation: staj yapmak = ein Praktikum machen.
+      - id: b1-u08-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „bölüm“?
+        options: [Studienfach, Stipendium, Kurs]
+        answer: Studienfach
+        explanation: Auch Abteilung oder Kapitel; hangi bölümde okuyorsun? = Was studierst du?
+      - id: b1-u08-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „özgeçmiş“?
+        options: [Lebenslauf, Zeugnis, Bewerbung]
+        answer: Lebenslauf
+        explanation: Wörtlich eigene Vergangenheit (öz + geçmiş).
+      - id: b1-u08-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Erfahrung
+        answers: [deneyim, tecrübe]
+      - id: b1-u08-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „başvurmak“?
+        options: [sich bewerben, anfangen, sich anmelden]
+        answer: sich bewerben
+        explanation: Mit Dativ, bir işe başvurmak = sich um eine Stelle bewerben.
+      - id: b1-u08-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Vorstellungsgespräch
+        answers: [iş görüşmesi, mülakat]
+      - id: b1-u08-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „burs“?
+        options: [Stipendium, Gehalt, Gebühr]
+        answer: Stipendium
+        explanation: maaş = Gehalt, ücret = Gebühr.
+      - id: b1-u08-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „amaç“?
+        options: [Ziel, Grund, Weg]
+        answer: Ziel
+        explanation: Vor Vokal wird ç zu c, amacım (mein Ziel).
+      - id: b1-u08-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: Ort, Platz
+        answers: [yer]
+      - id: b1-u08-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „seçmek“?
+        options: [wählen, suchen, schicken]
+        answer: wählen
+      - id: b1-u08-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „katılmak“?
+        options: [teilnehmen, verlassen, ankommen]
+        answer: teilnehmen
+        explanation: Mit Dativ, bir kursa katılmak = an einem Kurs teilnehmen.
+      - id: b1-u08-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: Kurs
+        answers: [kurs]
+      - id: b1-u08-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „ilan“?
+        options: [Anzeige, Antrag, Auftrag]
+        answer: Anzeige
+        explanation: iş ilanı = Stellenanzeige.
+      - id: b1-u08-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: letzte(r, s); Ende
+        answers: [son]
+        explanation: son yıl = das letzte Jahr, sonunda = am Ende, endlich.
+      - id: b1-u08-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „proje“?
+        options: [Projekt, Programm, Prüfung]
+        answer: Projekt
+
+  - id: b1-u08-l2
+    type: grammar
+    title: Das ich … (-diğim)
+    exercises:
+      - id: b1-u08-l2-e1
+        type: suffix_builder
+        stem: okumak
+        verbal: PART_DIK
+        suffixes: [POSS_1SG]
+        target: okuduğum
+        gloss_de: 'das ich lese, gelesen habe (okuduğum kitap = das Buch, das ich lese)'
+        explanation: -dik + Possessiv der handelnden Person; vor Vokal wird k zu ğ.
+      - { id: b1-u08-l2-e2, type: suffix_builder, stem: çalışmak, verbal: PART_DIK, suffixes: [POSS_1SG], target: çalıştığım, gloss_de: 'wo ich arbeite (çalıştığım şirket = die Firma, in der ich arbeite)' }
+      - { id: b1-u08-l2-e3, type: suffix_builder, stem: bilmek, verbal: PART_DIK, suffixes: [POSS_2SG], target: bildiğin, gloss_de: 'das du weißt' }
+      - { id: b1-u08-l2-e4, type: suffix_builder, stem: yapmak, verbal: PART_DIK, suffixes: [POSS_3SG], target: yaptığı, gloss_de: 'das er, sie macht (gemacht hat)' }
+      - id: b1-u08-l2-e5
+        type: suffix_builder
+        stem: gitmek
+        verbal: PART_DIK
+        suffixes: [POSS_1PL]
+        target: gittiğimiz
+        gloss_de: 'wohin wir gehen, gegangen sind (gittiğimiz okul = die Schule, die wir besuchen)'
+        explanation: -dik beginnt mit d, nach t wird es zu t; git bleibt, gittiğimiz.
+      - { id: b1-u08-l2-e6, type: suffix_builder, stem: istemek, verbal: PART_DIK, suffixes: [POSS_3PL], target: istedikleri, gloss_de: 'was sie wollen (wollten)' }
+      - id: b1-u08-l2-e7
+        type: multiple_choice
+        prompt: Was bedeutet „okuduğum kitap“?
+        options: ['das Buch, das ich lese (gelesen habe)', 'das Buch, das mich liest', Ich lese das Buch.]
+        answer: 'das Buch, das ich lese (gelesen habe)'
+      - id: b1-u08-l2-e8
+        type: word_bank
+        prompt: 'Die Firma, in der ich arbeite, ist in Ankara.'
+        answers: [Çalıştığım şirket Ankara'da.]
+        distractors: [çalışan, çalışıyorum]
+      - id: b1-u08-l2-e9
+        type: word_bank
+        prompt: 'Die Arbeit, die du machst, gefällt mir.'
+        answers: [Yaptığın işi beğeniyorum.]
+        distractors: [yapan, yapıyorsun]
+        explanation: beğenmek verlangt den Akkusativ, işi.
+      - id: b1-u08-l2-e10
+        type: free_text
+        direction: tr_de
+        prompt: Bildiğin her şeyi anlat.
+        answers: ['Erzähl alles, was du weißt.', 'Erzähl mir alles, was du weißt.', 'Erzähle alles, was du weißt.', 'Erzähle mir alles, was du weißt.', 'Sag alles, was du weißt.', 'Sag mir alles, was du weißt.']
+      - id: b1-u08-l2-e11
+        type: free_text
+        direction: de_tr
+        prompt: 'das Buch, das ich gelesen habe'
+        answers: [okuduğum kitap]
+      - id: b1-u08-l2-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „okuyan öğrenci“ / „okuduğum kitap“
+        options: ['der Schüler, der liest / das Buch, das ich lese', 'der Schüler, den ich lese / das Buch, das liest', Beides ist dasselbe.]
+        answer: 'der Schüler, der liest / das Buch, das ich lese'
+        explanation: -en, wenn das Nomen selbst handelt; -dik mit Possessiv, wenn jemand anderes handelt.
+      - id: b1-u08-l2-e13
+        type: multiple_choice
+        prompt: Welche Form passt? „Bu, … üniversite.“ (an der ich studiert habe)
+        options: [okuduğum, okuyan, okuyacağım]
+        answer: okuduğum
+        explanation: okumak heißt auch studieren.
+
+  - id: b1-u08-l3
+    type: grammar
+    title: Was ich tun werde (-eceğim)
+    exercises:
+      - id: b1-u08-l3-e1
+        type: suffix_builder
+        stem: gitmek
+        verbal: PART_ACAK
+        suffixes: [POSS_1SG]
+        target: gideceğim
+        gloss_de: 'wohin ich gehen werde (gideceğim yer = der Ort, an den ich gehen werde)'
+        explanation: Wie das Futur, git → gid vor Vokal, k → ğ vor dem Possessiv.
+      - { id: b1-u08-l3-e2, type: suffix_builder, stem: yapmak, verbal: PART_ACAK, suffixes: [POSS_2SG], target: yapacağın, gloss_de: 'das du machen wirst' }
+      - { id: b1-u08-l3-e3, type: suffix_builder, stem: çalışmak, verbal: PART_ACAK, suffixes: [POSS_3SG], target: çalışacağı, gloss_de: 'wo er, sie arbeiten wird' }
+      - { id: b1-u08-l3-e4, type: suffix_builder, stem: okumak, verbal: PART_ACAK, suffixes: [POSS_1PL], target: okuyacağımız, gloss_de: 'das wir lesen (studieren) werden' }
+      - { id: b1-u08-l3-e5, type: suffix_builder, stem: başvurmak, verbal: PART_ACAK, suffixes: [POSS_1SG], target: başvuracağım, gloss_de: 'bei der ich mich bewerben werde' }
+      - { id: b1-u08-l3-e6, type: suffix_builder, stem: seçmek, verbal: PART_ACAK, suffixes: [POSS_3PL], target: seçecekleri, gloss_de: 'das sie wählen werden' }
+      - id: b1-u08-l3-e7
+        type: multiple_choice
+        prompt: Was bedeutet „gideceğim yer“?
+        options: ['der Ort, an den ich gehen werde', 'der Ort, an den ich gegangen bin', Ich werde an den Ort gehen.]
+        answer: 'der Ort, an den ich gehen werde'
+      - id: b1-u08-l3-e8
+        type: word_bank
+        prompt: 'Die Stadt, in der ich arbeiten werde, ist sehr schön.'
+        answers: [Çalışacağım şehir çok güzel.]
+        distractors: [çalışan, çalıştım]
+      - id: b1-u08-l3-e9
+        type: word_bank
+        prompt: 'Das Fach, das ich studieren werde, ist Informatik.'
+        answers: [Okuyacağım bölüm bilgisayar mühendisliği.]
+        distractors: [okuyan, okuyorum]
+        explanation: bilgisayar mühendisliği = Informatik (wörtlich Computer-Ingenieurwesen).
+      - id: b1-u08-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Yapacağımız çok iş var.
+        answers: [Wir haben viel zu tun., Es gibt viel zu tun., Wir haben noch viel zu tun., Es gibt noch viel zu tun., Wir haben viel Arbeit vor uns., 'Es gibt viel Arbeit, die wir machen werden.', 'Es gibt viel Arbeit, die wir machen müssen.']
+      - id: b1-u08-l3-e11
+        type: free_text
+        direction: de_tr
+        prompt: 'der Ort, an den ich gehen werde'
+        answers: [gideceğim yer]
+      - id: b1-u08-l3-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Staj … şirketi buldum.“ (bei der ich machen werde)
+        options: [yapacağım, yapan, yapacak]
+        answer: yapacağım
+        explanation: yapacak şirket wäre eine Firma, die selbst etwas machen wird.
+
+  - id: b1-u08-l4
+    type: grammar
+    title: 'Was ich weiß, weil ich … (-diğimi, -diği için)'
+    exercises:
+      - id: b1-u08-l4-e1
+        type: suffix_builder
+        stem: bilmek
+        verbal: PART_DIK
+        suffixes: [POSS_1SG, ACC]
+        target: bildiğimi
+        gloss_de: 'dass ich weiß, was ich weiß (Akkusativ)'
+        explanation: Possessiv, dann Kasus, wie bei einem Nomen.
+      - { id: b1-u08-l4-e2, type: suffix_builder, stem: yapmak, verbal: PART_ACAK, suffixes: [POSS_1SG, ACC], target: yapacağımı, gloss_de: 'was ich machen werde (Akkusativ)' }
+      - { id: b1-u08-l4-e3, type: suffix_builder, stem: istemek, verbal: PART_DIK, suffixes: [POSS_2SG, ACC], target: istediğini, gloss_de: 'was du willst (Akkusativ)' }
+      - { id: b1-u08-l4-e4, type: suffix_builder, stem: çalışmak, verbal: PART_DIK, suffixes: [POSS_3SG, ACC], target: çalıştığını, gloss_de: 'wo er, sie arbeitet (Akkusativ)' }
+      - id: b1-u08-l4-e5
+        type: suffix_builder
+        stem: okumak
+        verbal: PART_DIK
+        suffixes: [POSS_1SG, LOC]
+        target: okuduğumda
+        gloss_de: 'als ich studierte (… las)'
+        explanation: Mit Lokativ heißt -dik „als, wenn“, üniversitede okuduğumda = als ich an der Uni studierte.
+      - { id: b1-u08-l4-e6, type: suffix_builder, stem: söylemek, verbal: PART_DIK, suffixes: [POSS_3PL, ACC], target: söylediklerini, gloss_de: 'was sie gesagt haben (Akkusativ)' }
+      - id: b1-u08-l4-e7
+        type: word_bank
+        prompt: 'Ich weiß nicht, was ich machen werde.'
+        answers: [Ne yapacağımı bilmiyorum.]
+        distractors: [yapan, biliyorum]
+      - id: b1-u08-l4-e8
+        type: word_bank
+        prompt: 'Hast du das Buch gelesen, das ich dir gegeben habe?'
+        answers: [Sana verdiğim kitabı okudun mu?]
+        distractors: [veren, kitap]
+      - id: b1-u08-l4-e9
+        type: word_bank
+        prompt: 'Dem Chef hat die Arbeit, die ich gemacht habe, sehr gefallen.'
+        answers: [Müdür yaptığım işi çok beğendi.]
+        chunks:
+          - { text: "Müdür", role: subject }
+          - { text: "yaptığım işi", role: object }
+          - { text: "çok beğendi", role: predicate }
+        distractors: [yapan, beğeniyor]
+      - id: b1-u08-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Ne istediğini anlamadım.
+        answers: ['Ich habe nicht verstanden, was du willst.', 'Ich habe nicht verstanden, was du wolltest.', 'Ich habe nicht verstanden, was du möchtest.', 'Ich verstehe nicht, was du willst.', 'Ich habe nicht verstanden, was er will.', 'Ich habe nicht verstanden, was sie will.']
+        explanation: istediğini kann zu du (istediğin + i) oder er, sie (istediği + ni) gehören.
+      - id: b1-u08-l4-e11
+        type: multiple_choice
+        prompt: Welche Form passt? „Nerede … biliyor musun?“ (wo er arbeitet)
+        options: [çalıştığını, çalıştığı, çalışan]
+        answer: çalıştığını
+        explanation: bilmek verlangt den Akkusativ.
+      - id: b1-u08-l4-e12
+        type: free_text
+        direction: de_tr
+        prompt: 'Ich weiß, was du willst.'
+        answers: [Ne istediğini biliyorum., Senin ne istediğini biliyorum.]
+      - id: b1-u08-l4-e13
+        type: multiple_choice
+        prompt: Was bedeutet „Bu mesleği sevdiğim için seçtim.“?
+        options: ['Ich habe diesen Beruf gewählt, weil ich ihn liebe.', 'Ich habe den Beruf gewählt, den ich liebe.', 'Ich liebe diesen Beruf, den ich gewählt habe.']
+        answer: 'Ich habe diesen Beruf gewählt, weil ich ihn liebe.'
+        explanation: -diği için = weil; sevdiğim mesleği seçtim = ich habe den Beruf gewählt, den ich liebe.
+
+  - id: b1-u08-l5
+    type: dialog
+    title: Im Vorstellungsgespräch
+    exercises:
+      - id: b1-u08-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Daha önce nerede çalıştınız?
+        answers: [Wo haben Sie vorher gearbeitet?, Wo haben Sie früher gearbeitet?, Wo haben Sie bisher gearbeitet?, Wo haben Sie davor gearbeitet?, Wo habt ihr vorher gearbeitet?]
+      - id: b1-u08-l5-e2
+        type: word_bank
+        prompt: 'In der Firma, in der ich ein Praktikum gemacht habe, habe ich viel gelernt.'
+        answers: [Staj yaptığım şirkette çok şey öğrendim.]
+        chunks:
+          - { text: "Staj yaptığım şirkette", role: place }
+          - { text: "çok şey", role: object_bare }
+          - { text: "öğrendim", role: predicate }
+        distractors: [yapan, öğreniyorum]
+      - id: b1-u08-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Warum möchten Sie in unserer Firma arbeiten?“
+        options: [Neden şirketimizde çalışmak istiyorsunuz?, Neden şirketimizde çalıştığınızı istiyorsunuz?, Neden çalışacağınız şirketimizde?]
+        answer: Neden şirketimizde çalışmak istiyorsunuz?
+        explanation: Wer selbst etwas will, nimmt den Infinitiv (çalışmak istemek).
+      - id: b1-u08-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe Erfahrung.
+        answers: [Deneyimim var., Benim deneyimim var., Tecrübem var., Benim tecrübem var.]
+      - id: b1-u08-l5-e5
+        type: word_bank
+        prompt: 'Das ist die Arbeit, von der ich geträumt habe.'
+        answers: [Hayal ettiğim iş bu., Bu hayal ettiğim iş.]
+        distractors: [eden, ediyorum]
+      - id: b1-u08-l5-e6
+        type: conjugation
+        mode: verb
+        lemma: başvurmak
+        person: 1sg
+        tense: past
+        target: başvurdum
+        gloss_de: ich habe mich beworben
+      - id: b1-u08-l5-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Ne zaman başlayabilirsiniz?“
+        options: [Wann können Sie anfangen?, Wann haben Sie angefangen?, Warum möchten Sie anfangen?]
+        answer: Wann können Sie anfangen?
+      - id: b1-u08-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Özgeçmişinizi okudum.
+        answers: [Ich habe Ihren Lebenslauf gelesen., Ich habe euren Lebenslauf gelesen., Ich las Ihren Lebenslauf.]
+
+  - id: b1-u08-l6
+    type: grammar
+    title: 'Tabellen: -dik und -ecek'
+    exercises:
+      - id: b1-u08-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: okumak
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [okuduğum, okuduğun, okuduğu, okuduğumuz, okuduğunuz, okudukları]
+        gloss_de: 'das … liest (gelesen hat)'
+      - id: b1-u08-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: PART_ACAK
+        lemma: gitmek
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [gideceğim, gideceğin, gideceği, gideceğimiz, gideceğiniz, gidecekleri]
+        gloss_de: 'wohin … gehen wird'
+      - id: b1-u08-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: bilmek
+        rows: [[POSS_1SG, ACC], [POSS_2SG, ACC], [POSS_3SG, ACC], [POSS_1PL, ACC], [POSS_2PL, ACC], [POSS_3PL, ACC]]
+        targets: [bildiğimi, bildiğini, bildiğini, bildiğimizi, bildiğinizi, bildiklerini]
+        gloss_de: 'was … weiß (Akkusativ)'
+        explanation: du und er, sie fallen im Akkusativ zusammen (bildiğin-i, bildiği-ni).
+      - id: b1-u08-l6-e4
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        negative: true
+        lemma: yapmak
+        rows: [[POSS_1SG], [POSS_3SG], [POSS_3PL]]
+        targets: [yapmadığım, yapmadığı, yapmadıkları]
+        gloss_de: 'das … nicht macht (gemacht hat)'
+
+  - id: b1-u08-r1
+    type: reading
+    title: 'Lesetext: Mein Weg zum Beruf'
+    passage:
+      sentences:
+        - { tr: "Lise yıllarımda hangi mesleği seçeceğimi bilmiyordum.", de: "In meinen Jahren auf dem Gymnasium wusste ich nicht, welchen Beruf ich wählen würde." }
+        - { tr: "Babam doktor olmamı istiyordu ama ben bilgisayarları seviyordum.", de: "Mein Vater wollte, dass ich Arzt werde, aber ich mochte Computer." }
+        - { tr: "Sonunda üniversitede bilgisayar mühendisliği okudum.", de: "Am Ende habe ich an der Universität Informatik studiert." }
+        - { tr: "Okuduğum bölüm zordu ama çok şey öğrendim.", de: "Das Fach, das ich studiert habe, war schwer, aber ich habe viel gelernt." }
+        - { tr: "Son yıl küçük bir şirkette staj yaptım.", de: "Im letzten Jahr habe ich in einer kleinen Firma ein Praktikum gemacht." }
+        - { tr: "Staj yaptığım şirketteki insanlar bana çok yardım etti.", de: "Die Leute in der Firma, in der ich das Praktikum gemacht habe, haben mir sehr geholfen." }
+        - { tr: "Mezun oldum ve birçok şirkete başvurdum.", de: "Ich habe meinen Abschluss gemacht und mich bei vielen Firmen beworben." }
+        - { tr: "İlk iş görüşmemde ne söyleyeceğimi bilmiyordum.", de: "Bei meinem ersten Vorstellungsgespräch wusste ich nicht, was ich sagen sollte." }
+        - { tr: "Ama müdür anlattığım projeleri çok beğendi.", de: "Aber dem Chef haben die Projekte, von denen ich erzählt habe, sehr gefallen." }
+        - { tr: "Şimdi o şirkette çalışıyorum ve yaptığım işi çok seviyorum.", de: "Jetzt arbeite ich in dieser Firma und liebe die Arbeit, die ich mache." }
+        - { tr: "Gelecek yıl şirketin beni göndereceği bir kursa katılacağım.", de: "Nächstes Jahr werde ich an einem Kurs teilnehmen, zu dem mich die Firma schickt." }
+      glossary:
+        - { tr: "yıllarımda", de: "in meinen Jahren (yıl + lar + ım + da)", vocab: "yıl" }
+        - { tr: "zordu", de: "war schwer (zor + -du)", vocab: "zor" }
+        - { tr: "şey", de: "Sache, Ding (çok şey = viel)" }
+        - { tr: "mühendisliği", de: "das Ingenieurwesen (mühendis + lik + i)", vocab: "mühendis" }
+        - { tr: "şirketteki", de: "in der Firma befindlich (şirket + te + ki)", vocab: "şirket" }
+        - { tr: "birçok", de: "viele" }
+        - { tr: "ilk", de: "erste(r, s)" }
+        - { tr: "görüşmemde", de: "in meinem Gespräch (iş görüşmesi = Vorstellungsgespräch)", vocab: "iş görüşmesi" }
+        - { tr: "etti", de: "machte (etmek; yardım etti = half)", vocab: "yardım etmek" }
+        - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
+        - { tr: "mezun", de: "Absolvent(in) (mezun olmak = den Abschluss machen)", vocab: "mezun olmak" }
+    exercises:
+      - id: b1-u08-r1-e1
+        type: multiple_choice
+        prompt: Was wollte der Vater?
+        options: [Dass sein Kind Arzt wird., Dass sein Kind Ingenieur wird., Dass sein Kind Lehrer wird.]
+        answer: Dass sein Kind Arzt wird.
+      - id: b1-u08-r1-e2
+        type: multiple_choice
+        prompt: Was hat die Person studiert?
+        options: [Informatik., Medizin., Lehramt.]
+        answer: Informatik.
+      - id: b1-u08-r1-e3
+        type: multiple_choice
+        prompt: Was wusste die Person beim ersten Vorstellungsgespräch nicht?
+        options: [Was sie sagen sollte., Wo die Firma war., Wann das Gespräch anfing.]
+        answer: Was sie sagen sollte.
+      - id: b1-u08-r1-e4
+        type: multiple_choice
+        prompt: Was hat dem Chef gefallen?
+        options: ['Die Projekte, von denen die Person erzählt hat.', Der Lebenslauf der Person., Das Diplom der Person.]
+        answer: 'Die Projekte, von denen die Person erzählt hat.'
+      - id: b1-u08-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Yaptığım işi çok seviyorum.
+        answers: ['Ich liebe die Arbeit, die ich mache.', Ich liebe meine Arbeit., 'Ich mag die Arbeit, die ich mache, sehr.', Ich mag meine Arbeit sehr., 'Die Arbeit, die ich mache, gefällt mir sehr.', Meine Arbeit gefällt mir sehr.]
+
+  - id: b1-u08-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u08-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: 'die Firma, in der ich arbeite'
+        answers: [çalıştığım şirket]
+      - id: b1-u08-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: 'Ich weiß nicht, wo er arbeitet.'
+        answers: [Nerede çalıştığını bilmiyorum., Onun nerede çalıştığını bilmiyorum.]
+      - id: b1-u08-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (das Buch, das ich lese)
+        options: [okuduğum kitap, okuyan kitap, okudum kitap]
+        answer: okuduğum kitap
+        explanation: okuyan kitap wäre ein Buch, das selbst liest.
+      - id: b1-u08-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wohin wir gehen werden)
+        options: [gideceğimiz, gidecekimiz, gitteceğimiz]
+        answer: gideceğimiz
+      - id: b1-u08-l7-e5
+        type: word_bank
+        prompt: 'Ich habe die Stellenanzeige gefunden, die du mir geschickt hast.'
+        answers: [Bana gönderdiğin iş ilanını buldum.]
+        distractors: [gönderen, buluyorum]
+        explanation: iş ilanı (Stellenanzeige) bekommt im Akkusativ -nı, iş ilanını.
+      - id: b1-u08-l7-e6
+        type: suffix_builder
+        stem: kazanmak
+        verbal: PART_DIK
+        suffixes: [POSS_1SG]
+        target: kazandığım
+        gloss_de: 'das ich verdiene (kazandığım para = das Geld, das ich verdiene)'
+      - id: b1-u08-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Seçtiğin bölümü beğendin mi?
+        answers: ['Hat dir das Fach gefallen, das du gewählt hast?', 'Gefällt dir das Fach, das du gewählt hast?', 'Hat dir das Studienfach gefallen, das du gewählt hast?', 'Gefällt dir das Studienfach, das du gewählt hast?', Hat dir dein Studienfach gefallen?, Gefällt dir dein Studienfach?]
+      - id: b1-u08-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: katılmak
+        person: 1pl
+        tense: future
+        target: katılacağız
+        gloss_de: wir werden teilnehmen
+      - id: b1-u08-l7-e9
+        type: word_bank
+        prompt: Mein Bruder hat den Job nicht bekommen, für den er sich beworben hat.
+        answers: [Kardeşim başvurduğu işi alamadı.]
+        chunks:
+          - { text: "Kardeşim", role: subject }
+          - { text: "başvurduğu işi", role: object }
+          - { text: "alamadı", role: predicate }
+        distractors: [başvuran, aldı]
+        explanation: başvurmak verlangt den Dativ (işe başvurmak), im -dik-Satz verschwindet er, başvurduğu iş.
+      - id: b1-u08-l7-e10
+        type: suffix_builder
+        stem: söylemek
+        verbal: PART_ACAK
+        suffixes: [POSS_1SG, ACC]
+        target: söyleyeceğimi
+        gloss_de: 'was ich sagen werde (Akkusativ)'
+
+vocab:
+  - { tr: eğitim, de: [Bildung, Ausbildung], pos: noun }
+  - { tr: bölüm, de: [Studienfach, Abteilung], pos: noun }
+  - { tr: kurs, de: [Kurs], pos: noun }
+  - { tr: staj, de: [Praktikum], pos: noun }
+  - { tr: iş görüşmesi, de: [Vorstellungsgespräch], pos: noun }
+  - { tr: deneyim, de: [Erfahrung], pos: noun }
+  - { tr: tecrübe, de: [Erfahrung], pos: noun }
+  - { tr: başvurmak, de: [sich bewerben], pos: verb }
+  - { tr: başvuru, de: [Bewerbung], pos: noun }
+  - { tr: özgeçmiş, de: [Lebenslauf], pos: noun }
+  - { tr: diploma, de: [Diplom, Zeugnis], pos: noun }
+  - { tr: burs, de: [Stipendium], pos: noun }
+  - { tr: amaç, de: [Ziel], pos: noun, softens: true }
+  - { tr: yer, de: [Ort, Platz], pos: noun }
+  - { tr: seçmek, de: [wählen], pos: verb }
+  - { tr: katılmak, de: [teilnehmen], pos: verb }
+  - { tr: ilan, de: [Anzeige], pos: noun }
+  - { tr: son, de: ['letzte(r, s)', Ende], pos: adj }
+  - { tr: proje, de: [Projekt], pos: noun }

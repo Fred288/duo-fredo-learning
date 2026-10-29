@@ -1,0 +1,523 @@
+# B1-07: Partizip -en (-yan), Relativsatz mit Subjekt (okuyan öğrenci), substantiviert (-enler), verneint, mit können und Passiv; Schule, Unterricht. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u07
+level: B1
+title: Schule und Unterricht
+grammar_focus: [en, enler, meyen, ebilen, ilen]
+explainer: explainers/b1-partizip-en.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u07-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u07-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „sınıf“?
+        options: [Klasse, Schule, Prüfung]
+        answer: Klasse
+        explanation: Auch das Klassenzimmer, sınıfta = in der Klasse.
+      - id: b1-u07-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Frage
+        answers: [soru]
+      - id: b1-u07-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „tahta“?
+        options: [Tafel, Heft, Bank]
+        answer: Tafel
+        explanation: tahtaya yazmak = an die Tafel schreiben.
+      - id: b1-u07-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Heft
+        answers: [defter]
+      - id: b1-u07-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „teneffüs“?
+        options: [Pause, Unterricht, Note]
+        answer: Pause
+        explanation: Die Pause zwischen zwei Schulstunden; teneffüste = in der Pause.
+      - id: b1-u07-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „lise“?
+        options: [Gymnasium, Grundschule, Universität]
+        answer: Gymnasium
+        explanation: Die Oberschule nach der achten Klasse; ilkokul = Grundschule.
+      - id: b1-u07-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Thema
+        answers: [konu]
+      - id: b1-u07-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „not“?
+        options: [Note, Notfall, Nummer]
+        answer: Note
+        explanation: iyi not almak = eine gute Note bekommen.
+      - id: b1-u07-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „ders çalışmak“?
+        options: [lernen (für die Schule), unterrichten, arbeiten]
+        answer: lernen (für die Schule)
+        explanation: öğrenmek = etwas lernen; ders çalışmak = Hausaufgaben machen, für die Schule lernen.
+      - id: b1-u07-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: antworten
+        answers: [cevap vermek, yanıt vermek]
+        explanation: Mit Dativ, soruya cevap vermek = auf die Frage antworten.
+      - id: b1-u07-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „el kaldırmak“?
+        options: [sich melden, die Hand geben, winken]
+        answer: sich melden
+        explanation: Wörtlich die Hand heben.
+      - id: b1-u07-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „ezberlemek“?
+        options: [auswendig lernen, vergessen, wiederholen]
+        answer: auswendig lernen
+      - id: b1-u07-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: wiederholen
+        answers: [tekrarlamak, tekrar etmek]
+      - id: b1-u07-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: schwer, schwierig
+        answers: [zor]
+        explanation: Das Gegenteil ist kolay (leicht).
+      - id: b1-u07-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „tanımak“?
+        options: [kennen, kennenlernen, vorstellen]
+        answer: kennen
+        explanation: tanışmak = sich kennenlernen, tanıtmak = vorstellen.
+      - id: b1-u07-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „dil“?
+        options: [Sprache, Wort, Satz]
+        answer: Sprache
+        explanation: Auch die Zunge; kelime = Wort.
+
+  - id: b1-u07-l2
+    type: grammar
+    title: Der, die, das … (-en)
+    exercises:
+      - id: b1-u07-l2-e1
+        type: suffix_builder
+        stem: okumak
+        verbal: PART_AN
+        target: okuyan
+        gloss_de: 'der, die liest (kitap okuyan öğrenci = der Schüler, der ein Buch liest)'
+        explanation: Nach Vokal steht y, okuyan.
+      - { id: b1-u07-l2-e2, type: suffix_builder, stem: gelmek, verbal: PART_AN, target: gelen, gloss_de: 'der, die kommt (gekommen ist)' }
+      - { id: b1-u07-l2-e3, type: suffix_builder, stem: bilmek, verbal: PART_AN, target: bilen, gloss_de: 'der, die weiß, kann (Türkçe bilen = der Türkisch kann)' }
+      - { id: b1-u07-l2-e4, type: suffix_builder, stem: oturmak, verbal: PART_AN, target: oturan, gloss_de: 'der, die sitzt (wohnt)' }
+      - { id: b1-u07-l2-e5, type: suffix_builder, stem: konuşmak, verbal: PART_AN, target: konuşan, gloss_de: 'der, die spricht' }
+      - id: b1-u07-l2-e6
+        type: suffix_builder
+        stem: gitmek
+        verbal: PART_AN
+        target: giden
+        gloss_de: 'der, die geht (okula giden çocuk = das Kind, das zur Schule geht)'
+        explanation: Vor Vokal wird t zu d, wie gidiyorum.
+      - id: b1-u07-l2-e7
+        type: multiple_choice
+        prompt: Was bedeutet „tahtaya yazan öğretmen“?
+        options: ['die Lehrerin, die an die Tafel schreibt', 'die Lehrerin, der man an die Tafel schreibt', Die Lehrerin schreibt an die Tafel.]
+        answer: 'die Lehrerin, die an die Tafel schreibt'
+        explanation: Das Partizip steht vor dem Nomen, das selbst handelt.
+      - id: b1-u07-l2-e8
+        type: word_bank
+        prompt: Der Schüler, der dort sitzt, ist mein Bruder.
+        answers: [Orada oturan öğrenci benim kardeşim., Orada oturan öğrenci kardeşim.]
+        distractors: [oturuyor, öğrenciler]
+      - id: b1-u07-l2-e9
+        type: word_bank
+        prompt: Ich kenne die Lehrerin, die Deutsch spricht.
+        answers: [Almanca konuşan öğretmeni tanıyorum.]
+        distractors: [konuşuyor, öğretmene]
+        explanation: Das Partizip ändert sich nicht, die Endung bekommt das Nomen (öğretmeni).
+      - id: b1-u07-l2-e10
+        type: free_text
+        direction: tr_de
+        prompt: Türkçe bilen var mı?
+        answers: [Spricht jemand Türkisch?, Kann jemand Türkisch?, Spricht hier jemand Türkisch?, Kann hier jemand Türkisch?, 'Gibt es jemanden, der Türkisch kann?', 'Gibt es jemanden, der Türkisch spricht?', 'Ist jemand da, der Türkisch kann?']
+        explanation: Ohne Nomen steht das Partizip selbst für die Person, bilen = jemand, der weiß.
+      - id: b1-u07-l2-e11
+        type: free_text
+        direction: de_tr
+        prompt: 'das Kind, das spielt'
+        answers: [oynayan çocuk]
+      - id: b1-u07-l2-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Kapıda … adam kim?“ (warten)
+        options: [bekleyen, bekliyor, beklemek]
+        answer: bekleyen
+      - id: b1-u07-l2-e13
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Öğrenci kitap okuyor.“ / „kitap okuyan öğrenci“
+        options: ['Der Schüler liest ein Buch. / der Schüler, der ein Buch liest', 'der Schüler, der ein Buch liest / Der Schüler liest ein Buch.', Beides heißt dasselbe.]
+        answer: 'Der Schüler liest ein Buch. / der Schüler, der ein Buch liest'
+
+  - id: b1-u07-l3
+    type: grammar
+    title: Die, die … (-enler)
+    exercises:
+      - id: b1-u07-l3-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: PART_AN
+        suffixes: [PL]
+        target: gelenler
+        gloss_de: 'die, die kommen (gekommen sind)'
+        explanation: Ohne Nomen wird das Partizip selbst zum Nomen und bekommt Plural und Kasus.
+      - { id: b1-u07-l3-e2, type: suffix_builder, stem: bilmek, verbal: PART_AN, suffixes: [PL], target: bilenler, gloss_de: 'die, die es wissen' }
+      - { id: b1-u07-l3-e3, type: suffix_builder, stem: okumak, verbal: PART_AN, suffixes: [PL, ACC], target: okuyanları, gloss_de: 'die, die lesen (Akkusativ)' }
+      - { id: b1-u07-l3-e4, type: suffix_builder, stem: sormak, verbal: PART_AN, suffixes: [DAT], target: sorana, gloss_de: 'dem, der fragt' }
+      - { id: b1-u07-l3-e5, type: suffix_builder, stem: istemek, verbal: PART_AN, suffixes: [PL], target: isteyenler, gloss_de: 'die, die wollen (wer will)' }
+      - { id: b1-u07-l3-e6, type: suffix_builder, stem: kazanmak, verbal: PART_AN, suffixes: [PL, DAT], target: kazananlara, gloss_de: 'den Gewinnern, denen, die gewinnen' }
+      - id: b1-u07-l3-e7
+        type: word_bank
+        prompt: 'Wer die Hausaufgaben gemacht hat, kann gehen.'
+        answers: [Ödevini yapanlar gidebilir., Ödevlerini yapanlar gidebilir.]
+        distractors: [yaptı, gidiyorum]
+        explanation: Das Partizip auf -en sagt nichts über die Zeit; yapanlar = die, die machen oder gemacht haben.
+      - id: b1-u07-l3-e8
+        type: word_bank
+        prompt: Den Gewinnern geben wir ein Geschenk.
+        answers: [Kazananlara hediye veriyoruz., Kazananlara bir hediye veriyoruz.]
+        chunks:
+          - { text: "Kazananlara", role: complement }
+          - { text: "hediye", role: object_bare }
+          - { text: "veriyoruz", role: predicate }
+        distractors: [kazananları, verdi]
+      - id: b1-u07-l3-e9
+        type: free_text
+        direction: tr_de
+        prompt: Geç gelenler içeri giremez.
+        answers: ['Wer zu spät kommt, kann nicht hinein.', 'Wer zu spät kommt, darf nicht hinein.', 'Wer zu spät kommt, kann nicht hineingehen.', 'Wer zu spät kommt, darf nicht hineingehen.', 'Die, die zu spät kommen, können nicht hinein.', 'Die, die zu spät kommen, dürfen nicht hinein.', Zuspätkommende dürfen nicht hinein., Zu spät Kommende dürfen nicht hinein.]
+      - id: b1-u07-l3-e10
+        type: multiple_choice
+        prompt: Was bedeutet „sınıfta konuşanlar“?
+        options: ['die, die in der Klasse sprechen', sie sprechen in der Klasse, das Gespräch in der Klasse]
+        answer: 'die, die in der Klasse sprechen'
+      - id: b1-u07-l3-e11
+        type: free_text
+        direction: de_tr
+        prompt: 'die, die kommen'
+        answers: [gelenler]
+      - id: b1-u07-l3-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „… teşekkür ederiz.“ (denen, die geholfen haben)
+        options: [Yardım edenlere, Yardım edenleri, Yardım edenler]
+        answer: Yardım edenlere
+        explanation: teşekkür etmek verlangt den Dativ, yardım edenlere.
+
+  - id: b1-u07-l4
+    type: grammar
+    title: 'Nicht, können, Passiv (-meyen, -ebilen, -ilen)'
+    exercises:
+      - id: b1-u07-l4-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: PART_AN
+        negative: true
+        target: gelmeyen
+        gloss_de: 'der, die nicht kommt (nicht gekommen ist)'
+        explanation: Die Verneinung -me steht vor dem Partizip, dazwischen y, gelme-y-en.
+      - { id: b1-u07-l4-e2, type: suffix_builder, stem: bilmek, verbal: PART_AN, negative: true, target: bilmeyen, gloss_de: 'der, die nicht weiß' }
+      - id: b1-u07-l4-e3
+        type: suffix_builder
+        stem: konuşmak
+        verbal: PART_AN
+        ability: true
+        target: konuşabilen
+        gloss_de: 'der, die sprechen kann'
+        explanation: -ebil (können) kommt vor das Partizip, konuş-abil-en.
+      - { id: b1-u07-l4-e4, type: suffix_builder, stem: yüzmek, verbal: PART_AN, ability: true, negative: true, target: yüzemeyen, gloss_de: 'der, die nicht schwimmen kann' }
+      - id: b1-u07-l4-e5
+        type: suffix_builder
+        stem: sormak
+        verbal: PART_AN
+        passive: true
+        target: sorulan
+        gloss_de: 'die gestellt wird (wurde) (sorulan soru = die gestellte Frage)'
+        explanation: Passiv -il vor dem Partizip, sor-ul-an.
+      - { id: b1-u07-l4-e6, type: suffix_builder, stem: yapmak, verbal: PART_AN, passive: true, target: yapılan, gloss_de: 'der, die, das gemacht wird (wurde)' }
+      - id: b1-u07-l4-e7
+        type: multiple_choice
+        prompt: Was bedeutet „ödevini yapmayan öğrenci“?
+        options: ['der Schüler, der seine Hausaufgaben nicht gemacht hat', 'der Schüler, der seine Hausaufgaben gemacht hat', Der Schüler macht seine Hausaufgaben nicht.]
+        answer: 'der Schüler, der seine Hausaufgaben nicht gemacht hat'
+      - id: b1-u07-l4-e8
+        type: word_bank
+        prompt: 'Ein Schüler, der nicht lernt, kann die Prüfung nicht bestehen.'
+        answers: [Ders çalışmayan öğrenci sınavı geçemez.]
+        chunks:
+          - { text: "Ders çalışmayan öğrenci", role: subject }
+          - { text: "sınavı", role: object }
+          - { text: "geçemez", role: predicate }
+        distractors: [çalışan, geçer]
+        explanation: sınavı geçmek = die Prüfung bestehen.
+      - id: b1-u07-l4-e9
+        type: word_bank
+        prompt: 'Die Fragen, die in der Prüfung gestellt wurden, waren schwer.'
+        answers: [Sınavda sorulan sorular zordu.]
+        distractors: [soran, sordu]
+      - id: b1-u07-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Türkçe konuşabilen bir öğretmen arıyoruz.
+        answers: ['Wir suchen einen Lehrer, der Türkisch sprechen kann.', 'Wir suchen eine Lehrerin, die Türkisch sprechen kann.', 'Wir suchen einen Lehrer, der Türkisch spricht.', 'Wir suchen eine Lehrerin, die Türkisch spricht.', 'Wir suchen einen Lehrer, der Türkisch kann.', 'Wir suchen eine Lehrerin, die Türkisch kann.', 'Wir suchen eine Lehrkraft, die Türkisch sprechen kann.']
+      - id: b1-u07-l4-e11
+        type: multiple_choice
+        prompt: Welche Form passt? „Okulda … dil Almanca.“ (die gesprochen wird)
+        options: [konuşulan, konuşan, konuşulur]
+        answer: konuşulan
+        explanation: Die Sprache spricht nicht selbst, sie wird gesprochen, also Passiv.
+      - id: b1-u07-l4-e12
+        type: free_text
+        direction: de_tr
+        prompt: 'ein Kind, das nicht schwimmen kann'
+        answers: [yüzemeyen bir çocuk, yüzemeyen çocuk, yüzme bilmeyen bir çocuk, yüzme bilmeyen çocuk, yüzmeyi bilmeyen bir çocuk, yüzmeyi bilmeyen çocuk]
+
+  - id: b1-u07-l5
+    type: dialog
+    title: Wer ist das Mädchen, das dort sitzt?
+    exercises:
+      - id: b1-u07-l5-e1
+        type: word_bank
+        prompt: Wer ist das Mädchen, das dort sitzt?
+        answers: [Orada oturan kız kim?]
+        distractors: [oturuyor, nerede]
+      - id: b1-u07-l5-e2
+        type: free_text
+        direction: tr_de
+        prompt: O, yeni gelen öğrenci.
+        answers: [Sie ist die neue Schülerin., Das ist die neue Schülerin., Er ist der neue Schüler., Das ist der neue Schüler., 'Das ist die Schülerin, die neu gekommen ist.', 'Das ist der Schüler, der neu gekommen ist.', 'Sie ist die Schülerin, die neu gekommen ist.', 'Er ist der Schüler, der neu gekommen ist.', Sie ist die neu angekommene Schülerin., 'Das ist die Schülerin, die neu ist.']
+      - id: b1-u07-l5-e3
+        type: multiple_choice
+        prompt: 'Wie sagst du „die Schüler, die in der Pause draußen spielen“?'
+        options: [teneffüste dışarıda oynayan öğrenciler, teneffüste dışarıda oynuyor öğrenciler, teneffüste dışarıda oynayanlar öğrenciler]
+        answer: teneffüste dışarıda oynayan öğrenciler
+        explanation: Vor einem Nomen bleibt das Partizip ohne Plural, öğrenciler trägt ihn.
+      - id: b1-u07-l5-e4
+        type: word_bank
+        prompt: 'Kennst du den Lehrer, der Mathematik unterrichtet?'
+        answers: [Matematik dersi veren öğretmeni tanıyor musun?]
+        distractors: [veriyor, öğretmen]
+        explanation: ders vermek = unterrichten.
+      - id: b1-u07-l5-e5
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe die Frage nicht verstanden.
+        answers: [Soruyu anlamadım., Ben soruyu anlamadım.]
+      - id: b1-u07-l5-e6
+        type: conjugation
+        mode: verb
+        lemma: tanımak
+        person: 1sg
+        tense: present
+        target: tanıyorum
+        gloss_de: ich kenne
+      - id: b1-u07-l5-e7
+        type: word_bank
+        prompt: Kannst du die Frage wiederholen?
+        answers: [Soruyu tekrarlayabilir misin?, Soruyu tekrar edebilir misin?]
+        distractors: [tekrarladı, soru]
+      - id: b1-u07-l5-e8
+        type: multiple_choice
+        prompt: Was bedeutet „Bu konuyu bilmeyen var mı?“
+        options: ['Gibt es jemanden, der dieses Thema nicht kennt?', Kennt jemand dieses Thema?, Gibt es dieses Thema nicht?]
+        answer: 'Gibt es jemanden, der dieses Thema nicht kennt?'
+
+  - id: b1-u07-l6
+    type: grammar
+    title: 'Tabellen: -en mit Endungen'
+    exercises:
+      - id: b1-u07-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: PART_AN
+        lemma: okumak
+        rows: [[], [PL], [ACC], [DAT], [LOC], [ABL]]
+        targets: [okuyan, okuyanlar, okuyanı, okuyana, okuyanda, okuyandan]
+        gloss_de: 'der, die liest'
+      - id: b1-u07-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: PART_AN
+        lemma: gelmek
+        rows: [[], [PL], [PL, ACC], [PL, DAT]]
+        targets: [gelen, gelenler, gelenleri, gelenlere]
+        gloss_de: 'der, die kommt'
+      - id: b1-u07-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: PART_AN
+        negative: true
+        lemma: bilmek
+        rows: [[], [PL], [PL, DAT]]
+        targets: [bilmeyen, bilmeyenler, bilmeyenlere]
+        gloss_de: 'der, die nicht weiß'
+      - id: b1-u07-l6-e4
+        type: paradigm
+        kind: verbal
+        verbal: PART_AN
+        passive: true
+        lemma: yapmak
+        rows: [[], [PL]]
+        targets: [yapılan, yapılanlar]
+        gloss_de: 'was gemacht wird (wurde)'
+
+  - id: b1-u07-r1
+    type: reading
+    title: 'Lesetext: Unsere Klasse'
+    passage:
+      sentences:
+        - { tr: "Bizim sınıfta yirmi öğrenci var.", de: "In unserer Klasse gibt es zwanzig Schüler." }
+        - { tr: "Pencerenin yanında oturan kız Elif.", de: "Das Mädchen, das am Fenster sitzt, ist Elif." }
+        - { tr: "Elif üç dil konuşabilen tek öğrenci.", de: "Elif ist die einzige Schülerin, die drei Sprachen sprechen kann." }
+        - { tr: "Türkçe öğretmenimiz her sabah tahtaya yeni kelimeler yazıyor.", de: "Unsere Türkischlehrerin schreibt jeden Morgen neue Wörter an die Tafel." }
+        - { tr: "Kelimeleri bilmeyen öğrenciler onları evde tekrarlıyor.", de: "Die Schüler, die die Wörter nicht kennen, wiederholen sie zu Hause." }
+        - { tr: "Öğretmenimiz derste soru soranlara her zaman sabırla cevap veriyor.", de: "Unsere Lehrerin antwortet im Unterricht immer geduldig denen, die Fragen stellen." }
+        - { tr: "Teneffüste bahçede futbol oynayanlar var, kitap okuyanlar da var.", de: "In der Pause gibt es welche, die im Hof Fußball spielen, und auch welche, die Bücher lesen." }
+        - { tr: "Geçen hafta sınavda sorulan sorular çok zordu.", de: "Letzte Woche waren die Fragen, die in der Prüfung gestellt wurden, sehr schwer." }
+        - { tr: "Ama ders çalışan herkes sınavı geçti.", de: "Aber alle, die gelernt hatten, haben die Prüfung bestanden." }
+        - { tr: "Sınava gelmeyen tek bir öğrenci vardı.", de: "Es gab nur einen Schüler, der nicht zur Prüfung gekommen ist." }
+        - { tr: "O da o gün hastaydı.", de: "Er war an dem Tag krank." }
+      glossary:
+        - { tr: "Elif", de: "Elif (Name)" }
+        - { tr: "tek", de: "einzig (tek bir = nur ein)" }
+        - { tr: "sabırla", de: "geduldig (sabır = Geduld)" }
+        - { tr: "hastaydı", de: "war krank (hasta + -ydı)", vocab: "hasta" }
+        - { tr: "vardı", de: "es gab (var + -dı)", vocab: "var" }
+        - { tr: "her", de: "jede(r, s) (her sabah = jeden Morgen)" }
+        - { tr: "da", de: "auch (nach Vokal a: okuyanlar da)" }
+        - { tr: "zordu", de: "war schwer (zor + -du)", vocab: "zor" }
+    exercises:
+      - id: b1-u07-r1-e1
+        type: multiple_choice
+        prompt: Wo sitzt Elif?
+        options: [Am Fenster., An der Tür., Neben der Lehrerin.]
+        answer: Am Fenster.
+      - id: b1-u07-r1-e2
+        type: multiple_choice
+        prompt: Was macht die Lehrerin jeden Morgen?
+        options: [Sie schreibt neue Wörter an die Tafel., Sie schreibt eine Prüfung., Sie spielt mit den Schülern Fußball.]
+        answer: Sie schreibt neue Wörter an die Tafel.
+      - id: b1-u07-r1-e3
+        type: multiple_choice
+        prompt: Wer hat die Prüfung bestanden?
+        options: ['Alle, die gelernt hatten.', Nur Elif., Niemand.]
+        answer: 'Alle, die gelernt hatten.'
+      - id: b1-u07-r1-e4
+        type: multiple_choice
+        prompt: Warum war ein Schüler nicht bei der Prüfung?
+        options: [Er war krank., Er hatte nicht gelernt., Er hatte die Prüfung vergessen.]
+        answer: Er war krank.
+      - id: b1-u07-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Elif üç dil konuşabilen tek öğrenci.
+        answers: ['Elif ist die einzige Schülerin, die drei Sprachen sprechen kann.', 'Elif ist die einzige Schülerin, die drei Sprachen spricht.', 'Elif ist die einzige Schülerin, die drei Sprachen kann.', 'Elif ist die Einzige, die drei Sprachen sprechen kann.', 'Elif ist die einzige, die drei Sprachen sprechen kann.']
+
+  - id: b1-u07-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u07-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: 'der Schüler, der Türkisch kann'
+        answers: [Türkçe bilen öğrenci, Türkçe konuşan öğrenci, Türkçe konuşabilen öğrenci]
+      - id: b1-u07-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: 'die, die nicht gekommen sind'
+        answers: [gelmeyenler]
+      - id: b1-u07-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (der Mann, der wartet)
+        options: [bekleyen adam, bekleyan adam, beklen adam]
+        answer: bekleyen adam
+        explanation: Nach Vokal y, und die Harmonie folgt dem letzten Vokal (e), bekle-y-en.
+      - id: b1-u07-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (die gestellte Frage)
+        options: [sorulan soru, soran soru, sorulmak soru]
+        answer: sorulan soru
+        explanation: soran soru wäre eine Frage, die selbst fragt; sorulmak ist der Infinitiv.
+      - id: b1-u07-l7-e5
+        type: word_bank
+        prompt: Die Kinder, die im Garten spielen, sind sehr laut.
+        answers: [Bahçede oynayan çocuklar çok gürültülü.]
+        distractors: [oynuyor, çocuk]
+        explanation: gürültülü = laut (gürültü = Lärm).
+      - id: b1-u07-l7-e6
+        type: suffix_builder
+        stem: yazmak
+        verbal: PART_AN
+        target: yazan
+        gloss_de: 'der, die schreibt (geschrieben hat)'
+      - id: b1-u07-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Soruyu bilenler el kaldırsın.
+        answers: ['Wer die Antwort weiß, soll sich melden.', 'Wer die Antwort weiß, meldet sich.', 'Die, die die Antwort wissen, sollen sich melden.', 'Wer die Frage weiß, soll sich melden.', 'Wer es weiß, soll sich melden.', 'Wer die Antwort kennt, soll sich melden.', 'Wer die Lösung weiß, soll sich melden.']
+        explanation: soruyu bilmek = die Antwort auf die Frage wissen.
+      - id: b1-u07-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: ders çalışmak
+        person: 1pl
+        tense: past
+        target: ders çalıştık
+        gloss_de: wir haben gelernt
+      - id: b1-u07-l7-e9
+        type: word_bank
+        prompt: Der Junge, der neben mir sitzt, schreibt von mir ab.
+        answers: [Yanımda oturan çocuk benden kopya çekiyor.]
+        chunks:
+          - { text: "Yanımda oturan çocuk", role: subject }
+          - { text: "benden", role: complement }
+          - { text: "kopya çekiyor", role: predicate }
+        distractors: [oturuyor, bana]
+        explanation: kopya çekmek = abschreiben, spicken.
+      - id: b1-u07-l7-e10
+        type: suffix_builder
+        stem: anlamak
+        verbal: PART_AN
+        negative: true
+        suffixes: [PL, DAT]
+        target: anlamayanlara
+        gloss_de: 'denen, die es nicht verstehen'
+
+vocab:
+  - { tr: sınıf, de: [Klasse, Klassenzimmer], pos: noun }
+  - { tr: soru, de: [Frage], pos: noun }
+  - { tr: tahta, de: [Tafel, Holz], pos: noun }
+  - { tr: defter, de: [Heft], pos: noun }
+  - { tr: silgi, de: [Radiergummi], pos: noun }
+  - { tr: teneffüs, de: [Pause (Schule)], pos: noun }
+  - { tr: lise, de: [Gymnasium, Oberschule], pos: noun }
+  - { tr: konu, de: [Thema], pos: noun }
+  - { tr: not, de: [Note, Notiz], pos: noun }
+  - { tr: matematik, de: [Mathematik], pos: noun }
+  - { tr: dil, de: [Sprache, Zunge], pos: noun }
+  - { tr: ders çalışmak, de: [lernen (für die Schule)], pos: verb }
+  - { tr: cevap vermek, de: [antworten], pos: verb }
+  - { tr: el kaldırmak, de: [sich melden], pos: verb }
+  - { tr: tekrarlamak, de: [wiederholen], pos: verb }
+  - { tr: ezberlemek, de: [auswendig lernen], pos: verb }
+  - { tr: tanımak, de: [kennen], pos: verb }
+  - { tr: kopya çekmek, de: [abschreiben, spicken], pos: verb }
+  - { tr: zor, de: [schwer, schwierig], pos: adj }
+  - { tr: başarılı, de: [erfolgreich], pos: adj }
+  - { tr: gürültülü, de: [laut], pos: adj }

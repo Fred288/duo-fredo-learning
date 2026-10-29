@@ -1,0 +1,526 @@
+# B1-09: Konverbien -ip (und dann), -erek (indem, …end), -meden (ohne zu); Erzählungen, Märchen. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u09
+level: B1
+title: Erzählungen und Märchen
+grammar_focus: [ip, erek, meden]
+explainer: explainers/b1-konverb.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u09-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u09-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „kral“?
+        options: [König, Prinz, Held]
+        answer: König
+      - id: b1-u09-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Palast, Schloss
+        answers: [saray]
+      - id: b1-u09-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „cadı“?
+        options: [Hexe, Riese, Fee]
+        answer: Hexe
+      - id: b1-u09-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „dev“?
+        options: [Riese, Zwerg, Drache]
+        answer: Riese
+        explanation: Als Adjektiv auch riesig, dev bir ağaç.
+      - id: b1-u09-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Fuchs
+        answers: [tilki]
+      - id: b1-u09-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: Wolf
+        answers: [kurt]
+      - id: b1-u09-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „kuyu“?
+        options: [Brunnen, Höhle, Fluss]
+        answer: Brunnen
+      - id: b1-u09-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Gold
+        answers: [altın]
+        explanation: Auch golden, altın elma = goldener Apfel.
+      - id: b1-u09-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „kahraman“?
+        options: [Held, König, Diener]
+        answer: Held
+      - id: b1-u09-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „sihirli“?
+        options: [Zauber-, gefährlich, heimlich]
+        answer: Zauber-
+        explanation: sihir (Zauber) + -li, sihirli elma = Zauberapfel.
+      - id: b1-u09-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: lachen
+        answers: [gülmek]
+      - id: b1-u09-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „kaçmak“?
+        options: [fliehen, fangen, fallen]
+        answer: fliehen
+        explanation: Auch weglaufen; kaçırmak = verpassen, entführen.
+      - id: b1-u09-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „saklanmak“?
+        options: [sich verstecken, sich verirren, sich ausruhen]
+        answer: sich verstecken
+      - id: b1-u09-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: aufwachen
+        answers: [uyanmak]
+      - id: b1-u09-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „acıkmak“?
+        options: [hungrig werden, müde werden, krank werden]
+        answer: hungrig werden
+        explanation: acıktım = ich habe Hunger.
+      - id: b1-u09-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „atlamak“?
+        options: [springen, werfen, klettern]
+        answer: springen
+
+  - id: b1-u09-l2
+    type: grammar
+    title: Und dann … (-ip)
+    exercises:
+      - id: b1-u09-l2-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: CV_IP
+        target: gelip
+        gloss_de: 'kam und …, kommen und …'
+        explanation: -ip verbindet zwei Handlungen nacheinander; Zeit und Person stehen nur am letzten Verb.
+      - { id: b1-u09-l2-e2, type: suffix_builder, stem: almak, verbal: CV_IP, target: alıp, gloss_de: 'nahm und …, nehmen und …' }
+      - { id: b1-u09-l2-e3, type: suffix_builder, stem: oturmak, verbal: CV_IP, target: oturup, gloss_de: 'setzte sich und …' }
+      - { id: b1-u09-l2-e4, type: suffix_builder, stem: kalkmak, verbal: CV_IP, target: kalkıp, gloss_de: 'stand auf und …' }
+      - id: b1-u09-l2-e5
+        type: suffix_builder
+        stem: gitmek
+        verbal: CV_IP
+        target: gidip
+        gloss_de: 'ging und …, gehen und …'
+        explanation: Vor Vokal wird t zu d, gidip.
+      - id: b1-u09-l2-e6
+        type: suffix_builder
+        stem: demek
+        verbal: CV_IP
+        target: deyip
+        gloss_de: 'sagte und …'
+        explanation: Anders als diyor, diyecek bleibt das e hier, deyip.
+      - id: b1-u09-l2-e7
+        type: word_bank
+        prompt: Der Fuchs ging in den Wald und versteckte sich.
+        answers: [Tilki ormana gidip saklandı.]
+        chunks:
+          - { text: "Tilki", role: subject }
+          - { text: "ormana gidip", role: complement }
+          - { text: "saklandı", role: predicate }
+        distractors: [gitti, saklanıp]
+      - id: b1-u09-l2-e8
+        type: word_bank
+        prompt: Er stand auf und öffnete das Fenster.
+        answers: [Kalkıp pencereyi açtı.]
+        distractors: [kalktı, açıp]
+      - id: b1-u09-l2-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Eve gelip yemek yedim.“?
+        options: [Ich bin nach Hause gekommen und habe gegessen., 'Ich bin nach Hause gekommen, ohne zu essen.', 'Als ich nach Hause kam, aß ich gerade.']
+        answer: Ich bin nach Hause gekommen und habe gegessen.
+      - id: b1-u09-l2-e10
+        type: free_text
+        direction: tr_de
+        prompt: Oturup konuşalım.
+        answers: [Setzen wir uns und reden wir., Setzen wir uns und reden., Setzen wir uns hin und reden., Setzen wir uns hin und reden wir., Lass uns hinsetzen und reden., Lasst uns hinsetzen und reden.]
+        explanation: Die Wunschform -elim gilt für beide Verben.
+      - id: b1-u09-l2-e11
+        type: free_text
+        direction: de_tr
+        prompt: Er kam und setzte sich. (mit -ip)
+        answers: [Gelip oturdu., O gelip oturdu.]
+      - id: b1-u09-l2-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Ekmek … eve döndü.“ (kaufte und)
+        options: [alıp, almak, alır]
+        answer: alıp
+
+  - id: b1-u09-l3
+    type: grammar
+    title: Lachend, indem … (-erek)
+    exercises:
+      - id: b1-u09-l3-e1
+        type: suffix_builder
+        stem: gülmek
+        verbal: CV_ARAK
+        target: gülerek
+        gloss_de: lachend
+        explanation: -erek beschreibt, wie oder wodurch etwas geschieht, gleichzeitig mit dem Hauptverb.
+      - { id: b1-u09-l3-e2, type: suffix_builder, stem: koşmak, verbal: CV_ARAK, target: koşarak, gloss_de: 'rennend, im Laufschritt' }
+      - { id: b1-u09-l3-e3, type: suffix_builder, stem: ağlamak, verbal: CV_ARAK, target: ağlayarak, gloss_de: weinend }
+      - { id: b1-u09-l3-e4, type: suffix_builder, stem: düşünmek, verbal: CV_ARAK, target: düşünerek, gloss_de: 'nachdenkend, überlegt' }
+      - id: b1-u09-l3-e5
+        type: suffix_builder
+        stem: demek
+        verbal: CV_ARAK
+        target: diyerek
+        gloss_de: 'indem er, sie sagte; mit den Worten'
+        explanation: Vor -yerek wird de zu di, wie diyor.
+      - { id: b1-u09-l3-e6, type: suffix_builder, stem: yürümek, verbal: CV_ARAK, target: yürüyerek, gloss_de: 'zu Fuß, gehend' }
+      - id: b1-u09-l3-e7
+        type: word_bank
+        prompt: Das Mädchen lief weinend nach Hause.
+        answers: [Kız ağlayarak eve koştu., Kız eve ağlayarak koştu.]
+        chunks:
+          - { text: "Kız", role: subject }
+          - { text: "ağlayarak", role: complement }
+          - { text: "eve", role: complement }
+          - { text: "koştu", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3] }
+        distractors: [ağlıyor, koşmak]
+      - id: b1-u09-l3-e8
+        type: word_bank
+        prompt: Wir sind zu Fuß zur Schule gegangen.
+        answers: [Okula yürüyerek gittik.]
+        distractors: [yürümek, gidiyoruz]
+      - id: b1-u09-l3-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Gülerek cevap verdi.“?
+        options: [Er antwortete lachend., Er lachte und antwortete dann., 'Er antwortete, ohne zu lachen.']
+        answer: Er antwortete lachend.
+        explanation: Gleichzeitig = -erek; nacheinander wäre gülüp cevap verdi.
+      - id: b1-u09-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Türkçeyi dizi izleyerek öğrendim.
+        answers: ['Ich habe Türkisch gelernt, indem ich Serien geschaut habe.', 'Ich habe Türkisch gelernt, indem ich Serien gesehen habe.', 'Ich habe Türkisch gelernt, indem ich Serien sah.', Ich habe Türkisch durch Serien gelernt., Ich habe Türkisch mit Serien gelernt., Ich habe Türkisch beim Serienschauen gelernt., Ich habe durch Serienschauen Türkisch gelernt.]
+      - id: b1-u09-l3-e11
+        type: multiple_choice
+        prompt: Welche Form passt? „Çocuk … uyudu.“ (weinend)
+        options: [ağlayarak, ağlamak, ağlamaya]
+        answer: ağlayarak
+      - id: b1-u09-l3-e12
+        type: free_text
+        direction: de_tr
+        prompt: lachend
+        answers: [gülerek]
+
+  - id: b1-u09-l4
+    type: grammar
+    title: Ohne zu … (-meden)
+    exercises:
+      - id: b1-u09-l4-e1
+        type: suffix_builder
+        stem: söylemek
+        verbal: CV_MADAN
+        target: söylemeden
+        gloss_de: ohne zu sagen
+        explanation: -meden ist schon verneint, ein -me davor gibt es nicht.
+      - { id: b1-u09-l4-e2, type: suffix_builder, stem: bakmak, verbal: CV_MADAN, target: bakmadan, gloss_de: ohne zu schauen }
+      - { id: b1-u09-l4-e3, type: suffix_builder, stem: düşünmek, verbal: CV_MADAN, target: düşünmeden, gloss_de: ohne nachzudenken }
+      - id: b1-u09-l4-e4
+        type: suffix_builder
+        stem: yemek
+        verbal: CV_MADAN
+        target: yemeden
+        gloss_de: ohne zu essen
+        explanation: Vor -meden bleibt ye unverändert (yemeden, nicht yimeden).
+      - id: b1-u09-l4-e5
+        type: suffix_builder
+        stem: gelmek
+        verbal: CV_MADAN
+        ability: true
+        target: gelemeden
+        gloss_de: ohne kommen zu können
+        explanation: Mit -e (können) davor, gel-e-meden.
+      - { id: b1-u09-l4-e6, type: suffix_builder, stem: uyumak, verbal: CV_MADAN, target: uyumadan, gloss_de: ohne zu schlafen }
+      - id: b1-u09-l4-e7
+        type: word_bank
+        prompt: 'Er ging, ohne etwas zu sagen.'
+        answers: [Bir şey söylemeden gitti., Hiçbir şey söylemeden gitti.]
+        distractors: [söyleyip, gidiyor]
+      - id: b1-u09-l4-e8
+        type: word_bank
+        prompt: 'Das Kind ist zur Schule gegangen, ohne zu frühstücken.'
+        answers: [Çocuk kahvaltı yapmadan okula gitti., Çocuk okula kahvaltı yapmadan gitti.]
+        chunks:
+          - { text: "Çocuk", role: subject }
+          - { text: "kahvaltı yapmadan", role: complement }
+          - { text: "okula", role: complement }
+          - { text: "gitti", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3] }
+        distractors: [yapıp, yapmak]
+      - id: b1-u09-l4-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Düşünmeden konuşma!“?
+        options: ['Sprich nicht, ohne nachzudenken!', Denk nach und sprich!, Sprich nicht beim Denken!]
+        answer: 'Sprich nicht, ohne nachzudenken!'
+      - id: b1-u09-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Kapıyı çalmadan içeri girdi.
+        answers: ['Er kam herein, ohne anzuklopfen.', 'Sie kam herein, ohne anzuklopfen.', 'Er ist hereingekommen, ohne anzuklopfen.', 'Sie ist hereingekommen, ohne anzuklopfen.', 'Er ging hinein, ohne anzuklopfen.', 'Sie ging hinein, ohne anzuklopfen.', 'Er trat ein, ohne anzuklopfen.', 'Sie trat ein, ohne anzuklopfen.', 'Er kam rein, ohne zu klopfen.', 'Sie kam rein, ohne zu klopfen.']
+        explanation: kapıyı çalmak = an die Tür klopfen.
+      - id: b1-u09-l4-e11
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ohne zu essen)
+        options: [yemeden, yimeden, yemedin]
+        answer: yemeden
+      - id: b1-u09-l4-e12
+        type: free_text
+        direction: de_tr
+        prompt: ohne zu schauen
+        answers: [bakmadan]
+
+  - id: b1-u09-l5
+    type: dialog
+    title: Erzähl mir ein Märchen!
+    exercises:
+      - id: b1-u09-l5-e1
+        type: word_bank
+        prompt: Erzähl mir ein Märchen!
+        answers: [Bana bir masal anlat!, Bana masal anlat!]
+        distractors: [anlattı, masalda]
+      - id: b1-u09-l5-e2
+        type: multiple_choice
+        prompt: Was bedeutet „Masalı dinleyip uyudu.“?
+        options: [Er hörte das Märchen und schlief ein., 'Er schlief ein, ohne das Märchen zu hören.', Er hörte das Märchen im Schlaf.]
+        answer: Er hörte das Märchen und schlief ein.
+      - id: b1-u09-l5-e3
+        type: free_text
+        direction: tr_de
+        prompt: Sonra ne olmuş?
+        answers: [Was ist dann passiert?, Was ist danach passiert?, Was passierte dann?, Was geschah dann?, Und was ist dann passiert?, Und dann?]
+        explanation: Im Märchen steht -miş, man erzählt Gehörtes.
+      - id: b1-u09-l5-e4
+        type: word_bank
+        prompt: Der Fuchs floh lachend.
+        answers: [Tilki gülerek kaçtı.]
+        chunks:
+          - { text: "Tilki", role: subject }
+          - { text: "gülerek", role: complement }
+          - { text: "kaçtı", role: predicate }
+        distractors: [güldü, kaçmak]
+      - id: b1-u09-l5-e5
+        type: conjugation
+        mode: verb
+        lemma: kaçmak
+        person: 3sg
+        tense: evidential
+        target: kaçmış
+        gloss_de: 'er, sie floh (im Märchen)'
+      - id: b1-u09-l5-e6
+        type: multiple_choice
+        prompt: Wie endet ein türkisches Märchen oft?
+        options: ['Onlar ermiş muradına, biz çıkalım kerevetine.', Bir varmış bir yokmuş., Afiyet olsun.]
+        answer: 'Onlar ermiş muradına, biz çıkalım kerevetine.'
+        explanation: Etwa „Sie haben ihr Ziel erreicht, und wir steigen auf unsere Bank.“ Bir varmış bir yokmuş ist der Anfang.
+      - id: b1-u09-l5-e7
+        type: free_text
+        direction: tr_de
+        prompt: Cadı sihirli bir elma verip kaybolmuş.
+        answers: [Die Hexe gab einen Zauberapfel und verschwand., Die Hexe hat einen Zauberapfel gegeben und ist verschwunden., Die Hexe gab einen verzauberten Apfel und verschwand., Die Hexe gab einen magischen Apfel und verschwand., Die Hexe soll einen Zauberapfel gegeben haben und verschwunden sein.]
+      - id: b1-u09-l5-e8
+        type: multiple_choice
+        prompt: Wie sagst du „ohne zu schlafen“?
+        options: [uyumadan, uyuyarak, uyuyup]
+        answer: uyumadan
+
+  - id: b1-u09-l6
+    type: grammar
+    title: 'Tabellen: Märchenzeit und Konverbien'
+    exercises:
+      - id: b1-u09-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: kaçmak
+        tense: evidential
+        targets: [kaçmışım, kaçmışsın, kaçmış, kaçmışız, kaçmışsınız, kaçmışlar]
+        gloss_de: 'fliehen (erzählt: -miş)'
+      - id: b1-u09-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: uyanmak
+        tense: evidential
+        negative: true
+        targets: [uyanmamışım, uyanmamışsın, uyanmamış, uyanmamışız, uyanmamışsınız, uyanmamışlar]
+        gloss_de: 'nicht aufwachen (erzählt)'
+      - { id: b1-u09-l6-e3, type: suffix_builder, stem: görmek, verbal: CV_IP, target: görüp, gloss_de: 'sah und …' }
+      - { id: b1-u09-l6-e4, type: suffix_builder, stem: görmek, verbal: CV_ARAK, target: görerek, gloss_de: 'sehend, indem er sah' }
+      - { id: b1-u09-l6-e5, type: suffix_builder, stem: görmek, verbal: CV_MADAN, target: görmeden, gloss_de: 'ohne zu sehen' }
+      - id: b1-u09-l6-e6
+        type: suffix_builder
+        stem: yemek
+        verbal: CV_IP
+        target: yiyip
+        gloss_de: 'aß und …'
+        explanation: Vor y + Vokal wird ye zu yi, yiyip, yiyerek; aber yemeden.
+      - { id: b1-u09-l6-e7, type: suffix_builder, stem: yemek, verbal: CV_ARAK, target: yiyerek, gloss_de: 'essend, beim Essen' }
+
+  - id: b1-u09-r1
+    type: reading
+    title: 'Lesetext: Der kluge Fuchs'
+    passage:
+      sentences:
+        - { tr: "Bir varmış bir yokmuş, büyük bir ormanda akıllı bir tilki yaşarmış.", de: "Es war einmal, in einem großen Wald lebte ein kluger Fuchs." }
+        - { tr: "Bir gün tilki çok acıkmış ve yiyecek aramaya çıkmış.", de: "Eines Tages bekam der Fuchs großen Hunger und machte sich auf die Suche nach etwas zu essen." }
+        - { tr: "Yolda eski bir kuyu görüp yanına gitmiş.", de: "Unterwegs sah er einen alten Brunnen und ging zu ihm." }
+        - { tr: "Kuyunun içinde ağlayan bir kurt varmış.", de: "Im Brunnen war ein Wolf, der weinte." }
+        - { tr: "Kurt ağlayarak \"Lütfen bana yardım et!\" demiş.", de: "Der Wolf sagte weinend: „Bitte hilf mir!“" }
+        - { tr: "Tilki hiç düşünmeden kuyuya bir ip atmış.", de: "Der Fuchs warf, ohne nachzudenken, ein Seil in den Brunnen." }
+        - { tr: "Kurt ipe tutunup dışarı çıkmış.", de: "Der Wolf hielt sich am Seil fest und kletterte heraus." }
+        - { tr: "Ama teşekkür etmeden tilkiyi yemek istemiş.", de: "Aber ohne sich zu bedanken, wollte er den Fuchs fressen." }
+        - { tr: "Tilki gülerek \"Kuyunun dibinde altın var!\" demiş.", de: "Der Fuchs sagte lachend: „Unten im Brunnen liegt Gold!“" }
+        - { tr: "Aç kurt altını almak için hemen kuyuya atlamış.", de: "Der hungrige Wolf sprang sofort in den Brunnen, um das Gold zu holen." }
+        - { tr: "Tilki de arkasına bakmadan koşarak kaçmış.", de: "Und der Fuchs rannte davon, ohne sich umzusehen." }
+      glossary:
+        - { tr: "yiyecek", de: "etwas zu essen (yemek + -ecek)", vocab: "yemek" }
+        - { tr: "varmış", de: "es gab (var + -mış, erzählt)", vocab: "var" }
+        - { tr: "yokmuş", de: "es gab nicht (yok + -muş; Bir varmış bir yokmuş = Es war einmal)", vocab: "yok" }
+        - { tr: "tutunup", de: "hielt sich fest und … (tutunmak)" }
+        - { tr: "teşekkür", de: "Dank (teşekkür etmek = sich bedanken)" }
+        - { tr: "etmeden", de: "ohne zu machen (etmek; teşekkür etmeden = ohne sich zu bedanken)" }
+        - { tr: "dibinde", de: "unten in, am Grund (dip + i + nde)" }
+        - { tr: "aç", de: "hungrig" }
+        - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
+    exercises:
+      - id: b1-u09-r1-e1
+        type: multiple_choice
+        prompt: Wo war der Wolf?
+        options: [Im Brunnen., Hinter einem Baum., Im Haus des Fuchses.]
+        answer: Im Brunnen.
+      - id: b1-u09-r1-e2
+        type: multiple_choice
+        prompt: Was hat der Fuchs gemacht, als der Wolf um Hilfe bat?
+        options: [Er warf ein Seil in den Brunnen., Er lief sofort weg., Er holte andere Tiere.]
+        answer: Er warf ein Seil in den Brunnen.
+      - id: b1-u09-r1-e3
+        type: multiple_choice
+        prompt: Was wollte der Wolf, als er draußen war?
+        options: [Den Fuchs fressen., Nach Hause gehen., Schlafen.]
+        answer: Den Fuchs fressen.
+      - id: b1-u09-r1-e4
+        type: multiple_choice
+        prompt: Wie ist der Fuchs entkommen?
+        options: [Er hat den Wolf mit dem Gold überlistet., Er hat mit dem Wolf gekämpft., Ein Jäger hat ihn gerettet.]
+        answer: Er hat den Wolf mit dem Gold überlistet.
+      - id: b1-u09-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Tilki arkasına bakmadan kaçmış.
+        answers: ['Der Fuchs floh, ohne sich umzusehen.', 'Der Fuchs lief weg, ohne sich umzusehen.', 'Der Fuchs ist geflohen, ohne sich umzusehen.', 'Der Fuchs ist weggelaufen, ohne sich umzusehen.', 'Der Fuchs floh, ohne zurückzuschauen.', 'Der Fuchs lief weg, ohne zurückzuschauen.', 'Der Fuchs floh, ohne sich umzudrehen.', 'Der Fuchs lief weg, ohne sich umzudrehen.']
+
+  - id: b1-u09-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u09-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ohne nachzudenken
+        answers: [düşünmeden]
+      - id: b1-u09-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: weinend
+        answers: [ağlayarak]
+      - id: b1-u09-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (sagte und …)
+        options: [deyip, diyip, deip]
+        answer: deyip
+        explanation: Bei -ip bleibt das e, deyip; bei -erek nicht, diyerek.
+      - id: b1-u09-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ohne zu gehen)
+        options: [gitmeden, gidmeden, gitmemeden]
+        answer: gitmeden
+        explanation: Vor m bleibt t, und -meden ist schon verneint.
+      - id: b1-u09-l7-e5
+        type: word_bank
+        prompt: Der König nahm das Gold und ging in den Palast.
+        answers: [Kral altını alıp saraya gitti.]
+        chunks:
+          - { text: "Kral", role: subject }
+          - { text: "altını alıp", role: complement }
+          - { text: "saraya", role: complement }
+          - { text: "gitti", role: predicate }
+        distractors: [aldı, sarayda]
+      - id: b1-u09-l7-e6
+        type: suffix_builder
+        stem: saklanmak
+        verbal: CV_IP
+        target: saklanıp
+        gloss_de: 'versteckte sich und …'
+      - id: b1-u09-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Kahraman korkmadan devin karşısına çıkmış.
+        answers: [Der Held trat dem Riesen ohne Angst entgegen., Der Held trat ohne Angst vor den Riesen., 'Der Held trat dem Riesen entgegen, ohne Angst zu haben.', Der Held stellte sich ohne Angst dem Riesen., Der Held stellte sich dem Riesen ohne Angst., Der Held soll dem Riesen ohne Angst entgegengetreten sein.]
+        explanation: birinin karşısına çıkmak = jemandem entgegentreten.
+      - id: b1-u09-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: uyanmak
+        person: 3sg
+        tense: evidential
+        target: uyanmış
+        gloss_de: 'er, sie wachte auf (im Märchen)'
+      - id: b1-u09-l7-e9
+        type: word_bank
+        prompt: 'Die Prinzessin aß den Apfel, ohne nachzudenken.'
+        answers: [Prenses düşünmeden elmayı yedi., Prenses elmayı düşünmeden yedi.]
+        chunks:
+          - { text: "Prenses", role: subject }
+          - { text: "düşünmeden", role: complement }
+          - { text: "elmayı", role: object }
+          - { text: "yedi", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3] }
+        distractors: [düşünerek, yiyip]
+      - id: b1-u09-l7-e10
+        type: suffix_builder
+        stem: gülmek
+        verbal: CV_MADAN
+        target: gülmeden
+        gloss_de: ohne zu lachen
+
+vocab:
+  - { tr: kral, de: [König], pos: noun }
+  - { tr: prenses, de: [Prinzessin], pos: noun }
+  - { tr: saray, de: [Palast, Schloss], pos: noun }
+  - { tr: dev, de: [Riese], pos: noun }
+  - { tr: cadı, de: [Hexe], pos: noun }
+  - { tr: kurt, de: [Wolf], pos: noun }
+  - { tr: tilki, de: [Fuchs], pos: noun }
+  - { tr: kuyu, de: [Brunnen], pos: noun }
+  - { tr: altın, de: [Gold], pos: noun }
+  - { tr: kahraman, de: [Held, Heldin], pos: noun }
+  - { tr: sihirli, de: [Zauber-, verzaubert], pos: adj }
+  - { tr: gülmek, de: [lachen], pos: verb }
+  - { tr: kaçmak, de: [fliehen, weglaufen], pos: verb }
+  - { tr: saklanmak, de: [sich verstecken], pos: verb }
+  - { tr: uyanmak, de: [aufwachen], pos: verb }
+  - { tr: acıkmak, de: [hungrig werden], pos: verb }
+  - { tr: atlamak, de: [springen], pos: verb }
+  - { tr: ip, de: [Seil], pos: noun }
+  - { tr: hemen, de: [sofort], pos: adv }
