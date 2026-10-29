@@ -20,6 +20,8 @@ import { caseHints, withWordOrder } from '../src/content/word-order';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import { prepareLookup } from '../src/lookup/search';
+import { PlacementOverrides, selectPlacement } from '../src/placement/select';
+import { parse as parseYaml } from 'yaml';
 import {
   checkListen,
   checkSegments,
@@ -34,9 +36,11 @@ import {
 
 const CONTENT_DIR = 'content';
 const OUT_DIR = join('public', 'content');
+/** Korrekturen der Einstufungsaufgaben (optional); keine Unit-Datei. */
+const PLACEMENT_FILE = 'placement.yaml';
 
 const files = readdirSync(CONTENT_DIR, { recursive: true, encoding: 'utf8' })
-  .filter((f) => /\.ya?ml$/.test(f))
+  .filter((f) => /\.ya?ml$/.test(f) && f !== PLACEMENT_FILE)
   .map((f) => join(CONTENT_DIR, f))
   .sort();
 
@@ -96,6 +100,24 @@ if (SEGMENT_LESSONS) {
   );
 }
 
+// Einstufungstest: je Unit Probe und Bestätigung aus vorhandenen Übungen (src/placement/select.ts).
+let overrides: PlacementOverrides = {};
+if (existsSync(join(CONTENT_DIR, PLACEMENT_FILE))) {
+  const parsed = PlacementOverrides.safeParse(
+    parseYaml(readFileSync(join(CONTENT_DIR, PLACEMENT_FILE), 'utf8')) ?? {},
+  );
+  if (parsed.success) overrides = parsed.data;
+  else
+    errors.push(
+      ...parsed.error.issues.map((i) => `${PLACEMENT_FILE}: ${i.path.join('.')}: ${i.message}`),
+    );
+}
+const placement = selectPlacement(
+  built.map(({ unit }) => unit),
+  overrides,
+);
+errors.push(...placement.errors);
+
 const explainers = new Map<string, string>();
 for (const { file, unit } of units) {
   if (!unit.explainer || !existsSync(join(CONTENT_DIR, unit.explainer))) continue;
@@ -128,6 +150,7 @@ for (const { unit } of units) {
 }
 const manifest = built.map(({ unit }) => manifestEntry(unit));
 writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));
+writeFileSync(join(OUT_DIR, 'placement.json'), JSON.stringify(placement.plan));
 const lookup = JSON.stringify(
   buildLookup(
     units.map(({ unit }) => unit),

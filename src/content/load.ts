@@ -1,4 +1,5 @@
 import type { LookupIndex } from '../lookup/types';
+import type { PlacementPlan } from '../placement/select';
 import type { Lesson, Level, Unit } from './schema';
 
 // Inhalte sind im Build validiert (tools/build-content.ts), daher hier nur typisiert.
@@ -32,6 +33,8 @@ export async function fetchExplainer(path: string): Promise<string> {
 }
 
 export const fetchManifest = () => getJson<Manifest>('index.json');
+/** Aufgaben des Einstufungstests (im Build ausgewählt). */
+export const fetchPlacement = () => getJson<PlacementPlan>('placement.json');
 
 // Einmal je Sitzung laden; ein Fehler (z. B. offline ohne Cache) wird beim nächsten Aufruf wiederholt.
 let lookup: Promise<LookupIndex> | undefined;
