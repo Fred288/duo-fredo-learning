@@ -1,5 +1,6 @@
 import { isScalar, parse as parseYaml, parseDocument, Scalar, visit } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
+import { PlacementOverrides } from '../src/placement/select';
 import { sameForm, solveExercise, solveForm, solveParadigm } from '../src/content/lexicon';
 import { isAmbiguous, pieces, presentAlternative } from '../src/content/segmenting';
 import { segmentLetters } from '../src/session/segment';
@@ -7,6 +8,36 @@ import { MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
 import { speechText } from '../src/audio/speech-text';
 import { trLower } from '../src/lib/turkish';
+
+/** Korrekturen der Einstufungsaufgaben (`src/placement/select.ts`), keine Unit-Datei. */
+export const PLACEMENT_FILE = 'placement.yaml';
+
+/** Unit-Dateien unter content/ (relativer Pfad), ohne `placement.yaml`. */
+export const isUnitFile = (file: string): boolean =>
+  /\.ya?ml$/.test(file) && file !== PLACEMENT_FILE;
+
+/** Liest `placement.yaml`; YAML- und Schemafehler als Meldungen statt Absturz. */
+export function parsePlacementFile(text: string): {
+  overrides: NonNullable<PlacementOverrides['overrides']>;
+  errors: string[];
+} {
+  let data: unknown;
+  try {
+    data = parseYaml(text);
+  } catch (e) {
+    return { overrides: {}, errors: [`${PLACEMENT_FILE}: YAML-Fehler: ${(e as Error).message}`] };
+  }
+  const result = PlacementOverrides.safeParse(data ?? {});
+  if (!result.success) {
+    return {
+      overrides: {},
+      errors: result.error.issues.map(
+        (i) => `${PLACEMENT_FILE}: ${i.path.length ? i.path.join('.') : '(root)'}: ${i.message}`,
+      ),
+    };
+  }
+  return { overrides: result.data.overrides ?? {}, errors: [] };
+}
 
 export interface LoadedUnit {
   file: string;

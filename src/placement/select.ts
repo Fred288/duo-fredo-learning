@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { LEVELS, type Exercise, type Level, type Unit } from '../content/schema';
+import { solveExercise } from '../content/lexicon';
+import { LEVELS, type Exercise, type Level, type Unit, type Vocab } from '../content/schema';
 import { fnv1a } from '../lib/hash';
 
 // Einstufungstest: Auswahl der Aufgaben im Build (rein). Nur vorhandene Übungen über stabile
@@ -46,6 +47,11 @@ const TYPE_RANK: Partial<Record<Exercise['type'], number>> = {
   free_text: 2,
   multiple_choice: 3,
 };
+/**
+ * Bauaufgaben mit nur einer Endung: Stamm plus zwei Kacheln, und die Formel nennt die Endung –
+ * zur Hälfte geraten. Sie stehen hinter der Wortbank.
+ */
+const SINGLE_SUFFIX_RANK = 1.5;
 
 /** Lektionen, aus denen Aufgaben kommen dürfen, in Vorrangreihenfolge. */
 const LESSON_RANK: Record<string, number> = { grammar: 0, dialog: 1, vocab: 2 };
@@ -58,24 +64,43 @@ interface Candidate {
   rank: number;
 }
 
-const typeAllowed = (ex: Exercise, lessonType: string) =>
-  TYPE_RANK[ex.type] !== undefined &&
-  // Multiple Choice in Wortschatz und Dialog fragt nur Wörter ab, kaum den Stand der Unit.
-  (ex.type !== 'multiple_choice' || lessonType === 'grammar');
+/** Endungen der Lösung ohne Stamm (Engine); nur für Bauaufgaben. */
+function suffixCount(ex: Exercise, vocab: readonly Vocab[]): number {
+  if (ex.type !== 'suffix_builder' && ex.type !== 'conjugation') return 0;
+  try {
+    return solveExercise(ex, vocab).segments.filter((s) => s.text && s.tag !== 'STEM').length;
+  } catch {
+    return 0; // Der Build prüft die Lösung ohnehin (checkSuffixTargets).
+  }
+}
 
-/** Erlaubte Aufgaben der Unit, sortiert nach Lektionsart, Typ und Hash. */
-function candidates(unit: Unit): Candidate[] {
-  const list: Candidate[] = [];
+function typeRank(ex: Exercise, vocab: readonly Vocab[]): number {
+  const rank = TYPE_RANK[ex.type]!;
+  return rank === 0 && suffixCount(ex, vocab) < 2 ? SINGLE_SUFFIX_RANK : rank;
+}
+
+/** Multiple Choice in Wortschatz und Dialog fragt nur Wörter ab, kaum den Stand der Unit. */
+const typeAllowed = (ex: Exercise, lessonType: string) =>
+  TYPE_RANK[ex.type] !== undefined && (ex.type !== 'multiple_choice' || lessonType === 'grammar');
+
+/**
+ * Erlaubte Aufgaben der Unit, sortiert nach Lektionsart, Typ und Hash. Vorschau-Lektionen auf
+ * spätere Units (a1-u12 „Ausblick: -dı“) haben heute nur Multiple Choice und liegen daher
+ * hinten; käme dort eine Bauaufgabe dazu, gehört die Unit in die Overrides.
+ */
+function candidates(unit: Unit, vocab: readonly Vocab[]): Candidate[] {
+  const list: (Candidate & { typeRank: number })[] = [];
   for (const l of unit.lessons) {
     const rank = LESSON_RANK[l.type];
     if (rank === undefined || l.passage) continue;
     for (const ex of l.exercises)
-      if (typeAllowed(ex, l.type)) list.push({ ex, lessonId: l.id, topic: l.title, rank });
+      if (typeAllowed(ex, l.type))
+        list.push({ ex, lessonId: l.id, topic: l.title, rank, typeRank: typeRank(ex, vocab) });
   }
   return list.sort(
     (a, b) =>
       a.rank - b.rank ||
-      TYPE_RANK[a.ex.type]! - TYPE_RANK[b.ex.type]! ||
+      a.typeRank - b.typeRank ||
       fnv1a(a.ex.id) - fnv1a(b.ex.id) ||
       a.ex.id.localeCompare(b.ex.id),
   );
@@ -102,62 +127,51 @@ const item = (c: Candidate): PlacementItem => ({
   topic: c.topic,
 });
 
-/** Sucht eine Übung samt Lektion in der Unit, für Overrides. */
-function findExercise(unit: Unit, id: string): Candidate | undefined {
-  for (const l of unit.lessons)
-    for (const ex of l.exercises)
-      if (ex.id === id)
-        return { ex, lessonId: l.id, topic: l.title, rank: LESSON_RANK[l.type] ?? -1 };
-  return undefined;
+/** Feste Aufgaben aus `placement.yaml`; dieselben Regeln wie die Auswahl (Typ, Lektionsart). */
+function fixedPair(unit: Unit, ids: readonly string[], errors: string[]): Candidate[] {
+  if (ids[0] === ids[1]) errors.push(`placement.yaml: ${unit.id}: zweimal ${ids[0]}`);
+  const pair: Candidate[] = [];
+  for (const id of ids) {
+    const lesson = unit.lessons.find((l) => l.exercises.some((e) => e.id === id));
+    const ex = lesson?.exercises.find((e) => e.id === id);
+    const rank = lesson && LESSON_RANK[lesson.type];
+    if (!lesson || !ex) errors.push(`placement.yaml: ${unit.id}: Übung ${id} gibt es nicht`);
+    else if (rank === undefined || lesson.passage || !typeAllowed(ex, lesson.type))
+      errors.push(
+        `placement.yaml: ${unit.id}: ${id} (${ex.type} in ${lesson.type}) ist nicht erlaubt`,
+      );
+    else pair.push({ ex, lessonId: lesson.id, topic: lesson.title, rank });
+  }
+  return pair;
 }
 
-const levelOrder = (u: Unit) => LEVELS.indexOf(u.level);
-
 /**
- * Plan des Einstufungstests: Niveaus und Units in Kursreihenfolge, je Unit Probe und
- * Bestätigung. `errors` nennt Units ohne zwei Aufgaben und ungültige Overrides (Build-Fehler).
+ * Plan des Einstufungstests: Niveaus in der Reihenfolge von `LEVELS`, darin die Units in der
+ * Reihenfolge der Eingabe (= Manifest), je Unit Probe und Bestätigung. `vocab` ist der
+ * Wortschatz des Kurses (Engine-Lösung der Bauaufgaben). `errors` nennt Units ohne zwei
+ * Aufgaben und ungültige Overrides (Build-Fehler).
  */
 export function selectPlacement(
   units: readonly Unit[],
   { overrides = {} }: PlacementOverrides = {},
+  vocab: readonly Vocab[] = units.flatMap((u) => u.vocab ?? []),
 ): { plan: PlacementPlan; errors: string[] } {
   const errors: string[] = [];
   const known = new Set(units.map((u) => u.id));
   for (const id of Object.keys(overrides)) {
     if (!known.has(id)) errors.push(`placement.yaml: Unit ${id} gibt es nicht`);
   }
-  const sorted = [...units].sort(
-    (a, b) => levelOrder(a) - levelOrder(b) || a.id.localeCompare(b.id),
-  );
-  const levels: PlacementLevel[] = [];
-  for (const unit of sorted) {
-    let pair: Candidate[];
+  const levels: PlacementLevel[] = LEVELS.map((level) => ({ level, units: [] }));
+  for (const unit of units) {
     const fixed = overrides[unit.id];
-    if (fixed) {
-      pair = [];
-      if (fixed[0] === fixed[1]) errors.push(`placement.yaml: ${unit.id}: zweimal ${fixed[0]}`);
-      for (const id of fixed) {
-        const c = findExercise(unit, id);
-        const lesson = c && unit.lessons.find((l) => l.id === c.lessonId);
-        if (!c || !lesson) errors.push(`placement.yaml: ${unit.id}: Übung ${id} gibt es nicht`);
-        else if (
-          TYPE_RANK[c.ex.type] === undefined ||
-          lesson.passage ||
-          !(lesson.type in LESSON_RANK)
-        )
-          errors.push(`placement.yaml: ${unit.id}: ${id} (${c.ex.type}) ist nicht erlaubt`);
-        else pair.push(c);
-      }
-    } else {
-      pair = pickPair(candidates(unit));
-      if (pair.length < 2) errors.push(`${unit.id}: weniger als zwei Aufgaben für die Einstufung`);
-    }
-    let level = levels.at(-1);
-    if (level?.level !== unit.level) {
-      level = { level: unit.level, units: [] };
-      levels.push(level);
-    }
-    level.units.push({ unitId: unit.id, title: unit.title, items: pair.map(item) });
+    const pair = fixed ? fixedPair(unit, fixed, errors) : pickPair(candidates(unit, vocab));
+    if (!fixed && pair.length < 2)
+      errors.push(`${unit.id}: weniger als zwei Aufgaben für die Einstufung`);
+    levels[LEVELS.indexOf(unit.level)]!.units.push({
+      unitId: unit.id,
+      title: unit.title,
+      items: pair.map(item),
+    });
   }
-  return { plan: { levels }, errors };
+  return { plan: { levels: levels.filter((l) => l.units.length > 0) }, errors };
 }

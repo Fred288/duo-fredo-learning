@@ -20,8 +20,7 @@ import { caseHints, withWordOrder } from '../src/content/word-order';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import { prepareLookup } from '../src/lookup/search';
-import { PlacementOverrides, selectPlacement } from '../src/placement/select';
-import { parse as parseYaml } from 'yaml';
+import { selectPlacement } from '../src/placement/select';
 import {
   checkListen,
   checkSegments,
@@ -29,18 +28,19 @@ import {
   checkSuffixTargets,
   checkUnits,
   foreignLexicon,
+  isUnitFile,
   manifestEntry,
+  parsePlacementFile,
   parseUnitFile,
+  PLACEMENT_FILE,
   type LoadedUnit,
 } from './content-checks';
 
 const CONTENT_DIR = 'content';
 const OUT_DIR = join('public', 'content');
-/** Korrekturen der Einstufungsaufgaben (optional); keine Unit-Datei. */
-const PLACEMENT_FILE = 'placement.yaml';
 
 const files = readdirSync(CONTENT_DIR, { recursive: true, encoding: 'utf8' })
-  .filter((f) => /\.ya?ml$/.test(f) && f !== PLACEMENT_FILE)
+  .filter(isUnitFile)
   .map((f) => join(CONTENT_DIR, f))
   .sort();
 
@@ -101,20 +101,14 @@ if (SEGMENT_LESSONS) {
 }
 
 // Einstufungstest: je Unit Probe und Bestätigung aus vorhandenen Übungen (src/placement/select.ts).
-let overrides: PlacementOverrides = {};
-if (existsSync(join(CONTENT_DIR, PLACEMENT_FILE))) {
-  const parsed = PlacementOverrides.safeParse(
-    parseYaml(readFileSync(join(CONTENT_DIR, PLACEMENT_FILE), 'utf8')) ?? {},
-  );
-  if (parsed.success) overrides = parsed.data;
-  else
-    errors.push(
-      ...parsed.error.issues.map((i) => `${PLACEMENT_FILE}: ${i.path.join('.')}: ${i.message}`),
-    );
-}
+const overrides = existsSync(join(CONTENT_DIR, PLACEMENT_FILE))
+  ? parsePlacementFile(readFileSync(join(CONTENT_DIR, PLACEMENT_FILE), 'utf8'))
+  : { overrides: {}, errors: [] };
+errors.push(...overrides.errors);
 const placement = selectPlacement(
   built.map(({ unit }) => unit),
   overrides,
+  allVocab,
 );
 errors.push(...placement.errors);
 

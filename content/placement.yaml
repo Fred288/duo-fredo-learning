@@ -1,0 +1,13 @@
+# Einstufungstest: feste Aufgaben je Unit, [Probe, Bestätigung] (src/placement/select.ts).
+# Nur wo die automatische Auswahl den Kern der Unit verfehlt; Quelle: Opus-Review P1.
+# Alle IDs sind vorhandene Übungen; neue Einträge prüft der Build.
+overrides:
+  a1-u06: [a1-u06-l4-e2, a1-u06-l3-e10] # Genitiv-Possessiv statt nur Possessiv
+  a1-u07: [a1-u07-l4-e14, a1-u07-l3-e2] # Akkusativ bestimmt, „haben“ mit yok
+  a1-u10: [a1-u10-l4-e8, a1-u10-l3-e4] # Uhrzeit-Ausdrücke selbst
+  a1-u12: [a1-u12-l3-e2, a1-u12-l3-e8] # Wohnung statt a1-u03-Lokativ
+  a2-u07: [a2-u07-l2-e9, a2-u07-l3-e4] # -den daha und en
+  a2-u09: [a2-u09-l2-e15, a2-u09-l3-e11] # -ci und -li statt Fragepartikel
+  b1-u05: [b1-u05-l3-e1, b1-u05-l4-e2] # -mek için, -mekte statt Kopula-Vergangenheit
+  b1-u09: [b1-u09-l2-e11, b1-u09-l4-e7] # -ip und -meden im Satz
+  b1-u10: [b1-u10-l4-e1, b1-u10-l2-e8] # -diğini und -ince statt b1-u09-Stoff

@@ -7,10 +7,10 @@ import { allForms, formTable } from '../src/lookup/forms';
 import { searchKey } from '../src/lookup/key';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import { lemmatize, prepareLookup, search } from '../src/lookup/search';
-import { parseUnitFile } from './content-checks';
+import { isUnitFile, parseUnitFile } from './content-checks';
 
 const units = readdirSync('content', { recursive: true, encoding: 'utf8' })
-  .filter((f) => /\.ya?ml$/.test(f))
+  .filter(isUnitFile)
   .sort()
   .map((f) => parseUnitFile(f, readFileSync(join('content', f), 'utf8')).unit!);
 const explainers = new Map(

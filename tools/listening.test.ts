@@ -7,10 +7,10 @@ import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
 import { withListening } from '../src/content/listening';
 import { Unit } from '../src/content/schema';
 import { tileTokens } from '../src/session/grade';
-import { checkListen, parseUnitFile } from './content-checks';
+import { checkListen, isUnitFile, parseUnitFile } from './content-checks';
 
 const loaded = readdirSync('content', { recursive: true, encoding: 'utf8' })
-  .filter((f) => /\.ya?ml$/.test(f))
+  .filter(isUnitFile)
   .sort()
   .map((f) => ({
     file: f,

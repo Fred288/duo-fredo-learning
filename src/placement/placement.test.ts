@@ -107,7 +107,7 @@ describe('selectPlacement', () => {
     expect(ids.sort()).toEqual(['a2-u01-l1-e2', 'a2-u01-l1-e3']);
   });
 
-  it('ordnet nach Niveau und Unit, unabhängig von der Eingabereihenfolge', () => {
+  it('gruppiert nach Niveau, Units in Eingabereihenfolge (Manifest)', () => {
     const { plan } = selectPlacement([
       plain('b1-u01'),
       plain('a2-u02'),
@@ -116,7 +116,7 @@ describe('selectPlacement', () => {
     ]);
     expect(plan.levels.map((l) => [l.level, l.units.map((u) => u.unitId)])).toEqual([
       ['A1', ['a1-u02']],
-      ['A2', ['a2-u01', 'a2-u02']],
+      ['A2', ['a2-u02', 'a2-u01']],
       ['B1', ['b1-u01']],
     ]);
   });
@@ -127,6 +127,37 @@ describe('selectPlacement', () => {
     // Multiple Choice steht in der Rangfolge hinten und ändert daher nichts.
     grown.lessons[1]!.exercises.push(mc('a1-u02-l2-e9'));
     expect(selectPlacement([grown]).plan).toEqual(before);
+  });
+
+  it('eine angehängte Übung gleichen Typs mit größerem Hash ändert nichts', () => {
+    const before = selectPlacement([plain('a1-u02')]).plan;
+    const [probe] = before.levels[0]!.units[0]!.items;
+    // Neue Wortbank in der Lektion der Probe, hinter ihr: Probe und Bestätigung bleiben.
+    const id = Array.from({ length: 200 }, (_, i) => `${probe!.lessonId}-e${10 + i}`).find(
+      (x) => fnv1a(x) > fnv1a(probe!.id),
+    )!;
+    const grown = plain('a1-u02');
+    grown.lessons.find((l) => l.id === probe!.lessonId)!.exercises.push(bank(id));
+    expect(selectPlacement([grown]).plan).toEqual(before);
+  });
+
+  it('Overrides folgen denselben Typregeln', () => {
+    const u = unit('a1-u02', [
+      { n: 1, type: 'vocab', ex: [mc, free] },
+      { n: 2, type: 'grammar', ex: [paradigm, bank] },
+      { n: 3, type: 'review', ex: [bank] },
+    ]);
+    const r = selectPlacement([u], { overrides: { 'a1-u02': ['a1-u02-l1-e1', 'a1-u02-l2-e1'] } });
+    expect(r.errors).toEqual([
+      'placement.yaml: a1-u02: a1-u02-l1-e1 (multiple_choice in vocab) ist nicht erlaubt',
+      'placement.yaml: a1-u02: a1-u02-l2-e1 (paradigm in grammar) ist nicht erlaubt',
+    ]);
+    const review = selectPlacement([u], {
+      overrides: { 'a1-u02': ['a1-u02-l3-e1', 'a1-u02-l2-e2'] },
+    });
+    expect(review.errors).toEqual([
+      'placement.yaml: a1-u02: a1-u02-l3-e1 (word_bank in review) ist nicht erlaubt',
+    ]);
   });
 
   it('übernimmt Overrides und prüft sie', () => {
@@ -230,6 +261,28 @@ describe('Ablauf', () => {
     const { s, asked } = play(plan, (id) => (id === 'a1-u01-p' ? 'wrong' : 'correct'));
     expect(asked[1]).toBe('a1-u02-p');
     expect(s.statuses['a1-u01']).toBe('unsure');
+  });
+
+  it('ohne erlaubte Fehlversuche endet ein kleines Niveau mit der ersten unsicheren Unit', () => {
+    const plan = planOf({ A1: 4, A2: 2 });
+    const { s, asked } = play(plan, (id) => (id.startsWith('a1-u02') ? 'wrong' : 'correct'));
+    expect(asked).toEqual(['a1-u01-p', 'a1-u02-p', 'a1-u02-c']);
+    expect(s.done).toBe(true);
+    expect(recommend(plan, s.statuses).startUnit).toBe('a1-u02');
+  });
+
+  it('fast richtig in der Bestätigung zählt als wackelig; nach dem Ende ändert nichts mehr', () => {
+    const plan = planOf({ A1: 1 });
+    let s = startPlacement(plan);
+    s = answer(plan, s, 'wrong');
+    s = answer(plan, s, 'almost');
+    expect(s).toMatchObject({ done: true, statuses: { 'a1-u01': 'shaky' } });
+    expect(answer(plan, s, 'wrong')).toBe(s);
+  });
+
+  it('überspringt ein leeres erstes Niveau', () => {
+    const plan = planOf({ A1: 0, A2: 1 });
+    expect(currentItem(plan, startPlacement(plan))?.unit.unitId).toBe('a2-u01');
   });
 
   it('zeigt Niveau und Position, endet bei leerem Plan sofort', () => {
