@@ -1,0 +1,552 @@
+# B1-03: Konditional -se, ise (-irse, -iyorsa, -ecekse, -diyse, -se, -ysa am Nomen); Natur, Umwelt, Erde. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u03
+level: B1
+title: Natur und Umwelt
+grammar_focus: [konditional, ise, eger, varsa]
+explainer: explainers/b1-konditional.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u03-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u03-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „doğa“?
+        options: [Natur, Umwelt, Erde]
+        answer: Natur
+      - id: b1-u03-l1-e2
+        type: multiple_choice
+        prompt: Was heißt „çevre“?
+        options: [Umwelt, Wald, Klima]
+        answer: Umwelt
+        explanation: çevre heißt auch „Umgebung“.
+      - id: b1-u03-l1-e3
+        type: free_text
+        direction: de_tr
+        prompt: Wald
+        answers: [orman]
+      - id: b1-u03-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „nehir“?
+        options: [Fluss, See, Meer]
+        answer: Fluss
+        explanation: Vor Vokal fällt das i aus, nehri (den Fluss).
+      - id: b1-u03-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: See
+        answers: [göl]
+      - id: b1-u03-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „iklim“?
+        options: [Klima, Wetter, Jahreszeit]
+        answer: Klima
+        explanation: hava = Wetter (und Luft), iklim = Klima.
+      - id: b1-u03-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: sauber
+        answers: [temiz]
+      - id: b1-u03-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: schmutzig
+        answers: [kirli, pis]
+      - id: b1-u03-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „çöp“?
+        options: [Müll, Flasche, Plastik]
+        answer: Müll
+      - id: b1-u03-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „geri dönüşüm“?
+        options: [Recycling, Rückfahrt, Umweg]
+        answer: Recycling
+        explanation: Wörtlich „Zurück-Wandlung“.
+      - id: b1-u03-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: schützen
+        answers: [korumak]
+      - id: b1-u03-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „kirletmek“?
+        options: [verschmutzen, reinigen, sammeln]
+        answer: verschmutzen
+        explanation: kirli (schmutzig) + -let, wie temiz → temizlemek (reinigen).
+      - id: b1-u03-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: (einen Baum) pflanzen
+        answers: [dikmek, ağaç dikmek]
+      - id: b1-u03-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „tasarruf etmek“?
+        options: [sparen, verschwenden, kaufen]
+        answer: sparen
+        explanation: Mit Ablativ, elektrikten tasarruf etmek = Strom sparen.
+      - id: b1-u03-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: wegwerfen
+        answers: [atmak]
+        explanation: atmak heißt auch „werfen“.
+      - id: b1-u03-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „zarar vermek“?
+        options: [schaden, helfen, sparen]
+        answer: schaden
+        explanation: Mit Dativ, doğaya zarar vermek = der Natur schaden.
+      - id: b1-u03-l1-e17
+        type: free_text
+        direction: de_tr
+        prompt: Welt, Erde
+        answers: [dünya]
+
+  - id: b1-u03-l2
+    type: grammar
+    title: Wenn …, dann (-irse)
+    exercises:
+      - id: b1-u03-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: yağmak
+        person: 3sg
+        tense: aorist
+        compound: conditional
+        target: yağarsa
+        gloss_de: wenn es regnet
+        explanation: Aorist yağar + sa.
+      - { id: b1-u03-l2-e2, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: aorist, compound: conditional, target: gelirsen, gloss_de: wenn du kommst }
+      - { id: b1-u03-l2-e3, type: conjugation, mode: verb, lemma: atmak, person: 1pl, tense: aorist, compound: conditional, target: atarsak, gloss_de: wenn wir wegwerfen }
+      - { id: b1-u03-l2-e4, type: conjugation, mode: verb, lemma: korumak, person: 3pl, tense: aorist, compound: conditional, target: korurlarsa, gloss_de: wenn sie schützen }
+      - { id: b1-u03-l2-e5, type: conjugation, mode: verb, lemma: kirletmek, person: 1sg, tense: aorist, compound: conditional, target: kirletirsem, gloss_de: wenn ich verschmutze }
+      - id: b1-u03-l2-e6
+        type: conjugation
+        mode: verb
+        lemma: kapatmak
+        person: 2pl
+        tense: aorist
+        compound: conditional
+        negative: true
+        target: kapatmazsanız
+        gloss_de: wenn ihr nicht ausmacht, wenn Sie nicht schließen
+      - { id: b1-u03-l2-e7, type: conjugation, mode: verb, lemma: tasarruf etmek, person: 1pl, tense: aorist, compound: conditional, target: tasarruf edersek, gloss_de: wenn wir sparen }
+      - id: b1-u03-l2-e8
+        type: multiple_choice
+        prompt: Was bedeutet „Yağmur yağarsa evde kalırız.“?
+        options: ['Wenn es regnet, bleiben wir zu Hause.', 'Weil es regnet, bleiben wir zu Hause.', 'Es hat geregnet, also sind wir zu Hause geblieben.']
+        answer: 'Wenn es regnet, bleiben wir zu Hause.'
+        explanation: Die Bedingung steht vorn, mit -se am Verb.
+      - id: b1-u03-l2-e9
+        type: word_bank
+        prompt: Wenn wir den Müll trennen, schützen wir die Umwelt.
+        answers: [Çöpleri ayırırsak çevreyi koruruz., Çöpü ayırırsak çevreyi koruruz.]
+        chunks:
+          - { text: "Çöpleri ayırırsak", role: complement }
+          - { text: "çevreyi", role: object }
+          - { text: "koruruz", role: predicate }
+        distractors: [korursak, ayırırız]
+        explanation: ayırmak = trennen, sortieren.
+      - id: b1-u03-l2-e10
+        type: free_text
+        direction: tr_de
+        prompt: Işıkları kapatırsan elektrikten tasarruf edersin.
+        answers: ['Wenn du das Licht ausmachst, sparst du Strom.', 'Wenn du die Lichter ausmachst, sparst du Strom.', 'Wenn du das Licht ausschaltest, sparst du Strom.', 'Wenn du die Lichter ausschaltest, sparst du Strom.', 'Du sparst Strom, wenn du das Licht ausmachst.', 'Du sparst Strom, wenn du das Licht ausschaltest.', 'Wenn du das Licht ausmachst, sparst du Energie.']
+      - id: b1-u03-l2-e11
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: aorist
+        compound: conditional
+        negative: true
+        target: gelmezsem
+        gloss_de: wenn ich nicht komme
+        explanation: Mit ise steht -mez auch bei „ich“, gelmezsem.
+
+  - id: b1-u03-l3
+    type: grammar
+    title: Wenn es gerade so ist (-iyorsa, -ecekse, -diyse)
+    exercises:
+      - id: b1-u03-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: istemek
+        person: 2sg
+        tense: present
+        compound: conditional
+        target: istiyorsan
+        gloss_de: wenn du (es wirklich) willst
+        explanation: istiyor + san.
+      - { id: b1-u03-l3-e2, type: conjugation, mode: verb, lemma: gelmek, person: 3sg, tense: present, compound: conditional, target: geliyorsa, gloss_de: 'wenn er, sie (gerade) kommt' }
+      - id: b1-u03-l3-e3
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 2pl
+        tense: future
+        compound: conditional
+        target: gidecekseniz
+        gloss_de: wenn ihr gehen wollt, wenn Sie vorhaben zu gehen
+        explanation: Das k von -ecek bleibt vor -se.
+      - { id: b1-u03-l3-e4, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: future, compound: conditional, target: yapacaksa, gloss_de: 'wenn er, sie (es) machen will' }
+      - id: b1-u03-l3-e5
+        type: conjugation
+        mode: verb
+        lemma: bitirmek
+        person: 2sg
+        tense: past
+        compound: conditional
+        target: bitirdiysen
+        gloss_de: wenn du fertig bist (beendet hast)
+        explanation: Nach Vokal mit y, bitirdi-y-sen.
+      - { id: b1-u03-l3-e6, type: conjugation, mode: verb, lemma: bilmek, person: 2sg, tense: present, compound: conditional, negative: true, target: bilmiyorsan, gloss_de: wenn du (es) nicht weißt }
+      - id: b1-u03-l3-e7
+        type: multiple_choice
+        prompt: Was bedeutet „İşini bitirdiysen gidebilirsin.“?
+        options: ['Wenn du deine Arbeit beendet hast, kannst du gehen.', 'Du hast deine Arbeit beendet, also bist du gegangen.', 'Wenn du deine Arbeit beendest, wirst du gehen.']
+        answer: 'Wenn du deine Arbeit beendet hast, kannst du gehen.'
+      - id: b1-u03-l3-e8
+        type: word_bank
+        prompt: Wenn du Zeit hast, komm zu uns.
+        answers: [Vaktin varsa bize gel., Zamanın varsa bize gel., Eğer vaktin varsa bize gel.]
+        chunks:
+          - { text: "Vaktin varsa", role: complement }
+          - { text: "bize", role: complement }
+          - { text: "gel", role: predicate }
+        distractors: [yoksa, gelir]
+        explanation: varsa = wenn es gibt, wenn … hat.
+      - id: b1-u03-l3-e9
+        type: free_text
+        direction: tr_de
+        prompt: Gideceksen bana söyle.
+        answers: ['Wenn du gehen willst, sag mir Bescheid.', 'Wenn du gehst, sag mir Bescheid.', 'Wenn du gehen wirst, sag es mir.', 'Falls du gehst, sag mir Bescheid.', 'Wenn du vorhast zu gehen, sag mir Bescheid.', 'Wenn du gehst, sag es mir.', 'Sag mir Bescheid, wenn du gehst.']
+      - id: b1-u03-l3-e10
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Yarın gelirsen …“ / „Yarın geleceksen …“
+        options: [Falls du morgen kommst … / Wenn du (wie geplant) morgen kommst …, Beides heißt dasselbe., Wenn du gestern gekommen bist … / Wenn du morgen kommst …]
+        answer: Falls du morgen kommst … / Wenn du (wie geplant) morgen kommst …
+
+  - id: b1-u03-l4
+    type: grammar
+    title: Wenn … wäre (-se)
+    exercises:
+      - id: b1-u03-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: conditional
+        target: gelsem
+        gloss_de: wenn ich käme
+        explanation: Stamm + se + m, ohne Aorist.
+      - { id: b1-u03-l4-e2, type: conjugation, mode: verb, lemma: bilmek, person: 2sg, tense: conditional, target: bilsen, gloss_de: wenn du wüsstest }
+      - { id: b1-u03-l4-e3, type: conjugation, mode: verb, lemma: olmak, person: 3sg, tense: conditional, target: olsa, gloss_de: 'wenn er, sie, es wäre' }
+      - { id: b1-u03-l4-e4, type: conjugation, mode: verb, lemma: yapmak, person: 1pl, tense: conditional, target: yapsak, gloss_de: wenn wir machten }
+      - { id: b1-u03-l4-e5, type: conjugation, mode: verb, lemma: almak, person: 3pl, tense: conditional, target: alsalar, gloss_de: wenn sie nähmen }
+      - { id: b1-u03-l4-e6, type: conjugation, mode: verb, lemma: gitmek, person: 1sg, tense: conditional, negative: true, target: gitmesem, gloss_de: wenn ich nicht ginge }
+      - id: b1-u03-l4-e7
+        type: conjugation
+        mode: copula
+        lemma: zengin
+        person: 1sg
+        tense: conditional
+        target: zenginsem
+        gloss_de: wenn ich reich bin
+      - { id: b1-u03-l4-e8, type: conjugation, mode: copula, lemma: evde, person: 3sg, tense: conditional, target: evdeyse, gloss_de: 'wenn er, sie zu Hause ist' }
+      - { id: b1-u03-l4-e9, type: conjugation, mode: copula, lemma: hasta, person: 2sg, tense: conditional, target: hastaysan, gloss_de: wenn du krank bist }
+      - { id: b1-u03-l4-e10, type: conjugation, mode: copula, lemma: öğrenci, person: 1sg, tense: conditional, negative: true, target: öğrenci değilsem, gloss_de: wenn ich kein(e) Student(in) bin }
+      - id: b1-u03-l4-e11
+        type: multiple_choice
+        prompt: Was bedeutet „Zengin olsam dünyayı gezerdim.“?
+        options: ['Wenn ich reich wäre, würde ich um die Welt reisen.', 'Weil ich reich bin, reise ich um die Welt.', 'Ich war reich und bin um die Welt gereist.']
+        answer: 'Wenn ich reich wäre, würde ich um die Welt reisen.'
+        explanation: -se im Nebensatz, -irdi (würde) im Hauptsatz.
+      - id: b1-u03-l4-e12
+        type: word_bank
+        prompt: Wenn ich Zeit hätte, würde ich mehr Bäume pflanzen.
+        answers: [Vaktim olsa daha çok ağaç dikerdim., Zamanım olsa daha çok ağaç dikerdim.]
+        chunks:
+          - { text: "Vaktim olsa", role: complement }
+          - { text: "daha çok", role: complement }
+          - { text: "ağaç", role: object_bare }
+          - { text: "dikerdim", role: predicate }
+        distractors: [dikerim, olursa]
+      - id: b1-u03-l4-e13
+        type: free_text
+        direction: de_tr
+        prompt: an deiner Stelle (wenn ich du wäre)
+        answers: [ben sen olsam, senin yerinde olsam, yerinde olsam, sen olsam]
+      - id: b1-u03-l4-e14
+        type: multiple_choice
+        prompt: Welcher Satz beschreibt einen gedachten Fall?
+        options: [Param olsa araba alırdım., Param varsa araba alırım., Param olursa araba alırım.]
+        answer: Param olsa araba alırdım.
+        explanation: olsa … alırdım = wenn ich Geld hätte, würde ich kaufen.
+
+  - id: b1-u03-l5
+    type: dialog
+    title: Was können wir für die Umwelt tun?
+    exercises:
+      - id: b1-u03-l5-e1
+        type: word_bank
+        prompt: Was können wir für die Umwelt tun?
+        answers: [Çevre için ne yapabiliriz?]
+        chunks:
+          - { text: "Çevre için", role: complement }
+          - { text: "ne", role: question }
+          - { text: "yapabiliriz", role: predicate }
+        distractors: [yapabilirsin, çevreyi]
+      - id: b1-u03-l5-e2
+        type: word_bank
+        prompt: Wir sollten kein Plastik benutzen.
+        answers: [Plastik kullanmamalıyız.]
+        distractors: [kullanmalıyız, plastiği]
+      - id: b1-u03-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Wenn du willst, helfe ich dir.“?
+        options: [İstersen sana yardım ederim., İstedin sana yardım ettim., İsteyeceksin sana yardım ederim.]
+        answer: İstersen sana yardım ederim.
+      - id: b1-u03-l5-e4
+        type: word_bank
+        prompt: Wenn alle Müll sammeln, wird der Park sauber.
+        answers: [Herkes çöp toplarsa park temiz olur.]
+        chunks:
+          - { text: "Herkes çöp toplarsa", role: complement }
+          - { text: "park", role: subject }
+          - { text: "temiz olur", role: predicate }
+        distractors: [toplar, kirli]
+      - id: b1-u03-l5-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ağaç dikersek hava daha temiz olur.
+        answers: ['Wenn wir Bäume pflanzen, wird die Luft sauberer.', 'Wenn wir Bäume pflanzen, wird die Luft sauberer werden.', 'Die Luft wird sauberer, wenn wir Bäume pflanzen.', 'Wenn wir einen Baum pflanzen, wird die Luft sauberer.']
+      - id: b1-u03-l5-e6
+        type: word_bank
+        prompt: Wir fahren mit dem Fahrrad, wenn das Wetter schön ist.
+        answers: [Hava güzelse bisiklete bineriz., Hava güzel olursa bisiklete bineriz.]
+        chunks:
+          - { text: "Hava güzelse", role: complement }
+          - { text: "bisiklete", role: place }
+          - { text: "bineriz", role: predicate }
+        distractors: [bisiklette, güzeldi]
+        explanation: güzelse = güzel + se (wenn es schön ist).
+      - id: b1-u03-l5-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Sorun yoksa başlayalım.“?
+        options: ['Wenn es kein Problem gibt, fangen wir an.', 'Es gibt ein Problem, also fangen wir nicht an.', 'Wir haben angefangen, ohne ein Problem.']
+        answer: 'Wenn es kein Problem gibt, fangen wir an.'
+        explanation: yoksa = wenn es nicht gibt; başlayalım = lass uns anfangen.
+      - id: b1-u03-l5-e8
+        type: free_text
+        direction: de_tr
+        prompt: Wenn du krank bist, bleib zu Hause.
+        answers: [Hastaysan evde kal., Eğer hastaysan evde kal., Hasta isen evde kal.]
+
+  - id: b1-u03-l6
+    type: grammar
+    title: 'Tabellen: Bedingungen'
+    exercises:
+      - id: b1-u03-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        compound: conditional
+        targets: [gelirsem, gelirsen, gelirse, gelirsek, gelirseniz, gelirlerse]
+        gloss_de: wenn … kommt
+        explanation: Bei „sie“ auch gelirseler.
+      - id: b1-u03-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: aorist
+        compound: conditional
+        negative: true
+        targets: [yapmazsam, yapmazsan, yapmazsa, yapmazsak, yapmazsanız, yapmazlarsa]
+        gloss_de: wenn … nicht macht
+      - id: b1-u03-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: olmak
+        tense: conditional
+        targets: [olsam, olsan, olsa, olsak, olsanız, olsalar]
+        gloss_de: wenn … wäre
+      - id: b1-u03-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: bilmek
+        tense: conditional
+        targets: [bilsem, bilsen, bilse, bilsek, bilseniz, bilseler]
+        gloss_de: wenn … wüsste
+      - id: b1-u03-l6-e5
+        type: paradigm
+        kind: copula
+        lemma: hasta
+        tense: conditional
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [hastaysam, hastaysan, hastaysa, hastaysak, hastaysanız]
+        gloss_de: wenn … krank ist
+
+  - id: b1-u03-r1
+    type: reading
+    title: 'Lesetext: Unser Wald'
+    passage:
+      sentences:
+        - { tr: "Köyümüzün yanında büyük bir orman var.", de: "Neben unserem Dorf gibt es einen großen Wald." }
+        - { tr: "Eskiden orman çok temizdi.", de: "Früher war der Wald sehr sauber." }
+        - { tr: "Şimdi insanlar ormana çöp atıyor.", de: "Jetzt werfen die Leute Müll in den Wald." }
+        - { tr: "Plastik şişeler toprağa zarar veriyor.", de: "Plastikflaschen schaden dem Boden." }
+        - { tr: "Hayvanlar da bundan çok etkileniyor.", de: "Auch die Tiere leiden sehr darunter." }
+        - { tr: "Geçen hafta köyün gençleri bir karar verdi.", de: "Letzte Woche haben die jungen Leute des Dorfes einen Beschluss gefasst." }
+        - { tr: "Her pazar ormanda çöp toplayacaklar.", de: "Jeden Sonntag werden sie im Wald Müll sammeln." }
+        - { tr: "Ben de onlara yardım edeceğim.", de: "Ich werde ihnen auch helfen." }
+        - { tr: "Herkes biraz dikkat ederse orman yine temiz olur.", de: "Wenn alle ein bisschen aufpassen, wird der Wald wieder sauber." }
+        - { tr: "Ağaç dikersek hava da daha temiz olacak.", de: "Wenn wir Bäume pflanzen, wird auch die Luft sauberer." }
+        - { tr: "Doğayı korursak kendimizi de koruruz.", de: "Wenn wir die Natur schützen, schützen wir auch uns selbst." }
+      glossary:
+        - { tr: "temizdi", de: "war sauber (temiz + di)", vocab: "temiz" }
+        - { tr: "da", de: "auch (nachgestellt, getrennt geschrieben)" }
+        - { tr: "de", de: "auch (nachgestellt, getrennt geschrieben)" }
+        - { tr: "etkileniyor", de: "ist betroffen, leidet darunter (etkilenmek)" }
+        - { tr: "her", de: "jede(r, s) (her pazar = jeden Sonntag)" }
+        - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
+        - { tr: "edeceğim", de: "werde machen (etmek, Futur; yardım edeceğim = ich werde helfen)", vocab: "yardım etmek" }
+        - { tr: "dikkat", de: "Aufmerksamkeit (dikkat etmek = aufpassen)", vocab: "dikkat etmek" }
+        - { tr: "ederse", de: "wenn … macht (etmek; dikkat ederse = wenn … aufpasst)", vocab: "dikkat etmek" }
+        - { tr: "yine", de: "wieder" }
+        - { tr: "zarar", de: "Schaden (zarar vermek = schaden)", vocab: "zarar vermek" }
+        - { tr: "kendimizi", de: "uns selbst (kendi, Akkusativ)", vocab: "kendi" }
+    exercises:
+      - id: b1-u03-r1-e1
+        type: multiple_choice
+        prompt: Wie war der Wald früher?
+        options: [sehr sauber, sehr klein, sehr gefährlich]
+        answer: sehr sauber
+      - id: b1-u03-r1-e2
+        type: multiple_choice
+        prompt: Was schadet dem Boden?
+        options: [Plastikflaschen, Bäume, Tiere]
+        answer: Plastikflaschen
+      - id: b1-u03-r1-e3
+        type: multiple_choice
+        prompt: Was haben die jungen Leute beschlossen?
+        options: [Jeden Sonntag im Wald Müll zu sammeln., In die Stadt zu ziehen., Den Wald zu verkaufen.]
+        answer: Jeden Sonntag im Wald Müll zu sammeln.
+      - id: b1-u03-r1-e4
+        type: multiple_choice
+        prompt: Was passiert laut Text, wenn alle ein bisschen aufpassen?
+        options: [Der Wald wird wieder sauber., Die Tiere gehen weg., Es regnet mehr.]
+        answer: Der Wald wird wieder sauber.
+      - id: b1-u03-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Doğayı korursak kendimizi de koruruz.
+        answers: ['Wenn wir die Natur schützen, schützen wir auch uns selbst.', 'Wenn wir die Natur schützen, schützen wir auch uns.', 'Wenn wir die Natur schützen, schützen wir uns selbst auch.', 'Wir schützen auch uns selbst, wenn wir die Natur schützen.']
+
+  - id: b1-u03-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u03-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: wenn es regnet
+        answers: [yağmur yağarsa, yağarsa]
+      - id: b1-u03-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: wenn ich es wüsste
+        answers: [bilsem]
+      - id: b1-u03-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wenn ich nicht komme)
+        options: [gelmezsem, gelmemsem, gelmesem]
+        answer: gelmezsem
+        explanation: gelmesem heißt „wenn ich nicht käme“ (gedacht).
+      - id: b1-u03-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wenn du gehen willst)
+        options: [gideceksen, gideceğsen, gidecekisen]
+        answer: gideceksen
+      - id: b1-u03-l7-e5
+        type: word_bank
+        prompt: Wenn wir Strom sparen, schützen wir die Welt.
+        answers: [Elektrikten tasarruf edersek dünyayı koruruz.]
+        chunks:
+          - { text: "Elektrikten tasarruf edersek", role: complement }
+          - { text: "dünyayı", role: object }
+          - { text: "koruruz", role: predicate }
+        distractors: [korursak, dünyada]
+      - id: b1-u03-l7-e6
+        type: conjugation
+        mode: verb
+        lemma: toplamak
+        person: 3pl
+        tense: aorist
+        compound: conditional
+        target: toplarlarsa
+        gloss_de: wenn sie sammeln
+      - id: b1-u03-l7-e7
+        type: conjugation
+        mode: verb
+        lemma: değişmek
+        person: 3sg
+        tense: conditional
+        target: değişse
+        gloss_de: 'wenn es sich ändern würde'
+      - id: b1-u03-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Çöpü yere atmazsan çevre temiz kalır.
+        answers: ['Wenn du den Müll nicht auf den Boden wirfst, bleibt die Umwelt sauber.', 'Wenn du keinen Müll auf den Boden wirfst, bleibt die Umwelt sauber.', 'Die Umwelt bleibt sauber, wenn du den Müll nicht auf den Boden wirfst.', 'Wenn du den Müll nicht auf die Straße wirfst, bleibt die Umgebung sauber.']
+      - id: b1-u03-l7-e9
+        type: word_bank
+        prompt: Schaden wir der Natur?
+        answers: [Doğaya zarar veriyor muyuz?]
+        distractors: [doğayı, verdik]
+      - id: b1-u03-l7-e10
+        type: conjugation
+        mode: copula
+        lemma: yorgun
+        person: 2pl
+        tense: conditional
+        target: yorgunsanız
+        gloss_de: wenn ihr müde seid, wenn Sie müde sind
+
+vocab:
+  - { tr: doğa, de: [Natur], pos: noun }
+  - { tr: çevre, de: [Umwelt, Umgebung], pos: noun }
+  - { tr: orman, de: [Wald], pos: noun }
+  - { tr: göl, de: [See], pos: noun }
+  - { tr: nehir, de: [Fluss], pos: noun, drops_vowel: true }
+  - { tr: iklim, de: [Klima], pos: noun }
+  - { tr: temiz, de: [sauber], pos: adj }
+  - { tr: kirli, de: [schmutzig], pos: adj }
+  - { tr: çöp, de: [Müll], pos: noun }
+  - { tr: geri dönüşüm, de: [Recycling], pos: noun }
+  - { tr: plastik, de: [Plastik, aus Plastik], pos: noun }
+  - { tr: şişe, de: [Flasche], pos: noun }
+  - { tr: elektrik, de: [Strom, Elektrizität], pos: noun }
+  - { tr: enerji, de: [Energie], pos: noun }
+  - { tr: toprak, de: [Boden, Erde], pos: noun, softens: true }
+  - { tr: dünya, de: [Welt, Erde], pos: noun }
+  - { tr: hayvan, de: [Tier], pos: noun }
+  - { tr: bitki, de: [Pflanze], pos: noun }
+  - { tr: korumak, de: [schützen], pos: verb }
+  - { tr: kirletmek, de: [verschmutzen], pos: verb }
+  - { tr: dikmek, de: [pflanzen, nähen], pos: verb }
+  - { tr: atmak, de: [werfen, wegwerfen], pos: verb }
+  - { tr: toplamak, de: [sammeln], pos: verb }
+  - { tr: ayırmak, de: [trennen, sortieren], pos: verb }
+  - { tr: kapatmak, de: [schließen, ausmachen], pos: verb }
+  - { tr: değişmek, de: [sich ändern], pos: verb }
+  - { tr: tasarruf etmek, de: [sparen], pos: verb, softens: true }
+  - { tr: zarar vermek, de: [schaden], pos: verb }
+  - { tr: eğer, de: [wenn, falls], pos: conj }
+  - { tr: vakit, de: [Zeit], pos: noun, drops_vowel: true }
+  - { tr: sorun, de: [Problem], pos: noun }

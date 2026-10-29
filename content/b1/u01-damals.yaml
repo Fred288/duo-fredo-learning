@@ -1,0 +1,613 @@
+# B1-01: Zeiten mit idi (-iyordu, -irdi, -mişti, -ecekti); Lebensgeschichten, Kindheit. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u01
+level: B1
+title: Lebensgeschichten
+grammar_focus: [iyordu, irdi, misti, ecekti, ken]
+explainer: explainers/b1-idi.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u01-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u01-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „çocukluk“?
+        options: [Kindheit, Jugend, Erinnerung]
+        answer: Kindheit
+        explanation: çocuk (Kind) + -luk, wie güzel → güzellik.
+      - id: b1-u01-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: aufwachsen
+        answers: [büyümek]
+        explanation: büyümek heißt auch „wachsen, größer werden“ (büyük = groß).
+      - id: b1-u01-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „köy“?
+        options: [Dorf, Stadt, Feld]
+        answer: Dorf
+      - id: b1-u01-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „hatırlamak“?
+        options: [sich erinnern, vergessen, erzählen]
+        answer: sich erinnern
+        explanation: Was man erinnert, steht im Akkusativ, onu hatırlıyorum = ich erinnere mich daran.
+      - id: b1-u01-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: früher
+        answers: [eskiden]
+        explanation: eski = alt (Dinge), eskiden = in alter Zeit, früher.
+      - id: b1-u01-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „o zamanlar“?
+        options: [damals, manchmal, bald]
+        answer: damals
+        explanation: Wörtlich „jene Zeiten“.
+      - id: b1-u01-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Grundschule
+        answers: [ilkokul]
+        explanation: ilk = erste, okul = Schule.
+      - id: b1-u01-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „mezun olmak“?
+        options: [den Abschluss machen, in Rente gehen, umziehen]
+        answer: den Abschluss machen
+        explanation: Mit Ablativ, üniversiteden mezun oldum = ich habe die Uni abgeschlossen.
+      - id: b1-u01-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: in Rente gehen
+        answers: [emekli olmak]
+      - id: b1-u01-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „tırmanmak“?
+        options: [klettern, schwimmen, rennen]
+        answer: klettern
+        explanation: Mit Dativ, ağaca tırmanmak = auf einen Baum klettern.
+      - id: b1-u01-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: geben
+        answers: [vermek]
+      - id: b1-u01-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „çoktan“?
+        options: [längst, plötzlich, noch nicht]
+        answer: längst
+      - id: b1-u01-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „henüz“ in „Henüz gelmedi.“?
+        options: [noch nicht, schon, nie]
+        answer: noch nicht
+        explanation: Mit Verneinung heißt henüz „noch nicht“.
+      - id: b1-u01-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: plötzlich
+        answers: [aniden, birden]
+      - id: b1-u01-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „karar vermek“?
+        options: [sich entscheiden, sich erinnern, Angst haben]
+        answer: sich entscheiden
+        explanation: Wörtlich „eine Entscheidung geben“.
+      - id: b1-u01-l1-e16
+        type: free_text
+        direction: tr_de
+        prompt: kaçırmak
+        answers: [verpassen, versäumen]
+        explanation: otobüsü kaçırdım = ich habe den Bus verpasst.
+
+  - id: b1-u01-l2
+    type: grammar
+    title: Was gerade lief (-iyordu)
+    exercises:
+      - id: b1-u01-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: present
+        compound: past
+        target: geliyordum
+        gloss_de: ich kam gerade, ich war unterwegs
+        explanation: geliyor + du + m. Die Endung ist wie bei -dı.
+      - id: b1-u01-l2-e2
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 3sg
+        tense: present
+        compound: past
+        target: yapıyordu
+        gloss_de: 'er, sie machte gerade'
+      - { id: b1-u01-l2-e3, type: conjugation, mode: verb, lemma: okumak, person: 1pl, tense: present, compound: past, target: okuyorduk, gloss_de: wir lasen gerade }
+      - { id: b1-u01-l2-e4, type: conjugation, mode: verb, lemma: uyumak, person: 3sg, tense: present, compound: past, target: uyuyordu, gloss_de: 'er, sie schlief gerade' }
+      - { id: b1-u01-l2-e5, type: conjugation, mode: verb, lemma: yaşamak, person: 1sg, tense: present, compound: past, target: yaşıyordum, gloss_de: ich lebte (damals) }
+      - { id: b1-u01-l2-e6, type: conjugation, mode: verb, lemma: oynamak, person: 3pl, tense: present, compound: past, target: oynuyorlardı, gloss_de: sie spielten gerade }
+      - { id: b1-u01-l2-e7, type: conjugation, mode: verb, lemma: beklemek, person: 2sg, tense: present, compound: past, target: bekliyordun, gloss_de: du wartetest gerade }
+      - id: b1-u01-l2-e8
+        type: conjugation
+        mode: verb
+        lemma: çalışmak
+        person: 1sg
+        tense: present
+        compound: past
+        negative: true
+        target: çalışmıyordum
+        gloss_de: ich arbeitete (damals) nicht
+        explanation: Die Verneinung steckt in -miyor, idi kommt danach.
+      - id: b1-u01-l2-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Kitap okuyordum, telefon çaldı.“?
+        options: ['Ich las gerade ein Buch, da klingelte das Telefon.', Ich habe ein Buch gelesen und dann telefoniert., 'Ich lese ein Buch, wenn das Telefon klingelt.']
+        answer: Ich las gerade ein Buch, da klingelte das Telefon.
+        explanation: -iyordu ist der Hintergrund, -dı das Ereignis, das dazwischenkommt.
+      - id: b1-u01-l2-e10
+        type: word_bank
+        prompt: Damals lebten wir in einem Dorf.
+        answers: [O zamanlar bir köyde yaşıyorduk., O zamanlar köyde yaşıyorduk.]
+        chunks:
+          - { text: "O zamanlar", role: time }
+          - { text: "bir köyde", role: place }
+          - { text: "yaşıyorduk", role: predicate }
+        distractors: [yaşadık, köye]
+      - id: b1-u01-l2-e11
+        type: word_bank
+        prompt: Ich schlief gerade, da klopfte es an der Tür.
+        answers: ['Uyuyordum, kapı çaldı.', 'Ben uyuyordum, kapı çaldı.']
+        distractors: [uyudum, çalıyordu]
+        explanation: kapı çaldı = es klopfte, es klingelte an der Tür.
+      - id: b1-u01-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: Eskiden İstanbul'da çalışıyordum.
+        answers: [Früher arbeitete ich in Istanbul., Früher habe ich in Istanbul gearbeitet., Ich arbeitete früher in Istanbul., Ich habe früher in Istanbul gearbeitet.]
+      - id: b1-u01-l2-e13
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 2sg
+        tense: present
+        compound: past
+        question: true
+        target: geliyor muydun?
+        gloss_de: Kamst du gerade?
+        explanation: mi steht vor der Kopula und nimmt sie mit, muydun.
+
+  - id: b1-u01-l3
+    type: grammar
+    title: Was früher immer so war (-irdi)
+    exercises:
+      - id: b1-u01-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: oynamak
+        person: 1pl
+        tense: aorist
+        compound: past
+        target: oynardık
+        gloss_de: wir spielten (früher immer)
+        explanation: Aorist oynar + dı + k.
+      - { id: b1-u01-l3-e2, type: conjugation, mode: verb, lemma: gitmek, person: 1sg, tense: aorist, compound: past, target: giderdim, gloss_de: ich ging (früher immer) }
+      - { id: b1-u01-l3-e3, type: conjugation, mode: verb, lemma: yüzmek, person: 3pl, tense: aorist, compound: past, target: yüzerlerdi, gloss_de: sie schwammen (früher immer) }
+      - { id: b1-u01-l3-e4, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: aorist, compound: past, target: okurdu, gloss_de: 'er, sie las (früher immer)' }
+      - { id: b1-u01-l3-e5, type: conjugation, mode: verb, lemma: gelmek, person: 3sg, tense: aorist, compound: past, target: gelirdi, gloss_de: 'er, sie kam (früher immer)' }
+      - id: b1-u01-l3-e6
+        type: conjugation
+        mode: verb
+        lemma: içmek
+        person: 1sg
+        tense: aorist
+        compound: past
+        negative: true
+        target: içmezdim
+        gloss_de: ich trank (früher) nicht
+        explanation: Mit idi steht -mez auch bei „ich“, içmezdim (nicht içmemdim).
+      - { id: b1-u01-l3-e7, type: conjugation, mode: verb, lemma: yapmak, person: 2sg, tense: aorist, compound: past, target: yapardın, gloss_de: du machtest (früher immer) }
+      - id: b1-u01-l3-e8
+        type: conjugation
+        mode: verb
+        lemma: vermek
+        person: 3sg
+        tense: aorist
+        compound: past
+        target: verirdi
+        gloss_de: 'er, sie gab (früher immer)'
+        explanation: ver- gehört zu den einsilbigen Verben mit -ir.
+      - id: b1-u01-l3-e9
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Her yaz köye giderdik.“ / „Geçen yaz köye gittik.“
+        options: [Früher fuhren wir jeden Sommer ins Dorf. / Letzten Sommer sind wir ins Dorf gefahren., Beides heißt dasselbe., Wir fahren jeden Sommer ins Dorf. / Wir fuhren letzten Sommer ins Dorf.]
+        answer: Früher fuhren wir jeden Sommer ins Dorf. / Letzten Sommer sind wir ins Dorf gefahren.
+        explanation: -irdi = Gewohnheit früher, -dı = einmaliges Ereignis.
+      - id: b1-u01-l3-e10
+        type: word_bank
+        prompt: Früher spielten wir im Garten Verstecken.
+        answers: [Eskiden bahçede saklambaç oynardık.]
+        chunks:
+          - { text: "Eskiden", role: time }
+          - { text: "bahçede", role: place }
+          - { text: "saklambaç", role: object_bare }
+          - { text: "oynardık", role: predicate }
+        distractors: [oynadık, bahçeye]
+      - id: b1-u01-l3-e11
+        type: word_bank
+        prompt: Als Kind kletterte ich auf Bäume.
+        answers: [Çocukken ağaçlara tırmanırdım.]
+        chunks:
+          - { text: "Çocukken", role: time }
+          - { text: "ağaçlara", role: place }
+          - { text: "tırmanırdım", role: predicate }
+        distractors: [ağaçlarda, tırmandım]
+        explanation: çocukken = als ich ein Kind war.
+      - id: b1-u01-l3-e12
+        type: free_text
+        direction: de_tr
+        prompt: Früher trank ich keinen Kaffee.
+        answers: [Eskiden kahve içmezdim., Ben eskiden kahve içmezdim., Eskiden hiç kahve içmezdim.]
+      - id: b1-u01-l3-e13
+        type: multiple_choice
+        prompt: Was bedeutet „Dedem bize her akşam masal anlatırdı.“?
+        options: [Mein Großvater erzählte uns jeden Abend ein Märchen., Mein Großvater erzählt uns heute Abend ein Märchen., Mein Großvater hat uns einmal ein Märchen erzählt.]
+        answer: Mein Großvater erzählte uns jeden Abend ein Märchen.
+
+  - id: b1-u01-l4
+    type: grammar
+    title: Was schon passiert war, was ich vorhatte
+    exercises:
+      - id: b1-u01-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: evidential
+        compound: past
+        target: gelmişti
+        gloss_de: 'er, sie war gekommen'
+        explanation: gelmiş + ti. Nach ş wird d zu t.
+      - { id: b1-u01-l4-e2, type: conjugation, mode: verb, lemma: bitirmek, person: 1sg, tense: evidential, compound: past, target: bitirmiştim, gloss_de: ich hatte beendet }
+      - { id: b1-u01-l4-e3, type: conjugation, mode: verb, lemma: gitmek, person: 3pl, tense: evidential, compound: past, target: gitmişlerdi, gloss_de: sie waren gegangen }
+      - { id: b1-u01-l4-e4, type: conjugation, mode: verb, lemma: unutmak, person: 1sg, tense: evidential, compound: past, target: unutmuştum, gloss_de: ich hatte vergessen }
+      - { id: b1-u01-l4-e5, type: conjugation, mode: verb, lemma: okumak, person: 1pl, tense: evidential, compound: past, negative: true, target: okumamıştık, gloss_de: wir hatten nicht gelesen }
+      - id: b1-u01-l4-e6
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: future
+        compound: past
+        target: gelecektim
+        gloss_de: ich wollte (eigentlich) kommen
+        explanation: gelecek + ti + m. Das k bleibt vor t, kein ğ.
+      - { id: b1-u01-l4-e7, type: conjugation, mode: verb, lemma: aramak, person: 3sg, tense: future, compound: past, target: arayacaktı, gloss_de: 'er, sie wollte anrufen' }
+      - { id: b1-u01-l4-e8, type: conjugation, mode: verb, lemma: yapmak, person: 1pl, tense: future, compound: past, target: yapacaktık, gloss_de: wir wollten machen }
+      - id: b1-u01-l4-e9
+        type: multiple_choice
+        prompt: Was ist passiert? „Otobüse koştum ama otobüs çoktan gitmişti.“
+        options: [Der Bus war schon weg., Der Bus kam gerade an., Ich bin mit dem Bus gefahren.]
+        answer: Der Bus war schon weg.
+        explanation: -mişti = war schon geschehen (Plusquamperfekt).
+      - id: b1-u01-l4-e10
+        type: multiple_choice
+        prompt: Was bedeutet „Seni arayacaktım ama unuttum.“?
+        options: ['Ich wollte dich anrufen, aber ich habe es vergessen.', Ich werde dich anrufen und es nicht vergessen., 'Ich habe dich angerufen, aber du hast es vergessen.']
+        answer: Ich wollte dich anrufen, aber ich habe es vergessen.
+      - id: b1-u01-l4-e11
+        type: word_bank
+        prompt: Der Film hatte längst begonnen.
+        answers: [Film çoktan başlamıştı.]
+        chunks:
+          - { text: "Film", role: subject }
+          - { text: "çoktan", role: complement }
+          - { text: "başlamıştı", role: predicate }
+        distractors: [başlıyor, henüz]
+      - id: b1-u01-l4-e12
+        type: word_bank
+        prompt: Ich hatte meinen Schlüssel vergessen.
+        answers: [Anahtarımı unutmuştum.]
+        distractors: [anahtarım, unutmuşum]
+      - id: b1-u01-l4-e13
+        type: free_text
+        direction: tr_de
+        prompt: Tam çıkacaktık, yağmur başladı.
+        answers: ['Wir wollten gerade gehen, da fing es an zu regnen.', 'Wir wollten gerade los, da fing es an zu regnen.', 'Wir wollten gerade gehen, da begann es zu regnen.', 'Wir wollten gerade los, da begann es zu regnen.', 'Wir wollten gerade gehen, als es anfing zu regnen.', 'Gerade als wir gehen wollten, fing es an zu regnen.']
+        explanation: tam = genau, gerade.
+      - id: b1-u01-l4-e14
+        type: conjugation
+        mode: verb
+        lemma: bitirmek
+        person: 2sg
+        tense: evidential
+        compound: past
+        question: true
+        target: bitirmiş miydin?
+        gloss_de: Hattest du (es schon) beendet?
+
+  - id: b1-u01-l5
+    type: dialog
+    title: Erzähl doch von früher!
+    exercises:
+      - id: b1-u01-l5-e1
+        type: word_bank
+        prompt: Wo bist du aufgewachsen?
+        answers: [Nerede büyüdün?, Sen nerede büyüdün?]
+        distractors: [büyüyor, nereye]
+      - id: b1-u01-l5-e2
+        type: word_bank
+        prompt: Ich bin in einem kleinen Dorf aufgewachsen.
+        answers: [Küçük bir köyde büyüdüm., Ben küçük bir köyde büyüdüm.]
+        distractors: [köye, büyürdüm]
+      - id: b1-u01-l5-e3
+        type: multiple_choice
+        prompt: Was wird gefragt? „Çocukken ne yapardın?“
+        options: [Was hast du als Kind (gewöhnlich) gemacht?, Was machst du mit deinem Kind?, Was wirst du als Kind machen?]
+        answer: Was hast du als Kind (gewöhnlich) gemacht?
+      - id: b1-u01-l5-e4
+        type: word_bank
+        prompt: Wir spielten immer am Bach.
+        answers: [Hep derede oynardık.]
+        chunks:
+          - { text: "Hep", role: complement }
+          - { text: "derede", role: place }
+          - { text: "oynardık", role: predicate }
+        distractors: [dereye, oynuyoruz]
+      - id: b1-u01-l5-e5
+        type: free_text
+        direction: tr_de
+        prompt: O zamanlar televizyonumuz yoktu.
+        answers: [Damals hatten wir keinen Fernseher., Wir hatten damals keinen Fernseher., Damals hatten wir kein Fernsehen., Wir hatten damals kein Fernsehen.]
+        explanation: yoktu = yok + tu (gab es nicht).
+      - id: b1-u01-l5-e6
+        type: word_bank
+        prompt: Was hast du nach der Schule gemacht?
+        answers: [Okuldan sonra ne yaptın?]
+        chunks:
+          - { text: "Okuldan sonra", role: time }
+          - { text: "ne", role: question }
+          - { text: "yaptın", role: predicate }
+        distractors: [yapardın, okula]
+      - id: b1-u01-l5-e7
+        type: word_bank
+        prompt: Ich habe die Universität abgeschlossen.
+        answers: [Üniversiteden mezun oldum.]
+        distractors: [üniversiteyi, oldun]
+        explanation: mezun olmak steht mit Ablativ.
+      - id: b1-u01-l5-e8
+        type: multiple_choice
+        prompt: Wie sagst du „Daran erinnere ich mich nicht.“?
+        options: [Bunu hatırlamıyorum., Bunu unutmuyorum., Bunu hatırladım.]
+        answer: Bunu hatırlamıyorum.
+      - id: b1-u01-l5-e9
+        type: free_text
+        direction: de_tr
+        prompt: Damals war ich noch jung.
+        answers: [O zamanlar daha gençtim., O zamanlar gençtim., O zamanlar ben gençtim., O zamanlar hâlâ gençtim., O zamanlar henüz gençtim.]
+        explanation: gençtim = genç + tim (ich war jung).
+      - id: b1-u01-l5-e10
+        type: conjugation
+        mode: verb
+        lemma: yaşamak
+        person: 2pl
+        tense: present
+        compound: past
+        question: true
+        target: yaşıyor muydunuz?
+        gloss_de: Lebten Sie (damals) …?
+
+  - id: b1-u01-l6
+    type: grammar
+    title: 'Tabellen: Zeiten mit idi'
+    exercises:
+      - id: b1-u01-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: present
+        compound: past
+        targets: [geliyordum, geliyordun, geliyordu, geliyorduk, geliyordunuz, geliyorlardı]
+        gloss_de: kam gerade
+        explanation: Bei „sie“ auch geliyordular.
+      - id: b1-u01-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: aorist
+        compound: past
+        targets: [yapardım, yapardın, yapardı, yapardık, yapardınız, yaparlardı]
+        gloss_de: machte (früher immer)
+      - id: b1-u01-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: okumak
+        tense: evidential
+        compound: past
+        targets: [okumuştum, okumuştun, okumuştu, okumuştuk, okumuştunuz, okumuşlardı]
+        gloss_de: hatte gelesen
+      - id: b1-u01-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: gitmek
+        tense: future
+        compound: past
+        targets: [gidecektim, gidecektin, gidecekti, gidecektik, gidecektiniz, gideceklerdi]
+        gloss_de: wollte gehen
+        explanation: git- wird vor Vokal zu gid-.
+      - id: b1-u01-l6-e5
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: aorist
+        compound: past
+        negative: true
+        targets: [gelmezdim, gelmezdin, gelmezdi, gelmezdik, gelmezdiniz, gelmezlerdi]
+        gloss_de: kam (früher) nicht
+        explanation: Mit idi überall -mez, auch bei ich und wir.
+
+  - id: b1-u01-r1
+    type: reading
+    title: 'Lesetext: Meine Kindheit im Dorf'
+    passage:
+      sentences:
+        - { tr: "Ben küçük bir köyde büyüdüm.", de: "Ich bin in einem kleinen Dorf aufgewachsen." }
+        - { tr: "Babam tarlada çalışırdı, annem ineklere bakardı.", de: "Mein Vater arbeitete auf dem Feld, meine Mutter kümmerte sich um die Kühe." }
+        - { tr: "Her sabah erken kalkardık.", de: "Jeden Morgen standen wir früh auf." }
+        - { tr: "Okulumuz uzaktı, her gün yürüyerek giderdik.", de: "Unsere Schule war weit weg, wir gingen jeden Tag zu Fuß." }
+        - { tr: "Okuldan sonra derede yüzerdik ya da ağaçlara tırmanırdık.", de: "Nach der Schule schwammen wir im Bach oder kletterten auf Bäume." }
+        - { tr: "Akşamları dedem bize masal anlatırdı.", de: "Abends erzählte uns mein Großvater Märchen." }
+        - { tr: "Bir akşam masalı ben anlattım, dedem dinledi.", de: "Eines Abends habe ich das Märchen erzählt, und mein Großvater hat zugehört." }
+        - { tr: "On sekiz yaşında şehre taşındım.", de: "Mit achtzehn bin ich in die Stadt gezogen." }
+        - { tr: "Önce köyümü çok özledim, ama sonra alıştım.", de: "Zuerst habe ich mein Dorf sehr vermisst, aber dann habe ich mich gewöhnt." }
+        - { tr: "Şimdi emekli oldum ve yine köyde yaşıyorum.", de: "Jetzt bin ich in Rente und lebe wieder im Dorf." }
+      glossary:
+        - { tr: "bakardı", de: "kümmerte sich (bakmak + Dativ = sich kümmern um; Aorist mit idi)", vocab: "bakmak" }
+        - { tr: "uzaktı", de: "war weit weg (uzak + tı)", vocab: "uzak" }
+        - { tr: "yürüyerek", de: "zu Fuß, gehend (yürümek + -erek)", vocab: "yürümek" }
+        - { tr: "her", de: "jede(r, s) (her sabah = jeden Morgen)" }
+        - { tr: "emekli", de: "Rentner(in), im Ruhestand (emekli olmak = in Rente gehen)", vocab: "emekli olmak" }
+        - { tr: "özledim", de: "ich habe vermisst (özlemek = vermissen)" }
+        - { tr: "alıştım", de: "ich habe mich gewöhnt (alışmak = sich gewöhnen)" }
+        - { tr: "yine", de: "wieder" }
+    exercises:
+      - id: b1-u01-r1-e1
+        type: multiple_choice
+        prompt: Was machte die Mutter?
+        options: [Sie kümmerte sich um die Kühe., Sie arbeitete in der Stadt., Sie erzählte Märchen.]
+        answer: Sie kümmerte sich um die Kühe.
+      - id: b1-u01-r1-e2
+        type: multiple_choice
+        prompt: Wie kamen die Kinder zur Schule?
+        options: [zu Fuß, mit dem Bus, mit dem Fahrrad]
+        answer: zu Fuß
+      - id: b1-u01-r1-e3
+        type: multiple_choice
+        prompt: Was war an einem Abend anders?
+        options: [Die Person erzählte das Märchen selbst., Der Großvater erzählte kein Märchen., Die Familie sah fern.]
+        answer: Die Person erzählte das Märchen selbst.
+      - id: b1-u01-r1-e4
+        type: multiple_choice
+        prompt: Warum steht im Text oft -ırdı/-erdi (çalışırdı, giderdik)?
+        options: [Es geht um Gewohnheiten von früher., Es geht um Pläne für die Zukunft., Es geht um Gehörtes.]
+        answer: Es geht um Gewohnheiten von früher.
+      - id: b1-u01-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Her sabah erken kalkardık.
+        answers: [Jeden Morgen standen wir früh auf., Wir standen jeden Morgen früh auf., Früher standen wir jeden Morgen früh auf., Jeden Morgen sind wir früh aufgestanden., Wir sind jeden Morgen früh aufgestanden.]
+
+  - id: b1-u01-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u01-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich las gerade
+        answers: [okuyordum, ben okuyordum]
+      - id: b1-u01-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: wir spielten (früher immer)
+        answers: [oynardık, biz oynardık]
+      - id: b1-u01-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich hatte vergessen)
+        options: [unutmuştum, unutmuşdum, unuttumdu]
+        answer: unutmuştum
+        explanation: Nach ş wird d zu t.
+      - id: b1-u01-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich wollte kommen)
+        options: [gelecektim, geleceğdim, gelecekdim]
+        answer: gelecektim
+        explanation: Vor -ti bleibt das k, und d wird nach k zu t.
+      - id: b1-u01-l7-e5
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich trank früher nicht)
+        options: [içmezdim, içmemdim, içmiyordum]
+        answer: içmezdim
+        explanation: içmiyordum heißt „ich trank gerade nicht“; für Gewohnheiten steht der Aorist.
+      - id: b1-u01-l7-e6
+        type: word_bank
+        prompt: Früher wohnten wir in einer Kleinstadt.
+        answers: [Eskiden bir kasabada yaşıyorduk., Eskiden kasabada yaşıyorduk., Eskiden bir kasabada otururduk.]
+        chunks:
+          - { text: "Eskiden", role: time }
+          - { text: "bir kasabada", role: place }
+          - { text: "yaşıyorduk", role: predicate }
+        distractors: [yaşadık, kasabaya]
+      - id: b1-u01-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Otobüsü kaçırmıştım.
+        answers: [Ich hatte den Bus verpasst., Ich hatte den Bus versäumt.]
+      - id: b1-u01-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: karar vermek
+        person: 1sg
+        tense: aorist
+        compound: past
+        negative: true
+        target: karar vermezdim
+        gloss_de: ich würde mich nicht (so) entscheiden
+        explanation: -mezdi heißt auch „würde nicht“.
+      - id: b1-u01-l7-e9
+        type: word_bank
+        prompt: Mein Großvater erzählte uns immer Märchen.
+        answers: [Dedem bize hep masal anlatırdı.]
+        chunks:
+          - { text: "Dedem", role: subject }
+          - { text: "bize", role: complement }
+          - { text: "hep", role: complement }
+          - { text: "masal", role: object_bare }
+          - { text: "anlatırdı", role: predicate }
+        distractors: [anlattı, bizi]
+      - id: b1-u01-l7-e10
+        type: conjugation
+        mode: verb
+        lemma: hatırlamak
+        person: 1sg
+        tense: present
+        negative: true
+        target: hatırlamıyorum
+        gloss_de: ich erinnere mich nicht
+
+vocab:
+  - { tr: çocukluk, de: [Kindheit], pos: noun, softens: true }
+  - { tr: çocukken, de: [als Kind], pos: phrase }
+  - { tr: büyümek, de: [aufwachsen, wachsen], pos: verb }
+  - { tr: köy, de: [Dorf], pos: noun }
+  - { tr: kasaba, de: [Kleinstadt], pos: noun }
+  - { tr: mahalle, de: [Viertel, Nachbarschaft], pos: noun }
+  - { tr: tarla, de: [Feld, Acker], pos: noun }
+  - { tr: inek, de: [Kuh], pos: noun, softens: true }
+  - { tr: dere, de: [Bach], pos: noun }
+  - { tr: anı, de: [Erinnerung], pos: noun }
+  - { tr: hatırlamak, de: [sich erinnern], pos: verb }
+  - { tr: ilkokul, de: [Grundschule], pos: noun }
+  - { tr: üniversite, de: [Universität], pos: noun }
+  - { tr: mezun olmak, de: [den Abschluss machen], pos: verb }
+  - { tr: emekli olmak, de: [in Rente gehen], pos: verb }
+  - { tr: saklambaç, de: [Versteckspiel], pos: noun, softens: true }
+  - { tr: tırmanmak, de: [klettern], pos: verb }
+  - { tr: o zamanlar, de: [damals], pos: phrase }
+  - { tr: eskiden, de: [früher], pos: adv }
+  - { tr: gençlik, de: [Jugend], pos: noun, softens: true }
+  - { tr: vermek, de: [geben], pos: verb }
+  - { tr: bitirmek, de: [beenden, abschließen], pos: verb }
+  - { tr: düşünmek, de: [denken, nachdenken], pos: verb }
+  - { tr: henüz, de: [noch nicht (mit Verneinung), gerade erst], pos: adv }
+  - { tr: çoktan, de: [längst, schon lange], pos: adv }
+  - { tr: aniden, de: [plötzlich], pos: adv }
+  - { tr: tam, de: [genau, gerade], pos: adv }
+  - { tr: kaçırmak, de: [verpassen], pos: verb }
+  - { tr: karar, de: [Entscheidung], pos: noun }
+  - { tr: karar vermek, de: [sich entscheiden, beschließen], pos: verb }
+  - { tr: ya da, de: [oder], pos: conj }

@@ -1,0 +1,539 @@
+# B1-02: Zeiten mit imiş (-iyormuş, -irmiş, -mişmiş, -ecekmiş, -ymiş); Erinnerungen, Familiengeschichte. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u02
+level: B1
+title: Familiengeschichte
+grammar_focus: [iyormus, irmis, mismis, ecekmis, masal]
+explainer: explainers/b1-imis.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u02-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u02-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „büyük dede“?
+        options: [Urgroßvater, Großvater, Onkel]
+        answer: Urgroßvater
+        explanation: Großvater ist dede; büyükanne dagegen ist die Großmutter.
+      - id: b1-u02-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: auswandern
+        answers: [göç etmek]
+        explanation: göç = Wanderung, Auswanderung; göçmen = Einwanderer(in), Migrant(in).
+      - id: b1-u02-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „akraba“?
+        options: [Verwandte(r), Nachbar(in), Freund(in)]
+        answer: Verwandte(r)
+      - id: b1-u02-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „torun“?
+        options: [Enkel(in), Neffe, Cousin]
+        answer: Enkel(in)
+      - id: b1-u02-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: arm
+        answers: [fakir, yoksul]
+      - id: b1-u02-l1-e6
+        type: free_text
+        direction: de_tr
+        prompt: reich
+        answers: [zengin]
+      - id: b1-u02-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „savaş“?
+        options: [Krieg, Frieden, Reise]
+        answer: Krieg
+      - id: b1-u02-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „meğer“?
+        options: [wie sich herausstellte, deshalb, trotzdem]
+        answer: wie sich herausstellte
+        explanation: meğer steht oft mit -miş, weil man etwas erst später erfährt.
+      - id: b1-u02-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: Schiff
+        answers: [gemi]
+      - id: b1-u02-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „terzi“?
+        options: [Schneider(in), Bäcker(in), Fischer(in)]
+        answer: Schneider(in)
+      - id: b1-u02-l1-e11
+        type: free_text
+        direction: tr_de
+        prompt: ayrılmak
+        answers: [sich trennen, weggehen, verlassen, sich verabschieden, abreisen]
+        explanation: Mit Ablativ, köyden ayrıldı = er hat das Dorf verlassen.
+      - id: b1-u02-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „âşık olmak“?
+        options: [sich verlieben, sich streiten, sich erinnern]
+        answer: sich verlieben
+        explanation: Mit Dativ, birine âşık olmak = sich in jemanden verlieben.
+      - id: b1-u02-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: Geschichte, Erzählung
+        answers: [hikâye, hikaye, öykü]
+        explanation: hikâye wird mit und ohne â geschrieben.
+      - id: b1-u02-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „yüzyıl“?
+        options: [Jahrhundert, Jahrzehnt, hundert Tage]
+        answer: Jahrhundert
+      - id: b1-u02-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: alle, jeder
+        answers: [herkes]
+      - id: b1-u02-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „nesil“?
+        options: [Generation, Familie, Herkunft]
+        answer: Generation
+        explanation: Vor Vokal fällt das i aus, yeni nesli (die neue Generation, Akkusativ).
+
+  - id: b1-u02-l2
+    type: grammar
+    title: Was man erzählt bekommt (-iyormuş)
+    exercises:
+      - id: b1-u02-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: çalışmak
+        person: 3sg
+        tense: present
+        compound: evidential
+        target: çalışıyormuş
+        gloss_de: 'er, sie arbeite (gerade, sagt man)'
+        explanation: çalışıyor + muş. Man gibt weiter, was man gehört hat.
+      - { id: b1-u02-l2-e2, type: conjugation, mode: verb, lemma: aramak, person: 3sg, tense: present, compound: evidential, target: arıyormuş, gloss_de: 'er, sie suche angeblich' }
+      - { id: b1-u02-l2-e3, type: conjugation, mode: verb, lemma: yaşamak, person: 3pl, tense: present, compound: evidential, target: yaşıyorlarmış, gloss_de: sie lebten angeblich }
+      - { id: b1-u02-l2-e4, type: conjugation, mode: verb, lemma: beklemek, person: 2sg, tense: present, compound: evidential, target: bekliyormuşsun, gloss_de: du wartest ja (wie ich sehe) }
+      - { id: b1-u02-l2-e5, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: present, compound: evidential, target: yağıyormuş, gloss_de: es regnet ja }
+      - id: b1-u02-l2-e6
+        type: conjugation
+        mode: verb
+        lemma: bilmek
+        person: 3sg
+        tense: present
+        compound: evidential
+        negative: true
+        target: bilmiyormuş
+        gloss_de: 'er, sie wisse es angeblich nicht'
+      - id: b1-u02-l2-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Kardeşim yeni bir iş arıyormuş.“?
+        options: [Mein Bruder sucht angeblich eine neue Arbeit., Mein Bruder hat eine neue Arbeit gefunden., Mein Bruder suchte gerade eine neue Arbeit (ich habe es gesehen).]
+        answer: Mein Bruder sucht angeblich eine neue Arbeit.
+      - id: b1-u02-l2-e8
+        type: multiple_choice
+        prompt: Du öffnest die Tür und siehst, dass es regnet. Was sagst du? „Aa, yağmur …!“
+        options: [yağıyormuş, yağıyordu, yağacak]
+        answer: yağıyormuş
+        explanation: -miş drückt auch Überraschung über etwas gerade Entdecktes aus.
+      - id: b1-u02-l2-e9
+        type: word_bank
+        prompt: Damals soll mein Großvater in einer Fabrik gearbeitet haben.
+        answers: [O zamanlar dedem bir fabrikada çalışıyormuş., Dedem o zamanlar bir fabrikada çalışıyormuş.]
+        chunks:
+          - { text: "O zamanlar", role: time }
+          - { text: "dedem", role: subject }
+          - { text: "bir fabrikada", role: place }
+          - { text: "çalışıyormuş", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3], note: "Auch üblich: das Subjekt zuerst." }
+        distractors: [çalışıyordu, fabrikaya]
+      - id: b1-u02-l2-e10
+        type: free_text
+        direction: tr_de
+        prompt: Komşumuz Almanya'da yaşıyormuş.
+        answers: [Unser Nachbar lebt angeblich in Deutschland., Unser Nachbar soll in Deutschland leben., Unsere Nachbarin lebt angeblich in Deutschland., Unsere Nachbarin soll in Deutschland leben., Unser Nachbar soll in Deutschland gelebt haben., Unsere Nachbarin soll in Deutschland gelebt haben., Unser Nachbar lebt anscheinend in Deutschland.]
+      - id: b1-u02-l2-e11
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: present
+        compound: evidential
+        question: true
+        target: geliyor muymuş?
+        gloss_de: Soll er (denn) kommen?
+        explanation: mi steht vor der Kopula, muymuş.
+
+  - id: b1-u02-l3
+    type: grammar
+    title: Was früher üblich gewesen sein soll (-irmiş)
+    exercises:
+      - id: b1-u02-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: yazmak
+        person: 3pl
+        tense: aorist
+        compound: evidential
+        target: yazarlarmış
+        gloss_de: sie sollen (früher immer) geschrieben haben
+        explanation: Aorist yazar + lar + mış.
+      - { id: b1-u02-l3-e2, type: conjugation, mode: verb, lemma: yüzmek, person: 3sg, tense: aorist, compound: evidential, target: yüzermiş, gloss_de: 'er, sie soll (immer) geschwommen sein' }
+      - { id: b1-u02-l3-e3, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: aorist, compound: evidential, target: okurmuş, gloss_de: 'er, sie soll (immer) gelesen haben' }
+      - { id: b1-u02-l3-e4, type: conjugation, mode: verb, lemma: gitmek, person: 1pl, tense: aorist, compound: evidential, target: gidermişiz, gloss_de: wir sollen (immer) gegangen sein }
+      - { id: b1-u02-l3-e5, type: conjugation, mode: verb, lemma: içmek, person: 3sg, tense: aorist, compound: evidential, negative: true, target: içmezmiş, gloss_de: 'er, sie soll nie getrunken haben' }
+      - { id: b1-u02-l3-e6, type: conjugation, mode: verb, lemma: gelmek, person: 3pl, tense: aorist, compound: evidential, target: gelirlermiş, gloss_de: sie sollen (immer) gekommen sein }
+      - id: b1-u02-l3-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Büyük dedem her sabah denizde yüzermiş.“?
+        options: [Mein Urgroßvater soll jeden Morgen im Meer geschwommen sein., Mein Urgroßvater schwimmt jeden Morgen im Meer., Mein Urgroßvater ist einmal im Meer geschwommen.]
+        answer: Mein Urgroßvater soll jeden Morgen im Meer geschwommen sein.
+      - id: b1-u02-l3-e8
+        type: word_bank
+        prompt: Früher schrieben die Menschen angeblich Briefe.
+        answers: [Eskiden insanlar mektup yazarmış.]
+        chunks:
+          - { text: "Eskiden", role: time }
+          - { text: "insanlar", role: subject }
+          - { text: "mektup", role: object_bare }
+          - { text: "yazarmış", role: predicate }
+        distractors: [yazardı, mektubu]
+      - id: b1-u02-l3-e9
+        type: word_bank
+        prompt: Als Kind soll ich viel geweint haben.
+        answers: [Çocukken çok ağlarmışım.]
+        chunks:
+          - { text: "Çocukken", role: time }
+          - { text: "çok", role: complement }
+          - { text: "ağlarmışım", role: predicate }
+        distractors: [ağlardım, ağlıyorum]
+        explanation: ağlamak = weinen. Man weiß es nicht selbst, die Eltern haben es erzählt.
+      - id: b1-u02-l3-e10
+        type: free_text
+        direction: de_tr
+        prompt: Mein Großvater soll nie Kaffee getrunken haben.
+        answers: [Dedem hiç kahve içmezmiş., Dedem asla kahve içmezmiş., Dedem kahve içmezmiş.]
+      - id: b1-u02-l3-e11
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Dedem kahve içmezdi.“ / „Dedem kahve içmezmiş.“
+        options: [Ich weiß es selbst. / Ich habe es gehört., Beides heißt dasselbe., Er trinkt jetzt keinen Kaffee. / Er trank früher keinen.]
+        answer: Ich weiß es selbst. / Ich habe es gehört.
+
+  - id: b1-u02-l4
+    type: grammar
+    title: Was geschehen oder geplant gewesen sein soll
+    exercises:
+      - id: b1-u02-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: evlenmek
+        person: 3pl
+        tense: evidential
+        compound: evidential
+        target: evlenmişlermiş
+        gloss_de: sie sollen geheiratet haben (sagt man)
+        explanation: -mişmiş gibt weiter, was andere erzählt haben.
+      - { id: b1-u02-l4-e2, type: conjugation, mode: verb, lemma: göç etmek, person: 3sg, tense: evidential, compound: evidential, target: göç etmişmiş, gloss_de: 'er, sie soll ausgewandert sein' }
+      - id: b1-u02-l4-e3
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: future
+        compound: evidential
+        target: gelecekmiş
+        gloss_de: 'er, sie soll kommen (hat man gesagt)'
+        explanation: gelecek + miş, das k bleibt.
+      - { id: b1-u02-l4-e4, type: conjugation, mode: verb, lemma: olmak, person: 3sg, tense: future, compound: evidential, target: olacakmış, gloss_de: 'er, sie sollte … werden (sagt man)' }
+      - { id: b1-u02-l4-e5, type: conjugation, mode: verb, lemma: taşınmak, person: 1pl, tense: future, compound: evidential, target: taşınacakmışız, gloss_de: wir sollen umziehen (hat man gesagt) }
+      - { id: b1-u02-l4-e6, type: conjugation, mode: verb, lemma: gitmek, person: 3sg, tense: future, compound: evidential, negative: true, target: gitmeyecekmiş, gloss_de: 'er, sie wolle nicht gehen (sagt man)' }
+      - id: b1-u02-l4-e7
+        type: conjugation
+        mode: copula
+        lemma: terzi
+        person: 3sg
+        tense: evidential
+        target: terziymiş
+        gloss_de: 'er, sie soll Schneider(in) gewesen sein'
+        explanation: Nach Vokal mit y, terzi-y-miş.
+      - { id: b1-u02-l4-e8, type: conjugation, mode: copula, lemma: fakir, person: 3sg, tense: evidential, target: fakirmiş, gloss_de: 'er, sie, es soll arm gewesen sein' }
+      - { id: b1-u02-l4-e9, type: conjugation, mode: copula, lemma: zengin, person: 3sg, tense: evidential, negative: true, target: zengin değilmiş, gloss_de: 'er, sie soll nicht reich gewesen sein' }
+      - id: b1-u02-l4-e10
+        type: multiple_choice
+        prompt: Was bedeutet „Ayşe yarın gelecekmiş.“?
+        options: [Ayşe soll morgen kommen (hat man gesagt)., Ayşe ist gestern gekommen., Ayşe wollte morgen kommen (ich weiß es selbst).]
+        answer: Ayşe soll morgen kommen (hat man gesagt).
+      - id: b1-u02-l4-e11
+        type: word_bank
+        prompt: Mein Urgroßvater soll Schneider gewesen sein.
+        answers: [Büyük dedem terziymiş.]
+        distractors: [terziydi, dedem]
+      - id: b1-u02-l4-e12
+        type: word_bank
+        prompt: Es war einmal …
+        answers: ['Bir varmış, bir yokmuş.']
+        distractors: [vardı, yoktu]
+        explanation: So beginnen türkische Märchen.
+      - id: b1-u02-l4-e13
+        type: free_text
+        direction: tr_de
+        prompt: Köy çok fakirmiş.
+        answers: [Das Dorf soll sehr arm gewesen sein., Das Dorf war angeblich sehr arm., Das Dorf soll sehr arm sein., Das Dorf ist angeblich sehr arm.]
+
+  - id: b1-u02-l5
+    type: dialog
+    title: Alte Familienfotos
+    exercises:
+      - id: b1-u02-l5-e1
+        type: word_bank
+        prompt: Wer ist das auf dem Foto?
+        answers: [Fotoğraftaki kim?, Bu fotoğraftaki kim?]
+        distractors: [fotoğrafta, ne]
+        explanation: fotoğraftaki = der/die auf dem Foto (-ki).
+      - id: b1-u02-l5-e2
+        type: word_bank
+        prompt: Das ist mein Urgroßvater.
+        answers: [Bu benim büyük dedem., Bu büyük dedem.]
+        distractors: [dedemi, şu]
+      - id: b1-u02-l5-e3
+        type: multiple_choice
+        prompt: Wie fragst du „Was hat er (angeblich) gemacht?“
+        options: [Ne yapmış?, Ne yaptı?, Ne yapıyor?]
+        answer: Ne yapmış?
+      - id: b1-u02-l5-e4
+        type: word_bank
+        prompt: Er soll in einem Hafen gearbeitet haben.
+        answers: [Bir limanda çalışıyormuş., Limanda çalışıyormuş.]
+        distractors: [limana, çalışıyordu]
+      - id: b1-u02-l5-e5
+        type: word_bank
+        prompt: Dann soll er nach Deutschland ausgewandert sein.
+        answers: [Sonra Almanya'ya göç etmiş.]
+        chunks:
+          - { text: "Sonra", role: time }
+          - { text: "Almanya'ya", role: place }
+          - { text: "göç etmiş", role: predicate }
+        distractors: [Almanya'da, etti]
+      - id: b1-u02-l5-e6
+        type: free_text
+        direction: tr_de
+        prompt: Meğer babaannem çok güzel şarkı söylermiş.
+        answers: ['Wie sich herausstellte, sang meine Großmutter sehr schön.', Meine Großmutter sang offenbar sehr schön., Meine Großmutter soll sehr schön gesungen haben., Anscheinend sang meine Großmutter sehr schön., Meine Oma sang offenbar sehr schön., Meine Oma soll sehr schön gesungen haben., 'Wie sich herausstellte, sang meine Oma sehr schön.']
+      - id: b1-u02-l5-e7
+        type: word_bank
+        prompt: Wer hat dir das erzählt?
+        answers: [Bunu sana kim anlattı?]
+        chunks:
+          - { text: "Bunu", role: object }
+          - { text: "sana", role: complement }
+          - { text: "kim", role: question }
+          - { text: "anlattı", role: predicate }
+        distractors: [seni, anlatmış]
+      - id: b1-u02-l5-e8
+        type: free_text
+        direction: de_tr
+        prompt: Meine Großmutter hat es erzählt.
+        answers: [Babaannem anlattı., Anneannem anlattı., Büyükannem anlattı., Babaannem anlattı bunu., Anneannem anlattı bunu., Bunu babaannem anlattı., Bunu anneannem anlattı.]
+      - id: b1-u02-l5-e9
+        type: multiple_choice
+        prompt: Jemand erzählt etwas Unglaubliches. Was fragst du nach?
+        options: [Öyle mi demiş?, Öyle mi dedim?, Öyle mi diyecek?]
+        answer: Öyle mi demiş?
+        explanation: Öyle mi demiş? = Hat er/sie das (wirklich) gesagt?
+
+  - id: b1-u02-l6
+    type: grammar
+    title: 'Tabellen: Zeiten mit imiş'
+    exercises:
+      - id: b1-u02-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: present
+        compound: evidential
+        targets: [geliyormuşum, geliyormuşsun, geliyormuş, geliyormuşuz, geliyormuşsunuz, geliyorlarmış]
+        gloss_de: komme angeblich
+        explanation: Endungen wie bei „sein“; bei „sie“ auch geliyormuşlar.
+      - id: b1-u02-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: aorist
+        compound: evidential
+        targets: [yaparmışım, yaparmışsın, yaparmış, yaparmışız, yaparmışsınız, yaparlarmış]
+        gloss_de: mache angeblich (gewöhnlich)
+      - id: b1-u02-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: olmak
+        tense: future
+        compound: evidential
+        targets: [olacakmışım, olacakmışsın, olacakmış, olacakmışız, olacakmışsınız, olacaklarmış]
+        gloss_de: werde angeblich
+      - id: b1-u02-l6-e4
+        type: paradigm
+        kind: copula
+        lemma: zengin
+        tense: evidential
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [zenginmişim, zenginmişsin, zenginmiş, zenginmişiz, zenginmişsiniz]
+        gloss_de: soll reich sein
+      - id: b1-u02-l6-e5
+        type: paradigm
+        kind: verb
+        lemma: gitmek
+        tense: evidential
+        compound: evidential
+        targets: [gitmişmişim, gitmişmişsin, gitmişmiş, gitmişmişiz, gitmişmişsiniz, gitmişlermiş]
+        gloss_de: soll gegangen sein (sagt man)
+
+  - id: b1-u02-r1
+    type: reading
+    title: 'Lesetext: Mein Urgroßvater'
+    passage:
+      sentences:
+        - { tr: "Büyük dedem yüz yıl önce küçük bir köyde doğmuş.", de: "Mein Urgroßvater soll vor hundert Jahren in einem kleinen Dorf geboren worden sein." }
+        - { tr: "Ailesi çok fakirmiş.", de: "Seine Familie soll sehr arm gewesen sein." }
+        - { tr: "On iki yaşında bir terzinin yanında çalışmaya başlamış.", de: "Mit zwölf hat er angeblich bei einem Schneider zu arbeiten begonnen." }
+        - { tr: "Her gün sabahtan akşama kadar çalışırmış.", de: "Er soll jeden Tag von morgens bis abends gearbeitet haben." }
+        - { tr: "Yirmi yaşında bir gemiyle İstanbul'a gitmiş.", de: "Mit zwanzig ist er mit einem Schiff nach Istanbul gefahren." }
+        - { tr: "İstanbul'da babaannemin annesiyle tanışmış.", de: "In Istanbul hat er die Mutter meiner Großmutter kennengelernt." }
+        - { tr: "İkisi hemen birbirine âşık olmuş ve evlenmişler.", de: "Die beiden sollen sich sofort ineinander verliebt und geheiratet haben." }
+        - { tr: "Büyük dedem sonra kendi dükkânını açmış.", de: "Mein Urgroßvater soll später seinen eigenen Laden eröffnet haben." }
+        - { tr: "Herkes onun ceketlerini çok severmiş.", de: "Alle sollen seine Jacken sehr gemocht haben." }
+        - { tr: "Ben onu hiç görmedim, ama annem onun hikâyelerini hep anlatır.", de: "Ich habe ihn nie gesehen, aber meine Mutter erzählt immer seine Geschichten." }
+      glossary:
+        - { tr: "fakirmiş", de: "soll arm gewesen sein (fakir + miş)", vocab: "fakir" }
+        - { tr: "birbirine", de: "einander, ineinander (Dativ)" }
+        - { tr: "hemen", de: "sofort" }
+        - { tr: "âşık", de: "verliebt (âşık olmak = sich verlieben)", vocab: "âşık olmak" }
+        - { tr: "dükkânını", de: "seinen Laden (dükkân = Laden, Geschäft)" }
+    exercises:
+      - id: b1-u02-r1-e1
+        type: multiple_choice
+        prompt: Wie war die Familie des Urgroßvaters?
+        options: [sehr arm, sehr reich, sehr groß]
+        answer: sehr arm
+      - id: b1-u02-r1-e2
+        type: multiple_choice
+        prompt: Wo hat er mit zwölf gearbeitet?
+        options: [bei einem Schneider, auf einem Schiff, in einer Fabrik]
+        answer: bei einem Schneider
+      - id: b1-u02-r1-e3
+        type: multiple_choice
+        prompt: Wie kam er nach Istanbul?
+        options: [mit einem Schiff, mit dem Zug, zu Fuß]
+        answer: mit einem Schiff
+      - id: b1-u02-r1-e4
+        type: multiple_choice
+        prompt: Warum stehen fast alle Sätze mit -miş?
+        options: [Die Person kennt die Geschichte nur aus Erzählungen., Die Geschichte spielt in der Zukunft., Die Person hat alles selbst gesehen.]
+        answer: Die Person kennt die Geschichte nur aus Erzählungen.
+        explanation: Nur der letzte Satz ist eigene Erfahrung, mit -dı (görmedim) und Aorist (anlatır).
+      - id: b1-u02-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ailesi çok fakirmiş.
+        answers: [Seine Familie soll sehr arm gewesen sein., Seine Familie war angeblich sehr arm., Ihre Familie soll sehr arm gewesen sein., Ihre Familie war angeblich sehr arm., Seine Familie war sehr arm., Die Familie soll sehr arm gewesen sein.]
+
+  - id: b1-u02-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u02-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: 'er, sie arbeite angeblich (gerade)'
+        answers: [çalışıyormuş, o çalışıyormuş]
+      - id: b1-u02-l7-e2
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich komme angeblich)
+        options: [geliyormuşum, geliyordum, geliyormuşdum]
+        answer: geliyormuşum
+        explanation: Nach imiş stehen die Endungen von „sein“ (-um), nach idi die von -dı (-m).
+      - id: b1-u02-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (er soll kommen, hat man gesagt)
+        options: [gelecekmiş, geleceğmiş, gelecekmişti]
+        answer: gelecekmiş
+      - id: b1-u02-l7-e4
+        type: word_bank
+        prompt: Meine Urgroßmutter soll sehr schön gesungen haben.
+        answers: [Babaannemin annesi çok güzel şarkı söylermiş., Anneannemin annesi çok güzel şarkı söylermiş.]
+        distractors: [söylerdi, söylüyor]
+        explanation: „Urgroßmutter“ umschreibt man, z. B. babaannemin annesi; büyükanne ist die Großmutter.
+      - id: b1-u02-l7-e5
+        type: free_text
+        direction: tr_de
+        prompt: Büyük dedem terziymiş.
+        answers: [Mein Urgroßvater soll Schneider gewesen sein., Mein Urgroßvater war angeblich Schneider., Mein Urgroßvater war Schneider., Mein Uropa soll Schneider gewesen sein., Mein Uropa war Schneider.]
+      - id: b1-u02-l7-e6
+        type: conjugation
+        mode: verb
+        lemma: ayrılmak
+        person: 3sg
+        tense: evidential
+        target: ayrılmış
+        gloss_de: 'er, sie soll weggegangen sein'
+      - id: b1-u02-l7-e7
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 3sg
+        tense: aorist
+        compound: evidential
+        negative: true
+        target: okumazmış
+        gloss_de: 'er, sie soll (früher) nicht gelesen haben'
+      - id: b1-u02-l7-e8
+        type: word_bank
+        prompt: Mein Großvater soll in einem Dorf gelebt haben.
+        answers: [Dedem bir köyde yaşıyormuş., Dedem köyde yaşıyormuş.]
+        chunks:
+          - { text: "Dedem", role: subject }
+          - { text: "bir köyde", role: place }
+          - { text: "yaşıyormuş", role: predicate }
+        distractors: [köye, yaşıyordu]
+      - id: b1-u02-l7-e9
+        type: multiple_choice
+        prompt: Welcher Satz beschreibt eigene Erfahrung, nicht Gehörtes?
+        options: [Dedemi hiç görmedim., Dedem terziymiş., Dedem kahve içmezmiş.]
+        answer: Dedemi hiç görmedim.
+      - id: b1-u02-l7-e10
+        type: conjugation
+        mode: verb
+        lemma: tanışmak
+        person: 3pl
+        tense: evidential
+        compound: evidential
+        target: tanışmışlarmış
+        gloss_de: sie sollen sich kennengelernt haben (sagt man)
+
+vocab:
+  - { tr: büyük dede, de: [Urgroßvater], pos: noun }
+  - { tr: göç etmek, de: [auswandern, einwandern], pos: verb, softens: true }
+  - { tr: göçmen, de: [Einwanderer, Einwanderin, Migrant(in)], pos: noun }
+  - { tr: akraba, de: [Verwandte(r)], pos: noun }
+  - { tr: torun, de: [Enkel(in)], pos: noun }
+  - { tr: nesil, de: [Generation], pos: noun, drops_vowel: true }
+  - { tr: fakir, de: [arm], pos: adj }
+  - { tr: zengin, de: [reich], pos: adj }
+  - { tr: savaş, de: [Krieg], pos: noun }
+  - { tr: meğer, de: [wie sich herausstellte], pos: adv }
+  - { tr: terzi, de: [Schneider(in)], pos: noun }
+  - { tr: gemi, de: [Schiff], pos: noun }
+  - { tr: liman, de: [Hafen], pos: noun }
+  - { tr: fabrika, de: [Fabrik], pos: noun }
+  - { tr: ayrılmak, de: [weggehen, sich trennen, verlassen], pos: verb }
+  - { tr: âşık olmak, de: [sich verlieben], pos: verb }
+  - { tr: hikâye, de: [Geschichte, Erzählung], pos: noun }
+  - { tr: yüzyıl, de: [Jahrhundert], pos: noun }
+  - { tr: herkes, de: [alle, jeder], pos: pron }
+  - { tr: insan, de: [Mensch], pos: noun }
+  - { tr: ağlamak, de: [weinen], pos: verb }
+  - { tr: fotoğraf, de: [Foto], pos: noun }
+  - { tr: öyle, de: [so], pos: adv }
