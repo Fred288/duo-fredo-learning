@@ -47,6 +47,8 @@ export const de = {
   'lookup.unit': 'Unit: {unit}',
   'lookup.explainer': 'Erklärkarte der Unit',
   'lookup.forms': 'Formen',
+  'lookup.compounds': 'Zusammengesetzte Zeiten und Wünsche',
+  'lookup.verbals': 'Partizipien, Verbalnomen, Konverbien',
   'lookup.nominative': 'Grundform',
   'lookup.singular': 'Singular',
   'lookup.plural': 'Plural',

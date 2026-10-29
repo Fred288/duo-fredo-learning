@@ -216,6 +216,76 @@ describe('LessonRunner', () => {
     expect(status).toContain('Vor -yor wird die Verneinung -me/-ma zu „mi“');
   });
 
+  it('Konjugation mit idi: Formel nennt Präsens und Kopula', () => {
+    const compound: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e4',
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'gelmek',
+          person: '1sg',
+          tense: 'present',
+          compound: 'past',
+          target: 'geliyordum',
+          gloss_de: 'ich kam gerade',
+        },
+      ],
+    };
+    render(<LessonRunner lesson={compound} onExit={() => {}} />);
+    expect(screen.getByText('gelmek · ich · Präsens · mit idi (-di)')).toBeTruthy();
+    for (const tile of ['gel', 'iyor', 'du', 'm']) {
+      fireEvent.click(screen.getByRole('button', { name: tile }));
+    }
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Richtig!');
+  });
+
+  it('Suffix-Builder mit Partizip: Verb, Partizip und Endung bauen', () => {
+    const verbal: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e3',
+          type: 'suffix_builder',
+          stem: 'okumak',
+          verbal: 'PART_DIK',
+          suffixes: ['POSS_1SG'],
+          target: 'okuduğum',
+          gloss_de: 'was ich gelesen habe',
+        },
+      ],
+    };
+    render(<LessonRunner lesson={verbal} onExit={() => {}} />);
+    expect(screen.getByText('okumak + Partizip -dik + mein')).toBeTruthy();
+    for (const tile of ['oku', 'duğ', 'um']) {
+      fireEvent.click(screen.getByRole('button', { name: tile }));
+    }
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Richtig!');
+  });
+
+  it('Tabelle mit Partizip nennt Passiv in der Formel', () => {
+    const table: Lesson = {
+      ...lesson,
+      exercises: [
+        {
+          id: 'a1-u01-l1-e2',
+          type: 'paradigm',
+          kind: 'verbal',
+          verbal: 'PART_DIK',
+          lemma: 'yapmak',
+          passive: true,
+          rows: [['POSS_1SG'], ['POSS_3SG']],
+          targets: ['yapıldığım', 'yapıldığı'],
+        },
+      ],
+    };
+    render(<LessonRunner lesson={table} onExit={() => {}} />);
+    expect(screen.getByText('yapmak · Passiv · Partizip -dik')).toBeTruthy();
+  });
+
   it('Konjugation im Präteritum: Zeit in der Formel, Begründung der Angleichung', () => {
     const past: Lesson = {
       ...lesson,

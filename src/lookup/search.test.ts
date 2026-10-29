@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formTable, nounForms, verbalForms, verbForms } from './forms';
+import { formTable, nounForms, verbalForms, verbExtras, verbForms } from './forms';
 import { lemmatize, prepareLookup, search, TIER } from './search';
 import type { LookupIndex, VocabEntry } from './types';
 
@@ -240,5 +240,56 @@ describe('Formtabellen', () => {
     expect(verbForms(entry('gelmek')).length).toBeLessThan(500);
     // Partizipien, Verbalnomen, Konverbien mit den üblichen Endungen
     expect(verbalForms(entry('gelmek')).length).toBeLessThan(400);
+  });
+});
+
+describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
+  const entry = (id: string) => index.vocab.find((x) => x.id === id)!;
+
+  it('gitmek: idi/imiş/ise, Konditional, Optativ', () => {
+    const e = verbExtras(entry('gitmek'))!;
+    const col = (c: number) => e.compounds.rows.map((r) => r.forms[c]);
+    expect(col(0)).toEqual([
+      'gidiyordum',
+      'gidiyordun',
+      'gidiyordu',
+      'gidiyorduk',
+      'gidiyordunuz',
+      'gidiyorlardı',
+    ]);
+    expect(e.compounds.rows[0]!.forms).toContain('gitsem');
+    expect(e.compounds.rows[0]!.forms).toContain('gideyim');
+    // Optativ nur 1. Person: 2. Person bleibt leer
+    const optative = e.compounds.columns.findIndex((c) => c.tense === 'optative');
+    expect(col(optative)).toEqual([
+      'gideyim',
+      undefined,
+      undefined,
+      'gidelim',
+      undefined,
+      undefined,
+    ]);
+  });
+
+  it('gitmek: Partizipien, Verbalnomen, Konverbien', () => {
+    const e = verbExtras(entry('gitmek'))!;
+    const forms = e.verbals.map((v) => v.form);
+    expect(forms).toEqual([
+      'giden',
+      'gittiğim',
+      'gideceğim',
+      'gitmesi',
+      'gitmek',
+      'gidiş',
+      'gidip',
+      'giderek',
+      'gidince',
+      'gideli',
+      'gitmeden',
+    ]);
+  });
+
+  it('Nomen haben keine zusätzlichen Tabellen', () => {
+    expect(verbExtras(entry('kitap'))).toBeUndefined();
   });
 });

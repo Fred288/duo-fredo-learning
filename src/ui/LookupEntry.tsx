@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { speechText } from '../audio/speech-text';
 import { t, type MessageKey } from '../i18n';
-import { formTable, type FormLabel } from '../lookup/forms';
+import { formTable, verbExtras, type CompoundColumn, type FormLabel } from '../lookup/forms';
 import type { LookupIndex, VocabEntry } from '../lookup/types';
 import { INTERVALS, vocabStatus, type Card, type VocabDir } from '../srs';
 import { dayKey } from '../progress/day';
@@ -122,6 +122,72 @@ function Forms({ entry }: { entry: VocabEntry }) {
   );
 }
 
+const columnLabel = (c: CompoundColumn): string =>
+  [t(`tense.${c.tense}`), c.compound && t(`compound.${c.compound}`)].filter(Boolean).join(' · ');
+
+/** Zusammengesetzte Zeiten und Wünsche, dazu Partizipien, Verbalnomen, Konverbien (nur Verben). */
+function VerbExtras({ entry }: { entry: VocabEntry }) {
+  const extras = verbExtras(entry);
+  if (!extras) return null;
+  const box =
+    'rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900';
+  return (
+    <>
+      <details className={box}>
+        <summary className="cursor-pointer font-medium">{t('lookup.compounds')}</summary>
+        <div className="mt-2 overflow-x-auto" lang="tr">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-stone-200 dark:border-stone-800">
+                <th className={th} />
+                {extras.compounds.columns.map((c, i) => (
+                  <th key={i} className={th} lang="de">
+                    {columnLabel(c)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {extras.compounds.rows.map((r) => (
+                <tr key={r.person} className="border-b border-stone-100 dark:border-stone-800">
+                  <th className={th} scope="row" lang="de">
+                    {t(`person.${r.person}`)}
+                  </th>
+                  {r.forms.map((f, i) => (
+                    <td key={i} className={td}>
+                      {f ?? '–'}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details className={box}>
+        <summary className="cursor-pointer font-medium">{t('lookup.verbals')}</summary>
+        <div className="mt-2 overflow-x-auto" lang="tr">
+          <table className="w-full text-sm">
+            <tbody>
+              {extras.verbals.map((v) => (
+                <tr
+                  key={formLabelText(v.label)}
+                  className="border-b border-stone-100 dark:border-stone-800"
+                >
+                  <th className={th} scope="row" lang="de">
+                    {formLabelText(v.label)}
+                  </th>
+                  <td className={td}>{v.form}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </>
+  );
+}
+
 const dueText = (due: string, isDue: boolean): string => {
   if (isDue) return t('lookup.srs.dueNow');
   const [, m, d] = due.split('-');
@@ -191,6 +257,7 @@ export function LookupEntry({
         </p>
       </header>
       <Forms entry={entry} />
+      <VerbExtras entry={entry} />
       <SrsStatus cards={cards} id={entry.id} />
       {unit && (
         <p className="text-sm">

@@ -57,3 +57,22 @@ test('Taste „/“ öffnet das Nachschlagewerk, Escape leert die Suche', async 
   await page.keyboard.press('Escape');
   await expect(page.getByRole('heading', { name: 'Yol' })).toBeVisible();
 });
+
+test('Verb-Eintrag zeigt zusammengesetzte Zeiten und infinite Formen', async ({ page }) => {
+  await open(page);
+  await page.getByRole('searchbox').fill('geliyordum');
+  await expect(page.getByText(/geliyordum = Präsens, mit idi/)).toBeVisible();
+  await page.getByRole('searchbox').press('Enter');
+  await page.getByText('Zusammengesetzte Zeiten und Wünsche', { exact: true }).click();
+  await expect(page.getByRole('cell', { name: 'geliyordum', exact: true })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'gelirse', exact: true })).toBeVisible();
+  await page.getByText('Partizipien, Verbalnomen, Konverbien', { exact: true }).click();
+  await expect(page.getByRole('cell', { name: 'geldiğim', exact: true })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'gelince', exact: true })).toBeVisible();
+});
+
+test('infinite Form führt auf das Verb zurück', async ({ page }) => {
+  await open(page);
+  await page.getByRole('searchbox').fill('okuduğum');
+  await expect(page.getByText(/okuduğum = Partizip -dik \+ mein/)).toBeVisible();
+});

@@ -264,3 +264,58 @@ export function formTable(entry: VocabEntry): FormTable | undefined {
       return undefined;
   }
 }
+
+/** Spalte der Tabelle „Zusammengesetzte Zeiten“: Zeit, optional mit idi/imiş/ise. */
+export interface CompoundColumn {
+  tense: Tense;
+  compound?: Compound;
+}
+
+const COMPOUND_COLUMNS: CompoundColumn[] = [
+  { tense: 'present', compound: 'past' },
+  { tense: 'future', compound: 'past' },
+  { tense: 'aorist', compound: 'past' },
+  { tense: 'evidential', compound: 'past' },
+  { tense: 'present', compound: 'evidential' },
+  { tense: 'aorist', compound: 'conditional' },
+  { tense: 'conditional' },
+  { tense: 'optative' },
+];
+
+/** Beispielzeilen der infiniten Formen im Eintrag: eine Form je Baustein. */
+const VERBAL_SAMPLES: Omit<Extract<FormLabel, { kind: 'verbal' }>, 'kind'>[] = [
+  { form: 'PART_AN', tags: [] },
+  { form: 'PART_DIK', tags: ['POSS_1SG'] },
+  { form: 'PART_ACAK', tags: ['POSS_1SG'] },
+  { form: 'VN_MA', tags: ['POSS_3SG'] },
+  { form: 'VN_MAK', tags: [] },
+  { form: 'VN_IS', tags: [] },
+  { form: 'CV_IP', tags: [] },
+  { form: 'CV_ARAK', tags: [] },
+  { form: 'CV_INCA', tags: [] },
+  { form: 'CV_ALI', tags: [] },
+  { form: 'CV_MADAN', tags: [] },
+];
+
+/** Weitere Tabellen eines Verbs: zusammengesetzte Zeiten/Wünsche und infinite Formen. */
+export interface VerbExtras {
+  compounds: {
+    columns: CompoundColumn[];
+    rows: { person: Person; forms: (string | undefined)[] }[];
+  };
+  verbals: { label: Extract<FormLabel, { kind: 'verbal' }>; form: string }[];
+}
+
+export function verbExtras(entry: VocabEntry): VerbExtras | undefined {
+  if (formKind(entry) !== 'verb') return undefined;
+  const stem = verbStemOf(entry);
+  const rows = PERSONS.map((person) => ({
+    person,
+    forms: COMPOUND_COLUMNS.map((c) => attempt(() => conjugate(stem, { ...c, person }).form)),
+  }));
+  const verbals = VERBAL_SAMPLES.flatMap((sample) => {
+    const form = attempt(() => nonfinite(stem, sample).form);
+    return form ? [{ label: { kind: 'verbal' as const, ...sample }, form }] : [];
+  });
+  return { compounds: { columns: COMPOUND_COLUMNS, rows }, verbals };
+}
