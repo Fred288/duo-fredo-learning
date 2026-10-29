@@ -95,3 +95,21 @@ describe('suffixTiles: erweichtes Partizip', () => {
     expect(tokens.filter((t) => t.endsWith('ğ')).length).toBeGreaterThan(1);
   });
 });
+
+describe('suffixTiles: doppelte Bausteine', () => {
+  it('gitmemesini braucht zweimal me', () => {
+    const ex: SB = {
+      id: 'x-git',
+      type: 'suffix_builder',
+      stem: 'gitmek',
+      verbal: 'VN_MA',
+      negative: true,
+      suffixes: ['POSS_3SG', 'ACC'],
+      target: 'gitmemesini',
+    };
+    const { tokens } = suffixTiles(ex, [
+      { tr: 'gitmek', de: ['gehen'], pos: 'verb', softens: true },
+    ]);
+    expect(tokens.filter((t) => t === 'me')).toHaveLength(2);
+  });
+});

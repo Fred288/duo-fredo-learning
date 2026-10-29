@@ -1,0 +1,523 @@
+# B1-04: Wunschformen (Optativ -eyim/-elim, keşke + -se, keşke + -seydi, umarım); Wetter, Klima, Pläne. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u04
+level: B1
+title: Wetter und Wünsche
+grammar_focus: [optativ, keske, seydi, umarim]
+explainer: explainers/b1-wunsch.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u04-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u04-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „fırtına“?
+        options: [Sturm, Nebel, Wolke]
+        answer: Sturm
+      - id: b1-u04-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Nebel
+        answers: [sis]
+      - id: b1-u04-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „şemsiye“?
+        options: [Regenschirm, Mantel, Stiefel]
+        answer: Regenschirm
+      - id: b1-u04-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „ısınmak“?
+        options: [warm werden, kalt werden, schmelzen]
+        answer: warm werden
+        explanation: Gegenteil soğumak (kalt werden).
+      - id: b1-u04-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: schmelzen
+        answers: [erimek]
+      - id: b1-u04-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „buzul“?
+        options: [Gletscher, Eis, Schnee]
+        answer: Gletscher
+        explanation: buz = Eis.
+      - id: b1-u04-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „kuraklık“?
+        options: [Dürre, Hochwasser, Hitze]
+        answer: Dürre
+        explanation: kuru (trocken) + -luk; sel = Hochwasser.
+      - id: b1-u04-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Hoffnung
+        answers: [umut]
+        explanation: Vor Vokal wird t zu d, umudum (meine Hoffnung).
+      - id: b1-u04-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „keşke“?
+        options: [wenn doch nur, hoffentlich, vielleicht]
+        answer: wenn doch nur
+      - id: b1-u04-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „umarım“?
+        options: [hoffentlich, leider, natürlich]
+        answer: hoffentlich
+        explanation: Wörtlich „ich hoffe“ (ummak = hoffen).
+      - id: b1-u04-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Wetterbericht
+        answers: [hava durumu]
+      - id: b1-u04-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „hayal etmek“?
+        options: [sich vorstellen, sich erinnern, hoffen]
+        answer: sich vorstellen
+        explanation: hayal = Vorstellung, Traum; hayal etmek = sich vorstellen, träumen von.
+      - id: b1-u04-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: Ausflug
+        answers: [gezi]
+      - id: b1-u04-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „Hadi!“?
+        options: [Komm schon! Los!, Halt!, Vorsicht!]
+        answer: Komm schon! Los!
+      - id: b1-u04-l1-e15
+        type: free_text
+        direction: tr_de
+        prompt: durmak
+        answers: [aufhören, stehen bleiben, anhalten, stehen]
+        explanation: yağmur durdu = der Regen hat aufgehört.
+
+  - id: b1-u04-l2
+    type: grammar
+    title: Vorschläge (-elim, -eyim)
+    exercises:
+      - id: b1-u04-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1pl
+        tense: optative
+        target: gidelim
+        gloss_de: lass uns gehen
+        explanation: git- + elim, vor Vokal wird t zu d.
+      - { id: b1-u04-l2-e2, type: conjugation, mode: verb, lemma: yapmak, person: 1pl, tense: optative, target: yapalım, gloss_de: lass uns machen }
+      - id: b1-u04-l2-e3
+        type: conjugation
+        mode: verb
+        lemma: okumak
+        person: 1sg
+        tense: optative
+        target: okuyayım
+        gloss_de: ich will mal lesen, lass mich lesen
+        explanation: Nach Vokal mit y, oku-y-ayım.
+      - { id: b1-u04-l2-e4, type: conjugation, mode: verb, lemma: bakmak, person: 1sg, tense: optative, target: bakayım, gloss_de: lass mich mal schauen }
+      - id: b1-u04-l2-e5
+        type: conjugation
+        mode: verb
+        lemma: yemek
+        person: 1pl
+        tense: optative
+        target: yiyelim
+        gloss_de: lass uns essen
+        explanation: ye- wird vor y zu yi-, yiyelim.
+      - { id: b1-u04-l2-e6, type: conjugation, mode: verb, lemma: beklemek, person: 1pl, tense: optative, negative: true, target: beklemeyelim, gloss_de: lass uns nicht warten }
+      - id: b1-u04-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: gitmek
+        person: 1pl
+        tense: optative
+        question: true
+        target: gidelim mi?
+        gloss_de: Sollen wir gehen?
+      - { id: b1-u04-l2-e8, type: conjugation, mode: verb, lemma: söylemek, person: 1sg, tense: optative, question: true, target: söyleyeyim mi?, gloss_de: Soll ich es sagen? }
+      - id: b1-u04-l2-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Hadi parka gidelim!“?
+        options: ['Komm, lass uns in den Park gehen!', Wir sind in den Park gegangen., Wir gehen jeden Tag in den Park.]
+        answer: 'Komm, lass uns in den Park gehen!'
+      - id: b1-u04-l2-e10
+        type: word_bank
+        prompt: Lass uns heute ein Picknick machen.
+        answers: [Bugün piknik yapalım.]
+        chunks:
+          - { text: "Bugün", role: time }
+          - { text: "piknik", role: object_bare }
+          - { text: "yapalım", role: predicate }
+        distractors: [yapıyoruz, dün]
+      - id: b1-u04-l2-e11
+        type: word_bank
+        prompt: Soll ich das Fenster aufmachen?
+        answers: [Pencereyi açayım mı?]
+        distractors: [açar, pencere]
+      - id: b1-u04-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: Biraz dinlenelim mi?
+        answers: [Sollen wir uns ein bisschen ausruhen?, Wollen wir uns ein bisschen ausruhen?, Sollen wir uns kurz ausruhen?, Wollen wir uns kurz ausruhen?, Sollen wir eine kurze Pause machen?, Machen wir eine kleine Pause?]
+      - id: b1-u04-l2-e13
+        type: multiple_choice
+        prompt: Wie sagst du „Gehen wir nicht raus, es regnet.“?
+        options: ['Dışarı çıkmayalım, yağmur yağıyor.', 'Dışarı çıkmıyoruz, yağmur yağdı.', 'Dışarı çıkalım, yağmur yağıyor.']
+        answer: 'Dışarı çıkmayalım, yağmur yağıyor.'
+
+  - id: b1-u04-l3
+    type: grammar
+    title: Wenn doch nur (keşke + -se)
+    exercises:
+      - id: b1-u04-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: olmak
+        person: 3sg
+        tense: conditional
+        target: olsa
+        gloss_de: 'wenn es doch … wäre (keşke … olsa)'
+        explanation: keşke + -se für einen Wunsch jetzt oder später.
+      - { id: b1-u04-l3-e2, type: conjugation, mode: verb, lemma: yağmak, person: 3sg, tense: conditional, negative: true, target: yağmasa, gloss_de: wenn es doch nicht regnen würde }
+      - { id: b1-u04-l3-e3, type: conjugation, mode: verb, lemma: bilmek, person: 1sg, tense: conditional, target: bilsem, gloss_de: wenn ich es doch wüsste }
+      - { id: b1-u04-l3-e4, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: conditional, target: gelsen, gloss_de: wenn du doch kämst }
+      - { id: b1-u04-l3-e5, type: conjugation, mode: verb, lemma: ısınmak, person: 3sg, tense: conditional, target: ısınsa, gloss_de: wenn es doch wärmer würde }
+      - id: b1-u04-l3-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Keşke hava güzel olsa.“?
+        options: [Wenn das Wetter doch schön wäre., Das Wetter war schön., Hoffentlich war das Wetter schön.]
+        answer: Wenn das Wetter doch schön wäre.
+      - id: b1-u04-l3-e7
+        type: word_bank
+        prompt: Wenn der Regen doch aufhören würde!
+        answers: [Keşke yağmur dursa!]
+        chunks:
+          - { text: "Keşke", role: complement }
+          - { text: "yağmur", role: subject }
+          - { text: "dursa", role: predicate }
+        distractors: [durdu, durursa]
+      - id: b1-u04-l3-e8
+        type: word_bank
+        prompt: Ich wünschte, ich hätte mehr Zeit.
+        answers: [Keşke daha çok vaktim olsa., Keşke daha çok zamanım olsa.]
+        distractors: [olur, vaktin]
+      - id: b1-u04-l3-e9
+        type: free_text
+        direction: de_tr
+        prompt: Ich wünschte, du wärst hier!
+        answers: [Keşke burada olsan!, Keşke sen burada olsan!, Keşke burada olsaydın!, Keşke sen de burada olsan!]
+      - id: b1-u04-l3-e10
+        type: multiple_choice
+        prompt: Welcher Satz drückt eine Hoffnung aus, keinen kaum erfüllbaren Wunsch?
+        options: [Umarım yarın hava güzel olur., Keşke hava güzel olsa., Keşke hava güzel olsaydı.]
+        answer: Umarım yarın hava güzel olur.
+        explanation: umarım + Aorist oder Futur für Mögliches; keşke für Unwahrscheinliches oder Vergangenes.
+      - id: b1-u04-l3-e11
+        type: free_text
+        direction: tr_de
+        prompt: Umarım yarın yağmur yağmaz.
+        answers: [Hoffentlich regnet es morgen nicht., 'Ich hoffe, es regnet morgen nicht.', 'Ich hoffe, dass es morgen nicht regnet.', Morgen regnet es hoffentlich nicht.]
+
+  - id: b1-u04-l4
+    type: grammar
+    title: Hätte ich doch … (keşke + -seydi)
+    exercises:
+      - id: b1-u04-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 1sg
+        tense: conditional
+        compound: past
+        target: gelseydim
+        gloss_de: wäre ich doch gekommen
+        explanation: gelse + ydi + m. Der Wunsch betrifft die Vergangenheit.
+      - { id: b1-u04-l4-e2, type: conjugation, mode: verb, lemma: bilmek, person: 1sg, tense: conditional, compound: past, target: bilseydim, gloss_de: hätte ich es doch gewusst }
+      - { id: b1-u04-l4-e3, type: conjugation, mode: verb, lemma: gitmek, person: 1pl, tense: conditional, compound: past, target: gitseydik, gloss_de: wären wir doch gegangen }
+      - { id: b1-u04-l4-e4, type: conjugation, mode: verb, lemma: almak, person: 2sg, tense: conditional, compound: past, target: alsaydın, gloss_de: hättest du doch genommen }
+      - { id: b1-u04-l4-e5, type: conjugation, mode: verb, lemma: söylemek, person: 3sg, tense: conditional, compound: past, target: söyleseydi, gloss_de: 'hätte er, sie es doch gesagt' }
+      - { id: b1-u04-l4-e6, type: conjugation, mode: verb, lemma: dinlemek, person: 1sg, tense: conditional, compound: past, negative: true, target: dinlemeseydim, gloss_de: hätte ich doch nicht zugehört }
+      - { id: b1-u04-l4-e7, type: conjugation, mode: verb, lemma: olmak, person: 1sg, tense: conditional, compound: past, target: olsaydım, gloss_de: wäre ich doch gewesen }
+      - id: b1-u04-l4-e8
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Keşke gelsen.“ / „Keşke gelseydin.“
+        options: [Wenn du doch kämst. / Wärst du doch gekommen., Beides heißt dasselbe., Komm bitte. / Du bist gekommen.]
+        answer: Wenn du doch kämst. / Wärst du doch gekommen.
+      - id: b1-u04-l4-e9
+        type: word_bank
+        prompt: Hätte ich doch einen Regenschirm mitgenommen!
+        answers: [Keşke şemsiye alsaydım!, Keşke şemsiyemi alsaydım!, Keşke yanıma şemsiye alsaydım!]
+        distractors: [alsam, aldım]
+      - id: b1-u04-l4-e10
+        type: word_bank
+        prompt: Wenn ich es gewusst hätte, wäre ich gekommen.
+        answers: [Bilseydim gelirdim., Bilseydim gelecektim.]
+        distractors: [bilsem, gelirim]
+        explanation: -seydi im Nebensatz, -irdi im Hauptsatz.
+      - id: b1-u04-l4-e11
+        type: free_text
+        direction: tr_de
+        prompt: Keşke daha önce başlasaydık.
+        answers: [Hätten wir doch früher angefangen., Hätten wir nur früher angefangen., Wenn wir doch früher angefangen hätten., Hätten wir doch eher angefangen., Wir hätten früher anfangen sollen.]
+
+  - id: b1-u04-l5
+    type: dialog
+    title: Pläne fürs Wochenende
+    exercises:
+      - id: b1-u04-l5-e1
+        type: word_bank
+        prompt: Wie wird das Wetter am Wochenende?
+        answers: [Hafta sonu hava nasıl olacak?]
+        chunks:
+          - { text: "Hafta sonu", role: time }
+          - { text: "hava", role: subject }
+          - { text: "nasıl", role: question }
+          - { text: "olacak", role: predicate }
+        distractors: [oldu, ne]
+      - id: b1-u04-l5-e2
+        type: free_text
+        direction: tr_de
+        prompt: Hava durumuna göre cumartesi yağmur yağacak.
+        answers: [Laut Wetterbericht regnet es am Samstag., Laut Wetterbericht wird es am Samstag regnen., Laut Wetterbericht soll es am Samstag regnen., Nach dem Wetterbericht regnet es am Samstag., Der Wetterbericht sagt für Samstag Regen voraus.]
+        explanation: -e göre = laut, nach.
+      - id: b1-u04-l5-e3
+        type: word_bank
+        prompt: Dann lass uns am Sonntag gehen.
+        answers: [O zaman pazar günü gidelim., O zaman pazar gidelim.]
+        chunks:
+          - { text: "O zaman", role: complement }
+          - { text: "pazar günü", role: time }
+          - { text: "gidelim", role: predicate }
+        distractors: [gittik, cumartesi]
+      - id: b1-u04-l5-e4
+        type: multiple_choice
+        prompt: Wie fragst du „Sollen wir einen Ausflug machen?“?
+        options: [Bir gezi yapalım mı?, Bir gezi yaptık mı?, Bir gezi yapar mısın?]
+        answer: Bir gezi yapalım mı?
+      - id: b1-u04-l5-e5
+        type: word_bank
+        prompt: Hoffentlich scheint die Sonne.
+        answers: [Umarım güneş açar., Umarım hava güneşli olur.]
+        distractors: [açtı, keşke]
+        explanation: güneş açmak = die Sonne kommt heraus.
+      - id: b1-u04-l5-e6
+        type: free_text
+        direction: de_tr
+        prompt: Lass uns einen Regenschirm mitnehmen.
+        answers: [Şemsiye alalım., Yanımıza şemsiye alalım., Bir şemsiye alalım., Yanımıza bir şemsiye alalım.]
+      - id: b1-u04-l5-e7
+        type: multiple_choice
+        prompt: Was antwortest du auf „Pikniğe gidelim mi?“, wenn du einverstanden bist?
+        options: ['Olur, gidelim!', 'Hayır, gittik.', Keşke gitseydik.]
+        answer: 'Olur, gidelim!'
+      - id: b1-u04-l5-e8
+        type: conjugation
+        mode: verb
+        lemma: gezmek
+        person: 1pl
+        tense: optative
+        target: gezelim
+        gloss_de: lass uns herumlaufen, lass uns die Gegend ansehen
+
+  - id: b1-u04-l6
+    type: grammar
+    title: 'Tabellen: Wunschformen'
+    exercises:
+      - id: b1-u04-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: gitmek
+        tense: optative
+        persons: [1sg, 1pl]
+        targets: [gideyim, gidelim]
+        gloss_de: ich will gehen, lass uns gehen
+      - id: b1-u04-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: okumak
+        tense: optative
+        persons: [1sg, 1pl]
+        targets: [okuyayım, okuyalım]
+        gloss_de: lesen
+      - id: b1-u04-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: optative
+        negative: true
+        persons: [1sg, 1pl]
+        targets: [yapmayayım, yapmayalım]
+        gloss_de: nicht machen
+      - id: b1-u04-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: conditional
+        compound: past
+        targets: [gelseydim, gelseydin, gelseydi, gelseydik, gelseydiniz, gelselerdi]
+        gloss_de: wäre … gekommen
+        explanation: Bei „sie“ auch gelseydiler.
+      - id: b1-u04-l6-e5
+        type: paradigm
+        kind: verb
+        lemma: bilmek
+        tense: conditional
+        compound: past
+        targets: [bilseydim, bilseydin, bilseydi, bilseydik, bilseydiniz, bilselerdi]
+        gloss_de: hätte … gewusst
+
+  - id: b1-u04-r1
+    type: reading
+    title: 'Lesetext: Ein Brief an meine Enkelin'
+    passage:
+      sentences:
+        - { tr: "Sevgili torunum, bu mektubu senin için yazıyorum.", de: "Meine liebe Enkelin, diesen Brief schreibe ich für dich." }
+        - { tr: "Bugün hava çok sıcak, yazlar her yıl daha da ısınıyor.", de: "Heute ist es sehr heiß, die Sommer werden jedes Jahr noch wärmer." }
+        - { tr: "Kışın artık pek kar yağmıyor.", de: "Im Winter schneit es kaum noch." }
+        - { tr: "Dağlardaki buzullar eriyor.", de: "Die Gletscher in den Bergen schmelzen." }
+        - { tr: "Keşke daha önce bir şey yapsaydık.", de: "Hätten wir doch früher etwas getan." }
+        - { tr: "Ama hâlâ umudum var.", de: "Aber ich habe noch Hoffnung." }
+        - { tr: "Bu yıl mahallemizde yüz ağaç diktik.", de: "Dieses Jahr haben wir in unserem Viertel hundert Bäume gepflanzt." }
+        - { tr: "Hadi, sen de bir ağaç dik!", de: "Los, pflanz du auch einen Baum!" }
+        - { tr: "Umarım senin dünyan daha yeşil olur.", de: "Hoffentlich wird deine Welt grüner." }
+        - { tr: "Keşke o zaman yanında olsam ve seninle konuşsam.", de: "Ich wünschte, ich könnte dann bei dir sein und mit dir reden." }
+        - { tr: "Sevgilerle, büyükannen", de: "Alles Liebe, deine Großmutter" }
+      glossary:
+        - { tr: "sevgili", de: "lieb (in der Anrede: Sevgili …)" }
+        - { tr: "her", de: "jede(r, s) (her yıl = jedes Jahr)" }
+        - { tr: "artık", de: "nicht mehr (mit Verneinung), jetzt, inzwischen" }
+        - { tr: "da", de: "auch, noch (daha da = noch mehr)" }
+        - { tr: "de", de: "auch (nachgestellt, getrennt geschrieben)" }
+        - { tr: "kışın", de: "im Winter", vocab: "kış" }
+        - { tr: "dağlardaki", de: "die in den Bergen (dağ + ler + de + ki)", vocab: "dağ" }
+        - { tr: "şey", de: "Sache, Ding (bir şey = etwas)" }
+        - { tr: "hâlâ", de: "noch, immer noch" }
+        - { tr: "zaman", de: "Zeit (o zaman = dann, damals)", vocab: "zaman" }
+        - { tr: "sevgilerle", de: "alles Liebe (Briefschluss)" }
+        - { tr: "büyükannen", de: "deine Großmutter (büyükanne + n)" }
+    exercises:
+      - id: b1-u04-r1-e1
+        type: multiple_choice
+        prompt: Was passiert mit den Sommern?
+        options: [Sie werden jedes Jahr wärmer., Sie werden kürzer., Sie werden kälter.]
+        answer: Sie werden jedes Jahr wärmer.
+      - id: b1-u04-r1-e2
+        type: multiple_choice
+        prompt: Was bedauert die Großmutter?
+        options: [Dass man nicht früher etwas getan hat., Dass sie keine Bäume gepflanzt hat., Dass ihre Enkelin nicht schreibt.]
+        answer: Dass man nicht früher etwas getan hat.
+      - id: b1-u04-r1-e3
+        type: multiple_choice
+        prompt: Was hat das Viertel dieses Jahr gemacht?
+        options: [hundert Bäume gepflanzt, einen Park gebaut, Müll gesammelt]
+        answer: hundert Bäume gepflanzt
+      - id: b1-u04-r1-e4
+        type: multiple_choice
+        prompt: Welcher Satz drückt eine Hoffnung aus?
+        options: [Umarım senin dünyan daha yeşil olur., Keşke daha önce bir şey yapsaydık., Dağlardaki buzullar eriyor.]
+        answer: Umarım senin dünyan daha yeşil olur.
+      - id: b1-u04-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ama hâlâ umudum var.
+        answers: [Aber ich habe noch Hoffnung., Aber ich habe immer noch Hoffnung., Aber ich bin noch hoffnungsvoll., Aber ich hoffe noch.]
+
+  - id: b1-u04-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u04-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: lass uns gehen
+        answers: [gidelim, hadi gidelim]
+      - id: b1-u04-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Soll ich (es) sagen?
+        answers: [söyleyeyim mi?, Söyleyeyim mi?]
+      - id: b1-u04-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (lass uns essen)
+        options: [yiyelim, yeyelim, yiyalım]
+        answer: yiyelim
+        explanation: ye- wird vor y zu yi-; die Harmonie folgt dem e.
+      - id: b1-u04-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (hätte ich doch gewusst)
+        options: [bilseydim, bilsaydim, bilirseydim]
+        answer: bilseydim
+      - id: b1-u04-l7-e5
+        type: word_bank
+        prompt: Wenn das Wetter doch schön wäre!
+        answers: [Keşke hava güzel olsa!]
+        chunks:
+          - { text: "Keşke", role: complement }
+          - { text: "hava", role: subject }
+          - { text: "güzel olsa", role: predicate }
+        distractors: [olur, umarım]
+      - id: b1-u04-l7-e6
+        type: free_text
+        direction: tr_de
+        prompt: Keşke şemsiye alsaydım.
+        answers: [Hätte ich doch einen Regenschirm mitgenommen., Hätte ich doch einen Schirm mitgenommen., Hätte ich nur einen Regenschirm mitgenommen., Ich hätte einen Regenschirm mitnehmen sollen., Hätte ich doch einen Regenschirm genommen.]
+      - id: b1-u04-l7-e7
+        type: conjugation
+        mode: verb
+        lemma: erimek
+        person: 3pl
+        tense: present
+        target: eriyorlar
+        gloss_de: sie schmelzen
+      - id: b1-u04-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: hayal etmek
+        person: 1pl
+        tense: optative
+        target: hayal edelim
+        gloss_de: lass uns (es uns) vorstellen
+      - id: b1-u04-l7-e9
+        type: word_bank
+        prompt: Hoffentlich regnet es morgen nicht.
+        answers: [Umarım yarın yağmur yağmaz.]
+        chunks:
+          - { text: "Umarım", role: complement }
+          - { text: "yarın", role: time }
+          - { text: "yağmur", role: subject }
+          - { text: "yağmaz", role: predicate }
+        distractors: [keşke, yağmasa]
+      - id: b1-u04-l7-e10
+        type: multiple_choice
+        prompt: Was bedeutet „Bilseydim söylerdim.“?
+        options: ['Wenn ich es gewusst hätte, hätte ich es gesagt.', 'Ich wusste es und habe es gesagt.', 'Wenn ich es weiß, sage ich es.']
+        answer: 'Wenn ich es gewusst hätte, hätte ich es gesagt.'
+
+vocab:
+  - { tr: fırtına, de: [Sturm], pos: noun }
+  - { tr: sis, de: [Nebel], pos: noun }
+  - { tr: şemsiye, de: [Regenschirm], pos: noun }
+  - { tr: ısınmak, de: [warm werden, sich erwärmen], pos: verb }
+  - { tr: soğumak, de: [kalt werden, abkühlen], pos: verb }
+  - { tr: erimek, de: [schmelzen], pos: verb }
+  - { tr: buzul, de: [Gletscher], pos: noun }
+  - { tr: buz, de: [Eis], pos: noun }
+  - { tr: kuraklık, de: [Dürre, Trockenheit], pos: noun, softens: true }
+  - { tr: sel, de: [Hochwasser, Überschwemmung], pos: noun }
+  - { tr: hava durumu, de: [Wetterbericht], pos: noun }
+  - { tr: umut, de: [Hoffnung], pos: noun, softens: true }
+  - { tr: umarım, de: [hoffentlich, ich hoffe], pos: phrase }
+  - { tr: inşallah, de: [hoffentlich, so Gott will], pos: interj }
+  - { tr: keşke, de: [wenn doch nur, ich wünschte], pos: particle }
+  - { tr: hayal, de: [Vorstellung, Traum], pos: noun }
+  - { tr: hayal etmek, de: [sich vorstellen, träumen], pos: verb, softens: true }
+  - { tr: hadi, de: [komm schon, los], pos: interj }
+  - { tr: piknik, de: [Picknick], pos: noun, softens: true }
+  - { tr: gezi, de: [Ausflug], pos: noun }
+  - { tr: durmak, de: [aufhören, stehen bleiben], pos: verb }
+  - { tr: plan, de: [Plan], pos: noun }
+  - { tr: o zaman, de: [dann, damals], pos: phrase }

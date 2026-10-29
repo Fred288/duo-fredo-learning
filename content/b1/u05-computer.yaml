@@ -1,0 +1,538 @@
+# B1-05: Verbalnomen -mek (-mek istemek, -mek için, -mek zorunda, -mekte, -mekten, -mekle); Computer, Internet. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u05
+level: B1
+title: Computer und Internet
+grammar_focus: [mek, mek-icin, mek-zorunda, mekte, mekten]
+explainer: explainers/b1-mek.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u05-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u05-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „bilgisayar“?
+        options: [Computer, Bildschirm, Tastatur]
+        answer: Computer
+        explanation: Wörtlich „Wissen-Rechner“.
+      - id: b1-u05-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Bildschirm
+        answers: [ekran]
+      - id: b1-u05-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „şifre“?
+        options: [Passwort, Datei, Programm]
+        answer: Passwort
+      - id: b1-u05-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „dosya“?
+        options: [Datei, Ordner, Drucker]
+        answer: Datei
+        explanation: dosya heißt auch „Akte“.
+      - id: b1-u05-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: herunterladen
+        answers: [indirmek]
+        explanation: Wörtlich „hinunterbringen“; yüklemek = hochladen, installieren.
+      - id: b1-u05-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „kaydetmek“?
+        options: [speichern, löschen, drucken]
+        answer: speichern
+        explanation: Aus kayıt + etmek; vor Vokal kaydediyor.
+      - id: b1-u05-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: löschen
+        answers: [silmek]
+      - id: b1-u05-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „uygulama“?
+        options: [App, Webseite, Drucker]
+        answer: App
+        explanation: uygulama heißt auch „Anwendung“ allgemein.
+      - id: b1-u05-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: ausprobieren, versuchen
+        answers: [denemek]
+      - id: b1-u05-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „bozulmak“?
+        options: [kaputtgehen, sich verbinden, schneller werden]
+        answer: kaputtgehen
+      - id: b1-u05-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: reparieren
+        answers: [tamir etmek, onarmak]
+      - id: b1-u05-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „zorunda“ in „gitmek zorundayım“?
+        options: [gezwungen (ich muss), gern (ich möchte), vielleicht (ich könnte)]
+        answer: gezwungen (ich muss)
+      - id: b1-u05-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: klicken
+        answers: [tıklamak]
+      - id: b1-u05-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „bağlanmak“?
+        options: [sich verbinden, sich anmelden, sich ausruhen]
+        answer: sich verbinden
+        explanation: internete bağlanmak = sich mit dem Internet verbinden.
+      - id: b1-u05-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: ändern
+        answers: [değiştirmek]
+        explanation: değişmek = sich ändern, değiştirmek = (etwas) ändern.
+
+  - id: b1-u05-l2
+    type: grammar
+    title: Ich möchte … (-mek istemek)
+    exercises:
+      - id: b1-u05-l2-e1
+        type: word_bank
+        prompt: Ich möchte ein Programm herunterladen.
+        answers: [Bir program indirmek istiyorum., Ben bir program indirmek istiyorum.]
+        distractors: [indiriyorum, programı]
+        explanation: Der Infinitiv steht vor istemek.
+      - id: b1-u05-l2-e2
+        type: word_bank
+        prompt: Möchtest du heute Abend einen Film sehen?
+        answers: [Bu akşam film izlemek ister misin?, Bu akşam film izlemek istiyor musun?]
+        chunks:
+          - { text: "Bu akşam", role: time }
+          - { text: "film", role: object_bare }
+          - { text: "izlemek ister misin", role: predicate }
+        distractors: [izliyor, filmi]
+      - id: b1-u05-l2-e3
+        type: multiple_choice
+        prompt: Welche Form steht vor istemek? „Ben erken … istiyorum.“ (schlafen gehen)
+        options: [yatmak, yatıyorum, yattım]
+        answer: yatmak
+      - id: b1-u05-l2-e4
+        type: conjugation
+        mode: verb
+        lemma: istemek
+        person: 3sg
+        tense: present
+        negative: true
+        target: istemiyor
+        gloss_de: 'er, sie will nicht'
+      - id: b1-u05-l2-e5
+        type: free_text
+        direction: de_tr
+        prompt: Ich möchte eine E-Mail schreiben.
+        answers: [Bir e-posta yazmak istiyorum., E-posta yazmak istiyorum., Ben bir e-posta yazmak istiyorum.]
+      - id: b1-u05-l2-e6
+        type: word_bank
+        prompt: Ich will nicht mehr Computerspiele spielen.
+        answers: [Artık bilgisayar oyunu oynamak istemiyorum., Artık bilgisayar oyunları oynamak istemiyorum.]
+        chunks:
+          - { text: "Artık", role: time }
+          - { text: "bilgisayar oyunu", role: object_bare }
+          - { text: "oynamak istemiyorum", role: predicate }
+        distractors: [oynuyorum, istiyorum]
+      - id: b1-u05-l2-e7
+        type: free_text
+        direction: tr_de
+        prompt: Ne yapmak istiyorsun?
+        answers: [Was willst du machen?, Was möchtest du machen?, Was möchtest du tun?, Was willst du tun?]
+      - id: b1-u05-l2-e8
+        type: multiple_choice
+        prompt: Was bedeutet „Yeni bir uygulama denemek istiyorum.“?
+        options: [Ich möchte eine neue App ausprobieren., Ich habe eine neue App ausprobiert., Ich teste gerade eine neue App.]
+        answer: Ich möchte eine neue App ausprobieren.
+      - id: b1-u05-l2-e9
+        type: conjugation
+        mode: verb
+        lemma: istemek
+        person: 2pl
+        tense: aorist
+        question: true
+        target: ister misiniz?
+        gloss_de: Möchten Sie? Möchtet ihr?
+
+  - id: b1-u05-l3
+    type: grammar
+    title: Um zu (-mek için) und müssen (-mek zorunda)
+    exercises:
+      - id: b1-u05-l3-e1
+        type: word_bank
+        prompt: Ich lerne Türkisch, um in der Türkei zu arbeiten.
+        answers: [Türkiye'de çalışmak için Türkçe öğreniyorum.]
+        chunks:
+          - { text: "Türkiye'de çalışmak için", role: complement }
+          - { text: "Türkçe", role: object_bare }
+          - { text: "öğreniyorum", role: predicate }
+        distractors: [çalışıyorum, Türkiye'ye]
+      - id: b1-u05-l3-e2
+        type: word_bank
+        prompt: Klicke hier, um die Datei zu speichern.
+        answers: [Dosyayı kaydetmek için buraya tıkla.]
+        chunks:
+          - { text: "Dosyayı kaydetmek için", role: complement }
+          - { text: "buraya", role: place }
+          - { text: "tıkla", role: predicate }
+        distractors: [burada, kaydet]
+      - id: b1-u05-l3-e3
+        type: multiple_choice
+        prompt: Was bedeutet „Para kazanmak için çalışıyorum.“?
+        options: ['Ich arbeite, um Geld zu verdienen.', 'Ich arbeite, weil ich Geld habe.', 'Ich verdiene Geld, ohne zu arbeiten.']
+        answer: 'Ich arbeite, um Geld zu verdienen.'
+      - id: b1-u05-l3-e4
+        type: free_text
+        direction: de_tr
+        prompt: um zu lernen
+        answers: [öğrenmek için]
+      - id: b1-u05-l3-e5
+        type: conjugation
+        mode: copula
+        lemma: zorunda
+        person: 1sg
+        target: zorundayım
+        gloss_de: ich muss
+        explanation: zorunda + yım, wie „ich bin“.
+      - { id: b1-u05-l3-e6, type: conjugation, mode: copula, lemma: zorunda, person: 2pl, target: zorundasınız, gloss_de: 'ihr müsst, Sie müssen' }
+      - id: b1-u05-l3-e7
+        type: conjugation
+        mode: copula
+        lemma: zorunda
+        person: 3sg
+        tense: past
+        target: zorundaydı
+        gloss_de: 'er, sie musste'
+      - id: b1-u05-l3-e8
+        type: word_bank
+        prompt: Ich muss heute arbeiten.
+        answers: [Bugün çalışmak zorundayım.]
+        distractors: [çalışıyorum, istiyorum]
+      - id: b1-u05-l3-e9
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Gitmek zorundayım.“ / „Gitmek istiyorum.“
+        options: [Ich muss gehen. / Ich möchte gehen., Beides heißt dasselbe., Ich gehe. / Ich ging.]
+        answer: Ich muss gehen. / Ich möchte gehen.
+      - id: b1-u05-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Şifreni değiştirmek zorundasın.
+        answers: [Du musst dein Passwort ändern., Du musst das Passwort ändern., Du musst dein Kennwort ändern., Du musst das Kennwort ändern.]
+      - id: b1-u05-l3-e11
+        type: suffix_builder
+        stem: unutmak
+        verbal: VN_MAK
+        negative: true
+        target: unutmamak
+        gloss_de: nicht vergessen (unutmamak için = um nicht zu vergessen)
+        explanation: Die Verneinung -me steht vor -mek.
+
+  - id: b1-u05-l4
+    type: grammar
+    title: Gerade dabei, Angst davor (-mekte, -mekten, -mekle)
+    exercises:
+      - id: b1-u05-l4-e1
+        type: suffix_builder
+        stem: indirmek
+        verbal: VN_MAK
+        suffixes: [LOC]
+        target: indirmekte
+        gloss_de: beim Herunterladen, ist dabei herunterzuladen
+        explanation: Das k bleibt vor -te, weil kein Vokal folgt.
+      - { id: b1-u05-l4-e2, type: suffix_builder, stem: yüklemek, verbal: VN_MAK, suffixes: [LOC], target: yüklemekte, gloss_de: ist dabei hochzuladen }
+      - id: b1-u05-l4-e3
+        type: suffix_builder
+        stem: uçmak
+        verbal: VN_MAK
+        suffixes: [ABL]
+        target: uçmaktan
+        gloss_de: vor dem Fliegen (uçmaktan korkmak)
+        explanation: korkmak verlangt den Ablativ.
+      - { id: b1-u05-l4-e4, type: suffix_builder, stem: kullanmak, verbal: VN_MAK, suffixes: [ABL], target: kullanmaktan, gloss_de: 'vom Benutzen (… hoşlanmak = gern benutzen)' }
+      - { id: b1-u05-l4-e5, type: suffix_builder, stem: beklemek, verbal: VN_MAK, suffixes: [ABL], target: beklemekten, gloss_de: vom Warten (müde) }
+      - id: b1-u05-l4-e6
+        type: suffix_builder
+        stem: okumak
+        verbal: VN_MAK
+        suffixes: [INS]
+        target: okumakla
+        gloss_de: durch Lesen
+      - { id: b1-u05-l4-e7, type: suffix_builder, stem: çalışmak, verbal: VN_MAK, suffixes: [INS], target: çalışmakla, gloss_de: mit Arbeiten (beschäftigt) }
+      - id: b1-u05-l4-e8
+        type: multiple_choice
+        prompt: Was bedeutet „Dosya şu anda yüklenmekte.“?
+        options: [Die Datei wird gerade hochgeladen., Die Datei ist gelöscht., Die Datei wird morgen hochgeladen.]
+        answer: Die Datei wird gerade hochgeladen.
+      - id: b1-u05-l4-e9
+        type: word_bank
+        prompt: Ich habe Angst vorm Fliegen.
+        answers: [Uçmaktan korkuyorum., Ben uçmaktan korkuyorum.]
+        distractors: [uçmayı, uçmakta]
+      - id: b1-u05-l4-e10
+        type: word_bank
+        prompt: Ich bin vom Warten müde geworden.
+        answers: [Beklemekten yoruldum., Ben beklemekten yoruldum.]
+        distractors: [beklemeye, yoruluyor]
+      - id: b1-u05-l4-e11
+        type: free_text
+        direction: tr_de
+        prompt: Bu oyunu oynamaktan hoşlanıyorum.
+        answers: [Ich spiele dieses Spiel gern., Ich spiele gern dieses Spiel., 'Mir gefällt es, dieses Spiel zu spielen.', 'Ich mag es, dieses Spiel zu spielen.', Dieses Spiel spiele ich gern., Ich mag dieses Spiel.]
+      - id: b1-u05-l4-e12
+        type: multiple_choice
+        prompt: Mit welchem Kasus steht korkmak (Angst haben vor)?
+        options: [Ablativ (-den), Akkusativ (-i), Dativ (-e)]
+        answer: Ablativ (-den)
+
+  - id: b1-u05-l5
+    type: dialog
+    title: Probleme mit dem Computer
+    exercises:
+      - id: b1-u05-l5-e1
+        type: word_bank
+        prompt: Mein Computer ist kaputtgegangen.
+        answers: [Bilgisayarım bozuldu.]
+        distractors: [bilgisayarı, bozuluyor]
+      - id: b1-u05-l5-e2
+        type: multiple_choice
+        prompt: Wie fragst du „Kannst du ihn reparieren?“
+        options: [Tamir edebilir misin?, Tamir ettin mi?, Tamir etmek zorunda mısın?]
+        answer: Tamir edebilir misin?
+      - id: b1-u05-l5-e3
+        type: word_bank
+        prompt: Ich habe mein Passwort vergessen.
+        answers: [Şifremi unuttum.]
+        distractors: [şifreni, unutmak]
+      - id: b1-u05-l5-e4
+        type: free_text
+        direction: tr_de
+        prompt: Programı tekrar yüklemek zorundasın.
+        answers: [Du musst das Programm noch einmal installieren., Du musst das Programm neu installieren., Du musst das Programm wieder installieren., Du musst das Programm erneut installieren., Du musst das Programm noch mal installieren.]
+      - id: b1-u05-l5-e5
+        type: word_bank
+        prompt: Das Internet ist heute sehr langsam.
+        answers: [İnternet bugün çok yavaş., Bugün internet çok yavaş.]
+        distractors: [hızlı, yavaştı]
+      - id: b1-u05-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Bağlanmak için şifre lazım.“?
+        options: ['Um sich zu verbinden, braucht man ein Passwort.', Das Passwort ist verbunden., Ohne Passwort verbindet man sich.]
+        answer: 'Um sich zu verbinden, braucht man ein Passwort.'
+      - id: b1-u05-l5-e7
+        type: free_text
+        direction: de_tr
+        prompt: Ich will es versuchen.
+        answers: [Denemek istiyorum., Ben denemek istiyorum., Bunu denemek istiyorum., Onu denemek istiyorum.]
+      - id: b1-u05-l5-e8
+        type: conjugation
+        mode: verb
+        lemma: tamir etmek
+        person: 1sg
+        tense: future
+        target: tamir edeceğim
+        gloss_de: ich werde reparieren
+        explanation: etmek wird vor Vokal zu ed-, edeceğim.
+
+  - id: b1-u05-l6
+    type: grammar
+    title: 'Tabellen: -mek'
+    exercises:
+      - id: b1-u05-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: VN_MAK
+        lemma: okumak
+        rows: [[], [LOC], [ABL], [INS]]
+        targets: [okumak, okumakta, okumaktan, okumakla]
+        gloss_de: lesen
+      - id: b1-u05-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: VN_MAK
+        lemma: gitmek
+        rows: [[], [LOC], [ABL], [INS]]
+        targets: [gitmek, gitmekte, gitmekten, gitmekle]
+        gloss_de: gehen
+        explanation: Vor -mek steht kein Vokal, git- bleibt.
+      - id: b1-u05-l6-e3
+        type: paradigm
+        kind: copula
+        lemma: zorunda
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [zorundayım, zorundasın, zorunda, zorundayız, zorundasınız]
+        gloss_de: muss
+      - id: b1-u05-l6-e4
+        type: paradigm
+        kind: copula
+        lemma: zorunda
+        tense: past
+        persons: [1sg, 2sg, 3sg, 1pl, 2pl]
+        targets: [zorundaydım, zorundaydın, zorundaydı, zorundaydık, zorundaydınız]
+        gloss_de: musste
+      - id: b1-u05-l6-e5
+        type: paradigm
+        kind: verb
+        lemma: istemek
+        tense: present
+        negative: true
+        targets: [istemiyorum, istemiyorsun, istemiyor, istemiyoruz, istemiyorsunuz, istemiyorlar]
+        gloss_de: nicht wollen
+
+  - id: b1-u05-r1
+    type: reading
+    title: 'Lesetext: Opa lernt das Internet'
+    passage:
+      sentences:
+        - { tr: "Dedem yetmiş beş yaşında.", de: "Mein Großvater ist fünfundsiebzig." }
+        - { tr: "Geçen ay bilgisayar kullanmak istedi.", de: "Letzten Monat wollte er einen Computer benutzen." }
+        - { tr: "\"Torunlarımla görüntülü konuşmak istiyorum,\" dedi.", de: "„Ich möchte mit meinen Enkeln per Video sprechen“, sagte er." }
+        - { tr: "Önce ekranı açmaktan bile korkuyordu.", de: "Zuerst hatte er sogar Angst davor, den Bildschirm einzuschalten." }
+        - { tr: "Ben her pazar ona yardım etmek için gidiyorum.", de: "Ich gehe jeden Sonntag zu ihm, um ihm zu helfen." }
+        - { tr: "Şimdi mesaj yazmayı ve video izlemeyi biliyor.", de: "Jetzt kann er Nachrichten schreiben und Videos ansehen." }
+        - { tr: "Şifresini unutmamak için bir kâğıda yazdı.", de: "Damit er sein Passwort nicht vergisst, hat er es auf einen Zettel geschrieben." }
+        - { tr: "Bazen bir dosyayı silmek zorunda kalıyor ve çok üzülüyor.", de: "Manchmal muss er eine Datei löschen und ist dann sehr traurig." }
+        - { tr: "Ama artık öğrenmekten çok keyif alıyor.", de: "Aber inzwischen macht ihm das Lernen viel Spaß." }
+        - { tr: "Dün bana ilk mesajını gönderdi.", de: "Gestern hat er mir seine erste Nachricht geschickt." }
+      glossary:
+        - { tr: "görüntülü", de: "mit Bild (görüntülü konuşmak = per Video sprechen)" }
+        - { tr: "bile", de: "sogar" }
+        - { tr: "her", de: "jede(r, s) (her pazar = jeden Sonntag)" }
+        - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
+        - { tr: "etmek", de: "machen (yardım etmek = helfen)", vocab: "yardım etmek" }
+        - { tr: "yazmayı", de: "das Schreiben (yazmak + -me + Akkusativ; … bilmek = … können)", vocab: "yazmak" }
+        - { tr: "izlemeyi", de: "das Ansehen (izlemek + -me + Akkusativ)", vocab: "izlemek" }
+        - { tr: "kâğıda", de: "auf ein Blatt Papier (kâğıt + Dativ)" }
+        - { tr: "zorunda", de: "gezwungen (zorunda kalmak = müssen)", vocab: "zorunda" }
+        - { tr: "üzülüyor", de: "ist traurig (üzülmek)" }
+        - { tr: "artık", de: "inzwischen, jetzt" }
+        - { tr: "keyif", de: "Freude, Vergnügen (keyif almak = Spaß haben an)" }
+        - { tr: "ilk", de: "erste(r, s)" }
+    exercises:
+      - id: b1-u05-r1-e1
+        type: multiple_choice
+        prompt: Warum wollte der Großvater einen Computer benutzen?
+        options: [Um mit seinen Enkeln per Video zu sprechen., Um Spiele zu spielen., Um Filme herunterzuladen.]
+        answer: Um mit seinen Enkeln per Video zu sprechen.
+      - id: b1-u05-r1-e2
+        type: multiple_choice
+        prompt: Wovor hatte er zuerst Angst?
+        options: [den Bildschirm einzuschalten, das Passwort zu vergessen, Nachrichten zu schreiben]
+        answer: den Bildschirm einzuschalten
+      - id: b1-u05-r1-e3
+        type: multiple_choice
+        prompt: Warum hat er das Passwort aufgeschrieben?
+        options: [Um es nicht zu vergessen., Um es zu ändern., Um es dem Enkel zu geben.]
+        answer: Um es nicht zu vergessen.
+      - id: b1-u05-r1-e4
+        type: multiple_choice
+        prompt: Was hat er gestern gemacht?
+        options: [Er hat seine erste Nachricht geschickt., Er hat eine Datei gelöscht., Er hat einen neuen Computer gekauft.]
+        answer: Er hat seine erste Nachricht geschickt.
+      - id: b1-u05-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ben her pazar ona yardım etmek için gidiyorum.
+        answers: ['Ich gehe jeden Sonntag zu ihm, um ihm zu helfen.', 'Jeden Sonntag gehe ich zu ihm, um ihm zu helfen.', 'Ich gehe jeden Sonntag hin, um ihm zu helfen.', 'Jeden Sonntag gehe ich hin, um ihm zu helfen.']
+
+  - id: b1-u05-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u05-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich möchte herunterladen
+        answers: [indirmek istiyorum]
+      - id: b1-u05-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: ich muss gehen
+        answers: [gitmek zorundayım]
+      - id: b1-u05-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (vor dem Fliegen, korkmak)
+        options: [uçmaktan, uçmağtan, uçmayı]
+        answer: uçmaktan
+        explanation: korkmak + Ablativ; das k bleibt vor -tan.
+      - id: b1-u05-l7-e4
+        type: multiple_choice
+        prompt: Welche Form passt? „Türkçe öğrenmek … kurs alıyorum.“ (um zu)
+        options: [için, gibi, kadar]
+        answer: için
+      - id: b1-u05-l7-e5
+        type: word_bank
+        prompt: Ich muss die Datei speichern.
+        answers: [Dosyayı kaydetmek zorundayım.]
+        distractors: [dosya, kaydettim]
+      - id: b1-u05-l7-e6
+        type: suffix_builder
+        stem: silmek
+        verbal: VN_MAK
+        suffixes: [ABL]
+        target: silmekten
+        gloss_de: vom Löschen
+      - id: b1-u05-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Bilgisayarı tamir etmek için yardım lazım.
+        answers: ['Um den Computer zu reparieren, braucht man Hilfe.', 'Um den Computer zu reparieren, brauche ich Hilfe.', 'Für die Reparatur des Computers braucht man Hilfe.', 'Man braucht Hilfe, um den Computer zu reparieren.', 'Ich brauche Hilfe, um den Computer zu reparieren.']
+      - id: b1-u05-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: bağlanmak
+        person: 1sg
+        tense: past
+        ability: true
+        negative: true
+        target: bağlanamadım
+        gloss_de: ich konnte mich nicht verbinden
+      - id: b1-u05-l7-e9
+        type: word_bank
+        prompt: Möchten Sie eine neue App ausprobieren?
+        answers: [Yeni bir uygulama denemek ister misiniz?]
+        chunks:
+          - { text: "Yeni bir uygulama", role: object_bare }
+          - { text: "denemek", role: complement }
+          - { text: "ister misiniz", role: predicate }
+        distractors: [denediniz, istiyorum]
+      - id: b1-u05-l7-e10
+        type: conjugation
+        mode: copula
+        lemma: zorunda
+        person: 1pl
+        target: zorundayız
+        gloss_de: wir müssen
+
+vocab:
+  - { tr: bilgisayar, de: [Computer], pos: noun }
+  - { tr: internet, de: [Internet], pos: noun }
+  - { tr: ekran, de: [Bildschirm], pos: noun }
+  - { tr: klavye, de: [Tastatur], pos: noun }
+  - { tr: dosya, de: [Datei, Akte], pos: noun }
+  - { tr: şifre, de: [Passwort], pos: noun }
+  - { tr: program, de: [Programm], pos: noun }
+  - { tr: uygulama, de: [App, Anwendung], pos: noun }
+  - { tr: video, de: [Video], pos: noun }
+  - { tr: oyun, de: [Spiel], pos: noun }
+  - { tr: indirmek, de: [herunterladen], pos: verb }
+  - { tr: yüklemek, de: [hochladen, installieren, laden], pos: verb }
+  - { tr: kaydetmek, de: [speichern], pos: verb, softens: true }
+  - { tr: silmek, de: [löschen], pos: verb }
+  - { tr: bağlanmak, de: [sich verbinden], pos: verb }
+  - { tr: tıklamak, de: [klicken], pos: verb }
+  - { tr: denemek, de: [ausprobieren, versuchen], pos: verb }
+  - { tr: bozulmak, de: [kaputtgehen], pos: verb }
+  - { tr: tamir etmek, de: [reparieren], pos: verb, softens: true }
+  - { tr: değiştirmek, de: [ändern], pos: verb }
+  - { tr: hoşlanmak, de: [gern haben, gern tun], pos: verb }
+  - { tr: vazgeçmek, de: [aufgeben, verzichten], pos: verb }
+  - { tr: yorulmak, de: [müde werden], pos: verb }
+  - { tr: zorunda, de: [gezwungen (… zorundayım = ich muss)], pos: phrase }

@@ -46,9 +46,9 @@ Aufbau jeder Unit (SPEC 3.1): Erklärkarte → Wortschatz → Grammatik → ab A
 | b1-u01 | Zeiten mit idi: -iyordu, -irdi, -mişti, -ecekti; -ken                                         | Lebensgeschichten, Kindheit        | 4a     | ✅    |
 | b1-u02 | Zeiten mit imiş: -iyormuş, -irmiş, -mişmiş, -ecekmiş; Märchen                                 | Erinnerungen, Familiengeschichte   | 4a     | ✅    |
 | b1-u03 | Konditional -se, ise (-irse, -iyorsa, -ecekse, -diyse, -ysa am Nomen)                         | Natur, Umwelt, Erde                | 4a     | ✅    |
-| b1-u04 | Wunschformen: Optativ -eyim/-elim, keşke + -seydi                                             | Wetter, Klima, Pläne für die Erde  | 4a     |       |
-| b1-u05 | Verbalnomen -mek (istemek, -mek için, -mekte, -mekten)                                        | Computer, Internet                 | 4b     |       |
-| b1-u06 | Verbalnomen -me, -iş mit Possessiv; Ergänzungssätze (gelmesini istiyorum)                     | Medien, Nachrichten                | 4b     |       |
+| b1-u04 | Wunschformen: Optativ -eyim/-elim, keşke + -seydi                                             | Wetter, Klima, Pläne für die Erde  | 4a     || ✅    |
+| b1-u05 | Verbalnomen -mek (istemek, -mek için, -mekte, -mekten)                                        | Computer, Internet                 | 4b     || ✅    |
+| b1-u06 | Verbalnomen -me, -iş mit Possessiv; Ergänzungssätze (gelmesini istiyorum)                     | Medien, Nachrichten                | 4b     || ✅    |
 | b1-u07 | Partizip -en, Relativsatz mit Subjekt                                                         | Schule, Unterricht                 | 4b     |       |
 | b1-u08 | Partizipien -dik, -ecek mit Possessiv                                                         | Bildung und Beruf                  | 4b     |       |
 | b1-u09 | Konverbien -ip, -erek, -meden                                                                 | Erzählungen, Märchen               | 4b     |       |

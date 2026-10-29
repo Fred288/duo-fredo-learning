@@ -1,0 +1,519 @@
+# B1-06: Verbalnomen -me und -iş mit Possessiv; Ergänzungssätze (-meyi, -meye, -mem lazım, -meni istiyorum); Medien, Nachrichten. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b1-u06
+level: B1
+title: Medien und Nachrichten
+grammar_focus: [me, meyi, meye, mem-lazim, meni-istiyorum, is]
+explainer: explainers/b1-me.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b1-u06-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b1-u06-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „dergi“?
+        options: [Zeitschrift, Zeitung, Buch]
+        answer: Zeitschrift
+        explanation: gazete = Zeitung.
+      - id: b1-u06-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Radio
+        answers: [radyo]
+      - id: b1-u06-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „dizi“?
+        options: [Fernsehserie, Werbung, Sender]
+        answer: Fernsehserie
+      - id: b1-u06-l1-e4
+        type: free_text
+        direction: de_tr
+        prompt: Werbung
+        answers: [reklam]
+      - id: b1-u06-l1-e5
+        type: multiple_choice
+        prompt: Was heißt „paylaşmak“?
+        options: [teilen, folgen, löschen]
+        answer: teilen
+      - id: b1-u06-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „takip etmek“?
+        options: [folgen, teilen, glauben]
+        answer: folgen
+        explanation: Mit Akkusativ, bir kanalı takip etmek = einem Kanal folgen.
+      - id: b1-u06-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: glauben
+        answers: [inanmak]
+        explanation: Mit Dativ, buna inanmıyorum = das glaube ich nicht.
+      - id: b1-u06-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „güvenmek“?
+        options: [vertrauen, zweifeln, verstehen]
+        answer: vertrauen
+        explanation: Mit Dativ, sana güveniyorum = ich vertraue dir.
+      - id: b1-u06-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: richtig, wahr
+        answers: [doğru]
+      - id: b1-u06-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: falsch
+        answers: [yanlış]
+      - id: b1-u06-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „fikir“?
+        options: [Meinung, Nachricht, Frage]
+        answer: Meinung
+        explanation: Vor Vokal fällt das i aus, fikrim (meine Meinung).
+      - id: b1-u06-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „kaynak“?
+        options: [Quelle, Kanal, Ereignis]
+        answer: Quelle
+        explanation: Vor Vokal wird k zu ğ, kaynağı (die Quelle, Akkusativ).
+      - id: b1-u06-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: Ereignis
+        answers: [olay]
+      - id: b1-u06-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „bence“?
+        options: [meiner Meinung nach, für mich bestimmt, mit mir]
+        answer: meiner Meinung nach
+        explanation: Ebenso sence (deiner Meinung nach).
+      - id: b1-u06-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: Handy
+        answers: [cep telefonu, telefon, cep]
+      - id: b1-u06-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „tartışmak“?
+        options: [diskutieren, erklären, berichten]
+        answer: diskutieren
+
+  - id: b1-u06-l2
+    type: grammar
+    title: Gern tun, anfangen (-meyi, -meye)
+    exercises:
+      - id: b1-u06-l2-e1
+        type: suffix_builder
+        stem: okumak
+        verbal: VN_MA
+        suffixes: [ACC]
+        target: okumayı
+        gloss_de: 'das Lesen (… sevmek = gern lesen)'
+        explanation: sevmek verlangt den Akkusativ; nach Vokal mit y.
+      - { id: b1-u06-l2-e2, type: suffix_builder, stem: izlemek, verbal: VN_MA, suffixes: [ACC], target: izlemeyi, gloss_de: 'das Ansehen (… sevmek = gern ansehen)' }
+      - { id: b1-u06-l2-e3, type: suffix_builder, stem: yüzmek, verbal: VN_MA, suffixes: [ACC], target: yüzmeyi, gloss_de: 'das Schwimmen (… bilmek = schwimmen können)' }
+      - id: b1-u06-l2-e4
+        type: suffix_builder
+        stem: öğrenmek
+        verbal: VN_MA
+        suffixes: [DAT]
+        target: öğrenmeye
+        gloss_de: 'zu lernen (… çalışmak = versuchen zu lernen)'
+        explanation: çalışmak (versuchen) verlangt den Dativ.
+      - { id: b1-u06-l2-e5, type: suffix_builder, stem: yağmak, verbal: VN_MA, suffixes: [DAT], target: yağmaya, gloss_de: 'zu regnen (… başlamak = anfangen zu regnen)' }
+      - { id: b1-u06-l2-e6, type: suffix_builder, stem: anlamak, verbal: VN_MA, suffixes: [DAT], target: anlamaya, gloss_de: zu verstehen (versuchen) }
+      - id: b1-u06-l2-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Haber izlemeyi sevmiyorum.“?
+        options: [Ich sehe nicht gern Nachrichten., Ich habe keine Nachrichten gesehen., Ich will keine Nachrichten sehen.]
+        answer: Ich sehe nicht gern Nachrichten.
+      - id: b1-u06-l2-e8
+        type: word_bank
+        prompt: Ich versuche, jeden Tag Zeitung zu lesen.
+        answers: [Her gün gazete okumaya çalışıyorum.]
+        chunks:
+          - { text: "Her gün", role: time }
+          - { text: "gazete okumaya", role: complement }
+          - { text: "çalışıyorum", role: predicate }
+        distractors: [okumayı, okuyorum]
+      - id: b1-u06-l2-e9
+        type: word_bank
+        prompt: Es hat angefangen zu regnen.
+        answers: [Yağmur yağmaya başladı.]
+        chunks:
+          - { text: "Yağmur", role: subject }
+          - { text: "yağmaya", role: complement }
+          - { text: "başladı", role: predicate }
+        distractors: [yağmayı, başlıyor]
+      - id: b1-u06-l2-e10
+        type: free_text
+        direction: de_tr
+        prompt: Ich lese gern.
+        answers: [Okumayı severim., Okumayı seviyorum., Kitap okumayı severim., Kitap okumayı seviyorum.]
+      - id: b1-u06-l2-e11
+        type: multiple_choice
+        prompt: Welche Form passt? „Türkçe … başladım.“ (lernen)
+        options: [öğrenmeye, öğrenmeyi, öğrenmekte]
+        answer: öğrenmeye
+        explanation: başlamak verlangt den Dativ.
+      - id: b1-u06-l2-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „… biliyor musun?“ (schwimmen können)
+        options: [Yüzmeyi, Yüzmeye, Yüzmekten]
+        answer: Yüzmeyi
+
+  - id: b1-u06-l3
+    type: grammar
+    title: Ich muss (-mem lazım)
+    exercises:
+      - id: b1-u06-l3-e1
+        type: suffix_builder
+        stem: gitmek
+        verbal: VN_MA
+        suffixes: [POSS_1SG]
+        target: gitmem
+        gloss_de: 'dass ich gehe (… lazım = ich muss gehen)'
+        explanation: Die Person steht im Possessiv, mein Gehen.
+      - { id: b1-u06-l3-e2, type: suffix_builder, stem: gelmek, verbal: VN_MA, suffixes: [POSS_2SG], target: gelmen, gloss_de: 'dass du kommst (… lazım = du musst kommen)' }
+      - { id: b1-u06-l3-e3, type: suffix_builder, stem: çalışmak, verbal: VN_MA, suffixes: [POSS_3SG], target: çalışması, gloss_de: 'dass er, sie arbeitet' }
+      - { id: b1-u06-l3-e4, type: suffix_builder, stem: okumak, verbal: VN_MA, suffixes: [POSS_1PL], target: okumamız, gloss_de: dass wir lesen }
+      - { id: b1-u06-l3-e5, type: suffix_builder, stem: beklemek, verbal: VN_MA, suffixes: [POSS_2PL], target: beklemeniz, gloss_de: 'dass ihr wartet, dass Sie warten' }
+      - { id: b1-u06-l3-e6, type: suffix_builder, stem: dinlemek, verbal: VN_MA, suffixes: [POSS_3PL], target: dinlemeleri, gloss_de: dass sie zuhören }
+      - id: b1-u06-l3-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Erken kalkmam lazım.“?
+        options: [Ich muss früh aufstehen., Ich bin früh aufgestanden., Du musst früh aufstehen.]
+        answer: Ich muss früh aufstehen.
+      - id: b1-u06-l3-e8
+        type: word_bank
+        prompt: Du musst die Nachrichten hören.
+        answers: [Haberleri dinlemen lazım., Haberleri dinlemen gerek., Haberleri dinlemen gerekiyor.]
+        chunks:
+          - { text: "Haberleri", role: object }
+          - { text: "dinlemen", role: complement }
+          - { text: "lazım", role: predicate }
+        distractors: [dinlemem, haberler]
+      - id: b1-u06-l3-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bunu herkesin bilmesi gerekiyor.
+        answers: [Das muss jeder wissen., Alle müssen das wissen., Jeder muss das wissen., Das müssen alle wissen., Das sollte jeder wissen.]
+      - id: b1-u06-l3-e10
+        type: free_text
+        direction: de_tr
+        prompt: Wir müssen gehen.
+        answers: [Gitmemiz lazım., Gitmemiz gerek., Gitmemiz gerekiyor., Gitmek zorundayız., Bizim gitmemiz lazım., Gitmeliyiz.]
+      - id: b1-u06-l3-e11
+        type: multiple_choice
+        prompt: Was kann „gitmem“ heißen?
+        options: ['mein Gehen (gitmem lazım) oder ich gehe nicht (Aorist)', nur „ich gehe nicht“, nur „mein Gehen“]
+        answer: 'mein Gehen (gitmem lazım) oder ich gehe nicht (Aorist)'
+        explanation: Beide Formen sehen gleich aus; der Satz zeigt, was gemeint ist.
+
+  - id: b1-u06-l4
+    type: grammar
+    title: Ich möchte, dass du … (-meni istiyorum)
+    exercises:
+      - id: b1-u06-l4-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: VN_MA
+        suffixes: [POSS_2SG, ACC]
+        target: gelmeni
+        gloss_de: 'dass du kommst (… istiyorum = ich möchte, dass du kommst)'
+        explanation: Possessiv der anderen Person, dann Akkusativ.
+      - { id: b1-u06-l4-e2, type: suffix_builder, stem: okumak, verbal: VN_MA, suffixes: [POSS_3SG, ACC], target: okumasını, gloss_de: 'dass er, sie liest (Akkusativ)' }
+      - { id: b1-u06-l4-e3, type: suffix_builder, stem: yardım etmek, verbal: VN_MA, suffixes: [POSS_2PL, ACC], target: yardım etmenizi, gloss_de: 'dass ihr helft, dass Sie helfen (Akkusativ)' }
+      - { id: b1-u06-l4-e4, type: suffix_builder, stem: bilmek, verbal: VN_MA, suffixes: [POSS_2SG, ACC], target: bilmeni, gloss_de: 'dass du weißt (… isterim = du sollst wissen)' }
+      - id: b1-u06-l4-e5
+        type: suffix_builder
+        stem: gitmek
+        verbal: VN_MA
+        negative: true
+        suffixes: [POSS_3SG, ACC]
+        target: gitmemesini
+        gloss_de: 'dass er, sie nicht geht (Akkusativ)'
+        explanation: Verneinung -me vor dem Verbalnomen -me, gitme-me-si-ni.
+      - id: b1-u06-l4-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Annem benim doktor olmamı istiyor.“?
+        options: ['Meine Mutter möchte, dass ich Arzt werde.', Meine Mutter möchte Ärztin werden., Meine Mutter ist Ärztin.]
+        answer: 'Meine Mutter möchte, dass ich Arzt werde.'
+      - id: b1-u06-l4-e7
+        type: word_bank
+        prompt: Ich möchte, dass du mir die Wahrheit sagst.
+        answers: [Bana doğruyu söylemeni istiyorum.]
+        chunks:
+          - { text: "Bana", role: complement }
+          - { text: "doğruyu söylemeni", role: object }
+          - { text: "istiyorum", role: predicate }
+        distractors: [söylemek, söylüyorsun]
+      - id: b1-u06-l4-e8
+        type: word_bank
+        prompt: Der Lehrer möchte, dass wir die Zeitung lesen.
+        answers: [Öğretmen gazeteyi okumamızı istiyor.]
+        chunks:
+          - { text: "Öğretmen", role: subject }
+          - { text: "gazeteyi okumamızı", role: object }
+          - { text: "istiyor", role: predicate }
+        distractors: [okumayı, okuyoruz]
+      - id: b1-u06-l4-e9
+        type: free_text
+        direction: tr_de
+        prompt: Senin gelmeni bekliyoruz.
+        answers: ['Wir warten darauf, dass du kommst.', 'Wir warten, dass du kommst.', 'Wir erwarten, dass du kommst.', Wir warten auf dich., Wir warten auf dein Kommen.]
+      - id: b1-u06-l4-e10
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Gitmek istiyorum.“ / „Gitmeni istiyorum.“
+        options: ['Ich möchte gehen. / Ich möchte, dass du gehst.', Beides heißt dasselbe., Ich gehe. / Du gehst.]
+        answer: 'Ich möchte gehen. / Ich möchte, dass du gehst.'
+      - id: b1-u06-l4-e11
+        type: suffix_builder
+        stem: gelmek
+        verbal: VN_IS
+        target: geliş
+        gloss_de: das Kommen, die Ankunft
+        explanation: -iş bildet ein Nomen, oft ein festes Wort.
+      - { id: b1-u06-l4-e12, type: suffix_builder, stem: gitmek, verbal: VN_IS, target: gidiş, gloss_de: 'das Gehen, die Hinfahrt (gidiş dönüş = hin und zurück)' }
+      - id: b1-u06-l4-e13
+        type: multiple_choice
+        prompt: Was heißt „bakış açısı“?
+        options: [Sichtweise, Fernsehsender, Schlagzeile]
+        answer: Sichtweise
+        explanation: bakış = Blick (bakmak + -ış), açı = Winkel.
+
+  - id: b1-u06-l5
+    type: dialog
+    title: Hast du die Nachrichten gehört?
+    exercises:
+      - id: b1-u06-l5-e1
+        type: word_bank
+        prompt: Hast du die Nachrichten gehört?
+        answers: [Haberleri duydun mu?, Haberleri dinledin mi?]
+        distractors: [haber, duyuyor]
+      - id: b1-u06-l5-e2
+        type: free_text
+        direction: tr_de
+        prompt: Bu habere inanmak zor.
+        answers: [Diese Nachricht ist schwer zu glauben., 'Es ist schwer, diese Nachricht zu glauben.', Man kann diese Nachricht kaum glauben., Diese Nachricht kann man kaum glauben.]
+      - id: b1-u06-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Das glaube ich nicht.“?
+        options: [Buna inanmıyorum., Bunu inanmıyorum., Buna inandım.]
+        answer: Buna inanmıyorum.
+        explanation: inanmak verlangt den Dativ, buna.
+      - id: b1-u06-l5-e4
+        type: word_bank
+        prompt: Man muss die Quelle prüfen.
+        answers: [Kaynağı kontrol etmek lazım., Kaynağı kontrol etmek gerek.]
+        distractors: [kaynak, ettim]
+      - id: b1-u06-l5-e5
+        type: word_bank
+        prompt: Ich teile nicht gern Nachrichten in den sozialen Medien.
+        answers: [Sosyal medyada haber paylaşmayı sevmem., Sosyal medyada haber paylaşmayı sevmiyorum.]
+        chunks:
+          - { text: "Sosyal medyada", role: place }
+          - { text: "haber paylaşmayı", role: object }
+          - { text: "sevmem", role: predicate }
+        distractors: [paylaşmaya, severim]
+      - id: b1-u06-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Bence bu haber yanlış.“?
+        options: [Meiner Meinung nach ist diese Nachricht falsch., Diese Nachricht ist für mich., Ich habe diese Nachricht falsch verstanden.]
+        answer: Meiner Meinung nach ist diese Nachricht falsch.
+      - id: b1-u06-l5-e7
+        type: free_text
+        direction: de_tr
+        prompt: Was ist deine Meinung?
+        answers: [Senin fikrin ne?, Fikrin ne?, Sen ne düşünüyorsun?, Ne düşünüyorsun?, Sence?]
+      - id: b1-u06-l5-e8
+        type: conjugation
+        mode: verb
+        lemma: takip etmek
+        person: 1sg
+        tense: present
+        target: takip ediyorum
+        gloss_de: ich folge (einem Kanal), ich verfolge
+
+  - id: b1-u06-l6
+    type: grammar
+    title: 'Tabellen: -me und -iş'
+    exercises:
+      - id: b1-u06-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: VN_MA
+        lemma: gitmek
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [gitmem, gitmen, gitmesi, gitmemiz, gitmeniz, gitmeleri]
+        gloss_de: dass … geht
+      - id: b1-u06-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: VN_MA
+        lemma: okumak
+        rows: [[POSS_1SG, ACC], [POSS_2SG, ACC], [POSS_3SG, ACC], [POSS_1PL, ACC], [POSS_2PL, ACC], [POSS_3PL, ACC]]
+        targets: [okumamı, okumanı, okumasını, okumamızı, okumanızı, okumalarını]
+        gloss_de: dass … liest (Akkusativ, vor istemek)
+      - id: b1-u06-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: VN_MA
+        lemma: çalışmak
+        rows: [[], [ACC], [DAT]]
+        targets: [çalışma, çalışmayı, çalışmaya]
+        gloss_de: das Arbeiten
+      - id: b1-u06-l6-e4
+        type: paradigm
+        kind: verbal
+        verbal: VN_IS
+        lemma: gelmek
+        rows: [[], [POSS_3SG], [POSS_3SG, ACC]]
+        targets: [geliş, gelişi, gelişini]
+        gloss_de: das Kommen
+
+  - id: b1-u06-r1
+    type: reading
+    title: 'Lesetext: Eine Woche ohne Handy'
+    passage:
+      sentences:
+        - { tr: "Geçen hafta telefonumu kullanmamaya karar verdim.", de: "Letzte Woche habe ich beschlossen, mein Handy nicht zu benutzen." }
+        - { tr: "Annem buna inanmadı.", de: "Meine Mutter hat das nicht geglaubt." }
+        - { tr: "\"Bir gün bile dayanamazsın,\" dedi.", de: "„Du hältst es keinen Tag aus“, sagte sie." }
+        - { tr: "İlk gün haberleri okumak için gazete aldım.", de: "Am ersten Tag habe ich eine Zeitung gekauft, um die Nachrichten zu lesen." }
+        - { tr: "Gazete okumayı çok sevdim.", de: "Das Zeitunglesen hat mir sehr gefallen." }
+        - { tr: "Akşamları arkadaşlarımı aramam gerekiyordu ama telefonum yoktu.", de: "Abends musste ich meine Freunde anrufen, aber ich hatte kein Handy." }
+        - { tr: "Bu yüzden onlara mektup yazmaya başladım.", de: "Deshalb habe ich angefangen, ihnen Briefe zu schreiben." }
+        - { tr: "Arkadaşlarım mektuplarıma çok şaşırdı.", de: "Meine Freunde waren über meine Briefe sehr überrascht." }
+        - { tr: "Bir hafta sonra telefonumu tekrar açtım.", de: "Nach einer Woche habe ich mein Handy wieder eingeschaltet." }
+        - { tr: "Şimdi her akşam bir saat telefonsuz kalmaya çalışıyorum.", de: "Jetzt versuche ich, jeden Abend eine Stunde ohne Handy auszukommen." }
+      glossary:
+        - { tr: "bile", de: "sogar, nicht einmal (mit Verneinung)" }
+        - { tr: "dayanamazsın", de: "du hältst es nicht aus (dayanmak = aushalten)" }
+        - { tr: "ilk", de: "erste(r, s)" }
+        - { tr: "gerekiyordu", de: "es war nötig (gerekmek; aramam gerekiyordu = ich musste anrufen)", vocab: "gerek" }
+        - { tr: "yoktu", de: "gab es nicht, war nicht da (yok + tu)", vocab: "yok" }
+        - { tr: "yüzden", de: "wegen (bu yüzden = deshalb)" }
+        - { tr: "her", de: "jede(r, s) (her akşam = jeden Abend)" }
+        - { tr: "telefonsuz", de: "ohne Handy (telefon + suz)", vocab: "telefon" }
+    exercises:
+      - id: b1-u06-r1-e1
+        type: multiple_choice
+        prompt: Was hat die Person beschlossen?
+        options: [Eine Woche lang das Handy nicht zu benutzen., Ein neues Handy zu kaufen., Jeden Tag Nachrichten zu schreiben.]
+        answer: Eine Woche lang das Handy nicht zu benutzen.
+      - id: b1-u06-r1-e2
+        type: multiple_choice
+        prompt: Was hat die Mutter gedacht?
+        options: [Dass ihr Kind es keinen Tag aushält., Dass es eine gute Idee ist., Dass das Handy kaputt ist.]
+        answer: Dass ihr Kind es keinen Tag aushält.
+      - id: b1-u06-r1-e3
+        type: multiple_choice
+        prompt: Wie hat die Person ihre Freunde erreicht?
+        options: [Mit Briefen., Mit E-Mails., Gar nicht.]
+        answer: Mit Briefen.
+      - id: b1-u06-r1-e4
+        type: multiple_choice
+        prompt: Was versucht die Person jetzt?
+        options: [Jeden Abend eine Stunde ohne Handy auszukommen., Nie wieder ein Handy zu benutzen., Jeden Tag Zeitung zu lesen.]
+        answer: Jeden Abend eine Stunde ohne Handy auszukommen.
+      - id: b1-u06-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Gazete okumayı çok sevdim.
+        answers: [Das Zeitunglesen hat mir sehr gefallen., Zeitung zu lesen hat mir sehr gefallen., Ich habe sehr gern Zeitung gelesen., Das Zeitunglesen hat mir gut gefallen.]
+
+  - id: b1-u06-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b1-u06-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: ich muss gehen (mit lazım)
+        answers: [gitmem lazım, benim gitmem lazım]
+      - id: b1-u06-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Ich möchte, dass du kommst.
+        answers: [Gelmeni istiyorum., Senin gelmeni istiyorum.]
+      - id: b1-u06-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (anfangen zu schreiben)
+        options: [yazmaya başlamak, yazmayı başlamak, yazmak başlamak]
+        answer: yazmaya başlamak
+      - id: b1-u06-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (dass er nicht geht, Akkusativ)
+        options: [gitmemesini, gitmesini değil, gitmemekini]
+        answer: gitmemesini
+      - id: b1-u06-l7-e5
+        type: word_bank
+        prompt: Kannst du Auto fahren?
+        answers: [Araba kullanmayı biliyor musun?]
+        distractors: [kullanmaya, biliyorum]
+        explanation: araba kullanmak = Auto fahren; bilmek mit Akkusativ = können.
+      - id: b1-u06-l7-e6
+        type: suffix_builder
+        stem: paylaşmak
+        verbal: VN_MA
+        suffixes: [ACC]
+        target: paylaşmayı
+        gloss_de: 'das Teilen (… sevmek = gern teilen)'
+      - id: b1-u06-l7-e7
+        type: free_text
+        direction: tr_de
+        prompt: Haberlere güvenmemiz lazım.
+        answers: [Wir müssen den Nachrichten vertrauen., Wir müssen den Nachrichten vertrauen können., Wir sollten den Nachrichten vertrauen.]
+      - id: b1-u06-l7-e8
+        type: conjugation
+        mode: verb
+        lemma: inanmak
+        person: 1sg
+        tense: present
+        negative: true
+        target: inanmıyorum
+        gloss_de: ich glaube (es) nicht
+      - id: b1-u06-l7-e9
+        type: word_bank
+        prompt: Meine Freunde möchten, dass ich ihnen schreibe.
+        answers: [Arkadaşlarım onlara yazmamı istiyor., Arkadaşlarım onlara yazmamı istiyorlar.]
+        chunks:
+          - { text: "Arkadaşlarım", role: subject }
+          - { text: "onlara yazmamı", role: object }
+          - { text: "istiyor", role: predicate }
+        distractors: [yazmayı, yazıyorum]
+      - id: b1-u06-l7-e10
+        type: suffix_builder
+        stem: bakmak
+        verbal: VN_IS
+        suffixes: [POSS_3SG]
+        target: bakışı
+        gloss_de: 'sein, ihr Blick'
+
+vocab:
+  - { tr: dergi, de: [Zeitschrift], pos: noun }
+  - { tr: radyo, de: [Radio], pos: noun }
+  - { tr: dizi, de: [Fernsehserie, Serie], pos: noun }
+  - { tr: reklam, de: [Werbung], pos: noun }
+  - { tr: kanal, de: [Sender, Kanal], pos: noun }
+  - { tr: sosyal medya, de: [soziale Medien], pos: noun }
+  - { tr: paylaşmak, de: [teilen], pos: verb }
+  - { tr: takip etmek, de: [folgen, verfolgen], pos: verb, softens: true }
+  - { tr: inanmak, de: [glauben], pos: verb }
+  - { tr: güvenmek, de: [vertrauen], pos: verb }
+  - { tr: doğru, de: [richtig, wahr], pos: adj }
+  - { tr: yanlış, de: [falsch], pos: adj }
+  - { tr: fikir, de: [Meinung, Idee], pos: noun, drops_vowel: true }
+  - { tr: kaynak, de: [Quelle], pos: noun, softens: true }
+  - { tr: olay, de: [Ereignis, Vorfall], pos: noun }
+  - { tr: bence, de: [meiner Meinung nach], pos: adv }
+  - { tr: sence, de: [deiner Meinung nach], pos: adv }
+  - { tr: cep telefonu, de: [Handy], pos: noun }
+  - { tr: tartışmak, de: [diskutieren], pos: verb }
+  - { tr: açıklamak, de: [erklären], pos: verb }
+  - { tr: kontrol etmek, de: [prüfen, kontrollieren], pos: verb, softens: true }
+  - { tr: muhabir, de: [Reporter(in)], pos: noun }
+  - { tr: bakış açısı, de: [Sichtweise], pos: noun }

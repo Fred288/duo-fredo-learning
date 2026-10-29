@@ -22,11 +22,12 @@ const MAX_DISTRACTORS_PER_SLOT = 1;
 /** Richtige Segmente aus der Engine plus plausibel falsche Varianten (falsche Harmonie etc.). */
 export function suffixTiles(ex: SuffixBuilder, vocab: readonly Vocab[] = []): SuffixTiles {
   const solution = solveExercise(ex, vocab);
-  const correct = new Set(solution.segments.map((s) => s.text));
+  // Jedes Segment ein Baustein, auch doppelte (gitme-me-si-ni braucht zweimal me).
+  const correct = solution.segments.map((s) => s.text).filter(Boolean);
 
   const distractors: string[] = [];
   const add = (candidates: string[], seed: string) => {
-    const pool = candidates.filter((c) => c && !correct.has(c) && !distractors.includes(c));
+    const pool = candidates.filter((c) => c && !correct.includes(c) && !distractors.includes(c));
     distractors.push(...seededShuffle(pool, seed).slice(0, MAX_DISTRACTORS_PER_SLOT));
   };
 
