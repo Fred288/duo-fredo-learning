@@ -35,7 +35,18 @@ export function suffixTiles(ex: SuffixBuilder, vocab: readonly Vocab[] = []): Su
   const plain = ex.verbal ? verbStem(ex.stem) : ex.stem;
   const stemSegment = solution.segments[0]!.text;
   if (stemSegment !== plain) add([plain], `${ex.id}-stem`);
-  if (ex.verbal) add(suffixVariants(ex.verbal), `${ex.id}-v`);
+  if (ex.verbal) {
+    // Erweichtes -dığ/-acağ: Ablenker ebenfalls mit ğ, dazu die unerweichte Form (duk).
+    const own = solution.segments.find((s) => s.tag === ex.verbal)?.text ?? '';
+    const variants = suffixVariants(ex.verbal);
+    if (own.endsWith('ğ')) {
+      add([own.slice(0, -1) + 'k'], `${ex.id}-k`);
+      add(
+        variants.map((v) => v.replace(/k$/, 'ğ')),
+        `${ex.id}-v`,
+      );
+    } else add(variants, `${ex.id}-v`);
+  }
   ex.suffixes.forEach((tag, i) => add(suffixVariants(tag), `${ex.id}-${i}`));
 
   return {

@@ -221,3 +221,24 @@ describe('segmentSolution', () => {
     expect(inf.steps.length).toBeGreaterThan(0);
   });
 });
+
+describe('Rollen-Ablenker ohne B1-Rollen in finiten Formen', () => {
+  it('Präteritum bekommt keine Partizip- oder Verbalnomen-Rollen', () => {
+    const ex = {
+      id: 'x-s',
+      type: 'segment',
+      word: 'yaptım',
+      segments: [
+        { text: 'yap', tag: 'STEM' },
+        { text: 'tı', tag: 'PAST' },
+        { text: 'm', tag: 'P1SG' },
+      ],
+      analysis: { kind: 'verb', lemma: 'yapmak', person: '1sg', tense: 'past' },
+      from: 'x-1',
+    } as Parameters<typeof segmentRoleOptions>[0];
+    const options = segmentRoleOptions(ex);
+    for (const tag of ['PART_AN', 'PART_DIK', 'PART_ACAK', 'VN_MA', 'VN_MAK', 'VN_IS']) {
+      expect(options).not.toContain(tag);
+    }
+  });
+});

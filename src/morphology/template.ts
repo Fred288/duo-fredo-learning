@@ -28,6 +28,7 @@ export type Step =
   | { tag: AnyTag; rule: 'narrowing'; chose: string }
   | { tag: AnyTag; rule: 'apostrophe' }
   | { tag: AnyTag; rule: 'stem_raising'; from: string; to: string }
+  | { tag: AnyTag; rule: 'no_raising' }
   | {
       tag: AnyTag;
       rule: 'aorist_vowel';

@@ -40,6 +40,8 @@ export function explainSteps(steps: Step[]): string[] {
         return t('explain.narrowing', { chose: step.chose, tag });
       case 'stem_raising':
         return t('explain.stem_raising', { from: step.from, to: step.to, tag });
+      case 'no_raising':
+        return t('explain.no_raising', { tag });
       case 'aorist_vowel':
         return t(`explain.aorist.${step.kind}`);
       case 'apostrophe':

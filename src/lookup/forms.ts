@@ -171,8 +171,8 @@ const VERBAL_VARIANTS: VerbalVariant[] = [
   })),
   // gelecek, geleceğim, geleceğini
   ...[[], ...withPoss(true)].map((tags) => ({ form: 'PART_ACAK' as const, tags })),
-  // gelme, gelmeyi, gelmesi, gelmesini
-  ...[[], ...VERBAL_CASES.map((c) => [c]), ...withPoss(true)].map((tags) => ({
+  // gelme, gelmeyi, gelmesi, gelmesini; ohne Possessiv nur ACC/DAT (gelmeden ist das Konverb)
+  ...([[], ['ACC'], ['DAT'], ...withPoss(true)] as MorphTag[][]).map((tags) => ({
     form: 'VN_MA' as const,
     tags,
   })),

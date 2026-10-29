@@ -67,7 +67,8 @@ function checkTags(opts: NonfiniteOptions): void {
     throw new MorphError(`${opts.form} + ${tags.join(' + ') || '∅'}: ${why}`);
   };
   if (tags.some((t) => DERIVATIONS.has(t) || t === 'KI')) fail('keine Ableitung, kein -ki');
-  if (opts.form === 'CV_MADAN' && opts.negative) fail('-mAdAn ist schon verneint');
+  if (opts.form === 'CV_MADAN' && opts.negative)
+    fail('-mAdAn ist schon verneint (gelemeden: ability)');
   const hasPoss = tags.some((t) => POSS.has(t));
   if (CONVERBS.has(opts.form)) {
     if (tags.length) fail('Konverbien nehmen keine Endungen');
@@ -82,7 +83,7 @@ function checkTags(opts: NonfiniteOptions): void {
       if (!hasPoss && !(tags.length === 1 && tags[0] === 'ABL')) fail('braucht ein Possessiv');
       return;
     case 'PART_ACAK':
-      if (tags.length && !hasPoss) fail('Kasus nur mit Possessiv');
+      if (tags.length && !hasPoss) fail('Endungen nur mit Possessiv');
       return;
     case 'VN_MAK':
       if (tags.length > 1 || (tags[0] && !['LOC', 'ABL', 'INS'].includes(tags[0]))) {
@@ -117,6 +118,7 @@ export function nonfinite(input: VerbStem | string, opts: NonfiniteOptions): Inf
     b.steps.push({ tag: opts.form, rule: 'stem_raising', from: stem.at(-1)!, to: raised.at(-1)! });
     b.add('STEM', raised);
   } else {
+    if (buffered && stem === 'de') b.steps.push({ tag: opts.form, rule: 'no_raising' });
     b.add('STEM', buffered ? softenedStem(verb, stem, opts.form, b.steps) : stem);
   }
   b.suffix(opts.form, template);
@@ -150,8 +152,9 @@ function derived(verb: VerbStem, stem: string, opts: NonfiniteOptions): Inflecti
     const inner = nonfinite({ form: `${base}${tail}mek` }, { ...opts, passive: false });
     return splitDerived(inner, base, tail, 'PASS', steps, 'passive');
   }
-  if (opts.form === 'CV_MADAN') throw new MorphError('-mAdAn nicht mit „können“');
-  const { base, tail } = abilityStem(verb, stem, opts.negative ?? false, steps);
+  // „ohne … zu können“: gel-e-meden; die Verneinung steckt schon in -mAdAn.
+  const madan = opts.form === 'CV_MADAN';
+  const { base, tail } = abilityStem(verb, stem, madan || (opts.negative ?? false), steps);
   const inner = nonfinite({ form: `${base}${tail}mek` }, { ...opts, ability: false });
   return splitDerived(inner, base, tail, 'ABIL', steps, 'ability');
 }

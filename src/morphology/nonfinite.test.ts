@@ -208,3 +208,71 @@ describe('nicht erlaubt', () => {
     expect(() => nonfinite('gelmek', { form: 'PART_AN', tags: ['POSS_1SG'] })).toThrow(MorphError);
   });
 });
+
+describe('weitere Kombinationen (Review E2)', () => {
+  it.each([
+    [{ form: 'yapmak' }, { form: 'PART_AN', passive: true, ability: true }, 'yapılabilen'],
+    [{ form: 'yapmak' }, { form: 'PART_AN', passive: true, negative: true }, 'yapılmayan'],
+    [{ form: 'yapmak' }, { form: 'VN_MA', passive: true, tags: ['POSS_3SG'] }, 'yapılması'],
+    [{ form: 'yapmak' }, { form: 'CV_MADAN', passive: true }, 'yapılmadan'],
+    [{ form: 'demek' }, { form: 'PART_AN', passive: true }, 'denen'],
+    [{ form: 'yemek' }, { form: 'PART_AN', passive: true }, 'yenen'],
+    [{ form: 'bilmek' }, { form: 'PART_AN', passive: true }, 'bilinen'],
+    [{ form: 'gelmek' }, { form: 'CV_IP', ability: true }, 'gelebilip'],
+    [{ form: 'gelmek' }, { form: 'CV_INCA', ability: true, negative: true }, 'gelemeyince'],
+    [{ form: 'gelmek' }, { form: 'CV_MADAN', ability: true }, 'gelemeden'],
+    [{ form: 'gelmek' }, { form: 'VN_MAK', ability: true }, 'gelebilmek'],
+    [{ form: 'gelmek' }, { form: 'VN_MAK', ability: true, negative: true }, 'gelememek'],
+    [git, { form: 'VN_MA', ability: true, tags: ['POSS_3SG'] }, 'gidebilmesi'],
+    [{ form: 'demek' }, { form: 'PART_AN', ability: true }, 'diyebilen'],
+    [{ form: 'yemek' }, { form: 'PART_AN', ability: true, negative: true }, 'yiyemeyen'],
+    [{ form: 'demek' }, { form: 'PART_DIK', tags: ['POSS_3SG'] }, 'dediği'],
+    [{ form: 'demek' }, { form: 'VN_MA', tags: ['POSS_3SG'] }, 'demesi'],
+    [{ form: 'demek' }, { form: 'CV_ARAK', negative: true }, 'demeyerek'],
+    [{ form: 'beklemek' }, { form: 'CV_INCA' }, 'bekleyince'],
+    [{ form: 'söylemek' }, { form: 'CV_ARAK' }, 'söyleyerek'],
+    [{ form: 'beklemek' }, { form: 'PART_AN', passive: true }, 'beklenen'],
+    [{ form: 'beklemek' }, { form: 'PART_DIK', tags: ['PL', 'POSS_3SG', 'ACC'] }, 'beklediklerini'],
+    [{ form: 'okumak' }, { form: 'PART_DIK', tags: ['POSS_3PL', 'ACC'] }, 'okuduklarını'],
+    [{ form: 'gelmek' }, { form: 'PART_DIK', tags: ['POSS_3SG', 'INS'] }, 'geldiğiyle'],
+    [{ form: 'gelmek' }, { form: 'VN_MA', tags: ['POSS_3SG', 'GEN'] }, 'gelmesinin'],
+    [et, { form: 'CV_IP' }, 'ziyaret edip'],
+    [et, { form: 'PART_AN', passive: true }, 'ziyaret edilen'],
+    [et, { form: 'PART_AN', ability: true, negative: true }, 'ziyaret edemeyen'],
+    [et, { form: 'PART_ACAK', tags: ['POSS_3SG', 'ACC'] }, 'ziyaret edeceğini'],
+    [{ form: 'gelmek' }, { form: 'CV_ALI', negative: true }, 'gelmeyeli'],
+    [{ form: 'gelmek' }, { form: 'VN_MAK', negative: true, tags: ['ABL'] }, 'gelmemekten'],
+    [{ form: 'gelmek' }, { form: 'PART_ACAK', negative: true, tags: ['POSS_1SG'] }, 'gelmeyeceğim'],
+  ] as [VerbStem, NonfiniteOptions, string][])('%o + %o → %s', (verb, opts, form) => {
+    expect(f(verb, opts)).toBe(form);
+  });
+
+  it('Bausteine: gelemeden, ziyaret edeceğini', () => {
+    const r = nonfinite('gelmek', { form: 'CV_MADAN', ability: true });
+    expect(r.segments.map((s) => [s.tag, s.text])).toEqual([
+      ['STEM', 'gel'],
+      ['ABIL', 'e'],
+      ['CV_MADAN', 'meden'],
+    ]);
+    const z = nonfinite(et, { form: 'PART_ACAK', tags: ['POSS_3SG', 'ACC'] });
+    expect(z.segments.map((s) => s.text)).toEqual(['ziyaret ed', 'eceğ', 'i', 'ni']);
+  });
+
+  it('Fehlerfälle', () => {
+    expect(() => nonfinite('gelmek', { form: 'CV_MADAN', ability: true, negative: true })).toThrow(
+      MorphError,
+    );
+    expect(() => nonfinite('gelmek', { form: 'PART_ACAK', tags: ['PL'] })).toThrow(MorphError);
+    expect(() => nonfinite('gelmek', { form: 'VN_MAK', tags: ['PL'] })).toThrow(MorphError);
+  });
+
+  it('deyip: Begründung für das erhaltene e', () => {
+    expect(nonfinite('demek', { form: 'CV_IP' }).steps).toContainEqual({
+      tag: 'CV_IP',
+      rule: 'no_raising',
+    });
+    expect(nonfinite('gelmek', { form: 'CV_IP' }).steps.some((s) => s.rule === 'no_raising')).toBe(
+      false,
+    );
+  });
+});

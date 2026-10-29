@@ -79,3 +79,19 @@ describe('suffixTiles: infinite Formen', () => {
     expect(tokens.length).toBeGreaterThan(2); // eine Variante von -(y)IncA als Ablenker
   });
 });
+
+describe('suffixTiles: erweichtes Partizip', () => {
+  it('Ablenker mit ğ und die unerweichte Form', () => {
+    const ex: SB = {
+      id: 'x-oku',
+      type: 'suffix_builder',
+      stem: 'okumak',
+      verbal: 'PART_DIK',
+      suffixes: ['POSS_1SG'],
+      target: 'okuduğum',
+    };
+    const { tokens } = suffixTiles(ex, []);
+    expect(tokens).toEqual(expect.arrayContaining(['oku', 'duğ', 'um', 'duk']));
+    expect(tokens.filter((t) => t.endsWith('ğ')).length).toBeGreaterThan(1);
+  });
+});

@@ -121,7 +121,8 @@ const CONFUSABLE: readonly (readonly SegmentTag[])[] = [
   ['PL', 'P3PL', 'POSS_3PL'],
   ['PRES', 'PAST', 'FUT', 'AOR', 'EVID', 'NEC', 'IMP', 'COND', 'OPT'],
   ['NEG', 'Q', 'ABIL', 'NEG_COP', 'PASS'],
-  ['PART_AN', 'PART_DIK', 'PART_ACAK', 'VN_MA', 'VN_MAK', 'VN_IS', 'FUT', 'PAST'],
+  // ohne Zeitformen: sonst bekämen A2-Formen (yaptım) Partizip-Rollen als Ablenker
+  ['PART_AN', 'PART_DIK', 'PART_ACAK', 'VN_MA', 'VN_MAK', 'VN_IS'],
   ['CV_IP', 'CV_ARAK', 'CV_INCA', 'CV_ALI', 'CV_MADAN'],
   ['LI', 'SIZ', 'LIK', 'CI', 'KI'],
   ['DIR', 'P3SG', 'LOC'],

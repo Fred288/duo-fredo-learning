@@ -289,6 +289,7 @@ export const de = {
   'explain.narrowing': 'Vor -yor wird die Verneinung -me/-ma zu „m{chose}“ ({tag})',
   'explain.apostrophe': 'Eigennamen trennt ein Apostroph von der Endung ({tag})',
   'explain.stem_raising': 'Vor dem Pufferlaut y wird „{from}“ zu „{to}“ (yiyecek, diyeyim) → {tag}',
+  'explain.no_raising': 'de- behält vor -ip, -ince und -iş sein e (deyip, deyince, deyiş) → {tag}',
   'explain.aorist.vowel_stem': 'Stamm endet auf Vokal → Aorist nur -r',
   'explain.aorist.monosyllabic': 'Einsilbiger Stamm auf Konsonant → Aorist -ar/-er',
   'explain.aorist.polysyllabic': 'Mehrsilbiger Stamm auf Konsonant → Aorist -ır/-ir/-ur/-ür',
