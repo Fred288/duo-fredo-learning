@@ -38,7 +38,9 @@ Mit **-seydi** (-se + idi) geht der Wunsch in die **Vergangenheit**, man bedauer
 - Keşke şemsiye al**saydım**! (Hätte ich doch einen Regenschirm mitgenommen!)
 - Keşke daha önce başla**saydık**. (Hätten wir doch früher angefangen.)
 
-Ohne keşke steht -seydi im Nebensatz eines **unerfüllten** Bedingungssatzes, der Hauptsatz hat -irdi: Bilseydim gelirdim. (Wenn ich es gewusst hätte, wäre ich gekommen.)
+Im Alltag steht -seydi auch für Wünsche, die **jetzt** unerfüllbar sind: Keşke burada ol**saydın**. (Wärst du doch hier!)
+
+Ohne keşke steht -seydi im Nebensatz eines **unerfüllten** Bedingungssatzes, der Hauptsatz hat -irdi: Bilseydim gelirdim. (Wenn ich es gewusst hätte, wäre ich gekommen.) Umgangssprachlich auch: Bilsem gelirdim.
 
 | Person      | gelmek     | bilmek     |
 | ----------- | ---------- | ---------- |

@@ -151,7 +151,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Ich lese gern.
-        answers: [Okumayı severim., Okumayı seviyorum., Kitap okumayı severim., Kitap okumayı seviyorum.]
+        answers: [Okumayı severim., Okumayı seviyorum., Kitap okumayı severim., Kitap okumayı seviyorum., Okumaktan hoşlanırım., Okumaktan hoşlanıyorum., Kitap okumaktan hoşlanıyorum.]
       - id: b1-u06-l2-e11
         type: multiple_choice
         prompt: Welche Form passt? „Türkçe … başladım.“ (lernen)
@@ -250,6 +250,7 @@ lessons:
           - { text: "doğruyu söylemeni", role: object }
           - { text: "istiyorum", role: predicate }
         distractors: [söylemek, söylüyorsun]
+        explanation: Auch gerçeği söylemek (die Wahrheit sagen).
       - id: b1-u06-l4-e8
         type: word_bank
         prompt: Der Lehrer möchte, dass wir die Zeitung lesen.
@@ -297,7 +298,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Bu habere inanmak zor.
-        answers: [Diese Nachricht ist schwer zu glauben., 'Es ist schwer, diese Nachricht zu glauben.', Man kann diese Nachricht kaum glauben., Diese Nachricht kann man kaum glauben.]
+        answers: [Diese Nachricht ist schwer zu glauben., 'Es ist schwer, diese Nachricht zu glauben.', 'Es ist schwer, dieser Nachricht zu glauben.', Diese Nachricht ist kaum zu glauben., Man kann diese Nachricht kaum glauben., Diese Nachricht kann man kaum glauben.]
       - id: b1-u06-l5-e3
         type: multiple_choice
         prompt: Wie sagst du „Das glaube ich nicht.“?
@@ -308,7 +309,7 @@ lessons:
         type: word_bank
         prompt: Man muss die Quelle prüfen.
         answers: [Kaynağı kontrol etmek lazım., Kaynağı kontrol etmek gerek.]
-        distractors: [kaynak, ettim]
+        distractors: [kaynakta, ettim]
       - id: b1-u06-l5-e5
         type: word_bank
         prompt: Ich teile nicht gern Nachrichten in den sozialen Medien.
@@ -327,7 +328,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Was ist deine Meinung?
-        answers: [Senin fikrin ne?, Fikrin ne?, Sen ne düşünüyorsun?, Ne düşünüyorsun?, Sence?]
+        answers: [Senin fikrin ne?, Fikrin ne?, Sen ne düşünüyorsun?, Ne düşünüyorsun?, Sence?, Senin fikrin nedir?, Fikrin nedir?, Sen ne dersin?, Ne dersin?]
       - id: b1-u06-l5-e8
         type: conjugation
         mode: verb
@@ -379,13 +380,14 @@ lessons:
     title: 'Lesetext: Eine Woche ohne Handy'
     passage:
       sentences:
-        - { tr: "Geçen hafta telefonumu kullanmamaya karar verdim.", de: "Letzte Woche habe ich beschlossen, mein Handy nicht zu benutzen." }
+        - { tr: "Geçen ay bir hafta telefonumu kullanmamaya karar verdim.", de: "Letzten Monat habe ich beschlossen, eine Woche lang mein Handy nicht zu benutzen." }
         - { tr: "Annem buna inanmadı.", de: "Meine Mutter hat das nicht geglaubt." }
         - { tr: "\"Bir gün bile dayanamazsın,\" dedi.", de: "„Du hältst es keinen Tag aus“, sagte sie." }
         - { tr: "İlk gün haberleri okumak için gazete aldım.", de: "Am ersten Tag habe ich eine Zeitung gekauft, um die Nachrichten zu lesen." }
         - { tr: "Gazete okumayı çok sevdim.", de: "Das Zeitunglesen hat mir sehr gefallen." }
-        - { tr: "Akşamları arkadaşlarımı aramam gerekiyordu ama telefonum yoktu.", de: "Abends musste ich meine Freunde anrufen, aber ich hatte kein Handy." }
-        - { tr: "Bu yüzden onlara mektup yazmaya başladım.", de: "Deshalb habe ich angefangen, ihnen Briefe zu schreiben." }
+        - { tr: "Annem her akşam onu aramamı istiyordu ama telefonumu kullanmıyordum.", de: "Meine Mutter wollte, dass ich sie jeden Abend anrufe, aber ich benutzte mein Handy nicht." }
+        - { tr: "Bu yüzden arkadaşlarıma mektup yazmaya başladım.", de: "Deshalb habe ich angefangen, meinen Freunden Briefe zu schreiben." }
+        - { tr: "Mektupları her gün postaneye gidişim bütün mahallenin dikkatini çekti.", de: "Dass ich jeden Tag mit den Briefen zur Post ging, fiel dem ganzen Viertel auf." }
         - { tr: "Arkadaşlarım mektuplarıma çok şaşırdı.", de: "Meine Freunde waren über meine Briefe sehr überrascht." }
         - { tr: "Bir hafta sonra telefonumu tekrar açtım.", de: "Nach einer Woche habe ich mein Handy wieder eingeschaltet." }
         - { tr: "Şimdi her akşam bir saat telefonsuz kalmaya çalışıyorum.", de: "Jetzt versuche ich, jeden Abend eine Stunde ohne Handy auszukommen." }
@@ -393,11 +395,13 @@ lessons:
         - { tr: "bile", de: "sogar, nicht einmal (mit Verneinung)" }
         - { tr: "dayanamazsın", de: "du hältst es nicht aus (dayanmak = aushalten)" }
         - { tr: "ilk", de: "erste(r, s)" }
-        - { tr: "gerekiyordu", de: "es war nötig (gerekmek; aramam gerekiyordu = ich musste anrufen)", vocab: "gerek" }
-        - { tr: "yoktu", de: "gab es nicht, war nicht da (yok + tu)", vocab: "yok" }
         - { tr: "yüzden", de: "wegen (bu yüzden = deshalb)" }
         - { tr: "her", de: "jede(r, s) (her akşam = jeden Abend)" }
         - { tr: "telefonsuz", de: "ohne Handy (telefon + suz)", vocab: "telefon" }
+        - { tr: "gidişim", de: "mein Gehen (gitmek + -iş + mein)", vocab: "gitmek" }
+        - { tr: "bütün", de: "ganz, alle" }
+        - { tr: "dikkatini", de: "die Aufmerksamkeit (dikkat çekmek = auffallen)", vocab: "dikkat etmek" }
+        - { tr: "çekti", de: "zog an (çekmek; dikkatini çekti = fiel auf)" }
     exercises:
       - id: b1-u06-r1-e1
         type: multiple_choice
@@ -438,7 +442,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Ich möchte, dass du kommst.
-        answers: [Gelmeni istiyorum., Senin gelmeni istiyorum.]
+        answers: [Gelmeni istiyorum., Senin gelmeni istiyorum., Gelmeni isterim., Senin gelmeni isterim.]
       - id: b1-u06-l7-e3
         type: multiple_choice
         prompt: Welche Form ist richtig? (anfangen zu schreiben)
@@ -465,8 +469,8 @@ lessons:
       - id: b1-u06-l7-e7
         type: free_text
         direction: tr_de
-        prompt: Haberlere güvenmemiz lazım.
-        answers: [Wir müssen den Nachrichten vertrauen., Wir müssen den Nachrichten vertrauen können., Wir sollten den Nachrichten vertrauen.]
+        prompt: Her habere güvenmemek lazım.
+        answers: [Man darf nicht jeder Nachricht trauen., Man sollte nicht jeder Nachricht trauen., Man darf nicht jeder Nachricht vertrauen., Man sollte nicht jeder Nachricht vertrauen., Man muss nicht jeder Nachricht glauben.]
       - id: b1-u06-l7-e8
         type: conjugation
         mode: verb
@@ -485,6 +489,7 @@ lessons:
           - { text: "onlara yazmamı", role: object }
           - { text: "istiyor", role: predicate }
         distractors: [yazmayı, yazıyorum]
+        explanation: Auch kendilerine yazmamı (ihnen selbst).
       - id: b1-u06-l7-e10
         type: suffix_builder
         stem: bakmak

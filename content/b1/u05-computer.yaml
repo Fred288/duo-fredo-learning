@@ -135,7 +135,7 @@ lessons:
         answers: [Bir e-posta yazmak istiyorum., E-posta yazmak istiyorum., Ben bir e-posta yazmak istiyorum.]
       - id: b1-u05-l2-e6
         type: word_bank
-        prompt: Ich will nicht mehr Computerspiele spielen.
+        prompt: Ich will keine Computerspiele mehr spielen.
         answers: [Artık bilgisayar oyunu oynamak istemiyorum., Artık bilgisayar oyunları oynamak istemiyorum.]
         chunks:
           - { text: "Artık", role: time }
@@ -278,14 +278,15 @@ lessons:
         distractors: [uçmayı, uçmakta]
       - id: b1-u05-l4-e10
         type: word_bank
-        prompt: Ich bin vom Warten müde geworden.
+        prompt: Ich bin müde vom Warten.
         answers: [Beklemekten yoruldum., Ben beklemekten yoruldum.]
         distractors: [beklemeye, yoruluyor]
+        explanation: Auch im Sinne von „Ich habe es satt zu warten“.
       - id: b1-u05-l4-e11
         type: free_text
         direction: tr_de
         prompt: Bu oyunu oynamaktan hoşlanıyorum.
-        answers: [Ich spiele dieses Spiel gern., Ich spiele gern dieses Spiel., 'Mir gefällt es, dieses Spiel zu spielen.', 'Ich mag es, dieses Spiel zu spielen.', Dieses Spiel spiele ich gern., Ich mag dieses Spiel.]
+        answers: [Ich spiele dieses Spiel gern., Ich spiele gern dieses Spiel., 'Mir gefällt es, dieses Spiel zu spielen.', 'Ich mag es, dieses Spiel zu spielen.', Dieses Spiel spiele ich gern.]
       - id: b1-u05-l4-e12
         type: multiple_choice
         prompt: Mit welchem Kasus steht korkmak (Angst haben vor)?
@@ -398,7 +399,7 @@ lessons:
         - { tr: "Ben her pazar ona yardım etmek için gidiyorum.", de: "Ich gehe jeden Sonntag zu ihm, um ihm zu helfen." }
         - { tr: "Şimdi mesaj yazmayı ve video izlemeyi biliyor.", de: "Jetzt kann er Nachrichten schreiben und Videos ansehen." }
         - { tr: "Şifresini unutmamak için bir kâğıda yazdı.", de: "Damit er sein Passwort nicht vergisst, hat er es auf einen Zettel geschrieben." }
-        - { tr: "Bazen bir dosyayı silmek zorunda kalıyor ve çok üzülüyor.", de: "Manchmal muss er eine Datei löschen und ist dann sehr traurig." }
+        - { tr: "Bazen yer açmak için fotoğrafları silmek zorunda kalıyor ve çok üzülüyor.", de: "Manchmal muss er Fotos löschen, um Platz zu schaffen, und ist dann sehr traurig." }
         - { tr: "Ama artık öğrenmekten çok keyif alıyor.", de: "Aber inzwischen macht ihm das Lernen viel Spaß." }
         - { tr: "Dün bana ilk mesajını gönderdi.", de: "Gestern hat er mir seine erste Nachricht geschickt." }
       glossary:
@@ -412,7 +413,7 @@ lessons:
         - { tr: "kâğıda", de: "auf ein Blatt Papier (kâğıt + Dativ)" }
         - { tr: "zorunda", de: "gezwungen (zorunda kalmak = müssen)", vocab: "zorunda" }
         - { tr: "üzülüyor", de: "ist traurig (üzülmek)" }
-        - { tr: "artık", de: "inzwischen, jetzt" }
+        - { tr: "yer", de: "Platz, Ort (yer açmak = Platz schaffen)" }
         - { tr: "keyif", de: "Freude, Vergnügen (keyif almak = Spaß haben an)" }
         - { tr: "ilk", de: "erste(r, s)" }
     exercises:
@@ -454,7 +455,7 @@ lessons:
       - id: b1-u05-l7-e2
         type: free_text
         direction: de_tr
-        prompt: ich muss gehen
+        prompt: ich muss gehen (mit zorunda)
         answers: [gitmek zorundayım]
       - id: b1-u05-l7-e3
         type: multiple_choice
@@ -498,10 +499,6 @@ lessons:
         type: word_bank
         prompt: Möchten Sie eine neue App ausprobieren?
         answers: [Yeni bir uygulama denemek ister misiniz?]
-        chunks:
-          - { text: "Yeni bir uygulama", role: object_bare }
-          - { text: "denemek", role: complement }
-          - { text: "ister misiniz", role: predicate }
         distractors: [denediniz, istiyorum]
       - id: b1-u05-l7-e10
         type: conjugation
@@ -536,3 +533,4 @@ vocab:
   - { tr: vazgeçmek, de: [aufgeben, verzichten], pos: verb }
   - { tr: yorulmak, de: [müde werden], pos: verb }
   - { tr: zorunda, de: [gezwungen (… zorundayım = ich muss)], pos: phrase }
+  - { tr: artık, de: [nicht mehr (mit Verneinung), inzwischen], pos: adv }

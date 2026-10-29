@@ -37,7 +37,9 @@ Hier steht immer -me, nie -mek: Der Infinitiv auf -mek nimmt keinen Dativ und ke
 - Haberleri dinle**men** gerek. (Du musst die Nachrichten hören.)
 - Bunu herkesin bil**mesi** gerekiyor. (Das muss jeder wissen.)
 
-Im Vergleich: -meli (sollte), -mek zorunda (ist gezwungen), -mem lazım (muss, neutral).
+Ohne bestimmte Person (man muss) steht der Infinitiv: Kaynağı kontrol et**mek** lazım. (Man muss die Quelle prüfen.)
+
+Im Vergleich: -meli (sollte, muss aus eigener Einsicht), -mek zorunda (ist gezwungen), -mem lazım (muss, neutral).
 
 ## Ich möchte, dass du …: -meni istiyorum
 
