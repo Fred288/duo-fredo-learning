@@ -667,7 +667,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Bu kalem senin mi? – Hayır, Ali'ninki.
-        answers: [Ist das dein Stift? – Nein, der von Ali., Ist dieser Stift deiner? – Nein, er gehört Ali., Ist das dein Stift? – Nein, das ist Alis., Ist das dein Stift? – Nein, Alis., Ist das dein Stift? – Nein, das ist der von Ali., Gehört dieser Stift dir? – Nein, er gehört Ali., Ist der Stift deiner? – Nein, Alis.]
+        answers: ["Ist das dein Stift? – Nein, der von Ali.", "Ist dieser Stift deiner? – Nein, er gehört Ali.", "Ist das dein Stift? – Nein, das ist Alis.", "Ist das dein Stift? – Nein, Alis.", "Ist das dein Stift? – Nein, das ist der von Ali.", "Gehört dieser Stift dir? – Nein, er gehört Ali.", "Ist der Stift deiner? – Nein, Alis."]
       - id: a2-u09-l9-e10
         type: multiple_choice
         prompt: Was heißt „arkadaşlık“?

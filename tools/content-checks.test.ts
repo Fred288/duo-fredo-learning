@@ -48,6 +48,27 @@ describe('parseUnitFile', () => {
     const { errors } = parseUnitFile('x.yaml', yamlUnit('a1-u01').replace('direction: de_tr', ''));
     expect(errors).toContainEqual(expect.stringContaining('x.yaml: lessons.0.exercises.0'));
   });
+
+  it('meldet Sätze, die in einer Flow-Liste am Komma zerfallen', () => {
+    const split = yamlUnit('a1-u01').replace(
+      'answers: [ev]',
+      'answers: [Aa, anahtarımı unutmuşum!, Er sagt, was passiert.]',
+    );
+    const { unit, errors } = parseUnitFile('x.yaml', split);
+    expect(unit).toBeDefined();
+    expect(errors).toEqual([
+      expect.stringMatching(/^x\.yaml:\d+: "Aa, anahtarımı unutmuşum!" zerfällt/),
+      expect.stringContaining('"Er sagt, was passiert."'),
+    ]);
+  });
+
+  it('lässt gequotete Sätze und gewöhnliche Listen durch', () => {
+    const ok = yamlUnit('a1-u01').replace(
+      'answers: [ev]',
+      'answers: ["Aa, anahtarımı unutmuşum!", In Erzurum, In Ankara, Es ist überall gleich., Kind, das Kind]',
+    );
+    expect(parseUnitFile('x.yaml', ok).errors).toEqual([]);
+  });
 });
 
 describe('checkUnits', () => {

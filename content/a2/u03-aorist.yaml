@@ -467,7 +467,7 @@ lessons:
       - id: a2-u03-l6-e9
         type: multiple_choice
         prompt: Warum steht im Text der Aorist (okurum, oynarım)?
-        options: [Er beschreibt Gewohnheiten., Er beschreibt, was gerade passiert., Er beschreibt die Zukunft.]
+        options: [Er beschreibt Gewohnheiten., "Er beschreibt, was gerade passiert.", Er beschreibt die Zukunft.]
         answer: Er beschreibt Gewohnheiten.
       - id: a2-u03-l6-e10
         type: word_bank

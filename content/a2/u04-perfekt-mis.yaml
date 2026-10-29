@@ -301,7 +301,7 @@ lessons:
       - id: a2-u04-l4-e6
         type: word_bank
         prompt: Oh, ich habe meinen Schlüssel ja vergessen! (du merkst es gerade erst)
-        answers: [Aa, anahtarımı unutmuşum!]
+        answers: ["Aa, anahtarımı unutmuşum!"]
         distractors: [unutacağım, anahtar]
         explanation: In der 1. Person drückt -miş eine plötzliche Erkenntnis aus.
       - id: a2-u04-l4-e7

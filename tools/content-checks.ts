@@ -1,4 +1,4 @@
-import { parse as parseYaml } from 'yaml';
+import { isScalar, parse as parseYaml, parseDocument, Scalar, visit } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { sameForm, solveExercise, solveForm, solveParadigm } from '../src/content/lexicon';
 import { isAmbiguous, pieces, presentAlternative } from '../src/content/segmenting';
@@ -34,7 +34,35 @@ export function parseUnitFile(file: string, text: string): { unit?: Unit; errors
       ),
     };
   }
-  return { unit: result.data, errors: [] };
+  return { unit: result.data, errors: splitSentences(file, text) };
+}
+
+const SENTENCE_END = /[.?!…]["“”»)]?$/u;
+
+/**
+ * Falle in Flow-Listen (`answers: [Aa, anahtarımı unutmuşum!]`): ein Satz mit Komma zerfällt
+ * ungequotet in zwei Einträge. Erkennungszeichen: ein Eintrag ohne Satzzeichen am Ende, der
+ * nächste beginnt klein und endet auf . ? ! …; beide ungequotet.
+ */
+export function splitSentences(file: string, text: string): string[] {
+  const errors: string[] = [];
+  visit(parseDocument(text), {
+    Seq(_key, seq) {
+      if (!seq.flow) return;
+      seq.items.forEach((a, i) => {
+        const b = seq.items[i + 1];
+        if (!isScalar(a) || !isScalar(b) || a.type !== Scalar.PLAIN || b.type !== Scalar.PLAIN)
+          return;
+        const [first, next] = [String(a.value), String(b.value)];
+        if (SENTENCE_END.test(first) || !/^\p{Ll}/u.test(next) || !SENTENCE_END.test(next)) return;
+        const line = text.slice(0, a.range?.[0] ?? 0).split('\n').length;
+        errors.push(
+          `${file}:${line}: "${first}, ${next}" zerfällt an einem Komma in zwei Einträge (in Anführungszeichen setzen)`,
+        );
+      });
+    },
+  });
+  return errors;
 }
 
 /** Prüfungen über alle Units hinweg (doppelte IDs, Dateiverweise, Review-Stand). */
