@@ -119,7 +119,7 @@ const CONFUSABLE: readonly (readonly SegmentTag[])[] = [
   ['POSS_1SG', 'POSS_2SG', 'POSS_3SG', 'POSS_1PL', 'POSS_2PL', 'POSS_3PL', 'ACC'],
   ['P1SG', 'P2SG', 'P3SG', 'P1PL', 'P2PL', 'P3PL', 'POSS_1SG', 'POSS_2SG', 'POSS_1PL'],
   ['PL', 'P3PL', 'POSS_3PL'],
-  ['PRES', 'PAST', 'FUT', 'AOR', 'EVID', 'NEC', 'IMP'],
+  ['PRES', 'PAST', 'FUT', 'AOR', 'EVID', 'NEC', 'IMP', 'COND', 'OPT'],
   ['NEG', 'Q', 'ABIL', 'NEG_COP', 'PASS'],
   ['LI', 'SIZ', 'LIK', 'CI', 'KI'],
   ['DIR', 'P3SG', 'LOC'],

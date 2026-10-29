@@ -1,6 +1,15 @@
 import { z } from 'zod';
 import { MORPH_TAGS, VERB_TAGS } from '../morphology/tags';
-import { COPULA_TENSES, IMPERATIVE_PERSONS, PERSONS, TENSES } from '../morphology/verb';
+import {
+  COMPOUND_TENSES,
+  COMPOUNDS,
+  COPULA_TENSES,
+  IMPERATIVE_PERSONS,
+  OPTATIVE_PERSONS,
+  PERSONS,
+  TENSES,
+  type Tense,
+} from '../morphology/verb';
 
 export const LEVELS = ['A1', 'A2', 'B1', 'B2'] as const;
 export const Level = z.enum(LEVELS);
@@ -145,7 +154,14 @@ const COPULA_TENSE_SET: readonly string[] = COPULA_TENSES;
 
 /** Zeit passt zum Modus; Imperativ nur für 2./3. Person. Gemeinsam für Konjugation und Tabelle. */
 function checkVerbForm(
-  e: { tense?: string; ability?: boolean; polite?: boolean; passive?: boolean },
+  e: {
+    tense?: Tense;
+    ability?: boolean;
+    polite?: boolean;
+    passive?: boolean;
+    question?: boolean;
+    compound?: (typeof COMPOUNDS)[number];
+  },
   copula: boolean,
   persons: readonly string[],
   ctx: z.RefinementCtx,
@@ -155,6 +171,32 @@ function checkVerbForm(
   }
   if (copula && (e.ability || e.passive)) {
     ctx.addIssue({ code: 'custom', path: ['ability'], message: 'ability nur bei Verben' });
+  }
+  if (copula && e.tense === 'conditional' && e.question) {
+    ctx.addIssue({ code: 'custom', path: ['question'], message: 'keine Frage mit ise' });
+  }
+  if (e.compound) {
+    if (copula) {
+      ctx.addIssue({ code: 'custom', path: ['compound'], message: 'compound nur bei Verben' });
+    } else if (!COMPOUND_TENSES[e.compound].includes(e.tense ?? 'present')) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['compound'],
+        message: `keine Kopula ${e.compound} nach ${e.tense ?? 'present'}`,
+      });
+    } else if (e.compound === 'conditional' && e.question) {
+      ctx.addIssue({ code: 'custom', path: ['question'], message: 'keine Frage mit ise' });
+    }
+  }
+  if (e.tense === 'optative') {
+    const bad = persons.filter((p) => !OPTATIVE_PERSONS.includes(p as never));
+    if (bad.length) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['person'],
+        message: `Optativ nicht für ${bad.join(', ')}`,
+      });
+    }
   }
   if (e.tense === 'imperative') {
     if (e.ability)
@@ -187,6 +229,7 @@ export const Conjugation = z
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
+    compound: z.enum(COMPOUNDS).optional(),
     target: nonEmpty,
   })
   .superRefine((e, ctx) => checkVerbForm(e, e.mode === 'copula', [e.person], ctx));
@@ -207,14 +250,15 @@ export const Paradigm = z
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
+    compound: z.enum(COMPOUNDS).optional(),
     negative: z.boolean().optional(),
     question: z.boolean().optional(),
     targets: z.array(nonEmpty).min(2),
   })
   .superRefine((e, ctx) => {
     if (e.kind !== 'noun') {
-      if (e.tense === 'imperative' && !e.persons) {
-        ctx.addIssue({ code: 'custom', path: ['persons'], message: 'Imperativ braucht persons' });
+      if ((e.tense === 'imperative' || e.tense === 'optative') && !e.persons) {
+        ctx.addIssue({ code: 'custom', path: ['persons'], message: `${e.tense} braucht persons` });
       }
       checkVerbForm(e, e.kind === 'copula', e.persons ?? [], ctx);
     }
@@ -252,6 +296,7 @@ export const FormSpec = z.discriminatedUnion('kind', [
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
+    compound: z.enum(COMPOUNDS).optional(),
   }),
 ]);
 

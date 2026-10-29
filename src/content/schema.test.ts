@@ -75,6 +75,37 @@ describe('Unit-Schema', () => {
     expect(issues(u).length).toBeGreaterThan(0);
   });
 
+  it('compound, Optativ und ise nur in erlaubten Kombinationen', () => {
+    const conj = (extra: object) => {
+      const u = validUnit();
+      u.lessons[0]!.exercises[0] = {
+        id: 'a1-u03-l1-e1',
+        type: 'conjugation',
+        mode: 'verb',
+        lemma: 'gelmek',
+        person: '1sg',
+        target: 'x',
+        ...extra,
+      } as never;
+      return issues(u);
+    };
+    expect(conj({ tense: 'present', compound: 'past' })).toEqual([]);
+    expect(conj({ compound: 'past' })).toEqual([]);
+    expect(conj({ tense: 'past', compound: 'past' })).toContainEqual(
+      expect.stringContaining('compound'),
+    );
+    expect(conj({ tense: 'aorist', compound: 'conditional', question: true })).toContainEqual(
+      expect.stringContaining('question'),
+    );
+    expect(conj({ tense: 'optative', person: '3sg' })).toContainEqual(
+      expect.stringContaining('Optativ'),
+    );
+    expect(conj({ mode: 'copula', lemma: 'öğrenci', compound: 'past' })).toContainEqual(
+      expect.stringContaining('compound'),
+    );
+    expect(conj({ mode: 'copula', lemma: 'öğrenci', tense: 'conditional' })).toEqual([]);
+  });
+
   it('verlangt source und license', () => {
     const u: Record<string, unknown> = validUnit();
     delete u.source;

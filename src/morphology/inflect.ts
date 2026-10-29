@@ -46,7 +46,9 @@ export const KNOWN_LIMITS = [
   'Stumme Endung arabischer Lehnwörter (cami → camii)',
   'ne + Possessiv 3. Sg. ist „nesi“, mit y_stem entstünde „neyi“',
   'Kopula imiş in der Frage (öğretmen miymiş) ungeprüft',
-  'Verbmorphologie ab Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Kausativ)',
+  'Partizipien, Verbalnomen und Konverbien (B1, in Arbeit); Kausativ (B2)',
+  'Optativ nur 1sg/1pl (gelesin, geleler veraltet); geldiydi, gelseymiş bewusst nicht',
+  'Frage mit ise (geliyor muysa) nicht gebildet',
   'benimki/seninki: Pronomen + -ki nur als Text, nicht über die Engine',
   'Unregelmäßiges Passiv (anlamak → anlaşılmak) nicht abgedeckt',
 ] as const;

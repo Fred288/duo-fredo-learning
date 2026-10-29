@@ -45,7 +45,9 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 
 **Stufe 2 umgesetzt**: Präteritum -DI mit Personalendungen Typ 2 (Frage: geldin mi?), Futur -(y)AcAk mit k → ğ vor vokalischer Endung und ye-/de- → yiyecek/diyecek, Aorist (-r / -Ar / -Ir mit der Liste der 13 Einsilber, Override `aorist: ar|ir`, Verneinung gelmem/gelmez/gelmeyiz). `tense` in `conjugation` und `paradigm`.
 
-**Stufe 3 umgesetzt**: Perfekt/Evidential -mIş, Notwendigkeit -mAlI, Imperativ (gel, gelsin, gelin/geliniz, gelsinler; verneint gelme, gelmeyin; git → gidin, ye → yiyin), „können“ -(y)Abil als Option `ability` in allen Zeiten (gelebilirim, gelebildim; verneint gelemem, gelemiyorum, gidemem, yiyemem), Kopula-Vergangenheit -(y)DI mit Typ 2 (öğrenciydim, Türktüm, değildim, öğretmen miydin?) und -(y)mIş. Offen ab hier: Stufe 4 (Voluntativ, -Iyordu, Konditional -sA, Partizipien, Verbalnomen, Kausativ).
+**Stufe 3 umgesetzt**: Perfekt/Evidential -mIş, Notwendigkeit -mAlI, Imperativ (gel, gelsin, gelin/geliniz, gelsinler; verneint gelme, gelmeyin; git → gidin, ye → yiyin), „können“ -(y)Abil als Option `ability` in allen Zeiten (gelebilirim, gelebildim; verneint gelemem, gelemiyorum, gidemem, yiyemem), Kopula-Vergangenheit -(y)DI mit Typ 2 (öğrenciydim, Türktüm, değildim, öğretmen miydin?) und -(y)mIş. 
+
+**Stufe 4a umgesetzt (B1)**: Konditional -sA mit Typ 2 (gelsem, gelmesem, gelsem mi), Optativ 1sg/1pl -(y)AyIm/-(y)AlIm (geleyim, gelelim, gideyim, yiyelim), Kopula an der Zeitform über `compound` (idi: geliyordum, gelecektim, gelirdim/gelmezdim, gelmiştim, gelmeliydim, gelseydim; imiş: geliyormuşum, gelmişmiş; ise: geliyorsam, gelirse, geldiysem), Frage vor der Kopula (geliyor muydum), Kopula ise im Nominalsatz (öğrenciysem, değilse). Offen: Stufe 4b (Partizipien, Verbalnomen, Konverbien), Kausativ (B2).
 
 **Passiv umgesetzt** (Option `passive` in `conjugate()`, `conjugation` und `paradigm`): -Il nach Konsonant, -In nach l, -n nach Vokal (yapılıyor, bilinir, okunur, yenir), Aorist immer -Ir, kombinierbar mit `ability` (yapılabilir). Reflexiv ist lexikalisch (yıkanmak, giyinmek) und über das Pronomen kendi (kendim, kendine).
 
@@ -77,7 +79,7 @@ Zusätzlich nötig:
 4. ✅ Stufe 2: -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag
 5. ✅ Stufe 3: -(y)Abil, -mAlI, Imperativ, -mIş, idi/imiş
 6. ✅ -ki, Ableitungen -lI/-sIz/-lIk/-CI mit `C`, Passiv
-7. Stufe 4: Voluntativ, -Iyordu, -sA, Partizipien, Kausativ; `G`; `doubles`, `consonant_final`
+7. 🟡 Stufe 4: ✅ Optativ, idi/imiş/ise, -sA (4a); offen Partizipien, Verbalnomen, Konverbien (4b), Kausativ; `G`; `doubles`, `consonant_final`
 
 Jede Regel bekommt Tabellentests nach dem Muster von `src/morphology/inflect.test.ts`; offene
 Punkte stehen dort als `it.todo`.

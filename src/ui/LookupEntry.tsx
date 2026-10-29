@@ -19,6 +19,7 @@ export function formLabelText(label: FormLabel): string {
     case 'verb':
       return [
         t(`tense.${label.tense}`),
+        label.compound && t(`compound.${label.compound}`),
         t(`person.${label.person}`),
         label.ability && t('tag.ABIL'),
         label.passive && t('lookup.passive'),

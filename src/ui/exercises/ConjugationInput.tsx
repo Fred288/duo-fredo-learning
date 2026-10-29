@@ -15,16 +15,27 @@ interface Props {
 /** Formel-Teile für Zeit, „können“ und Höflichkeit (gemeinsam mit der Tabelle). */
 export function tenseLabels(
   copula: boolean,
-  ex: { tense?: string; ability?: boolean; polite?: boolean; passive?: boolean },
+  ex: {
+    tense?: string;
+    ability?: boolean;
+    polite?: boolean;
+    passive?: boolean;
+    compound?: 'past' | 'evidential' | 'conditional';
+  },
 ): string[] {
   if (copula) {
-    return ex.tense === 'past' || ex.tense === 'evidential' ? [t(`copula.${ex.tense}`)] : [];
+    return ex.tense === 'past' || ex.tense === 'evidential' || ex.tense === 'conditional'
+      ? [t(`copula.${ex.tense}`)]
+      : [];
   }
   const tense = ex.tense as Exclude<typeof ex.tense, undefined>;
   return [
     ex.passive ? t('ex.conjugation.passive') : '',
     ex.ability ? t('ex.conjugation.ability') : '',
-    tense && tense !== 'present' ? t(`tense.${tense as 'past'}`) : '',
+    // Mit Kopula wird auch das Präsens genannt: „Präsens · mit idi“ (geliyordum).
+    tense && (tense !== 'present' || ex.compound) ? t(`tense.${tense as 'past'}`) : '',
+    !tense && ex.compound ? t('tense.present') : '',
+    ex.compound ? t(`compound.${ex.compound}`) : '',
     ex.polite ? t('ex.conjugation.polite') : '',
   ].filter(Boolean);
 }

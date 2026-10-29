@@ -18,12 +18,16 @@ export {
 export { MORPH_TAGS, VERB_TAGS, type AnyTag, type MorphTag, type VerbTag } from './tags';
 export {
   conjugate,
+  COMPOUND_TENSES,
+  COMPOUNDS,
   COPULA_TENSES,
   IMPERATIVE_PERSONS,
+  OPTATIVE_PERSONS,
   PERSONS,
   predicate,
   TENSES,
   verbStem,
+  type Compound,
   type ConjugateOptions,
   type Tense,
   type Person,

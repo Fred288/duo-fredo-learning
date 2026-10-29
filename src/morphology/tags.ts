@@ -34,6 +34,8 @@ export const VERB_TAGS = [
   'ABIL', // -(y)Abil, verneint -(y)A
   'IMP', // Imperativ -sIn, -(y)In, -sInlAr
   'PASS', // Passiv -Il / -In / -n
+  'COND', // Konditional -sA, Kopula -(y)sA (ise)
+  'OPT', // Optativ -(y)A (geleyim, gelelim)
   'NEG', // -mA (vor -yor: -mI)
   'Q', // Fragepartikel mI (getrennt geschrieben)
   'NEG_COP', // değil

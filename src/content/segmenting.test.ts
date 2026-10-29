@@ -113,6 +113,13 @@ describe('presentAlternative', () => {
     );
   });
 
+  it('auch mit Kopula (bekli-yor-du-m)', () => {
+    expect(alt(verb('beklemek', { compound: 'past' }))).toBe('bekli:STEM yor:PRES du:PAST m:P1SG');
+    expect(alt(verb('beklemek', { compound: 'past', question: true }))).toBe(
+      'bekli:STEM yor:PRES mu:Q ydu:PAST m:P1SG',
+    );
+  });
+
   it('Verneinung vor -yor: auch gel-m-iyor', () => {
     expect(alt(verb('gelmek', { negative: true }))).toBe('gel:STEM m:NEG iyor:PRES um:P1SG');
     expect(alt(verb('beklemek', { negative: true }))).toBe('bekle:STEM m:NEG iyor:PRES um:P1SG');

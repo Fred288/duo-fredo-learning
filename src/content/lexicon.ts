@@ -43,6 +43,7 @@ export function solveForm(spec: FormSpec, vocab: readonly Vocab[] = []): Inflect
         ability: spec.ability,
         polite: spec.polite,
         passive: spec.passive,
+        compound: spec.compound,
         ...flags,
       })
     : predicate(stem, { ...flags, dir: spec.dir, tense: copulaTense(spec.tense) });
@@ -58,6 +59,7 @@ export function formSpecOf(ex: EngineExercise | ParadigmExercise, row = 0): Form
     ability: ex.ability,
     polite: ex.polite,
     passive: ex.passive,
+    compound: ex.compound,
   };
   if (ex.type === 'conjugation') {
     return defined({ kind: ex.mode, lemma: ex.lemma, person: ex.person, dir: ex.dir, ...verbal });
@@ -78,9 +80,9 @@ export function solveExercise(ex: EngineExercise, vocab: readonly Vocab[] = []):
   return solveForm(formSpecOf(ex), vocab);
 }
 
-/** Schema stellt sicher, dass Kopula-Übungen nur present/past/evidential nutzen. */
+/** Schema stellt sicher, dass Kopula-Übungen nur present/past/evidential/conditional nutzen. */
 const copulaTense = (tense?: string) =>
-  tense === 'past' || tense === 'evidential' ? tense : undefined;
+  tense === 'past' || tense === 'evidential' || tense === 'conditional' ? tense : undefined;
 
 /** Zeilen einer Tabelle: Tag-Folgen (Nomen) oder Personen (Verb, Kopula). */
 export function paradigmRows(ex: ParadigmExercise): (MorphTag[] | Person)[] {

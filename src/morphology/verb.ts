@@ -44,8 +44,28 @@ export const TENSES = [
   'evidential',
   'necessitative',
   'imperative',
+  'conditional',
+  'optative',
 ] as const;
 export type Tense = (typeof TENSES)[number];
+
+/** Kopula an einer Zeitform: idi (geliyordum), imiş (geliyormuş), ise (geliyorsa). */
+export const COMPOUNDS = ['past', 'evidential', 'conditional'] as const;
+export type Compound = (typeof COMPOUNDS)[number];
+
+/** Zeiten, an die die Kopula treten kann (gelseydi ja, geldiydi nein). */
+export const COMPOUND_TENSES: Record<Compound, readonly Tense[]> = {
+  past: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'conditional'],
+  evidential: ['present', 'future', 'aorist', 'evidential', 'necessitative'],
+  conditional: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'past'],
+};
+
+// Kopula-Baustein; die Endung danach ist bei idi und ise Typ 2, bei imiş Typ 1.
+const COMPOUND_SUFFIX: Record<Compound, { tag: VerbTag; template: string }> = {
+  past: { tag: 'PAST', template: '(y)DI' },
+  evidential: { tag: 'EVID', template: '(y)mIş' },
+  conditional: { tag: 'COND', template: '(y)sA' },
+};
 
 export interface VerbStem {
   /** Infinitiv (gelmek) oder Stamm (gel). */
@@ -67,13 +87,15 @@ export interface ConjugateOptions {
   polite?: boolean;
   /** Passiv: -Il nach Konsonant, -In nach l, -n nach Vokal (yapıl-, bilin-, okun-). */
   passive?: boolean;
+  /** Kopula idi/imiş/ise nach der Zeit (geliyordum, gelirmiş, gelecekse). */
+  compound?: Compound;
 }
 
-export const COPULA_TENSES = ['present', 'past', 'evidential'] as const;
+export const COPULA_TENSES = ['present', 'past', 'evidential', 'conditional'] as const;
 
 export interface PredicateOptions {
   person: Person;
-  /** Vergangenheit -(y)DI (öğretmendim) oder -(y)mIş (öğretmenmiş). */
+  /** Vergangenheit -(y)DI (öğretmendim), -(y)mIş (öğretmenmiş), Bedingung -(y)sA (öğretmensem). */
   tense?: (typeof COPULA_TENSES)[number];
   negative?: boolean;
   question?: boolean;
@@ -94,8 +116,24 @@ class Builder {
   /** Wörter, aus denen die Form besteht (Fragepartikel und değil stehen getrennt). */
   words: string[] = [''];
 
+  /** Weiterbauen an einer fertigen Form (Kopula nach der Zeit). */
+  static from(inf: Inflection): Builder {
+    const b = new Builder();
+    b.segments = inf.segments.map((s) => ({ ...s }));
+    b.steps = [...inf.steps];
+    b.words = [inf.form];
+    return b;
+  }
   get current(): string {
     return this.words.at(-1)!;
+  }
+  /** Fragepartikel mI als eigenes Wort, harmonisiert mit dem vorangehenden. */
+  particle() {
+    this.add(
+      'Q',
+      'm' + realizeVowel('I', lastVowel(trLower(this.current))!, 'Q', this.steps),
+      true,
+    );
   }
   add(tag: Segment['tag'], text: string, newWord = false) {
     if (newWord) this.words.push(text);
@@ -186,11 +224,10 @@ function softenedStem(verb: VerbStem, stem: string, tag: VerbTag, steps: Step[])
 /** Personalendung Typ 2 am Verb, die Fragepartikel steht danach ohne Endung (geldin mi). */
 function personType2AndQuestion(b: Builder, person: Person, question: boolean) {
   b.suffix(PERSON_TAG[person], TYPE2[person]);
-  if (question) {
-    const particle = 'm' + realizeVowel('I', lastVowel(trLower(b.current))!, 'Q', b.steps);
-    b.add('Q', particle, true);
-  }
+  if (question) b.particle();
 }
+
+export const OPTATIVE_PERSONS: readonly Person[] = ['1sg', '1pl'];
 
 export const IMPERATIVE_PERSONS: readonly Person[] = ['2sg', '3sg', '2pl', '3pl'];
 
@@ -198,9 +235,11 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
   const verb: VerbStem = typeof input === 'string' ? { form: input } : input;
   const stem = verbStem(verb.form);
   if (!lastVowel(stem)) throw new MorphError(`Verbstamm "${verb.form}" enthält keinen Vokal`);
+  if (opts.compound) return withCompound(verb, opts);
   if (opts.passive) return withPassive(verb, stem, opts);
   if (opts.ability) return withAbility(verb, stem, opts);
   if (opts.tense === 'imperative') return imperative(verb, stem, opts);
+  if (opts.tense === 'optative') return optative(verb, stem, opts);
   const b = new Builder();
   const question = opts.question ?? false;
 
@@ -240,7 +279,58 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
     case 'aorist':
       aorist(b, verb, stem, opts.person, opts.negative ?? false, question);
       break;
+    case 'conditional':
+      b.add('STEM', stem);
+      if (opts.negative) b.suffix('NEG', 'mA');
+      b.suffix('COND', 'sA');
+      personType2AndQuestion(b, opts.person, question);
+      break;
   }
+  return b.result();
+}
+
+/**
+ * Zeitform + Kopula: Die Zeit wird in der 3. Person gebildet (geliyor, gelmez, gelse), die
+ * 3. Person Plural setzt -lAr davor (geliyorlardı), dann folgen Frage, Kopula und Endung.
+ */
+function withCompound(verb: VerbStem, opts: ConjugateOptions): Inflection {
+  const compound = opts.compound!;
+  if (!COMPOUND_TENSES[compound].includes(opts.tense)) {
+    throw new MorphError(`Keine Kopula ${compound} nach ${opts.tense}`);
+  }
+  if (opts.question && compound === 'conditional') throw new MorphError('Keine Frage mit ise');
+  const base = conjugate(verb, { ...opts, compound: undefined, person: '3sg', question: false });
+  const b = Builder.from(base);
+  const tag = PERSON_TAG[opts.person];
+  if (opts.person === '3pl') b.suffix(tag, TYPE1['3pl']);
+  if (opts.question) b.particle();
+  const cop = COMPOUND_SUFFIX[compound];
+  b.suffix(cop.tag, cop.template);
+  if (opts.person !== '3pl') {
+    b.suffix(tag, (compound === 'evidential' ? TYPE1 : TYPE2)[opts.person]);
+  }
+  return b.result();
+}
+
+/** Optativ (Wunsch, Vorschlag): geleyim, gelelim; verneint gelmeyeyim; ye → yiyeyim. */
+function optative(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
+  if (!OPTATIVE_PERSONS.includes(opts.person)) {
+    throw new MorphError(`Optativ gibt es hier nur für 1sg und 1pl, nicht ${opts.person}`);
+  }
+  const b = new Builder();
+  if (opts.negative) {
+    b.add('STEM', stem);
+    b.suffix('NEG', 'mA');
+  } else if (IRREGULAR_FUTURE[stem]) {
+    const raised = IRREGULAR_FUTURE[stem]!;
+    b.steps.push({ tag: 'OPT', rule: 'stem_raising', from: stem.at(-1)!, to: raised.at(-1)! });
+    b.add('STEM', raised);
+  } else {
+    b.add('STEM', softenedStem(verb, stem, 'OPT', b.steps));
+  }
+  b.suffix('OPT', '(y)A');
+  b.suffix(PERSON_TAG[opts.person], opts.person === '1sg' ? 'yIm' : 'lIm');
+  if (opts.question) b.particle();
   return b.result();
 }
 
@@ -430,7 +520,7 @@ export function predicate(input: Stem | string, opts: PredicateOptions): Inflect
   const word = stemSpelling(stem);
   const b = new Builder();
   b.add('STEM', word);
-  if (opts.tense === 'past' || opts.tense === 'evidential') return copulaPast(b, stem, opts);
+  if (opts.tense && opts.tense !== 'present') return copulaPast(b, stem, opts);
 
   if (opts.negative) b.add('NEG_COP', 'değil', true);
   else if (stem.proper && (TYPE1[opts.person] || opts.dir) && !opts.question) {
@@ -450,20 +540,22 @@ export function predicate(input: Stem | string, opts: PredicateOptions): Inflect
   return b.result();
 }
 
-/** „war“: -(y)DI + Typ 2 (öğrenciydim), „sei angeblich“: -(y)mIş + Typ 1 (öğretmenmiş). */
+/**
+ * „war“: -(y)DI + Typ 2 (öğrenciydim), „sei angeblich“: -(y)mIş + Typ 1 (öğretmenmiş),
+ * „wenn … ist“: -(y)sA + Typ 2 (öğrenciysem).
+ */
 function copulaPast(b: Builder, stem: Stem, opts: PredicateOptions): Inflection {
-  const past = opts.tense === 'past';
+  const compound = opts.tense as Compound;
+  if (opts.question && compound === 'conditional') throw new MorphError('Keine Frage mit ise');
+  const cop = COMPOUND_SUFFIX[compound];
   if (opts.negative) b.add('NEG_COP', 'değil', true);
   else if (stem.proper && !opts.question) {
     b.add('STEM', "'");
     b.segments.pop();
-    b.steps.push({ tag: past ? 'PAST' : 'EVID', rule: 'apostrophe' });
+    b.steps.push({ tag: cop.tag, rule: 'apostrophe' });
   }
-  if (opts.question) {
-    const particle = 'm' + realizeVowel('I', lastVowel(trLower(b.current))!, 'Q', b.steps);
-    b.add('Q', particle, true);
-  }
-  b.suffix(past ? 'PAST' : 'EVID', past ? '(y)DI' : '(y)mIş');
-  b.suffix(PERSON_TAG[opts.person], (past ? TYPE2 : TYPE1)[opts.person]);
+  if (opts.question) b.particle();
+  b.suffix(cop.tag, cop.template);
+  b.suffix(PERSON_TAG[opts.person], (compound === 'evidential' ? TYPE1 : TYPE2)[opts.person]);
   return b.result();
 }

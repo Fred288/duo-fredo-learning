@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { inflect } from '../morphology';
+import { conjugate, inflect, predicate } from '../morphology';
 import { explainSteps } from './explain';
 
 describe('explainSteps', () => {
@@ -15,6 +15,28 @@ describe('explainSteps', () => {
     expect(lines).toContain('Auslaut „p“ wird vor einem Vokal zu „b“ (Akkusativ)');
     expect(explainSteps(inflect('araba', ['DAT']).steps)).toContain(
       'Pufferlaut „y“ trennt zwei Vokale → Dativ',
+    );
+  });
+
+  it('begründet zusammengesetzte Zeiten, Konditional und Optativ ohne offene Platzhalter', () => {
+    const forms = [
+      conjugate('gelmek', { tense: 'present', compound: 'past', person: '1sg' }),
+      conjugate('gelmek', { tense: 'past', compound: 'conditional', person: '1sg' }),
+      conjugate('okumak', { tense: 'optative', person: '1sg' }),
+      conjugate('yemek', { tense: 'optative', person: '1pl' }),
+      conjugate('gelmek', { tense: 'conditional', person: '3pl', negative: true }),
+      predicate('hasta', { person: '1sg', tense: 'conditional' }),
+    ];
+    for (const f of forms) {
+      const lines = explainSteps(f.steps);
+      expect(lines.length).toBeGreaterThan(0);
+      for (const line of lines) expect(line).not.toMatch(/\{|tag\./);
+    }
+    expect(explainSteps(forms[3]!.steps)).toContain(
+      'Vor dem Pufferlaut y wird „e“ zu „i“ (yiyecek, diyeyim) → Optativ -e',
+    );
+    expect(explainSteps(forms[1]!.steps)).toContain(
+      'Pufferlaut „y“ trennt zwei Vokale → Bedingung -se',
     );
   });
 

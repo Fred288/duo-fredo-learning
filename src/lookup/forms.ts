@@ -1,4 +1,6 @@
 import {
+  COMPOUND_TENSES,
+  COMPOUNDS,
   conjugate,
   inflect,
   MorphError,
@@ -6,6 +8,7 @@ import {
   PRONOUN_CASES,
   PRONOUN_LEMMAS,
   pronoun,
+  type Compound,
   type MorphTag,
   type Person,
   type PronounCase,
@@ -28,6 +31,7 @@ export type FormLabel =
       negative?: boolean;
       ability?: boolean;
       passive?: boolean;
+      compound?: Compound;
     };
 
 export interface Form {
@@ -99,11 +103,17 @@ export function pronounForms(entry: VocabEntry): Form[] {
 
 type VerbVariant = Pick<
   Extract<FormLabel, { kind: 'verb' }>,
-  'tense' | 'negative' | 'ability' | 'passive'
+  'tense' | 'negative' | 'ability' | 'passive' | 'compound'
 >;
 
 const VERB_VARIANTS: VerbVariant[] = [
   ...TENSES.flatMap((tense) => [{ tense }, { tense, negative: true }]),
+  ...COMPOUNDS.flatMap((compound) =>
+    COMPOUND_TENSES[compound].flatMap((tense) => [
+      { tense, compound },
+      { tense, compound, negative: true },
+    ]),
+  ),
   ...(['present', 'aorist'] as const).flatMap((tense) =>
     [{ ability: true }, { passive: true }].flatMap((v) => [
       { tense, ...v },

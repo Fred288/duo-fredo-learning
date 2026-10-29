@@ -45,7 +45,10 @@ export function conjugationTiles(
       if (ex.tense === 'aorist' && (ex.person === '1sg' || ex.person === '1pl')) {
         add([`z${NARROW[v] ?? 'i'}${ex.person === '1sg' ? 'm' : 'z'}`], `${seed}-z`);
       }
-    } else if ((seg.tag === 'PAST' || seg.tag === 'IMP') && seg.text.startsWith('y')) {
+    } else if (
+      (seg.tag === 'PAST' || seg.tag === 'IMP' || seg.tag === 'COND' || seg.tag === 'EVID') &&
+      seg.text.startsWith('y')
+    ) {
       // Pufferlaut vergessen: öğrenci-dim, oku-in
       add([seg.text.slice(1)], seed);
       add(harmonyVariants(seg.text), `${seed}-h`);
