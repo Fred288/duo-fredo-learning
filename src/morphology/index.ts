@@ -18,6 +18,7 @@ export {
 export { MORPH_TAGS, VERB_TAGS, type AnyTag, type MorphTag, type VerbTag } from './tags';
 export {
   conjugate,
+  conjugateVariants,
   COMPOUND_TENSES,
   COMPOUNDS,
   COPULA_TENSES,

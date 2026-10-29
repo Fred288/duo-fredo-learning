@@ -160,12 +160,17 @@ function checkVerbForm(
     polite?: boolean;
     passive?: boolean;
     question?: boolean;
+    dir?: boolean;
     compound?: (typeof COMPOUNDS)[number];
   },
   copula: boolean,
   persons: readonly string[],
   ctx: z.RefinementCtx,
 ) {
+  // -DIr verbindet sich nicht mit idi/imiş/ise (die Engine ließe es stillschweigend weg).
+  if (e.dir && (!copula || (e.tense && e.tense !== 'present'))) {
+    ctx.addIssue({ code: 'custom', path: ['dir'], message: 'dir nur bei Kopula im Präsens' });
+  }
   if (copula && e.tense && !COPULA_TENSE_SET.includes(e.tense)) {
     ctx.addIssue({ code: 'custom', path: ['tense'], message: `Kopula kennt kein ${e.tense}` });
   }
@@ -231,6 +236,8 @@ export const Conjugation = z
     passive: z.boolean().optional(),
     compound: z.enum(COMPOUNDS).optional(),
     target: nonEmpty,
+    /** Ebenso richtige Nebenformen der Engine; schreibt der Build (`withAlternatives`). */
+    alt_targets: z.array(nonEmpty).optional(),
   })
   .superRefine((e, ctx) => checkVerbForm(e, e.mode === 'copula', [e.person], ctx));
 
@@ -254,6 +261,8 @@ export const Paradigm = z
     negative: z.boolean().optional(),
     question: z.boolean().optional(),
     targets: z.array(nonEmpty).min(2),
+    /** Nebenformen je Zeile (leer = keine); schreibt der Build (`withAlternatives`). */
+    alt_targets: z.array(z.array(nonEmpty)).optional(),
   })
   .superRefine((e, ctx) => {
     if (e.kind !== 'noun') {
@@ -271,6 +280,9 @@ export const Paradigm = z
         path: ['targets'],
         message: `${e.targets.length} targets für ${rows} Zeilen`,
       });
+    }
+    if (e.alt_targets && e.alt_targets.length !== e.targets.length) {
+      ctx.addIssue({ code: 'custom', path: ['alt_targets'], message: 'eine Liste je Zeile' });
     }
   });
 

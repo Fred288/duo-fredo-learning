@@ -36,7 +36,7 @@ describe('explainSteps', () => {
       'Vor dem Pufferlaut y wird „e“ zu „i“ (yiyecek, diyeyim) → Optativ -e',
     );
     expect(explainSteps(forms[1]!.steps)).toContain(
-      'Pufferlaut „y“ trennt zwei Vokale → Bedingung -se',
+      'Pufferlaut „y“ trennt zwei Vokale → Bedingung -(y)se',
     );
   });
 

@@ -11,6 +11,7 @@ import {
 } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
+import { withAlternatives } from '../src/content/lexicon';
 import { withListening } from '../src/content/listening';
 import { checkGlossary, withPassages } from '../src/content/reading';
 import { vocabId } from '../src/content/schema';
@@ -82,6 +83,7 @@ const built: LoadedUnit[] = units.map(({ file, unit }) => {
   if (SEGMENT_LESSONS) out = withSegments(out, t('segment.lessonTitle'), allVocab);
   if (ORDER_LESSONS) out = withWordOrder(out, t('word_order.lessonTitle'), cases);
   if (LISTENING_LESSONS) out = withListening(out, t('listen.lessonTitle'));
+  out = withAlternatives(out, allVocab);
   return { file, unit: annotateSpeech(out, words) };
 });
 errors.push(...checkListen(built), ...checkSegments(built), ...checkWordOrder(built));

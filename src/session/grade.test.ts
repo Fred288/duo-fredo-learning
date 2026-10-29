@@ -148,3 +148,21 @@ describe('grade paradigm', () => {
     );
   });
 });
+
+describe('grade paradigm: Nebenformen', () => {
+  it('nimmt alt_targets je Zeile an', () => {
+    const ex: Extract<Exercise, { type: 'paradigm' }> = {
+      id: 'x-q',
+      type: 'paradigm',
+      kind: 'verb',
+      lemma: 'gelmek',
+      tense: 'present',
+      compound: 'past',
+      persons: ['1sg', '3pl'],
+      targets: ['geliyordum', 'geliyorlardı'],
+      alt_targets: [[], ['geliyordular']],
+    };
+    expect(paradigmCells(ex, 'geliyordum\ngeliyordular')).toEqual([true, true]);
+    expect(paradigmCells(ex, 'geliyordular\ngeliyorlardı')).toEqual([false, true]);
+  });
+});

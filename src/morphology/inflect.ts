@@ -45,7 +45,6 @@ export const KNOWN_LIMITS = [
   'Konsonantenverdopplung (hak → hakkı, ret → reddi)',
   'Stumme Endung arabischer Lehnwörter (cami → camii)',
   'ne + Possessiv 3. Sg. ist „nesi“, mit y_stem entstünde „neyi“',
-  'Kopula imiş in der Frage (öğretmen miymiş) ungeprüft',
   'Partizipien, Verbalnomen und Konverbien (B1, in Arbeit); Kausativ (B2)',
   'Optativ nur 1sg/1pl (gelesin, geleler veraltet); geldiydi, gelseymiş bewusst nicht',
   'Frage mit ise (geliyor muysa) nicht gebildet',

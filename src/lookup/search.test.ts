@@ -116,6 +116,9 @@ describe('lemmatize: gebeugte Formen', () => {
     ['gelseydim', 'gelmek'],
     ['gelirse', 'gelmek'],
     ['gelelim', 'gelmek'],
+    ['geliyordular', 'gelmek'],
+    ['gelebilirdim', 'gelmek'],
+    ['gelemezdim', 'gelmek'],
     ['bana', 'ben'],
     ['ışıkları', 'ışık'],
   ])('%s → %s', (q, id) => {
@@ -226,6 +229,6 @@ describe('Formtabellen', () => {
   it('Formenmengen sind begrenzt', () => {
     expect(nounForms(entry('ev')).length).toBe(97);
     // Zeiten, zusammengesetzte Zeiten (idi/imiş/ise), können und Passiv
-    expect(verbForms(entry('gelmek')).length).toBeLessThan(400);
+    expect(verbForms(entry('gelmek')).length).toBeLessThan(500);
   });
 });

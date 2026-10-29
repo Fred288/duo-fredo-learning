@@ -43,10 +43,13 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
     case 'suffix_builder':
       // Genau die Form zählt: kein Tippfehler-Spielraum, sonst wäre evda ≈ evde.
       return checkAnswer(answer, [ex.target], { allowTypos: false });
-    case 'conjugation':
-      return sameForm(squash(ex.target), squash(answer))
-        ? { verdict: 'correct', matched: ex.target, hints: [] }
-        : { verdict: 'wrong', hints: [] };
+    case 'conjugation': {
+      // Nebenformen (geliyordular neben geliyorlardı) zählen ebenso.
+      const matched = [ex.target, ...(ex.alt_targets ?? [])].find((form) =>
+        sameForm(squash(form), squash(answer)),
+      );
+      return matched ? { verdict: 'correct', matched, hints: [] } : { verdict: 'wrong', hints: [] };
+    }
     case 'paradigm':
       return paradigmCells(ex, answer).every(Boolean)
         ? { verdict: 'correct', matched: ex.targets.join(', '), hints: [] }
@@ -84,7 +87,9 @@ export function paradigmCells(ex: Extract<Exercise, { type: 'paradigm' }>, answe
   return ex.targets.map((target, i) => {
     const given = squash(cells[i] ?? '');
     const dotted = target.includes('İ') ? given.replaceAll('I', 'İ') : given;
-    return trLower(squash(target)) === trLower(dotted);
+    return [target, ...(ex.alt_targets?.[i] ?? [])].some(
+      (form) => trLower(squash(form)) === trLower(dotted),
+    );
   });
 }
 

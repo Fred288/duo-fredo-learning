@@ -2,6 +2,7 @@ import {
   COMPOUND_TENSES,
   COMPOUNDS,
   conjugate,
+  conjugateVariants,
   inflect,
   MorphError,
   PERSONS,
@@ -118,6 +119,9 @@ const VERB_VARIANTS: VerbVariant[] = [
     [{ ability: true }, { passive: true }].flatMap((v) => [
       { tense, ...v },
       { tense, ...v, negative: true },
+      // gelebilirdim, gelemezdim, yapılırdı, yapabiliyordum
+      { tense, ...v, compound: 'past' as const },
+      { tense, ...v, compound: 'past' as const, negative: true },
     ]),
   ),
 ];
@@ -128,7 +132,11 @@ export function verbForms(entry: VocabEntry): Form[] {
   return VERB_VARIANTS.flatMap((variant) =>
     PERSONS.flatMap((person) => {
       const form = attempt(() => conjugate(stem, { ...variant, person }).form);
-      return form ? [{ form, label: { kind: 'verb' as const, person, ...variant } }] : [];
+      if (!form) return [];
+      const label = { kind: 'verb' as const, person, ...variant };
+      // Nebenformen (geliyordular) mit derselben Angabe
+      const more = conjugateVariants(stem, { ...variant, person });
+      return [form, ...more].map((f) => ({ form: f, label }));
     }),
   );
 }

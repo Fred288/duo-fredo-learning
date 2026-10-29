@@ -293,23 +293,34 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
  * Zeitform + Kopula: Die Zeit wird in der 3. Person gebildet (geliyor, gelmez, gelse), die
  * 3. Person Plural setzt -lAr davor (geliyorlardı), dann folgen Frage, Kopula und Endung.
  */
-function withCompound(verb: VerbStem, opts: ConjugateOptions): Inflection {
+function withCompound(verb: VerbStem, opts: ConjugateOptions, latePlural = false): Inflection {
   const compound = opts.compound!;
   if (!COMPOUND_TENSES[compound].includes(opts.tense)) {
     throw new MorphError(`Keine Kopula ${compound} nach ${opts.tense}`);
   }
   if (opts.question && compound === 'conditional') throw new MorphError('Keine Frage mit ise');
+  if (opts.polite) throw new MorphError('polite nur im Imperativ');
   const base = conjugate(verb, { ...opts, compound: undefined, person: '3sg', question: false });
   const b = Builder.from(base);
   const tag = PERSON_TAG[opts.person];
-  if (opts.person === '3pl') b.suffix(tag, TYPE1['3pl']);
+  if (opts.person === '3pl' && !latePlural) b.suffix(tag, TYPE1['3pl']);
   if (opts.question) b.particle();
   const cop = COMPOUND_SUFFIX[compound];
   b.suffix(cop.tag, cop.template);
-  if (opts.person !== '3pl') {
+  if (opts.person !== '3pl' || latePlural) {
     b.suffix(tag, (compound === 'evidential' ? TYPE1 : TYPE2)[opts.person]);
   }
   return b.result();
+}
+
+/**
+ * Ebenso richtige Nebenformen: In der 3. Person Plural kann -lAr auch nach der Kopula stehen
+ * (geliyordular, gelseydiler, geldiyseler, geliyormuşlar, geliyor muydular).
+ */
+export function conjugateVariants(input: VerbStem | string, opts: ConjugateOptions): string[] {
+  if (!opts.compound || opts.person !== '3pl') return [];
+  const verb: VerbStem = typeof input === 'string' ? { form: input } : input;
+  return [withCompound(verb, opts, true).form];
 }
 
 /** Optativ (Wunsch, Vorschlag): geleyim, gelelim; verneint gelmeyeyim; ye → yiyeyim. */
@@ -317,6 +328,7 @@ function optative(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflect
   if (!OPTATIVE_PERSONS.includes(opts.person)) {
     throw new MorphError(`Optativ gibt es hier nur für 1sg und 1pl, nicht ${opts.person}`);
   }
+  if (opts.polite) throw new MorphError('polite nur im Imperativ');
   const b = new Builder();
   if (opts.negative) {
     b.add('STEM', stem);

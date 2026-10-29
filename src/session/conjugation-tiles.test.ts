@@ -116,3 +116,25 @@ describe('conjugationTiles: Stufe 3', () => {
     expect(imp.tokens).toEqual(expect.arrayContaining(['oku', 'yun', 'un']));
   });
 });
+
+describe('Nebenformen (alt_targets)', () => {
+  it('zählt geliyordular neben geliyorlardı', () => {
+    const ex = conj({
+      person: '3pl',
+      compound: 'past',
+      target: 'geliyorlardı',
+      alt_targets: ['geliyordular'],
+    });
+    expect(grade(ex, 'geliyorlardı', opts).matched).toBe('geliyorlardı');
+    expect(grade(ex, 'geliyordular', opts)).toMatchObject({
+      verdict: 'correct',
+      matched: 'geliyordular',
+    });
+    expect(grade(ex, 'geliyorlardılar', opts).verdict).toBe('wrong');
+  });
+
+  it('kein zim-Ablenker bei gelmezdim', () => {
+    const ex = conj({ tense: 'aorist', compound: 'past', negative: true, target: 'gelmezdim' });
+    expect(conjugationTiles(ex).tokens).not.toContain('zim');
+  });
+});

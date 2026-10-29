@@ -104,6 +104,29 @@ describe('Unit-Schema', () => {
       expect.stringContaining('compound'),
     );
     expect(conj({ mode: 'copula', lemma: 'öğrenci', tense: 'conditional' })).toEqual([]);
+    expect(
+      conj({ mode: 'copula', lemma: 'öğrenci', tense: 'conditional', question: true }),
+    ).toContainEqual(expect.stringContaining('question'));
+    expect(conj({ tense: 'imperative', person: '2sg', compound: 'past' })).toContainEqual(
+      expect.stringContaining('compound'),
+    );
+    expect(conj({ mode: 'copula', lemma: 'öğrenci', tense: 'past', dir: true })).toContainEqual(
+      expect.stringContaining('dir'),
+    );
+    expect(conj({ mode: 'copula', lemma: 'öğrenci', person: '3sg', dir: true })).toEqual([]);
+  });
+
+  it('Optativ-Tabelle braucht persons', () => {
+    const u = validUnit();
+    u.lessons[0]!.exercises[0] = {
+      id: 'a1-u03-l1-e1',
+      type: 'paradigm',
+      kind: 'verb',
+      lemma: 'gelmek',
+      tense: 'optative',
+      targets: ['geleyim', 'gelelim'],
+    } as never;
+    expect(issues(u)).toContainEqual(expect.stringContaining('persons'));
   });
 
   it('verlangt source und license', () => {

@@ -42,7 +42,7 @@ export function conjugationTiles(
       const v = seg.text.at(-1)!;
       add([NARROW[v] ? `m${NARROW[v]}` : `m${harmony2(v)}`], seed);
       // Aorist 1. Person: gelmezim statt gelmem
-      if (ex.tense === 'aorist' && (ex.person === '1sg' || ex.person === '1pl')) {
+      if (ex.tense === 'aorist' && !ex.compound && (ex.person === '1sg' || ex.person === '1pl')) {
         add([`z${NARROW[v] ?? 'i'}${ex.person === '1sg' ? 'm' : 'z'}`], `${seed}-z`);
       }
     } else if (

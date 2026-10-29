@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { MorphError } from './inflect';
 import {
   conjugate,
+  conjugateVariants,
   PERSONS,
   predicate,
   type ConjugateOptions,
@@ -369,5 +370,154 @@ describe('Kopula ise (-(y)sA, Typ 2)', () => {
     expect(() =>
       predicate('öğrenci', { person: '1sg', tense: 'conditional', question: true }),
     ).toThrow(MorphError);
+  });
+});
+
+describe('Nebenformen und weitere Kombinationen (Review E1)', () => {
+  it('3. Person Plural: -lAr auch nach der Kopula', () => {
+    const v = (opts: Opts) => conjugateVariants('gelmek', { ...opts, person: '3pl' });
+    expect(v({ tense: 'present', compound: 'past' })).toEqual(['geliyordular']);
+    expect(v({ tense: 'conditional', compound: 'past' })).toEqual(['gelseydiler']);
+    expect(v({ tense: 'past', compound: 'conditional' })).toEqual(['geldiyseler']);
+    expect(v({ tense: 'necessitative', compound: 'past' })).toEqual(['gelmeliydiler']);
+    expect(v({ tense: 'present', compound: 'evidential' })).toEqual(['geliyormuşlar']);
+    expect(v({ tense: 'present', compound: 'past', question: true })).toEqual(['geliyor muydular']);
+    expect(v({ tense: 'present' })).toEqual([]);
+    expect(
+      conjugateVariants('gelmek', { tense: 'present', compound: 'past', person: '1sg' }),
+    ).toEqual([]);
+  });
+
+  it('Erweichung, Mehrwortverb, de/ye mit Kopula', () => {
+    expect(one(git, { tense: 'present', compound: 'past', person: '1sg' })).toBe('gidiyordum');
+    expect(one(git, { tense: 'aorist', compound: 'past', person: '1sg' })).toBe('giderdim');
+    expect(one(git, { tense: 'future', compound: 'conditional', person: '1sg' })).toBe(
+      'gideceksem',
+    );
+    expect(one(git, { tense: 'past', compound: 'conditional', person: '3sg' })).toBe('gittiyse');
+    expect(one(git, { tense: 'optative', person: '1sg', negative: true })).toBe('gitmeyeyim');
+    const visit = { form: 'ziyaret etmek', softens: true };
+    expect(one(visit, { tense: 'present', compound: 'past', person: '1sg' })).toBe(
+      'ziyaret ediyordum',
+    );
+    expect(one(visit, { tense: 'present', compound: 'past', person: '1sg', question: true })).toBe(
+      'ziyaret ediyor muydum',
+    );
+    expect(one(visit, { tense: 'optative', person: '1pl' })).toBe('ziyaret edelim');
+    expect(one(visit, { tense: 'conditional', person: '1pl' })).toBe('ziyaret etsek');
+    expect(one('yemek', { tense: 'present', compound: 'past', person: '1sg' })).toBe('yiyordum');
+    expect(one('demek', { tense: 'future', compound: 'evidential', person: '1sg' })).toBe(
+      'diyecekmişim',
+    );
+  });
+
+  it('Passiv und können mit Kopula und Optativ', () => {
+    expect(one('yapmak', { tense: 'aorist', compound: 'past', person: '1sg', passive: true })).toBe(
+      'yapılırdım',
+    );
+    expect(
+      one('yapmak', { tense: 'aorist', compound: 'conditional', person: '3sg', passive: true }),
+    ).toBe('yapılırsa');
+    expect(
+      one('yapmak', {
+        tense: 'conditional',
+        compound: 'past',
+        person: '1sg',
+        passive: true,
+        ability: true,
+      }),
+    ).toBe('yapılabilseydim');
+    expect(
+      one('yapmak', { tense: 'present', compound: 'past', person: '1sg', ability: true }),
+    ).toBe('yapabiliyordum');
+    expect(
+      one('yapmak', {
+        tense: 'present',
+        compound: 'past',
+        person: '1sg',
+        ability: true,
+        negative: true,
+      }),
+    ).toBe('yapamıyordum');
+    expect(one('gelmek', { tense: 'optative', person: '1sg', ability: true })).toBe('gelebileyim');
+    expect(one('gelmek', { tense: 'optative', person: '1sg', ability: true, negative: true })).toBe(
+      'gelemeyeyim',
+    );
+    expect(one('yapmak', { tense: 'optative', person: '1sg', passive: true })).toBe('yapılayım');
+  });
+
+  it('Fragen mit imiş, verneinte Fragen, Konditional 3pl', () => {
+    expect(
+      one('gelmek', { tense: 'present', compound: 'evidential', person: '1sg', question: true }),
+    ).toBe('geliyor muymuşum');
+    expect(
+      one('gelmek', { tense: 'present', compound: 'evidential', person: '3pl', question: true }),
+    ).toBe('geliyorlar mıymış');
+    expect(
+      one('gelmek', {
+        tense: 'aorist',
+        compound: 'past',
+        person: '1sg',
+        question: true,
+        negative: true,
+      }),
+    ).toBe('gelmez miydim');
+    expect(one('gelmek', { tense: 'conditional', person: '3pl', question: true })).toBe(
+      'gelseler mi',
+    );
+    expect(
+      one('gelmek', { tense: 'conditional', compound: 'past', person: '3pl', question: true }),
+    ).toBe('gelseler miydi');
+    expect(
+      one('gelmek', { tense: 'aorist', compound: 'conditional', person: '1sg', negative: true }),
+    ).toBe('gelmezsem');
+    expect(
+      one('gelmek', { tense: 'aorist', compound: 'conditional', person: '1pl', negative: true }),
+    ).toBe('gelmezsek');
+  });
+
+  it('Bausteine einer Frage mit Kopula', () => {
+    const r = conjugate('gelmek', {
+      tense: 'present',
+      compound: 'past',
+      person: '1sg',
+      question: true,
+    });
+    expect(r.segments.map((s) => [s.tag, s.text])).toEqual([
+      ['STEM', 'gel'],
+      ['PRES', 'iyor'],
+      ['Q', 'mu'],
+      ['PAST', 'ydu'],
+      ['P1SG', 'm'],
+    ]);
+  });
+
+  it('polite nur im Imperativ', () => {
+    expect(() => conjugate('gelmek', { tense: 'optative', person: '1sg', polite: true })).toThrow(
+      MorphError,
+    );
+    expect(() =>
+      conjugate('gelmek', { tense: 'present', compound: 'past', person: '1sg', polite: true }),
+    ).toThrow(MorphError);
+  });
+
+  it('Kopula ise und imiş: Eigennamen, Verneinung, Frage', () => {
+    const ist = { form: 'İstanbul', proper: true };
+    expect(predicate(ist, { person: '3sg', tense: 'conditional' }).form).toBe("İstanbul'sa");
+    expect(predicate(ist, { person: '1sg', tense: 'conditional' }).form).toBe("İstanbul'sam");
+    expect(
+      predicate(
+        { form: 'Ankara', proper: true },
+        {
+          person: '1sg',
+          tense: 'conditional',
+          negative: true,
+        },
+      ).form,
+    ).toBe('Ankara değilsem');
+    expect(predicate('kitap', { person: '3sg', tense: 'conditional' }).form).toBe('kitapsa');
+    expect(predicate('öğretmen', { person: '1sg', tense: 'evidential', question: true }).form).toBe(
+      'öğretmen miymişim',
+    );
   });
 });
