@@ -34,11 +34,11 @@ Ohne Verb reicht der Ablativ: yemek**ten** sonra (nach dem Essen), yemek**ten** 
 
 Indirekte Rede steht mit **-dik** (Gegenwart, Vergangenheit) oder **-ecek** (Zukunft), dem Possessiv der Person und dem Akkusativ vor söylemek, anlatmak, bilmek, duymak:
 
-- Eve git**tiğini** söyledi. (Er sagte, dass er nach Hause gegangen ist.)
+- Eve git**tiğini** söyledi. (Er sagte, dass er nach Hause geht oder gegangen ist.)
 - Eve gid**eceğini** söyledi. (Er sagte, dass er nach Hause gehen wird.)
 - Tanık hırsızı gör**düğünü** söyledi. (Der Zeuge sagte, dass er den Dieb gesehen hat.)
 
-Hat der Nebensatz ein eigenes Subjekt, steht es im **Genitiv**: Ambulans**ın** geleceğini söylediler. (Sie sagten, dass der Krankenwagen kommt.) Beim Nomen steht **olduğunu**: Hasta **olduğunu** söyledi. (Er sagte, dass er krank ist.)
+Hat der Nebensatz ein eigenes Subjekt, steht es im **Genitiv**: Ambulans**ın** geleceğini söylediler. (Sie sagten, dass der Krankenwagen kommt.) Ein unbestimmtes Subjekt (etwas, irgendein …) bleibt oft ohne Genitiv: Duman çıktığını gördüm. (Ich sah, dass Rauch aufstieg.) Beim Nomen steht **olduğunu**: Hasta **olduğunu** söyledi. (Er sagte, dass er krank ist.)
 
 **diye** (wörtlich „sagend“) steht nach wörtlicher Rede vor einem anderen Verb als demek:
 
@@ -46,3 +46,5 @@ Hat der Nebensatz ein eigenes Subjekt, steht es im **Genitiv**: Ambulans**ın** 
 - „Ne oldu?“ **diye** sordu. (Er fragte: „Was ist passiert?“)
 
 Nach einem Wunsch heißt diye „damit, um zu“: Geç kalmayayım **diye** koştum. (Ich bin gerannt, um nicht zu spät zu kommen.)
+
+Nach einer Vermutung heißt es „weil, in der Annahme, dass“: Yağmur yağar **diye** şemsiye aldım. (Ich habe einen Schirm mitgenommen, weil es regnen könnte.)

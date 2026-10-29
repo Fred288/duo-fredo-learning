@@ -62,7 +62,7 @@ lessons:
         prompt: Was heißt „ders çalışmak“?
         options: [lernen (für die Schule), unterrichten, arbeiten]
         answer: lernen (für die Schule)
-        explanation: öğrenmek = etwas lernen; ders çalışmak = Hausaufgaben machen, für die Schule lernen.
+        explanation: öğrenmek = etwas lernen; ders çalışmak = lernen, für die Schule üben; ödev yapmak = Hausaufgaben machen.
       - id: b1-u07-l1-e10
         type: free_text
         direction: de_tr
@@ -74,7 +74,7 @@ lessons:
         prompt: Was heißt „el kaldırmak“?
         options: [sich melden, die Hand geben, winken]
         answer: sich melden
-        explanation: Wörtlich die Hand heben.
+        explanation: Wörtlich die Hand heben; in der Schule meist parmak kaldırmak.
       - id: b1-u07-l1-e12
         type: multiple_choice
         prompt: Was heißt „ezberlemek“?
@@ -94,9 +94,9 @@ lessons:
       - id: b1-u07-l1-e15
         type: multiple_choice
         prompt: Was heißt „tanımak“?
-        options: [kennen, kennenlernen, vorstellen]
+        options: [kennen, vergessen, vorstellen]
         answer: kennen
-        explanation: tanışmak = sich kennenlernen, tanıtmak = vorstellen.
+        explanation: Auch näher kennenlernen und erkennen (tanıyamadım = ich habe dich nicht erkannt); tanışmak = sich kennenlernen, tanıtmak = vorstellen.
       - id: b1-u07-l1-e16
         type: multiple_choice
         prompt: Was heißt „dil“?
@@ -390,7 +390,7 @@ lessons:
         - { tr: "Teneffüste bahçede futbol oynayanlar var, kitap okuyanlar da var.", de: "In der Pause gibt es welche, die im Hof Fußball spielen, und auch welche, die Bücher lesen." }
         - { tr: "Geçen hafta sınavda sorulan sorular çok zordu.", de: "Letzte Woche waren die Fragen, die in der Prüfung gestellt wurden, sehr schwer." }
         - { tr: "Ama ders çalışan herkes sınavı geçti.", de: "Aber alle, die gelernt hatten, haben die Prüfung bestanden." }
-        - { tr: "Sınava gelmeyen tek bir öğrenci vardı.", de: "Es gab nur einen Schüler, der nicht zur Prüfung gekommen ist." }
+        - { tr: "Sınava gelmeyen tek bir öğrenci vardı.", de: "Es gab nur einen Schüler, der nicht zur Prüfung gekommen war." }
         - { tr: "O da o gün hastaydı.", de: "Er war an dem Tag krank." }
       glossary:
         - { tr: "Elif", de: "Elif (Name)" }
@@ -457,9 +457,9 @@ lessons:
       - id: b1-u07-l7-e5
         type: word_bank
         prompt: Die Kinder, die im Garten spielen, sind sehr laut.
-        answers: [Bahçede oynayan çocuklar çok gürültülü.]
+        answers: [Bahçede oynayan çocuklar çok gürültü yapıyor.]
         distractors: [oynuyor, çocuk]
-        explanation: gürültülü = laut (gürültü = Lärm).
+        explanation: gürültü yapmak = Lärm machen, laut sein.
       - id: b1-u07-l7-e6
         type: suffix_builder
         stem: yazmak
@@ -520,4 +520,5 @@ vocab:
   - { tr: kopya çekmek, de: [abschreiben, spicken], pos: verb }
   - { tr: zor, de: [schwer, schwierig], pos: adj }
   - { tr: başarılı, de: [erfolgreich], pos: adj }
-  - { tr: gürültülü, de: [laut], pos: adj }
+  - { tr: gürültü, de: [Lärm], pos: noun }
+  - { tr: adam, de: [Mann], pos: noun }

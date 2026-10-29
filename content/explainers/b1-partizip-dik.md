@@ -45,3 +45,5 @@ Mit **için** heißt es „weil“: Bu mesleği sev**diğim** için seçtim. (Ic
 Verneint steht -me davor: yap**madığım** (das ich nicht mache, gemacht habe).
 
 Faustregel: Ist das Nomen das Subjekt, nimm -en (okuyan öğrenci). Sonst -dik oder -ecek mit Possessiv (okuduğum kitap, okuyacağım kitap).
+
+Ohne Possessiv bezieht sich -ecek auf das Subjekt, für die Zukunft: gelecek misafirler (die Gäste, die kommen werden).

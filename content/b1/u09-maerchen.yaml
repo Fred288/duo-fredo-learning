@@ -199,7 +199,7 @@ lessons:
       - id: b1-u09-l3-e8
         type: word_bank
         prompt: Wir sind zu Fuß zur Schule gegangen.
-        answers: [Okula yürüyerek gittik.]
+        answers: [Okula yürüyerek gittik., Yürüyerek okula gittik.]
         distractors: [yürümek, gidiyoruz]
       - id: b1-u09-l3-e9
         type: multiple_choice
@@ -333,7 +333,7 @@ lessons:
         prompt: Wie endet ein türkisches Märchen oft?
         options: ['Onlar ermiş muradına, biz çıkalım kerevetine.', Bir varmış bir yokmuş., Afiyet olsun.]
         answer: 'Onlar ermiş muradına, biz çıkalım kerevetine.'
-        explanation: Etwa „Sie haben ihr Ziel erreicht, und wir steigen auf unsere Bank.“ Bir varmış bir yokmuş ist der Anfang.
+        explanation: Etwa „Ihr Wunsch hat sich erfüllt, und wir steigen auf ihren Diwan“ (murat = Wunsch, kerevet = Holzdiwan). Bir varmış bir yokmuş ist der Anfang.
       - id: b1-u09-l5-e7
         type: free_text
         direction: tr_de
@@ -381,7 +381,7 @@ lessons:
     title: 'Lesetext: Der kluge Fuchs'
     passage:
       sentences:
-        - { tr: "Bir varmış bir yokmuş, büyük bir ormanda akıllı bir tilki yaşarmış.", de: "Es war einmal, in einem großen Wald lebte ein kluger Fuchs." }
+        - { tr: "Bir varmış bir yokmuş, büyük bir ormanda akıllı bir tilki yaşarmış.", de: "Es war einmal ein kluger Fuchs, der in einem großen Wald lebte." }
         - { tr: "Bir gün tilki çok acıkmış ve yiyecek aramaya çıkmış.", de: "Eines Tages bekam der Fuchs großen Hunger und machte sich auf die Suche nach etwas zu essen." }
         - { tr: "Yolda eski bir kuyu görüp yanına gitmiş.", de: "Unterwegs sah er einen alten Brunnen und ging zu ihm." }
         - { tr: "Kuyunun içinde ağlayan bir kurt varmış.", de: "Im Brunnen war ein Wolf, der weinte." }
@@ -389,8 +389,8 @@ lessons:
         - { tr: "Tilki hiç düşünmeden kuyuya bir ip atmış.", de: "Der Fuchs warf, ohne nachzudenken, ein Seil in den Brunnen." }
         - { tr: "Kurt ipe tutunup dışarı çıkmış.", de: "Der Wolf hielt sich am Seil fest und kletterte heraus." }
         - { tr: "Ama teşekkür etmeden tilkiyi yemek istemiş.", de: "Aber ohne sich zu bedanken, wollte er den Fuchs fressen." }
-        - { tr: "Tilki gülerek \"Kuyunun dibinde altın var!\" demiş.", de: "Der Fuchs sagte lachend: „Unten im Brunnen liegt Gold!“" }
-        - { tr: "Aç kurt altını almak için hemen kuyuya atlamış.", de: "Der hungrige Wolf sprang sofort in den Brunnen, um das Gold zu holen." }
+        - { tr: "Tilki gülerek \"Görmedin mi? Kuyunun dibinde altın var!\" demiş.", de: "Der Fuchs sagte lachend: „Hast du es nicht gesehen? Unten im Brunnen liegt Gold!“" }
+        - { tr: "Açgözlü kurt altını almak için hemen kuyuya atlamış.", de: "Der gierige Wolf sprang sofort in den Brunnen, um das Gold zu holen." }
         - { tr: "Tilki de arkasına bakmadan koşarak kaçmış.", de: "Und der Fuchs rannte davon, ohne sich umzusehen." }
       glossary:
         - { tr: "yiyecek", de: "etwas zu essen (yemek + -ecek)", vocab: "yemek" }
@@ -400,7 +400,8 @@ lessons:
         - { tr: "teşekkür", de: "Dank (teşekkür etmek = sich bedanken)" }
         - { tr: "etmeden", de: "ohne zu machen (etmek; teşekkür etmeden = ohne sich zu bedanken)" }
         - { tr: "dibinde", de: "unten in, am Grund (dip + i + nde)" }
-        - { tr: "aç", de: "hungrig" }
+        - { tr: "açgözlü", de: "gierig (aç = hungrig, göz = Auge)" }
+        - { tr: "mi", de: "Fragepartikel (Görmedin mi? = Hast du es nicht gesehen?)" }
         - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
     exercises:
       - id: b1-u09-r1-e1
@@ -448,7 +449,7 @@ lessons:
         prompt: Welche Form ist richtig? (sagte und …)
         options: [deyip, diyip, deip]
         answer: deyip
-        explanation: Bei -ip bleibt das e, deyip; bei -erek nicht, diyerek.
+        explanation: Bei -ip bleibt das e, deyip; bei -erek nicht, diyerek. Gesprochen hört man oft diyip, geschrieben nach TDK deyip.
       - id: b1-u09-l7-e4
         type: multiple_choice
         prompt: Welche Form ist richtig? (ohne zu gehen)

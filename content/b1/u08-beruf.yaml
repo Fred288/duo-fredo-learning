@@ -44,7 +44,7 @@ lessons:
       - id: b1-u08-l1-e6
         type: multiple_choice
         prompt: Was heißt „başvurmak“?
-        options: [sich bewerben, anfangen, sich anmelden]
+        options: [sich bewerben, anfangen, sich bedanken]
         answer: sich bewerben
         explanation: Mit Dativ, bir işe başvurmak = sich um eine Stelle bewerben.
       - id: b1-u08-l1-e7
@@ -211,7 +211,7 @@ lessons:
         answers: [gideceğim yer]
       - id: b1-u08-l3-e12
         type: multiple_choice
-        prompt: Welche Form passt? „Staj … şirketi buldum.“ (bei der ich machen werde)
+        prompt: Welche Form passt? „Staj … şirketi buldum.“ (bei der ich das Praktikum machen werde)
         options: [yapacağım, yapan, yapacak]
         answer: yapacağım
         explanation: yapacak şirket wäre eine Firma, die selbst etwas machen wird.
@@ -381,10 +381,10 @@ lessons:
     passage:
       sentences:
         - { tr: "Lise yıllarımda hangi mesleği seçeceğimi bilmiyordum.", de: "In meinen Jahren auf dem Gymnasium wusste ich nicht, welchen Beruf ich wählen würde." }
-        - { tr: "Babam doktor olmamı istiyordu ama ben bilgisayarları seviyordum.", de: "Mein Vater wollte, dass ich Arzt werde, aber ich mochte Computer." }
+        - { tr: "Babam doktor olmamı istiyordu ama ben bilgisayarları sevdiğim için mühendis olmak istedim.", de: "Mein Vater wollte, dass ich Arzt werde, aber weil ich Computer mochte, wollte ich Ingenieur werden." }
         - { tr: "Sonunda üniversitede bilgisayar mühendisliği okudum.", de: "Am Ende habe ich an der Universität Informatik studiert." }
         - { tr: "Okuduğum bölüm zordu ama çok şey öğrendim.", de: "Das Fach, das ich studiert habe, war schwer, aber ich habe viel gelernt." }
-        - { tr: "Son yıl küçük bir şirkette staj yaptım.", de: "Im letzten Jahr habe ich in einer kleinen Firma ein Praktikum gemacht." }
+        - { tr: "Son sınıfta küçük bir şirkette staj yaptım.", de: "Im letzten Studienjahr habe ich in einer kleinen Firma ein Praktikum gemacht." }
         - { tr: "Staj yaptığım şirketteki insanlar bana çok yardım etti.", de: "Die Leute in der Firma, in der ich das Praktikum gemacht habe, haben mir sehr geholfen." }
         - { tr: "Mezun oldum ve birçok şirkete başvurdum.", de: "Ich habe meinen Abschluss gemacht und mich bei vielen Firmen beworben." }
         - { tr: "İlk iş görüşmemde ne söyleyeceğimi bilmiyordum.", de: "Bei meinem ersten Vorstellungsgespräch wusste ich nicht, was ich sagen sollte." }
@@ -438,7 +438,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: 'die Firma, in der ich arbeite'
-        answers: [çalıştığım şirket]
+        answers: [çalıştığım şirket, çalıştığım firma]
       - id: b1-u08-l7-e2
         type: free_text
         direction: de_tr

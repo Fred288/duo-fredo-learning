@@ -75,8 +75,9 @@ lessons:
       - id: b1-u10-l1-e12
         type: multiple_choice
         prompt: Was heißt „söndürmek“?
-        options: [löschen (Feuer), anzünden, ausschalten]
+        options: [löschen (Feuer), anzünden, anrufen]
         answer: löschen (Feuer)
+        explanation: Auch Licht oder Motor ausmachen, ışığı söndürmek.
       - id: b1-u10-l1-e13
         type: free_text
         direction: de_tr
@@ -141,7 +142,7 @@ lessons:
         type: word_bank
         prompt: 'Seit wir hierher gezogen sind, sind zwei Jahre vergangen.'
         answers: [Buraya taşınalı iki yıl oldu.]
-        distractors: [taşınınca, oluyor]
+        distractors: [taşınınca, oldum]
         explanation: Wörtlich „seit wir hierher gezogen sind, wurden es zwei Jahre“.
       - id: b1-u10-l2-e10
         type: multiple_choice
@@ -279,7 +280,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Geç kalmayayım diye koştum.
-        answers: ['Ich bin gerannt, damit ich nicht zu spät komme.', 'Ich bin gerannt, um nicht zu spät zu kommen.', 'Ich rannte, um nicht zu spät zu kommen.', 'Ich rannte, damit ich nicht zu spät komme.', 'Ich bin gelaufen, um nicht zu spät zu kommen.', 'Ich bin gelaufen, damit ich nicht zu spät komme.', 'Um nicht zu spät zu kommen, bin ich gerannt.']
+        answers: ['Ich bin gerannt, damit ich nicht zu spät komme.', 'Ich bin gerannt, um nicht zu spät zu kommen.', 'Ich rannte, um nicht zu spät zu kommen.', 'Ich rannte, damit ich nicht zu spät komme.', 'Ich bin gelaufen, um nicht zu spät zu kommen.', 'Ich bin gelaufen, damit ich nicht zu spät komme.', 'Um nicht zu spät zu kommen, bin ich gerannt.', 'Ich bin gerannt, um mich nicht zu verspäten.', 'Ich bin gelaufen, um mich nicht zu verspäten.']
         explanation: diye nach einem Wunsch heißt „damit, um zu“, wörtlich „sagend, ich soll nicht zu spät kommen“.
       - id: b1-u10-l4-e11
         type: multiple_choice
@@ -318,7 +319,7 @@ lessons:
         type: word_bank
         prompt: Bitte schicken Sie sofort einen Krankenwagen!
         answers: [Lütfen hemen bir ambulans gönderin!, Lütfen hemen ambulans gönderin!]
-        distractors: [gönderdim, ambulansı]
+        distractors: [gönderdim, ambulansta]
       - id: b1-u10-l5-e4
         type: free_text
         direction: de_tr
@@ -402,13 +403,13 @@ lessons:
     passage:
       sentences:
         - { tr: "Dün gece saat ikide bir ses duyup uyandım.", de: "Gestern Nacht um zwei Uhr hörte ich ein Geräusch und wachte auf." }
-        - { tr: "Pencereden bakınca komşunun evinden duman çıktığını gördüm.", de: "Als ich aus dem Fenster schaute, sah ich, dass aus dem Haus des Nachbarn Rauch kam." }
+        - { tr: "Pencereden bakınca komşunun dairesinden duman çıktığını gördüm.", de: "Als ich aus dem Fenster schaute, sah ich, dass aus der Wohnung des Nachbarn Rauch kam." }
         - { tr: "Hemen 112'yi arayıp yangın olduğunu söyledim.", de: "Ich rief sofort die 112 an und sagte, dass es brennt." }
         - { tr: "Telefondaki kadın itfaiyenin beş dakika içinde geleceğini söyledi.", de: "Die Frau am Telefon sagte, dass die Feuerwehr in fünf Minuten kommen würde." }
         - { tr: "Ben de \"Yangın var!\" diye bağırarak komşuları uyandırdım.", de: "Ich weckte die Nachbarn, indem ich „Feuer!“ rief." }
-        - { tr: "Komşum yaşlı bir adam ve yalnız yaşıyor.", de: "Mein Nachbar ist ein alter Mann und lebt allein." }
-        - { tr: "Onunla birlikte dışarı çıktıktan sonra itfaiye geldi.", de: "Nachdem wir zusammen hinausgegangen waren, kam die Feuerwehr." }
-        - { tr: "İtfaiyeciler yangını kısa sürede söndürdü.", de: "Die Feuerwehrleute löschten den Brand in kurzer Zeit." }
+        - { tr: "Komşum yaşlı bir adam ve alt katta yalnız yaşıyor.", de: "Mein Nachbar ist ein alter Mann und lebt allein im Stockwerk unter mir." }
+        - { tr: "İtfaiye gelmeden önce onunla birlikte dışarı çıktık.", de: "Bevor die Feuerwehr kam, gingen wir zusammen hinaus." }
+        - { tr: "İtfaiyeciler geldikten sonra yangını kısa sürede söndürdü.", de: "Nachdem die Feuerwehrleute gekommen waren, löschten sie den Brand in kurzer Zeit." }
         - { tr: "Neyse ki kimse yaralanmadı.", de: "Zum Glück wurde niemand verletzt." }
         - { tr: "Komşum ağlayarak bana teşekkür etti.", de: "Mein Nachbar bedankte sich weinend bei mir." }
         - { tr: "Yangın çıkalı bir hafta oldu ama hâlâ o geceyi düşünüyorum.", de: "Seit dem Brand ist eine Woche vergangen, aber ich denke immer noch an jene Nacht." }
@@ -440,8 +441,8 @@ lessons:
       - id: b1-u10-r1-e3
         type: multiple_choice
         prompt: Wann kam die Feuerwehr?
-        options: [Nachdem die Person mit dem Nachbarn draußen war., Bevor die Person aufgewacht war., Am nächsten Morgen.]
-        answer: Nachdem die Person mit dem Nachbarn draußen war.
+        options: [Als die Person mit dem Nachbarn schon draußen war., Bevor die Person aufgewacht war., Am nächsten Morgen.]
+        answer: Als die Person mit dem Nachbarn schon draußen war.
       - id: b1-u10-r1-e4
         type: multiple_choice
         prompt: Wurde jemand verletzt?
@@ -472,6 +473,7 @@ lessons:
         prompt: Welche Form ist richtig? (als er es sagte)
         options: [deyince, diyince, deince]
         answer: deyince
+        explanation: Gesprochen hört man oft diyince, geschrieben nach TDK deyince.
       - id: b1-u10-l7-e4
         type: multiple_choice
         prompt: Welche Form ist richtig? (nachdem ich angerufen hatte)
@@ -513,10 +515,10 @@ lessons:
         prompt: 'Seit das Feuer ausgebrochen ist, ist ein Jahr vergangen.'
         answers: [Yangın çıkalı bir yıl oldu.]
         chunks:
-          - { text: "Yangın", role: subject }
-          - { text: "çıkalı", role: time }
-          - { text: "bir yıl oldu", role: predicate }
-        distractors: [çıkınca, oluyor]
+          - { text: "Yangın çıkalı", role: time }
+          - { text: "bir yıl", role: subject }
+          - { text: "oldu", role: predicate }
+        distractors: [çıkınca, oldum]
       - id: b1-u10-l7-e10
         type: suffix_builder
         stem: söndürmek
@@ -546,4 +548,3 @@ vocab:
   - { tr: beri, de: [seit], pos: postp }
   - { tr: yakalamak, de: [fangen, festnehmen], pos: verb }
   - { tr: kadın, de: [Frau], pos: noun }
-  - { tr: adam, de: [Mann], pos: noun }
