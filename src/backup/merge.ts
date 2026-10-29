@@ -20,13 +20,21 @@ export interface Merged {
   summary: ImportSummary;
 }
 
-const zero = (): Record<Table, number> => ({ attempts: 0, completions: 0, cards: 0, notes: 0 });
+const zero = (): Record<Table, number> => ({
+  attempts: 0,
+  completions: 0,
+  cards: 0,
+  notes: 0,
+  placements: 0,
+});
 
 /** Dublettenschlüssel je Tabelle: Auto-IDs sind gerätelokal, gleiche Einträge erkennt man am Inhalt. */
 const KEYS: { [T in Exclude<Table, 'cards'>]: (row: BackupData[T][number]) => string } = {
   attempts: (a) => `${a.exerciseId}|${a.at}|${a.verdict}`,
   completions: (c) => `${c.lessonId}|${c.at}`,
   notes: (n) => `${n.itemId}|${n.at}|${n.text}`,
+  // Gültig ist die jüngste Einstufung (`currentPlacement`), auch über Geräte hinweg.
+  placements: (p) => `${p.at}|${p.startUnit ?? ''}`,
 };
 
 function union<T>(local: readonly T[], incoming: readonly T[], key: (row: T) => string) {
@@ -78,6 +86,7 @@ export function mergeBackup(local: BackupData, incoming: BackupData, mode: Impor
   const attempts = union(local.attempts, incoming.attempts, KEYS.attempts);
   const completions = union(local.completions, incoming.completions, KEYS.completions);
   const notes = union(local.notes, incoming.notes, KEYS.notes);
+  const placements = union(local.placements, incoming.placements, KEYS.placements);
   const cards = mergeCards(local.cards, incoming.cards);
   return {
     data: {
@@ -86,6 +95,7 @@ export function mergeBackup(local: BackupData, incoming: BackupData, mode: Impor
       completions: completions.rows,
       notes: notes.rows,
       cards: cards.rows,
+      placements: placements.rows,
     },
     summary: {
       mode,
@@ -94,6 +104,7 @@ export function mergeBackup(local: BackupData, incoming: BackupData, mode: Impor
         completions: completions.added,
         notes: notes.added,
         cards: cards.added,
+        placements: placements.added,
       },
       dropped: zero(),
       updatedCards: cards.updated,

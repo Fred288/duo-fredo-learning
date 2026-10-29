@@ -1,4 +1,5 @@
 import type { Lesson } from '../content/schema';
+import { placementMark, type Placement } from '../placement/record';
 import type { Card, VocabDir } from '../srs/card';
 import { unitOfExercise } from '../srs/card';
 import { INTERVALS } from '../srs/leitner';
@@ -94,6 +95,8 @@ export interface UnitInsight {
   /** Karten der Unit insgesamt und davon gefestigt (Box ≥ SETTLED_BOX). */
   cards: number;
   settled: number;
+  /** Laut Einstufung bekannt (übersprungen). */
+  skipped: boolean;
 }
 
 export function unitOverview(
@@ -102,6 +105,7 @@ export function unitOverview(
   attempts: readonly Attempt[],
   cards: readonly Card[],
   today: string,
+  placement?: Placement,
 ): UnitInsight[] {
   const completed = completedLessonIds(completions);
   const since = addDays(today, -(ACCURACY_DAYS - 1));
@@ -129,6 +133,7 @@ export function unitOverview(
       attempts: t?.all ?? 0,
       cards: own.length,
       settled: own.filter((c) => c.box >= SETTLED_BOX).length,
+      skipped: placementMark(placement, u.id) === 'skipped',
     };
   });
 }
@@ -152,7 +157,7 @@ export function insights(
   attempts: readonly Attempt[],
   allCards: readonly Card[],
   today: string,
-  opts: { skip?: (card: Card) => boolean } = {},
+  opts: { skip?: (card: Card) => boolean; placement?: Placement } = {},
 ): Insights {
   const cards = reconcileCards(units, allCards).cards.filter((c) => !opts.skip?.(c));
   return {
@@ -160,6 +165,6 @@ export function insights(
     due: dueForecast(cards, today),
     hardWords: hardItems(cards, 'vocab'),
     hardForms: hardItems(cards, 'exercise'),
-    units: unitOverview(units, completions, attempts, cards, today),
+    units: unitOverview(units, completions, attempts, cards, today, opts.placement),
   };
 }

@@ -66,3 +66,12 @@ describe('planRepeat', () => {
     expect(planRepeat(units, [], [listen, other], '2026-05-01', 10).due).toBe(2);
   });
 });
+
+describe('planRepeat und Einstufung', () => {
+  it('übersprungene Units ohne Abschluss liefern keine neuen Wörter (erst bei Bedarf)', () => {
+    // Die Einstufung schreibt keine Abschlüsse: a1-u01 gilt als bekannt, bleibt aber ohne Karten.
+    expect(planRepeat(units, [], [], '2026-05-01', 10).fresh).toBe(0);
+    // Erst eine gemachte Lektion dort bringt ihre Wörter wie gewohnt.
+    expect(planRepeat(units, [done('a1-u01-l1')], [], '2026-05-01', 10).fresh).toBe(3);
+  });
+});

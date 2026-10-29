@@ -1,6 +1,7 @@
 import 'fake-indexeddb/auto';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { db } from '../db/db';
+import type { Placement } from '../placement/record';
 import type { Attempt, Completion } from '../progress/stats';
 import { cardId, type Card, type CardRef } from '../srs/card';
 import { reconcileCards } from '../srs/reconcile';
@@ -18,6 +19,7 @@ import {
 } from './format';
 import { exportBackup, importBackup, planImport } from './io';
 import { mergeBackup } from './merge';
+import { currentPlacement } from '../placement/record';
 
 const attempt = (
   exerciseId: string,
@@ -47,6 +49,12 @@ const card = (ref: CardRef, unitId: string, lastAt: number, box = 2): Card => ({
   lastAt,
   lapses: 0,
 });
+const placement = (at: number, startUnit: string | null = 'a1-u03'): Placement => ({
+  at,
+  startUnit,
+  skipped: startUnit ? ['a1-u01', 'a1-u02'] : [],
+  shaky: startUnit ? ['a1-u02'] : [],
+});
 const ev: CardRef = { kind: 'vocab', vocabId: 'ev', dir: 'tr_de' };
 const ex: CardRef = { kind: 'exercise', exerciseId: 'a1-u02-l2-e1' };
 
@@ -56,6 +64,7 @@ const empty = (): BackupData => ({
   completions: [],
   cards: [],
   notes: [],
+  placements: [],
 });
 const sample = (): BackupData => ({
   settings: { dailyGoal: 3, theme: 'dark' },
@@ -63,6 +72,7 @@ const sample = (): BackupData => ({
   completions: [completion('a1-u02-l2', 300)],
   cards: [card(ev, 'a1-u02', 300), card(ex, 'a1-u02', 100, 1)],
   notes: [{ itemId: 'a1-u02-l2-e1', unitId: 'a1-u02', text: 'Glosse prüfen', at: 400 }],
+  placements: [placement(500)],
 });
 const json = (v: unknown) => JSON.stringify(v);
 const file = (data: BackupData = sample()) => makeBackup(data, 3, new Date('2026-10-28T10:00:00Z'));
@@ -122,12 +132,20 @@ describe('parseBackup', () => {
         attempts: [...f.data.attempts, { exerciseId: 'x', verdict: 'vielleicht', at: 1 }],
         cards: [...f.data.cards, { ...card(ev, 'a1-u02', 1), id: 'vo:de_tr:ev' }, 'Unsinn'],
         notes: [...f.data.notes, { itemId: 'x', unitId: 'a1-u01', text: '', at: 1 }],
+        placements: [...f.data.placements, { at: 1, startUnit: '', skipped: [], shaky: [] }],
       },
     };
     const r = parseBackup(json(broken));
     expect(r.ok).toBe(true);
     if (!r.ok) return;
-    expect(r.skipped).toEqual({ settings: 2, attempts: 1, completions: 0, cards: 2, notes: 1 });
+    expect(r.skipped).toEqual({
+      settings: 2,
+      attempts: 1,
+      completions: 0,
+      cards: 2,
+      notes: 1,
+      placements: 1,
+    });
     expect(r.backup.data.settings).toEqual({ theme: 'dark' });
     expect(r.backup.data.attempts).toHaveLength(2);
     expect(r.backup.data.cards).toHaveLength(2);
@@ -138,6 +156,15 @@ describe('parseBackup', () => {
     const r = parseBackup(json(f));
     expect(r.ok && r.backup.data.cards).toEqual([card(ev, 'a1-u02', 500, 4)]);
     expect(r.ok && r.skipped.cards).toBe(1);
+  });
+
+  it('liest Dateien von vor dem Einstufungstest (ohne placements)', () => {
+    const old = file() as { data: Partial<BackupData> };
+    delete old.data.placements;
+    const f = json(old);
+    expect(f).not.toContain('placements');
+    const r = parseBackup(f);
+    expect(r.ok && r.backup.data.placements).toEqual([]);
   });
 
   it('akzeptiert fehlende Tabellen als leer', () => {
@@ -162,7 +189,13 @@ describe('mergeBackup', () => {
     );
     expect(data).toEqual({ ...empty(), settings: { theme: 'light' } });
     expect(summary.settings).toBe(true);
-    expect(summary.dropped).toEqual({ attempts: 2, completions: 1, cards: 2, notes: 1 });
+    expect(summary.dropped).toEqual({
+      attempts: 2,
+      completions: 1,
+      cards: 2,
+      notes: 1,
+      placements: 1,
+    });
   });
 
   it('führt ohne Dubletten zusammen und behält die lokalen Einstellungen', () => {
@@ -170,13 +203,22 @@ describe('mergeBackup', () => {
     incoming.settings = { dailyGoal: 7 };
     incoming.attempts.push(attempt('a1-u03-l1-e1', 900));
     incoming.notes.push({ itemId: 'a1-u03-l1-e1', unitId: 'a1-u03', text: 'neu', at: 901 });
+    incoming.placements.push(placement(950, null));
     const { data, summary } = mergeBackup(sample(), incoming, 'merge');
     expect(data.settings).toEqual(sample().settings);
     expect(data.attempts).toHaveLength(3);
     expect(data.completions).toHaveLength(1);
     expect(data.notes).toHaveLength(2);
-    expect(summary.added).toEqual({ attempts: 1, completions: 0, cards: 0, notes: 1 });
+    expect(summary.added).toEqual({
+      attempts: 1,
+      completions: 0,
+      cards: 0,
+      notes: 1,
+      placements: 1,
+    });
     expect(summary.settings).toBe(false);
+    // Die jüngere Rücknahme aus der Datei gilt danach (`currentPlacement`).
+    expect(currentPlacement(data.placements)).toBeUndefined();
   });
 
   it('nimmt bei gleicher Karte den jüngeren Stand, bei Gleichstand den lokalen', () => {
@@ -211,10 +253,18 @@ describe('mergeBackup', () => {
 describe('Export und Import über IndexedDB', () => {
   beforeEach(async () => {
     await Promise.all(
-      [db.settings, db.attempts, db.completions, db.cards, db.notes].map((t) => t.clear()),
+      [db.settings, db.attempts, db.completions, db.cards, db.notes, db.placements].map((t) =>
+        t.clear(),
+      ),
     );
     useSettings.setState({ ...DEFAULT_SETTINGS, loaded: false });
-    useProgress.setState({ completions: [], attempts: [], cards: [], loaded: false });
+    useProgress.setState({
+      completions: [],
+      attempts: [],
+      cards: [],
+      placements: [],
+      loaded: false,
+    });
     useNotes.setState({ notes: [] });
   });
 
@@ -226,6 +276,7 @@ describe('Export und Import über IndexedDB', () => {
     await db.completions.bulkAdd(data.completions);
     await db.cards.bulkPut(data.cards);
     await db.notes.bulkAdd(data.notes);
+    await db.placements.bulkAdd(data.placements);
   }
 
   it('Rundlauf: Export, leeren, Import (ersetzen) ergibt denselben Stand', async () => {
@@ -233,7 +284,12 @@ describe('Export und Import über IndexedDB', () => {
     const exported = await exportBackup(new Date('2026-10-28T10:00:00Z'));
     expect(exported.app.dbVersion).toBe(db.verno);
 
-    await Promise.all([db.attempts.clear(), db.cards.clear(), db.notes.clear()]);
+    await Promise.all([
+      db.attempts.clear(),
+      db.cards.clear(),
+      db.notes.clear(),
+      db.placements.clear(),
+    ]);
     const parsed = parseBackup(json(exported));
     if (!parsed.ok) throw new Error(parsed.reason);
     await importBackup(parsed.backup, 'replace');
@@ -245,6 +301,7 @@ describe('Export und Import über IndexedDB', () => {
     expect(useProgress.getState().cards).toHaveLength(2);
     expect(useSettings.getState().dailyGoal).toBe(3);
     expect(useNotes.getState().notes).toHaveLength(1);
+    expect(currentPlacement(useProgress.getState().placements)?.startUnit).toBe('a1-u03');
   });
 
   it('Zusammenführen zweimal hintereinander verdoppelt nichts', async () => {
@@ -252,7 +309,14 @@ describe('Export und Import über IndexedDB', () => {
     const exported = await exportBackup();
     await importBackup(exported, 'merge');
     const twice = await importBackup(exported, 'merge');
-    expect(twice.summary.added).toEqual({ attempts: 0, completions: 0, cards: 0, notes: 0 });
+    expect(twice.summary.added).toEqual({
+      attempts: 0,
+      completions: 0,
+      cards: 0,
+      notes: 0,
+      placements: 0,
+    });
+    expect(await db.placements.count()).toBe(1);
     expect(await db.attempts.count()).toBe(2);
     expect(useProgress.getState().attempts).toHaveLength(2);
   });

@@ -13,9 +13,10 @@ beforeEach(async () => {
     db.attempts.clear(),
     db.completions.clear(),
     db.cards.clear(),
+    db.placements.clear(),
   ]);
   useSettings.setState({ ...DEFAULT_SETTINGS, loaded: false });
-  useProgress.setState({ completions: [], attempts: [], cards: [], loaded: false });
+  useProgress.setState({ completions: [], attempts: [], cards: [], placements: [], loaded: false });
   document.documentElement.classList.remove('dark');
 });
 
@@ -91,6 +92,17 @@ describe('Progress-Store', () => {
       { lessonId: 'a1-u01-l1', unitId: 'a1-u01', correct: 2, total: 3 },
     ]);
     expect(await db.attempts.count()).toBe(1);
+  });
+
+  it('speichert Einstufungen ohne Abschlüsse, Versuche oder Karten', async () => {
+    const placement = { at: 5, startUnit: 'a1-u03', skipped: ['a1-u01', 'a1-u02'], shaky: [] };
+    useProgress.getState().recordPlacement(placement);
+    await flush();
+    useProgress.setState({ placements: [], loaded: false });
+    await useProgress.getState().load();
+    expect(useProgress.getState().placements).toEqual([placement]);
+    expect(useProgress.getState()).toMatchObject({ completions: [], attempts: [], cards: [] });
+    expect(await db.completions.count()).toBe(0);
   });
 });
 

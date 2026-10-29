@@ -1,6 +1,7 @@
 import Dexie, { type EntityTable } from 'dexie';
 import type { Verdict } from '../lib/answer';
 import type { Completion } from '../progress/stats';
+import type { Placement } from '../placement/record';
 import type { Card } from '../srs/card';
 import { addDays } from '../progress/day';
 import { seedFromAttempts } from '../srs/seed';
@@ -19,7 +20,13 @@ const leitnerV3: Scheduler = {
   },
   review: (card, verdict, today, at) => {
     if (verdict === 'wrong') {
-      return { ...card, box: 1, due: addDays(today, LEITNER_V3_DAYS[0]!), lapses: card.lapses + 1, lastAt: at };
+      return {
+        ...card,
+        box: 1,
+        due: addDays(today, LEITNER_V3_DAYS[0]!),
+        lapses: card.lapses + 1,
+        lastAt: at,
+      };
     }
     if (!isDue(card, today)) return { ...card, lastAt: at };
     const box = verdict === 'correct' ? Math.min(card.box + 1, LEITNER_V3_DAYS.length) : card.box;
@@ -43,6 +50,9 @@ export interface AttemptRow {
 
 export type CompletionRow = Completion & { id?: number };
 
+/** Angenommene Einstufung; gültig ist die jüngste Zeile. */
+export type PlacementRow = Placement & { id?: number };
+
 /** SRS-Karte; Schlüssel ist die Karten-ID (ex:…, vo:…). */
 export type CardRow = Card;
 
@@ -61,6 +71,7 @@ class YolDb extends Dexie {
   attempts!: EntityTable<AttemptRow, 'id'>;
   completions!: EntityTable<CompletionRow, 'id'>;
   cards!: EntityTable<CardRow, 'id'>;
+  placements!: EntityTable<PlacementRow, 'id'>;
 
   constructor() {
     super('yol');
@@ -81,6 +92,10 @@ class YolDb extends Dexie {
         const attempts = await tx.table<AttemptRow>('attempts').toArray();
         await tx.table<CardRow>('cards').bulkPut(seedFromAttempts(attempts, leitnerV3));
       });
+    // v4: angenommene Einstufungen (nur anhängen). Neue, leere Tabelle; nichts umzurechnen.
+    this.version(4)
+      .stores({ placements: '++id, at' })
+      .upgrade(() => undefined);
   }
 }
 

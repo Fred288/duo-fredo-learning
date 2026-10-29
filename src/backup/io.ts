@@ -9,14 +9,15 @@ import { mergeBackup, type ImportMode, type Merged } from './merge';
 async function readLocal(): Promise<BackupData> {
   return db.transaction(
     'r',
-    [db.settings, db.attempts, db.completions, db.cards, db.notes],
+    [db.settings, db.attempts, db.completions, db.cards, db.notes, db.placements],
     async () => {
-      const [settings, attempts, completions, cards, notes] = await Promise.all([
+      const [settings, attempts, completions, cards, notes, placements] = await Promise.all([
         db.settings.toArray(),
         db.attempts.toArray(),
         db.completions.toArray(),
         db.cards.toArray(),
         db.notes.toArray(),
+        db.placements.toArray(),
       ]);
       return {
         settings: pickKnown(
@@ -26,6 +27,7 @@ async function readLocal(): Promise<BackupData> {
         completions,
         cards,
         notes,
+        placements,
       };
     },
   );
@@ -33,12 +35,19 @@ async function readLocal(): Promise<BackupData> {
 
 /** Stand im Speicher, falls IndexedDB fehlt (privater Modus, gesperrter Speicher). */
 function fromStores(): BackupData {
-  const { completions, attempts, cards } = useProgress.getState();
+  const { completions, attempts, cards, placements } = useProgress.getState();
   const s = useSettings.getState();
   const settings = Object.fromEntries(
     (Object.keys(DEFAULT_SETTINGS) as (keyof Settings)[]).map((k) => [k, s[k]]),
   ) as Partial<Settings>;
-  return { settings, completions, attempts, cards, notes: useNotes.getState().notes };
+  return {
+    settings,
+    completions,
+    attempts,
+    cards,
+    notes: useNotes.getState().notes,
+    placements,
+  };
 }
 
 export async function exportBackup(now: Date = new Date()): Promise<Backup> {
@@ -56,7 +65,7 @@ export async function planImport(backup: Backup, mode: ImportMode): Promise<Merg
  * wenn IndexedDB fehlt: ein Import nur in den Speicher wäre beim nächsten Start verloren.
  */
 export async function importBackup(backup: Backup, mode: ImportMode): Promise<Merged> {
-  const tables = [db.settings, db.attempts, db.completions, db.cards, db.notes];
+  const tables = [db.settings, db.attempts, db.completions, db.cards, db.notes, db.placements];
   const merged = await db.transaction('rw', tables, async () => {
     const result = mergeBackup(await readLocal(), backup.data, mode);
     const { data } = result;
@@ -68,6 +77,7 @@ export async function importBackup(backup: Backup, mode: ImportMode): Promise<Me
     await db.completions.bulkAdd(data.completions.map(withoutId));
     await db.cards.bulkPut(data.cards.map((c) => ({ ...c })));
     await db.notes.bulkAdd(data.notes.map(withoutId));
+    await db.placements.bulkAdd(data.placements.map(withoutId));
     return result;
   });
   await Promise.all([

@@ -9,6 +9,7 @@ import type { Card } from '../srs/card';
 import { INTERVALS } from '../srs/leitner';
 import { useApp } from '../store/app';
 import { useCanSpeak } from '../store/audio';
+import { currentPlacement } from '../placement/record';
 import { useProgress } from '../store/progress';
 
 const backButton =
@@ -59,7 +60,7 @@ export function StatsScreen() {
   const openLesson = useApp((s) => s.openLesson);
   const openLookup = useApp((s) => s.openLookup);
   const setLookup = useApp((s) => s.setLookup);
-  const { completions, attempts, cards } = useProgress();
+  const { completions, attempts, cards, placements } = useProgress();
   const canListen = useCanSpeak();
   const [manifest, setManifest] = useState<Manifest>();
   const [index, setIndex] = useState<LookupIndex>();
@@ -79,6 +80,7 @@ export function StatsScreen() {
   const data = manifest
     ? insights(manifest.units, completions, attempts, cards, today, {
         skip: canListen ? undefined : isListeningCard,
+        placement: currentPlacement(placements),
       })
     : undefined;
   const vocabOf = (c: Card) => {

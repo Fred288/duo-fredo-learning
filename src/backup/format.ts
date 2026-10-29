@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Placement } from '../placement/record';
 import type { Attempt, Completion } from '../progress/stats';
 import { cardId, type Card } from '../srs/card';
 import { pickKnown, type Settings } from '../store/settings';
@@ -24,6 +25,8 @@ export interface BackupData {
   completions: Completion[];
   cards: Card[];
   notes: BackupNote[];
+  /** Angenommene Einstufungen; fehlt in Dateien vor dem Einstufungstest (dann leer). */
+  placements: Placement[];
 }
 
 export interface Backup {
@@ -36,7 +39,7 @@ export interface Backup {
 }
 
 export type Table = Exclude<keyof BackupData, 'settings'>;
-export const TABLES: readonly Table[] = ['attempts', 'completions', 'cards', 'notes'];
+export const TABLES: readonly Table[] = ['attempts', 'completions', 'cards', 'notes', 'placements'];
 
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 const time = z.number().int().nonnegative();
@@ -70,12 +73,19 @@ const CardRow = z
   // Die ID ist aus der Referenz abgeleitet; passt sie nicht, wäre die Karte doppelt oder verwaist.
   .refine((c) => c.id === cardId(c.ref));
 const NoteRow = z.object({ itemId: id, unitId: id, text: z.string().min(1), at: time });
+const PlacementRow = z.object({
+  at: time,
+  startUnit: id.nullable(),
+  skipped: z.array(id),
+  shaky: z.array(id),
+});
 
 const ROWS: { [T in Table]: z.ZodType<BackupData[T][number]> } = {
   attempts: AttemptRow,
   completions: CompletionRow,
   cards: CardRow,
   notes: NoteRow,
+  placements: PlacementRow,
 };
 
 const Envelope = z.object({
@@ -89,6 +99,7 @@ const Envelope = z.object({
     completions: z.array(z.unknown()).optional(),
     cards: z.array(z.unknown()).optional(),
     notes: z.array(z.unknown()).optional(),
+    placements: z.array(z.unknown()).optional(),
   }),
 });
 type Envelope = z.infer<typeof Envelope>;
@@ -132,7 +143,14 @@ export function parseBackup(text: string): ParseResult {
     env = step(env);
   }
 
-  const skipped: Skipped = { settings: 0, attempts: 0, completions: 0, cards: 0, notes: 0 };
+  const skipped: Skipped = {
+    settings: 0,
+    attempts: 0,
+    completions: 0,
+    cards: 0,
+    notes: 0,
+    placements: 0,
+  };
   const rows = <T extends Table>(table: T): BackupData[T] => {
     const out: BackupData[T][number][] = [];
     for (const row of env.data[table] ?? []) {
@@ -169,6 +187,7 @@ export function parseBackup(text: string): ParseResult {
         completions: rows('completions'),
         cards: [...cards.values()],
         notes: rows('notes'),
+        placements: rows('placements'),
       },
     },
   };
@@ -193,6 +212,7 @@ export function makeBackup(data: BackupData, dbVersion: number, now: Date): Back
       completions: strip(data.completions),
       cards: data.cards.map((c) => ({ ...c })),
       notes: strip(data.notes),
+      placements: strip(data.placements),
     },
   };
 }

@@ -21,6 +21,8 @@ export interface Settings {
   shadowing: boolean;
   /** Tag der letzten gespeicherten Sicherung, 'YYYY-MM-DD'; '' = noch nie. */
   lastBackup: string;
+  /** Einstufung beim ersten Start angeboten (angenommen oder abgelehnt). */
+  placementOffered: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -34,6 +36,7 @@ export const DEFAULT_SETTINGS: Settings = {
   voiceURI: '',
   shadowing: true,
   lastBackup: '',
+  placementOffered: false,
 };
 
 export const GOAL_RANGE = { min: 1, max: 10 } as const;
@@ -79,6 +82,7 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.audioEnabled === 'boolean') out.audioEnabled = stored.audioEnabled;
   if (typeof stored.autoplay === 'boolean') out.autoplay = stored.autoplay;
   if (typeof stored.shadowing === 'boolean') out.shadowing = stored.shadowing;
+  if (typeof stored.placementOffered === 'boolean') out.placementOffered = stored.placementOffered;
   if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
   if (typeof stored.lastBackup === 'string' && /^(\d{4}-\d{2}-\d{2})?$/.test(stored.lastBackup)) {
     out.lastBackup = stored.lastBackup;

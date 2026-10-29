@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { db, safely } from '../db/db';
 import type { Exercise } from '../content/schema';
 import type { Verdict } from '../lib/answer';
+import type { Placement } from '../placement/record';
 import { dayKey } from '../progress/day';
 import type { Attempt, Completion } from '../progress/stats';
 import { cardId, tracks, unitOfExercise, type Card, type CardRef } from '../srs/card';
@@ -17,6 +18,8 @@ interface ProgressState {
   attempts: Attempt[];
   /** SRS-Karten (Übungen und Vokabeln). */
   cards: Card[];
+  /** Angenommene Einstufungen (Protokoll); gültig ist die jüngste (`currentPlacement`). */
+  placements: Placement[];
   loaded: boolean;
   load: () => Promise<void>;
   /** Verwirft den Speicherstand und lädt neu aus IndexedDB (nach einem Import). */
@@ -35,6 +38,8 @@ interface ProgressState {
   /** Speichert geänderte Karten (z. B. Vokabel in andere Unit gewandert). */
   putCards: (cards: readonly Card[]) => void;
   recordCompletion: (unitId: string, lessonId: string, correct: number, total: number) => void;
+  /** Speichert eine angenommene (oder zurückgenommene) Einstufung. */
+  recordPlacement: (placement: Placement) => void;
 }
 
 const upsertCard = (cards: Card[], card: Card): Card[] =>
@@ -48,6 +53,14 @@ const upsertCard = (cards: Card[], card: Card): Card[] =>
  * dem Laden doppelt im Speicher. Ohne laufendes Laden laufen sie sofort (synchron).
  */
 let loading: Promise<void> | undefined;
+
+/** Auto-ID der Tabelle gehört nicht in den Store (wie bei Sicherungen gerätelokal). */
+const stripId = ({ at, startUnit, skipped, shaky }: Placement): Placement => ({
+  at,
+  startUnit,
+  skipped,
+  shaky,
+});
 const whenReady = (fn: () => void) => (loading ? void loading.then(fn) : fn());
 
 export const useProgress = create<ProgressState>((set, get) => {
@@ -64,21 +77,24 @@ export const useProgress = create<ProgressState>((set, get) => {
     completions: [],
     attempts: [],
     cards: [],
+    placements: [],
     loaded: false,
     load: () => {
       if (loading) return loading;
       if (get().loaded) return Promise.resolve();
       const run = async () => {
-        const [rows, attempts, cards] = await Promise.all([
+        const [rows, attempts, cards, placements] = await Promise.all([
           safely(() => db.completions.toArray(), []),
           safely(() => db.attempts.toArray(), []),
           safely(() => db.cards.toArray(), []),
+          safely(() => db.placements.toArray(), []),
         ]);
         // Lokal schon erfasste Einträge (vor dem Laden) bleiben erhalten.
         set((s) => ({
           completions: [...rows, ...s.completions],
           attempts: [...attempts, ...s.attempts],
           cards: s.cards.reduce(upsertCard, cards),
+          placements: [...placements.map(stripId), ...s.placements],
           loaded: true,
         }));
       };
@@ -90,7 +106,7 @@ export const useProgress = create<ProgressState>((set, get) => {
     },
     reload: async () => {
       await loading;
-      set({ completions: [], attempts: [], cards: [], loaded: false });
+      set({ completions: [], attempts: [], cards: [], placements: [], loaded: false });
       await get().load();
     },
     recordAttempt: (exerciseId, lessonId, verdict, type) =>
@@ -131,6 +147,16 @@ export const useProgress = create<ProgressState>((set, get) => {
         };
         set((s) => ({ completions: [...s.completions, completion] }));
         void safely(() => db.completions.add({ ...completion }), 0);
+      }),
+    recordPlacement: (placement) =>
+      whenReady(() => {
+        const row: Placement = {
+          ...placement,
+          skipped: [...placement.skipped],
+          shaky: [...placement.shaky],
+        };
+        set((s) => ({ placements: [...s.placements, row] }));
+        void safely(() => db.placements.add({ ...row }), 0);
       }),
   };
 });

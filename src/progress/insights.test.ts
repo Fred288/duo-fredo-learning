@@ -151,8 +151,15 @@ describe('unitOverview', () => {
       attempts: 3,
       cards: 2,
       settled: 1,
+      skipped: false,
     });
     expect(o[1]).toMatchObject({ done: 0, total: 1, accuracy: undefined, attempts: 0, cards: 0 });
+  });
+
+  it('markiert laut Einstufung übersprungene Units, die Start-Unit nicht', () => {
+    const placement = { at: 1, startUnit: units[1]!.id, skipped: [units[0]!.id], shaky: [] };
+    const o = unitOverview(units, [], [], [], TODAY, placement);
+    expect(o.map((u) => u.skipped)).toEqual([true, false]);
   });
 });
 

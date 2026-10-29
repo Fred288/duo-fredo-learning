@@ -187,6 +187,7 @@ export function BackupSection() {
               completions: data.completions.length,
               cards: data.cards.length,
               notes: data.notes.length,
+              placements: data.placements.length,
             })}
           </p>
           {skipped > 0 && (
