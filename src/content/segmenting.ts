@@ -5,6 +5,7 @@ import {
   conjugate,
   inflect,
   MorphError,
+  nonfinite,
   predicate,
   type Inflection,
   type MorphTag,
@@ -89,7 +90,7 @@ export function presentAlternative(
 }
 
 const personOf = (spec: FormSpec): Person | undefined =>
-  spec.kind === 'noun' ? undefined : spec.person;
+  'person' in spec ? spec.person : undefined;
 
 const suffixTags = (inf: Inflection, person?: Person): string =>
   pieces(inf, person)
@@ -106,7 +107,12 @@ function entryOf(spec: FormSpec, vocab: readonly Vocab[]): VocabEntry {
     unit: '',
     tr: spec.lemma,
     de: v?.de ?? ['-'],
-    pos: spec.kind === 'verb' ? 'verb' : v?.pos === 'adj' || v?.pos === 'num' ? v.pos : 'noun',
+    pos:
+      spec.kind === 'verb' || spec.kind === 'verbal'
+        ? 'verb'
+        : v?.pos === 'adj' || v?.pos === 'num'
+          ? v.pos
+          : 'noun',
     softens: stem.softens,
     harmony_vowel: stem.harmonyVowel,
     drops_vowel: stem.dropsVowel,
@@ -152,7 +158,8 @@ const COPULA_PERSONS: Person[] = ['1sg', '2sg', '1pl', '2pl'];
  * Lässt sich dieselbe Form desselben Stamms anders zerlegen oder benennen? evleri ist PL+ACC,
  * PL+POSS_3SG oder POSS_3PL; evim ist „mein Haus“ oder „ich bin ein Haus“. Solche Formen
  * fallen weg, denn ohne Satz ist keine Zerlegung die einzig richtige. Verglichen wird mit allen
- * Formen des Nachschlagewerks (Nomen: Plural × Possessiv × Kasus, Verben: alle Zeiten), bei
+ * Formen des Nachschlagewerks (Nomen: Plural × Possessiv × Kasus, Verben: alle Zeiten und infinite
+ * Formen: gelecek ist Futur und Partizip, gelmem Aorist und Verbalnomen), bei
  * Nomen ohne deutsche Bedeutung (`glossed`) auch mit der Kopula. Ableitungen kennt das
  * Formenraster nicht; ein Stamm, der selbst abgeleitet ist (evli), gilt daher als mehrdeutig.
  */
@@ -163,7 +170,8 @@ export function isAmbiguous(
   { glossed = false } = {},
 ): boolean {
   const form = trLower(inf.form);
-  if (spec.kind !== 'verb' && derivedStem(spec.lemma, vocab)) return true;
+  const verbal = spec.kind === 'verb' || spec.kind === 'verbal';
+  if (!verbal && derivedStem(spec.lemma, vocab)) return true;
   if (spec.kind === 'noun' && !glossed) {
     const stem = stemFromVocab(spec.lemma, vocab);
     if (COPULA_PERSONS.some((person) => attempt(() => predicate(stem, { person })) === form)) {
@@ -181,7 +189,9 @@ export function isAmbiguous(
         ? label.tags.join(' ')
         : label.kind === 'verb'
           ? suffixTags(conjugate(verb, label), label.person)
-          : 'PRONOUN';
+          : label.kind === 'verbal'
+            ? suffixTags(nonfinite(verb, label))
+            : 'PRONOUN';
     if (tags !== own) return true;
   }
   return false;

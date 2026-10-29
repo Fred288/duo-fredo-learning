@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { conjugate, inflect, predicate } from '../morphology';
+import { conjugate, inflect, nonfinite, predicate } from '../morphology';
 import { explainSteps } from './explain';
 
 describe('explainSteps', () => {
@@ -38,6 +38,19 @@ describe('explainSteps', () => {
     expect(explainSteps(forms[1]!.steps)).toContain(
       'Pufferlaut „y“ trennt zwei Vokale → Bedingung -(y)se',
     );
+  });
+
+  it('begründet infinite Formen (Erweichung des Partizips, Hebung, Stammerweichung)', () => {
+    const lines = explainSteps(nonfinite('okumak', { form: 'PART_DIK', tags: ['POSS_1SG'] }).steps);
+    expect(lines).toContain('Auslaut „k“ wird vor einem Vokal zu „ğ“ (mein)');
+    expect(explainSteps(nonfinite('yemek', { form: 'CV_IP' }).steps)).toContain(
+      'Vor dem Pufferlaut y wird „e“ zu „i“ (yiyecek, diyeyim) → und dann (-ip)',
+    );
+    const git = explainSteps(
+      nonfinite({ form: 'gitmek', softens: true }, { form: 'CV_INCA' }).steps,
+    );
+    expect(git).toContain('Auslaut „t“ wird vor einem Vokal zu „d“ (als, sobald (-ince))');
+    for (const line of [...lines, ...git]) expect(line).not.toMatch(/\{|tag\./);
   });
 
   it('begründet vierfache Harmonie', () => {

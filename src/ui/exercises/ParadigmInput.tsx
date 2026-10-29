@@ -64,7 +64,11 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
 
   const formula = [
     ex.lemma,
-    ...(ex.kind === 'noun' ? [] : tenseLabels(ex.kind === 'copula', ex)),
+    ...(ex.kind === 'noun'
+      ? []
+      : ex.kind === 'verbal'
+        ? [t(`tag.${ex.verbal!}`)]
+        : tenseLabels(ex.kind === 'copula', ex)),
     ex.negative && t('ex.conjugation.negative'),
     ex.question && t('ex.conjugation.question'),
   ]

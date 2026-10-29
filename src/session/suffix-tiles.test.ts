@@ -47,3 +47,35 @@ describe('grade suffix_builder', () => {
     expect(grade(ex, 'evda', { tolerateDiacritics: true }).verdict).toBe('wrong');
   });
 });
+
+describe('suffixTiles: infinite Formen', () => {
+  it('Verbstamm mit Erweichung, Partizip und Possessiv', () => {
+    const ex: SB = {
+      id: 'x-gid',
+      type: 'suffix_builder',
+      stem: 'gitmek',
+      verbal: 'PART_ACAK',
+      suffixes: ['POSS_1SG'],
+      target: 'gideceğim',
+    };
+    const git: Vocab = { tr: 'gitmek', de: ['gehen'], pos: 'verb', softens: true };
+    const { tokens, solution } = suffixTiles(ex, [git]);
+    expect(solution.form).toBe('gideceğim');
+    expect(tokens).toEqual(expect.arrayContaining(['gid', 'eceğ', 'im', 'git']));
+    expect(grade(ex, 'gideceğim', { tolerateDiacritics: true }).verdict).toBe('correct');
+  });
+
+  it('Konverb ohne Endungen', () => {
+    const ex: SB = {
+      id: 'x-gel',
+      type: 'suffix_builder',
+      stem: 'gelmek',
+      verbal: 'CV_INCA',
+      suffixes: [],
+      target: 'gelince',
+    };
+    const { tokens } = suffixTiles(ex, []);
+    expect(tokens).toEqual(expect.arrayContaining(['gel', 'ince']));
+    expect(tokens.length).toBeGreaterThan(2); // eine Variante von -(y)IncA als Ablenker
+  });
+});

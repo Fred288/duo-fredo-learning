@@ -14,8 +14,17 @@ interface Props {
 
 export function SuffixBuilderInput({ ex, vocab, onChange, disabled }: Props) {
   const { tokens } = useMemo(() => suffixTiles(ex, vocab), [ex, vocab]);
-  // Aufgabe als Formel: "ev + Plural + Lokativ", Deutsch als Kontext.
-  const formula = [ex.stem, ...ex.suffixes.map((tag) => t(`tag.${tag}`))].join(' + ');
+  // Aufgabe als Formel: "ev + Plural + Lokativ", "okumak + Partizip -dik + mein", Deutsch als Kontext.
+  const formula = [
+    ex.stem,
+    ex.passive && t('tag.PASS'),
+    ex.ability && t('tag.ABIL'),
+    ex.negative && t('tag.NEG'),
+    ex.verbal && t(`tag.${ex.verbal}`),
+    ...ex.suffixes.map((tag) => t(`tag.${tag}`)),
+  ]
+    .filter(Boolean)
+    .join(' + ');
   return (
     <div className="space-y-4">
       <Prompt instruction={t('ex.suffix_builder')} text={formula} ex={ex} lang="de" />

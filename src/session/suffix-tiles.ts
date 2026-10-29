@@ -1,7 +1,7 @@
 import type { Exercise, Vocab } from '../content/schema';
-import { inflect, type Inflection, type Stem } from '../morphology';
+import { verbStem, type Inflection, type Stem } from '../morphology';
 import { suffixVariants } from '../morphology/variants';
-import { stemFromVocab } from '../content/lexicon';
+import { solveExercise, stemFromVocab } from '../content/lexicon';
 import { seededShuffle } from './grade';
 
 type SuffixBuilder = Extract<Exercise, { type: 'suffix_builder' }>;
@@ -21,8 +21,7 @@ const MAX_DISTRACTORS_PER_SLOT = 1;
 
 /** Richtige Segmente aus der Engine plus plausibel falsche Varianten (falsche Harmonie etc.). */
 export function suffixTiles(ex: SuffixBuilder, vocab: readonly Vocab[] = []): SuffixTiles {
-  const stem = stemFor(ex, vocab);
-  const solution = inflect(stem, ex.suffixes);
+  const solution = solveExercise(ex, vocab);
   const correct = new Set(solution.segments.map((s) => s.text));
 
   const distractors: string[] = [];
@@ -32,8 +31,11 @@ export function suffixTiles(ex: SuffixBuilder, vocab: readonly Vocab[] = []): Su
   };
 
   // Stamm: ungeänderte Form als Ablenker, wenn die Erweichung sie verändert hat.
+  // Bei Verben: Stamm ohne Erweichung/Hebung (git statt gid), dazu falsche Harmonie der Form.
+  const plain = ex.verbal ? verbStem(ex.stem) : ex.stem;
   const stemSegment = solution.segments[0]!.text;
-  if (stemSegment !== ex.stem) add([ex.stem], `${ex.id}-stem`);
+  if (stemSegment !== plain) add([plain], `${ex.id}-stem`);
+  if (ex.verbal) add(suffixVariants(ex.verbal), `${ex.id}-v`);
   ex.suffixes.forEach((tag, i) => add(suffixVariants(tag), `${ex.id}-${i}`));
 
   return {

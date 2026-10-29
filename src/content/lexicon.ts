@@ -3,11 +3,13 @@ import {
   conjugate,
   conjugateVariants,
   inflect,
+  nonfinite,
   PERSONS,
   predicate,
   type ConjugateOptions,
   type Inflection,
   type MorphTag,
+  type NonfiniteTag,
   type Person,
   type Stem,
 } from '../morphology';
@@ -38,6 +40,15 @@ export function stemFromVocab(
 export function solveForm(spec: FormSpec, vocab: readonly Vocab[] = []): Inflection {
   const stem = stemFromVocab(spec.lemma, vocab);
   if (spec.kind === 'noun') return inflect(stem, spec.tags);
+  if (spec.kind === 'verbal') {
+    return nonfinite(stem, {
+      form: spec.form,
+      negative: spec.negative,
+      ability: spec.ability,
+      passive: spec.passive,
+      tags: spec.tags,
+    });
+  }
   const flags = { person: spec.person, negative: spec.negative, question: spec.question };
   return spec.kind === 'verb'
     ? conjugate(stem, verbOptions(spec))
@@ -74,7 +85,7 @@ export function withAlternatives<U extends { lessons: { exercises: Exercise[] }[
       const alt = formVariants(formSpecOf(ex), vocab);
       return alt.length ? { ...ex, alt_targets: alt } : ex;
     }
-    if (ex.type === 'paradigm' && ex.kind !== 'noun') {
+    if (ex.type === 'paradigm' && (ex.kind === 'verb' || ex.kind === 'copula')) {
       const alt = paradigmRows(ex).map((_, i) => formVariants(formSpecOf(ex, i), vocab));
       return alt.some((a) => a.length) ? { ...ex, alt_targets: alt } : ex;
     }
@@ -88,7 +99,10 @@ export function withAlternatives<U extends { lessons: { exercises: Exercise[] }[
 
 /** Formangabe einer Grammatikübung bzw. einer Tabellenzeile (ohne Lösung und IDs). */
 export function formSpecOf(ex: EngineExercise | ParadigmExercise, row = 0): FormSpec {
-  if (ex.type === 'suffix_builder') return { kind: 'noun', lemma: ex.stem, tags: ex.suffixes };
+  if (ex.type === 'suffix_builder') {
+    if (!ex.verbal) return { kind: 'noun', lemma: ex.stem, tags: ex.suffixes };
+    return verbalSpec(ex.stem, ex.verbal, ex, ex.suffixes);
+  }
   const verbal = {
     tense: ex.tense,
     negative: ex.negative,
@@ -103,10 +117,31 @@ export function formSpecOf(ex: EngineExercise | ParadigmExercise, row = 0): Form
   }
   const r = paradigmRows(ex)[row];
   if (r === undefined) throw new RangeError(`${ex.id}: keine Zeile ${row}`);
-  if (typeof r !== 'string') return { kind: 'noun', lemma: ex.lemma, tags: r };
+  if (typeof r !== 'string') {
+    return ex.kind === 'verbal'
+      ? verbalSpec(ex.lemma, ex.verbal!, ex, r)
+      : { kind: 'noun', lemma: ex.lemma, tags: r };
+  }
   const kind = ex.kind as 'verb' | 'copula'; // Personenzeilen gibt es nur bei Verb und Kopula
   return defined({ kind, lemma: ex.lemma, person: r, ...verbal });
 }
+
+/** Infinite Form (Partizip, Verbalnomen, Konverb) mit nominalen Endungen; leere Endungen fallen weg. */
+const verbalSpec = (
+  lemma: string,
+  form: NonfiniteTag,
+  ex: { negative?: boolean; ability?: boolean; passive?: boolean },
+  tags: MorphTag[],
+): FormSpec =>
+  defined({
+    kind: 'verbal' as const,
+    lemma,
+    form,
+    negative: ex.negative,
+    ability: ex.ability,
+    passive: ex.passive,
+    tags: tags.length ? tags : undefined,
+  });
 
 /** Ohne undefined-Felder: die Angabe landet im JSON und wird mit dem Schema verglichen. */
 const defined = <T extends object>(o: T): T =>
@@ -121,9 +156,11 @@ export function solveExercise(ex: EngineExercise, vocab: readonly Vocab[] = []):
 const copulaTense = (tense?: string) =>
   tense === 'past' || tense === 'evidential' || tense === 'conditional' ? tense : undefined;
 
-/** Zeilen einer Tabelle: Tag-Folgen (Nomen) oder Personen (Verb, Kopula). */
+/** Zeilen einer Tabelle: Tag-Folgen (Nomen, infinite Form) oder Personen (Verb, Kopula). */
 export function paradigmRows(ex: ParadigmExercise): (MorphTag[] | Person)[] {
-  return ex.kind === 'noun' ? (ex.rows ?? []) : (ex.persons ?? [...PERSONS]);
+  return ex.kind === 'noun' || ex.kind === 'verbal'
+    ? (ex.rows ?? [])
+    : (ex.persons ?? [...PERSONS]);
 }
 
 /** Engine-Lösung je Tabellenzeile. */

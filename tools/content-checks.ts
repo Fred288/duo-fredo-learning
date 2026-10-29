@@ -148,7 +148,7 @@ export function checkSegments(units: LoadedUnit[]): string[] {
       if (!ids.has(ex.from)) fail(`Quelle "${ex.from}" ist keine Grammatikübung dieser Unit`);
       try {
         const inf = solveForm(ex.analysis, lexicon);
-        const expected = pieces(inf, ex.analysis.kind === 'noun' ? undefined : ex.analysis.person);
+        const expected = pieces(inf, 'person' in ex.analysis ? ex.analysis.person : undefined);
         const got = ex.segments;
         if (!sameForm(inf.form, ex.word)) fail(`word "${ex.word}", Engine erwartet "${inf.form}"`);
         if (got.map((p) => p.text).join('') !== segmentLetters(ex.word)) {

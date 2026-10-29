@@ -110,7 +110,7 @@ export const verbStem = (form: string): string => normalize(form).replace(/m[ea]
 
 type Segment = Inflection['segments'][number];
 
-class Builder {
+export class Builder {
   segments: Segment[] = [];
   steps: Step[] = [];
   /** Wörter, aus denen die Form besteht (Fragepartikel und değil stehen getrennt). */
@@ -191,7 +191,7 @@ function personAndQuestion(
 }
 
 // Futur: ye-/de- heben den Stammvokal (yiyecek, diyecek).
-const IRREGULAR_FUTURE: Record<string, string> = { de: 'di', ye: 'yi' };
+export const IRREGULAR_FUTURE: Record<string, string> = { de: 'di', ye: 'yi' };
 
 // Einsilbige Konsonantenstämme mit Aorist -Ir statt -Ar.
 const AORIST_IR = new Set([
@@ -213,7 +213,7 @@ const AORIST_IR = new Set([
 const vowelCount = (s: string) => [...s].filter(isVowel).length;
 
 /** Stammauslaut t → d vor vokalisch anlautendem Suffix (lexikalisch, git- → gid-). */
-function softenedStem(verb: VerbStem, stem: string, tag: VerbTag, steps: Step[]): string {
+export function softenedStem(verb: VerbStem, stem: string, tag: VerbTag, steps: Step[]): string {
   if (!verb.softens || isVowel(stem.at(-1)!)) return stem;
   const s = soften(stem);
   if (!s) return stem;
@@ -353,6 +353,21 @@ function optative(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflect
 function withAbility(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
   if (opts.tense === 'imperative') throw new MorphError('„können“ gibt es nicht im Imperativ');
   const steps: Step[] = [];
+  const { base, tail } = abilityStem(verb, stem, opts.negative ?? false, steps);
+  const inner = conjugate(
+    { form: `${base}${tail}mek`, aorist: opts.negative ? undefined : 'ir' },
+    { ...opts, ability: false },
+  );
+  return splitDerived(inner, base, tail, 'ABIL', steps, 'ability');
+}
+
+/** Erweiterter Stamm für „können“: gel → gel + ebil, verneint gel + e (gele-me-z); ye → yi + yebil. */
+export function abilityStem(
+  verb: VerbStem,
+  stem: string,
+  negative: boolean,
+  steps: Step[],
+): { base: string; tail: string } {
   let base: string;
   if (IRREGULAR_FUTURE[stem]) {
     base = IRREGULAR_FUTURE[stem]!;
@@ -360,20 +375,53 @@ function withAbility(verb: VerbStem, stem: string, opts: ConjugateOptions): Infl
   } else {
     base = softenedStem(verb, stem, 'ABIL', steps);
   }
-  const tail = realize(opts.negative ? '(y)A' : '(y)Abil', 'ABIL', { base, steps });
-  const inner = conjugate(
-    { form: `${base}${tail}mek`, aorist: opts.negative ? undefined : 'ir' },
-    { ...opts, ability: false },
-  );
+  return { base, tail: realize(negative ? '(y)A' : '(y)Abil', 'ABIL', { base, steps }) };
+}
+
+/** Passivstamm: -Il nach Konsonant, -In nach l, -n nach Vokal (yapıl-, bilin-, okun-). */
+export function passiveStem(
+  verb: VerbStem,
+  stem: string,
+  steps: Step[],
+): { base: string; tail: string } {
+  let base = stem;
+  let template: string;
+  if (isVowel(stem.at(-1)!)) template = 'n';
+  else {
+    template = stem.at(-1) === 'l' ? 'In' : 'Il';
+    base = softenedStem(verb, stem, 'PASS', steps);
+  }
+  return { base, tail: realize(template, 'PASS', { base, steps }) };
+}
+
+/**
+ * Form eines erweiterten Stamms (yapıl-, gelebil-) zurück in Stamm + Erweiterung + Rest teilen.
+ * Ist das erste Segment schon geteilt (yapıl + abil), bleibt der Rest als eigener Baustein.
+ */
+export function splitDerived(
+  inner: Inflection,
+  base: string,
+  tail: string,
+  tag: 'ABIL' | 'PASS',
+  steps: Step[],
+  kind: 'ability' | 'passive',
+): Inflection {
   const [first, ...rest] = inner.segments;
-  if (first?.text !== base + tail) throw new MorphError(`Unerwarteter Stamm "${first?.text}"`);
+  const firstText = first?.text ?? '';
+  if (!firstText.startsWith(base + tail)) throw new MorphError(`Unerwarteter Stamm "${firstText}"`);
+  const own = firstText.slice((base + tail).length);
   return {
     form: inner.form,
-    segments: [{ tag: 'STEM', text: base }, { tag: 'ABIL', text: tail }, ...rest],
+    segments: [
+      { tag: 'STEM', text: base },
+      { tag, text: tail },
+      ...(own ? [{ tag: first!.tag, text: own }] : []),
+      ...rest,
+    ],
     steps: [
       ...steps,
       ...inner.steps.map((s) =>
-        s.rule === 'aorist_vowel' && s.kind === 'lexical' ? { ...s, kind: 'ability' as const } : s,
+        s.rule === 'aorist_vowel' && s.kind === 'lexical' ? { ...s, kind } : s,
       ),
     ],
   };
@@ -385,35 +433,9 @@ function withAbility(verb: VerbStem, stem: string, opts: ConjugateOptions): Infl
  */
 function withPassive(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
   const steps: Step[] = [];
-  let base = stem;
-  let template: string;
-  if (isVowel(stem.at(-1)!)) template = 'n';
-  else {
-    template = stem.at(-1) === 'l' ? 'In' : 'Il';
-    base = softenedStem(verb, stem, 'PASS', steps);
-  }
-  const tail = realize(template, 'PASS', { base, steps });
+  const { base, tail } = passiveStem(verb, stem, steps);
   const inner = conjugate({ form: `${base}${tail}mek`, aorist: 'ir' }, { ...opts, passive: false });
-  const [first, ...rest] = inner.segments;
-  // Mit „können“ ist das erste Segment bereits gesplittet (yapıl + abil).
-  const firstText = first?.text ?? '';
-  if (!firstText.startsWith(base + tail)) throw new MorphError(`Unerwarteter Stamm "${firstText}"`);
-  const own = firstText.slice((base + tail).length);
-  return {
-    form: inner.form,
-    segments: [
-      { tag: 'STEM', text: base },
-      { tag: 'PASS', text: tail },
-      ...(own ? [{ tag: first!.tag, text: own }] : []),
-      ...rest,
-    ],
-    steps: [
-      ...steps,
-      ...inner.steps.map((s) =>
-        s.rule === 'aorist_vowel' && s.kind === 'lexical' ? { ...s, kind: 'passive' as const } : s,
-      ),
-    ],
-  };
+  return splitDerived(inner, base, tail, 'PASS', steps, 'passive');
 }
 
 /** Imperativ: gel, gelsin, gelin (höflich geliniz), gelsinler; verneint gelme, gelmeyin. */

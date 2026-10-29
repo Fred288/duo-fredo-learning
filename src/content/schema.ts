@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { MORPH_TAGS, VERB_TAGS } from '../morphology/tags';
+import { MORPH_TAGS, NONFINITE_TAGS, VERB_TAGS } from '../morphology/tags';
 import {
   COMPOUND_TENSES,
   COMPOUNDS,
@@ -142,13 +142,34 @@ export const FreeText = z.strictObject({
   answers: z.array(nonEmpty).min(1),
 });
 
-export const SuffixBuilder = z.strictObject({
-  ...exerciseBase,
-  type: z.literal('suffix_builder'),
-  stem: nonEmpty,
-  suffixes: z.array(z.enum(MORPH_TAGS)).min(1),
-  target: nonEmpty,
-});
+/**
+ * Wortform bauen: Nomen + Endungen (ev + PL + LOC) oder, mit `verbal`, Verb (Infinitiv) + infinite
+ * Form + Endungen (okumak + PART_DIK + POSS_1SG → okuduğum; gelmek + CV_INCA → gelince).
+ */
+export const SuffixBuilder = z
+  .strictObject({
+    ...exerciseBase,
+    type: z.literal('suffix_builder'),
+    stem: nonEmpty,
+    verbal: z.enum(NONFINITE_TAGS).optional(),
+    negative: z.boolean().optional(),
+    ability: z.boolean().optional(),
+    passive: z.boolean().optional(),
+    suffixes: z.array(z.enum(MORPH_TAGS)).default([]),
+    target: nonEmpty,
+  })
+  .superRefine((e, ctx) => {
+    if (!e.verbal && e.suffixes.length === 0) {
+      ctx.addIssue({ code: 'custom', path: ['suffixes'], message: 'mindestens eine Endung' });
+    }
+    if (!e.verbal && (e.negative || e.ability || e.passive)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['verbal'],
+        message: 'negative/ability/passive nur mit verbal',
+      });
+    }
+  });
 
 const COPULA_TENSE_SET: readonly string[] = COPULA_TENSES;
 
@@ -246,8 +267,10 @@ export const Paradigm = z
   .strictObject({
     ...exerciseBase,
     type: z.literal('paradigm'),
-    kind: z.enum(['noun', 'verb', 'copula']),
+    kind: z.enum(['noun', 'verb', 'copula', 'verbal']),
     lemma: nonEmpty,
+    /** Bei `verbal`: die infinite Form; die Zeilen sind die Endungen danach (okuduğum … okudukları). */
+    verbal: z.enum(NONFINITE_TAGS).optional(),
     rows: z
       .array(z.array(z.enum(MORPH_TAGS)))
       .min(2)
@@ -265,15 +288,26 @@ export const Paradigm = z
     alt_targets: z.array(z.array(nonEmpty)).optional(),
   })
   .superRefine((e, ctx) => {
-    if (e.kind !== 'noun') {
+    if ((e.kind === 'verbal') !== !!e.verbal) {
+      ctx.addIssue({ code: 'custom', path: ['verbal'], message: 'verbal genau bei kind verbal' });
+    }
+    if (e.kind === 'verbal' && (e.tense || e.persons || e.compound || e.question || e.polite)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['kind'],
+        message: 'verbal-Tabellen haben Zeilen, keine Zeit',
+      });
+    }
+    if (e.kind === 'verb' || e.kind === 'copula') {
       if ((e.tense === 'imperative' || e.tense === 'optative') && !e.persons) {
         ctx.addIssue({ code: 'custom', path: ['persons'], message: `${e.tense} braucht persons` });
       }
       checkVerbForm(e, e.kind === 'copula', e.persons ?? [], ctx);
     }
-    const rows = e.kind === 'noun' ? e.rows?.length : (e.persons ?? PERSONS).length;
+    const byRows = e.kind === 'noun' || e.kind === 'verbal';
+    const rows = byRows ? e.rows?.length : (e.persons ?? PERSONS).length;
     if (rows === undefined) {
-      ctx.addIssue({ code: 'custom', path: ['rows'], message: 'noun-Tabelle braucht rows' });
+      ctx.addIssue({ code: 'custom', path: ['rows'], message: `${e.kind}-Tabelle braucht rows` });
     } else if (rows !== e.targets.length) {
       ctx.addIssue({
         code: 'custom',
@@ -309,6 +343,15 @@ export const FormSpec = z.discriminatedUnion('kind', [
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
     compound: z.enum(COMPOUNDS).optional(),
+  }),
+  z.strictObject({
+    kind: z.literal('verbal'),
+    lemma: nonEmpty,
+    form: z.enum(NONFINITE_TAGS),
+    negative: z.boolean().optional(),
+    ability: z.boolean().optional(),
+    passive: z.boolean().optional(),
+    tags: z.array(z.enum(MORPH_TAGS)).optional(),
   }),
 ]);
 

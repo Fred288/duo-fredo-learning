@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formTable, nounForms, verbForms } from './forms';
+import { formTable, nounForms, verbalForms, verbForms } from './forms';
 import { lemmatize, prepareLookup, search, TIER } from './search';
 import type { LookupIndex, VocabEntry } from './types';
 
@@ -119,6 +119,14 @@ describe('lemmatize: gebeugte Formen', () => {
     ['geliyordular', 'gelmek'],
     ['gelebilirdim', 'gelmek'],
     ['gelemezdim', 'gelmek'],
+    ['gittiğim', 'gitmek'],
+    ['geldiğini', 'gelmek'],
+    ['gelince', 'gelmek'],
+    ['gelmeden', 'gelmek'],
+    ['gelenlere', 'gelmek'],
+    ['gelmesini', 'gelmek'],
+    ['gidip', 'gitmek'],
+    ['yiyecek', 'yemek'],
     ['bana', 'ben'],
     ['ışıkları', 'ışık'],
   ])('%s → %s', (q, id) => {
@@ -230,5 +238,7 @@ describe('Formtabellen', () => {
     expect(nounForms(entry('ev')).length).toBe(97);
     // Zeiten, zusammengesetzte Zeiten (idi/imiş/ise), können und Passiv
     expect(verbForms(entry('gelmek')).length).toBeLessThan(500);
+    // Partizipien, Verbalnomen, Konverbien mit den üblichen Endungen
+    expect(verbalForms(entry('gelmek')).length).toBeLessThan(400);
   });
 });

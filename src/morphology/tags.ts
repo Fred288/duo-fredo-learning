@@ -23,8 +23,26 @@ export const MORPH_TAGS = [
 
 export type MorphTag = (typeof MORPH_TAGS)[number];
 
+// Infinite Verbformen: Partizipien, Verbalnomen, Konverbien. Danach folgen nominale Endungen.
+export const NONFINITE_TAGS = [
+  'PART_AN', // -(y)An (gelen)
+  'PART_DIK', // -DIk (geldiğim)
+  'PART_ACAK', // -(y)AcAk (geleceğim)
+  'VN_MA', // -mA (gelmesi)
+  'VN_MAK', // -mAk (gelmek, gelmekte)
+  'VN_IS', // -(y)Iş (geliş)
+  'CV_IP', // -(y)Ip (gelip)
+  'CV_ARAK', // -(y)ArAk (gelerek)
+  'CV_INCA', // -(y)IncA (gelince)
+  'CV_ALI', // -(y)AlI (geleli)
+  'CV_MADAN', // -mAdAn (gelmeden)
+] as const;
+
+export type NonfiniteTag = (typeof NONFINITE_TAGS)[number];
+
 // Verbale Bausteine (Präsens, Verneinung, Frage, Kopula) und Personalendungen.
 export const VERB_TAGS = [
+  ...NONFINITE_TAGS,
   'PRES', // -Iyor
   'PAST', // -DI
   'FUT', // -(y)AcAk

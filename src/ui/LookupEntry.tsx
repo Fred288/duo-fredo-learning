@@ -16,6 +16,15 @@ export function formLabelText(label: FormLabel): string {
       return label.tags.map((tag) => t(`tag.${tag}`)).join(' + ');
     case 'pronoun':
       return t(`tag.${label.case}` as MessageKey);
+    case 'verbal':
+      return [
+        [t(`tag.${label.form}`), ...(label.tags ?? []).map((tag) => t(`tag.${tag}`))].join(' + '),
+        label.ability && t('tag.ABIL'),
+        label.passive && t('lookup.passive'),
+        label.negative && t('lookup.negative'),
+      ]
+        .filter(Boolean)
+        .join(', ');
     case 'verb':
       return [
         t(`tense.${label.tense}`),

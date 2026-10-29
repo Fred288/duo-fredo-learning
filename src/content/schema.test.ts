@@ -116,6 +116,49 @@ describe('Unit-Schema', () => {
     expect(conj({ mode: 'copula', lemma: 'öğrenci', person: '3sg', dir: true })).toEqual([]);
   });
 
+  it('suffix_builder mit verbal: Endungen optional, Verneinung nur dort', () => {
+    const sb = (extra: object) => {
+      const u = validUnit();
+      u.lessons[0]!.exercises[0] = {
+        id: 'a1-u03-l1-e1',
+        type: 'suffix_builder',
+        stem: 'gelmek',
+        target: 'x',
+        ...extra,
+      } as never;
+      return issues(u);
+    };
+    expect(sb({ verbal: 'CV_INCA' })).toEqual([]);
+    expect(sb({ verbal: 'PART_DIK', suffixes: ['POSS_1SG'], negative: true })).toEqual([]);
+    expect(sb({})).toContainEqual(expect.stringContaining('suffixes'));
+    expect(sb({ suffixes: ['PL'], negative: true })).toContainEqual(
+      expect.stringContaining('verbal'),
+    );
+  });
+
+  it('Tabelle verbal braucht verbal und rows, keine Zeit', () => {
+    const par = (extra: object) => {
+      const u = validUnit();
+      u.lessons[0]!.exercises[0] = {
+        id: 'a1-u03-l1-e1',
+        type: 'paradigm',
+        kind: 'verbal',
+        lemma: 'okumak',
+        targets: ['okuduğum', 'okuduğun'],
+        ...extra,
+      } as never;
+      return issues(u);
+    };
+    expect(par({ verbal: 'PART_DIK', rows: [['POSS_1SG'], ['POSS_2SG']] })).toEqual([]);
+    expect(par({ rows: [['POSS_1SG'], ['POSS_2SG']] })).toContainEqual(
+      expect.stringContaining('verbal'),
+    );
+    expect(par({ verbal: 'PART_DIK' })).toContainEqual(expect.stringContaining('rows'));
+    expect(
+      par({ verbal: 'PART_DIK', rows: [['POSS_1SG'], ['POSS_2SG']], tense: 'past' }),
+    ).toContainEqual(expect.stringContaining('kind'));
+  });
+
   it('Optativ-Tabelle braucht persons', () => {
     const u = validUnit();
     u.lessons[0]!.exercises[0] = {

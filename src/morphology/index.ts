@@ -15,7 +15,16 @@ export {
   type PronounCase,
   type PronounLemma,
 } from './pronouns';
-export { MORPH_TAGS, VERB_TAGS, type AnyTag, type MorphTag, type VerbTag } from './tags';
+export { NONFINITE, nonfinite, type NonfiniteOptions } from './nonfinite';
+export {
+  MORPH_TAGS,
+  NONFINITE_TAGS,
+  VERB_TAGS,
+  type AnyTag,
+  type MorphTag,
+  type NonfiniteTag,
+  type VerbTag,
+} from './tags';
 export {
   conjugate,
   conjugateVariants,

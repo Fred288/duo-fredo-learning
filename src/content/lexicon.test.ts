@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { formVariants, withAlternatives } from './lexicon';
+import {
+  formSpecOf,
+  formVariants,
+  solveExercise,
+  solveParadigm,
+  withAlternatives,
+} from './lexicon';
 import type { Exercise } from './schema';
 
 describe('Nebenformen im Build', () => {
@@ -44,5 +50,39 @@ describe('Nebenformen im Build', () => {
     expect(a).toMatchObject({ alt_targets: ['geliyordular'] });
     expect(b).toBe(plain);
     expect(c).toMatchObject({ alt_targets: [[], ['geliyordular']] });
+  });
+});
+
+describe('infinite Formen über Übungen', () => {
+  it('suffix_builder mit verbal und Tabelle verbal', () => {
+    const sb: Exercise = {
+      id: 'b1-u08-l2-e1',
+      type: 'suffix_builder',
+      stem: 'okumak',
+      verbal: 'PART_DIK',
+      suffixes: ['POSS_1SG', 'ACC'],
+      target: 'okuduğumu',
+    };
+    expect(formSpecOf(sb as never)).toEqual({
+      kind: 'verbal',
+      lemma: 'okumak',
+      form: 'PART_DIK',
+      tags: ['POSS_1SG', 'ACC'],
+    });
+    expect(solveExercise(sb as never).form).toBe('okuduğumu');
+    const table = {
+      id: 'b1-u08-l2-e2',
+      type: 'paradigm',
+      kind: 'verbal',
+      lemma: 'gelmek',
+      verbal: 'PART_DIK',
+      negative: true,
+      rows: [['POSS_1SG'], ['POSS_3PL']],
+      targets: ['gelmediğim', 'gelmedikleri'],
+    } as const;
+    expect(solveParadigm(table as never).map((r) => r.form)).toEqual([
+      'gelmediğim',
+      'gelmedikleri',
+    ]);
   });
 });

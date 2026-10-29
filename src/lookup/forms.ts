@@ -5,12 +5,14 @@ import {
   conjugateVariants,
   inflect,
   MorphError,
+  nonfinite,
   PERSONS,
   PRONOUN_CASES,
   PRONOUN_LEMMAS,
   pronoun,
   type Compound,
   type MorphTag,
+  type NonfiniteTag,
   type Person,
   type PronounCase,
   type PronounLemma,
@@ -33,6 +35,14 @@ export type FormLabel =
       ability?: boolean;
       passive?: boolean;
       compound?: Compound;
+    }
+  | {
+      kind: 'verbal';
+      form: NonfiniteTag;
+      tags?: MorphTag[];
+      negative?: boolean;
+      ability?: boolean;
+      passive?: boolean;
     };
 
 export interface Form {
@@ -141,6 +151,67 @@ export function verbForms(entry: VocabEntry): Form[] {
   );
 }
 
+type VerbalVariant = Omit<Extract<FormLabel, { kind: 'verbal' }>, 'kind'>;
+
+// Kasus nach infiniten Formen; Genitiv und Instrumental sind dort selten.
+const VERBAL_CASES: MorphTag[] = ['ACC', 'DAT', 'LOC', 'ABL'];
+const withPoss = (cases: boolean): MorphTag[][] =>
+  POSS.flatMap((p) => [[p], ...(cases ? VERBAL_CASES.map((c) => [p, c]) : [])]);
+const BOTH = [false, true];
+
+const VERBAL_VARIANTS: VerbalVariant[] = [
+  // gelen, gelenler, gelene, gelenlere
+  ...[[], ['PL'], ...VERBAL_CASES.map((c) => [c]), ...VERBAL_CASES.map((c) => ['PL', c])].map(
+    (tags) => ({ form: 'PART_AN' as const, tags: tags as MorphTag[] }),
+  ),
+  // geldiğim, geldiğini, geldikten
+  ...[['ABL'] as MorphTag[], ...withPoss(true)].map((tags) => ({
+    form: 'PART_DIK' as const,
+    tags,
+  })),
+  // gelecek, geleceğim, geleceğini
+  ...[[], ...withPoss(true)].map((tags) => ({ form: 'PART_ACAK' as const, tags })),
+  // gelme, gelmeyi, gelmesi, gelmesini
+  ...[[], ...VERBAL_CASES.map((c) => [c]), ...withPoss(true)].map((tags) => ({
+    form: 'VN_MA' as const,
+    tags,
+  })),
+  // gelmek, gelmekte, gelmekten, gelmekle
+  ...[[], ['LOC'], ['ABL'], ['INS']].map((tags) => ({
+    form: 'VN_MAK' as const,
+    tags: tags as MorphTag[],
+  })),
+  ...(['CV_IP', 'CV_ARAK', 'CV_INCA', 'CV_ALI'] as const).map((form) => ({ form, tags: [] })),
+].flatMap((v) => BOTH.map((negative) => ({ ...v, negative })));
+
+const VERBAL_EXTRA: VerbalVariant[] = [
+  { form: 'CV_MADAN', tags: [] },
+  // geliş, gelişi (verneint selten)
+  ...[[], ...VERBAL_CASES.map((c) => [c]), ...withPoss(true)].map((tags) => ({
+    form: 'VN_IS' as const,
+    tags,
+  })),
+  // yapılan, yapıldığı, gelebilen, gelemeyen
+  { form: 'PART_AN', tags: [], passive: true },
+  { form: 'PART_AN', tags: ['PL'], passive: true },
+  { form: 'PART_DIK', tags: ['POSS_3SG'], passive: true },
+  { form: 'PART_AN', tags: [], ability: true },
+  { form: 'PART_AN', tags: [], ability: true, negative: true },
+];
+
+/** Partizipien, Verbalnomen, Konverbien mit den üblichen Endungen; ohne den Infinitiv selbst. */
+export function verbalForms(entry: VocabEntry): Form[] {
+  const stem = verbStemOf(entry);
+  return [...VERBAL_VARIANTS, ...VERBAL_EXTRA].flatMap((variant) => {
+    const opts = { ...variant, negative: variant.negative || undefined };
+    const form = attempt(() => nonfinite(stem, opts).form);
+    if (!form || (variant.form === 'VN_MAK' && !variant.tags?.length && !variant.negative)) {
+      return [];
+    }
+    return [{ form, label: { kind: 'verbal' as const, ...opts } }];
+  });
+}
+
 export function allForms(entry: VocabEntry): Form[] {
   switch (formKind(entry)) {
     case 'noun':
@@ -148,7 +219,7 @@ export function allForms(entry: VocabEntry): Form[] {
     case 'pronoun':
       return pronounForms(entry);
     case 'verb':
-      return verbForms(entry);
+      return [...verbForms(entry), ...verbalForms(entry)];
     default:
       return [];
   }

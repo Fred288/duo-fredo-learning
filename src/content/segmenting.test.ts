@@ -97,7 +97,7 @@ describe('pieces', () => {
 
 describe('presentAlternative', () => {
   const alt = (spec: Parameters<typeof solveForm>[0]) => {
-    const person = spec.kind === 'noun' ? undefined : spec.person;
+    const person = 'person' in spec ? spec.person : undefined;
     const a = presentAlternative(pieces(solveForm(spec, vocab), person), spec);
     return a?.map((p) => `${p.text}:${p.tag}`).join(' ');
   };
@@ -322,5 +322,46 @@ describe('segmentLesson', () => {
       { id: 'a1-u03-l2-e1', type: 'free_text', direction: 'de_tr', prompt: 'x', answers: ['ev'] },
     ]);
     expect(withSegments(plain, 'Z', vocab)).toBe(plain);
+  });
+});
+
+describe('infinite Formen beim Zerlegen', () => {
+  const verbal = (form: string, tags: string[] = [], more: object = {}) =>
+    ({ kind: 'verbal', lemma: 'gelmek', form, tags, ...more }) as Parameters<typeof solveForm>[0];
+  const ambiguous = (spec: Parameters<typeof solveForm>[0]) =>
+    isAmbiguous(spec, solveForm(spec, vocab), vocab);
+
+  it('erkennt Formen, die auch Zeitformen sind', () => {
+    expect(ambiguous(verbal('PART_ACAK'))).toBe(true); // gelecek: Futur 3sg
+    expect(ambiguous(verbal('VN_MA', ['POSS_1SG']))).toBe(true); // gelmem: Aorist verneint 1sg
+    expect(ambiguous(verbal('VN_MA'))).toBe(true); // gelme: Imperativ verneint
+    expect(ambiguous({ kind: 'verb', lemma: 'gelmek', person: '3sg', tense: 'future' })).toBe(true);
+  });
+
+  it('lässt eindeutige Formen durch', () => {
+    expect(ambiguous(verbal('PART_DIK', ['POSS_1SG', 'ACC']))).toBe(false); // geldiğimi
+    expect(ambiguous(verbal('CV_INCA'))).toBe(false); // gelince
+    expect(ambiguous(verbal('PART_AN', ['PL', 'DAT']))).toBe(false); // gelenlere
+  });
+
+  it('segmentCandidates nimmt verbale Suffix-Builder auf', () => {
+    const unit = makeUnit([
+      {
+        id: 'a1-u03-l2-e1',
+        type: 'suffix_builder',
+        stem: 'okumak',
+        verbal: 'PART_DIK',
+        suffixes: ['POSS_1SG', 'ACC'],
+        target: 'okuduğumu',
+      } as Exercise,
+    ]);
+    const [ex] = segmentCandidates(unit, vocab);
+    expect(segs(ex!)).toBe('oku:STEM duğ:PART_DIK um:POSS_1SG u:ACC');
+    expect(ex!.analysis).toEqual({
+      kind: 'verbal',
+      lemma: 'okumak',
+      form: 'PART_DIK',
+      tags: ['POSS_1SG', 'ACC'],
+    });
   });
 });
