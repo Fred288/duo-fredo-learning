@@ -111,6 +111,44 @@ describe('Migration v2 → v3', () => {
   });
 });
 
+describe('Migration v3 → v4', () => {
+  it('behält Karten und Versuche, legt eine leere, beschreibbare Einstufungstabelle an', async () => {
+    db.close();
+    await Dexie.delete('yol');
+
+    const v3 = new Dexie('yol');
+    v3.version(1).stores({
+      settings: 'key',
+      attempts: '++id, exerciseId, lessonId, at',
+      completions: '++id, lessonId, day',
+    });
+    v3.version(2).stores({ notes: '++id, itemId, unitId, at' });
+    v3.version(3).stores({ cards: 'id, due, unitId' });
+    const card = {
+      id: 'vo:tr_de:ev',
+      ref: { kind: 'vocab', vocabId: 'ev', dir: 'tr_de' },
+      unitId: 'a1-u02',
+      box: 3,
+      due: '2026-04-10',
+      introduced: '2026-04-01',
+      lastAt: 5,
+      lapses: 1,
+    };
+    await v3.table('cards').put(card);
+    await v3
+      .table('attempts')
+      .add({ exerciseId: 'a1-u02-l1-e3', lessonId: 'a1-u02-l1', verdict: 'wrong', at: 1 });
+    v3.close();
+
+    await db.open();
+    expect(await db.cards.toArray()).toEqual([card]);
+    expect(await db.attempts.count()).toBe(1);
+    expect(await db.placements.count()).toBe(0);
+    await db.placements.add({ at: 9, startUnit: 'a1-u03', skipped: ['a1-u01'], shaky: [] });
+    expect(await db.placements.where('at').above(1).count()).toBe(1);
+  });
+});
+
 describe('safely', () => {
   it('liefert das Ergebnis, wenn die Operation klappt', async () => {
     expect(await safely(async () => 42, 0)).toBe(42);

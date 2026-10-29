@@ -352,3 +352,16 @@ describe('recommend', () => {
     expect(r.startUnit).toBe('a1-u02');
   });
 });
+
+describe('recommend und gespeicherte Einstufung', () => {
+  it('liefert nie „kein Start und nichts übersprungen“ (das hieße Rücknahme)', () => {
+    const outcomes: Outcome[] = ['correct', 'wrong', 'unknown'];
+    const plan = planOf({ A1: 5, A2: 5 });
+    // Alle Antwortmuster aus drei Ausgängen je Aufgabe, deterministisch per Hash gestreut.
+    for (let seed = 0; seed < 300; seed++) {
+      const { s } = play(plan, (id) => outcomes[fnv1a(`${seed}|${id}`) % 3]!);
+      const r = recommend(plan, s.statuses);
+      expect(r.startUnit !== null || r.skipped.length > 0).toBe(true);
+    }
+  });
+});

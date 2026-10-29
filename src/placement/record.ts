@@ -19,7 +19,11 @@ export const clearedPlacement = (at: number): Placement => ({
   shaky: [],
 });
 
-/** Jüngste Einstufung, undefined ohne Einstufung oder nach dem Zurücknehmen. */
+/**
+ * Jüngste Einstufung, undefined ohne Einstufung oder nach dem Zurücknehmen. Eine Rücknahme
+ * erkennt man an `startUnit: null` ohne `skipped`; `recommend` liefert das nie (ohne Start ist
+ * alles Geprüfte bekannt, ohne Übersprungenes gibt es einen Start), siehe Test dort.
+ */
 export function currentPlacement(rows: readonly Placement[]): Placement | undefined {
   let latest: Placement | undefined;
   for (const r of rows) if (!latest || r.at >= latest.at) latest = r;

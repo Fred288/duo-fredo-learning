@@ -52,6 +52,10 @@ async function saveFile(file: File): Promise<void> {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+/** Einstufungen nennt die Vorschau nur, wenn welche betroffen sind (meist keine). */
+const placementNote = (count: number) =>
+  count > 0 ? t('backup.counts.placements', { count }) : '';
+
 export function BackupSection() {
   const lastBackup = useSettings((s) => s.lastBackup);
   const setSetting = useSettings((s) => s.set);
@@ -187,7 +191,7 @@ export function BackupSection() {
               completions: data.completions.length,
               cards: data.cards.length,
               notes: data.notes.length,
-              placements: data.placements.length,
+              placementNote: placementNote(data.placements.length),
             })}
           </p>
           {skipped > 0 && (
@@ -218,8 +222,12 @@ export function BackupSection() {
                       ? t('backup.mode.merge.effect', {
                           ...merge.added,
                           updated: merge.updatedCards,
+                          placementNote: placementNote(merge.added.placements),
                         })
-                      : t('backup.mode.replace.effect', { ...replace.dropped })}
+                      : t('backup.mode.replace.effect', {
+                          ...replace.dropped,
+                          placementNote: placementNote(replace.dropped.placements),
+                        })}
                   </span>
                 </span>
               </label>

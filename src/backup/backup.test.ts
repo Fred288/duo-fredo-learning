@@ -221,6 +221,12 @@ describe('mergeBackup', () => {
     expect(currentPlacement(data.placements)).toBeUndefined();
   });
 
+  it('eine jüngere Einstufung aus der Datei gilt nach einer lokalen Rücknahme', () => {
+    const local = { ...empty(), placements: [placement(100), placement(200, null)] };
+    const { data } = mergeBackup(local, { ...empty(), placements: [placement(300)] }, 'merge');
+    expect(currentPlacement(data.placements)?.at).toBe(300);
+  });
+
   it('nimmt bei gleicher Karte den jüngeren Stand, bei Gleichstand den lokalen', () => {
     const local = { ...empty(), cards: [card(ev, 'a1-u02', 300, 2), card(ex, 'a1-u02', 100, 1)] };
     const incoming = {
