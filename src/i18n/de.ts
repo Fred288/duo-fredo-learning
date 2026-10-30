@@ -111,11 +111,11 @@ export const de = {
   'placement.title': 'Einstufung',
   'placement.offer.title': 'Schon Vorkenntnisse?',
   'placement.offer.text':
-    'Ein kurzer Test (etwa 10 bis 20 Minuten) schlägt vor, wo du einsteigen kannst. Du kannst ihn auslassen und später in den Einstellungen nachholen.',
+    'Ein Test (je nach Vorkenntnissen etwa 15 bis 30 Minuten) schlägt vor, wo du einsteigen kannst. Du kannst ihn auslassen und später in den Einstellungen nachholen.',
   'placement.offer.start': 'Einstufung machen',
   'placement.offer.decline': 'Nein, von vorn',
   'placement.intro.1':
-    'Der Test geht die Themen von A1 bis B2 der Reihe nach durch, je Thema ein bis zwei Aufgaben. Er dauert etwa 10 bis 20 Minuten und endet früher, sobald der Stoff zu schwer wird.',
+    'Der Test geht die Themen von A1 bis B2 der Reihe nach durch, je Thema ein bis zwei Aufgaben. Er dauert etwa 15 bis 30 Minuten und endet früher, sobald der Stoff zu schwer wird.',
   'placement.intro.2':
     'Es gibt keine Punkte und nach den Aufgaben keine Rückmeldung. Wenn du etwas nicht weißt, wähle „Weiß ich nicht“. Am Ende bekommst du eine Empfehlung, wo du anfangen kannst.',
   'placement.intro.3':

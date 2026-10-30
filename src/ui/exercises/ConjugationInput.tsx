@@ -12,7 +12,7 @@ interface Props {
   disabled: boolean;
 }
 
-/** Formel-Teile für Zeit, „können“ und Höflichkeit (gemeinsam mit der Tabelle). */
+/** Formel-Teile für Stamm, Zeit, „können“, Höflichkeit und -dir (gemeinsam mit der Tabelle); „verneint“ ergänzt der Aufrufer. */
 export function tenseLabels(
   copula: boolean,
   ex: {
@@ -27,9 +27,11 @@ export function tenseLabels(
   },
 ): string[] {
   if (copula) {
-    return ex.tense === 'past' || ex.tense === 'evidential' || ex.tense === 'conditional'
-      ? [t(`copula.${ex.tense}`)]
-      : [];
+    const parts =
+      ex.tense === 'past' || ex.tense === 'evidential' || ex.tense === 'conditional'
+        ? [t(`copula.${ex.tense}`)]
+        : [];
+    return ex.dir ? [...parts, t('tag.DIR')] : parts;
   }
   const tense = ex.tense as Exclude<typeof ex.tense, undefined>;
   return [
@@ -38,9 +40,9 @@ export function tenseLabels(
     ex.reciprocal ? t('tag.RECIP') : '',
     ex.passive ? t('ex.conjugation.passive') : '',
     ex.ability ? t('ex.conjugation.ability') : '',
-    // Mit Kopula wird auch das Präsens genannt: „Präsens · mit idi“ (geliyordum).
-    tense && (tense !== 'present' || ex.compound) ? t(`tense.${tense as 'past'}`) : '',
-    !tense && ex.compound ? t('tense.present') : '',
+    // Mit Kopula oder -dir wird auch das Präsens genannt: „Präsens · mit idi“ (geliyordum).
+    tense && (tense !== 'present' || ex.compound || ex.dir) ? t(`tense.${tense as 'past'}`) : '',
+    !tense && (ex.compound || ex.dir) ? t('tense.present') : '',
     ex.compound ? t(`compound.${ex.compound}`) : '',
     ex.polite ? t('ex.conjugation.polite') : '',
     ex.dir ? t('tag.DIR') : '',
