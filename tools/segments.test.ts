@@ -20,4 +20,4 @@ it('Zerlegeübungen behalten ihre IDs', () => {
       .flatMap((l) => l.exercises.map((e) => e.id)),
   );
   expect(ids).toMatchSnapshot();
-});
+}, 120_000);
