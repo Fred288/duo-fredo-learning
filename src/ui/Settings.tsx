@@ -3,6 +3,8 @@ import { canSpeak } from '../audio/types';
 import { t, type MessageKey } from '../i18n';
 import { useApp } from '../store/app';
 import { getSpeaker, speak, useAudio } from '../store/audio';
+import { clearedPlacement, currentPlacement } from '../placement';
+import { useProgress } from '../store/progress';
 import { BackupSection } from './BackupSection';
 import { GOAL_RANGE, NEW_WORDS_RANGE, useSettings, type Theme } from '../store/settings';
 
@@ -15,6 +17,10 @@ export function Settings() {
   const goHome = useApp((s) => s.goHome);
   const openReview = useApp((s) => s.openReview);
   const openStats = useApp((s) => s.openStats);
+  const openPlacement = useApp((s) => s.openPlacement);
+  const placements = useProgress((s) => s.placements);
+  const recordPlacement = useProgress((s) => s.recordPlacement);
+  const placement = currentPlacement(placements);
   const {
     dailyGoal,
     newWordsPerDay,
@@ -211,6 +217,35 @@ export function Settings() {
       >
         {t('stats.title')}
       </button>
+
+      <section aria-labelledby="placement-settings" className="space-y-2">
+        <h2 id="placement-settings" className="font-medium">
+          {t('settings.placement')}
+        </h2>
+        <p className="text-sm text-stone-600 dark:text-stone-400">
+          {placement
+            ? t('settings.placement.current', { count: placement.skipped.length })
+            : t(placements.length ? 'settings.placement.cleared' : 'settings.placement.none')}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={openPlacement}
+            className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+          >
+            {t('settings.placement.run')}
+          </button>
+          {placement && (
+            <button
+              type="button"
+              onClick={() => recordPlacement(clearedPlacement(Date.now()))}
+              className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+            >
+              {t('settings.placement.clear')}
+            </button>
+          )}
+        </div>
+      </section>
 
       <fieldset>
         <legend className="mb-2">{t('settings.theme')}</legend>

@@ -237,6 +237,7 @@ export function StatsScreen() {
                         ? t('stats.accuracy.none')
                         : t('stats.accuracy', { percent: Math.round(u.accuracy * 100) }),
                       t('stats.settled', { settled: u.settled, cards: u.cards }),
+                      ...(u.skipped ? [t('placement.mark.skipped')] : []),
                     ].join(' · ')}
                   </span>
                 </li>

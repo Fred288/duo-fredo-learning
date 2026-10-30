@@ -19,19 +19,11 @@ import { stopSpeaking, useAudio, useAutoplay, useCanSpeak } from '../store/audio
 import { useSettings } from '../store/settings';
 import { solveExercise, solveParadigm } from '../content/lexicon';
 import { segmentSolution } from '../session/segment';
-import { SegmentInput } from './exercises/SegmentInput';
-import { SentenceOrderInput } from './exercises/SentenceOrderInput';
 import { OrderFeedback, SegmentFeedback } from './StructureFeedback';
-import { ConjugationInput } from './exercises/ConjugationInput';
+import { ExerciseView } from './ExerciseView';
 import { Feedback } from './Feedback';
 import { GrammarHint } from './GrammarHint';
 import { ReportError } from './ReportError';
-import { FreeTextInput } from './exercises/FreeTextInput';
-import { ListenInput } from './exercises/ListenInput';
-import { MultipleChoiceInput } from './exercises/MultipleChoiceInput';
-import { ParadigmInput } from './exercises/ParadigmInput';
-import { SuffixBuilderInput } from './exercises/SuffixBuilderInput';
-import { WordBankInput } from './exercises/WordBankInput';
 
 const buttonBase =
   'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 disabled:opacity-40';
@@ -242,48 +234,13 @@ function Runner({
       )}
 
       <div key={`${supported.id}-${session.index}`} data-exercise-id={supported.id}>
-        {supported.type === 'multiple_choice' && (
-          <MultipleChoiceInput
-            ex={supported}
-            value={answer}
-            onChange={setAnswer}
-            disabled={!answering}
-          />
-        )}
-        {supported.type === 'word_bank' && (
-          <WordBankInput ex={supported} onChange={setAnswer} disabled={!answering} />
-        )}
-        {supported.type === 'free_text' && (
-          <FreeTextInput ex={supported} value={answer} onChange={setAnswer} disabled={!answering} />
-        )}
-        {supported.type === 'conjugation' && (
-          <ConjugationInput
-            ex={supported}
-            vocab={vocab}
-            onChange={setAnswer}
-            disabled={!answering}
-          />
-        )}
-        {supported.type === 'listen' && (
-          <ListenInput ex={supported} value={answer} onChange={setAnswer} disabled={!answering} />
-        )}
-        {supported.type === 'paradigm' && (
-          <ParadigmInput ex={supported} onChange={setAnswer} disabled={!answering} />
-        )}
-        {supported.type === 'segment' && (
-          <SegmentInput ex={supported} onChange={setAnswer} disabled={!answering} />
-        )}
-        {supported.type === 'sov_puzzle' && (
-          <SentenceOrderInput ex={supported} onChange={setAnswer} disabled={!answering} />
-        )}
-        {supported.type === 'suffix_builder' && (
-          <SuffixBuilderInput
-            ex={supported}
-            vocab={vocab}
-            onChange={setAnswer}
-            disabled={!answering}
-          />
-        )}
+        <ExerciseView
+          ex={supported}
+          vocab={vocab}
+          value={answer}
+          onChange={setAnswer}
+          disabled={!answering}
+        />
       </div>
 
       {answering ? (

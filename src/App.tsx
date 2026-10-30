@@ -7,6 +7,7 @@ import { Home } from './ui/Home';
 import { LookupScreen } from './ui/LookupScreen';
 import { LessonScreen } from './ui/LessonScreen';
 import { MistakesScreen } from './ui/MistakesScreen';
+import { PlacementScreen } from './ui/PlacementScreen';
 import { RepeatScreen } from './ui/RepeatScreen';
 import { Review } from './ui/Review';
 import { Settings } from './ui/Settings';
@@ -99,6 +100,7 @@ export function App() {
         {screen.name === 'repeat' && <RepeatScreen />}
         {screen.name === 'lookup' && <LookupScreen />}
         {screen.name === 'stats' && <StatsScreen />}
+        {screen.name === 'placement' && <PlacementScreen />}
         {screen.name === 'explainer' && (
           <ExplainerScreen unitId={screen.unitId} section={screen.section} from={screen.from} />
         )}

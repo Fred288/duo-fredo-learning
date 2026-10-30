@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { currentPlacement, placementMark } from '../placement';
 import { fetchManifest, type Manifest } from '../content/load';
 import { isListeningCard } from '../content/listening';
 import { LEVELS } from '../content/schema';
@@ -24,6 +25,14 @@ export function Home() {
   const canListen = useCanSpeak();
   const voicesLoading = useAudio((s) => s.status === 'loading');
   const cards = useProgress((s) => s.cards);
+  const placements = useProgress((s) => s.placements);
+  const progressLoaded = useProgress((s) => s.loaded);
+  const settingsLoaded = useSettings((s) => s.loaded);
+  const placementOffered = useSettings((s) => s.placementOffered);
+  const setSetting = useSettings((s) => s.set);
+  const openPlacement = useApp((s) => s.openPlacement);
+  const focusUnit = useApp((s) => s.focusUnit);
+  const clearFocusUnit = useApp((s) => s.clearFocusUnit);
   const newWordsPerDay = useSettings((s) => s.newWordsPerDay);
   const [manifest, setManifest] = useState<Manifest>();
   const [failed, setFailed] = useState(false);
@@ -34,7 +43,25 @@ export function Home() {
       .catch(() => setFailed(true));
   }, []);
 
+  // Nach übernommener Einstufung zur Start-Unit scrollen (einmal), sobald der Kurs steht.
+  useEffect(() => {
+    if (!manifest || !focusUnit) return;
+    document
+      .getElementById(`unit-${focusUnit}`)
+      ?.scrollIntoView({ block: 'start', behavior: 'instant' });
+    clearFocusUnit();
+  }, [manifest, focusUnit, clearFocusUnit]);
+
   const completed = completedLessonIds(completions);
+  const placement = currentPlacement(placements);
+  // Angebot nur bei einem ersten Start: nichts gemacht, nichts eingestuft, noch nicht entschieden.
+  // Das rohe Protokoll zählt (nicht `currentPlacement`), damit eine Rücknahme es nicht zurückholt.
+  const offerPlacement =
+    progressLoaded &&
+    settingsLoaded &&
+    !placementOffered &&
+    completions.length === 0 &&
+    placements.length === 0;
   const mistakes = openMistakes(attempts).length;
   const plan = manifest
     ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay, {
@@ -61,6 +88,38 @@ export function Home() {
           {t('stats.open')}
         </button>
       </div>
+      {offerPlacement && (
+        <section
+          aria-labelledby="placement-offer"
+          className="mt-4 rounded-xl border border-teal-300 bg-teal-50 p-4 dark:border-teal-800 dark:bg-teal-950"
+        >
+          <h2 id="placement-offer" className="font-medium">
+            {t('placement.offer.title')}
+          </h2>
+          <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
+            {t('placement.offer.text')}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setSetting('placementOffered', true);
+                openPlacement();
+              }}
+              className="min-h-11 rounded-lg bg-teal-700 px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+            >
+              {t('placement.offer.start')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setSetting('placementOffered', true)}
+              className="min-h-11 rounded-lg border border-teal-700 px-4 text-teal-800 hover:bg-teal-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-teal-500 dark:text-teal-300 dark:hover:bg-teal-900"
+            >
+              {t('placement.offer.decline')}
+            </button>
+          </div>
+        </section>
+      )}
       {repeatCount && (
         <button
           type="button"
@@ -113,12 +172,21 @@ export function Home() {
                       completed,
                     );
                     const label = t('home.unitProgress', { done, total });
+                    const mark = placementMark(placement, unit.id);
                     return (
                       <li
                         key={unit.id}
-                        className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+                        id={`unit-${unit.id}`}
+                        className="scroll-mt-4 rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
                       >
                         <h3 className="font-medium">{unit.title}</h3>
+                        {mark && (
+                          <p
+                            className={`mt-1 text-xs ${mark === 'start' ? 'font-medium text-teal-700 dark:text-teal-400' : 'text-stone-500'}`}
+                          >
+                            {t(`placement.mark.${mark}`)}
+                          </p>
+                        )}
                         <div className="mt-2 flex items-center gap-3 text-xs text-stone-500">
                           <div
                             role="progressbar"

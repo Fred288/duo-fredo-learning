@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { playPlacement, startPlacementFromOffer } from './placement';
 import { playLesson } from './solve';
 
 test('Sicherung speichern und auf einem leeren Gerät laden', async ({ page, browser }) => {
@@ -69,4 +70,32 @@ test('Ersetzen fragt nach; fremde Datei wird abgelehnt', async ({ page }) => {
   await expect(page.getByText('Sicherung geladen.')).toBeVisible();
   // Einstellungen kommen beim Ersetzen aus der Datei.
   await expect(page.getByRole('group', { name: /Tagesziel/ }).locator('output')).toHaveText('4');
+});
+
+test('Übernommene Einstufung gehört zur Sicherung', async ({ page, browser }) => {
+  await page.goto('/');
+  await startPlacementFromOffer(page);
+  await playPlacement(page, () => false);
+  await page.getByRole('button', { name: 'Empfehlung übernehmen' }).click();
+  await expect(page.getByText('Empfohlener Start')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  const downloading = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Sicherung speichern' }).click();
+  const file = await (await downloading).path();
+
+  // Leeres Gerät: Angebot sichtbar, nach dem Laden gilt die Einstufung.
+  const other = await browser.newContext();
+  const fresh = await other.newPage();
+  await fresh.goto('/');
+  await expect(fresh.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toBeVisible();
+  await fresh.getByRole('button', { name: 'Einstellungen' }).click();
+  await fresh.getByLabel('Sicherung laden').setInputFiles(file);
+  await expect(fresh.getByText(/1 Einstufungen/).first()).toBeVisible();
+  await fresh.getByRole('button', { name: 'Laden', exact: true }).click();
+  await expect(fresh.getByText('Sicherung geladen.')).toBeVisible();
+  await fresh.getByRole('button', { name: /Zurück/ }).click();
+  await expect(fresh.getByText('Empfohlener Start')).toBeVisible();
+  await expect(fresh.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
+  await other.close();
 });
