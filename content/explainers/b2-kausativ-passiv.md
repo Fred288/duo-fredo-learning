@@ -35,7 +35,7 @@ Die Bausteine kommen immer in derselben Reihenfolge:
 
 **Stamm + Kausativ + Passiv + können + Verneinung + Zeit**
 
-- yap**tır**ıl**dı** (wurde veranlasst)
+- yap**tır**ıl**dı** (wurde in Auftrag gegeben)
 - çık**ar**ıl**dı** (wurde herausgeholt)
 - piş**ir**il**ir** (wird gekocht)
 - yap**tır**abil**ir** (kann machen lassen)

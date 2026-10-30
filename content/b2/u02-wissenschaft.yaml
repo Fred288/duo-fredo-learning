@@ -15,7 +15,7 @@ lessons:
       - id: b2-u02-l1-e1
         type: multiple_choice
         prompt: Was heißt „bilim“?
-        options: [Wissenschaft, Wissen über Märchen, Bildung]
+        options: [Wissenschaft, Kunst, Bildung]
         answer: Wissenschaft
         explanation: bilim insanı = Wissenschaftler(in); eğitim = Bildung.
       - id: b2-u02-l1-e2
@@ -91,7 +91,7 @@ lessons:
       - id: b2-u02-l1-e15
         type: free_text
         direction: de_tr
-        prompt: kochen, gar werden
+        prompt: gar werden
         answers: [pişmek]
         explanation: pişirmek = etwas kochen, garen.
       - id: b2-u02-l1-e16
@@ -137,16 +137,20 @@ lessons:
         type: word_bank
         prompt: Die Fabrik hat die Produktion erhöht.
         answers: [Fabrika üretimi artırdı.]
+        chunks:
+          - { text: "Fabrika", role: subject }
+          - { text: "üretimi", role: object }
+          - { text: "artırdı", role: predicate }
         distractors: [arttı, üretim]
         explanation: üretim arttı = die Produktion hat zugenommen, ohne Objekt.
       - id: b2-u02-l2-e12
         type: free_text
         direction: tr_de
         prompt: Annem bana ilacımı içirdi.
-        answers: [Meine Mutter hat mir meine Medizin gegeben., Meine Mutter gab mir meine Medizin., Meine Mutter hat mich meine Medizin trinken lassen., Meine Mutter ließ mich meine Medizin trinken., Meine Mutter hat mir mein Medikament gegeben., Meine Mutter gab mir mein Medikament.]
+        answers: [Meine Mutter hat mir meine Medizin gegeben., Meine Mutter gab mir meine Medizin., Meine Mutter hat mich meine Medizin trinken lassen., Meine Mutter ließ mich meine Medizin trinken., Meine Mutter hat mir mein Medikament gegeben., Meine Mutter gab mir mein Medikament., Meine Mutter hat mir meine Medizin zu trinken gegeben.]
       - id: b2-u02-l2-e13
         type: multiple_choice
-        prompt: Welche Form passt? „Bilim insanları fiyatı … istiyor.“ (senken)
+        prompt: Welche Form passt? „Şirket fiyatı … istiyor.“ (senken)
         options: [düşürmek, düşmek, düştürmek]
         answer: düşürmek
         explanation: düşürmek heißt auch senken, fiyatı düşürmek = den Preis senken.
@@ -184,29 +188,35 @@ lessons:
       - id: b2-u02-l3-e9
         type: multiple_choice
         prompt: Was bedeutet „Ses bizi çok korkuttu.“?
-        options: [Das Geräusch hat uns sehr erschreckt., Wir haben uns vor dem Geräusch gefürchtet und es gemacht., Wir haben das Geräusch erschreckt.]
+        options: [Das Geräusch hat uns sehr erschreckt., Wir haben uns vor dem Geräusch nicht gefürchtet., Wir haben das Geräusch erschreckt.]
         answer: Das Geräusch hat uns sehr erschreckt.
       - id: b2-u02-l3-e10
         type: word_bank
         prompt: Hol dein Telefon aus der Tasche.
-        answers: [Telefonunu çantadan çıkar.]
+        answers: [Telefonunu çantadan çıkar., Çantadan telefonunu çıkar.]
+        chunks:
+          - { text: "Telefonunu", role: object }
+          - { text: "çantadan", role: place }
+          - { text: "çıkar", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [çık, çantada]
       - id: b2-u02-l3-e11
         type: word_bank
         prompt: Diese Methode hat die Kosten verringert.
-        answers: [Bu yöntem masrafı azalttı.]
-        distractors: [azaldı, masraf]
+        answers: [Bu yöntem maliyeti azalttı.]
+        distractors: [azaldı, maliyet]
       - id: b2-u02-l3-e12
         type: free_text
         direction: de_tr
         prompt: Wir haben das Problem gelöst.
-        answers: [Sorunu çözdük., Biz sorunu çözdük.]
+        answers: [Sorunu çözdük., Biz sorunu çözdük., Problemi çözdük., Biz problemi çözdük.]
       - id: b2-u02-l3-e13
         type: multiple_choice
-        prompt: Welches Paar gehört nicht zusammen?
-        options: [gelmek – getirmek (Sonderfall), öğrenmek – öğretmek, görmek – gördürmek (zeigen)]
-        answer: görmek – gördürmek (zeigen)
-        explanation: Zeigen heißt göstermek, ein eigenes Wort. getirmek und öğretmek stammen von gelmek und öğrenmek.
+        prompt: Wie heißt „zeigen“?
+        options: [göstermek, gördürmek, görtmek]
+        answer: göstermek
+        explanation: göstermek ist ein eigenes Wort, ebenso getirmek (von gelmek) und öğretmek (von öğrenmek).
 
   - id: b2-u02-l4
     type: grammar
@@ -221,12 +231,12 @@ lessons:
         causative: true
         passive: true
         target: yaptırıldı
-        gloss_de: 'wurde veranlasst, ließ man machen'
+        gloss_de: 'wurde in Auftrag gegeben, ließ man machen'
         explanation: Reihenfolge, Stamm + Kausativ + Passiv + Zeit.
       - { id: b2-u02-l4-e2, type: conjugation, mode: verb, lemma: çıkmak, person: 3sg, tense: past, causative: true, passive: true, target: çıkarıldı, gloss_de: 'wurde herausgeholt, entfernt' }
       - { id: b2-u02-l4-e3, type: conjugation, mode: verb, lemma: pişmek, person: 3sg, tense: aorist, causative: true, passive: true, target: pişirilir, gloss_de: 'wird gekocht, gegart' }
       - { id: b2-u02-l4-e4, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: aorist, causative: true, passive: true, target: okutulur, gloss_de: wird unterrichtet }
-      - { id: b2-u02-l4-e5, type: conjugation, mode: verb, lemma: gelişmek, person: 3pl, tense: past, causative: true, passive: true, target: geliştirildiler, gloss_de: sie wurden entwickelt }
+      - { id: b2-u02-l4-e5, type: conjugation, mode: verb, lemma: çıkmak, person: 3pl, tense: past, causative: true, passive: true, target: çıkarıldılar, gloss_de: sie wurden hinausgeschickt }
       - { id: b2-u02-l4-e6, type: conjugation, mode: verb, lemma: üretmek, person: 3sg, tense: present, passive: true, target: üretiliyor, gloss_de: wird hergestellt }
       - { id: b2-u02-l4-e7, type: conjugation, mode: verb, lemma: artmak, person: 3sg, tense: future, causative: true, passive: true, target: artırılacak, gloss_de: wird erhöht werden }
       - id: b2-u02-l4-e8
@@ -267,7 +277,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Sonuçlar yarın açıklanacak.
-        answers: [Die Ergebnisse werden morgen bekannt gegeben., Die Ergebnisse werden morgen veröffentlicht., Die Ergebnisse werden morgen erklärt., Morgen werden die Ergebnisse bekannt gegeben., Die Ergebnisse werden morgen bekanntgegeben.]
+        answers: [Die Ergebnisse werden morgen bekannt gegeben., Die Ergebnisse werden morgen veröffentlicht., Die Ergebnisse werden morgen erklärt., Morgen werden die Ergebnisse bekannt gegeben., Die Ergebnisse werden morgen bekanntgegeben., Morgen werden die Ergebnisse veröffentlicht.]
       - id: b2-u02-l4-e14
         type: multiple_choice
         prompt: Was ist der Unterschied? „Üretim arttı.“ / „Üretim artırıldı.“
@@ -287,7 +297,13 @@ lessons:
       - id: b2-u02-l5-e2
         type: word_bank
         prompt: Wir müssen die Temperatur noch einmal messen.
-        answers: [Sıcaklığı bir kez daha ölçmeliyiz.]
+        answers: [Sıcaklığı bir kez daha ölçmeliyiz., Bir kez daha sıcaklığı ölçmeliyiz.]
+        chunks:
+          - { text: "Sıcaklığı", role: object }
+          - { text: "bir kez daha", role: time }
+          - { text: "ölçmeliyiz", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [ölçüyoruz, sıcaklık]
       - id: b2-u02-l5-e3
         type: multiple_choice
@@ -307,7 +323,7 @@ lessons:
       - id: b2-u02-l5-e6
         type: word_bank
         prompt: Wer hat dieses Problem entdeckt?
-        answers: [Bu sorunu kim keşfetti?, Bu sorunu kim buldu?]
+        answers: [Bu sorunu kim keşfetti?, Bu sorunu kim buldu?, Bu sorunu kim fark etti?]
         distractors: [keşfedildi, kimi]
       - { id: b2-u02-l5-e7, type: conjugation, mode: verb, lemma: keşfetmek, person: 3sg, tense: past, passive: true, target: keşfedildi, gloss_de: wurde entdeckt }
       - id: b2-u02-l5-e8
@@ -359,7 +375,8 @@ lessons:
     title: 'Lesetext: Die Erfindung aus dem Dorf'
     passage:
       sentences:
-        - { tr: "Elif genç bir mühendis ve küçük bir köyde doğdu.", de: "Elif ist eine junge Ingenieurin und wurde in einem kleinen Dorf geboren." }
+        - { tr: "Elif genç bir mühendis.", de: "Elif ist eine junge Ingenieurin." }
+        - { tr: "Küçük bir köyde doğdu.", de: "Sie wurde in einem kleinen Dorf geboren." }
         - { tr: "Köyde kışın elektrik sık sık kesilirdi.", de: "Im Dorf fiel im Winter oft der Strom aus." }
         - { tr: "Bu yüzden insanlar suyu ısıtamaz ve yemek pişiremezdi.", de: "Deshalb konnten die Leute kein Wasser erhitzen und nicht kochen." }
         - { tr: "Üniversiteyi bitirince Elif köyüne döndü ve bu sorunu çözmeye karar verdi.", de: "Nach dem Studium kehrte Elif in ihr Dorf zurück und beschloss, dieses Problem zu lösen." }
@@ -374,7 +391,7 @@ lessons:
         - { tr: "Cihazlar evlerin elektrik faturalarını da azalttı.", de: "Die Geräte verringerten auch die Stromrechnungen der Häuser." }
         - { tr: "Gazeteciler köye geldi ve Elif'in çalışmasını haber yaptı.", de: "Journalisten kamen ins Dorf und berichteten über Elifs Arbeit." }
         - { tr: "Elif şimdi köydeki çocuklara basit deneyler yaptırıyor.", de: "Elif lässt die Kinder im Dorf jetzt einfache Versuche machen." }
-        - { tr: "Çocuklar suyu ısıtıyor, sonuçları ölçüyor ve deftere yazıyor.", de: "Die Kinder erhitzen Wasser, messen die Ergebnisse und schreiben sie ins Heft." }
+        - { tr: "Çocuklar suyu ısıtıyor, sıcaklığı ölçüyor ve sonuçları deftere yazıyor.", de: "Die Kinder erhitzen Wasser, messen die Temperatur und schreiben die Ergebnisse ins Heft." }
         - { tr: "Bir çocuk “Bilim insanı olmak zor mu?” diye sordu.", de: "Ein Kind fragte: „Ist es schwer, Wissenschaftler zu werden?“" }
         - { tr: "Elif gülerek “Zor ama bir sorunu çözünce insan çok mutlu oluyor.” dedi.", de: "Elif sagte lachend: „Schwer, aber wenn man ein Problem gelöst hat, ist man sehr glücklich.“" }
         - { tr: "Ona göre bilim sadece büyük şehirlerde yapılmaz.", de: "Ihrer Meinung nach wird Wissenschaft nicht nur in großen Städten betrieben." }
@@ -382,7 +399,7 @@ lessons:
       glossary:
         - { tr: "elif", de: "Elif (Name)" }
         - { tr: "yüzden", de: "bu yüzden = deshalb" }
-        - { tr: "ısıtamaz", de: "kann nicht erhitzen (ısıtmak)", vocab: "ısıtmak" }
+        - { tr: "ısıtamaz", de: "konnten nicht erhitzen (-di am nächsten Verb gilt auch hier)", vocab: "ısıtmak" }
         - { tr: "pişiremezdi", de: "konnte nicht kochen (pişmek + -ir + -eme + -z + -di)", vocab: "pişmek" }
         - { tr: "çözmeye", de: "zu lösen (çözmek)", vocab: "çözmek" }
         - { tr: "ilk", de: "erste(r, s)" }
@@ -435,12 +452,12 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Ich habe das Essen gekocht.
-        answers: [Yemeği pişirdim., Yemek pişirdim., Yemeği ben pişirdim., Yemek yaptım., Yemeği yaptım.]
+        answers: [Yemeği pişirdim., Yemek pişirdim., Yemeği ben pişirdim., Yemek yaptım., Yemeği yaptım., Yemeği ben yaptım.]
       - id: b2-u02-l7-e2
         type: free_text
         direction: de_tr
         prompt: Die Firma hat die Preise erhöht.
-        answers: [Şirket fiyatları artırdı., Şirket fiyatları yükseltti.]
+        answers: [Şirket fiyatları artırdı., Şirket fiyatları yükseltti., Şirket zam yaptı.]
       - id: b2-u02-l7-e3
         type: multiple_choice
         prompt: Welche Form ist richtig? (wird erhöht werden)
@@ -455,6 +472,10 @@ lessons:
         type: word_bank
         prompt: Die Ergebnisse des Versuchs haben uns erschreckt.
         answers: [Deneyin sonuçları bizi korkuttu.]
+        chunks:
+          - { text: "Deneyin sonuçları", role: subject }
+          - { text: "bizi", role: object }
+          - { text: "korkuttu", role: predicate }
         distractors: [korktu, bize]
       - { id: b2-u02-l7-e6, type: conjugation, mode: verb, lemma: geliştirmek, person: 3sg, tense: past, passive: true, target: geliştirildi, gloss_de: wurde entwickelt }
       - { id: b2-u02-l7-e7, type: conjugation, mode: verb, lemma: araştırmak, person: 1pl, tense: necessitative, target: araştırmalıyız, gloss_de: wir müssen forschen }
@@ -462,7 +483,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Bu sorun nasıl çözülür?
-        answers: [Wie wird dieses Problem gelöst?, Wie löst man dieses Problem?, Wie kann man dieses Problem lösen?, Wie wird das Problem gelöst?, Wie löst man das Problem?]
+        answers: [Wie wird dieses Problem gelöst?, Wie löst man dieses Problem?, Wie kann man dieses Problem lösen?, Wie wird das Problem gelöst?, Wie löst man das Problem?, Wie kann dieses Problem gelöst werden?, Wie lässt sich dieses Problem lösen?]
       - id: b2-u02-l7-e9
         type: word_bank
         prompt: Das in dieser Fabrik hergestellte Gerät ist sehr billig.
@@ -493,7 +514,7 @@ vocab:
   - { tr: ısı, de: [Wärme, Hitze], pos: noun }
   - { tr: sıcaklık, de: [Temperatur], pos: noun, softens: true }
   - { tr: ısıtmak, de: [erwärmen, erhitzen], pos: verb }
-  - { tr: masraf, de: [Kosten], pos: noun }
+  - { tr: maliyet, de: [Kosten], pos: noun }
   - { tr: artmak, de: [zunehmen], pos: verb, causative: ir }
   - { tr: azalmak, de: [abnehmen, weniger werden], pos: verb }
   - { tr: çözmek, de: [lösen], pos: verb }

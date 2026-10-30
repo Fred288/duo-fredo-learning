@@ -36,14 +36,16 @@ Nach einem **Vokal** steht nur **-t**. Das gilt auch für mehrsilbige Stämme au
 
 Einsilbige Stämme auf Vokal sind die Ausnahme: yemek → yedirmek (zu essen geben), demek → dedirtmek (sagen lassen).
 
-Ein paar häufige Verben folgen eigenen Regeln: içmek → içirmek, yatmak → yatırmak. Sie kommen in der nächsten Unit. Viele Kausative sind eigene Wörter geworden: öğrenmek → öğretmek (lehren), görmek → göstermek (zeigen).
+Ein paar häufige Verben folgen eigenen Regeln: içmek → içirmek, yatmak → yatırmak. Sie kommen in der nächsten Unit. Viele Kausative sind eigene Wörter geworden: öğrenmek → öğretmek (lehren), görmek → göstermek (zeigen). değiştirmek ist selbst schon ein Kausativ, darum kann noch -t dazukommen: değiştirtmek (austauschen lassen).
 
 ## Wer was tun lässt: Dativ und Akkusativ
 
 Wer die Arbeit **ausführt**, steht
 
 - im **Dativ**, wenn das Verb schon ein Objekt hat: Usta**ya** duvarları boyattık. (Wir haben die Wände vom Handwerker streichen lassen.)
-- im **Akkusativ**, wenn das Verb sonst keines hat: Müdür işçi**leri** çalıştırıyor. (Der Chef lässt die Arbeiter arbeiten.) Beni bekletti. (Er hat mich warten lassen.)
+- im **Akkusativ** bei Verben ohne Objekt wie çalışmak, ebenso bei beklemek im Sinn von warten: Müdür işçi**leri** çalıştırıyor. (Der Direktor lässt die Arbeiter arbeiten.) Beni bekletti. (Er hat mich warten lassen.)
+
+Fehlt beim transitiven Verb nur das Objekt, bleibt der Dativ: Ablama yazdırdım. (Ich habe es von meiner Schwester schreiben lassen.)
 
 Oft bleibt die Person ungenannt, weil sie sich von selbst versteht: Saçımı kestirdim. (Ich habe mir die Haare schneiden lassen.)
 

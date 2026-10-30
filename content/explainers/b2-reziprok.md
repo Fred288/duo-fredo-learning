@@ -29,7 +29,7 @@ Für alle anderen Verben gibt es **birbiri** mit Possessiv und dem Kasus, den da
 | ihr     | birbirinizi | birbirinize | birbirinizle  |
 | sie     | birbirlerini | birbirlerine | birbirleriyle |
 
-Birbirimizi seviyoruz. (Wir lieben uns.) Birbirlerine güveniyorlar. (Sie vertrauen einander.)
+Birbirimizi seviyoruz. (Wir lieben uns.) Birbirlerine güveniyorlar. (Sie vertrauen einander.) In der 3. Person geht auch die Einzahlform: birbirini, birbirine.
 
 ## Sich waschen: -in
 
@@ -37,7 +37,7 @@ Birbirimizi seviyoruz. (Wir lieben uns.) Birbirlerine güveniyorlar. (Sie vertra
 
 - yıkamak → yıkanmak (sich waschen)
 - giymek → giyinmek (sich anziehen)
-- taramak → taranmak (sich kämmen)
+- taramak → taranmak (sich kämmen; im Alltag meist saçını taramak)
 - hazırlamak → hazırlanmak (sich vorbereiten)
 - övmek → övünmek (prahlen)
 
@@ -51,7 +51,9 @@ Im Türkischen haben auch Verben **ohne Objekt** ein Passiv. Es steht immer in d
 
 - Buraya oturulmaz. (Hierhin setzt man sich nicht.)
 - İstasyona nasıl gidilir? (Wie kommt man zum Bahnhof?)
-- Burada sigara içilmez. (Hier wird nicht geraucht.)
+- Burada yüksek sesle konuşulmaz. (Hier spricht man nicht laut.)
 - Bayramda erken kalkılır. (Am Feiertag steht man früh auf.)
 
 Der Aorist drückt die allgemeine Regel aus, darum steht er hier besonders oft. Mit der Vergangenheit klingt es wie ein Bericht: Bütün gün çalışıldı. (Es wurde den ganzen Tag gearbeitet.)
+
+Auch das normale Passiv übersetzt man oft mit *man*. Dort ist das Objekt des Aktivs Subjekt, darum steht es ohne Akkusativ und kann in den Plural: Burada sigara içilmez. (Hier wird nicht geraucht.) Evde ayakkabılar çıkarılır. (Im Haus zieht man die Schuhe aus.)

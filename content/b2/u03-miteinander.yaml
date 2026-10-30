@@ -76,7 +76,7 @@ lessons:
         prompt: Was heißt „karşılaşmak“?
         options: [einander begegnen, einander fehlen, sich verlieren]
         answer: einander begegnen
-        explanation: Mit ile oder Dativ; sokakta karşılaştık = wir sind uns auf der Straße begegnet.
+        explanation: Mit ile; Ali ile karşılaştım, sokakta karşılaştık = wir sind uns auf der Straße begegnet.
       - id: b2-u03-l1-e13
         type: multiple_choice
         prompt: Was heißt „selamlaşmak“?
@@ -85,7 +85,7 @@ lessons:
       - id: b2-u03-l1-e14
         type: free_text
         direction: de_tr
-        prompt: traurig sein, sich sorgen
+        prompt: traurig sein, bedauern
         answers: [üzülmek]
       - id: b2-u03-l1-e15
         type: multiple_choice
@@ -129,12 +129,14 @@ lessons:
         explanation: Darum heißt es auch auf Wiedersehen; görüşmek ist der Reziprok von görmek.
       - id: b2-u03-l2-e10
         type: word_bank
-        prompt: Wir haben uns gestern auf der Straße getroffen.
-        answers: [Dün sokakta karşılaştık.]
+        prompt: Wir sind uns gestern auf der Straße begegnet.
+        answers: [Dün sokakta karşılaştık., Sokakta dün karşılaştık.]
         chunks:
           - { text: "Dün", role: time }
           - { text: "sokakta", role: place }
           - { text: "karşılaştık", role: predicate }
+        orders:
+          - { order: [1, 0, 2], note: Mit dün direkt vor dem Verb liegt der Ton auf der Zeit. }
         distractors: [karşıladık, sokağı]
       - id: b2-u03-l2-e11
         type: word_bank
@@ -145,7 +147,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: İki kardeş iyi anlaşıyor.
-        answers: [Die beiden Geschwister verstehen sich gut., Die zwei Geschwister verstehen sich gut., Zwei Geschwister verstehen sich gut., Die beiden Brüder verstehen sich gut., Die beiden Schwestern verstehen sich gut., Die zwei Brüder verstehen sich gut., Die zwei Schwestern verstehen sich gut.]
+        answers: [Die beiden Geschwister verstehen sich gut., Die zwei Geschwister verstehen sich gut., Zwei Geschwister verstehen sich gut., Die beiden Brüder verstehen sich gut., Die beiden Schwestern verstehen sich gut., Die zwei Brüder verstehen sich gut., Die zwei Schwestern verstehen sich gut., Die beiden Geschwister kommen gut miteinander aus.]
       - id: b2-u03-l2-e13
         type: suffix_builder
         stem: görmek
@@ -179,13 +181,19 @@ lessons:
         explanation: yardım etmek verlangt den Dativ.
       - id: b2-u03-l3-e4
         type: multiple_choice
-        prompt: Welche Form passt? „Çocuklar … ile oynuyor.“ (miteinander)
-        options: [birbirleri, birbirlerini, birbirlerine]
-        answer: birbirleri
+        prompt: Welche Form passt? „Çocuklar … oynuyor.“ (miteinander)
+        options: [birbirleriyle, birbirlerini, birbirlerine]
+        answer: birbirleriyle
       - id: b2-u03-l3-e5
         type: word_bank
         prompt: Wir haben uns lange nicht gesehen.
-        answers: [Birbirimizi uzun zamandır görmedik., Uzun zamandır görüşmedik.]
+        answers: [Birbirimizi uzun zamandır görmedik., Uzun zamandır görüşmedik., Uzun zamandır birbirimizi görmedik.]
+        chunks:
+          - { text: "Birbirimizi", role: object }
+          - { text: "uzun zamandır", role: time }
+          - { text: "görmedik", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [birbirini, görüyoruz]
       - id: b2-u03-l3-e6
         type: word_bank
@@ -197,12 +205,12 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Birbirimizi yıllardır tanıyoruz.
-        answers: [Wir kennen uns seit Jahren., Wir kennen einander seit Jahren., Seit Jahren kennen wir uns., Seit Jahren kennen wir einander.]
+        answers: [Wir kennen uns seit Jahren., Wir kennen einander seit Jahren., Seit Jahren kennen wir uns., Seit Jahren kennen wir einander., Wir kennen uns schon seit Jahren., Wir kennen einander schon seit Jahren., Wir kennen uns seit vielen Jahren.]
       - id: b2-u03-l3-e8
         type: free_text
         direction: de_tr
         prompt: Sie lieben einander.
-        answers: [Birbirlerini seviyorlar., Onlar birbirlerini seviyorlar., Birbirlerini seviyor., Onlar birbirlerini seviyor.]
+        answers: [Birbirlerini seviyorlar., Onlar birbirlerini seviyorlar., Birbirlerini seviyor., Onlar birbirlerini seviyor., Birbirini seviyorlar., Birbirini seviyor., Onlar birbirini seviyorlar., Onlar birbirini seviyor.]
       - id: b2-u03-l3-e9
         type: multiple_choice
         prompt: Was ist hier richtig? (Mehmet und Ali haben sich gestritten.)
@@ -211,8 +219,8 @@ lessons:
       - id: b2-u03-l3-e10
         type: multiple_choice
         prompt: Welches Verb darfst du nicht frei mit -iş bilden?
-        options: [sevmek (sevişmek hat eine andere Bedeutung), görmek, anlamak]
-        answer: sevmek (sevişmek hat eine andere Bedeutung)
+        options: [sevmek, görmek, anlamak]
+        answer: sevmek
         explanation: sevişmek meint körperliche Liebe. Für „sich lieben“ sagt man birbirini sevmek.
 
   - id: b2-u03-l4
@@ -222,7 +230,7 @@ lessons:
       - { id: b2-u03-l4-e1, type: conjugation, mode: verb, lemma: yıkanmak, person: 1sg, tense: past, target: yıkandım, gloss_de: ich habe mich gewaschen }
       - { id: b2-u03-l4-e2, type: conjugation, mode: verb, lemma: giyinmek, person: 3sg, tense: present, target: giyiniyor, gloss_de: 'er, sie zieht sich an' }
       - { id: b2-u03-l4-e3, type: conjugation, mode: verb, lemma: hazırlanmak, person: 1pl, tense: future, target: hazırlanacağız, gloss_de: wir werden uns vorbereiten }
-      - { id: b2-u03-l4-e4, type: conjugation, mode: verb, lemma: taranmak, person: 2sg, tense: past, target: tarandın, gloss_de: du hast dich gekämmt }
+      - { id: b2-u03-l4-e4, type: conjugation, mode: verb, lemma: taranmak, person: 2sg, tense: past, target: tarandın, gloss_de: du hast dich gekämmt, explanation: Im Alltag meist saçını taramak. }
       - { id: b2-u03-l4-e5, type: conjugation, mode: verb, lemma: övünmek, person: 3sg, tense: aorist, target: övünür, gloss_de: 'er, sie prahlt' }
       - id: b2-u03-l4-e6
         type: multiple_choice
@@ -257,7 +265,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Ich habe mich sehr gefreut.
-        answers: [Çok sevindim., Ben çok sevindim.]
+        answers: [Çok sevindim., Ben çok sevindim., Çok memnun oldum.]
       - id: b2-u03-l4-e12
         type: multiple_choice
         prompt: Welche Form passt? „Çocuk aynada … bakıyor.“ (sich selbst)
@@ -284,7 +292,7 @@ lessons:
       - { id: b2-u03-l5-e4, type: conjugation, mode: verb, lemma: kalkmak, person: 3sg, tense: aorist, passive: true, target: kalkılır, gloss_de: man steht auf }
       - { id: b2-u03-l5-e5, type: conjugation, mode: verb, lemma: çalışmak, person: 3sg, tense: past, passive: true, target: çalışıldı, gloss_de: es wurde gearbeitet }
       - { id: b2-u03-l5-e6, type: conjugation, mode: verb, lemma: yüzmek, person: 3sg, tense: aorist, passive: true, negative: true, target: yüzülmez, gloss_de: man schwimmt nicht }
-      - { id: b2-u03-l5-e7, type: conjugation, mode: verb, lemma: içmek, person: 3sg, tense: aorist, passive: true, negative: true, target: içilmez, gloss_de: man trinkt (raucht) nicht }
+      - { id: b2-u03-l5-e7, type: conjugation, mode: verb, lemma: içmek, person: 3sg, tense: aorist, passive: true, negative: true, target: içilmez, gloss_de: 'wird nicht getrunken, geraucht' }
       - id: b2-u03-l5-e8
         type: multiple_choice
         prompt: Was bedeutet „Burada sigara içilmez.“?
@@ -299,12 +307,19 @@ lessons:
         type: word_bank
         prompt: In der Türkei zieht man im Haus die Schuhe aus.
         answers: [Türkiye'de evde ayakkabı çıkarılır.]
+        chunks:
+          - { text: "Türkiye'de", role: place }
+          - { text: "evde", role: place }
+          - { text: "ayakkabı", role: subject }
+          - { text: "çıkarılır", role: predicate }
         distractors: [çıkar, ayakkabıyı]
+        explanation: ayakkabı ist hier Subjekt des Passivs, darum kein Akkusativ.
       - id: b2-u03-l5-e11
         type: free_text
         direction: tr_de
         prompt: Bayramda büyükler ziyaret edilir.
         answers: [Am Feiertag besucht man die Älteren., An Feiertagen besucht man die Älteren., Am Feiertag werden die Älteren besucht., An Feiertagen werden die Älteren besucht., An Feiertagen besucht man die Alten., Am Feiertag besucht man die Alten.]
+        explanation: Passiv mit Subjekt (büyükler), nicht unpersönlich.
       - id: b2-u03-l5-e12
         type: multiple_choice
         prompt: Welche Form passt? „Bu odada yüksek sesle ….“ (spricht man nicht)
@@ -315,7 +330,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Man kann hier nicht schwimmen.
-        answers: [Burada yüzülmez., Burada yüzülemez.]
+        answers: [Burada yüzülmez., Burada yüzülemez., Burada yüzemezsin.]
 
   - id: b2-u03-l6
     type: dialog
@@ -325,7 +340,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Ali ile neden konuşmuyorsun, küstünüz mü?
-        answers: ['Warum sprichst du nicht mit Ali, seid ihr zerstritten?', 'Warum redest du nicht mit Ali, seid ihr zerstritten?', 'Warum sprichst du nicht mit Ali, habt ihr euch zerstritten?', 'Warum redest du nicht mit Ali, habt ihr euch zerstritten?']
+        answers: ['Warum sprichst du nicht mit Ali, seid ihr zerstritten?', 'Warum redest du nicht mit Ali, seid ihr zerstritten?', 'Warum sprichst du nicht mit Ali, habt ihr euch zerstritten?', 'Warum redest du nicht mit Ali, habt ihr euch zerstritten?', 'Warum sprichst du nicht mit Ali, seid ihr böse aufeinander?', 'Warum redest du nicht mit Ali, seid ihr böse aufeinander?']
       - id: b2-u03-l6-e2
         type: word_bank
         prompt: Wir haben uns wegen einer Kleinigkeit gestritten.
@@ -356,7 +371,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Seninle anlaşmak çok kolay.
-        answers: ['Es ist sehr leicht, sich mit dir zu einigen.', 'Es ist sehr einfach, sich mit dir zu einigen.', 'Es ist sehr leicht, sich mit dir zu verstehen.', 'Es ist sehr einfach, sich mit dir zu verstehen.', 'Mit dir kommt man leicht aus.']
+        answers: ['Es ist sehr leicht, sich mit dir zu einigen.', 'Es ist sehr einfach, sich mit dir zu einigen.', 'Es ist sehr leicht, sich mit dir zu verstehen.', 'Es ist sehr einfach, sich mit dir zu verstehen.', 'Mit dir kommt man leicht aus.', 'Es ist sehr leicht, mit dir auszukommen.', 'Mit dir kommt man sehr leicht aus.']
 
   - id: b2-u03-l7
     type: grammar
@@ -405,7 +420,7 @@ lessons:
     passage:
       sentences:
         - { tr: "Bizim mahallede iki eski dost yaşıyor: Hasan Amca ve Mehmet Amca.", de: "In unserem Viertel leben zwei alte Freunde: Onkel Hasan und Onkel Mehmet." }
-        - { tr: "Her sabah kahvede buluşur, çay içer ve ülkenin sorunlarını tartışırlardı.", de: "Jeden Morgen trafen sie sich im Café, tranken Tee und diskutierten über die Probleme des Landes." }
+        - { tr: "Her sabah kahvede buluşur, çay içer ve ülkenin sorunlarını tartışırlardı.", de: "Jeden Morgen trafen sie sich im Kaffeehaus, tranken Tee und diskutierten über die Probleme des Landes." }
         - { tr: "Bazen anlaşamazlardı ama kavga etmezlerdi.", de: "Manchmal waren sie sich nicht einig, aber sie stritten nicht." }
         - { tr: "Bir gün bir ağaç yüzünden kavga ettiler.", de: "Eines Tages stritten sie wegen eines Baumes." }
         - { tr: "O günden sonra birbirleriyle konuşmadılar.", de: "Von diesem Tag an sprachen sie nicht mehr miteinander." }
@@ -422,12 +437,13 @@ lessons:
         - { tr: "Sonra hiçbir şey söylemeden kucaklaştılar.", de: "Dann umarmten sie sich, ohne etwas zu sagen." }
         - { tr: "“Ağacı unutalım.” dedi Hasan Amca.", de: "„Vergessen wir den Baum“, sagte Onkel Hasan." }
         - { tr: "Mehmet Amca gülerek “O ağaç ikimizden de yaşlı.” dedi.", de: "Onkel Mehmet sagte lachend: „Der Baum ist älter als wir beide.“" }
-        - { tr: "O günden sonra yine her sabah kahvede görüşüyorlar.", de: "Seit diesem Tag sehen sie sich wieder jeden Morgen im Café." }
+        - { tr: "O günden sonra yine her sabah kahvede görüşüyorlar.", de: "Seit diesem Tag sehen sie sich wieder jeden Morgen im Kaffeehaus." }
         - { tr: "Hâlâ anlaşamıyorlar ama artık birbirlerine hiç küsmüyorlar.", de: "Sie sind sich immer noch nicht einig, aber sie sind nie mehr böse aufeinander." }
       glossary:
         - { tr: "bizim", de: "unser", vocab: "biz" }
         - { tr: "hasan", de: "Hasan (Name)" }
         - { tr: "her", de: "jeder" }
+        - { tr: "kahvede", de: "im Kaffeehaus (kahve = auch Kaffeehaus)", vocab: "kahve" }
         - { tr: "anlaşamazlardı", de: "konnten sich nicht einigen (anlaşmak)", vocab: "anlaşmak" }
         - { tr: "etmezlerdi", de: "machten nicht (kavga etmek)", vocab: "kavga etmek" }
         - { tr: "ettiler", de: "machten (kavga etmek)", vocab: "kavga etmek" }
@@ -460,8 +476,8 @@ lessons:
       - id: b2-u03-r1-e1
         type: multiple_choice
         prompt: Was taten die Freunde jeden Morgen?
-        options: [Sie trafen sich im Café., Sie gingen spazieren., Sie arbeiteten im Garten.]
-        answer: Sie trafen sich im Café.
+        options: [Sie trafen sich im Kaffeehaus., Sie gingen spazieren., Sie arbeiteten im Garten.]
+        answer: Sie trafen sich im Kaffeehaus.
       - id: b2-u03-r1-e2
         type: multiple_choice
         prompt: Warum stritten sie?
@@ -481,7 +497,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Bizim mahallede bayramda barışılır.
-        answers: [In unserem Viertel versöhnt man sich am Feiertag., In unserem Viertel versöhnt man sich an Feiertagen., Am Feiertag versöhnt man sich in unserem Viertel., In unserer Nachbarschaft versöhnt man sich am Feiertag., In unserer Nachbarschaft versöhnt man sich an Feiertagen.]
+        answers: [In unserem Viertel versöhnt man sich am Feiertag., In unserem Viertel versöhnt man sich an Feiertagen., Am Feiertag versöhnt man sich in unserem Viertel., In unserer Nachbarschaft versöhnt man sich am Feiertag., In unserer Nachbarschaft versöhnt man sich an Feiertagen., An Feiertagen versöhnt man sich in unserem Viertel.]
 
   - id: b2-u03-l8
     type: review
@@ -511,7 +527,11 @@ lessons:
         type: word_bank
         prompt: Die Nachbarn in unserem Haus helfen einander.
         answers: [Binamızdaki komşular birbirine yardım ediyor., Binamızdaki komşular birbirlerine yardım ediyor.]
-        distractors: [birbirini, yardım]
+        chunks:
+          - { text: "Binamızdaki komşular", role: subject }
+          - { text: "birbirine", role: complement }
+          - { text: "yardım ediyor", role: predicate }
+        distractors: [birbirini, yardımcı]
       - { id: b2-u03-l8-e6, type: conjugation, mode: verb, lemma: görmek, person: 3pl, tense: evidential, reciprocal: true, target: görüşmüşler, gloss_de: sie haben sich (offenbar) getroffen }
       - { id: b2-u03-l8-e7, type: conjugation, mode: verb, lemma: gitmek, person: 3sg, tense: past, passive: true, target: gidildi, gloss_de: man ging }
       - id: b2-u03-l8-e8
@@ -523,6 +543,10 @@ lessons:
         type: word_bank
         prompt: Am Feiertag küsst man den Älteren die Hand.
         answers: [Bayramda büyüklerin eli öpülür.]
+        chunks:
+          - { text: "Bayramda", role: time }
+          - { text: "büyüklerin eli", role: subject }
+          - { text: "öpülür", role: predicate }
         distractors: [öper, büyükleri]
       - { id: b2-u03-l8-e10, type: suffix_builder, stem: bulmak, verbal: PART_ACAK, reciprocal: true, suffixes: [POSS_1PL], target: buluşacağımız, gloss_de: 'wo wir uns treffen werden' }
 
@@ -542,6 +566,6 @@ vocab:
   - { tr: karşılaşmak, de: [einander begegnen], pos: verb }
   - { tr: selamlaşmak, de: [einander grüßen], pos: verb }
   - { tr: kucaklaşmak, de: [sich umarmen], pos: verb }
-  - { tr: üzülmek, de: ['traurig sein, sich sorgen'], pos: verb, causative: none }
+  - { tr: üzülmek, de: ['traurig sein, bedauern'], pos: verb, causative: none }
   - { tr: övünmek, de: [prahlen], pos: verb }
   - { tr: taranmak, de: [sich kämmen], pos: verb }
