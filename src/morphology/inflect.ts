@@ -46,10 +46,13 @@ export class MorphError extends Error {}
 
 // Noch nicht abgedeckt; später über weitere Vocab-Flags lösbar.
 export const KNOWN_LIMITS = [
-  'Zweifacher Kausativ (yaptırtmak) und Kausativ + Reziprok (görüştürmek) nur als eigene Vokabel',
+  'Zweifacher Kausativ (yaptırtmak) und Kausativ + Reziprok (görüştürmek) nur als eigene Vokabel; ohne eigenen Kausativ (Flag `causative: none`): kaybolmak, bozulmak, ayrılmak, kalkmak → kaldırmak',
+  'Reziprok -(I)ş ist nicht produktiv, nur für belegte Verben verwenden; de-/ye- gar nicht',
+  '-DIr am Verb nur 3. Person ohne Frage (yorulmuşsundur, gelmiş midir, bilirsindir fehlen)',
+  '-(y)As in der 3. Plural (gelesileri) nicht gebildet',
   'Passiv von de-/ye- nur denir/yenir; denilmek und yenilmek sind eigene Vokabeln',
   'Infinite Formen: -DIk ohne Possessiv nur mit Ablativ (geldikten), -mAk nur mit -DA/-DAn/-(y)lA, Konverbien ohne Endungen',
-  'Nachschlagen: -mIş-Partizip und -(y)AcAk ohne Possessiv fallen mit Perfekt und Futur zusammen und führen dorthin',
+  'Nachschlagen: blankes -mIş-Partizip und -(y)AcAk fallen mit Perfekt und Futur zusammen und führen dorthin; gelesi und Kausativ-Formen nur, wenn sie selbst Vokabeln sind',
   'Optativ nur 1sg/1pl (gelesin, geleler veraltet); geldiydi, gelseymiş bewusst nicht',
   'Frage mit ise (geliyor muysa) nicht gebildet',
   'benimki/seninki: Pronomen + -ki nur als Text, nicht über die Engine',

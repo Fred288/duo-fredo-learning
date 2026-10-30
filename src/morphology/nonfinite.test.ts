@@ -335,3 +335,23 @@ describe('B2-Formen', () => {
     expect(nonfinite('gelmek', { form: 'CV_DIKCA', ability: true }).form).toBe('gelebildikçe');
   });
 });
+
+describe('Review E5', () => {
+  it('de- behält das e vor -(y)IncAyA, ye- nicht', () => {
+    expect(nonfinite('demek', { form: 'CV_INCAYA' }).form).toBe('deyinceye');
+    expect(nonfinite('evet demek', { form: 'CV_INCAYA' }).form).toBe('evet deyinceye');
+    expect(nonfinite('yemek', { form: 'CV_INCAYA' }).form).toBe('yiyinceye');
+    expect(nonfinite('demek', { form: 'PART_ASI', tags: ['POSS_1SG'] }).form).toBe('diyesim');
+  });
+
+  it('-(y)As: verneint ja, 3. Plural nicht', () => {
+    expect(nonfinite('gelmek', { form: 'PART_ASI', negative: true, tags: ['POSS_1SG'] }).form).toBe(
+      'gelmeyesim',
+    );
+    expect(() => nonfinite('gelmek', { form: 'PART_ASI', tags: ['POSS_3PL'] })).toThrow(MorphError);
+  });
+
+  it('-(y)An mit Possessiv auch ohne Plural', () => {
+    expect(nonfinite('sevmek', { form: 'PART_AN', tags: ['POSS_1SG'] }).form).toBe('sevenim');
+  });
+});

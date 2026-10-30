@@ -588,7 +588,7 @@ vocab:
   - { tr: buluşmak, de: [sich treffen], pos: verb }
   - { tr: ziyaret etmek, de: [besuchen], pos: verb, softens: true }
   - { tr: alışveriş yapmak, de: [einkaufen], pos: verb }
-  - { tr: doğmak, de: [geboren werden], pos: verb }
+  - { tr: doğmak, de: [geboren werden], pos: verb, causative: ir }
   - { tr: evlenmek, de: [heiraten], pos: verb }
   - { tr: taşınmak, de: [umziehen], pos: verb }
   - { tr: öğrenmek, de: [lernen, erfahren], pos: verb }

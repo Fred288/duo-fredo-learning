@@ -428,11 +428,11 @@ vocab:
   - { tr: gitmek, de: [gehen, fahren], pos: verb, softens: true }
   - { tr: yapmak, de: [machen, tun], pos: verb }
   - { tr: okumak, de: [lesen], pos: verb }
-  - { tr: içmek, de: [trinken], pos: verb }
+  - { tr: içmek, de: [trinken], pos: verb, causative: ir }
   - { tr: yemek, de: [essen], pos: verb }
   - { tr: çalışmak, de: [arbeiten, lernen], pos: verb }
   - { tr: uyumak, de: [schlafen], pos: verb }
-  - { tr: kalkmak, de: [aufstehen], pos: verb }
+  - { tr: kalkmak, de: [aufstehen], pos: verb, causative: none }
   - { tr: beklemek, de: [warten], pos: verb }
   - { tr: izlemek, de: [anschauen, zuschauen], pos: verb }
   - { tr: konuşmak, de: [sprechen], pos: verb }

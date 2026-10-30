@@ -152,3 +152,13 @@ describe('B2-Bausteine', () => {
     expect(grade(ex, 'gelmiştir', opts).verdict).toBe('correct');
   });
 });
+
+describe('Ablenker beim Kausativ auf Vokal', () => {
+  it('keine d/t-Vertauschung, wenn der Baustein nicht mit d/t beginnt', () => {
+    const vocab: Vocab[] = [{ tr: 'çıkmak', de: ['x'], pos: 'verb', causative: 'ar' }];
+    const ex = conj({ lemma: 'çıkmak', causative: true, target: 'çıkarıyorum' });
+    const { tokens } = conjugationTiles(ex, vocab);
+    expect(tokens).toContain('ar');
+    expect(tokens).not.toContain('tr');
+  });
+});

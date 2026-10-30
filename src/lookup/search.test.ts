@@ -237,7 +237,7 @@ describe('Formtabellen', () => {
   it('Formenmengen sind begrenzt', () => {
     expect(nounForms(entry('ev')).length).toBe(97);
     // Zeiten, zusammengesetzte Zeiten (idi/imiş/ise), können und Passiv
-    expect(verbForms(entry('gelmek')).length).toBeLessThan(500);
+    expect(verbForms(entry('gelmek')).length).toBeLessThan(600);
     // Partizipien, Verbalnomen, Konverbien mit den üblichen Endungen
     expect(verbalForms(entry('gelmek')).length).toBeLessThan(400);
   });
@@ -290,6 +290,8 @@ describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
       'gittikçe',
       'gidinceye',
       'gitmeksizin',
+      'gitmektense',
+      'gidesim',
     ]);
   });
 

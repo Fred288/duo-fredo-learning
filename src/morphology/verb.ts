@@ -64,7 +64,7 @@ export type Compound = (typeof COMPOUNDS)[number];
 /** Zeiten, an die die Kopula treten kann (gelseydi ja, geldiydi nein). */
 export const COMPOUND_TENSES: Record<Compound, readonly Tense[]> = {
   past: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'conditional', 'mekte'],
-  evidential: ['present', 'future', 'aorist', 'evidential', 'necessitative'],
+  evidential: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'mekte'],
   conditional: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'past', 'mekte'],
 };
 
@@ -77,10 +77,16 @@ export const DIR_TENSES: readonly Tense[] = [
   'mekte',
 ];
 
-/** Kausativ-Endungen; `dir` und `t` folgen der Regel, die anderen stehen im Wortschatz. */
-export const CAUSATIVES = ['dir', 't', 'ir', 'ar', 'it'] as const;
+/** Bei diesen Zeiten steht -lAr meist hinter -DIr: gelmektedirler, gelmelidirler. */
+const DIR_LATE_PLURAL: readonly Tense[] = ['mekte', 'necessitative'];
+
+/**
+ * Kausativ im Wortschatz: Endung, wenn die Regel nicht greift; `none` = kein eigener Kausativ
+ * (bozulmak, kaybolmak: Kausativ ist ein anderes Verb, kalkmak → kaldırmak).
+ */
+export const CAUSATIVES = ['dir', 't', 'ir', 'ar', 'it', 'none'] as const;
 export type Causative = (typeof CAUSATIVES)[number];
-const CAUSATIVE_TEMPLATE: Record<Causative, string> = {
+const CAUSATIVE_TEMPLATE: Record<Exclude<Causative, 'none'>, string> = {
   dir: 'DIr',
   t: 't',
   ir: 'Ir',
@@ -143,6 +149,8 @@ export interface PredicateOptions {
 export const isDe = (stem: string): boolean => /(^| )de$/.test(stem);
 const isYe = (stem: string): boolean => /(^| )ye$/.test(stem);
 const isIrregular = (stem: string): boolean => /(^| )(de|ye)$/.test(stem);
+/** Einsilbiger Verbstamm (das letzte Wort zählt: temizlik yap-). */
+const monosyllabic = (stem: string): boolean => vowelCount(stem.split(' ').at(-1)!) === 1;
 
 /** Präsens: Stammvokal fällt weg (de- → di-yor, ye- → yi-yor). */
 const irregularPresent = (stem: string): string | undefined =>
@@ -341,14 +349,20 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
 }
 
 /** -DIr nach der fertigen Form, nur 3. Person: gelmiştir, gelmişlerdir (formell, Vermutung). */
-function withDir(verb: VerbStem, opts: ConjugateOptions): Inflection {
+function withDir(verb: VerbStem, opts: ConjugateOptions, swapPlural = false): Inflection {
   if (!DIR_TENSES.includes(opts.tense)) throw new MorphError(`Kein -DIr nach ${opts.tense}`);
   if (opts.person !== '3sg' && opts.person !== '3pl') {
     throw new MorphError('-DIr am Verb nur in der 3. Person');
   }
   if (opts.question || opts.compound) throw new MorphError('-DIr ohne Frage und ohne Kopula');
-  const b = Builder.from(conjugate(verb, { ...opts, dir: false }));
+  const plural = opts.person === '3pl';
+  // Das -lAr steht bei -mAktA und -mAlI meist hinter -DIr (gelmektedirler), sonst davor.
+  const late = plural && DIR_LATE_PLURAL.includes(opts.tense) !== swapPlural;
+  const b = Builder.from(
+    conjugate(verb, { ...opts, dir: false, person: late ? '3sg' : opts.person }),
+  );
   b.suffix('DIR', 'DIr');
+  if (late) b.suffix('P3PL', TYPE1['3pl']);
   return b.result();
 }
 
@@ -381,9 +395,9 @@ function withCompound(verb: VerbStem, opts: ConjugateOptions, latePlural = false
  * (geliyordular, gelseydiler, geldiyseler, geliyormuşlar, geliyor muydular).
  */
 export function conjugateVariants(input: VerbStem | string, opts: ConjugateOptions): string[] {
-  if (!opts.compound || opts.person !== '3pl') return [];
+  if (opts.person !== '3pl' || !(opts.compound || opts.dir)) return [];
   const verb: VerbStem = typeof input === 'string' ? { form: input } : input;
-  return [withCompound(verb, opts, true).form];
+  return [opts.dir ? withDir(verb, opts, true).form : withCompound(verb, opts, true).form];
 }
 
 /** Optativ (Wunsch, Vorschlag): geleyim, gelelim; verneint gelmeyeyim; ye → yiyeyim. */
@@ -433,13 +447,11 @@ export function causativeStem(
   stem: string,
   steps: Step[],
 ): { base: string; tail: string } {
-  const head = stem.split(' ').at(-1)!;
-  // ye- und de- gehen eigene Wege: yedir-, dedirt-.
-  const irregular = isIrregular(stem);
-  const regular: Causative =
-    !irregular && (isVowel(stem.at(-1)!) || (vowelCount(head) > 1 && /[rl]$/.test(stem)))
-      ? 't'
-      : 'dir';
+  if (verb.causative === 'none') {
+    throw new MorphError(`"${verb.form}" hat keinen eigenen Kausativ: eigene Vokabel`);
+  }
+  // Einsilbig auf Vokal gilt -DIr (yedir-, yudur-); de- nimmt zusätzlich -t (dedirt-).
+  const regular = !monosyllabic(stem) && /[aeıioöuürl]$/.test(stem) ? 't' : 'dir';
   const kind = verb.causative ?? regular;
   // Nur Endungen mit Vokal erweichen den Stamm (git- bleibt in gittir-).
   const vowelInitial = kind === 'ir' || kind === 'ar' || kind === 'it';
@@ -449,18 +461,22 @@ export function causativeStem(
   steps.push({
     tag: 'CAUS',
     rule: 'causative',
-    kind: verb.causative || irregular ? 'lexical' : (regular as 'dir' | 't'),
+    kind: verb.causative || isIrregular(stem) ? 'lexical' : regular,
     chose: tail,
   });
   return { base, tail };
 }
 
-/** Reziprokstamm -(I)ş: görüş-, bakış-, anlaş-. */
+/**
+ * Reziprokstamm -(I)ş: görüş-, bakış-, anlaş-. Nicht produktiv (yapış-, çalış- sind andere
+ * Wörter): Inhalte nutzen ihn nur für belegte Verben.
+ */
 export function reciprocalStem(
   verb: VerbStem,
   stem: string,
   steps: Step[],
 ): { base: string; tail: string } {
+  if (isIrregular(stem)) throw new MorphError('de-/ye- bilden den Reziprok nur als Vokabel');
   const base = softenedStem(verb, stem, 'RECIP', steps);
   return { base, tail: realize('(I)ş', 'RECIP', { base, steps }) };
 }

@@ -691,7 +691,7 @@ lessons:
         answers: [Warst du krank?, Bist du krank gewesen?]
 
 vocab:
-  - { tr: duymak, de: [hören, erfahren], pos: verb }
+  - { tr: duymak, de: [hören, erfahren], pos: verb, causative: ir }
   - { tr: anlatmak, de: [erzählen], pos: verb }
   - { tr: demek, de: [sagen], pos: verb }
   - { tr: haber, de: [Nachricht], pos: noun }
@@ -700,7 +700,7 @@ vocab:
   - { tr: kaybetmek, de: [verlieren], pos: verb, softens: true, aorist: ar }
   - { tr: kazanmak, de: [gewinnen, verdienen], pos: verb }
   - { tr: bulmak, de: [finden], pos: verb }
-  - { tr: düşmek, de: [fallen], pos: verb }
+  - { tr: düşmek, de: [fallen], pos: verb, causative: ir }
   - { tr: hasta, de: [krank, Patient], pos: adj }
   - { tr: galiba, de: [anscheinend, wohl], pos: adv }
   - { tr: masal, de: [Märchen], pos: noun }

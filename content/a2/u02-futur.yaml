@@ -610,7 +610,7 @@ vocab:
   - { tr: binmek, de: [einsteigen, nehmen (Verkehrsmittel)], pos: verb }
   - { tr: hazırlamak, de: [vorbereiten, packen], pos: verb }
   - { tr: dinlenmek, de: [sich ausruhen], pos: verb }
-  - { tr: uçmak, de: [fliegen], pos: verb }
+  - { tr: uçmak, de: [fliegen], pos: verb, causative: ir }
   - { tr: seyahat etmek, de: [reisen], pos: verb, softens: true }
   - { tr: gelecek, de: [nächste, kommende], pos: adj }
   - { tr: seneye, de: [nächstes Jahr], pos: adv }

@@ -545,4 +545,4 @@ vocab:
   - { tr: çiçek, de: [Blume], pos: noun, softens: true }
   - { tr: hafta sonu, de: [Wochenende], pos: noun }
   - { tr: sabahları, de: [morgens, jeden Morgen], pos: adv }
-  - { tr: çıkmak, de: [hinausgehen, hinaufgehen], pos: verb }
+  - { tr: çıkmak, de: [hinausgehen, hinaufgehen], pos: verb, causative: ar }

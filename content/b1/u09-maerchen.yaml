@@ -518,7 +518,7 @@ vocab:
   - { tr: kahraman, de: [Held, Heldin], pos: noun }
   - { tr: sihirli, de: [Zauber-, verzaubert], pos: adj }
   - { tr: gülmek, de: [lachen], pos: verb }
-  - { tr: kaçmak, de: [fliehen, weglaufen], pos: verb }
+  - { tr: kaçmak, de: [fliehen, weglaufen], pos: verb, causative: ir }
   - { tr: saklanmak, de: [sich verstecken], pos: verb }
   - { tr: uyanmak, de: [aufwachen], pos: verb }
   - { tr: acıkmak, de: [hungrig werden], pos: verb }

@@ -54,7 +54,7 @@ export function conjugationTiles(
       add(harmonyVariants(seg.text), `${seed}-h`);
     } else if (
       seg.tag === 'PAST' ||
-      (seg.tag === 'CAUS' && seg.text.length > 1) ||
+      (seg.tag === 'CAUS' && /^[dt]./.test(seg.text)) ||
       seg.tag === 'DIR'
     ) {
       // d/t-Verwechslung (gitdi, yapdır) neben falscher Harmonie

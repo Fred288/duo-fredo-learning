@@ -763,7 +763,7 @@ vocab:
   - { tr: ağrımak, de: [schmerzen, wehtun], pos: verb }
   - { tr: reçete, de: [Rezept (ärztlich)], pos: noun }
   - { tr: geçmiş olsun, de: [gute Besserung], pos: phrase }
-  - { tr: yatmak, de: [sich hinlegen, im Bett liegen, ins Bett gehen], pos: verb }
+  - { tr: yatmak, de: [sich hinlegen, im Bett liegen, ins Bett gehen], pos: verb, causative: ir }
   - { tr: yürümek, de: [gehen (zu Fuß), laufen], pos: verb }
   - { tr: grip, de: [Grippe], pos: noun, softens: true }
   - { tr: sigara, de: [Zigarette], pos: noun }

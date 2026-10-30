@@ -75,7 +75,7 @@ const CONVERBS: ReadonlySet<NonfiniteTag> = new Set([
 ]);
 
 // de- bleibt vor diesen Endungen bei e (deyip, deyince, deyiş), ye- wird immer zu yi- (yiyip).
-const DE_KEEPS_E: ReadonlySet<NonfiniteTag> = new Set(['CV_IP', 'CV_INCA', 'VN_IS']);
+const DE_KEEPS_E: ReadonlySet<NonfiniteTag> = new Set(['CV_IP', 'CV_INCA', 'CV_INCAYA', 'VN_IS']);
 
 /** Welche nominalen Endungen nach der Form stehen dürfen; sonst MorphError. */
 function checkTags(opts: NonfiniteOptions): void {
@@ -96,8 +96,8 @@ function checkTags(opts: NonfiniteOptions): void {
       if (hasPoss) fail('kein Possessiv am -mIş-Partizip');
       return;
     case 'PART_ASI':
-      // gidesim, gidesin, gidesi: das Possessiv gehört zur Form.
-      if (tags.length !== 1 || !hasPoss) fail('genau ein Possessiv');
+      // gidesim, gidesin, gidesi: das Possessiv gehört zur Form; 3. Plural (gelesileri) fehlt.
+      if (tags.length !== 1 || !hasPoss || tags[0] === 'POSS_3PL') fail('genau ein Possessiv');
       return;
     case 'PART_DIK':
       // okuduğum, okuduklarım; ohne Possessiv nur geldikten (sonra)

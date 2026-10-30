@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { MorphError } from './inflect';
 import { nonfinite } from './nonfinite';
-import { conjugate, predicate, type ConjugateOptions, type VerbStem } from './verb';
+import {
+  conjugate,
+  conjugateVariants,
+  predicate,
+  type ConjugateOptions,
+  type VerbStem,
+} from './verb';
 
 const form = (verb: VerbStem | string, opts: Partial<ConjugateOptions>) =>
   conjugate(verb, { tense: 'present', person: '3sg', ...opts }).form;
@@ -191,5 +197,42 @@ describe('ye- im Imperativ', () => {
     expect(conjugate('yemek', imp).form).toBe('yiyin');
     expect(conjugate('yemek yemek', imp).form).toBe('yemek yiyin');
     expect(conjugate('evet demek', imp).form).toBe('evet deyin');
+  });
+});
+
+describe('Review E4', () => {
+  it('kein eigener Kausativ: Flag none', () => {
+    expect(() => form({ form: 'bozulmak', causative: 'none' }, { causative: true })).toThrow(
+      MorphError,
+    );
+    expect(form({ form: 'bozulmak', causative: 'none' }, {})).toBe('bozuluyor');
+  });
+
+  it('einsilbig auf Vokal nimmt -DIr', () => {
+    expect(form('yumak', { causative: true })).toBe('yuduruyor');
+    expect(form('evet demek', { causative: true })).toBe('evet dedirtiyor');
+  });
+
+  it('Reziprok nicht von de-/ye-', () => {
+    expect(() => form('demek', { reciprocal: true })).toThrow(MorphError);
+    expect(() => form('yemek', { reciprocal: true })).toThrow(MorphError);
+  });
+
+  it('imiş nach -mekte', () => {
+    expect(form('yapmak', { tense: 'mekte', compound: 'evidential', passive: true })).toBe(
+      'yapılmaktaymış',
+    );
+  });
+
+  it('-lAr und -DIr: Haupt- und Nebenform', () => {
+    const opts = { person: '3pl', dir: true } as const;
+    expect(form('gelmek', { ...opts, tense: 'mekte' })).toBe('gelmektedirler');
+    expect(form('gelmek', { ...opts, tense: 'necessitative' })).toBe('gelmelidirler');
+    expect(form('gelmek', { ...opts, tense: 'evidential' })).toBe('gelmişlerdir');
+    expect(conjugateVariants('gelmek', { ...opts, tense: 'mekte' })).toEqual(['gelmektelerdir']);
+    expect(conjugateVariants('gelmek', { ...opts, tense: 'evidential' })).toEqual(['gelmiştirler']);
+    expect(conjugateVariants('gelmek', { ...opts, tense: 'evidential', person: '3sg' })).toEqual(
+      [],
+    );
   });
 });

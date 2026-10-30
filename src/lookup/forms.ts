@@ -147,6 +147,14 @@ const VERB_VARIANTS: VerbVariant[] = [
     { tense, dir: true },
     { tense, dir: true, negative: true },
   ]),
+  // yapılmış, yapılmakta, yapılmıştır, yapılmaktadır, yapılmaktaydı: formelle Texte
+  ...(['evidential', 'mekte'] as const).flatMap((tense) => [
+    { tense, passive: true },
+    { tense, passive: true, negative: true },
+    { tense, passive: true, dir: true },
+    { tense, passive: true, dir: true, negative: true },
+    { tense, passive: true, compound: 'past' as const },
+  ]),
 ];
 
 /** Verb: alle Zeiten × Personen × bejaht/verneint, dazu „können“ und Passiv in Präsens und Aorist. */
@@ -202,9 +210,24 @@ const VERBAL_VARIANTS: VerbalVariant[] = [
 const VERBAL_EXTRA: VerbalVariant[] = [
   { form: 'CV_MADAN', tags: [] },
   { form: 'CV_MAKSIZIN', tags: [] },
-  // gelesim, gelesi; sevenlerim
-  ...POSS.map((p) => ({ form: 'PART_ASI' as const, tags: [p] })),
-  ...POSS.map((p) => ({ form: 'PART_AN' as const, tags: ['PL', p] as MorphTag[] })),
+  // gelesim; gelesi nicht: fällt mit Nomen zusammen (doğası, gecesi ≈ geçesi)
+  ...POSS.filter((p) => p !== 'POSS_3SG').map((p) => ({
+    form: 'PART_ASI' as const,
+    tags: [p],
+  })),
+  // sevenim, sevenlerim; nicht 3. Person: okuyanı, okuyanları klingen wie der Akkusativ
+  ...POSS.filter((p) => p !== 'POSS_3SG' && p !== 'POSS_3PL').flatMap((p) => [
+    { form: 'PART_AN' as const, tags: [p] },
+    { form: 'PART_AN' as const, tags: ['PL', p] as MorphTag[] },
+  ]),
+  // görmüşlere, geleceğe; die blanken Formen und ACC stehen nicht hier: sie klingen wie
+  // Perfekt, Futur und -AcAğI und würden bestehende Zerlegeübungen als mehrdeutig streichen.
+  ...(['DAT', 'LOC', 'ABL'] as MorphTag[]).flatMap((c) => [
+    { form: 'PART_MIS' as const, tags: [c] },
+    { form: 'PART_MIS' as const, tags: ['PL', c] as MorphTag[] },
+    { form: 'PART_ACAK' as const, tags: [c] },
+    { form: 'PART_ACAK' as const, tags: ['PL', c] as MorphTag[] },
+  ]),
   // geliş, gelişi (verneint selten)
   ...[[], ...VERBAL_CASES.map((c) => [c]), ...withPoss(true)].map((tags) => ({
     form: 'VN_IS' as const,
@@ -320,6 +343,8 @@ const VERBAL_SAMPLES: Omit<Extract<FormLabel, { kind: 'verbal' }>, 'kind'>[] = [
   { form: 'CV_DIKCA', tags: [] },
   { form: 'CV_INCAYA', tags: [] },
   { form: 'CV_MAKSIZIN', tags: [] },
+  { form: 'CV_MAKTANSA', tags: [] },
+  { form: 'PART_ASI', tags: ['POSS_1SG'] },
 ];
 
 /** Weitere Tabellen eines Verbs: zusammengesetzte Zeiten/Wünsche und infinite Formen. */

@@ -206,8 +206,16 @@ function checkVerbForm(
   ctx: z.RefinementCtx,
 ) {
   // -DIr verbindet sich nicht mit idi/imiş/ise (die Engine ließe es stillschweigend weg).
-  if (e.dir && copula && e.tense && e.tense !== 'present') {
-    ctx.addIssue({ code: 'custom', path: ['dir'], message: 'dir nur bei Kopula im Präsens' });
+  if (e.dir && copula) {
+    const bad =
+      (e.tense && e.tense !== 'present') || e.question || persons.some((p) => p !== '3sg');
+    if (bad) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['dir'],
+        message: 'dir bei der Kopula nur im Präsens, 3. Person, ohne Frage',
+      });
+    }
   }
   if (e.dir && !copula) {
     const bad = persons.filter((p) => p !== '3sg' && p !== '3pl');
@@ -327,6 +335,15 @@ export const Paradigm = z
     alt_targets: z.array(z.array(nonEmpty)).optional(),
   })
   .superRefine((e, ctx) => {
+    if (e.dir && !e.persons?.length) {
+      ctx.addIssue({ code: 'custom', path: ['dir'], message: 'dir braucht persons' });
+    }
+    if ((e.kind === 'noun' || e.kind === 'verbal') && e.dir) {
+      ctx.addIssue({ code: 'custom', path: ['dir'], message: 'dir nur bei verb und copula' });
+    }
+    if (e.kind === 'noun' && (e.causative || e.reciprocal)) {
+      ctx.addIssue({ code: 'custom', path: ['causative'], message: 'causative nur bei Verben' });
+    }
     if ((e.kind === 'verbal') !== !!e.verbal) {
       ctx.addIssue({ code: 'custom', path: ['verbal'], message: 'verbal genau bei kind verbal' });
     }

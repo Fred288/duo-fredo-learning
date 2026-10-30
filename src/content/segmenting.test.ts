@@ -334,6 +334,8 @@ describe('infinite Formen beim Zerlegen', () => {
   it('erkennt Formen, die auch Zeitformen sind', () => {
     expect(ambiguous(verbal('PART_ACAK'))).toBe(true); // gelecek: Futur 3sg
     expect(ambiguous(verbal('VN_MAK', ['LOC']))).toBe(false); // gelmekte: als Zeit gleich zerlegt
+    const mekte = { kind: 'verb', lemma: 'gelmek', person: '3sg', tense: 'mekte' } as const;
+    expect(ambiguous(mekte)).toBe(true); // Einbahnstraße: als Zeit fällt es heraus
     expect(ambiguous(verbal('VN_MA', ['POSS_1SG']))).toBe(true); // gelmem: Aorist verneint 1sg
     expect(ambiguous(verbal('VN_MA'))).toBe(true); // gelme: Imperativ verneint
     expect(ambiguous({ kind: 'verb', lemma: 'gelmek', person: '3sg', tense: 'future' })).toBe(true);

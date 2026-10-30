@@ -681,7 +681,7 @@ vocab:
   - { tr: durak, de: [Haltestelle], pos: noun, softens: true }
   - { tr: meydan, de: [Platz], pos: noun }
   - { tr: trafik ışığı, de: [Ampel], pos: noun }
-  - { tr: geçmek, de: [überqueren, vorbeigehen, vergehen], pos: verb }
+  - { tr: geçmek, de: [überqueren, vorbeigehen, vergehen], pos: verb, causative: ir }
   - { tr: inmek, de: [aussteigen, hinuntergehen], pos: verb }
   - { tr: uzak, de: [weit, fern], pos: adj }
   - { tr: yakın, de: [nah], pos: adj }
@@ -690,11 +690,11 @@ vocab:
   - { tr: karşı, de: [gegenüber], pos: noun }
   - { tr: dikkat etmek, de: [aufpassen, achten auf], pos: verb, softens: true }
   - { tr: devam etmek, de: [weitermachen, weitergehen], pos: verb, softens: true }
-  - { tr: korkmak, de: [Angst haben, sich fürchten], pos: verb }
+  - { tr: korkmak, de: [Angst haben, sich fürchten], pos: verb, causative: it }
   - { tr: aramak, de: [anrufen, suchen], pos: verb }
   - { tr: postane, de: [Post (Gebäude)], pos: noun }
   - { tr: harita, de: [Karte, Stadtplan], pos: noun }
-  - { tr: kaybolmak, de: [sich verirren, verloren gehen], pos: verb }
+  - { tr: kaybolmak, de: [sich verirren, verloren gehen], pos: verb, causative: none }
   - { tr: metro, de: [U-Bahn, Metro], pos: noun }
   - { tr: buraya, de: [hierher], pos: adv }
   - { tr: ön, de: [Vorderseite, vorne], pos: noun }

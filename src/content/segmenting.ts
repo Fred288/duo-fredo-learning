@@ -181,9 +181,12 @@ export function isAmbiguous(
       return true;
     }
   }
-  // gelmekte ist als Zeit und als -mAk + Lokativ dieselbe Zerlegung, also nicht mehrdeutig.
-  const same = (tags: string) => tags.replace('VN_MAK LOC', 'PROG');
-  const own = same(suffixTags(inf, personOf(spec)));
+  const own = suffixTags(inf, personOf(spec));
+  // Einbahnstraße: -mAk + Lokativ (gel-mek-te) bleibt trotz der gleichlautenden Zeit, damit
+  // bestehende Übungen nicht wegfallen. Die Zeit `mekte` in der 3. Person fällt dagegen heraus,
+  // sonst gälte dasselbe Wort je nach Lektion mit einer anderen Zerlegung.
+  const same = (tags: string) =>
+    own.includes('VN_MAK LOC') ? tags.replace('PROG', 'VN_MAK LOC') : tags;
   const entry = entryOf(spec, vocab);
   for (const other of allForms(entry)) {
     if (trLower(other.form) !== form) continue;

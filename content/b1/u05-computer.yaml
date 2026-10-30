@@ -526,11 +526,11 @@ vocab:
   - { tr: bağlanmak, de: [sich verbinden], pos: verb }
   - { tr: tıklamak, de: [klicken], pos: verb }
   - { tr: denemek, de: [ausprobieren, versuchen], pos: verb }
-  - { tr: bozulmak, de: [kaputtgehen], pos: verb }
+  - { tr: bozulmak, de: [kaputtgehen], pos: verb, causative: none }
   - { tr: tamir etmek, de: [reparieren], pos: verb, softens: true }
   - { tr: değiştirmek, de: [ändern], pos: verb }
   - { tr: hoşlanmak, de: [gern haben, gern tun], pos: verb }
-  - { tr: vazgeçmek, de: [aufgeben, verzichten], pos: verb }
-  - { tr: yorulmak, de: [müde werden], pos: verb }
+  - { tr: vazgeçmek, de: [aufgeben, verzichten], pos: verb, causative: ir }
+  - { tr: yorulmak, de: [müde werden], pos: verb, causative: none }
   - { tr: zorunda, de: [gezwungen (… zorundayım = ich muss)], pos: phrase }
   - { tr: artık, de: [nicht mehr (mit Verneinung), inzwischen], pos: adv }

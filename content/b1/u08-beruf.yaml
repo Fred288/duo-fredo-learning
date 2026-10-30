@@ -515,7 +515,7 @@ vocab:
   - { tr: amaç, de: [Ziel], pos: noun, softens: true }
   - { tr: yer, de: [Ort, Platz], pos: noun }
   - { tr: seçmek, de: [wählen], pos: verb }
-  - { tr: katılmak, de: [teilnehmen], pos: verb }
+  - { tr: katılmak, de: [teilnehmen], pos: verb, causative: none }
   - { tr: ilan, de: [Anzeige], pos: noun }
   - { tr: son, de: ['letzte(r, s)', Ende], pos: adj }
   - { tr: proje, de: [Projekt], pos: noun }

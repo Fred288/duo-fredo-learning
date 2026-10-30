@@ -534,7 +534,7 @@ vocab:
   - { tr: gemi, de: [Schiff], pos: noun }
   - { tr: liman, de: [Hafen], pos: noun }
   - { tr: fabrika, de: [Fabrik], pos: noun }
-  - { tr: ayrılmak, de: [weggehen, sich trennen, verlassen], pos: verb }
+  - { tr: ayrılmak, de: [weggehen, sich trennen, verlassen], pos: verb, causative: none }
   - { tr: âşık olmak, de: [sich verlieben], pos: verb }
   - { tr: hikâye, de: [Geschichte, Erzählung], pos: noun }
   - { tr: yüzyıl, de: [Jahrhundert], pos: noun }
