@@ -28,6 +28,8 @@ export const NONFINITE_TAGS = [
   'PART_AN', // -(y)An (gelen)
   'PART_DIK', // -DIk (geldiğim)
   'PART_ACAK', // -(y)AcAk (geleceğim)
+  'PART_MIS', // -mIş (görmüş adam)
+  'PART_ASI', // -(y)As + Possessiv (gidesim var)
   'VN_MA', // -mA (gelmesi)
   'VN_MAK', // -mAk (gelmek, gelmekte)
   'VN_IS', // -(y)Iş (geliş)
@@ -36,6 +38,10 @@ export const NONFINITE_TAGS = [
   'CV_INCA', // -(y)IncA (gelince)
   'CV_ALI', // -(y)AlI (geleli)
   'CV_MADAN', // -mAdAn (gelmeden)
+  'CV_DIKCA', // -DIkçA (geldikçe)
+  'CV_INCAYA', // -(y)IncAyA (gelinceye kadar)
+  'CV_MAKSIZIN', // -mAksIzIn (gelmeksizin)
+  'CV_MAKTANSA', // -mAktAnsA (gelmektense)
 ] as const;
 
 export type NonfiniteTag = (typeof NONFINITE_TAGS)[number];

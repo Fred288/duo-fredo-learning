@@ -181,7 +181,9 @@ export function isAmbiguous(
       return true;
     }
   }
-  const own = suffixTags(inf, personOf(spec));
+  // gelmekte ist als Zeit und als -mAk + Lokativ dieselbe Zerlegung, also nicht mehrdeutig.
+  const same = (tags: string) => tags.replace('VN_MAK LOC', 'PROG');
+  const own = same(suffixTags(inf, personOf(spec)));
   const entry = entryOf(spec, vocab);
   for (const other of allForms(entry)) {
     if (trLower(other.form) !== form) continue;
@@ -195,7 +197,7 @@ export function isAmbiguous(
           : label.kind === 'verbal'
             ? suffixTags(nonfinite(verb, label))
             : 'PRONOUN';
-    if (tags !== own) return true;
+    if (same(tags) !== own) return true;
   }
   return false;
 }

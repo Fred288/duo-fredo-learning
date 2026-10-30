@@ -133,6 +133,12 @@ const CONFUSABLE_B2: Partial<Record<SegmentTag, readonly SegmentTag[]>> = {
   CAUS: ['PASS', 'RECIP', 'ABIL'],
   RECIP: ['PASS', 'CAUS'],
   PROG: ['PRES', 'AOR', 'EVID'],
+  PART_MIS: ['PART_AN', 'PART_DIK', 'EVID'],
+  PART_ASI: ['PART_ACAK', 'VN_MA'],
+  CV_DIKCA: ['CV_INCA', 'CV_ARAK', 'CV_ALI'],
+  CV_INCAYA: ['CV_INCA', 'CV_DIKCA'],
+  CV_MAKSIZIN: ['CV_MADAN', 'CV_ARAK'],
+  CV_MAKTANSA: ['CV_MADAN', 'VN_MAK'],
 };
 
 /** Höchstens so viele Rollen, die nicht im Wort vorkommen. */

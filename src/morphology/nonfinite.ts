@@ -23,6 +23,8 @@ export const NONFINITE: Record<NonfiniteTag, string> = {
   PART_AN: '(y)An',
   PART_DIK: 'DIk',
   PART_ACAK: '(y)AcAk',
+  PART_MIS: 'mIş',
+  PART_ASI: '(y)As',
   VN_MA: 'mA',
   VN_MAK: 'mAk',
   VN_IS: '(y)Iş',
@@ -31,6 +33,10 @@ export const NONFINITE: Record<NonfiniteTag, string> = {
   CV_INCA: '(y)IncA',
   CV_ALI: '(y)AlI',
   CV_MADAN: 'mAdAn',
+  CV_DIKCA: 'DIkçA',
+  CV_INCAYA: '(y)IncAyA',
+  CV_MAKSIZIN: 'mAksIzIn',
+  CV_MAKTANSA: 'mAktAnsA',
 };
 
 export interface NonfiniteOptions {
@@ -62,6 +68,10 @@ const CONVERBS: ReadonlySet<NonfiniteTag> = new Set([
   'CV_INCA',
   'CV_ALI',
   'CV_MADAN',
+  'CV_DIKCA',
+  'CV_INCAYA',
+  'CV_MAKSIZIN',
+  'CV_MAKTANSA',
 ]);
 
 // de- bleibt vor diesen Endungen bei e (deyip, deyince, deyiş), ye- wird immer zu yi- (yiyip).
@@ -74,23 +84,24 @@ function checkTags(opts: NonfiniteOptions): void {
     throw new MorphError(`${opts.form} + ${tags.join(' + ') || '∅'}: ${why}`);
   };
   if (tags.some((t) => DERIVATIONS.has(t) || t === 'KI')) fail('keine Ableitung, kein -ki');
-  if (opts.form === 'CV_MADAN' && opts.negative)
-    fail('-mAdAn ist schon verneint (gelemeden: ability)');
+  if ((opts.form === 'CV_MADAN' || opts.form === 'CV_MAKSIZIN') && opts.negative)
+    fail('schon verneint (gelemeden: ability)');
   const hasPoss = tags.some((t) => POSS.has(t));
   if (CONVERBS.has(opts.form)) {
     if (tags.length) fail('Konverbien nehmen keine Endungen');
     return;
   }
   switch (opts.form) {
-    case 'PART_AN':
-      if (hasPoss) fail('kein Possessiv am -(y)An-Partizip');
+    case 'PART_MIS':
+      if (hasPoss) fail('kein Possessiv am -mIş-Partizip');
+      return;
+    case 'PART_ASI':
+      // gidesim, gidesin, gidesi: das Possessiv gehört zur Form.
+      if (tags.length !== 1 || !hasPoss) fail('genau ein Possessiv');
       return;
     case 'PART_DIK':
       // okuduğum, okuduklarım; ohne Possessiv nur geldikten (sonra)
       if (!hasPoss && !(tags.length === 1 && tags[0] === 'ABL')) fail('braucht ein Possessiv');
-      return;
-    case 'PART_ACAK':
-      if (tags.length && !hasPoss) fail('Endungen nur mit Possessiv');
       return;
     case 'VN_MAK':
       if (tags.length > 1 || (tags[0] && !['LOC', 'ABL', 'INS'].includes(tags[0]))) {
@@ -176,7 +187,7 @@ function derived(verb: VerbStem, stem: string, opts: NonfiniteOptions): Inflecti
     return splitDerived(inner, base, tail, 'PASS', steps, 'passive');
   }
   // „ohne … zu können“: gel-e-meden; die Verneinung steckt schon in -mAdAn.
-  const madan = opts.form === 'CV_MADAN';
+  const madan = opts.form === 'CV_MADAN' || opts.form === 'CV_MAKSIZIN';
   const { base, tail } = abilityStem(verb, stem, madan || (opts.negative ?? false), steps);
   const inner = nonfinite({ form: `${base}${tail}mek` }, { ...opts, ability: false });
   return splitDerived(inner, base, tail, 'ABIL', steps, 'ability');

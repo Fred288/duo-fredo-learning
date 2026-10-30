@@ -287,6 +287,9 @@ describe('verbExtras: zusammengesetzte Zeiten und infinite Formen', () => {
       'gidince',
       'gideli',
       'gitmeden',
+      'gittikçe',
+      'gidinceye',
+      'gitmeksizin',
     ]);
   });
 

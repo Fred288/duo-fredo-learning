@@ -117,8 +117,8 @@ describe('Partizip -(y)AcAk', () => {
     expect(f('gelmek', { form: 'PART_ACAK', negative: true })).toBe('gelmeyecek');
   });
 
-  it('ohne Possessiv kein Kasus', () => {
-    expect(() => nonfinite('gelmek', { form: 'PART_ACAK', tags: ['ACC'] })).toThrow(MorphError);
+  it('auch ohne Possessiv mit Kasus (das Kommende)', () => {
+    expect(f('gelmek', { form: 'PART_ACAK', tags: ['ACC'] })).toBe('geleceği');
   });
 });
 
@@ -204,8 +204,8 @@ describe('nicht erlaubt', () => {
     expect(() => nonfinite('gelmek', { form: 'PART_AN', tags: ['KI'] })).toThrow(MorphError);
   });
 
-  it('Possessiv am Partizip -(y)An', () => {
-    expect(() => nonfinite('gelmek', { form: 'PART_AN', tags: ['POSS_1SG'] })).toThrow(MorphError);
+  it('Possessiv am Partizip -mIş', () => {
+    expect(() => nonfinite('gelmek', { form: 'PART_MIS', tags: ['POSS_1SG'] })).toThrow(MorphError);
   });
 });
 
@@ -262,7 +262,6 @@ describe('weitere Kombinationen (Review E2)', () => {
     expect(() => nonfinite('gelmek', { form: 'CV_MADAN', ability: true, negative: true })).toThrow(
       MorphError,
     );
-    expect(() => nonfinite('gelmek', { form: 'PART_ACAK', tags: ['PL'] })).toThrow(MorphError);
     expect(() => nonfinite('gelmek', { form: 'VN_MAK', tags: ['PL'] })).toThrow(MorphError);
   });
 
@@ -284,3 +283,55 @@ describe('de- in Mehrwortverben', () => {
   });
 });
 
+describe('B2-Formen', () => {
+  it.each([
+    ['gelmek', 'CV_DIKCA', 'geldikçe'],
+    ['okumak', 'CV_DIKCA', 'okudukça'],
+    ['gitmek', 'CV_DIKCA', 'gittikçe'],
+    ['gelmek', 'CV_INCAYA', 'gelinceye'],
+    ['gitmek', 'CV_INCAYA', 'gidinceye'],
+    ['okumak', 'CV_INCAYA', 'okuyuncaya'],
+    ['gelmek', 'CV_MAKSIZIN', 'gelmeksizin'],
+    ['yapmak', 'CV_MAKSIZIN', 'yapmaksızın'],
+    ['gelmek', 'CV_MAKTANSA', 'gelmektense'],
+    ['yapmak', 'CV_MAKTANSA', 'yapmaktansa'],
+    ['görmek', 'PART_MIS', 'görmüş'],
+  ] as const)('%s + %s → %s', (verb, form, expected) => {
+    const stem = verb === 'gitmek' ? { form: verb, softens: true } : verb;
+    expect(nonfinite(stem, { form }).form).toBe(expected);
+  });
+
+  it('-(y)As braucht genau ein Possessiv', () => {
+    const asi = (tags: MorphTag[], verb = 'gelmek') =>
+      nonfinite({ form: verb, softens: verb === 'gitmek' }, { form: 'PART_ASI', tags }).form;
+    expect(asi(['POSS_1SG'], 'gitmek')).toBe('gidesim');
+    expect(asi(['POSS_3SG'])).toBe('gelesi');
+    expect(asi(['POSS_2PL'], 'yapmak')).toBe('yapasınız');
+    expect(() => asi([])).toThrow(MorphError);
+    expect(() => asi(['POSS_1SG', 'ACC'])).toThrow(MorphError);
+  });
+
+  it('Endungen an -(y)An und -(y)AcAk', () => {
+    const f = (form: 'PART_AN' | 'PART_ACAK', tags: MorphTag[], verb = 'gelmek') =>
+      nonfinite(verb, { form, tags }).form;
+    expect(f('PART_AN', ['PL', 'POSS_1SG'], 'sevmek')).toBe('sevenlerim');
+    expect(f('PART_ACAK', ['PL'])).toBe('gelecekler');
+    expect(f('PART_ACAK', ['PL', 'DAT'])).toBe('geleceklere');
+    expect(f('PART_ACAK', ['DAT'])).toBe('geleceğe');
+  });
+
+  it('-mIş-Partizip ohne Possessiv; verneinte Konverbien', () => {
+    expect(nonfinite('görmek', { form: 'PART_MIS', tags: ['PL', 'DAT'] }).form).toBe('görmüşlere');
+    expect(() => nonfinite('görmek', { form: 'PART_MIS', tags: ['POSS_1SG'] })).toThrow(MorphError);
+    expect(nonfinite('gelmek', { form: 'CV_DIKCA', negative: true }).form).toBe('gelmedikçe');
+    expect(nonfinite('gelmek', { form: 'CV_MAKTANSA', negative: true }).form).toBe('gelmemektense');
+    expect(() => nonfinite('gelmek', { form: 'CV_MAKSIZIN', negative: true })).toThrow(MorphError);
+    expect(nonfinite('gelmek', { form: 'CV_MAKSIZIN', ability: true }).form).toBe('gelemeksizin');
+  });
+
+  it('Kausativ, Passiv und „können“ davor', () => {
+    expect(nonfinite('yapmak', { form: 'CV_DIKCA', causative: true }).form).toBe('yaptırdıkça');
+    expect(nonfinite('yapmak', { form: 'CV_DIKCA', passive: true }).form).toBe('yapıldıkça');
+    expect(nonfinite('gelmek', { form: 'CV_DIKCA', ability: true }).form).toBe('gelebildikçe');
+  });
+});

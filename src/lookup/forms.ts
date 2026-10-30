@@ -194,11 +194,17 @@ const VERBAL_VARIANTS: VerbalVariant[] = [
     form: 'VN_MAK' as const,
     tags: tags as MorphTag[],
   })),
-  ...(['CV_IP', 'CV_ARAK', 'CV_INCA', 'CV_ALI'] as const).map((form) => ({ form, tags: [] })),
+  ...(
+    ['CV_IP', 'CV_ARAK', 'CV_INCA', 'CV_ALI', 'CV_DIKCA', 'CV_INCAYA', 'CV_MAKTANSA'] as const
+  ).map((form) => ({ form, tags: [] })),
 ].flatMap((v) => BOTH.map((negative) => ({ ...v, negative })));
 
 const VERBAL_EXTRA: VerbalVariant[] = [
   { form: 'CV_MADAN', tags: [] },
+  { form: 'CV_MAKSIZIN', tags: [] },
+  // gelesim, gelesi; sevenlerim
+  ...POSS.map((p) => ({ form: 'PART_ASI' as const, tags: [p] })),
+  ...POSS.map((p) => ({ form: 'PART_AN' as const, tags: ['PL', p] as MorphTag[] })),
   // geliş, gelişi (verneint selten)
   ...[[], ...VERBAL_CASES.map((c) => [c]), ...withPoss(true)].map((tags) => ({
     form: 'VN_IS' as const,
@@ -311,6 +317,9 @@ const VERBAL_SAMPLES: Omit<Extract<FormLabel, { kind: 'verbal' }>, 'kind'>[] = [
   { form: 'CV_INCA', tags: [] },
   { form: 'CV_ALI', tags: [] },
   { form: 'CV_MADAN', tags: [] },
+  { form: 'CV_DIKCA', tags: [] },
+  { form: 'CV_INCAYA', tags: [] },
+  { form: 'CV_MAKSIZIN', tags: [] },
 ];
 
 /** Weitere Tabellen eines Verbs: zusammengesetzte Zeiten/Wünsche und infinite Formen. */
