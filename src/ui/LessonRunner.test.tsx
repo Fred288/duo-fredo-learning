@@ -616,3 +616,76 @@ describe('LessonRunner Zerlegen und Satzbau', () => {
     expect(status.textContent).toContain('direkt vor dem Verb');
   });
 });
+
+describe('LessonRunner B2-Formeln', () => {
+  const one = (ex: object): Lesson => ({
+    id: 'b2-u01-l1',
+    type: 'grammar',
+    title: 'Test',
+    exercises: [{ id: 'b2-u01-l1-e1', ...ex } as Lesson['exercises'][number]],
+  });
+  const tiles = (names: string[]) => {
+    for (const name of names) fireEvent.click(screen.getByRole('button', { name }));
+    click('Prüfen');
+    return screen.getByRole('status').textContent;
+  };
+
+  it('Kausativ: Formel nennt ihn vor dem Passiv, Begründung im Feedback', () => {
+    render(
+      <LessonRunner
+        lesson={one({
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'yapmak',
+          person: '3sg',
+          tense: 'aorist',
+          causative: true,
+          passive: true,
+          target: 'yaptırılır',
+        })}
+        onExit={() => {}}
+      />,
+    );
+    expect(screen.getByText('yapmak · er/sie/es · Kausativ · Passiv · Aorist')).toBeTruthy();
+    const status = tiles(['yap', 'tır', 'ıl', 'ır']);
+    expect(status).toContain('Richtig!');
+    expect(status).toContain('Kausativ nach Konsonant: -tır');
+  });
+
+  it('-mekte mit -dir am Verb', () => {
+    render(
+      <LessonRunner
+        lesson={one({
+          type: 'conjugation',
+          mode: 'verb',
+          lemma: 'gelmek',
+          person: '3sg',
+          tense: 'mekte',
+          dir: true,
+          target: 'gelmektedir',
+        })}
+        onExit={() => {}}
+      />,
+    );
+    expect(screen.getByText('gelmek · er/sie/es · Verlauf (-mekte) · Endung -dir')).toBeTruthy();
+    expect(tiles(['gel', 'mekte', 'dir'])).toContain('Richtig!');
+  });
+
+  it('Suffix-Builder: Kausativ + infinite Form', () => {
+    render(
+      <LessonRunner
+        lesson={one({
+          type: 'suffix_builder',
+          stem: 'yapmak',
+          verbal: 'CV_DIKCA',
+          suffixes: [],
+          causative: true,
+          target: 'yaptırdıkça',
+        })}
+        onExit={() => {}}
+      />,
+    );
+    expect(screen.getByText(/yapmak \+ Kausativ \+ je mehr, immer wenn/)).toBeTruthy();
+    expect(tiles(['yap', 'tır', 'dıkça'])).toContain('Richtig!');
+  });
+});

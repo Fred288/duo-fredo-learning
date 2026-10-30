@@ -68,6 +68,8 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
       ? []
       : ex.kind === 'verbal'
         ? [
+            ex.causative && t('tag.CAUS'),
+            ex.reciprocal && t('tag.RECIP'),
             ex.passive && t('tag.PASS'),
             // verneintes Können ist -(y)AmA (gelemeyen), nicht -ebil + verneint
             ex.ability && t(ex.negative ? 'tag.ABIL_NEG' : 'tag.ABIL'),

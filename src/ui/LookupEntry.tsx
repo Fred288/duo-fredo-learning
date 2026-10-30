@@ -33,6 +33,7 @@ export function formLabelText(label: FormLabel): string {
         t(`person.${label.person}`),
         label.ability && t('tag.ABIL'),
         label.passive && t('lookup.passive'),
+        label.dir && t('tag.DIR'),
         label.negative && t('lookup.negative'),
       ]
         .filter(Boolean)

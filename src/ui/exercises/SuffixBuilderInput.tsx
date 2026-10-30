@@ -17,6 +17,8 @@ export function SuffixBuilderInput({ ex, vocab, onChange, disabled }: Props) {
   // Aufgabe als Formel: "ev + Plural + Lokativ", "okumak + Partizip -dik + mein", Deutsch als Kontext.
   const formula = [
     ex.stem,
+    ex.causative && t('tag.CAUS'),
+    ex.reciprocal && t('tag.RECIP'),
     ex.passive && t('tag.PASS'),
     // verneintes Können ist -(y)AmA, nicht -ebil + -me (gelemeyen)
     ex.ability && t(ex.negative ? 'tag.ABIL_NEG' : 'tag.ABIL'),

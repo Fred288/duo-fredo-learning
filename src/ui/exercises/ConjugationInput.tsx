@@ -20,6 +20,9 @@ export function tenseLabels(
     ability?: boolean;
     polite?: boolean;
     passive?: boolean;
+    causative?: boolean;
+    reciprocal?: boolean;
+    dir?: boolean;
     compound?: 'past' | 'evidential' | 'conditional';
   },
 ): string[] {
@@ -30,6 +33,9 @@ export function tenseLabels(
   }
   const tense = ex.tense as Exclude<typeof ex.tense, undefined>;
   return [
+    // Reihenfolge wie im Wort: Kausativ/Reziprok → Passiv → können → Zeit
+    ex.causative ? t('tag.CAUS') : '',
+    ex.reciprocal ? t('tag.RECIP') : '',
     ex.passive ? t('ex.conjugation.passive') : '',
     ex.ability ? t('ex.conjugation.ability') : '',
     // Mit Kopula wird auch das Präsens genannt: „Präsens · mit idi“ (geliyordum).
@@ -37,6 +43,7 @@ export function tenseLabels(
     !tense && ex.compound ? t('tense.present') : '',
     ex.compound ? t(`compound.${ex.compound}`) : '',
     ex.polite ? t('ex.conjugation.polite') : '',
+    ex.dir ? t('tag.DIR') : '',
   ].filter(Boolean);
 }
 

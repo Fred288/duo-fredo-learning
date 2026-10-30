@@ -6,7 +6,7 @@ import type { Exercise } from '../src/content/schema';
 import { answer, loadUnit } from './solve';
 
 /** Zahl der Units je Niveau laut Einstufungsplan; die Tests hängen so nicht an Inhaltszahlen. */
-export function unitsAt(level: 'A1' | 'A2' | 'B1'): number {
+export function unitsAt(level: 'A1' | 'A2' | 'B1' | 'B2'): number {
   const plan = JSON.parse(readFileSync('public/content/placement.json', 'utf8')) as PlacementPlan;
   return plan.levels.find((l) => l.level === level)?.units.length ?? 0;
 }
