@@ -1,0 +1,543 @@
+# B2-01: Kausativ auf -dir und -t (yaptırmak, okutmak), jemanden etwas tun lassen; Dienstleistungen, Arbeitswelt. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u01
+level: B2
+title: Machen lassen
+grammar_focus: [kausativ-dir, kausativ-t, lassen]
+explainer: explainers/b2-kausativ.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u01-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u01-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „yaptırmak“?
+        options: [machen lassen, machen können, gemacht werden]
+        answer: machen lassen
+        explanation: yapmak + -tır, jemand anderes erledigt die Arbeit.
+      - id: b2-u01-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Friseur
+        answers: [kuaför, berber]
+        explanation: berber schneidet meist Männern die Haare, kuaför ist allgemeiner.
+      - id: b2-u01-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „kesmek“?
+        options: [schneiden, nähen, malen]
+        answer: schneiden
+      - id: b2-u01-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „boyamak“?
+        options: [streichen, wischen, tragen]
+        answer: streichen
+        explanation: Auch färben, duvarı boyamak = die Wand streichen, saçını boyamak = die Haare färben.
+      - id: b2-u01-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: putzen, sauber machen
+        answers: [temizlemek]
+      - id: b2-u01-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „taşımak“?
+        options: [tragen, umziehen, teilen]
+        answer: tragen
+        explanation: taşınmak (umziehen) ist die Form mit -n.
+      - id: b2-u01-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Handwerker, Meister
+        answers: [usta]
+        explanation: Auch als Anrede, usta, musluk bozuk (Meister, der Hahn ist kaputt).
+      - id: b2-u01-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „işveren“?
+        options: [Arbeitgeber, Arbeiter, Beruf]
+        answer: Arbeitgeber
+        explanation: Wörtlich der, der Arbeit gibt (iş + veren).
+      - id: b2-u01-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „sözleşme“?
+        options: [Vertrag, Rechnung, Sitzung]
+        answer: Vertrag
+        explanation: iş sözleşmesi = Arbeitsvertrag.
+      - id: b2-u01-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: Rechnung
+        answers: [fatura]
+      - id: b2-u01-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „izin“?
+        options: [Erlaubnis, Eile, Unterschrift]
+        answer: Erlaubnis
+        explanation: Auch Urlaub von der Arbeit; izin almak = freinehmen. Vor Vokal fällt das zweite i, iznim.
+      - id: b2-u01-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „müsait“?
+        options: ['frei, verfügbar', teuer, müde]
+        answer: 'frei, verfügbar'
+        explanation: Müsait misiniz? = Haben Sie Zeit?
+      - id: b2-u01-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: warten lassen
+        answers: [bekletmek]
+      - id: b2-u01-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „çalıştırmak“?
+        options: ['arbeiten lassen, beschäftigen', 'sich anstrengen', 'gearbeitet werden']
+        answer: 'arbeiten lassen, beschäftigen'
+        explanation: Bei Geräten auch einschalten, starten, makineyi çalıştırmak.
+      - id: b2-u01-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „düzeltmek“?
+        options: [korrigieren, zerstören, wiederholen]
+        answer: korrigieren
+        explanation: Auch richten, in Ordnung bringen; von düzelmek (besser werden).
+      - id: b2-u01-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: Gebühr, Lohn
+        answers: [ücret]
+
+  - id: b2-u01-l2
+    type: grammar
+    title: Machen lassen (-dir)
+    exercises:
+      - id: b2-u01-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 1sg
+        tense: past
+        causative: true
+        target: yaptırdım
+        gloss_de: ich habe machen lassen
+        explanation: Nach einem Konsonanten steht -dir, nach p wird es zu -tır.
+      - { id: b2-u01-l2-e2, type: conjugation, mode: verb, lemma: kesmek, person: 1sg, tense: future, causative: true, target: kestireceğim, gloss_de: ich werde schneiden lassen }
+      - { id: b2-u01-l2-e3, type: conjugation, mode: verb, lemma: yazmak, person: 3sg, tense: past, causative: true, target: yazdırdı, gloss_de: 'er, sie hat schreiben lassen, diktiert' }
+      - { id: b2-u01-l2-e4, type: conjugation, mode: verb, lemma: dikmek, person: 1pl, tense: evidential, causative: true, target: diktirmişiz, gloss_de: wir haben offenbar nähen lassen }
+      - { id: b2-u01-l2-e5, type: conjugation, mode: verb, lemma: gülmek, person: 3sg, tense: present, causative: true, target: güldürüyor, gloss_de: 'er, sie bringt zum Lachen' }
+      - { id: b2-u01-l2-e6, type: conjugation, mode: verb, lemma: ölmek, person: 3sg, tense: past, causative: true, target: öldürdü, gloss_de: 'er, sie hat getötet' }
+      - id: b2-u01-l2-e7
+        type: conjugation
+        mode: verb
+        lemma: tamir etmek
+        person: 1sg
+        tense: past
+        causative: true
+        target: tamir ettirdim
+        gloss_de: ich habe reparieren lassen
+        explanation: Bei etmek hängt der Kausativ am letzten Wort, ettirmek.
+      - id: b2-u01-l2-e8
+        type: conjugation
+        mode: verb
+        lemma: yapmak
+        person: 1sg
+        tense: aorist
+        causative: true
+        target: yaptırırım
+        gloss_de: ich lasse (gewöhnlich) machen
+        explanation: Der neue Stamm ist mehrsilbig, also Aorist mit -ir.
+      - id: b2-u01-l2-e9
+        type: multiple_choice
+        prompt: Was bedeutet „Arabamı yıkattım.“?
+        options: [Ich habe mein Auto waschen lassen., Ich habe mein Auto gewaschen., Mein Auto wurde gewaschen.]
+        answer: Ich habe mein Auto waschen lassen.
+        explanation: Arabamı yıkadım hieße, du hast es selbst gewaschen.
+      - id: b2-u01-l2-e10
+        type: word_bank
+        prompt: Ich habe mir gestern die Haare schneiden lassen.
+        answers: [Dün saçımı kestirdim.]
+        chunks:
+          - { text: "Dün", role: time }
+          - { text: "saçımı", role: object }
+          - { text: "kestirdim", role: predicate }
+        distractors: [kestim, kesildi]
+      - id: b2-u01-l2-e11
+        type: word_bank
+        prompt: Wir haben die Wohnung streichen lassen.
+        answers: [Daireyi boyattık.]
+        distractors: [boyadık, boyandı]
+      - id: b2-u01-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: Bu elbiseyi terziye diktirdim.
+        answers: [Ich habe dieses Kleid beim Schneider nähen lassen., Ich habe das Kleid beim Schneider nähen lassen., Dieses Kleid habe ich beim Schneider nähen lassen., Ich ließ dieses Kleid beim Schneider nähen., Ich habe dieses Kleid von der Schneiderin nähen lassen., Ich habe dieses Kleid vom Schneider nähen lassen.]
+      - id: b2-u01-l2-e13
+        type: multiple_choice
+        prompt: Welche Form passt? „Bu filmi izlerken çok güldük, bizi çok ….“ (der Film hat uns sehr zum Lachen gebracht)
+        options: [güldürdü, güldü, gülündü]
+        answer: güldürdü
+        explanation: Der Film bringt andere zum Lachen, also Kausativ.
+
+  - id: b2-u01-l3
+    type: grammar
+    title: Warten lassen (-t)
+    exercises:
+      - id: b2-u01-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: beklemek
+        person: 2pl
+        tense: past
+        causative: true
+        target: beklettiniz
+        gloss_de: ihr habt, Sie haben warten lassen
+        explanation: Nach einem Vokal steht nur -t.
+      - { id: b2-u01-l3-e2, type: conjugation, mode: verb, lemma: temizlemek, person: 1sg, tense: past, causative: true, target: temizlettim, gloss_de: ich habe putzen lassen }
+      - { id: b2-u01-l3-e3, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: present, causative: true, target: okutuyor, gloss_de: 'er, sie lässt lesen, unterrichtet' }
+      - { id: b2-u01-l3-e4, type: conjugation, mode: verb, lemma: yıkamak, person: 1sg, tense: future, causative: true, target: yıkatacağım, gloss_de: ich werde waschen lassen }
+      - { id: b2-u01-l3-e5, type: conjugation, mode: verb, lemma: taşımak, person: 1pl, tense: past, causative: true, target: taşıttık, gloss_de: wir haben tragen lassen }
+      - id: b2-u01-l3-e6
+        type: conjugation
+        mode: verb
+        lemma: oturmak
+        person: 3sg
+        tense: past
+        causative: true
+        target: oturttu
+        gloss_de: 'er, sie hat hingesetzt'
+        explanation: Mehrsilbige Stämme auf r oder l nehmen ebenfalls -t.
+      - { id: b2-u01-l3-e7, type: conjugation, mode: verb, lemma: beklemek, person: 3sg, tense: aorist, negative: true, causative: true, target: bekletmez, gloss_de: 'er, sie lässt nicht warten' }
+      - id: b2-u01-l3-e8
+        type: multiple_choice
+        prompt: Welcher Kausativ ist richtig gebildet?
+        options: [bekletmek, beklettirmek, beklemetmek]
+        answer: bekletmek
+        explanation: Nach Vokal -t, ohne weiteres -dir.
+      - id: b2-u01-l3-e9
+        type: word_bank
+        prompt: Entschuldigung, ich habe Sie warten lassen.
+        answers: ["Özür dilerim, sizi beklettim."]
+        distractors: [bekledim, bekliyorum]
+      - id: b2-u01-l3-e10
+        type: word_bank
+        prompt: Wir haben das Büro von einer Firma putzen lassen.
+        answers: [Ofisi bir şirkete temizlettik.]
+        distractors: [temizledik, şirketi]
+        explanation: Wer die Arbeit erledigt, steht im Dativ, bir şirkete.
+      - id: b2-u01-l3-e11
+        type: free_text
+        direction: tr_de
+        prompt: Çocuğu yatağına yatırıp masal okudum.
+        answers: [Ich habe das Kind ins Bett gebracht und ein Märchen vorgelesen., Ich brachte das Kind ins Bett und las ein Märchen vor., Ich habe das Kind in sein Bett gelegt und ein Märchen vorgelesen., Ich legte das Kind ins Bett und las ihm ein Märchen vor., Ich habe das Kind ins Bett gebracht und ihm ein Märchen vorgelesen., Ich habe das Kind ins Bett gelegt und ein Märchen vorgelesen.]
+        explanation: yatmak gehört zu den wenigen Verben auf -ir, yatırmak (hinlegen).
+      - id: b2-u01-l3-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Bu dersi bize Ayşe Hanım okutuyor.“?
+        options: [Frau Ayşe unterrichtet uns in diesem Fach., Frau Ayşe liest dieses Fach., Wir lesen Frau Ayşe vor.]
+        answer: Frau Ayşe unterrichtet uns in diesem Fach.
+        explanation: okutmak heißt wörtlich lesen lassen, daher unterrichten.
+
+  - id: b2-u01-l4
+    type: grammar
+    title: Wer was tun lässt (Dativ und Akkusativ)
+    exercises:
+      - id: b2-u01-l4-e1
+        type: multiple_choice
+        prompt: Welche Form passt? „Musluğu … tamir ettirdim.“ (vom Handwerker)
+        options: [ustaya, ustayı, ustada]
+        answer: ustaya
+        explanation: Bei transitiven Verben steht die ausführende Person im Dativ.
+      - id: b2-u01-l4-e2
+        type: multiple_choice
+        prompt: Welche Form passt? „Patron … çok çalıştırıyor.“ (die Arbeiter)
+        options: [işçileri, işçilere, işçilerde]
+        answer: işçileri
+        explanation: çalışmak hat kein Objekt, darum steht die Person im Akkusativ.
+      - id: b2-u01-l4-e3
+        type: multiple_choice
+        prompt: Welche Form passt? „Mektubu … yazdırdım.“ (meiner Schwester)
+        options: [ablama, ablamı, ablamda]
+        answer: ablama
+      - id: b2-u01-l4-e4
+        type: word_bank
+        prompt: Der Chef hat mich drei Stunden warten lassen.
+        answers: [Müdür beni üç saat bekletti.]
+        chunks:
+          - { text: "Müdür", role: subject }
+          - { text: "beni", role: object }
+          - { text: "üç saat", role: time }
+          - { text: "bekletti", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3], note: Mit der Dauer vor beni liegt der Ton auf der Person. }
+        distractors: [bana, bekledi]
+      - id: b2-u01-l4-e5
+        type: word_bank
+        prompt: Ich habe den Vertrag von einem Anwalt prüfen lassen.
+        answers: [Sözleşmeyi bir avukata kontrol ettirdim.]
+        chunks:
+          - { text: "Sözleşmeyi", role: object }
+          - { text: "bir avukata", role: complement }
+          - { text: "kontrol ettirdim", role: predicate }
+        distractors: [avukatı, ettim]
+      - id: b2-u01-l4-e6
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe meine Tasche reparieren lassen.
+        answers: [Çantamı tamir ettirdim.]
+      - id: b2-u01-l4-e7
+        type: free_text
+        direction: tr_de
+        prompt: Saçını nerede kestirdin?
+        answers: [Wo hast du dir die Haare schneiden lassen?, Wo hast du deine Haare schneiden lassen?, Wo hast du dein Haar schneiden lassen?, Wo ließest du dir die Haare schneiden?]
+      - id: b2-u01-l4-e8
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Arabayı tamir ettim.“ / „Arabayı tamir ettirdim.“
+        options: [Ich habe es selbst repariert. / Ich habe es reparieren lassen., Ich habe es reparieren lassen. / Ich habe es selbst repariert., Beides ist dasselbe.]
+        answer: Ich habe es selbst repariert. / Ich habe es reparieren lassen.
+      - id: b2-u01-l4-e9
+        type: suffix_builder
+        stem: yapmak
+        verbal: PART_AN
+        causative: true
+        target: yaptıran
+        gloss_de: 'der, die machen lässt (evi yaptıran kişi = die Person, die das Haus bauen lässt)'
+        explanation: Der Kausativ bildet einen neuen Stamm, auch für Partizipien.
+      - { id: b2-u01-l4-e10, type: suffix_builder, stem: yapmak, verbal: PART_DIK, causative: true, suffixes: [POSS_1SG], target: yaptırdığım, gloss_de: 'das ich machen lasse (machen ließ)' }
+      - { id: b2-u01-l4-e11, type: suffix_builder, stem: beklemek, verbal: VN_MAK, causative: true, target: bekletmek, gloss_de: warten lassen }
+
+  - id: b2-u01-l5
+    type: dialog
+    title: Beim Friseur und am Telefon
+    exercises:
+      - id: b2-u01-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Saçınızı nasıl kestirmek istiyorsunuz?
+        answers: [Wie möchten Sie sich die Haare schneiden lassen?, Wie möchten Sie Ihre Haare schneiden lassen?, Wie wollen Sie sich die Haare schneiden lassen?, Wie möchten Sie Ihr Haar schneiden lassen?]
+      - id: b2-u01-l5-e2
+        type: word_bank
+        prompt: Ich möchte meine Haare nur ein wenig kürzen lassen.
+        answers: [Saçımı biraz kısaltmak istiyorum.]
+        distractors: [kısa, kesmek]
+        explanation: kısaltmak gehört zu kısa, kurz machen; beim Friseur reicht dieses Verb.
+      - id: b2-u01-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Haben Sie morgen Zeit?“
+        options: [Yarın müsait misiniz?, Yarın izin misiniz?, Yarın boş musun zamanı?]
+        answer: Yarın müsait misiniz?
+      - id: b2-u01-l5-e4
+        type: word_bank
+        prompt: Der Handwerker kommt morgen früh und repariert den Hahn.
+        answers: [Usta yarın sabah gelip musluğu tamir edecek.]
+        distractors: [ettirecek, gelir]
+      - id: b2-u01-l5-e5
+        type: multiple_choice
+        prompt: Was bedeutet „Faturayı şirket adına kestirebilir miyim?“
+        options: [Kann ich die Rechnung auf den Namen der Firma ausstellen lassen?, Kann ich die Rechnung an die Firma schicken?, Kann die Firma die Rechnung bezahlen?]
+        answer: Kann ich die Rechnung auf den Namen der Firma ausstellen lassen?
+        explanation: fatura kesmek = eine Rechnung ausstellen.
+      - id: b2-u01-l5-e6
+        type: free_text
+        direction: de_tr
+        prompt: Wie viel kostet das?
+        answers: [Ne kadar?, Bu ne kadar?, Ücreti ne kadar?, Bunun ücreti ne kadar?, Fiyatı ne kadar?, Kaç lira?]
+      - { id: b2-u01-l5-e7, type: conjugation, mode: verb, lemma: yapmak, person: 2sg, tense: past, causative: true, question: true, target: yaptırdın mı, gloss_de: hast du machen lassen? }
+      - id: b2-u01-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Sizi beklettiğim için özür dilerim.
+        answers: ['Entschuldigen Sie, dass ich Sie warten ließ.', 'Entschuldigen Sie, dass ich Sie habe warten lassen.', 'Entschuldigung, dass ich Sie warten ließ.', 'Entschuldigung, dass ich Sie habe warten lassen.', 'Es tut mir leid, dass ich Sie warten ließ.', 'Es tut mir leid, dass ich Sie habe warten lassen.', 'Entschuldigt, dass ich euch warten ließ.', 'Entschuldigt, dass ich euch habe warten lassen.']
+
+  - id: b2-u01-l6
+    type: grammar
+    title: 'Tabellen: Kausativ'
+    exercises:
+      - id: b2-u01-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: yapmak
+        tense: past
+        causative: true
+        targets: [yaptırdım, yaptırdın, yaptırdı, yaptırdık, yaptırdınız, yaptırdılar]
+        gloss_de: machen lassen
+      - id: b2-u01-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: beklemek
+        tense: aorist
+        causative: true
+        targets: [bekletirim, bekletirsin, bekletir, bekletiriz, bekletirsiniz, bekletirler]
+        gloss_de: warten lassen
+      - id: b2-u01-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: kesmek
+        tense: future
+        causative: true
+        targets: [kestireceğim, kestireceksin, kestirecek, kestireceğiz, kestireceksiniz, kestirecekler]
+        gloss_de: schneiden lassen
+      - id: b2-u01-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: okumak
+        tense: present
+        causative: true
+        negative: true
+        targets: [okutmuyorum, okutmuyorsun, okutmuyor, okutmuyoruz, okutmuyorsunuz, okutmuyorlar]
+        gloss_de: nicht lesen lassen
+
+  - id: b2-u01-r1
+    type: reading
+    title: 'Lesetext: Unser Umzug'
+    passage:
+      sentences:
+        - { tr: "Geçen ay yeni bir daireye taşındık.", de: "Letzten Monat sind wir in eine neue Wohnung gezogen." }
+        - { tr: "Daire güzeldi ama çok eskiydi ve her yerin tamir edilmesi gerekiyordu.", de: "Die Wohnung war schön, aber sehr alt, und alles musste repariert werden." }
+        - { tr: "Eşim ve ben ikimiz de çok çalıştığımız için bu işleri kendimiz yapamazdık.", de: "Weil mein Partner und ich beide viel arbeiten, konnten wir diese Arbeiten nicht selbst machen." }
+        - { tr: "Bu yüzden önce bir usta bulduk.", de: "Deshalb haben wir zuerst einen Handwerker gefunden." }
+        - { tr: "Ustaya duvarları boyattık.", de: "Wir haben die Wände vom Handwerker streichen lassen." }
+        - { tr: "Mutfaktaki musluğu değiştirttik.", de: "Den Hahn in der Küche haben wir austauschen lassen." }
+        - { tr: "Eski kapıyı da tamir ettirdik.", de: "Auch die alte Tür haben wir reparieren lassen." }
+        - { tr: "Usta bizi hiç bekletmedi ve işini iki günde bitirdi.", de: "Der Handwerker ließ uns gar nicht warten und beendete seine Arbeit in zwei Tagen." }
+        - { tr: "Eşyalarımızı bir şirkete taşıttık.", de: "Unsere Sachen haben wir von einer Firma transportieren lassen." }
+        - { tr: "Şirketin çalışanları hem hızlı hem de dikkatliydi.", de: "Die Angestellten der Firma waren schnell und auch sorgfältig." }
+        - { tr: "Sadece bir kutu düştü, içindeki bardaklar kırıldı.", de: "Nur ein Karton fiel herunter, die Gläser darin gingen kaputt." }
+        - { tr: "Şirket ücretin bir kısmını geri verdi.", de: "Die Firma gab einen Teil der Gebühr zurück." }
+        - { tr: "Sonra evi baştan sona temizlettik.", de: "Dann haben wir die Wohnung von vorn bis hinten putzen lassen." }
+        - { tr: "Perdeleri de terziye diktirdik.", de: "Die Vorhänge haben wir auch vom Schneider nähen lassen." }
+        - { tr: "Fatura yüksekti ama artık çok rahatız.", de: "Die Rechnung war hoch, aber jetzt haben wir es sehr bequem." }
+        - { tr: "Komşumuz bir gün bize geldi ve evi çok beğendi.", de: "Eines Tages kam unser Nachbar zu uns, und die Wohnung gefiel ihm sehr." }
+        - { tr: "Bana “Bu duvarları kim boyadı?” diye sordu.", de: "Er fragte mich: „Wer hat diese Wände gestrichen?“" }
+        - { tr: "Ben gülerek “Biz boyamadık, boyattık.” dedim.", de: "Ich sagte lachend: „Wir haben sie nicht gestrichen, wir haben sie streichen lassen.“" }
+        - { tr: "Bu söz onu çok güldürdü.", de: "Dieser Satz brachte ihn sehr zum Lachen." }
+      glossary:
+        - { tr: "her", de: "jeder (her yer = überall)" }
+        - { tr: "tamir", de: "Reparatur (tamir etmek = reparieren)", vocab: "tamir etmek" }
+        - { tr: "edilmesi", de: "dass … gemacht wird (etmek + Passiv + -me + -si)", vocab: "tamir etmek" }
+        - { tr: "gerekiyordu", de: "war nötig (gerekmek)", vocab: "gerek" }
+        - { tr: "da", de: "auch" }
+        - { tr: "de", de: "auch" }
+        - { tr: "hem", de: "sowohl (hem … hem de = sowohl … als auch)" }
+        - { tr: "geri", de: "zurück (geri vermek = zurückgeben)" }
+        - { tr: "güzeldi", de: "war schön (güzel + -di)", vocab: "güzel" }
+        - { tr: "eskiydi", de: "war alt (eski + -ydi)", vocab: "eski" }
+        - { tr: "ikimiz", de: "wir beide (iki + -miz)", vocab: "iki" }
+        - { tr: "kendimiz", de: "wir selbst", vocab: "kendi" }
+        - { tr: "yapamazdık", de: "konnten nicht machen (yapmak)", vocab: "yapmak" }
+        - { tr: "yüzden", de: "bu yüzden = deshalb" }
+        - { tr: "duvarları", de: "die Wände (Akkusativ)", vocab: "duvar" }
+        - { tr: "boyattık", de: "wir haben streichen lassen (boyamak)", vocab: "boyamak" }
+        - { tr: "değiştirttik", de: "wir haben austauschen lassen (değiştirmek)", vocab: "değiştirmek" }
+        - { tr: "mutfaktaki", de: "in der Küche befindlich (mutfak + ta + ki)", vocab: "mutfak" }
+        - { tr: "ettirdik", de: "wir ließen machen (tamir ettirmek = reparieren lassen)", vocab: "tamir etmek" }
+        - { tr: "bekletmedi", de: "ließ nicht warten", vocab: "bekletmek" }
+        - { tr: "eşyalarımızı", de: "unsere Sachen (eşya + lar + ımız + ı)" }
+        - { tr: "taşıttık", de: "wir haben tragen lassen (taşımak)", vocab: "taşımak" }
+        - { tr: "çalışanları", de: "ihre Angestellten", vocab: "çalışan" }
+        - { tr: "dikkatliydi", de: "waren sorgfältig (dikkat + li + ydi)" }
+        - { tr: "içindeki", de: "darin befindlich (iç + i + nde + ki)", vocab: "iç" }
+        - { tr: "bardaklar", de: "Gläser (bardak)" }
+        - { tr: "kırıldı", de: "ging kaputt (kırılmak)" }
+        - { tr: "kısmını", de: "Teil (kısım) im Akkusativ" }
+        - { tr: "baştan", de: "von Anfang an (baştan sona = von vorn bis hinten)", vocab: "baş" }
+        - { tr: "sona", de: "bis zum Ende (son + a)", vocab: "son" }
+        - { tr: "temizlettik", de: "wir haben putzen lassen (temizlemek)", vocab: "temizlemek" }
+        - { tr: "perdeleri", de: "die Vorhänge (perde)" }
+        - { tr: "diktirdik", de: "wir haben nähen lassen (dikmek)", vocab: "dikmek" }
+        - { tr: "yüksekti", de: "war hoch (yüksek + -ti)", vocab: "yüksek" }
+        - { tr: "rahatız", de: "wir haben es bequem (rahat + ız)" }
+        - { tr: "söz", de: "Wort, Satz" }
+        - { tr: "güldürdü", de: "brachte zum Lachen (gülmek)", vocab: "gülmek" }
+    exercises:
+      - id: b2-u01-r1-e1
+        type: multiple_choice
+        prompt: Warum hat das Paar die Arbeiten nicht selbst gemacht?
+        options: [Weil beide viel arbeiten., Weil sie kein Werkzeug hatten., Weil der Vermieter es verlangt hat.]
+        answer: Weil beide viel arbeiten.
+      - id: b2-u01-r1-e2
+        type: multiple_choice
+        prompt: Was hat der Handwerker nicht gemacht?
+        options: [Die Vorhänge genäht., Die Wände gestrichen., Die Tür repariert.]
+        answer: Die Vorhänge genäht.
+      - id: b2-u01-r1-e3
+        type: multiple_choice
+        prompt: Was ist beim Umzug passiert?
+        options: [Ein Karton fiel herunter., Ein Möbelstück ging verloren., Die Firma kam zu spät.]
+        answer: Ein Karton fiel herunter.
+      - id: b2-u01-r1-e4
+        type: multiple_choice
+        prompt: Worüber lacht der Nachbar?
+        options: [Über die Antwort auf seine Frage., Über die Farbe der Wände., Über die Höhe der Rechnung.]
+        answer: Über die Antwort auf seine Frage.
+      - id: b2-u01-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Ustaya duvarları boyattık.
+        answers: [Wir haben die Wände vom Handwerker streichen lassen., Wir ließen die Wände vom Handwerker streichen., Wir haben den Handwerker die Wände streichen lassen., Wir ließen den Handwerker die Wände streichen.]
+
+  - id: b2-u01-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u01-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe mein Auto waschen lassen.
+        answers: [Arabamı yıkattım.]
+      - id: b2-u01-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Sie haben uns warten lassen.
+        answers: [Bizi beklettiniz., Siz bizi beklettiniz., Bizi bekletti., Bizi beklettiler.]
+      - id: b2-u01-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (ich lasse machen, gewöhnlich)
+        options: [yaptırırım, yaptırarım, yapdırırım]
+        answer: yaptırırım
+      - id: b2-u01-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (putzen lassen)
+        options: [temizletmek, temizlettirmek, temizledirmek]
+        answer: temizletmek
+      - id: b2-u01-l7-e5
+        type: word_bank
+        prompt: Ich lasse den Vertrag von meinem Bruder lesen.
+        answers: [Sözleşmeyi ağabeyime okutuyorum.]
+        distractors: [ağabeyimi, okuyorum]
+      - id: b2-u01-l7-e6
+        type: suffix_builder
+        stem: yaptırmak
+        verbal: PART_ACAK
+        suffixes: [POSS_1PL]
+        target: yaptıracağımız
+        gloss_de: 'das wir machen lassen werden'
+      - { id: b2-u01-l7-e7, type: conjugation, mode: verb, lemma: çalıştırmak, person: 3pl, tense: aorist, target: çalıştırırlar, gloss_de: sie beschäftigen }
+      - id: b2-u01-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Bu şirket çok işçi çalıştırıyor.
+        answers: [Diese Firma beschäftigt viele Arbeiter., Diese Firma beschäftigt viele Arbeitskräfte., Die Firma beschäftigt viele Arbeiter., Diese Firma lässt viele Arbeiter arbeiten., Diese Firma beschäftigt sehr viele Arbeiter.]
+      - id: b2-u01-l7-e9
+        type: word_bank
+        prompt: Das Foto, das du gemacht hast, hat uns sehr zum Lachen gebracht.
+        answers: [Çektiğin fotoğraf bizi çok güldürdü.]
+        distractors: [çeken, güldü]
+      - { id: b2-u01-l7-e10, type: conjugation, mode: verb, lemma: temizletmek, person: 1pl, tense: necessitative, target: temizletmeliyiz, gloss_de: wir müssen putzen lassen }
+
+vocab:
+  - { tr: yaptırmak, de: [machen lassen], pos: verb }
+  - { tr: kesmek, de: [schneiden], pos: verb }
+  - { tr: boyamak, de: [streichen, färben], pos: verb }
+  - { tr: temizlemek, de: [putzen, sauber machen], pos: verb }
+  - { tr: temizletmek, de: [putzen lassen], pos: verb }
+  - { tr: taşımak, de: [tragen, transportieren], pos: verb }
+  - { tr: bekletmek, de: [warten lassen], pos: verb }
+  - { tr: çalıştırmak, de: [arbeiten lassen, beschäftigen, einschalten], pos: verb }
+  - { tr: düzeltmek, de: [korrigieren, richten], pos: verb }
+  - { tr: kısaltmak, de: [kürzen, kurz machen], pos: verb }
+  - { tr: kuaför, de: [Friseur], pos: noun }
+  - { tr: berber, de: [Herrenfriseur], pos: noun }
+  - { tr: usta, de: [Handwerker, Meister], pos: noun }
+  - { tr: işveren, de: [Arbeitgeber], pos: noun }
+  - { tr: sözleşme, de: [Vertrag], pos: noun }
+  - { tr: fatura, de: [Rechnung], pos: noun }
+  - { tr: izin, de: [Erlaubnis, Urlaub], pos: noun, drops_vowel: true }
+  - { tr: müsait, de: ['frei, verfügbar'], pos: adj }
+  - { tr: musluk, de: [Wasserhahn], pos: noun, softens: true }

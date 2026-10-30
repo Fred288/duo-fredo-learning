@@ -130,5 +130,17 @@ exports[`placement.json aus content/ > Auswahl bleibt stabil 1`] = `
     "b1-u10-l4-e1",
     "b1-u10-l2-e8",
   ],
+  "b2-u01": [
+    "b2-u01-l2-e8",
+    "b2-u01-l4-e9",
+  ],
+  "b2-u02": [
+    "b2-u02-l2-e1",
+    "b2-u02-l3-e8",
+  ],
+  "b2-u03": [
+    "b2-u03-l2-e8",
+    "b2-u03-l5-e1",
+  ],
 }
 `;
