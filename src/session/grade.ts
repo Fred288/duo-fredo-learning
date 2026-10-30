@@ -42,7 +42,7 @@ export function grade(ex: Supported, answer: string, opts: GradeOptions): Answer
       return checkAnswer(answer, ex.answers, { tolerateDiacritics: opts.tolerateDiacritics });
     case 'suffix_builder':
       // Genau die Form zählt: kein Tippfehler-Spielraum, sonst wäre evda ≈ evde.
-      return checkAnswer(answer, [ex.target], { allowTypos: false });
+      return checkAnswer(answer, [ex.target, ...(ex.alt_targets ?? [])], { allowTypos: false });
     case 'conjugation': {
       // Nebenformen (geliyordular neben geliyorlardı) zählen ebenso.
       const matched = [ex.target, ...(ex.alt_targets ?? [])].find((form) =>

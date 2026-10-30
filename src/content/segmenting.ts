@@ -11,6 +11,7 @@ import {
   type MorphTag,
   type Person,
 } from '../morphology';
+import { lastVowel } from '../morphology/phonology';
 import { inherited, insertLesson, localId, sample } from './generated';
 import { formSpecOf, paradigmRows, solveForm, stemFromVocab } from './lexicon';
 import type { Exercise, FormSpec, Lesson, SegmentTag, Unit, Vocab } from './schema';
@@ -218,7 +219,7 @@ export function segmentExercise(
   const segments = pieces(inflection, personOf(analysis));
   // Ein Stamm ohne Vokal (ye- → y-iyor) taugt nicht zum Zerlegen, ein Stamm aus mehreren
   // Wörtern (seyahat et-) auch nicht: Leerzeichen sind feste Grenzen zwischen Stücken.
-  if (segments.length < 2 || !/[aeıioöuü]/i.test(trLower(segments[0]!.text))) return undefined;
+  if (segments.length < 2 || !lastVowel(trLower(segments[0]!.text))) return undefined;
   if (segments.some((s) => /\s/.test(s.text))) return undefined;
   const suffix = row === undefined ? '' : `-r${row + 1}`;
   const alt = presentAlternative(segments, analysis);

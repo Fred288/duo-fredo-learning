@@ -1,5 +1,12 @@
 import { trLower } from '../lib/turkish';
-import { asStem, MorphError, stemSpelling, type Inflection, type Stem } from './inflect';
+import {
+  asStem,
+  MorphError,
+  stemBeforeVowel,
+  stemSpelling,
+  type Inflection,
+  type Stem,
+} from './inflect';
 import { isVowel, lastVowel, normalize, soften } from './phonology';
 import type { AnyTag, VerbTag } from './tags';
 import { realize, realizeVowel, type Step } from './template';
@@ -134,6 +141,7 @@ export interface PredicateOptions {
 
 // de- und ye- sind unregelmäßig, auch als letztes Wort eines Mehrwortverbs (evet de-).
 export const isDe = (stem: string): boolean => /(^| )de$/.test(stem);
+const isYe = (stem: string): boolean => /(^| )ye$/.test(stem);
 const isIrregular = (stem: string): boolean => /(^| )(de|ye)$/.test(stem);
 
 /** Präsens: Stammvokal fällt weg (de- → di-yor, ye- → yi-yor). */
@@ -561,10 +569,10 @@ function imperative(verb: VerbStem, stem: string, opts: ConjugateOptions): Infle
   if (opts.negative) {
     b.add('STEM', stem);
     b.suffix('NEG', 'mA');
-  } else if (opts.person === '2pl' && stem === 'ye') {
+  } else if (opts.person === '2pl' && isYe(stem)) {
     // ye → yiyin; de bleibt (deyin)
     b.steps.push({ tag: 'IMP', rule: 'stem_raising', from: 'e', to: 'i' });
-    b.add('STEM', 'yi');
+    b.add('STEM', raisedStem(stem)!);
   } else if (opts.person === '2pl') {
     b.add('STEM', softenedStem(verb, stem, 'IMP', b.steps));
   } else {
@@ -681,10 +689,16 @@ export function predicate(input: Stem | string, opts: PredicateOptions): Inflect
     b.suffix('DIR', 'DIr');
     return b.result();
   }
-  // Erweichende Nomen erweichen vor -(y)Im/-(y)Iz: çocuğum, gencim (aber çocuksun, çocuktum).
-  personAndQuestion(b, opts.person, opts.question ?? false, {
-    softenBefore: !!stem.softens && !stem.proper && !opts.negative,
-  });
+  // Der Stamm wandelt sich vor -(y)Im/-(y)Iz wie vor jedem Vokal: çocuğum, oğlum, hakkım
+  // (aber çocuksun, çocuktum).
+  const tag = PERSON_TAG[opts.person];
+  const ending = realize(TYPE1[opts.person], tag, { base: word, steps: [] });
+  if (isVowel(ending[0] ?? '') && !stem.proper && !opts.negative && !opts.question) {
+    const changed = stemBeforeVowel(stem, word, tag, b.steps);
+    b.words = [changed];
+    b.segments[0]!.text = changed;
+  }
+  personAndQuestion(b, opts.person, opts.question ?? false);
   return b.result();
 }
 

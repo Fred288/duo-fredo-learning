@@ -3,6 +3,7 @@ import {
   conjugate,
   conjugateVariants,
   inflect,
+  inflectVariants,
   nonfinite,
   PERSONS,
   predicate,
@@ -75,8 +76,9 @@ const verbOptions = (spec: Extract<FormSpec, { kind: 'verb' | 'copula' }>): Conj
   question: spec.question,
 });
 
-/** Ebenso richtige Nebenformen der Engine (3. Person Plural mit Kopula: geliyordular). */
+/** Ebenso richtige Nebenformen der Engine (geliyordular neben geliyorlardı, camisi neben camii). */
 export function formVariants(spec: FormSpec, vocab: readonly Vocab[] = []): string[] {
+  if (spec.kind === 'noun') return inflectVariants(stemFromVocab(spec.lemma, vocab), spec.tags);
   if (spec.kind !== 'verb') return [];
   return conjugateVariants(stemFromVocab(spec.lemma, vocab), verbOptions(spec));
 }
@@ -90,11 +92,11 @@ export function withAlternatives<U extends { lessons: { exercises: Exercise[] }[
   vocab: readonly Vocab[],
 ): U {
   const annotate = (ex: Exercise): Exercise => {
-    if (ex.type === 'conjugation') {
+    if (ex.type === 'conjugation' || ex.type === 'suffix_builder') {
       const alt = formVariants(formSpecOf(ex), vocab);
       return alt.length ? { ...ex, alt_targets: alt } : ex;
     }
-    if (ex.type === 'paradigm' && (ex.kind === 'verb' || ex.kind === 'copula')) {
+    if (ex.type === 'paradigm' && ex.kind !== 'verbal') {
       const alt = paradigmRows(ex).map((_, i) => formVariants(formSpecOf(ex, i), vocab));
       return alt.some((a) => a.length) ? { ...ex, alt_targets: alt } : ex;
     }

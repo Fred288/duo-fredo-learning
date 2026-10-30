@@ -167,6 +167,8 @@ export const SuffixBuilder = z
     reciprocal: z.boolean().optional(),
     suffixes: z.array(z.enum(MORPH_TAGS)).default([]),
     target: nonEmpty,
+    /** Nebenformen (camisi neben camii); schreibt der Build (`withAlternatives`). */
+    alt_targets: z.array(nonEmpty).optional(),
   })
   .superRefine((e, ctx) => {
     if (!e.verbal && e.suffixes.length === 0) {

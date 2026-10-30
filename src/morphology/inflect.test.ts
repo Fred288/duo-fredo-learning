@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { inflect, MorphError, type Stem } from './index';
+import { inflect, inflectVariants, MorphError, type Stem } from './index';
 import type { MorphTag } from './tags';
 
 type Case = [stem: Stem | string, tags: MorphTag[], expected: string];
@@ -214,6 +214,16 @@ describe('Possessiv ohne Puffer-s (cami, mevzu)', () => {
     [cami, ['PL'], 'camiler'],
   ] as const)('%o + %j → %s', (stem, tags, form) => {
     expect(inflect(stem, [...tags]).form).toBe(form);
+  });
+});
+
+describe('Nebenform mit Puffer-s', () => {
+  it('nur bei poss_no_s und Possessiv 3. Sg.', () => {
+    const cami = { form: 'cami', possNoS: true };
+    expect(inflectVariants(cami, ['POSS_3SG'])).toEqual(['camisi']);
+    expect(inflectVariants(cami, ['POSS_3SG', 'LOC'])).toEqual(['camisinde']);
+    expect(inflectVariants(cami, ['ACC'])).toEqual([]);
+    expect(inflectVariants('ev', ['POSS_3SG'])).toEqual([]);
   });
 });
 

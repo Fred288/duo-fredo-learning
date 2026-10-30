@@ -128,6 +128,10 @@ export function checkUnits(units: LoadedUnit[], fileExists: (path: string) => bo
       if (v.audio && !fileExists(`audio/${v.audio}`)) {
         warnings.push(`${file}: Audio "${v.audio}" fehlt`);
       }
+      // hâl → hâli: nach â/û + l oft helle Harmonie, das muss die Vokabel festlegen.
+      if (/[âû]l$/.test(v.tr) && !v.harmony_vowel) {
+        warnings.push(`${file}: ${v.tr}: Harmonie prüfen (harmony_vowel?)`);
+      }
     }
   }
   if (unreviewed > 0)

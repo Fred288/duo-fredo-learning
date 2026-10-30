@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { MorphError } from './inflect';
 import { nonfinite } from './nonfinite';
-import { conjugate, type ConjugateOptions, type VerbStem } from './verb';
+import { conjugate, predicate, type ConjugateOptions, type VerbStem } from './verb';
 
 const form = (verb: VerbStem | string, opts: Partial<ConjugateOptions>) =>
   conjugate(verb, { tense: 'present', person: '3sg', ...opts }).form;
@@ -162,5 +162,34 @@ describe('-DIr am Verb', () => {
     expect(() => form('gelmek', { tense: 'present', dir: true, compound: 'past' })).toThrow(
       MorphError,
     );
+  });
+});
+
+describe('Nominalsatz: Stammwandel vor -(y)Im/-(y)Iz', () => {
+  it.each([
+    [{ form: 'hak', doubles: true }, '1sg', 'hakkım'],
+    [{ form: 'zıt', doubles: true, softens: true }, '1pl', 'zıddız'],
+    [{ form: 'oğul', dropsVowel: true }, '1sg', 'oğlum'],
+    [{ form: 'çocuk', softens: true }, '1sg', 'çocuğum'],
+    [{ form: 'çocuk', softens: true }, '2sg', 'çocuksun'],
+    [{ form: 'hak', doubles: true }, '2sg', 'haksın'],
+    [{ form: 'öğrenci' }, '1sg', 'öğrenciyim'],
+  ] as const)('%o, %s → %s', (stem, person, expected) => {
+    expect(predicate(stem, { person }).form).toBe(expected);
+  });
+
+  it('bleibt in Frage und Verneinung unverändert', () => {
+    const hak = { form: 'hak', doubles: true };
+    expect(predicate(hak, { person: '1sg', question: true }).form).toBe('hak mıyım');
+    expect(predicate(hak, { person: '1sg', negative: true }).form).toBe('hak değilim');
+  });
+});
+
+describe('ye- im Imperativ', () => {
+  it('hebt auch im Mehrwortverb, de- nicht', () => {
+    const imp = { tense: 'imperative', person: '2pl' } as const;
+    expect(conjugate('yemek', imp).form).toBe('yiyin');
+    expect(conjugate('yemek yemek', imp).form).toBe('yemek yiyin');
+    expect(conjugate('evet demek', imp).form).toBe('evet deyin');
   });
 });

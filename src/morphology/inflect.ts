@@ -46,7 +46,6 @@ export class MorphError extends Error {}
 
 // Noch nicht abgedeckt; später über weitere Vocab-Flags lösbar.
 export const KNOWN_LIMITS = [
-  'Nebenform camisi neben camii: die Engine bildet nur camii (Freitext-Übungen nennen beide)',
   'Zweifacher Kausativ (yaptırtmak) und Kausativ + Reziprok (görüştürmek) nur als eigene Vokabel; -DIkçA, -(y)IncAyA kadar, -(y)AsI, -mAktAnsA nicht gebildet',
   'Passiv von de-/ye- nur denir/yenir; denilmek und yenilmek sind eigene Vokabeln',
   'Infinite Formen: -(y)An ohne Possessiv (sevenlerim fehlt), -(y)AcAk ohne Possessiv ohne Endungen (gelecekler fehlt), -DIk ohne Possessiv nur mit Ablativ (geldikten), -mAk nur mit -DA/-DAn/-(y)lA, Konverbien ohne Endungen',
@@ -117,25 +116,7 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
 
     // Lautwandel am Stamm nur vor vokalisch anlautendem erstem Suffix.
     if (i === 0 && isVowel(out[0] ?? '')) {
-      if (stem.dropsVowel) {
-        const dropped = dropLastVowel(stemForm);
-        if (dropped) {
-          stemForm = dropped.form;
-          steps.push({ tag, rule: 'vowel_drop', vowel: dropped.vowel });
-        }
-      }
-      // Bei Eigennamen bleibt die Erweichung ungeschrieben (Mehmet'e).
-      if (stem.softens && !stem.proper) {
-        const s = soften(stemForm);
-        if (s) {
-          stemForm = s.form;
-          steps.push({ tag, rule: 'softening', from: s.from, to: s.to });
-        }
-      }
-      if (stem.doubles && !isVowel(stemForm.at(-1)!)) {
-        steps.push({ tag, rule: 'doubling', letter: stemForm.at(-1)! });
-        stemForm += stemForm.at(-1)!;
-      }
+      stemForm = stemBeforeVowel(stem, stemForm, tag, steps);
     }
     suffixTexts.push(out);
   });
@@ -151,6 +132,39 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
     ],
     steps,
   };
+}
+
+/** Lautwandel am Stamm vor vokalischer Endung: Vokalausfall, Erweichung, Verdopplung. */
+export function stemBeforeVowel(stem: Stem, spelled: string, tag: AnyTag, steps: Step[]): string {
+  let form = spelled;
+  if (stem.dropsVowel) {
+    const dropped = dropLastVowel(form);
+    if (dropped) {
+      form = dropped.form;
+      steps.push({ tag, rule: 'vowel_drop', vowel: dropped.vowel });
+    }
+  }
+  // Bei Eigennamen bleibt die Erweichung ungeschrieben (Mehmet'e).
+  if (stem.softens && !stem.proper) {
+    const s = soften(form);
+    if (s) {
+      form = s.form;
+      steps.push({ tag, rule: 'softening', from: s.from, to: s.to });
+    }
+  }
+  if (stem.doubles && !isVowel(form.at(-1)!)) {
+    steps.push({ tag, rule: 'doubling', letter: form.at(-1)! });
+    form += form.at(-1)!;
+  }
+  return form;
+}
+
+/** Ebenso richtige Nebenform: camisi neben camii (Possessiv 3. Sg. mit Puffer-s). */
+export function inflectVariants(input: Stem | string, tags: MorphTag[]): string[] {
+  const stem = asStem(input);
+  return stem.possNoS && tags[0] === 'POSS_3SG'
+    ? [inflect({ ...stem, possNoS: false }, tags).form]
+    : [];
 }
 
 /** Entfernt den letzten Vokal (oğul → oğl); nur wenn danach noch genau ein Konsonant folgt. */

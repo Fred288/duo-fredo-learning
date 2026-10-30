@@ -11,6 +11,7 @@ import {
   PRONOUN_LEMMAS,
   pronoun,
   DIR_TENSES,
+  inflectVariants,
   type Compound,
   type MorphTag,
   type NonfiniteTag,
@@ -103,6 +104,9 @@ export function nounForms(entry: VocabEntry): Form[] {
         if (!tags.length) continue;
         const form = attempt(() => inflect(stem, tags).form);
         if (form) out.push({ form, label: { kind: 'noun', tags } });
+        for (const more of inflectVariants(stem, tags)) {
+          out.push({ form: more, label: { kind: 'noun', tags } });
+        }
       }
     }
   }

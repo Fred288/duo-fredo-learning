@@ -1,6 +1,7 @@
 export {
   asStem,
   inflect,
+  inflectVariants,
   KNOWN_LIMITS,
   MorphError,
   stemSpelling,
