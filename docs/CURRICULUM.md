@@ -61,9 +61,9 @@ Aufbau jeder Unit (SPEC 3.1): Erklärkarte → Wortschatz → Grammatik → ab A
 | b2-u01 | Kausativ -DIr, -t                                                      | Dienstleistungen, Arbeitswelt  | ✅    |
 | b2-u02 | Kausativ -Ir, -Ar, -It; Kausativ + Passiv                              | Wissenschaft, Technik          | ✅    |
 | b2-u03 | Reziprok, Reflexiv vertieft, unpersönliches Passiv                     | Beziehungen, Gesellschaft      | ✅    |
-| b2-u04 | -DIğI için/zaman/halde, -DIğIndan, -DIkçA, -(y)IncAyA kadar            | Arbeit und Alltag vertieft     |       |
-| b2-u05 | -mAsInA rağmen, -sA bile, -sA da, -mAksIzIn, -mAktAnsA                 | Meinungen                      |       |
-| b2-u06 | Potentialis, Irrealis, Vermutung (-mIş olmalı, -DIr)                   | Diskussion                     |       |
+| b2-u04 | -DIğI için/zaman/halde, -DIğIndan, -DIkçA, -(y)IncAyA kadar            | Arbeit und Alltag vertieft     | ✅    |
+| b2-u05 | -mAsInA rağmen, -sA bile, -sA da, -mAksIzIn, -mAktAnsA                 | Meinungen                      | ✅    |
+| b2-u06 | Potentialis, Irrealis, Vermutung (-mIş olmalı, -DIr)                   | Diskussion                     | ✅    |
 | b2-u07 | Formelles Register: -mAktAdIr, -mIştIr, Höflichkeit                    | Behörden, Briefe               |       |
 | b2-u08 | Lehnwörter: Verdopplung, stumme Endung, Zirkumflex; Konnektoren        | Sprache und Schrift            |       |
 | b2-u09 | -mIş- und -(y)AsI-Formen, Idiomatik                                    | Alltagssprache, Redewendungen  |       |

@@ -1,0 +1,501 @@
+# B2-04: Nebensätze mit -diği için, -diği zaman, -diği halde, -diğinden, -dikçe, -inceye kadar; Arbeit und Alltag vertieft. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u04
+level: B2
+title: Arbeitsalltag
+grammar_focus: [digi-zaman, digi-halde, diginden, dikce, inceye-kadar]
+explainer: explainers/b2-nebensaetze.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u04-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u04-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „mesai“?
+        options: [Arbeitszeit, Gehalt, Pause]
+        answer: Arbeitszeit
+        explanation: fazla mesai = Überstunden.
+      - id: b2-u04-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Aufgabe, Pflicht
+        answers: [görev]
+      - id: b2-u04-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „sorumluluk“?
+        options: [Verantwortung, Geduld, Erfolg]
+        answer: Verantwortung
+        explanation: Vor Vokal wird k zu ğ, sorumluluğum.
+      - id: b2-u04-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „yönetici“?
+        options: [Vorgesetzte(r), Kollege, Kunde]
+        answer: Vorgesetzte(r)
+      - id: b2-u04-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Kollege, Kollegin
+        answers: [meslektaş, iş arkadaşı]
+      - id: b2-u04-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „hata“?
+        options: [Fehler, Bericht, Ziel]
+        answer: Fehler
+        explanation: hata yapmak = einen Fehler machen.
+      - id: b2-u04-l1-e7
+        type: free_text
+        direction: de_tr
+        prompt: Bericht
+        answers: [rapor]
+      - id: b2-u04-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „ertelemek“?
+        options: [verschieben, beenden, vorbereiten]
+        answer: verschieben
+      - id: b2-u04-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „alışmak“?
+        options: [sich gewöhnen, sich beschweren, sich beeilen]
+        answer: sich gewöhnen
+        explanation: Mit Dativ, işe alışmak = sich an die Arbeit gewöhnen.
+      - id: b2-u04-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: abschließen, fertigstellen
+        answers: [tamamlamak, bitirmek]
+      - id: b2-u04-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „yetişmek“?
+        options: [rechtzeitig schaffen, fehlen, zurückkehren]
+        answer: rechtzeitig schaffen
+        explanation: Mit Dativ, toplantıya yetiştim = ich habe es rechtzeitig zur Sitzung geschafft.
+      - id: b2-u04-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „geç kalmak“?
+        options: [sich verspäten, früh aufstehen, lange bleiben]
+        answer: sich verspäten
+      - id: b2-u04-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: rufen
+        answers: [çağırmak]
+      - id: b2-u04-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „kızmak“?
+        options: [böse werden, müde werden, rot werden]
+        answer: böse werden
+        explanation: Mit Dativ, bana kızdı = er, sie wurde böse auf mich.
+      - id: b2-u04-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „zam“?
+        options: [Erhöhung, Rabatt, Steuer]
+        answer: Erhöhung
+        explanation: Bei Lohn oder Preis; maaşıma zam yapıldı = mein Gehalt wurde erhöht.
+      - id: b2-u04-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: Stress
+        answers: [stres]
+
+  - id: b2-u04-l2
+    type: grammar
+    title: Weil und als (-diği için, -diği zaman)
+    exercises:
+      - id: b2-u04-l2-e1
+        type: suffix_builder
+        stem: çalışmak
+        verbal: PART_DIK
+        suffixes: [POSS_1SG]
+        target: çalıştığım
+        gloss_de: 'weil ich arbeite (çalıştığım için)'
+        explanation: Die Person steht am Partizip, için bleibt unverändert.
+      - { id: b2-u04-l2-e2, type: suffix_builder, stem: gelmek, verbal: PART_DIK, negative: true, suffixes: [POSS_2SG], target: gelmediğin, gloss_de: 'weil du nicht kommst (gelmediğin için)' }
+      - { id: b2-u04-l2-e3, type: suffix_builder, stem: bitmek, verbal: PART_ACAK, negative: true, suffixes: [POSS_3SG], target: bitmeyeceği, gloss_de: 'weil es nicht enden wird (bitmeyeceği için)' }
+      - { id: b2-u04-l2-e4, type: suffix_builder, stem: dönmek, verbal: PART_DIK, suffixes: [POSS_1PL], target: döndüğümüz, gloss_de: 'wenn wir zurückkehren (döndüğümüz zaman)' }
+      - { id: b2-u04-l2-e5, type: suffix_builder, stem: başlamak, verbal: PART_DIK, suffixes: [POSS_3PL], target: başladıkları, gloss_de: 'als sie anfingen (başladıkları zaman)' }
+      - id: b2-u04-l2-e6
+        type: word_bank
+        prompt: Weil ich viel gearbeitet habe, bin ich müde.
+        answers: [Çok çalıştığım için yorgunum.]
+        distractors: [çalıştım, çalışan]
+      - id: b2-u04-l2-e7
+        type: word_bank
+        prompt: Als ich nach Hause kam, schlief mein Sohn.
+        answers: [Eve geldiğim zaman oğlum uyuyordu.]
+        chunks:
+          - { text: "Eve geldiğim zaman", role: time }
+          - { text: "oğlum", role: subject }
+          - { text: "uyuyordu", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [geldim, gelen]
+      - id: b2-u04-l2-e8
+        type: word_bank
+        prompt: Weil der Bericht nicht fertig wird, verschieben wir die Sitzung.
+        answers: [Rapor bitmeyeceği için toplantıyı erteliyoruz.]
+        chunks:
+          - { text: "Rapor bitmeyeceği için", role: complement }
+          - { text: "toplantıyı", role: object }
+          - { text: "erteliyoruz", role: predicate }
+        distractors: [bitmedi, toplantı]
+      - id: b2-u04-l2-e9
+        type: free_text
+        direction: tr_de
+        prompt: Geç kaldığım için özür dilerim.
+        answers: ['Entschuldigung, dass ich zu spät bin.', 'Entschuldigung, dass ich zu spät gekommen bin.', 'Entschuldigen Sie, dass ich zu spät bin.', 'Entschuldigen Sie, dass ich zu spät gekommen bin.', 'Es tut mir leid, dass ich zu spät bin.', 'Es tut mir leid, dass ich zu spät gekommen bin.', Entschuldigung für die Verspätung., Ich entschuldige mich für die Verspätung., 'Entschuldigung, dass ich mich verspätet habe.', 'Es tut mir leid, dass ich mich verspätet habe.']
+      - id: b2-u04-l2-e10
+        type: free_text
+        direction: de_tr
+        prompt: 'Wenn du nach Hause kommst, ruf mich an.'
+        answers: [Eve geldiğin zaman beni ara., Eve gelince beni ara., Eve vardığın zaman beni ara., Eve döndüğün zaman beni ara., Eve dönünce beni ara.]
+      - id: b2-u04-l2-e11
+        type: multiple_choice
+        prompt: Was bedeutet „Toplantıya yetişemediği için üzgün.“?
+        options: ['Er, sie ist traurig, weil er, sie es nicht rechtzeitig zur Sitzung geschafft hat.', 'Er, sie schafft es zur Sitzung, obwohl er, sie traurig ist.', 'Er, sie ist traurig, wenn die Sitzung beginnt.']
+        answer: 'Er, sie ist traurig, weil er, sie es nicht rechtzeitig zur Sitzung geschafft hat.'
+      - id: b2-u04-l2-e12
+        type: multiple_choice
+        prompt: Welche Form passt? „Sen … zaman ben çıkmıştım.“ (als du kamst)
+        options: [geldiğin, geldiğim, gelen]
+        answer: geldiğin
+        explanation: Die Person des Nebensatzes steht am Partizip, sen → -in.
+
+  - id: b2-u04-l3
+    type: grammar
+    title: Obwohl und da (-diği halde, -diğinden)
+    exercises:
+      - id: b2-u04-l3-e1
+        type: suffix_builder
+        stem: çalışmak
+        verbal: PART_DIK
+        suffixes: [POSS_3SG, ABL]
+        target: çalıştığından
+        gloss_de: 'da er, sie arbeitet (formeller als çalıştığı için)'
+        explanation: -dik + Possessiv + Ablativ heißt „da, weil“, vor allem geschrieben.
+      - { id: b2-u04-l3-e2, type: suffix_builder, stem: bilmek, verbal: PART_DIK, negative: true, suffixes: [POSS_1SG, ABL], target: bilmediğimden, gloss_de: 'da ich nicht weiß' }
+      - { id: b2-u04-l3-e3, type: suffix_builder, stem: gelmek, verbal: PART_ACAK, suffixes: [POSS_3PL, ABL], target: geleceklerinden, gloss_de: 'da sie kommen werden' }
+      - { id: b2-u04-l3-e4, type: suffix_builder, stem: söylemek, verbal: PART_DIK, suffixes: [POSS_1SG], target: söylediğim, gloss_de: 'obwohl ich sage (söylediğim halde)' }
+      - { id: b2-u04-l3-e5, type: suffix_builder, stem: uyumak, verbal: PART_DIK, suffixes: [POSS_2SG], target: uyuduğun, gloss_de: 'obwohl du schläfst, geschlafen hast (uyuduğun halde)' }
+      - id: b2-u04-l3-e6
+        type: word_bank
+        prompt: Obwohl ich viel geschlafen habe, bin ich müde.
+        answers: [Çok uyuduğum halde yorgunum.]
+        distractors: [uyudum, için]
+      - id: b2-u04-l3-e7
+        type: word_bank
+        prompt: Obwohl sie es wusste, sagte sie mir nichts.
+        answers: [Bildiği halde bana bir şey söylemedi.]
+        chunks:
+          - { text: "Bildiği halde", role: complement }
+          - { text: "bana", role: complement }
+          - { text: "bir şey", role: object_bare }
+          - { text: "söylemedi", role: predicate }
+        distractors: [bilen, için]
+      - id: b2-u04-l3-e8
+        type: word_bank
+        prompt: Da die Arbeit nicht abgeschlossen ist, bleiben wir heute länger.
+        answers: [İş tamamlanmadığından bugün daha geç çıkacağız.]
+        distractors: [tamamlandı, için]
+      - id: b2-u04-l3-e9
+        type: free_text
+        direction: tr_de
+        prompt: Kaç kere söylediğim halde beni dinlemiyorsun.
+        answers: ['Obwohl ich es so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es dir so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es schon so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es dir schon so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es mehrmals gesagt habe, hörst du nicht auf mich.', 'Obwohl ich es so oft gesagt habe, hörst du nicht auf mich.']
+      - id: b2-u04-l3-e10
+        type: free_text
+        direction: de_tr
+        prompt: 'Obwohl er krank ist, arbeitet er.'
+        answers: [Hasta olduğu halde çalışıyor., O hasta olduğu halde çalışıyor.]
+        explanation: Beim Nomen hilft olmak, hasta olduğu halde.
+      - id: b2-u04-l3-e11
+        type: multiple_choice
+        prompt: Welches Wort passt? „Çok çalıştığı … işini kaybetti.“ (obwohl)
+        options: [halde, için, zaman]
+        answer: halde
+      - id: b2-u04-l3-e12
+        type: multiple_choice
+        prompt: Welcher Satz klingt am förmlichsten?
+        options: [Rapor gecikeceğinden toplantı ertelenmiştir., Rapor gecikiyor ya toplantıyı erteliyoruz., Rapor gecikecek çünkü toplantı ertelendi.]
+        answer: Rapor gecikeceğinden toplantı ertelenmiştir.
+        explanation: -diğinden und -miştir sind Kennzeichen geschriebener Sprache.
+
+  - id: b2-u04-l4
+    type: grammar
+    title: Je mehr und bis (-dikçe, -inceye kadar)
+    exercises:
+      - id: b2-u04-l4-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: CV_DIKCA
+        target: geldikçe
+        gloss_de: 'immer wenn, je mehr … kommt'
+        explanation: -dikçe nimmt keine Personenendung; die Person steht im Satz.
+      - { id: b2-u04-l4-e2, type: suffix_builder, stem: çalışmak, verbal: CV_DIKCA, target: çalıştıkça, gloss_de: je mehr … arbeitet }
+      - { id: b2-u04-l4-e3, type: suffix_builder, stem: okumak, verbal: CV_DIKCA, target: okudukça, gloss_de: je mehr … liest }
+      - { id: b2-u04-l4-e4, type: suffix_builder, stem: görmek, verbal: CV_DIKCA, negative: true, target: görmedikçe, gloss_de: solange … nicht sieht }
+      - { id: b2-u04-l4-e5, type: suffix_builder, stem: bitmek, verbal: CV_INCAYA, target: bitinceye, gloss_de: 'bis es endet (bitinceye kadar)' }
+      - { id: b2-u04-l4-e6, type: suffix_builder, stem: gelmek, verbal: CV_INCAYA, target: gelinceye, gloss_de: 'bis … kommt (gelinceye kadar)' }
+      - { id: b2-u04-l4-e7, type: suffix_builder, stem: öğrenmek, verbal: CV_INCAYA, target: öğreninceye, gloss_de: 'bis … lernt (öğreninceye kadar)' }
+      - id: b2-u04-l4-e8
+        type: word_bank
+        prompt: Je mehr ich arbeite, desto mehr nimmt mein Stress zu.
+        answers: [Çalıştıkça stresim artıyor.]
+        distractors: [çalışınca, azalıyor]
+      - id: b2-u04-l4-e9
+        type: word_bank
+        prompt: Warte hier, bis ich komme.
+        answers: [Ben gelinceye kadar burada bekle.]
+        chunks:
+          - { text: "Ben gelinceye kadar", role: time }
+          - { text: "burada", role: place }
+          - { text: "bekle", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [gelen, için]
+      - id: b2-u04-l4-e10
+        type: word_bank
+        prompt: Solange du nicht fragst, lernst du es nicht.
+        answers: [Sormadıkça öğrenemezsin.]
+        distractors: [sorunca, öğrenirsin]
+      - id: b2-u04-l4-e11
+        type: free_text
+        direction: tr_de
+        prompt: Bu işi öğreninceye kadar çok hata yaptım.
+        answers: ['Bis ich diese Arbeit gelernt hatte, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt habe, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt hatte, machte ich viele Fehler.', 'Bis ich diese Arbeit gelernt hatte, habe ich sehr viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt habe, habe ich sehr viele Fehler gemacht.', 'Bis ich die Arbeit gelernt hatte, habe ich viele Fehler gemacht.', 'Bis ich die Arbeit gelernt habe, habe ich viele Fehler gemacht.']
+      - id: b2-u04-l4-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Meslektaşlarımı tanıdıkça işimi daha çok seviyorum.“?
+        options: ['Je besser ich meine Kollegen kenne, desto mehr mag ich meine Arbeit.', 'Ich mag meine Arbeit, seit ich meine Kollegen nicht kenne.', 'Wenn ich meine Kollegen kenne, gehe ich zur Arbeit.']
+        answer: 'Je besser ich meine Kollegen kenne, desto mehr mag ich meine Arbeit.'
+      - id: b2-u04-l4-e13
+        type: multiple_choice
+        prompt: Welche Form passt? „Toplantı … kadar burada kalacağız.“ (bis … endet)
+        options: [bitinceye, bitince, bittikçe]
+        answer: bitinceye
+        explanation: Auch möglich ist bitene kadar, das im Alltag häufiger ist.
+
+  - id: b2-u04-l5
+    type: dialog
+    title: Im Büro
+    exercises:
+      - id: b2-u04-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Raporu ne zaman tamamlayabilirsin?
+        answers: [Wann kannst du den Bericht fertigstellen?, Wann kannst du den Bericht abschließen?, Wann kannst du den Bericht fertig machen?, Wann kannst du mit dem Bericht fertig werden?, Bis wann kannst du den Bericht fertigstellen?]
+      - id: b2-u04-l5-e2
+        type: word_bank
+        prompt: Ich schaffe es bis zur Sitzung nicht.
+        answers: [Toplantıya yetişemem., Toplantıya yetiştiremem.]
+        distractors: [yetişirim, toplantıda]
+        explanation: yetişmek = es rechtzeitig schaffen; yetiştirmek = etwas rechtzeitig fertig bekommen.
+      - id: b2-u04-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Können wir die Sitzung verschieben?“
+        options: [Toplantıyı erteleyebilir miyiz?, Toplantıyı bitirdik mi?, Toplantıya geç mi kaldık?]
+        answer: Toplantıyı erteleyebilir miyiz?
+      - id: b2-u04-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Das ist meine Verantwortung.
+        answers: [Bu benim sorumluluğum., Bu sorumluluk benim., Sorumluluk bende.]
+      - id: b2-u04-l5-e5
+        type: word_bank
+        prompt: Ich habe heute Überstunden gemacht.
+        answers: [Bugün fazla mesai yaptım.]
+        chunks:
+          - { text: "Bugün", role: time }
+          - { text: "fazla mesai", role: object_bare }
+          - { text: "yaptım", role: predicate }
+        distractors: [yapıyorum, mesaiyi]
+      - id: b2-u04-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Maaşıma zam yapıldı.“?
+        options: [Mein Gehalt wurde erhöht., Mein Gehalt wurde gekürzt., Ich habe mein Gehalt bekommen.]
+        answer: Mein Gehalt wurde erhöht.
+      - { id: b2-u04-l5-e7, type: conjugation, mode: verb, lemma: alışmak, person: 1sg, tense: past, target: alıştım, gloss_de: ich habe mich gewöhnt }
+      - id: b2-u04-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Yöneticim bana çok kızdı.
+        answers: [Mein Vorgesetzter wurde sehr böse auf mich., Mein Chef wurde sehr böse auf mich., Meine Chefin wurde sehr böse auf mich., Meine Vorgesetzte wurde sehr böse auf mich., Mein Chef war sehr böse auf mich., Meine Chefin war sehr böse auf mich., Mein Vorgesetzter war sehr böse auf mich., Meine Vorgesetzte war sehr böse auf mich.]
+
+  - id: b2-u04-l6
+    type: grammar
+    title: 'Tabellen: Nebensätze'
+    exercises:
+      - id: b2-u04-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: çalışmak
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [çalıştığım, çalıştığın, çalıştığı, çalıştığımız, çalıştığınız, çalıştıkları]
+        gloss_de: 'weil … arbeitet (… için)'
+      - id: b2-u04-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: bilmek
+        negative: true
+        rows: [[POSS_1SG, ABL], [POSS_2SG, ABL], [POSS_3SG, ABL], [POSS_1PL, ABL], [POSS_2PL, ABL], [POSS_3PL, ABL]]
+        targets: [bilmediğimden, bilmediğinden, bilmediğinden, bilmediğimizden, bilmediğinizden, bilmediklerinden]
+        gloss_de: 'da … nicht weiß'
+        explanation: du und er, sie fallen zusammen (bilmediğin-den, bilmediği-nden).
+      - id: b2-u04-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: PART_ACAK
+        lemma: gelmek
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [geleceğim, geleceğin, geleceği, geleceğimiz, geleceğiniz, gelecekleri]
+        gloss_de: 'weil … kommen wird (… için)'
+      - id: b2-u04-l6-e4
+        type: paradigm
+        kind: verbal
+        verbal: PART_DIK
+        lemma: gitmek
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [gittiğim, gittiğin, gittiği, gittiğimiz, gittiğiniz, gittikleri]
+        gloss_de: 'wenn … geht (… zaman)'
+
+  - id: b2-u04-r1
+    type: reading
+    title: 'Lesetext: Die neue Stelle'
+    passage:
+      sentences:
+        - { tr: "Zeynep üç ay önce yeni bir işe başladı.", de: "Zeynep hat vor drei Monaten eine neue Stelle angefangen." }
+        - { tr: "İlk günlerde işe alışmak çok zordu.", de: "In den ersten Tagen war es sehr schwer, sich an die Arbeit zu gewöhnen." }
+        - { tr: "Yöneticisi her sabah yeni görevler verdiği için akşama kadar ofisten çıkamıyordu.", de: "Weil ihre Vorgesetzte ihr jeden Morgen neue Aufgaben gab, konnte sie bis zum Abend das Büro nicht verlassen." }
+        - { tr: "Çok çalıştığı halde işlerini bitiremiyordu.", de: "Obwohl sie viel arbeitete, wurde sie mit ihrer Arbeit nicht fertig." }
+        - { tr: "Bu yüzden sık sık fazla mesai yapıyordu.", de: "Deshalb machte sie oft Überstunden." }
+        - { tr: "Eve geldiği zaman çok yorgun oluyordu.", de: "Wenn sie nach Hause kam, war sie sehr müde." }
+        - { tr: "Çalıştıkça stresi artıyordu.", de: "Je mehr sie arbeitete, desto mehr nahm ihr Stress zu." }
+        - { tr: "Bir gün önemli bir raporda büyük bir hata yaptı.", de: "Eines Tages machte sie in einem wichtigen Bericht einen großen Fehler." }
+        - { tr: "Yöneticisi raporu okuyunca onu odasına çağırdı.", de: "Als ihre Vorgesetzte den Bericht gelesen hatte, rief sie sie in ihr Zimmer." }
+        - { tr: "Zeynep işten çıkarılacağını düşündü.", de: "Zeynep dachte, sie würde entlassen werden." }
+        - { tr: "Ama yöneticisi ona kızmadı.", de: "Aber ihre Vorgesetzte wurde nicht böse auf sie." }
+        - { tr: "“Yeni başladığın için hata yapman normal.” dedi.", de: "„Weil du neu angefangen hast, ist es normal, dass du Fehler machst“, sagte sie." }
+        - { tr: "“Bundan sonra bir şeyi anlamadığın zaman bana sor.”", de: "„Wenn du von jetzt an etwas nicht verstehst, frag mich.“" }
+        - { tr: "O günden sonra Zeynep meslektaşlarından yardım istemeye başladı.", de: "Von diesem Tag an begann Zeynep, ihre Kollegen um Hilfe zu bitten." }
+        - { tr: "Onları tanıdıkça işini daha çok sevdi.", de: "Je besser sie sie kennenlernte, desto mehr mochte sie ihre Arbeit." }
+        - { tr: "Görevlerini paylaştıkları için işler daha hızlı bitiyordu.", de: "Weil sie ihre Aufgaben teilten, wurde die Arbeit schneller fertig." }
+        - { tr: "Artık akşam altıya kadar çalışıyor, sonra eve gidiyor.", de: "Jetzt arbeitet sie bis sechs Uhr abends, dann geht sie nach Hause." }
+        - { tr: "Geçen ay toplantıda yeni bir proje anlattı.", de: "Letzten Monat stellte sie in der Sitzung ein neues Projekt vor." }
+        - { tr: "Yöneticisi projeyi çok beğendiğinden maaşına zam yaptı.", de: "Da ihrer Vorgesetzten das Projekt sehr gefiel, erhöhte sie ihr Gehalt." }
+        - { tr: "Zeynep bu işe alışıncaya kadar çok zorlandı ama şimdi çok mutlu.", de: "Bis Zeynep sich an diese Arbeit gewöhnt hatte, hatte sie es sehr schwer, aber jetzt ist sie sehr glücklich." }
+      glossary:
+        - { tr: "zeynep", de: "Zeynep (Name)" }
+        - { tr: "ilk", de: "erste(r, s)" }
+        - { tr: "zordu", de: "war schwer (zor + -du)", vocab: "zor" }
+        - { tr: "her", de: "jeder" }
+        - { tr: "yüzden", de: "bu yüzden = deshalb" }
+        - { tr: "çıkarılacağını", de: "dass sie entlassen wird (işten çıkarmak = entlassen)", vocab: "çıkmak" }
+        - { tr: "hata", de: "Fehler (hata yapmak = einen Fehler machen)", vocab: "hata" }
+        - { tr: "yapman", de: "dass du machst (yapmak + -ma + -n)", vocab: "yapmak" }
+        - { tr: "normal", de: "normal" }
+        - { tr: "bundan", de: "von diesem (bu + ndan; bundan sonra = von jetzt an)", vocab: "bu" }
+        - { tr: "şeyi", de: "Sache (şey), Akkusativ" }
+        - { tr: "günden", de: "vom Tag (gün + den)", vocab: "gün" }
+        - { tr: "meslektaşlarından", de: "von ihren Kollegen", vocab: "meslektaş" }
+        - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
+        - { tr: "istemeye", de: "zu bitten (istemek + -me + -ye)", vocab: "istemek" }
+        - { tr: "altıya", de: "bis sechs (altı + ya)", vocab: "altı" }
+        - { tr: "zam", de: "Erhöhung (zam yapmak = erhöhen)", vocab: "zam" }
+        - { tr: "zorlandı", de: "hatte es schwer (zorlanmak)", vocab: "zor" }
+    exercises:
+      - id: b2-u04-r1-e1
+        type: multiple_choice
+        prompt: Warum konnte Zeynep das Büro am Anfang nicht verlassen?
+        options: [Sie bekam jeden Morgen neue Aufgaben., Sie hatte keinen Schlüssel., Sie wollte mehr verdienen.]
+        answer: Sie bekam jeden Morgen neue Aufgaben.
+      - id: b2-u04-r1-e2
+        type: multiple_choice
+        prompt: Was befürchtete Zeynep nach ihrem Fehler?
+        options: [Dass sie entlassen wird., Dass sie umziehen muss., Dass der Bericht verloren geht.]
+        answer: Dass sie entlassen wird.
+      - id: b2-u04-r1-e3
+        type: multiple_choice
+        prompt: Was sagte die Vorgesetzte?
+        options: ['Dass Zeynep fragen soll, wenn sie etwas nicht versteht.', Dass Zeynep mehr Überstunden machen soll., Dass Zeynep kein Projekt mehr bekommt.]
+        answer: 'Dass Zeynep fragen soll, wenn sie etwas nicht versteht.'
+      - id: b2-u04-r1-e4
+        type: multiple_choice
+        prompt: Warum wurde die Arbeit schneller fertig?
+        options: [Die Kollegen teilten die Aufgaben., Die Arbeitszeit wurde länger., Die Berichte wurden kürzer.]
+        answer: Die Kollegen teilten die Aufgaben.
+      - id: b2-u04-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Çalıştıkça stresi artıyordu.
+        answers: ['Je mehr sie arbeitete, desto mehr nahm ihr Stress zu.', 'Je mehr er arbeitete, desto mehr nahm sein Stress zu.', 'Je mehr sie arbeitete, desto größer wurde ihr Stress.', 'Je mehr er arbeitete, desto größer wurde sein Stress.', 'Je mehr sie arbeitete, umso mehr nahm ihr Stress zu.']
+
+  - id: b2-u04-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u04-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: 'Weil ich krank bin, komme ich nicht.'
+        answers: [Hasta olduğum için gelmiyorum., Hasta olduğum için gelemiyorum., Hasta olduğumdan gelmiyorum., Hasta olduğumdan gelemiyorum.]
+      - id: b2-u04-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Warte, bis er kommt.
+        answers: [O gelinceye kadar bekle., Gelinceye kadar bekle., O gelene kadar bekle., Gelene kadar bekle.]
+      - id: b2-u04-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (obwohl ich weiß)
+        options: [bildiğim halde, biliyorum halde, bilen halde]
+        answer: bildiğim halde
+      - id: b2-u04-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (je mehr … liest)
+        options: [okudukça, okuduça, okuyunca]
+        answer: okudukça
+      - id: b2-u04-l7-e5
+        type: word_bank
+        prompt: Weil das Wetter schlecht war, haben wir das Picknick verschoben.
+        answers: [Hava kötü olduğu için pikniği erteledik.]
+        chunks:
+          - { text: "Hava kötü olduğu için", role: complement }
+          - { text: "pikniği", role: object }
+          - { text: "erteledik", role: predicate }
+        distractors: [oldu, piknik]
+      - { id: b2-u04-l7-e6, type: suffix_builder, stem: unutmak, verbal: PART_DIK, suffixes: [POSS_2SG, ABL], target: unuttuğundan, gloss_de: 'da du vergessen hast' }
+      - { id: b2-u04-l7-e7, type: suffix_builder, stem: gitmek, verbal: CV_DIKCA, target: gittikçe, gloss_de: 'je mehr … geht; auch: allmählich' }
+      - id: b2-u04-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: İşe alışıncaya kadar zorlandım.
+        answers: ['Bis ich mich an die Arbeit gewöhnt hatte, hatte ich es schwer.', 'Bis ich mich an die Arbeit gewöhnt habe, hatte ich es schwer.', 'Bis ich mich an die Arbeit gewöhnt hatte, tat ich mich schwer.', 'Bis ich mich an die Arbeit gewöhnt habe, habe ich mich schwergetan.']
+      - id: b2-u04-l7-e9
+        type: word_bank
+        prompt: Obwohl er spät kam, wurde der Leiter nicht böse.
+        answers: [Geç geldiği halde müdür kızmadı.]
+        distractors: [geldi, kızdı]
+      - { id: b2-u04-l7-e10, type: conjugation, mode: verb, lemma: ertelemek, person: 1pl, tense: past, target: erteledik, gloss_de: wir haben verschoben }
+
+vocab:
+  - { tr: mesai, de: [Arbeitszeit], pos: noun }
+  - { tr: fazla mesai, de: [Überstunden], pos: noun }
+  - { tr: görev, de: [Aufgabe, Pflicht], pos: noun }
+  - { tr: sorumluluk, de: [Verantwortung], pos: noun, softens: true }
+  - { tr: yönetici, de: [Vorgesetzte(r)], pos: noun }
+  - { tr: meslektaş, de: [Kollege, Kollegin], pos: noun }
+  - { tr: hata, de: [Fehler], pos: noun }
+  - { tr: rapor, de: [Bericht], pos: noun }
+  - { tr: zam, de: [Erhöhung], pos: noun }
+  - { tr: stres, de: [Stress], pos: noun }
+  - { tr: ertelemek, de: [verschieben], pos: verb }
+  - { tr: tamamlamak, de: [abschließen, fertigstellen], pos: verb }
+  - { tr: alışmak, de: [sich gewöhnen], pos: verb }
+  - { tr: yetişmek, de: [rechtzeitig schaffen], pos: verb }
+  - { tr: geç kalmak, de: [sich verspäten], pos: verb }
+  - { tr: çağırmak, de: [rufen], pos: verb }
+  - { tr: kızmak, de: [böse werden], pos: verb }
+  - { tr: halde, de: [obwohl (nach -diği)], pos: conj }

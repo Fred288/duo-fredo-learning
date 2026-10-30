@@ -1,0 +1,501 @@
+# B2-05: -mesine rağmen, -se bile, -se de, -meksizin, -mektense; Meinungen. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u05
+level: B2
+title: Meinungen
+grammar_focus: [mesine-ragmen, se-bile, meksizin, mektense]
+explainer: explainers/b2-konzessiv.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u05-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u05-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „görüş“?
+        options: [Ansicht, Gesetz, Wahl]
+        answer: Ansicht
+        explanation: bana göre oder benim görüşüme göre = meiner Ansicht nach.
+      - id: b2-u05-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: unterstützen
+        answers: [desteklemek]
+      - id: b2-u05-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „karşı çıkmak“?
+        options: [widersprechen, abreisen, zustimmen]
+        answer: widersprechen
+        explanation: Mit Dativ, plana karşı çıkmak = sich gegen den Plan stellen.
+      - id: b2-u05-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „haklı“?
+        options: [im Recht, gerecht bezahlt, schuldig]
+        answer: im Recht
+        explanation: Haklısın = Du hast recht; haksız = im Unrecht.
+      - id: b2-u05-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Recht, Anspruch
+        answers: [hak]
+        explanation: Vor Vokal verdoppelt sich k, hakkım.
+      - id: b2-u05-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „yasak“?
+        options: [verboten, erlaubt, nötig]
+        answer: verboten
+        explanation: Auch das Verbot; yasaklamak = verbieten.
+      - id: b2-u05-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „belediye“?
+        options: [Stadtverwaltung, Polizeiwache, Regierung]
+        answer: Stadtverwaltung
+      - id: b2-u05-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Wahl
+        answers: [seçim]
+      - id: b2-u05-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „eleştirmek“?
+        options: [kritisieren, loben, erklären]
+        answer: kritisieren
+      - id: b2-u05-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „halk“?
+        options: [Volk, Haushalt, Hälfte]
+        answer: Volk
+      - id: b2-u05-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: Lösung
+        answers: [çözüm]
+      - id: b2-u05-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „aslında“?
+        options: [eigentlich, deshalb, sofort]
+        answer: eigentlich
+      - id: b2-u05-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „üstelik“?
+        options: [außerdem, trotzdem, vielleicht]
+        answer: außerdem
+      - id: b2-u05-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: auf jeden Fall, unbedingt
+        answers: [kesinlikle, mutlaka]
+      - id: b2-u05-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „esnaf“?
+        options: [Händler und Handwerker eines Ortes, Beamte, Bauern]
+        answer: Händler und Handwerker eines Ortes
+      - id: b2-u05-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „rağmen“?
+        options: [trotz, wegen, seit]
+        answer: trotz
+        explanation: Mit Dativ, yağmura rağmen = trotz des Regens.
+
+  - id: b2-u05-l2
+    type: grammar
+    title: Trotz und obwohl (-mesine rağmen)
+    exercises:
+      - id: b2-u05-l2-e1
+        type: suffix_builder
+        stem: gelmek
+        verbal: VN_MA
+        suffixes: [POSS_3SG, DAT]
+        target: gelmesine
+        gloss_de: 'obwohl er, sie kommt (gelmesine rağmen)'
+        explanation: -me + Possessiv + Dativ, danach rağmen.
+      - { id: b2-u05-l2-e2, type: suffix_builder, stem: çalışmak, verbal: VN_MA, suffixes: [POSS_1SG, DAT], target: çalışmama, gloss_de: 'obwohl ich arbeite (çalışmama rağmen)' }
+      - { id: b2-u05-l2-e3, type: suffix_builder, stem: bilmek, verbal: VN_MA, suffixes: [POSS_2SG, DAT], target: bilmene, gloss_de: 'obwohl du weißt (bilmene rağmen)' }
+      - { id: b2-u05-l2-e4, type: suffix_builder, stem: söylemek, verbal: VN_MA, suffixes: [POSS_1PL, DAT], target: söylememize, gloss_de: 'obwohl wir sagen (söylememize rağmen)' }
+      - { id: b2-u05-l2-e5, type: suffix_builder, stem: istemek, verbal: VN_MA, suffixes: [POSS_3PL, DAT], target: istemelerine, gloss_de: 'obwohl sie wollen (istemelerine rağmen)' }
+      - { id: b2-u05-l2-e6, type: suffix_builder, stem: gitmek, verbal: VN_MA, negative: true, suffixes: [POSS_3SG, DAT], target: gitmemesine, gloss_de: 'obwohl er, sie nicht geht (gitmemesine rağmen)' }
+      - id: b2-u05-l2-e7
+        type: multiple_choice
+        prompt: Was bedeutet „çalışmama rağmen“?
+        options: [obwohl ich arbeite, obwohl ich nicht arbeite, weil ich arbeite]
+        answer: obwohl ich arbeite
+        explanation: çalış-ma-ma = -ma + -m + -a; das zweite -ma ist keine Verneinung. Verneint hieße es çalışmamama.
+      - id: b2-u05-l2-e8
+        type: word_bank
+        prompt: Obwohl es regnet, gehen wir spazieren.
+        answers: [Yağmur yağmasına rağmen yürüyüş yapıyoruz.]
+        chunks:
+          - { text: "Yağmur yağmasına rağmen", role: complement }
+          - { text: "yürüyüş", role: object_bare }
+          - { text: "yapıyoruz", role: predicate }
+        distractors: [yağdı, için]
+      - id: b2-u05-l2-e9
+        type: word_bank
+        prompt: Obwohl die Stadtverwaltung den Plan erklärt hat, sind viele dagegen.
+        answers: [Belediyenin planı açıklamasına rağmen birçok kişi karşı çıkıyor.]
+        distractors: [belediye, açıkladı]
+        explanation: Das Subjekt steht im Genitiv, belediyenin.
+      - id: b2-u05-l2-e10
+        type: word_bank
+        prompt: Trotz des schlechten Wetters kamen alle.
+        answers: [Kötü havaya rağmen herkes geldi.]
+        distractors: [hava, için]
+      - id: b2-u05-l2-e11
+        type: free_text
+        direction: tr_de
+        prompt: Ona söylememize rağmen gelmedi.
+        answers: ['Obwohl wir es ihm gesagt haben, ist er nicht gekommen.', 'Obwohl wir es ihr gesagt haben, ist sie nicht gekommen.', 'Obwohl wir es ihm sagten, kam er nicht.', 'Obwohl wir es ihr sagten, kam sie nicht.', 'Obwohl wir es ihm gesagt hatten, ist er nicht gekommen.', 'Obwohl wir es ihr gesagt hatten, ist sie nicht gekommen.', 'Obwohl wir es ihm gesagt hatten, kam er nicht.', 'Obwohl wir es ihr gesagt hatten, kam sie nicht.']
+      - id: b2-u05-l2-e12
+        type: free_text
+        direction: de_tr
+        prompt: 'Obwohl ich müde bin, arbeite ich.'
+        answers: [Yorgun olmama rağmen çalışıyorum., Yorgun olduğum halde çalışıyorum.]
+      - id: b2-u05-l2-e13
+        type: multiple_choice
+        prompt: Welche Form passt? „Öğrencilerin çok … rağmen sınav kolay değildi.“ (obwohl die Schüler viel lernten)
+        options: [çalışmasına, çalışması, çalıştı]
+        answer: çalışmasına
+        explanation: Das Subjekt steht im Genitiv, darum -mesine; -diğine rağmen geht auch, ist hier aber nicht zur Wahl.
+
+  - id: b2-u05-l3
+    type: grammar
+    title: Selbst wenn (-se bile, -se de)
+    exercises:
+      - id: b2-u05-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: gelmek
+        person: 3sg
+        tense: conditional
+        target: gelse
+        gloss_de: 'wenn er, sie käme (gelse bile = selbst wenn er, sie käme)'
+        explanation: bile und de stehen als eigene Wörter hinter der Form.
+      - { id: b2-u05-l3-e2, type: conjugation, mode: verb, lemma: istemek, person: 1sg, tense: conditional, target: istesem, gloss_de: 'wenn ich wollte (istesem de = auch wenn ich wollte)' }
+      - { id: b2-u05-l3-e3, type: conjugation, mode: verb, lemma: yapmak, person: 2sg, tense: conditional, target: yapsan, gloss_de: 'wenn du machtest (ne yapsan = was du auch machst)' }
+      - { id: b2-u05-l3-e4, type: conjugation, mode: verb, lemma: gitmek, person: 1pl, tense: conditional, target: gitsek, gloss_de: 'wenn wir gingen (nereye gitsek = wohin wir auch gehen)' }
+      - { id: b2-u05-l3-e5, type: conjugation, mode: verb, lemma: görmek, person: 3pl, tense: conditional, negative: true, target: görmeseler, gloss_de: 'wenn sie nicht sähen' }
+      - { id: b2-u05-l3-e6, type: conjugation, mode: verb, lemma: söylemek, person: 3sg, tense: aorist, compound: conditional, target: söylerse, gloss_de: 'wenn er, sie sagt (söylerse de = auch wenn er, sie sagt)' }
+      - id: b2-u05-l3-e7
+        type: word_bank
+        prompt: Selbst wenn du gehst, ändert sich nichts.
+        answers: [Sen gitsen bile hiçbir şey değişmez.]
+        distractors: [gidince, değişir]
+      - id: b2-u05-l3-e8
+        type: word_bank
+        prompt: Auch wenn es teuer ist, kaufe ich es.
+        answers: [Pahalı olsa da alacağım., Pahalı olsa da alırım.]
+        distractors: [pahalıya, aldım]
+      - id: b2-u05-l3-e9
+        type: word_bank
+        prompt: Was du auch sagst, ich glaube dir nicht.
+        answers: [Ne söylersen söyle sana inanmıyorum.]
+        distractors: [seni, söyledin]
+        explanation: Doppelte Form, -irse + Imperativ, ne yaparsan yap = was du auch tust.
+      - id: b2-u05-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Çok zengin olsa bile mutlu değil.
+        answers: ['Selbst wenn er sehr reich ist, ist er nicht glücklich.', 'Selbst wenn sie sehr reich ist, ist sie nicht glücklich.', 'Auch wenn er sehr reich ist, ist er nicht glücklich.', 'Auch wenn sie sehr reich ist, ist sie nicht glücklich.', 'Obwohl er sehr reich ist, ist er nicht glücklich.', 'Obwohl sie sehr reich ist, ist sie nicht glücklich.']
+      - id: b2-u05-l3-e11
+        type: free_text
+        direction: de_tr
+        prompt: 'Auch wenn du recht hast, schrei nicht.'
+        answers: [Haklı olsan da bağırma., Haklı olsan bile bağırma., Sen haklı olsan da bağırma., Sen haklı olsan bile bağırma.]
+      - id: b2-u05-l3-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Gelse iyi olur.“ / „Gelse bile iyi olmaz.“
+        options: ['Es wäre gut, wenn er käme. / Selbst wenn er käme, wäre es nicht gut.', 'Es wäre schlecht, wenn er käme. / Es wäre gut, wenn er nicht käme.', Beides bedeutet dasselbe.]
+        answer: 'Es wäre gut, wenn er käme. / Selbst wenn er käme, wäre es nicht gut.'
+
+  - id: b2-u05-l4
+    type: grammar
+    title: Ohne zu und statt zu (-meksizin, -mektense)
+    exercises:
+      - id: b2-u05-l4-e1
+        type: suffix_builder
+        stem: düşünmek
+        verbal: CV_MAKSIZIN
+        target: düşünmeksizin
+        gloss_de: ohne nachzudenken
+        explanation: -meksizin ist die formelle Schwester von -meden.
+      - { id: b2-u05-l4-e2, type: suffix_builder, stem: sormak, verbal: CV_MAKSIZIN, target: sormaksızın, gloss_de: ohne zu fragen }
+      - { id: b2-u05-l4-e3, type: suffix_builder, stem: dinlemek, verbal: CV_MAKSIZIN, target: dinlemeksizin, gloss_de: ohne zuzuhören }
+      - { id: b2-u05-l4-e4, type: suffix_builder, stem: beklemek, verbal: CV_MAKTANSA, target: beklemektense, gloss_de: statt zu warten }
+      - { id: b2-u05-l4-e5, type: suffix_builder, stem: yapmak, verbal: CV_MAKTANSA, target: yapmaktansa, gloss_de: statt zu machen }
+      - { id: b2-u05-l4-e6, type: suffix_builder, stem: gitmek, verbal: CV_MAKTANSA, negative: true, target: gitmemektense, gloss_de: statt nicht zu gehen }
+      - id: b2-u05-l4-e7
+        type: word_bank
+        prompt: Die Stadtverwaltung hat entschieden, ohne das Volk zu fragen.
+        answers: [Belediye halka sormaksızın karar verdi.]
+        chunks:
+          - { text: "Belediye", role: subject }
+          - { text: "halka sormaksızın", role: complement }
+          - { text: "karar verdi", role: predicate }
+        distractors: [halkı, sorarak]
+      - id: b2-u05-l4-e8
+        type: word_bank
+        prompt: Statt hier zu warten, gehen wir lieber zu Fuß.
+        answers: [Burada beklemektense yürüyelim.]
+        distractors: [bekleyerek, yürüdük]
+      - id: b2-u05-l4-e9
+        type: word_bank
+        prompt: Lieber arm und glücklich als reich und unglücklich sein.
+        answers: [Zengin ve mutsuz olmaktansa fakir ve mutlu olmak daha iyi.]
+        distractors: [olarak, olursa]
+      - id: b2-u05-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Düşünmeksizin cevap verdi.
+        answers: [Er antwortete ohne nachzudenken., Sie antwortete ohne nachzudenken., 'Er antwortete, ohne nachzudenken.', 'Sie antwortete, ohne nachzudenken.', Er hat ohne nachzudenken geantwortet., Sie hat ohne nachzudenken geantwortet., 'Er hat geantwortet, ohne nachzudenken.', 'Sie hat geantwortet, ohne nachzudenken.', Ohne nachzudenken antwortete er., Ohne nachzudenken antwortete sie.]
+      - id: b2-u05-l4-e11
+        type: multiple_choice
+        prompt: Welche Form ist alltäglicher? (ohne zu fragen)
+        options: [sormadan, sormaksızın, sormaktansa]
+        answer: sormadan
+        explanation: sormaksızın ist schriftlich; sormaktansa heißt „statt zu fragen“.
+      - id: b2-u05-l4-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Tartışmaktansa konuyu kapatalım.“?
+        options: ['Statt zu streiten, lassen wir das Thema lieber.', Wir streiten über das Thema., 'Ohne das Thema zu kennen, streiten wir.']
+        answer: 'Statt zu streiten, lassen wir das Thema lieber.'
+
+  - id: b2-u05-l5
+    type: dialog
+    title: Seine Meinung sagen
+    exercises:
+      - id: b2-u05-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Bu konuda ne düşünüyorsun?
+        answers: [Was denkst du zu diesem Thema?, Was denkst du über dieses Thema?, Was meinst du zu diesem Thema?, Was hältst du davon?, Was denkst du darüber?]
+      - id: b2-u05-l5-e2
+        type: word_bank
+        prompt: Ich stimme dir nicht zu.
+        answers: [Sana katılmıyorum.]
+        distractors: [seni, katılıyorum]
+        explanation: katılmak heißt auch zustimmen, mit Dativ.
+      - id: b2-u05-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Du hast recht.“?
+        options: [Haklısın., Hakkın var sana., Doğrusun.]
+        answer: Haklısın.
+      - id: b2-u05-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Meiner Meinung nach ist das nicht richtig.
+        answers: [Bence bu doğru değil., Bana göre bu doğru değil., Bence bu yanlış., Bana göre bu yanlış., Bence doğru değil., Bana göre doğru değil.]
+      - id: b2-u05-l5-e5
+        type: word_bank
+        prompt: Eigentlich ist das Problem nicht das Geld.
+        answers: [Aslında sorun para değil.]
+        chunks:
+          - { text: "Aslında", role: time }
+          - { text: "sorun", role: subject }
+          - { text: "para değil", role: predicate }
+        distractors: [paralı, yok]
+      - id: b2-u05-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Üstelik bu çözüm çok pahalı.“?
+        options: [Außerdem ist diese Lösung sehr teuer., Trotzdem ist diese Lösung sehr billig., Diese Lösung war früher teuer.]
+        answer: Außerdem ist diese Lösung sehr teuer.
+      - { id: b2-u05-l5-e7, type: conjugation, mode: verb, lemma: desteklemek, person: 1sg, tense: present, target: destekliyorum, gloss_de: ich unterstütze }
+      - id: b2-u05-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Kesinlikle haklısınız.
+        answers: [Sie haben völlig recht., Sie haben absolut recht., Sie haben auf jeden Fall recht., Ihr habt völlig recht., Ihr habt absolut recht., Sie haben ganz recht., Ihr habt ganz recht., Sie haben unbedingt recht.]
+
+  - id: b2-u05-l6
+    type: grammar
+    title: 'Tabellen: Trotz und selbst wenn'
+    exercises:
+      - id: b2-u05-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: VN_MA
+        lemma: gelmek
+        rows: [[POSS_1SG, DAT], [POSS_2SG, DAT], [POSS_3SG, DAT], [POSS_1PL, DAT], [POSS_2PL, DAT], [POSS_3PL, DAT]]
+        targets: [gelmeme, gelmene, gelmesine, gelmemize, gelmenize, gelmelerine]
+        gloss_de: 'obwohl … kommt (… rağmen)'
+      - id: b2-u05-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: VN_MA
+        lemma: bilmek
+        negative: true
+        rows: [[POSS_1SG, DAT], [POSS_2SG, DAT], [POSS_3SG, DAT], [POSS_1PL, DAT], [POSS_2PL, DAT], [POSS_3PL, DAT]]
+        targets: [bilmememe, bilmemene, bilmemesine, bilmememize, bilmemenize, bilmemelerine]
+        gloss_de: 'obwohl … nicht weiß (… rağmen)'
+      - id: b2-u05-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: istemek
+        tense: conditional
+        targets: [istesem, istesen, istese, istesek, isteseniz, isteseler]
+        gloss_de: 'wenn … wollte (… de = auch wenn)'
+      - id: b2-u05-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: gitmek
+        tense: conditional
+        negative: true
+        targets: [gitmesem, gitmesen, gitmese, gitmesek, gitmeseniz, gitmeseler]
+        gloss_de: 'wenn … nicht ginge (… bile = selbst wenn)'
+
+  - id: b2-u05-r1
+    type: reading
+    title: 'Lesetext: Die autofreie Innenstadt'
+    passage:
+      sentences:
+        - { tr: "Şehrimizin merkezinde arabaların yasaklanması tartışılıyor.", de: "Im Zentrum unserer Stadt wird über ein Autoverbot diskutiert." }
+        - { tr: "Belediye bu planı geçen ay açıkladı.", de: "Die Stadtverwaltung hat diesen Plan letzten Monat vorgestellt." }
+        - { tr: "Bazı insanlar fikri destekliyor, bazıları karşı çıkıyor.", de: "Manche Menschen unterstützen die Idee, andere sind dagegen." }
+        - { tr: "Ayşe Hanım'a göre plan çok iyi.", de: "Laut Frau Ayşe ist der Plan sehr gut." }
+        - { tr: "“Hava bu kadar kirli olmasına rağmen hâlâ herkes arabayla işe gidiyor.” diyor.", de: "„Obwohl die Luft so schmutzig ist, fahren immer noch alle mit dem Auto zur Arbeit“, sagt sie." }
+        - { tr: "“Yürümek biraz zor olsa bile çocuklarımız temiz hava alır.”", de: "„Auch wenn das Laufen ein wenig schwer ist, bekommen unsere Kinder saubere Luft.“" }
+        - { tr: "Esnaf ise plana karşı.", de: "Die Händler dagegen sind gegen den Plan." }
+        - { tr: "Mağaza sahibi Mehmet Bey “Müşteriler arabayla gelemezse dükkânımı kapatmak zorunda kalırım.” diyor.", de: "Ladenbesitzer Herr Mehmet sagt: „Wenn die Kunden nicht mit dem Auto kommen können, muss ich meinen Laden schließen.“" }
+        - { tr: "“Belediye bizi dinlemeksizin karar verdi.” diye ekliyor.", de: "„Die Stadtverwaltung hat entschieden, ohne uns anzuhören“, fügt er hinzu." }
+        - { tr: "Ona göre bu haksızlık.", de: "Seiner Meinung nach ist das ungerecht." }
+        - { tr: "Üniversite öğrencisi Ali ikisine de katılmıyor.", de: "Der Student Ali stimmt beiden nicht zu." }
+        - { tr: "“Yasaklamaktansa otobüsleri ücretsiz yapmak daha doğru olur.” diyor.", de: "„Statt zu verbieten, wäre es richtiger, die Busse kostenlos zu machen“, sagt er." }
+        - { tr: "“Otobüsler ücretsiz olursa insanlar arabalarını evde bırakır.”", de: "„Wenn die Busse kostenlos sind, lassen die Menschen ihre Autos zu Hause.“" }
+        - { tr: "Ama otobüsler ücretsiz olsa da herkes kullanmaz, diyenler de var.", de: "Es gibt aber auch Leute, die sagen, selbst wenn die Busse kostenlos sind, nutzt sie nicht jeder." }
+        - { tr: "Dün akşam büyük bir toplantı yapıldı ve herkes görüşünü söyledi.", de: "Gestern Abend gab es eine große Versammlung, und alle sagten ihre Meinung." }
+        - { tr: "Toplantı saatlerce sürmesine rağmen kimse anlaşamadı.", de: "Obwohl die Versammlung stundenlang dauerte, konnte sich niemand einigen." }
+        - { tr: "Belediye başkanı “Karar vermeden önce halka soracağız.” dedi.", de: "Der Bürgermeister sagte: „Bevor wir entscheiden, werden wir das Volk fragen.“" }
+        - { tr: "Önümüzdeki ay oylama yapılacak.", de: "Nächsten Monat wird abgestimmt." }
+        - { tr: "Sonuç ne olursa olsun tartışma bitmeyecek gibi görünüyor.", de: "Wie das Ergebnis auch ausfällt, die Diskussion wird wohl nicht enden." }
+        - { tr: "Ama insanların fikirlerini söylemesi bile önemli bir adım.", de: "Aber schon dass die Menschen ihre Meinung sagen, ist ein wichtiger Schritt." }
+      glossary:
+        - { tr: "şehrimizin", de: "unserer Stadt (şehir + imiz + in)", vocab: "şehir" }
+        - { tr: "yasaklanması", de: "das Verbot (yasaklamak + Passiv + -ma + -sı)", vocab: "yasak" }
+        - { tr: "tartışılıyor", de: "wird diskutiert", vocab: "tartışmak" }
+        - { tr: "bazı", de: "manche" }
+        - { tr: "bazıları", de: "manche von ihnen" }
+        - { tr: "hanım", de: "Frau (nach dem Vornamen)" }
+        - { tr: "hâlâ", de: "immer noch" }
+        - { tr: "arabayla", de: "mit dem Auto (araba + yla)", vocab: "araba" }
+        - { tr: "bile", de: "sogar, selbst" }
+        - { tr: "ise", de: "dagegen, hingegen" }
+        - { tr: "plana", de: "gegen den Plan (plan + a)", vocab: "plan" }
+        - { tr: "sahibi", de: "Besitzer (sahip + i)" }
+        - { tr: "bey", de: "Herr (nach dem Vornamen)" }
+        - { tr: "gelemezse", de: "wenn … nicht kommen können", vocab: "gelmek" }
+        - { tr: "dükkânımı", de: "meinen Laden (dükkân + ım + ı)" }
+        - { tr: "kalırım", de: "ich bleibe (zorunda kalmak = müssen)", vocab: "kalmak" }
+        - { tr: "ekliyor", de: "fügt hinzu (eklemek)" }
+        - { tr: "haksızlık", de: "Unrecht (hak + sız + lık)", vocab: "hak" }
+        - { tr: "ikisine", de: "beiden (iki + si + ne)", vocab: "iki" }
+        - { tr: "de", de: "auch" }
+        - { tr: "da", de: "auch" }
+        - { tr: "iyi", de: "gut" }
+        - { tr: "yapıldı", de: "wurde gemacht", vocab: "yapmak" }
+        - { tr: "yapılacak", de: "wird gemacht werden", vocab: "yapmak" }
+        - { tr: "anlaşamadı", de: "konnte sich nicht einigen", vocab: "anlaşmak" }
+        - { tr: "yasaklamaktansa", de: "statt zu verbieten (yasaklamak)", vocab: "yasak" }
+        - { tr: "diyenler", de: "Leute, die sagen (demek)", vocab: "demek" }
+        - { tr: "saatlerce", de: "stundenlang", vocab: "saat" }
+        - { tr: "sürmesine", de: "zu dauern (sürmek + -me + -si + -ne)" }
+        - { tr: "kimse", de: "niemand (mit Verneinung)" }
+        - { tr: "önümüzdeki", de: "kommend (önümüzdeki ay = nächsten Monat)", vocab: "ön" }
+        - { tr: "oylama", de: "Abstimmung" }
+        - { tr: "olsun", de: "es soll sein (ne olursa olsun = wie es auch sei)", vocab: "olmak" }
+        - { tr: "adım", de: "Schritt" }
+    exercises:
+      - id: b2-u05-r1-e1
+        type: multiple_choice
+        prompt: Worum geht es in dem Plan?
+        options: [Um ein Autoverbot im Stadtzentrum., Um neue Busse., Um eine neue Universität.]
+        answer: Um ein Autoverbot im Stadtzentrum.
+      - id: b2-u05-r1-e2
+        type: multiple_choice
+        prompt: Wovor hat Herr Mehmet Angst?
+        options: [Dass er seinen Laden schließen muss., Dass die Luft schlechter wird., Dass die Busse teurer werden.]
+        answer: Dass er seinen Laden schließen muss.
+      - id: b2-u05-r1-e3
+        type: multiple_choice
+        prompt: Was schlägt Ali vor?
+        options: [Die Busse kostenlos zu machen., Mehr Parkplätze zu bauen., Den Plan sofort umzusetzen.]
+        answer: Die Busse kostenlos zu machen.
+      - id: b2-u05-r1-e4
+        type: multiple_choice
+        prompt: Wie geht es weiter?
+        options: [Nächsten Monat wird abgestimmt., Der Plan ist schon beschlossen., Der Bürgermeister tritt zurück.]
+        answer: Nächsten Monat wird abgestimmt.
+      - id: b2-u05-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Belediye bizi dinlemeksizin karar verdi.
+        answers: ['Die Stadtverwaltung hat entschieden, ohne uns anzuhören.', 'Die Stadtverwaltung hat entschieden, ohne uns zuzuhören.', Die Stadtverwaltung hat ohne uns anzuhören entschieden., Die Stadtverwaltung hat ohne uns zuzuhören entschieden., 'Die Stadtverwaltung entschied, ohne uns anzuhören.', 'Die Stadtverwaltung entschied, ohne uns zuzuhören.', 'Die Stadt hat entschieden, ohne uns anzuhören.', 'Die Stadt hat entschieden, ohne uns zuzuhören.']
+
+  - id: b2-u05-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u05-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: 'Obwohl er reich ist, ist er nicht glücklich.'
+        answers: [Zengin olmasına rağmen mutlu değil., Zengin olduğu halde mutlu değil., O zengin olmasına rağmen mutlu değil., O zengin olduğu halde mutlu değil.]
+      - id: b2-u05-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Ich stimme dir zu.
+        answers: [Sana katılıyorum., Ben sana katılıyorum., Seninle aynı fikirdeyim., Aynı fikirdeyim.]
+      - id: b2-u05-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (obwohl wir kommen)
+        options: [gelmemize rağmen, geliyoruz rağmen, gelmemizde rağmen]
+        answer: gelmemize rağmen
+      - id: b2-u05-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (statt zu warten)
+        options: [beklemektense, beklemekse, bekleyense]
+        answer: beklemektense
+      - id: b2-u05-l7-e5
+        type: word_bank
+        prompt: Selbst wenn ich das Geld hätte, würde ich es nicht kaufen.
+        answers: [Param olsa bile almam.]
+        distractors: [paralı, alırım]
+      - { id: b2-u05-l7-e6, type: suffix_builder, stem: anlamak, verbal: CV_MAKSIZIN, target: anlamaksızın, gloss_de: ohne zu verstehen }
+      - { id: b2-u05-l7-e7, type: suffix_builder, stem: yağmak, verbal: VN_MA, suffixes: [POSS_3SG, DAT], target: yağmasına, gloss_de: 'obwohl es regnet (yağmasına rağmen)' }
+      - id: b2-u05-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Ne yaparsan yap beni ikna edemezsin.
+        answers: ['Was du auch tust, du kannst mich nicht überzeugen.', 'Was immer du tust, du kannst mich nicht überzeugen.', 'Egal, was du tust, du kannst mich nicht überzeugen.', 'Was du auch machst, du kannst mich nicht überzeugen.']
+      - id: b2-u05-l7-e9
+        type: word_bank
+        prompt: Trotz des Verbots rauchen alle.
+        answers: [Yasağa rağmen herkes sigara içiyor.]
+        chunks:
+          - { text: "Yasağa rağmen", role: complement }
+          - { text: "herkes", role: subject }
+          - { text: "sigara içiyor", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [yasak, için]
+      - { id: b2-u05-l7-e10, type: conjugation, mode: verb, lemma: eleştirmek, person: 3pl, tense: past, target: eleştirdiler, gloss_de: sie haben kritisiert }
+
+vocab:
+  - { tr: görüş, de: [Ansicht, Meinung], pos: noun }
+  - { tr: desteklemek, de: [unterstützen], pos: verb }
+  - { tr: karşı çıkmak, de: [widersprechen, sich dagegenstellen], pos: verb, causative: ar }
+  - { tr: eleştirmek, de: [kritisieren], pos: verb }
+  - { tr: haklı, de: [im Recht], pos: adj }
+  - { tr: hak, de: [Recht, Anspruch], pos: noun, doubles: true }
+  - { tr: yasak, de: [verboten, Verbot], pos: adj, softens: true }
+  - { tr: belediye, de: [Stadtverwaltung], pos: noun }
+  - { tr: başkan, de: [Vorsitzende(r), Präsident(in)], pos: noun }
+  - { tr: seçim, de: [Wahl], pos: noun }
+  - { tr: halk, de: [Volk], pos: noun }
+  - { tr: çözüm, de: [Lösung], pos: noun }
+  - { tr: esnaf, de: [Händler und Handwerker], pos: noun }
+  - { tr: aslında, de: [eigentlich], pos: adv }
+  - { tr: üstelik, de: [außerdem], pos: adv }
+  - { tr: kesinlikle, de: [auf jeden Fall, unbedingt], pos: adv }
+  - { tr: rağmen, de: [trotz], pos: postp }
+  - { tr: ikna etmek, de: [überzeugen], pos: verb, softens: true }
