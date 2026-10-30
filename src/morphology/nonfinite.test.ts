@@ -276,3 +276,11 @@ describe('weitere Kombinationen (Review E2)', () => {
     );
   });
 });
+
+describe('de- in Mehrwortverben', () => {
+  it('hebt wie der einfache Stamm, außer vor -ip', () => {
+    expect(nonfinite('evet demek', { form: 'PART_AN' }).form).toBe('evet diyen');
+    expect(nonfinite('evet demek', { form: 'CV_IP' }).form).toBe('evet deyip');
+  });
+});
+

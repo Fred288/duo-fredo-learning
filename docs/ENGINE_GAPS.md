@@ -20,12 +20,12 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 | nk → ng                                                                                                      | ✅     | in `soften()`                                                                                                                        | –                                    |
 | Erweichung bei Verbstämmen (et-, git-, tat- → ed-, gid-, tad-)                                               | ✅     | `softens` am Verb (gidiyor, ediyor)                                                                                                  | A1 (Präsens: gidiyorum)              |
 | Vokalausfall bei Suffix mit Vokal (ağız → ağzı, burun → burnu, oğul → oğlu, isim → ismi)                     | ✅     | Vokabel-Flag `drops_vowel` (Phase 2, Schritt 1)                                                                                      | **A1** (Familie: oğlum; Name: ismim) |
-| Konsonantenverdopplung (hak → hakkı, his → hissi, sır → sırrı)                                               | ❌     | Vokabel-Flag `doubles: true`, kombinierbar mit Erweichung (ret → reddi)                                                              | A2                                   |
-| Stumme Endung arabischer Lehnwörter (cami → camii)                                                           | ❌     | Vokabel-Flag `consonant_final: true` (wie Konsonant behandeln, kein Puffer); beide Formen akzeptieren, da camisi inzwischen zulässig | A2                                   |
+| Konsonantenverdopplung (hak → hakkı, his → hissi, sır → sırrı)                                               | ✅     | Vokabel-Flag `doubles`, kombinierbar mit Erweichung (ret → reddi)                                                                    | –                                    |
+| Stumme Endung arabischer Lehnwörter (cami → camii)                                                           | ✅     | Vokabel-Flag `poss_no_s`: nur Possessiv 3. Sg. ohne Puffer-s (camii, camiinde), sonst regulär (camiyi, camiye); camisi nur in Freitext-Antworten | –                                    |
 | Eigennamen mit Apostroph (Berlin'de, Frankfurt'ta), keine geschriebene Erweichung (Mehmet'e, nicht *Mehmede) | ✅     | Vokabel-Flag `proper`; Nationalitäten ohne Apostroph über `capitalized` (Türkler, Almanım)                                           | **A1** (Herkunft, Orte)              |
-| Zirkumflex (kâr, hala vs. hâlâ)                                                                              | ❌     | nur Orthografie in Inhalten; Antwortprüfung sollte `â` ≈ `a` tolerieren (Hinweis statt Fehler)                                       | A2                                   |
+| Zirkumflex (kâr, hala vs. hâlâ)                                                                              | ✅     | â î û zählen als Vokale (harmonisch wie a i u); Antwortprüfung faltet sie wie Sonderzeichen (Hinweis statt Fehler)                    | –                                    |
 | Betonung (meist letzte Silbe; Ausnahmen bei Ortsnamen, -mA-Verneinung, Fragepartikel)                        | ❌     | kein Engine-Thema; Audio und Erklärkarten                                                                                            | später                               |
-| Unregelmäßige Stämme (su → suyun/suyu, ne → neyi)                                                            | ✅     | Vokabel-Flag `y_stem`: y vor Genitiv und Possessiv (suyun, suyum, neyin); offen: ne + Poss. 3. Sg. (nesi)                            | –                                    |
+| Unregelmäßige Stämme (su → suyun/suyu, ne → neyi)                                                            | ✅     | Vokabel-Flag `y_stem`: y vor Genitiv und Possessiv (suyun, suyum, neyin); ne + Poss. 3. Sg. = nesi                            | –                                    |
 
 ## 2. Nominalmorphologie
 
@@ -81,7 +81,7 @@ Zusätzlich nötig:
 4. ✅ Stufe 2: -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag
 5. ✅ Stufe 3: -(y)Abil, -mAlI, Imperativ, -mIş, idi/imiş
 6. ✅ -ki, Ableitungen -lI/-sIz/-lIk/-CI mit `C`, Passiv
-7. 🟡 Stufe 4: ✅ Optativ, idi/imiş/ise, -sA (4a); ✅ Partizipien, Verbalnomen, Konverbien (4b); offen Kausativ; `G`; `doubles`, `consonant_final`
+7. 🟡 Stufe 4: ✅ Optativ, idi/imiş/ise, -sA (4a); ✅ Partizipien, Verbalnomen, Konverbien (4b); ✅ `doubles`, `poss_no_s`, Zirkumflex; offen Kausativ, `G`
 
 Jede Regel bekommt Tabellentests nach dem Muster von `src/morphology/inflect.test.ts`; offene
 Punkte stehen dort als `it.todo`.

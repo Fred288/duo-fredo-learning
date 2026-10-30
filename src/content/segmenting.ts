@@ -119,6 +119,8 @@ function entryOf(spec: FormSpec, vocab: readonly Vocab[]): VocabEntry {
     proper: stem.proper,
     capitalized: stem.capitalized,
     y_stem: stem.yStem,
+    doubles: stem.doubles,
+    poss_no_s: stem.possNoS,
     aorist: stem.aorist,
   };
 }

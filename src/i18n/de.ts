@@ -345,6 +345,8 @@ export const de = {
   'explain.softening': 'Auslaut „{from}“ wird vor einem Vokal zu „{to}“ ({tag})',
   'explain.pronominal_n': 'Nach dem Possessiv der 3. Person steht ein n → {tag}',
   'explain.vowel_drop': 'Der Vokal „{vowel}“ im Stamm fällt vor einem Vokal aus ({tag})',
+  'explain.doubling': 'Das „{letter}“ am Stammende verdoppelt sich vor einem Vokal ({tag})',
+  'explain.no_buffer': 'Dieses Lehnwort nimmt hier kein Puffer-„{letter}“ ({tag})',
   'explain.stem_vowel_drop':
     'Der Stamm endet auf „{vowel}“; vor -iyor fällt dieser Vokal weg ({tag})',
   'explain.narrowing': 'Vor -yor wird die Verneinung -me/-ma zu „m{chose}“ ({tag})',

@@ -36,6 +36,8 @@ export function buildLookup(
       proper: v.proper,
       capitalized: v.capitalized,
       y_stem: v.y_stem,
+      doubles: v.doubles,
+      poss_no_s: v.poss_no_s,
       aorist: v.aorist,
       register: v.register,
     })),

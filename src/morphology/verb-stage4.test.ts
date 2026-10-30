@@ -521,3 +521,17 @@ describe('Nebenformen und weitere Kombinationen (Review E1)', () => {
     );
   });
 });
+
+describe('de-/ye- als letztes Wort eines Mehrwortverbs', () => {
+  it.each([
+    [{ tense: 'present', person: '3sg' }, 'evet diyor'],
+    [{ tense: 'future', person: '1sg' }, 'evet diyeceğim'],
+    [{ tense: 'past', person: '3sg' }, 'evet dedi'],
+  ] as const)('%j → %s', (opts, form) => {
+    expect(conjugate('evet demek', opts).form).toBe(form);
+  });
+
+  it('andere Mehrwortverben bleiben regelmäßig', () => {
+    expect(conjugate('söz vermek', { tense: 'present', person: '1sg' }).form).toBe('söz veriyorum');
+  });
+});

@@ -70,6 +70,8 @@ export const nounStem = (e: VocabEntry): Stem => ({
   proper: e.proper,
   capitalized: e.capitalized,
   yStem: e.y_stem,
+  doubles: e.doubles,
+  possNoS: e.poss_no_s,
 });
 
 const verbStemOf = (e: VocabEntry): VerbStem => ({

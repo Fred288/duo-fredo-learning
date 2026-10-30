@@ -20,6 +20,10 @@ export interface Stem {
   capitalized?: boolean;
   /** Stamm mit y vor Genitiv und Possessiv (su → suyun, suyum; ne → neyin). */
   yStem?: boolean;
+  /** Auslautkonsonant verdoppelt sich vor vokalischem Suffix (hak → hakkı, ret → reddi). */
+  doubles?: boolean;
+  /** Possessiv 3. Sg. ohne Puffer-s, arabische Lehnwörter (cami → camii, mevzu → mevzuu). */
+  possNoS?: boolean;
 }
 
 // Suffixe, vor denen ein y-Stamm sein y zeigt (nicht POSS_3PL: suları).
@@ -42,11 +46,9 @@ export class MorphError extends Error {}
 
 // Noch nicht abgedeckt; später über weitere Vocab-Flags lösbar.
 export const KNOWN_LIMITS = [
-  'Konsonantenverdopplung (hak → hakkı, ret → reddi)',
-  'Stumme Endung arabischer Lehnwörter (cami → camii)',
-  'ne + Possessiv 3. Sg. ist „nesi“, mit y_stem entstünde „neyi“',
+  'Nebenform camisi neben camii: die Engine bildet nur camii (Freitext-Übungen nennen beide)',
   'Kausativ (B2); -DIkçA, -(y)IncAyA kadar, -(y)AsI, -mAktAnsA nicht gebildet',
-  'Passiv von de-/ye- nur denen/yenen (denilen/yenilen fehlen); de-/ye-Hebung nicht in Mehrwortverben (evet demek)',
+  'Passiv von de-/ye- nur denir/yenir; denilmek und yenilmek sind eigene Vokabeln',
   'Infinite Formen: -(y)An ohne Possessiv (sevenlerim fehlt), -(y)AcAk ohne Possessiv ohne Endungen (gelecekler fehlt), -DIk ohne Possessiv nur mit Ablativ (geldikten), -mAk nur mit -DA/-DAn/-(y)lA, Konverbien ohne Endungen',
   'Optativ nur 1sg/1pl (gelesin, geleler veraltet); geldiydi, gelseymiş bewusst nicht',
   'Frage mit ise (geliyor muysa) nicht gebildet',
@@ -88,8 +90,14 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
     }
 
     // y-Stamm: das y gehört zum Suffix-Baustein (su-yun), danach gilt der Stamm als konsonantisch.
-    const yPrefix = i === 0 && stem.yStem && Y_STEM_TAGS.has(tag) ? 'y' : '';
+    // ne zeigt in der 3. Person kein y: nesi (neyi wäre der Akkusativ).
+    const yStem = stem.yStem && !(tag === 'POSS_3SG' && normalize(stemForm) === 'ne');
+    const yPrefix = i === 0 && yStem && Y_STEM_TAGS.has(tag) ? 'y' : '';
     if (yPrefix) steps.push({ tag, rule: 'buffer', letter: 'y' });
+    if (i === 0 && tag === 'POSS_3SG' && stem.possNoS) {
+      template = 'I';
+      steps.push({ tag, rule: 'no_buffer', letter: 's' });
+    }
     const out =
       yPrefix +
       realize(template, tag, {
@@ -123,6 +131,10 @@ export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
           stemForm = s.form;
           steps.push({ tag, rule: 'softening', from: s.from, to: s.to });
         }
+      }
+      if (stem.doubles && !isVowel(stemForm.at(-1)!)) {
+        steps.push({ tag, rule: 'doubling', letter: stemForm.at(-1)! });
+        stemForm += stemForm.at(-1)!;
       }
     }
     suffixTexts.push(out);

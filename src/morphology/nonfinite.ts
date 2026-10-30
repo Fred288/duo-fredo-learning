@@ -6,7 +6,8 @@ import type { Step } from './template';
 import {
   abilityStem,
   Builder,
-  IRREGULAR_FUTURE,
+  isDe,
+  raisedStem,
   passiveStem,
   softenedStem,
   splitDerived,
@@ -113,12 +114,12 @@ export function nonfinite(input: VerbStem | string, opts: NonfiniteOptions): Inf
   if (opts.negative) {
     b.add('STEM', stem);
     b.suffix('NEG', 'mA');
-  } else if (buffered && IRREGULAR_FUTURE[stem] && !(stem === 'de' && DE_KEEPS_E.has(opts.form))) {
-    const raised = IRREGULAR_FUTURE[stem]!;
+  } else if (buffered && raisedStem(stem) && !(isDe(stem) && DE_KEEPS_E.has(opts.form))) {
+    const raised = raisedStem(stem)!;
     b.steps.push({ tag: opts.form, rule: 'stem_raising', from: stem.at(-1)!, to: raised.at(-1)! });
     b.add('STEM', raised);
   } else {
-    if (buffered && stem === 'de') b.steps.push({ tag: opts.form, rule: 'no_raising' });
+    if (buffered && isDe(stem)) b.steps.push({ tag: opts.form, rule: 'no_raising' });
     b.add('STEM', buffered ? softenedStem(verb, stem, opts.form, b.steps) : stem);
   }
   b.suffix(opts.form, template);

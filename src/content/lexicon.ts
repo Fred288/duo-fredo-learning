@@ -32,6 +32,8 @@ export function stemFromVocab(
     proper: v?.proper,
     capitalized: v?.capitalized,
     yStem: v?.y_stem,
+    doubles: v?.doubles,
+    possNoS: v?.poss_no_s,
     aorist: v?.aorist,
   };
 }

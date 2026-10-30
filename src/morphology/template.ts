@@ -24,6 +24,8 @@ export type Step =
   | { tag: AnyTag; rule: 'softening'; from: string; to: string }
   | { tag: AnyTag; rule: 'pronominal_n' }
   | { tag: AnyTag; rule: 'vowel_drop'; vowel: string }
+  | { tag: AnyTag; rule: 'doubling'; letter: string }
+  | { tag: AnyTag; rule: 'no_buffer'; letter: string }
   | { tag: AnyTag; rule: 'stem_vowel_drop'; vowel: string }
   | { tag: AnyTag; rule: 'narrowing'; chose: string }
   | { tag: AnyTag; rule: 'apostrophe' }

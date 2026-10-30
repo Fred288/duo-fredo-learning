@@ -5,10 +5,20 @@ export const trUpper = (s: string): string => s.normalize('NFC').toLocaleUpperCa
 
 export const SPECIAL_CHARS = ['ç', 'ğ', 'ı', 'İ', 'ö', 'ş', 'ü'] as const;
 
-const FOLD: Record<string, string> = { ç: 'c', ğ: 'g', ı: 'i', ö: 'o', ş: 's', ü: 'u' };
+const FOLD: Record<string, string> = {
+  ç: 'c',
+  ğ: 'g',
+  ı: 'i',
+  ö: 'o',
+  ş: 's',
+  ü: 'u',
+  â: 'a',
+  î: 'i',
+  û: 'u',
+};
 
-/** Ersetzt türkische Sonderzeichen (Kleinbuchstaben) durch ihre Grundbuchstaben. */
-export const foldDiacritics = (s: string): string => s.replace(/[çğıöşü]/g, (c) => FOLD[c]!);
+/** Ersetzt türkische Sonderzeichen und den Zirkumflex (Kleinbuchstaben) durch die Grundbuchstaben. */
+export const foldDiacritics = (s: string): string => s.replace(/[çğıöşüâîû]/g, (c) => FOLD[c]!);
 
 /**
  * Vergleichsform einer Antwort: NFC, tr-Kleinschreibung, ohne Satzzeichen und

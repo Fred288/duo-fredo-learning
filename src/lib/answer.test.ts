@@ -4,6 +4,15 @@ import { checkAnswer } from './answer';
 const danke = ['Teşekkürler', 'Teşekkür ederim', 'Sağ ol'];
 
 describe('checkAnswer', () => {
+  it('behandelt den Zirkumflex wie ein Sonderzeichen, in beide Richtungen', () => {
+    expect(checkAnswer('kar', ['kâr'], { tolerateDiacritics: true })).toMatchObject({
+      verdict: 'correct',
+      hints: ['diacritics'],
+    });
+    expect(checkAnswer('kâğıt', ['kağıt'], { tolerateDiacritics: true }).verdict).toBe('correct');
+    expect(checkAnswer('kar', ['kâr']).verdict).toBe('almost');
+  });
+
   it('akzeptiert jede gültige Alternative, tolerant bei Satzzeichen und Groß/Klein', () => {
     expect(checkAnswer('teşekkür ederim!', danke)).toEqual({
       verdict: 'correct',

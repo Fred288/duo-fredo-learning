@@ -103,8 +103,13 @@ export interface PredicateOptions {
   dir?: boolean;
 }
 
-// Einsilbige Stämme, die im Präsens unregelmäßig sind (de- → di-yor, ye- → yi-yor).
-const IRREGULAR_PRESENT: Record<string, string> = { de: 'd', ye: 'y' };
+// de- und ye- sind unregelmäßig, auch als letztes Wort eines Mehrwortverbs (evet de-).
+export const isDe = (stem: string): boolean => /(^| )de$/.test(stem);
+const isIrregular = (stem: string): boolean => /(^| )(de|ye)$/.test(stem);
+
+/** Präsens: Stammvokal fällt weg (de- → di-yor, ye- → yi-yor). */
+const irregularPresent = (stem: string): string | undefined =>
+  isIrregular(stem) ? stem.slice(0, -1) : undefined;
 
 export const verbStem = (form: string): string => normalize(form).replace(/m[ea]k$/, '');
 
@@ -190,8 +195,9 @@ function personAndQuestion(
   b.add('Q', particle + ending, true);
 }
 
-// Futur: ye-/de- heben den Stammvokal (yiyecek, diyecek).
-export const IRREGULAR_FUTURE: Record<string, string> = { de: 'di', ye: 'yi' };
+/** Futur: ye-/de- heben den Stammvokal (yiyecek, diyecek). */
+export const raisedStem = (stem: string): string | undefined =>
+  isIrregular(stem) ? `${stem.slice(0, -1)}i` : undefined;
 
 // Einsilbige Konsonantenstämme mit Aorist -Ir statt -Ar.
 const AORIST_IR = new Set([
@@ -266,8 +272,8 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
       if (opts.negative) {
         b.add('STEM', stem);
         b.suffix('NEG', 'mA');
-      } else if (IRREGULAR_FUTURE[stem]) {
-        const raised = IRREGULAR_FUTURE[stem]!;
+      } else if (raisedStem(stem)) {
+        const raised = raisedStem(stem)!;
         b.steps.push({ tag: 'FUT', rule: 'stem_raising', from: stem.at(-1)!, to: raised.at(-1)! });
         b.add('STEM', raised);
       } else {
@@ -333,8 +339,8 @@ function optative(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflect
   if (opts.negative) {
     b.add('STEM', stem);
     b.suffix('NEG', 'mA');
-  } else if (IRREGULAR_FUTURE[stem]) {
-    const raised = IRREGULAR_FUTURE[stem]!;
+  } else if (raisedStem(stem)) {
+    const raised = raisedStem(stem)!;
     b.steps.push({ tag: 'OPT', rule: 'stem_raising', from: stem.at(-1)!, to: raised.at(-1)! });
     b.add('STEM', raised);
   } else {
@@ -369,8 +375,8 @@ export function abilityStem(
   steps: Step[],
 ): { base: string; tail: string } {
   let base: string;
-  if (IRREGULAR_FUTURE[stem]) {
-    base = IRREGULAR_FUTURE[stem]!;
+  if (raisedStem(stem)) {
+    base = raisedStem(stem)!;
     steps.push({ tag: 'ABIL', rule: 'stem_raising', from: stem.at(-1)!, to: base.at(-1)! });
   } else {
     base = softenedStem(verb, stem, 'ABIL', steps);
@@ -519,8 +525,8 @@ function present(b: Builder, verb: VerbStem, input: string, negative: boolean) {
     b.steps.push({ tag: 'NEG', rule: 'narrowing', chose });
     b.add('NEG', 'm' + chose);
     b.add('PRES', 'yor');
-  } else if (IRREGULAR_PRESENT[stem]) {
-    const short = IRREGULAR_PRESENT[stem]!;
+  } else if (irregularPresent(stem)) {
+    const short = irregularPresent(stem)!;
     b.steps.push({ tag: 'PRES', rule: 'stem_vowel_drop', vowel: stem.at(-1)! });
     b.add('STEM', short);
     b.add('PRES', 'iyor');

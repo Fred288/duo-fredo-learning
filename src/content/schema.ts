@@ -63,6 +63,10 @@ export const Vocab = z.strictObject({
   capitalized: z.boolean().optional(),
   // y vor Genitiv und Possessiv (su → suyun, suyum)
   y_stem: z.boolean().optional(),
+  // Auslaut verdoppelt sich vor vokalischem Suffix (hak → hakkı, ret → reddi)
+  doubles: z.boolean().optional(),
+  // Possessiv 3. Sg. ohne Puffer-s (cami → camii, mevzu → mevzuu)
+  poss_no_s: z.boolean().optional(),
   // Aorist-Vokal von Verben, wenn die Regel nicht greift (ar: yapar, ir: gelir)
   aorist: z.enum(['ar', 'ir']).optional(),
   register: register.optional(),

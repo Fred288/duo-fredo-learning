@@ -169,15 +169,75 @@ describe('inflect', () => {
   it('lehnt Stamm ohne Vokal ab', () => {
     expect(() => inflect('brr', ['PL'])).toThrow(MorphError);
   });
+});
 
-  // Bekannte Grenzen, siehe KNOWN_LIMITS in inflect.ts und docs/ENGINE_GAPS.md
-  it.todo('Konsonantenverdopplung: hak → hakkı, his → hissi, ret → reddi');
-  it.todo('Stumme Endung (arab. ʿain): cami → camii (umgangssprachlich auch camisi)');
-  it.todo('ne + Possessiv 3. Sg.: nesi (mit y_stem entstünde neyi)');
+describe('Verdopplung', () => {
+  const hak = { form: 'hak', doubles: true };
+  it.each([
+    [hak, ['ACC'], 'hakkı'],
+    [hak, ['POSS_1SG'], 'hakkım'],
+    [hak, ['POSS_3SG', 'LOC'], 'hakkında'],
+    [hak, ['DAT'], 'hakka'],
+    [hak, ['LOC'], 'hakta'],
+    [hak, ['PL'], 'haklar'],
+    [hak, ['ABL'], 'haktan'],
+    [{ form: 'his', doubles: true }, ['ACC'], 'hissi'],
+    [{ form: 'sır', doubles: true }, ['POSS_1PL'], 'sırrımız'],
+    [{ form: 'af', doubles: true }, ['ACC'], 'affı'],
+    [{ form: 'ret', doubles: true, softens: true }, ['ACC'], 'reddi'],
+    [{ form: 'ret', doubles: true, softens: true }, ['LOC'], 'rette'],
+  ] as const)('%o + %j → %s', (stem, tags, form) => {
+    expect(inflect(stem, [...tags]).form).toBe(form);
+  });
+
+  it('nennt den Schritt und hält den Stamm zusammen', () => {
+    const r = inflect(hak, ['ACC']);
+    expect(r.segments).toEqual([
+      { tag: 'STEM', text: 'hakk' },
+      { tag: 'ACC', text: 'ı' },
+    ]);
+    expect(r.steps).toContainEqual({ tag: 'ACC', rule: 'doubling', letter: 'k' });
+  });
+});
+
+describe('Possessiv ohne Puffer-s (cami, mevzu)', () => {
+  const cami = { form: 'cami', possNoS: true };
+  it.each([
+    [cami, ['POSS_3SG'], 'camii'],
+    [cami, ['POSS_3SG', 'LOC'], 'camiinde'],
+    [cami, ['POSS_3SG', 'ACC'], 'camiini'],
+    [{ form: 'mevzu', possNoS: true }, ['POSS_3SG'], 'mevzuu'],
+    // Nur die 3. Person ist besonders.
+    [cami, ['ACC'], 'camiyi'],
+    [cami, ['DAT'], 'camiye'],
+    [cami, ['POSS_1SG'], 'camim'],
+    [cami, ['PL'], 'camiler'],
+  ] as const)('%o + %j → %s', (stem, tags, form) => {
+    expect(inflect(stem, [...tags]).form).toBe(form);
+  });
+});
+
+describe('Zirkumflex (â, î, û)', () => {
+  it.each([
+    ['kâr', ['ACC'], 'kârı'],
+    ['dükkân', ['LOC'], 'dükkânda'],
+    ['sükûn', ['ACC'], 'sükûnu'],
+    ['rüzgâr', ['PL'], 'rüzgârlar'],
+    ['millî', ['LIK'], 'millîlik'],
+  ] as const)('%s + %j → %s', (stem, tags, form) => {
+    expect(inflect(stem, [...tags]).form).toBe(form);
+  });
 });
 
 describe('y-Stamm (su, ne)', () => {
   const su = { form: 'su', yStem: true };
+
+  it('ne zeigt in der 3. Person kein y', () => {
+    const ne = { form: 'ne', yStem: true };
+    expect(inflect(ne, ['POSS_3SG']).form).toBe('nesi');
+    expect(inflect(ne, ['POSS_1SG']).form).toBe('neyim');
+    expect(inflect(ne, ['ACC']).form).toBe('neyi');
+  });
   it.each([
     [['GEN'], 'suyun'],
     [['POSS_1SG'], 'suyum'],

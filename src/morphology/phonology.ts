@@ -1,9 +1,10 @@
 // Lautklassen und Harmonieregeln des Türkischen.
 import { trLower } from '../lib/turkish';
 
-export const VOWELS = 'aeıioöuü';
-const FRONT = 'eiöü';
-const ROUNDED = 'oöuü';
+// â î û: Zirkumflex in Lehnwörtern (kâr, millî, sükûn), harmonisch wie a, i, u.
+export const VOWELS = 'aeıioöuüâîû';
+const FRONT = 'eiöüî';
+const ROUNDED = 'oöuüû';
 // Merkwort für stimmlose Konsonanten: "fıstıkçı şahap"
 const VOICELESS = 'fstkçşhp';
 

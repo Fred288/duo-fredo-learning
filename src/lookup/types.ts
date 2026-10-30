@@ -12,6 +12,8 @@ export type VocabEntry = Pick<
   | 'proper'
   | 'capitalized'
   | 'y_stem'
+  | 'doubles'
+  | 'poss_no_s'
   | 'aorist'
   | 'register'
 > & {
