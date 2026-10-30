@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { playPlacement, startPlacementFromOffer } from './placement';
+import { playPlacement, startPlacementFromOffer, unitsAt } from './placement';
 
 const unitCard = (page: import('@playwright/test').Page, title: string) =>
   page
@@ -19,7 +19,7 @@ test('Angebot beim ersten Start lässt sich ablehnen und kommt nicht wieder', as
 test('Anfänger: nur „Weiß ich nicht“ führt zum Start bei der ersten Unit', async ({ page }) => {
   await page.goto('/');
   await startPlacementFromOffer(page);
-  await expect(page.getByText('A1 · Thema 1 von 12')).toBeVisible();
+  await expect(page.getByText(`A1 · Thema 1 von ${unitsAt('A1')}`)).toBeVisible();
   await playPlacement(page, () => false);
 
   await expect(page.getByText('Starte bei: Alphabet und Begrüßung')).toBeVisible();
@@ -30,7 +30,7 @@ test('Anfänger: nur „Weiß ich nicht“ führt zum Start bei der ersten Unit'
   await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(0);
   // Der Test zählt weder fürs Tagesziel noch für den Fortschritt.
   await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
-  await expect(first.getByText('0 von 4 Lektionen')).toBeVisible();
+  await expect(first.getByText(/^0 von \d+ Lektionen$/)).toBeVisible();
 });
 
 test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; zurücknehmbar', async ({
@@ -42,22 +42,22 @@ test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; z
   await playPlacement(page, (unitId) => unitId.startsWith('a1-'));
 
   await expect(page.getByText(/^Starte bei: /)).toBeVisible();
-  await expect(page.getByText('Sicher (12)')).toBeVisible();
+  await expect(page.getByText('Sicher', { exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Empfehlung übernehmen' }).click();
 
   // Die Startseite scrollt zur Start-Unit; sie trägt die Marke, A1 ist als bekannt markiert.
   await expect(page.getByText('Empfohlener Start')).toHaveCount(1);
-  await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(12);
+  await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(unitsAt('A1'));
   const start = page.getByRole('listitem').filter({ has: page.getByText('Empfohlener Start') });
   await expect(start).toBeInViewport();
   // Fortschrittsbalken bleiben echt.
   await expect(
-    unitCard(page, 'Alphabet und Begrüßung').getByText('0 von 4 Lektionen'),
+    unitCard(page, 'Alphabet und Begrüßung').getByText(/^0 von \d+ Lektionen$/),
   ).toBeVisible();
 
   // Bleibt nach dem Neuladen erhalten.
   await page.reload();
-  await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(12);
+  await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(unitsAt('A1'));
 
   // Statistik nennt die übersprungenen Units.
   await page.getByRole('button', { name: 'Statistik' }).first().click();
@@ -67,7 +67,7 @@ test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; z
   // Zurücknehmen in den Einstellungen; das Angebot kommt nicht zurück.
   await page.getByRole('button', { name: 'Einstellungen' }).click();
   await expect(
-    page.getByText('Einstufung übernommen: 12 Themen als bekannt markiert.'),
+    page.getByText(`Einstufung übernommen. Als bekannt markierte Themen: ${unitsAt('A1')}.`),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Einstufung zurücknehmen' }).click();
   await expect(page.getByText('Einstufung zurückgenommen.')).toBeVisible();
@@ -86,6 +86,7 @@ test('Abbrechen speichert nichts; aus den Einstellungen wiederholbar', async ({ 
   await page.getByRole('button', { name: 'Test beginnen' }).click();
   await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
   await page.getByRole('button', { name: /Abbrechen/ }).click();
+  await page.getByRole('button', { name: 'Ja, abbrechen' }).click();
   await expect(page.getByText('Empfohlener Start')).toHaveCount(0);
   await page.getByRole('button', { name: 'Einstellungen' }).click();
   await expect(page.getByText('Noch keine Einstufung übernommen.')).toBeVisible();

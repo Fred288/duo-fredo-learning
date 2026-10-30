@@ -1,4 +1,12 @@
+import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
+
+// Zahl der A1-Units laut Einstufungsplan (vom Build erzeugt).
+const a1Units = (
+  JSON.parse(readFileSync('public/content/placement.json', 'utf8')) as {
+    levels: { level: string; units: unknown[] }[];
+  }
+).levels.find((l) => l.level === 'A1')!.units.length;
 
 test('App und Lektion laufen nach dem ersten Besuch offline', async ({ page, context }) => {
   await page.goto('/');
@@ -57,11 +65,11 @@ test('Einstufungstest läuft offline (placement.json und Units im Precache)', as
   await page.reload();
   await page.getByRole('button', { name: 'Einstufung machen' }).click();
   await page.getByRole('button', { name: 'Test beginnen' }).click();
-  await expect(page.getByText('A1 · Thema 1 von 12')).toBeVisible();
+  await expect(page.getByText(`A1 · Thema 1 von ${a1Units}`)).toBeVisible();
   await expect(page.locator('[data-exercise-id]')).toBeVisible();
   await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
   await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
-  await expect(page.getByText('A1 · Thema 2 von 12')).toBeVisible();
+  await expect(page.getByText(`A1 · Thema 2 von ${a1Units}`)).toBeVisible();
 });
 
 test('Manifest ist installierbar konfiguriert', async ({ page, request }) => {

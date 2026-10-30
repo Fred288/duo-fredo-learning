@@ -91,7 +91,7 @@ test('Übernommene Einstufung gehört zur Sicherung', async ({ page, browser }) 
   await expect(fresh.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toBeVisible();
   await fresh.getByRole('button', { name: 'Einstellungen' }).click();
   await fresh.getByLabel('Sicherung laden').setInputFiles(file);
-  await expect(fresh.getByText(/1 Einstufungen/).first()).toBeVisible();
+  await expect(fresh.getByText(/Einstufungen: 1/).first()).toBeVisible();
   await fresh.getByRole('button', { name: 'Laden', exact: true }).click();
   await expect(fresh.getByText('Sicherung geladen.')).toBeVisible();
   await fresh.getByRole('button', { name: /Zurück/ }).click();

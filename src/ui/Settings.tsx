@@ -224,7 +224,9 @@ export function Settings() {
         </h2>
         <p className="text-sm text-stone-600 dark:text-stone-400">
           {placement
-            ? t('settings.placement.current', { count: placement.skipped.length })
+            ? placement.skipped.length > 0
+              ? t('settings.placement.current', { count: placement.skipped.length })
+              : t('settings.placement.currentStart')
             : t(placements.length ? 'settings.placement.cleared' : 'settings.placement.none')}
         </p>
         <div className="flex flex-wrap gap-2">

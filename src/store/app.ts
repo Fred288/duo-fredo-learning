@@ -49,7 +49,7 @@ export const useApp = create<AppState>((set) => ({
   lookupQuery: '',
   lookupEntry: undefined,
   setLookup: (lookupQuery, lookupEntry) => set({ lookupQuery, lookupEntry }),
-  goHome: () => set({ screen: { name: 'home' } }),
+  goHome: () => set({ screen: { name: 'home' }, focusUnit: undefined }),
   focusUnit: undefined,
   goHomeTo: (focusUnit) => set({ screen: { name: 'home' }, focusUnit }),
   clearFocusUnit: () => set({ focusUnit: undefined }),

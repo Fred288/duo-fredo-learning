@@ -21,6 +21,15 @@ const buttonBase =
   'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 disabled:opacity-40';
 
 /**
+ * Doppeltippen (Klick mit `detail` > 1) und gehaltene Tasten auf den Antwortknöpfen zählen
+ * nicht: der zweite Tipp träfe schon die nächste, ungesehene Aufgabe.
+ */
+const repeated = (e: React.MouseEvent) => e.detail > 1;
+const noKeyRepeat = (e: React.KeyboardEvent) => {
+  if (e.repeat) e.preventDefault();
+};
+
+/**
  * Einstufungstest: ein bis zwei Aufgaben je Thema, ohne Rückmeldung und ohne Punkte. Schreibt
  * nichts in Versuche, Abschlüsse oder Karten; nur die übernommene Empfehlung wird gespeichert.
  */
@@ -28,34 +37,50 @@ export function PlacementScreen() {
   const goHome = useApp((s) => s.goHome);
   const [plan, setPlan] = useState<PlacementPlan>();
   const [failed, setFailed] = useState(false);
+  const [tries, setTries] = useState(0);
   const [flow, setFlow] = useState<PlacementState>();
+  const fail = useCallback(() => setFailed(true), []);
 
   useEffect(() => {
-    fetchPlacement().then(setPlan, () => setFailed(true));
-  }, []);
+    if (!plan) fetchPlacement().then(setPlan, fail);
+  }, [plan, tries, fail]);
 
   if (failed) {
+    // Der Stand `flow` bleibt erhalten: nach „Nochmal versuchen“ geht es bei derselben Aufgabe weiter.
     return (
       <section className="space-y-4">
-        <p className="text-rose-700 dark:text-rose-400">{t('home.error')}</p>
-        <BackButton onClick={goHome} />
+        <p role="alert" className="text-rose-700 dark:text-rose-400">
+          {t('placement.error')}
+        </p>
+        <button
+          type="button"
+          autoFocus
+          onClick={() => {
+            setFailed(false);
+            setTries((n) => n + 1);
+          }}
+          className={`${buttonBase} bg-teal-700 text-white`}
+        >
+          {t('placement.retry')}
+        </button>
+        <BackButton label={t('placement.leave')} onClick={goHome} />
       </section>
     );
   }
-  if (!plan) return <p className="text-stone-500">{t('placement.loading')}</p>;
+  if (!plan) return <p className="text-stone-500 dark:text-stone-400">{t('placement.loading')}</p>;
   if (!flow) return <Intro onStart={() => setFlow(startPlacement(plan))} onBack={goHome} />;
   if (flow.done) return <Result plan={plan} flow={flow} />;
-  return <Question plan={plan} flow={flow} onFlow={setFlow} onFail={() => setFailed(true)} />;
+  return <Question plan={plan} flow={flow} onFlow={setFlow} onFail={fail} />;
 }
 
-function BackButton({ onClick }: { onClick: () => void }) {
+function BackButton({ onClick, label }: { onClick: () => void; label: string }) {
   return (
     <button
       type="button"
       onClick={onClick}
       className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800"
     >
-      ← {t('placement.back')}
+      ← {label}
     </button>
   );
 }
@@ -64,7 +89,7 @@ function Intro({ onStart, onBack }: { onStart: () => void; onBack: () => void })
   return (
     <section className="space-y-6" aria-labelledby="placement-title">
       <header className="flex items-center gap-3">
-        <BackButton onClick={onBack} />
+        <BackButton label={t('placement.back')} onClick={onBack} />
         <h1 id="placement-title" className="text-xl font-semibold">
           {t('placement.title')}
         </h1>
@@ -101,7 +126,9 @@ function Question({
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const [value, setValue] = useState('');
   const [loaded, setLoaded] = useState<Unit>();
+  const [leaving, setLeaving] = useState(false);
   const units = useRef(new Map<string, Promise<Unit>>());
+  const heading = useRef<HTMLHeadingElement>(null);
 
   const load = useCallback((id: string) => {
     let p = units.current.get(id);
@@ -132,6 +159,13 @@ function Question({
     if (ready && !supported) onFail();
   }, [ready, supported, onFail]);
 
+  // Neue Aufgabe: Fokus auf die Fortschrittszeile, damit Screenreader sie ansagen und die
+  // Tastatur oben beginnt (der gedrückte Knopf ist nach dem Wechsel nicht mehr derselbe).
+  const supportedId = supported?.id;
+  useEffect(() => {
+    if (supportedId) heading.current?.focus();
+  }, [supportedId]);
+
   const send = useCallback(
     (unknown: boolean) => {
       if (!supported) return;
@@ -147,7 +181,7 @@ function Question({
     const onKey = (e: KeyboardEvent) => {
       // Aktive Buttons lösen Enter selbst aus (sonst würde doppelt gewertet).
       const button = e.target instanceof HTMLButtonElement ? e.target : undefined;
-      if (e.key !== 'Enter' || (button && !button.disabled)) return;
+      if (e.key !== 'Enter' || e.repeat || (button && !button.disabled)) return;
       e.preventDefault();
       send(false);
     };
@@ -157,12 +191,22 @@ function Question({
 
   if (!cur) return null;
   const vocab: Vocab[] = ready ? [...(ready.vocab ?? []), ...(ready.lexicon ?? [])] : [];
+  // Erst nach einer Antwort lohnt die Rückfrage vorm Verlassen.
+  const answered = flow.step === 1 || Object.keys(flow.statuses).length > 0;
 
   return (
     <section className="space-y-6" aria-labelledby="placement-progress">
       <header className="flex items-center gap-3">
-        <BackButton onClick={goHome} />
-        <h1 id="placement-progress" className="flex-1 text-sm text-stone-600 dark:text-stone-400">
+        <BackButton
+          label={t('placement.leave')}
+          onClick={() => (answered ? setLeaving(true) : goHome())}
+        />
+        <h1
+          id="placement-progress"
+          ref={heading}
+          tabIndex={-1}
+          className="flex-1 text-sm text-stone-600 outline-none dark:text-stone-400"
+        >
           {t('placement.progress', {
             level: cur.level,
             current: cur.position,
@@ -171,8 +215,35 @@ function Question({
         </h1>
       </header>
 
+      {leaving && (
+        <div
+          role="group"
+          aria-labelledby="placement-leave"
+          className="space-y-3 rounded-xl border border-stone-300 p-4 dark:border-stone-700"
+        >
+          <p id="placement-leave">{t('placement.leave.confirm')}</p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              autoFocus
+              onClick={() => setLeaving(false)}
+              className="min-h-11 rounded-lg bg-teal-700 px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+            >
+              {t('placement.leave.keep')}
+            </button>
+            <button
+              type="button"
+              onClick={goHome}
+              className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+            >
+              {t('placement.leave.yes')}
+            </button>
+          </div>
+        </div>
+      )}
+
       {!supported ? (
-        <p className="text-stone-500">{t('placement.unit.loading')}</p>
+        <p className="text-stone-500 dark:text-stone-400">{t('placement.unit.loading')}</p>
       ) : (
         <>
           <div key={supported.id} data-exercise-id={supported.id}>
@@ -187,7 +258,8 @@ function Question({
           <div className="space-y-2">
             <button
               type="button"
-              onClick={() => send(false)}
+              onClick={(e) => !repeated(e) && send(false)}
+              onKeyDown={noKeyRepeat}
               disabled={!value.trim()}
               className={`${buttonBase} bg-teal-700 text-white`}
             >
@@ -195,7 +267,8 @@ function Question({
             </button>
             <button
               type="button"
-              onClick={() => send(true)}
+              onClick={(e) => !repeated(e) && send(true)}
+              onKeyDown={noKeyRepeat}
               className={`${buttonBase} bg-stone-200 dark:bg-stone-800`}
             >
               {t('placement.unknown')}
@@ -214,6 +287,7 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
   const goHomeTo = useApp((s) => s.goHomeTo);
   const recordPlacement = useProgress((s) => s.recordPlacement);
   const set = useSettings((s) => s.set);
+  const heading = useRef<HTMLHeadingElement>(null);
   const rec = recommend(plan, flow.statuses);
   const byStatus = (status: UnitResult['status']) => rec.units.filter((u) => u.status === status);
   const start = rec.units.find((u) => u.unitId === rec.startUnit);
@@ -222,9 +296,18 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
   // Ohne Start und ohne Übersprungenes gäbe es nichts zu übernehmen (kommt nicht vor).
   const acceptable = rec.startUnit !== null || rec.skipped.length > 0;
 
+  // Die Überschrift bekommt den Fokus: Screenreader lesen die Empfehlung, bevor sie den
+  // Knopf erreichen, der sie übernimmt.
+  useEffect(() => heading.current?.focus(), []);
+
   return (
     <section className="space-y-6" aria-labelledby="placement-result">
-      <h1 id="placement-result" className="text-xl font-semibold">
+      <h1
+        id="placement-result"
+        ref={heading}
+        tabIndex={-1}
+        className="text-xl font-semibold outline-none"
+      >
         {t('placement.result.title')}
       </h1>
       <div className="space-y-2">
@@ -234,14 +317,18 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
             : t(catchUp.length ? 'placement.result.catchUpOnly' : 'placement.result.allKnown')}
         </p>
         {catchUp.length > 0 && <p>{t('placement.result.catchUp', { units: names(catchUp) })}</p>}
-        <p className="text-sm text-stone-600 dark:text-stone-400">{t('placement.result.effect')}</p>
+        {rec.skipped.length > 0 && (
+          <p className="text-sm text-stone-600 dark:text-stone-400">
+            {t('placement.result.effect')}
+          </p>
+        )}
       </div>
 
       <Group title={t('placement.section.unsure')} units={byStatus('unsure')} />
       <Group title={t('placement.section.shaky')} units={byStatus('shaky')} />
       <Group title={t('placement.section.secure')} units={byStatus('secure')} fold />
       {untested > 0 && (
-        <p className="text-sm text-stone-500">
+        <p className="text-sm text-stone-500 dark:text-stone-400">
           {t('placement.section.untested', { count: untested })}
         </p>
       )}
@@ -249,7 +336,6 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
       <div className="space-y-2">
         <button
           type="button"
-          autoFocus
           disabled={!acceptable}
           onClick={() => {
             recordPlacement({
@@ -298,18 +384,15 @@ function Group({
       ))}
     </ul>
   );
+  // Bewusst ohne Zahl im Titel: eine Zählung je Gruppe läse sich wie eine Trefferzahl.
   return fold ? (
     <details>
-      <summary className="min-h-11 cursor-pointer py-2 font-medium">
-        {title} ({units.length})
-      </summary>
+      <summary className="min-h-11 cursor-pointer py-2 font-medium">{title}</summary>
       {list}
     </details>
   ) : (
     <div>
-      <h2 className="font-medium">
-        {title} ({units.length})
-      </h2>
+      <h2 className="font-medium">{title}</h2>
       {list}
     </div>
   );

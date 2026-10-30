@@ -182,7 +182,7 @@ export function Home() {
                         <h3 className="font-medium">{unit.title}</h3>
                         {mark && (
                           <p
-                            className={`mt-1 text-xs ${mark === 'start' ? 'font-medium text-teal-700 dark:text-teal-400' : 'text-stone-500'}`}
+                            className={`mt-1 text-xs ${mark === 'start' ? 'font-medium text-teal-700 dark:text-teal-400' : 'text-stone-500 dark:text-stone-400'}`}
                           >
                             {t(`placement.mark.${mark}`)}
                           </p>

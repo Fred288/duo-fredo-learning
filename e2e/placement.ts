@@ -1,7 +1,15 @@
 // Hilfen für den Einstufungstest in E2E-Tests.
+import { readFileSync } from 'node:fs';
 import { expect, type Page } from '@playwright/test';
+import type { PlacementPlan } from '../src/placement';
 import type { Exercise } from '../src/content/schema';
 import { answer, loadUnit } from './solve';
+
+/** Zahl der Units je Niveau laut Einstufungsplan; die Tests hängen so nicht an Inhaltszahlen. */
+export function unitsAt(level: 'A1' | 'A2' | 'B1'): number {
+  const plan = JSON.parse(readFileSync('public/content/placement.json', 'utf8')) as PlacementPlan;
+  return plan.levels.find((l) => l.level === level)?.units.length ?? 0;
+}
 
 const result = (page: Page) => page.getByRole('heading', { name: 'Deine Empfehlung' });
 
