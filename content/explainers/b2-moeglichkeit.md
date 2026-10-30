@@ -11,7 +11,9 @@ Die einfache Form auf **-se** rückt die Sache weiter weg. Sie ist möglich, abe
 - Gelse konuşuruz. (Falls er käme, würden wir sprechen.)
 - Çok param olsa ev alırım. (Wenn ich viel Geld hätte, würde ich ein Haus kaufen.)
 
-Im Hauptsatz steht meist der Aorist. Mit **Yerinde olsam** … sagst du „an deiner Stelle“.
+Im Hauptsatz steht meist der Aorist. Auch -irdi ist möglich und klingt noch weniger wirklich: Çok param olsa ev alırdım. Darum kann Yerinde olsam kabul etmezdim beides heißen: „würde nicht“ oder „hätte nicht“.
+
+Mit **Yerinde olsam** … sagst du „an deiner Stelle“.
 
 ## Hätte ich nur: Irrealis
 

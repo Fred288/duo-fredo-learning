@@ -71,11 +71,12 @@ export function readingResolver(
     if (g) return { gloss: g.de, vocab: g.vocab };
     const plain = best(base.get(k) ?? []);
     if (plain) return { vocab: plain.id };
-    const inflected = best(
-      lemmatize(prepared, text)
-        .filter((m) => exactKey(m.form) === k)
-        .map((m) => m.entry),
-    );
+    const readings = lemmatize(prepared, text)
+      .filter((m) => exactKey(m.form) === k)
+      .map((m) => m.entry);
+    // ona, onu: Pronomen vor der Zahl on, auch wenn die Zahl die nähere Unit hat.
+    const pronouns = readings.filter((e) => e.pos === 'pron');
+    const inflected = best(pronouns.length ? pronouns : readings);
     return inflected ? { vocab: inflected.id } : undefined;
   };
 

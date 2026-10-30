@@ -37,7 +37,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: wahrscheinlich
-        answers: [muhtemelen, herhalde, galiba]
+        answers: [muhtemelen, herhalde, galiba, büyük ihtimalle]
       - id: b2-u06-l1-e6
         type: multiple_choice
         prompt: Was heißt „şüphe“?
@@ -109,7 +109,7 @@ lessons:
         target: bilsem
         gloss_de: wenn ich wüsste
         explanation: -se für etwas, das unwahrscheinlich oder gedacht ist.
-      - { id: b2-u06-l2-e2, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: conditional, target: gelsen, gloss_de: wenn du kämest }
+      - { id: b2-u06-l2-e2, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: conditional, target: gelsen, gloss_de: wenn du kämst }
       - { id: b2-u06-l2-e3, type: conjugation, mode: verb, lemma: olmak, person: 3sg, tense: conditional, target: olsa, gloss_de: wenn es wäre }
       - { id: b2-u06-l2-e4, type: conjugation, mode: verb, lemma: gitmek, person: 1pl, tense: conditional, target: gitsek, gloss_de: wenn wir gingen }
       - { id: b2-u06-l2-e5, type: conjugation, mode: verb, lemma: söylemek, person: 1sg, tense: aorist, target: söylerim, gloss_de: ich würde sagen (ich sage) }
@@ -124,13 +124,13 @@ lessons:
       - id: b2-u06-l2-e9
         type: word_bank
         prompt: Wenn du es wüsstest, würdest du es mir sagen.
-        answers: [Bilsen bana söylersin.]
+        answers: [Bilsen bana söylersin., Bilsen bana söylerdin.]
         distractors: [söyledin, biliyorsun]
       - id: b2-u06-l2-e10
         type: free_text
         direction: tr_de
         prompt: Vaktim olsa sana yardım ederim.
-        answers: ['Wenn ich Zeit hätte, würde ich dir helfen.', 'Hätte ich Zeit, würde ich dir helfen.', 'Wenn ich Zeit hätte, hülfe ich dir.', 'Wenn ich Zeit habe, helfe ich dir.']
+        answers: ['Wenn ich Zeit hätte, würde ich dir helfen.', 'Hätte ich Zeit, würde ich dir helfen.']
       - id: b2-u06-l2-e11
         type: multiple_choice
         prompt: Was ist der Unterschied? „Gelirse konuşuruz.“ / „Gelse konuşuruz.“
@@ -140,7 +140,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Wenn ich du wäre, würde ich gehen.
-        answers: [Senin yerinde olsam giderim., Senin yerinde olsam giderdim., Yerinde olsam giderim., Yerinde olsam giderdim.]
+        answers: [Senin yerinde olsam giderim., Senin yerinde olsam giderdim., Yerinde olsam giderim., Yerinde olsam giderdim., Senin yerinde olsaydım giderdim., Yerinde olsaydım giderdim.]
         explanation: Wörtlich „wenn ich an deiner Stelle wäre“.
 
   - id: b2-u06-l3
@@ -169,7 +169,7 @@ lessons:
         compound: past
         target: gelirdim
         gloss_de: ich wäre gekommen
-        explanation: Im Hauptsatz Aorist + idi.
+        explanation: Im Hauptsatz Aorist + idi. Dieselbe Form heißt auch „ich kam immer“.
       - { id: b2-u06-l3-e6, type: conjugation, mode: verb, lemma: söylemek, person: 2sg, tense: aorist, compound: past, target: söylerdin, gloss_de: du hättest gesagt }
       - { id: b2-u06-l3-e7, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: aorist, compound: past, negative: true, target: yapmazdı, gloss_de: 'er, sie hätte nicht gemacht' }
       - { id: b2-u06-l3-e8, type: conjugation, mode: verb, lemma: gelmek, person: 1pl, tense: aorist, compound: past, ability: true, target: gelebilirdik, gloss_de: wir hätten kommen können }
@@ -177,10 +177,10 @@ lessons:
         type: word_bank
         prompt: Wenn ich es gewusst hätte, wäre ich gekommen.
         answers: [Bilseydim gelirdim.]
-        distractors: [bilsem, geldim]
+        distractors: [bilirsem, geldim]
       - id: b2-u06-l3-e10
         type: word_bank
-        prompt: Wenn du früher aufgestanden wärst, hättest du den Bus nicht verpasst.
+        prompt: 'Wenn du früh aufgestanden wärst, hättest du den Bus nicht verpasst.'
         answers: [Erken kalksaydın otobüsü kaçırmazdın.]
         chunks:
           - { text: "Erken kalksaydın", role: complement }
@@ -191,12 +191,16 @@ lessons:
         type: word_bank
         prompt: Wenn wir nicht gegangen wären, wäre das nicht passiert.
         answers: [Gitmeseydik bu olmazdı.]
+        chunks:
+          - { text: "Gitmeseydik", role: complement }
+          - { text: "bu", role: subject }
+          - { text: "olmazdı", role: predicate }
         distractors: [gitsek, olurdu]
       - id: b2-u06-l3-e12
         type: free_text
         direction: tr_de
         prompt: O gün orada olsaydım her şey farklı olurdu.
-        answers: ['Wenn ich an dem Tag dort gewesen wäre, wäre alles anders gewesen.', 'Wäre ich an dem Tag dort gewesen, wäre alles anders gewesen.', 'Wenn ich an jenem Tag dort gewesen wäre, wäre alles anders gewesen.', 'Wenn ich an diesem Tag dort gewesen wäre, wäre alles anders gewesen.', 'Wäre ich an jenem Tag dort gewesen, wäre alles anders gewesen.', 'Wenn ich an dem Tag dort gewesen wäre, wäre alles anders.']
+        answers: ['Wenn ich an dem Tag dort gewesen wäre, wäre alles anders gewesen.', 'Wäre ich an dem Tag dort gewesen, wäre alles anders gewesen.', 'Wenn ich an jenem Tag dort gewesen wäre, wäre alles anders gewesen.', 'Wenn ich an diesem Tag dort gewesen wäre, wäre alles anders gewesen.', 'Wäre ich an jenem Tag dort gewesen, wäre alles anders gewesen.', 'Wenn ich an dem Tag dort gewesen wäre, wäre alles anders.', 'Wäre ich an diesem Tag dort gewesen, wäre alles anders gewesen.', 'Wenn ich an dem Tag dort gewesen wäre, wäre alles anders gekommen.']
       - id: b2-u06-l3-e13
         type: multiple_choice
         prompt: Welcher Satz sagt, dass ich nicht gekommen bin?
@@ -225,7 +229,7 @@ lessons:
       - { id: b2-u06-l4-e2, type: conjugation, mode: verb, lemma: çalışmak, person: 3sg, tense: present, dir: true, target: çalışıyordur, gloss_de: 'er, sie arbeitet wohl gerade' }
       - { id: b2-u06-l4-e3, type: conjugation, mode: verb, lemma: gitmek, person: 3sg, tense: evidential, dir: true, target: gitmiştir, gloss_de: 'er, sie ist wohl gegangen' }
       - { id: b2-u06-l4-e4, type: conjugation, mode: verb, lemma: unutmak, person: 3sg, tense: evidential, dir: true, target: unutmuştur, gloss_de: 'er, sie hat es wohl vergessen' }
-      - { id: b2-u06-l4-e5, type: conjugation, mode: verb, lemma: bilmek, person: 3sg, tense: future, dir: true, target: bilecektir, gloss_de: 'er, sie wird es wohl wissen' }
+      - { id: b2-u06-l4-e5, type: conjugation, mode: verb, lemma: gelmek, person: 3sg, tense: future, dir: true, target: gelecektir, gloss_de: 'er, sie wird bestimmt kommen' }
       - { id: b2-u06-l4-e6, type: conjugation, mode: copula, lemma: yorgun, person: 3sg, dir: true, target: yorgundur, gloss_de: 'er, sie ist wohl müde' }
       - { id: b2-u06-l4-e7, type: conjugation, mode: copula, lemma: evde, person: 3sg, dir: true, target: evdedir, gloss_de: 'er, sie ist wohl zu Hause' }
       - { id: b2-u06-l4-e8, type: conjugation, mode: verb, lemma: olmak, person: 3sg, tense: aorist, ability: true, target: olabilir, gloss_de: es kann sein }
@@ -243,17 +247,19 @@ lessons:
       - id: b2-u06-l4-e11
         type: word_bank
         prompt: Vielleicht haben sie den Zug verpasst.
-        answers: [Belki treni kaçırmışlardır., Belki treni kaçırmış olabilirler.]
+        answers: [Belki treni kaçırmışlardır., Belki treni kaçırmış olabilirler., Treni belki kaçırmışlardır.]
         chunks:
-          - { text: "Belki", role: time }
+          - { text: "Belki", role: complement }
           - { text: "treni", role: object }
           - { text: "kaçırmışlardır", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [tren, kaçırırlar]
       - id: b2-u06-l4-e12
         type: free_text
         direction: tr_de
         prompt: Telefonunu açmıyor, toplantıdadır.
-        answers: ['Er geht nicht ans Telefon, er ist wohl in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist wohl in einer Sitzung.', 'Er geht nicht ans Telefon, er ist sicher in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist sicher in einer Sitzung.', 'Er geht nicht ans Telefon, er ist bestimmt in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist bestimmt in einer Sitzung.', 'Er geht nicht ans Telefon, er wird in einer Sitzung sein.', 'Sie geht nicht ans Telefon, sie wird in einer Sitzung sein.']
+        answers: ['Er geht nicht ans Telefon, er ist wohl in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist wohl in einer Sitzung.', 'Er geht nicht ans Telefon, er ist sicher in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist sicher in einer Sitzung.', 'Er geht nicht ans Telefon, er ist bestimmt in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist bestimmt in einer Sitzung.', 'Er geht nicht ans Telefon, er wird in einer Sitzung sein.', 'Sie geht nicht ans Telefon, sie wird in einer Sitzung sein.', 'Er geht nicht ans Telefon, er ist wahrscheinlich in einer Sitzung.', 'Sie geht nicht ans Telefon, sie ist wahrscheinlich in einer Sitzung.', 'Er geht nicht ans Telefon, er ist wohl in einer Besprechung.', 'Sie geht nicht ans Telefon, sie ist wohl in einer Besprechung.', 'Er geht nicht ans Telefon, er ist sicher in einer Besprechung.', 'Sie geht nicht ans Telefon, sie ist sicher in einer Besprechung.']
       - id: b2-u06-l4-e13
         type: multiple_choice
         prompt: Was bedeutet „Yanılmış olabilirim.“?
@@ -273,7 +279,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Yerinde olsam kabul etmezdim.
-        answers: ['An deiner Stelle würde ich nicht zustimmen.', 'An deiner Stelle würde ich das nicht akzeptieren.', 'An deiner Stelle hätte ich nicht zugestimmt.', 'An deiner Stelle hätte ich das nicht akzeptiert.', 'An deiner Stelle würde ich es nicht akzeptieren.', 'An deiner Stelle hätte ich es nicht akzeptiert.', 'An deiner Stelle würde ich das nicht annehmen.', 'An deiner Stelle hätte ich das nicht angenommen.']
+        answers: ['An deiner Stelle würde ich nicht zustimmen.', 'An deiner Stelle würde ich das nicht akzeptieren.', 'An deiner Stelle hätte ich nicht zugestimmt.', 'An deiner Stelle hätte ich das nicht akzeptiert.', 'An deiner Stelle würde ich es nicht akzeptieren.', 'An deiner Stelle hätte ich es nicht akzeptiert.', 'An deiner Stelle würde ich das nicht annehmen.', 'An deiner Stelle hätte ich das nicht angenommen.', 'An deiner Stelle würde ich es nicht annehmen.', 'An deiner Stelle hätte ich es nicht angenommen.']
       - id: b2-u06-l5-e2
         type: word_bank
         prompt: Du könntest recht haben.
@@ -288,7 +294,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Wahrscheinlich hast du recht.
-        answers: [Muhtemelen haklısın., Herhalde haklısın., Galiba haklısın., Belki haklısın.]
+        answers: [Muhtemelen haklısın., Herhalde haklısın., Galiba haklısın., Sanırım haklısın., Büyük ihtimalle haklısın.]
       - id: b2-u06-l5-e5
         type: word_bank
         prompt: Ich schlage etwas anderes vor.
@@ -341,7 +347,7 @@ lessons:
         lemma: almak
         tense: conditional
         targets: [alsam, alsan, alsa, alsak, alsanız, alsalar]
-        gloss_de: wenn … kaufte
+        gloss_de: wenn … kaufen würde
 
   - id: b2-u06-r1
     type: reading
@@ -389,6 +395,7 @@ lessons:
         - { tr: "tanışmışlar", de: "sie haben sich offenbar kennengelernt", vocab: "tanışmak" }
         - { tr: "ikisi", de: "beide (iki + si)", vocab: "iki" }
         - { tr: "de", de: "auch" }
+        - { tr: "sorun", de: "fragt (sormak, Imperativ ihr)", vocab: "sormak" }
         - { tr: "nasıl", de: "wie" }
         - { tr: "sık", de: "oft (daha sık = öfter)" }
         - { tr: "bulamadık", de: "wir konnten nicht finden", vocab: "bulmak" }
@@ -403,7 +410,7 @@ lessons:
         - { tr: "içindedir", de: "ist wohl darin (iç + i + nde + dir)", vocab: "iç" }
         - { tr: "bodrumdadır", de: "ist wohl im Keller (bodrum + da + dır)" }
         - { tr: "birine", de: "jemandem" }
-        - { tr: "olabilirsin", de: "du kannst sein", vocab: "olmak" }
+        - { tr: "olabilirsin", de: "vermiş olabilirsin = du hast vielleicht gegeben", vocab: "olmak" }
         - { tr: "saklasaydık", de: "hätten wir aufgehoben (saklamak)" }
     exercises:
       - id: b2-u06-r1-e1
@@ -430,7 +437,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Keşke o kitabı saklasaydık.
-        answers: [Hätten wir das Buch doch aufgehoben., Hätten wir dieses Buch doch aufgehoben., Hätten wir das Buch nur aufgehoben., Hätten wir dieses Buch nur aufgehoben., 'Ich wünschte, wir hätten das Buch aufgehoben.', 'Ich wünschte, wir hätten dieses Buch aufgehoben.', Hätten wir das Buch doch behalten., Hätten wir das Buch nur behalten.]
+        answers: [Hätten wir das Buch doch aufgehoben., Hätten wir dieses Buch doch aufgehoben., Hätten wir das Buch nur aufgehoben., Hätten wir dieses Buch nur aufgehoben., 'Ich wünschte, wir hätten das Buch aufgehoben.', 'Ich wünschte, wir hätten dieses Buch aufgehoben.', Hätten wir das Buch doch behalten., Hätten wir das Buch nur behalten., Hätten wir dieses Buch doch behalten., Hätten wir dieses Buch nur behalten.]
 
   - id: b2-u06-l7
     type: review
@@ -440,12 +447,12 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: 'Wenn ich es gewusst hätte, hätte ich es gesagt.'
-        answers: [Bilseydim söylerdim., Bilseydim söylemiştim.]
+        answers: [Bilseydim söylerdim., Bilseydim sana söylerdim., Bilsem söylerdim.]
       - id: b2-u06-l7-e2
         type: free_text
         direction: de_tr
         prompt: Er muss schon gekommen sein.
-        answers: [Gelmiş olmalı., O gelmiş olmalı., Çoktan gelmiş olmalı., Gelmiştir., Çoktan gelmiştir.]
+        answers: [Gelmiş olmalı., O gelmiş olmalı., Çoktan gelmiş olmalı., Gelmiştir., Çoktan gelmiştir., Şimdiye kadar gelmiş olmalı.]
       - id: b2-u06-l7-e3
         type: multiple_choice
         prompt: Welche Form ist richtig? (ich wäre gekommen)
@@ -455,21 +462,25 @@ lessons:
       - id: b2-u06-l7-e4
         type: multiple_choice
         prompt: Welche Form ist richtig? (sie arbeitet wohl gerade)
-        options: [çalışıyordur, çalışıyordu, çalışırdır]
+        options: [çalışıyordur, çalışıyordu, çalışıyorsa]
         answer: çalışıyordur
         explanation: çalışıyordu heißt „sie arbeitete“.
       - id: b2-u06-l7-e5
         type: word_bank
         prompt: Wenn ich Zeit gehabt hätte, hätte ich dir geholfen.
         answers: [Vaktim olsaydı sana yardım ederdim.]
-        distractors: [yardım etti, olsa]
+        chunks:
+          - { text: "Vaktim olsaydı", role: complement }
+          - { text: "sana", role: complement }
+          - { text: "yardım ederdim", role: predicate }
+        distractors: [yardım etti, olursa]
       - { id: b2-u06-l7-e6, type: conjugation, mode: verb, lemma: kabul etmek, person: 1sg, tense: aorist, compound: past, negative: true, target: kabul etmezdim, gloss_de: ich hätte nicht akzeptiert }
       - { id: b2-u06-l7-e7, type: conjugation, mode: verb, lemma: önermek, person: 3sg, tense: evidential, dir: true, target: önermiştir, gloss_de: 'er, sie hat wohl vorgeschlagen' }
       - id: b2-u06-l7-e8
         type: free_text
         direction: tr_de
         prompt: Bu haber gerçek olamaz.
-        answers: [Diese Nachricht kann nicht wahr sein., Das kann nicht wahr sein., Die Nachricht kann nicht wahr sein., Diese Nachricht kann nicht stimmen., Die Nachricht kann nicht stimmen.]
+        answers: [Diese Nachricht kann nicht wahr sein., Das kann nicht wahr sein., Die Nachricht kann nicht wahr sein., Diese Nachricht kann nicht stimmen., Die Nachricht kann nicht stimmen., Diese Neuigkeit kann nicht wahr sein.]
       - id: b2-u06-l7-e9
         type: word_bank
         prompt: Vielleicht hat sie sich geirrt.
@@ -478,7 +489,7 @@ lessons:
       - { id: b2-u06-l7-e10, type: conjugation, mode: verb, lemma: tahmin etmek, person: 1sg, tense: present, target: tahmin ediyorum, gloss_de: ich vermute }
 
 vocab:
-  - { tr: ihtimal, de: [Wahrscheinlichkeit, Möglichkeit], pos: noun }
+  - { tr: ihtimal, de: [Wahrscheinlichkeit, Möglichkeit], pos: noun, harmony_vowel: e }
   - { tr: tahmin etmek, de: [schätzen, vermuten], pos: verb, softens: true }
   - { tr: sanmak, de: ['glauben, vermuten'], pos: verb }
   - { tr: herhalde, de: [wahrscheinlich], pos: adv }

@@ -19,7 +19,7 @@ Für ganze Sätze steht das Verbalnomen -me mit Possessiv und Dativ:
 | ihr, Sie    | gelmenize | rağmen       |
 | sie         | gelmelerine | rağmen     |
 
-Das Subjekt des Nebensatzes steht im Genitiv: Belediye**nin** planı açıklamasına rağmen … (Obwohl die Stadtverwaltung den Plan erklärt hat, …)
+Das Subjekt des Nebensatzes steht im Genitiv: Belediye**nin** planı açıklamasına rağmen … (Obwohl die Stadtverwaltung den Plan erklärt hat, …) Ein unbestimmtes Subjekt bleibt ohne Genitiv: Yağmur yağmasına rağmen …
 
 Vorsicht bei **çalışmama rağmen**: Das bedeutet „obwohl ich arbeite“. -ma ist hier das Verbalnomen, -m die Person, -a der Dativ. „Obwohl ich nicht arbeite“ heißt çalış**ma**mama rağmen.
 

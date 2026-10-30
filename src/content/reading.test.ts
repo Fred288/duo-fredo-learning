@@ -40,6 +40,22 @@ const units = [
 ];
 const prepared = prepareLookup(buildLookup(units, new Map()));
 
+describe('readingResolver: Pronomen und Zahl', () => {
+  const pronounFirst = prepareLookup(
+    buildLookup([unit('a1-u04', [v('o', 'pron')]), unit('a1-u05', [v('on', 'num')])], new Map()),
+  );
+  const resolver = readingResolver(pronounFirst, 'b2-u04');
+
+  it('ona und onu führen auf das Pronomen, auch wenn die Zahl näher liegt', () => {
+    expect(resolver.resolve('ona')?.vocab).toBe('o');
+    expect(resolver.resolve('onu')?.vocab).toBe('o');
+  });
+
+  it('on selbst bleibt die Zahl', () => {
+    expect(resolver.resolve('on')?.vocab).toBe('on');
+  });
+});
+
 describe('tokenize', () => {
   it('trennt Wörter und Lücken, zusammen ergeben sie den Satz', () => {
     const s = "Ayşe'yle Ankara'ya gittik, değil mi?";

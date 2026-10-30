@@ -16,13 +16,15 @@ Bei Nomen und Adjektiven hilft olmak: Hasta **olduğum** için gelmiyorum. Hava 
 
 -diği zaman und -ince bedeuten oft dasselbe, aber -ince trägt keine Person: Eve gelince beni ara.
 
+Das Subjekt bleibt vor -diği için, -diği zaman und -diği halde im Gespräch meist ohne Endung, der Genitiv ist möglich: Rapor(un) geciktiği için …
+
 ## Obwohl und da: -diği halde, -diğinden
 
 **-diği halde** heißt „obwohl“: Çok uyuduğum halde yorgunum. (Obwohl ich viel geschlafen habe, bin ich müde.)
 
 **-diğinden** (Possessiv + Ablativ) heißt „da, weil“ und steht vor allem in geschriebenen Texten:
 
-- Rapor gecikeceğinden toplantı ertelenmiştir. (Da sich der Bericht verspätet, wurde die Sitzung verschoben.)
+- Raporun gecikeceğinden toplantı ertelenmiştir. (Da sich der Bericht verspätet, wurde die Sitzung verschoben.)
 
 Achte auf die Folge Possessiv + Ablativ: bilmediği**nden** (er, sie), bilmediğin**den** (du) sehen gleich aus. Der Satz entscheidet.
 
@@ -31,7 +33,7 @@ Achte auf die Folge Possessiv + Ablativ: bilmediği**nden** (er, sie), bilmediğ
 **-dikçe** bedeutet „je mehr“, „immer wenn“ oder verneint „solange nicht“. Es nimmt keine Person:
 
 - Çalıştıkça stresim artıyor. (Je mehr ich arbeite, desto mehr nimmt mein Stress zu.)
-- Sormadıkça öğrenemezsin. (Solange du nicht fragst, lernst du es nicht.)
+- Sormadıkça öğrenemezsin. (Solange du nicht fragst, kannst du es nicht lernen.)
 
 **-inceye kadar** heißt „bis“. Das Subjekt steht, falls nötig, als eigenes Wort davor:
 

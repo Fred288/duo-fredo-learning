@@ -81,7 +81,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: rufen
-        answers: [çağırmak]
+        answers: [çağırmak, seslenmek]
       - id: b2-u04-l1-e14
         type: multiple_choice
         prompt: Was heißt „kızmak“?
@@ -124,7 +124,7 @@ lessons:
       - id: b2-u04-l2-e7
         type: word_bank
         prompt: Als ich nach Hause kam, schlief mein Sohn.
-        answers: [Eve geldiğim zaman oğlum uyuyordu.]
+        answers: [Eve geldiğim zaman oğlum uyuyordu., Oğlum eve geldiğim zaman uyuyordu.]
         chunks:
           - { text: "Eve geldiğim zaman", role: time }
           - { text: "oğlum", role: subject }
@@ -135,22 +135,24 @@ lessons:
       - id: b2-u04-l2-e8
         type: word_bank
         prompt: Weil der Bericht nicht fertig wird, verschieben wir die Sitzung.
-        answers: [Rapor bitmeyeceği için toplantıyı erteliyoruz.]
+        answers: [Rapor bitmeyeceği için toplantıyı erteliyoruz., Toplantıyı rapor bitmeyeceği için erteliyoruz.]
         chunks:
           - { text: "Rapor bitmeyeceği için", role: complement }
           - { text: "toplantıyı", role: object }
           - { text: "erteliyoruz", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [bitmedi, toplantı]
       - id: b2-u04-l2-e9
         type: free_text
         direction: tr_de
         prompt: Geç kaldığım için özür dilerim.
-        answers: ['Entschuldigung, dass ich zu spät bin.', 'Entschuldigung, dass ich zu spät gekommen bin.', 'Entschuldigen Sie, dass ich zu spät bin.', 'Entschuldigen Sie, dass ich zu spät gekommen bin.', 'Es tut mir leid, dass ich zu spät bin.', 'Es tut mir leid, dass ich zu spät gekommen bin.', Entschuldigung für die Verspätung., Ich entschuldige mich für die Verspätung., 'Entschuldigung, dass ich mich verspätet habe.', 'Es tut mir leid, dass ich mich verspätet habe.']
+        answers: ['Entschuldigung, dass ich zu spät bin.', 'Entschuldigung, dass ich zu spät gekommen bin.', 'Entschuldigen Sie, dass ich zu spät bin.', 'Entschuldigen Sie, dass ich zu spät gekommen bin.', 'Es tut mir leid, dass ich zu spät bin.', 'Es tut mir leid, dass ich zu spät gekommen bin.', Entschuldigung für die Verspätung., Ich entschuldige mich für die Verspätung., 'Entschuldigung, dass ich mich verspätet habe.', 'Es tut mir leid, dass ich mich verspätet habe.', 'Entschuldigung, dass ich zu spät komme.', 'Entschuldigen Sie, dass ich zu spät komme.', 'Es tut mir leid, dass ich zu spät komme.', 'Entschuldige, dass ich zu spät bin.', 'Entschuldige, dass ich zu spät komme.', Entschuldigen Sie die Verspätung.]
       - id: b2-u04-l2-e10
         type: free_text
         direction: de_tr
         prompt: 'Wenn du nach Hause kommst, ruf mich an.'
-        answers: [Eve geldiğin zaman beni ara., Eve gelince beni ara., Eve vardığın zaman beni ara., Eve döndüğün zaman beni ara., Eve dönünce beni ara.]
+        answers: [Eve geldiğin zaman beni ara., Eve gelince beni ara., Eve vardığın zaman beni ara., Eve döndüğün zaman beni ara., Eve dönünce beni ara., Eve geldiğinde beni ara., Eve döndüğünde beni ara., Eve varınca beni ara., Eve gelince ara., Eve geldiğin zaman ara.]
       - id: b2-u04-l2-e11
         type: multiple_choice
         prompt: Was bedeutet „Toplantıya yetişemediği için üzgün.“?
@@ -187,29 +189,31 @@ lessons:
       - id: b2-u04-l3-e7
         type: word_bank
         prompt: Obwohl sie es wusste, sagte sie mir nichts.
-        answers: [Bildiği halde bana bir şey söylemedi.]
+        answers: [Bildiği halde bana bir şey söylemedi., Bana bildiği halde bir şey söylemedi.]
         chunks:
           - { text: "Bildiği halde", role: complement }
           - { text: "bana", role: complement }
           - { text: "bir şey", role: object_bare }
           - { text: "söylemedi", role: predicate }
+        orders:
+          - { order: [1, 0, 2, 3] }
         distractors: [bilen, için]
       - id: b2-u04-l3-e8
         type: word_bank
-        prompt: Da die Arbeit nicht abgeschlossen ist, bleiben wir heute länger.
+        prompt: 'Da die Arbeit nicht abgeschlossen ist, gehen wir heute später.'
         answers: [İş tamamlanmadığından bugün daha geç çıkacağız.]
         distractors: [tamamlandı, için]
       - id: b2-u04-l3-e9
         type: free_text
         direction: tr_de
         prompt: Kaç kere söylediğim halde beni dinlemiyorsun.
-        answers: ['Obwohl ich es so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es dir so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es schon so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es dir schon so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es mehrmals gesagt habe, hörst du nicht auf mich.', 'Obwohl ich es so oft gesagt habe, hörst du nicht auf mich.']
+        answers: ['Obwohl ich es so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es dir so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es schon so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es dir schon so oft gesagt habe, hörst du mir nicht zu.', 'Obwohl ich es mehrmals gesagt habe, hörst du nicht auf mich.', 'Obwohl ich es so oft gesagt habe, hörst du nicht auf mich.', 'Obwohl ich es dir so oft gesagt habe, hörst du nicht auf mich.', 'Obwohl ich es dir mehrmals gesagt habe, hörst du mir nicht zu.']
       - id: b2-u04-l3-e10
         type: free_text
         direction: de_tr
         prompt: 'Obwohl er krank ist, arbeitet er.'
-        answers: [Hasta olduğu halde çalışıyor., O hasta olduğu halde çalışıyor.]
-        explanation: Beim Nomen hilft olmak, hasta olduğu halde.
+        answers: [Hasta olduğu halde çalışıyor., O hasta olduğu halde çalışıyor., Hasta olmasına rağmen çalışıyor.]
+        explanation: Bei Nomen und Adjektiven hilft olmak, hasta olduğu halde.
       - id: b2-u04-l3-e11
         type: multiple_choice
         prompt: Welches Wort passt? „Çok çalıştığı … işini kaybetti.“ (obwohl)
@@ -218,8 +222,8 @@ lessons:
       - id: b2-u04-l3-e12
         type: multiple_choice
         prompt: Welcher Satz klingt am förmlichsten?
-        options: [Rapor gecikeceğinden toplantı ertelenmiştir., Rapor gecikiyor ya toplantıyı erteliyoruz., Rapor gecikecek çünkü toplantı ertelendi.]
-        answer: Rapor gecikeceğinden toplantı ertelenmiştir.
+        options: [Raporun gecikeceğinden toplantı ertelenmiştir., Rapor gecikiyor ya toplantıyı erteliyoruz., Rapor gecikecek çünkü toplantı ertelendi.]
+        answer: Raporun gecikeceğinden toplantı ertelenmiştir.
         explanation: -diğinden und -miştir sind Kennzeichen geschriebener Sprache.
 
   - id: b2-u04-l4
@@ -247,7 +251,7 @@ lessons:
       - id: b2-u04-l4-e9
         type: word_bank
         prompt: Warte hier, bis ich komme.
-        answers: [Ben gelinceye kadar burada bekle.]
+        answers: [Ben gelinceye kadar burada bekle., Burada ben gelinceye kadar bekle.]
         chunks:
           - { text: "Ben gelinceye kadar", role: time }
           - { text: "burada", role: place }
@@ -257,14 +261,14 @@ lessons:
         distractors: [gelen, için]
       - id: b2-u04-l4-e10
         type: word_bank
-        prompt: Solange du nicht fragst, lernst du es nicht.
+        prompt: 'Solange du nicht fragst, kannst du es nicht lernen.'
         answers: [Sormadıkça öğrenemezsin.]
         distractors: [sorunca, öğrenirsin]
       - id: b2-u04-l4-e11
         type: free_text
         direction: tr_de
         prompt: Bu işi öğreninceye kadar çok hata yaptım.
-        answers: ['Bis ich diese Arbeit gelernt hatte, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt habe, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt hatte, machte ich viele Fehler.', 'Bis ich diese Arbeit gelernt hatte, habe ich sehr viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt habe, habe ich sehr viele Fehler gemacht.', 'Bis ich die Arbeit gelernt hatte, habe ich viele Fehler gemacht.', 'Bis ich die Arbeit gelernt habe, habe ich viele Fehler gemacht.']
+        answers: ['Bis ich diese Arbeit gelernt hatte, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt habe, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt hatte, machte ich viele Fehler.', 'Bis ich diese Arbeit gelernt hatte, habe ich sehr viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt habe, habe ich sehr viele Fehler gemacht.', 'Bis ich die Arbeit gelernt hatte, habe ich viele Fehler gemacht.', 'Bis ich die Arbeit gelernt habe, habe ich viele Fehler gemacht.', 'Bis ich diese Arbeit gelernt hatte, machte ich sehr viele Fehler.', 'Bis ich diesen Beruf gelernt hatte, habe ich viele Fehler gemacht.']
       - id: b2-u04-l4-e12
         type: multiple_choice
         prompt: Was bedeutet „Meslektaşlarımı tanıdıkça işimi daha çok seviyorum.“?
@@ -285,7 +289,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Raporu ne zaman tamamlayabilirsin?
-        answers: [Wann kannst du den Bericht fertigstellen?, Wann kannst du den Bericht abschließen?, Wann kannst du den Bericht fertig machen?, Wann kannst du mit dem Bericht fertig werden?, Bis wann kannst du den Bericht fertigstellen?]
+        answers: [Wann kannst du den Bericht fertigstellen?, Wann kannst du den Bericht abschließen?, Wann kannst du den Bericht fertig machen?, Wann kannst du mit dem Bericht fertig werden?, Bis wann kannst du den Bericht fertigstellen?, Wann kannst du den Bericht fertig haben?]
       - id: b2-u04-l5-e2
         type: word_bank
         prompt: Ich schaffe es bis zur Sitzung nicht.
@@ -301,7 +305,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Das ist meine Verantwortung.
-        answers: [Bu benim sorumluluğum., Bu sorumluluk benim., Sorumluluk bende.]
+        answers: [Bu benim sorumluluğum., Bu sorumluluk benim., Sorumluluk bende., Benim sorumluluğum.]
       - id: b2-u04-l5-e5
         type: word_bank
         prompt: Ich habe heute Überstunden gemacht.
@@ -321,7 +325,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Yöneticim bana çok kızdı.
-        answers: [Mein Vorgesetzter wurde sehr böse auf mich., Mein Chef wurde sehr böse auf mich., Meine Chefin wurde sehr böse auf mich., Meine Vorgesetzte wurde sehr böse auf mich., Mein Chef war sehr böse auf mich., Meine Chefin war sehr böse auf mich., Mein Vorgesetzter war sehr böse auf mich., Meine Vorgesetzte war sehr böse auf mich.]
+        answers: [Mein Vorgesetzter wurde sehr böse auf mich., Mein Chef wurde sehr böse auf mich., Meine Chefin wurde sehr böse auf mich., Meine Vorgesetzte wurde sehr böse auf mich., Mein Chef war sehr böse auf mich., Meine Chefin war sehr böse auf mich., Mein Vorgesetzter war sehr böse auf mich., Meine Vorgesetzte war sehr böse auf mich., Mein Chef ist sehr böse auf mich geworden., Meine Chefin ist sehr böse auf mich geworden., Mein Vorgesetzter ist sehr böse auf mich geworden., Meine Vorgesetzte ist sehr böse auf mich geworden.]
 
   - id: b2-u04-l6
     type: grammar
@@ -381,7 +385,7 @@ lessons:
         - { tr: "“Yeni başladığın için hata yapman normal.” dedi.", de: "„Weil du neu angefangen hast, ist es normal, dass du Fehler machst“, sagte sie." }
         - { tr: "“Bundan sonra bir şeyi anlamadığın zaman bana sor.”", de: "„Wenn du von jetzt an etwas nicht verstehst, frag mich.“" }
         - { tr: "O günden sonra Zeynep meslektaşlarından yardım istemeye başladı.", de: "Von diesem Tag an begann Zeynep, ihre Kollegen um Hilfe zu bitten." }
-        - { tr: "Onları tanıdıkça işini daha çok sevdi.", de: "Je besser sie sie kennenlernte, desto mehr mochte sie ihre Arbeit." }
+        - { tr: "Onları tanıdıkça işini daha çok seviyordu.", de: "Je besser sie sie kennenlernte, desto mehr mochte sie ihre Arbeit." }
         - { tr: "Görevlerini paylaştıkları için işler daha hızlı bitiyordu.", de: "Weil sie ihre Aufgaben teilten, wurde die Arbeit schneller fertig." }
         - { tr: "Artık akşam altıya kadar çalışıyor, sonra eve gidiyor.", de: "Jetzt arbeitet sie bis sechs Uhr abends, dann geht sie nach Hause." }
         - { tr: "Geçen ay toplantıda yeni bir proje anlattı.", de: "Letzten Monat stellte sie in der Sitzung ein neues Projekt vor." }
@@ -403,7 +407,7 @@ lessons:
         - { tr: "meslektaşlarından", de: "von ihren Kollegen", vocab: "meslektaş" }
         - { tr: "yardım", de: "Hilfe (yardım etmek = helfen)", vocab: "yardım etmek" }
         - { tr: "istemeye", de: "zu bitten (istemek + -me + -ye)", vocab: "istemek" }
-        - { tr: "altıya", de: "bis sechs (altı + ya)", vocab: "altı" }
+        - { tr: "altıya", de: "altıya kadar = bis sechs", vocab: "altı" }
         - { tr: "zam", de: "Erhöhung (zam yapmak = erhöhen)", vocab: "zam" }
         - { tr: "zorlandı", de: "hatte es schwer (zorlanmak)", vocab: "zor" }
     exercises:
@@ -431,7 +435,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Çalıştıkça stresi artıyordu.
-        answers: ['Je mehr sie arbeitete, desto mehr nahm ihr Stress zu.', 'Je mehr er arbeitete, desto mehr nahm sein Stress zu.', 'Je mehr sie arbeitete, desto größer wurde ihr Stress.', 'Je mehr er arbeitete, desto größer wurde sein Stress.', 'Je mehr sie arbeitete, umso mehr nahm ihr Stress zu.']
+        answers: ['Je mehr sie arbeitete, desto mehr nahm ihr Stress zu.', 'Je mehr er arbeitete, desto mehr nahm sein Stress zu.', 'Je mehr sie arbeitete, desto größer wurde ihr Stress.', 'Je mehr er arbeitete, desto größer wurde sein Stress.', 'Je mehr sie arbeitete, umso mehr nahm ihr Stress zu.', 'Je mehr sie arbeitete, umso größer wurde ihr Stress.']
 
   - id: b2-u04-l7
     type: review
@@ -441,7 +445,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: 'Weil ich krank bin, komme ich nicht.'
-        answers: [Hasta olduğum için gelmiyorum., Hasta olduğum için gelemiyorum., Hasta olduğumdan gelmiyorum., Hasta olduğumdan gelemiyorum.]
+        answers: [Hasta olduğum için gelmiyorum., Hasta olduğum için gelemiyorum., Hasta olduğumdan gelmiyorum., Hasta olduğumdan gelemiyorum., Hasta olduğum için gelmeyeceğim., Hasta olduğum için gelemeyeceğim.]
       - id: b2-u04-l7-e2
         type: free_text
         direction: de_tr
@@ -460,11 +464,13 @@ lessons:
       - id: b2-u04-l7-e5
         type: word_bank
         prompt: Weil das Wetter schlecht war, haben wir das Picknick verschoben.
-        answers: [Hava kötü olduğu için pikniği erteledik.]
+        answers: [Hava kötü olduğu için pikniği erteledik., Pikniği hava kötü olduğu için erteledik.]
         chunks:
           - { text: "Hava kötü olduğu için", role: complement }
           - { text: "pikniği", role: object }
           - { text: "erteledik", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [oldu, piknik]
       - { id: b2-u04-l7-e6, type: suffix_builder, stem: unutmak, verbal: PART_DIK, suffixes: [POSS_2SG, ABL], target: unuttuğundan, gloss_de: 'da du vergessen hast' }
       - { id: b2-u04-l7-e7, type: suffix_builder, stem: gitmek, verbal: CV_DIKCA, target: gittikçe, gloss_de: 'je mehr … geht; auch: allmählich' }
@@ -472,7 +478,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: İşe alışıncaya kadar zorlandım.
-        answers: ['Bis ich mich an die Arbeit gewöhnt hatte, hatte ich es schwer.', 'Bis ich mich an die Arbeit gewöhnt habe, hatte ich es schwer.', 'Bis ich mich an die Arbeit gewöhnt hatte, tat ich mich schwer.', 'Bis ich mich an die Arbeit gewöhnt habe, habe ich mich schwergetan.']
+        answers: ['Bis ich mich an die Arbeit gewöhnt hatte, hatte ich es schwer.', 'Bis ich mich an die Arbeit gewöhnt habe, hatte ich es schwer.', 'Bis ich mich an die Arbeit gewöhnt hatte, tat ich mich schwer.', 'Bis ich mich an die Arbeit gewöhnt habe, habe ich mich schwergetan.', 'Bis ich mich an die Arbeit gewöhnt hatte, fiel es mir schwer.']
       - id: b2-u04-l7-e9
         type: word_bank
         prompt: Obwohl er spät kam, wurde der Leiter nicht böse.
@@ -489,7 +495,7 @@ vocab:
   - { tr: meslektaş, de: [Kollege, Kollegin], pos: noun }
   - { tr: hata, de: [Fehler], pos: noun }
   - { tr: rapor, de: [Bericht], pos: noun }
-  - { tr: zam, de: [Erhöhung], pos: noun }
+  - { tr: zam, de: [Erhöhung], pos: noun, doubles: true }
   - { tr: stres, de: [Stress], pos: noun }
   - { tr: ertelemek, de: [verschieben], pos: verb }
   - { tr: tamamlamak, de: [abschließen, fertigstellen], pos: verb }
