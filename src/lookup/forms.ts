@@ -10,6 +10,7 @@ import {
   PRONOUN_CASES,
   PRONOUN_LEMMAS,
   pronoun,
+  DIR_TENSES,
   type Compound,
   type MorphTag,
   type NonfiniteTag,
@@ -35,6 +36,7 @@ export type FormLabel =
       ability?: boolean;
       passive?: boolean;
       compound?: Compound;
+      dir?: boolean;
     }
   | {
       kind: 'verbal';
@@ -116,7 +118,7 @@ export function pronounForms(entry: VocabEntry): Form[] {
 
 type VerbVariant = Pick<
   Extract<FormLabel, { kind: 'verb' }>,
-  'tense' | 'negative' | 'ability' | 'passive' | 'compound'
+  'tense' | 'negative' | 'ability' | 'passive' | 'compound' | 'dir'
 >;
 
 const VERB_VARIANTS: VerbVariant[] = [
@@ -136,6 +138,11 @@ const VERB_VARIANTS: VerbVariant[] = [
       { tense, ...v, compound: 'past' as const, negative: true },
     ]),
   ),
+  // gelmiştir, gelmemiştir, gelmektedir, gelecektir (nur 3. Person, sonst wirft die Engine)
+  ...DIR_TENSES.flatMap((tense) => [
+    { tense, dir: true },
+    { tense, dir: true, negative: true },
+  ]),
 ];
 
 /** Verb: alle Zeiten × Personen × bejaht/verneint, dazu „können“ und Passiv in Präsens und Aorist. */

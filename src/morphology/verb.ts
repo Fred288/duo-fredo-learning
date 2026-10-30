@@ -46,6 +46,7 @@ export const TENSES = [
   'imperative',
   'conditional',
   'optative',
+  'mekte',
 ] as const;
 export type Tense = (typeof TENSES)[number];
 
@@ -55,9 +56,29 @@ export type Compound = (typeof COMPOUNDS)[number];
 
 /** Zeiten, an die die Kopula treten kann (gelseydi ja, geldiydi nein). */
 export const COMPOUND_TENSES: Record<Compound, readonly Tense[]> = {
-  past: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'conditional'],
+  past: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'conditional', 'mekte'],
   evidential: ['present', 'future', 'aorist', 'evidential', 'necessitative'],
-  conditional: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'past'],
+  conditional: ['present', 'future', 'aorist', 'evidential', 'necessitative', 'past', 'mekte'],
+};
+
+/** -DIr am Verb (Vermutung, formell): geliyordur, gelecektir, gelmiştir, gelmektedir, gelmelidir. */
+export const DIR_TENSES: readonly Tense[] = [
+  'present',
+  'future',
+  'evidential',
+  'necessitative',
+  'mekte',
+];
+
+/** Kausativ-Endungen; `dir` und `t` folgen der Regel, die anderen stehen im Wortschatz. */
+export const CAUSATIVES = ['dir', 't', 'ir', 'ar', 'it'] as const;
+export type Causative = (typeof CAUSATIVES)[number];
+const CAUSATIVE_TEMPLATE: Record<Causative, string> = {
+  dir: 'DIr',
+  t: 't',
+  ir: 'Ir',
+  ar: 'Ar',
+  it: 'It',
 };
 
 // Kopula-Baustein; die Endung danach ist bei idi und ise Typ 2, bei imiş Typ 1.
@@ -74,6 +95,8 @@ export interface VerbStem {
   softens?: boolean;
   /** Aorist-Vokal festlegen, wenn die Regel nicht greift. */
   aorist?: 'ar' | 'ir';
+  /** Kausativ-Endung, wenn die Regel nicht greift (pişir-, çıkar-, korkut-). */
+  causative?: Causative;
 }
 
 export interface ConjugateOptions {
@@ -89,6 +112,12 @@ export interface ConjugateOptions {
   passive?: boolean;
   /** Kopula idi/imiş/ise nach der Zeit (geliyordum, gelirmiş, gelecekse). */
   compound?: Compound;
+  /** Kausativ: yaptır-, okut-, pişir-; steht vor Passiv und „können“ (yaptırılabilir). */
+  causative?: boolean;
+  /** Reziprok -(I)ş: görüş-, bakış-. */
+  reciprocal?: boolean;
+  /** -DIr in der 3. Person (gelmiştir, gelmektedir, gelmişlerdir). */
+  dir?: boolean;
 }
 
 export const COPULA_TENSES = ['present', 'past', 'evidential', 'conditional'] as const;
@@ -241,7 +270,9 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
   const verb: VerbStem = typeof input === 'string' ? { form: input } : input;
   const stem = verbStem(verb.form);
   if (!lastVowel(stem)) throw new MorphError(`Verbstamm "${verb.form}" enthält keinen Vokal`);
+  if (opts.dir) return withDir(verb, opts);
   if (opts.compound) return withCompound(verb, opts);
+  if (opts.causative || opts.reciprocal) return withVoice(verb, stem, opts);
   if (opts.passive) return withPassive(verb, stem, opts);
   if (opts.ability) return withAbility(verb, stem, opts);
   if (opts.tense === 'imperative') return imperative(verb, stem, opts);
@@ -285,6 +316,12 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
     case 'aorist':
       aorist(b, verb, stem, opts.person, opts.negative ?? false, question);
       break;
+    case 'mekte':
+      b.add('STEM', stem);
+      if (opts.negative) b.suffix('NEG', 'mA');
+      b.suffix('PROG', 'mAktA');
+      personAndQuestion(b, opts.person, question);
+      break;
     case 'conditional':
       b.add('STEM', stem);
       if (opts.negative) b.suffix('NEG', 'mA');
@@ -292,6 +329,18 @@ export function conjugate(input: VerbStem | string, opts: ConjugateOptions): Inf
       personType2AndQuestion(b, opts.person, question);
       break;
   }
+  return b.result();
+}
+
+/** -DIr nach der fertigen Form, nur 3. Person: gelmiştir, gelmişlerdir (formell, Vermutung). */
+function withDir(verb: VerbStem, opts: ConjugateOptions): Inflection {
+  if (!DIR_TENSES.includes(opts.tense)) throw new MorphError(`Kein -DIr nach ${opts.tense}`);
+  if (opts.person !== '3sg' && opts.person !== '3pl') {
+    throw new MorphError('-DIr am Verb nur in der 3. Person');
+  }
+  if (opts.question || opts.compound) throw new MorphError('-DIr ohne Frage und ohne Kopula');
+  const b = Builder.from(conjugate(verb, { ...opts, dir: false }));
+  b.suffix('DIR', 'DIr');
   return b.result();
 }
 
@@ -367,6 +416,65 @@ function withAbility(verb: VerbStem, stem: string, opts: ConjugateOptions): Infl
   return splitDerived(inner, base, tail, 'ABIL', steps, 'ability');
 }
 
+/**
+ * Kausativstamm: -t nach Vokal und bei mehrsilbigen Stämmen auf r/l (okut-, oturt-), sonst -DIr
+ * (yaptır-, gittir-); die geschlossene Liste auf -Ir, -Ar, -It steht im Wortschatz.
+ */
+export function causativeStem(
+  verb: VerbStem,
+  stem: string,
+  steps: Step[],
+): { base: string; tail: string } {
+  const head = stem.split(' ').at(-1)!;
+  // ye- und de- gehen eigene Wege: yedir-, dedirt-.
+  const irregular = isIrregular(stem);
+  const regular: Causative =
+    !irregular && (isVowel(stem.at(-1)!) || (vowelCount(head) > 1 && /[rl]$/.test(stem)))
+      ? 't'
+      : 'dir';
+  const kind = verb.causative ?? regular;
+  // Nur Endungen mit Vokal erweichen den Stamm (git- bleibt in gittir-).
+  const vowelInitial = kind === 'ir' || kind === 'ar' || kind === 'it';
+  const base = vowelInitial ? softenedStem(verb, stem, 'CAUS', steps) : stem;
+  const template = isDe(stem) ? 'DIrt' : CAUSATIVE_TEMPLATE[kind];
+  const tail = realize(template, 'CAUS', { base, steps });
+  steps.push({
+    tag: 'CAUS',
+    rule: 'causative',
+    kind: verb.causative || irregular ? 'lexical' : (regular as 'dir' | 't'),
+    chose: tail,
+  });
+  return { base, tail };
+}
+
+/** Reziprokstamm -(I)ş: görüş-, bakış-, anlaş-. */
+export function reciprocalStem(
+  verb: VerbStem,
+  stem: string,
+  steps: Step[],
+): { base: string; tail: string } {
+  const base = softenedStem(verb, stem, 'RECIP', steps);
+  return { base, tail: realize('(I)ş', 'RECIP', { base, steps }) };
+}
+
+/**
+ * Kausativ und Reziprok bilden einen neuen Verbstamm, der wie ein eigenes mehrsilbiges Verb
+ * weiterläuft (yaptırır, yaptırıldı, yaptırabilir). Beides zugleich: eigene Vokabel (görüştür-).
+ */
+function withVoice(verb: VerbStem, stem: string, opts: ConjugateOptions): Inflection {
+  if (opts.causative && opts.reciprocal) {
+    throw new MorphError('Kausativ und Reziprok nur über eine eigene Vokabel');
+  }
+  const steps: Step[] = [];
+  const tag = opts.causative ? 'CAUS' : 'RECIP';
+  const { base, tail } = (opts.causative ? causativeStem : reciprocalStem)(verb, stem, steps);
+  const inner = conjugate(
+    { form: `${base}${tail}mek`, aorist: 'ir' },
+    { ...opts, causative: false, reciprocal: false },
+  );
+  return splitDerived(inner, base, tail, tag, steps, 'derived');
+}
+
 /** Erweiterter Stamm für „können“: gel → gel + ebil, verneint gel + e (gele-me-z); ye → yi + yebil. */
 export function abilityStem(
   verb: VerbStem,
@@ -408,9 +516,9 @@ export function splitDerived(
   inner: Inflection,
   base: string,
   tail: string,
-  tag: 'ABIL' | 'PASS',
+  tag: 'ABIL' | 'PASS' | 'CAUS' | 'RECIP',
   steps: Step[],
-  kind: 'ability' | 'passive',
+  kind: 'ability' | 'passive' | 'derived',
 ): Inflection {
   const [first, ...rest] = inner.segments;
   const firstText = first?.text ?? '';

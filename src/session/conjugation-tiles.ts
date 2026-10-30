@@ -52,8 +52,12 @@ export function conjugationTiles(
       // Pufferlaut vergessen: öğrenci-dim, oku-in
       add([seg.text.slice(1)], seed);
       add(harmonyVariants(seg.text), `${seed}-h`);
-    } else if (seg.tag === 'PAST') {
-      // d/t-Verwechslung (gitdi) neben falscher Harmonie
+    } else if (
+      seg.tag === 'PAST' ||
+      (seg.tag === 'CAUS' && seg.text.length > 1) ||
+      seg.tag === 'DIR'
+    ) {
+      // d/t-Verwechslung (gitdi, yapdır) neben falscher Harmonie
       const swapped = (seg.text[0] === 't' ? 'd' : 't') + seg.text.slice(1);
       add([swapped], seed);
       add(harmonyVariants(seg.text), `${seed}-h`);

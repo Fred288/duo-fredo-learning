@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Unit } from './schema';
+import { Conjugation, Unit } from './schema';
 
 const validUnit = () => ({
   id: 'a1-u03',
@@ -176,5 +176,32 @@ describe('Unit-Schema', () => {
     const u: Record<string, unknown> = validUnit();
     delete u.source;
     expect(issues(u)).toContainEqual(expect.stringContaining('source'));
+  });
+});
+
+describe('B2-Verbformen im Schema', () => {
+  const conj = (extra: object) =>
+    Conjugation.safeParse({
+      id: 'x',
+      type: 'conjugation',
+      mode: 'verb',
+      lemma: 'gelmek',
+      person: '3sg',
+      target: 'x',
+      ...extra,
+    }).success;
+
+  it('dir am Verb nur in der 3. Person, passende Zeit, ohne Frage und Kopula', () => {
+    expect(conj({ tense: 'evidential', dir: true })).toBe(true);
+    expect(conj({ tense: 'mekte', dir: true, person: '3pl' })).toBe(true);
+    expect(conj({ tense: 'evidential', dir: true, person: '1sg' })).toBe(false);
+    expect(conj({ tense: 'past', dir: true })).toBe(false);
+    expect(conj({ tense: 'present', dir: true, question: true })).toBe(false);
+  });
+
+  it('Kausativ und Reziprok schließen sich aus und gelten nur für Verben', () => {
+    expect(conj({ causative: true })).toBe(true);
+    expect(conj({ causative: true, reciprocal: true })).toBe(false);
+    expect(conj({ mode: 'copula', causative: true })).toBe(false);
   });
 });

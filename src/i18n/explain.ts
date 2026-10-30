@@ -46,6 +46,8 @@ export function explainSteps(steps: Step[]): string[] {
         return t('explain.stem_raising', { from: step.from, to: step.to, tag });
       case 'no_raising':
         return t('explain.no_raising', { tag });
+      case 'causative':
+        return t(`explain.causative.${step.kind}`, { chose: step.chose });
       case 'aorist_vowel':
         return t(`explain.aorist.${step.kind}`);
       case 'apostrophe':

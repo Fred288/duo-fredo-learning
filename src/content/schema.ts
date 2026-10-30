@@ -1,9 +1,11 @@
 import { z } from 'zod';
 import { MORPH_TAGS, NONFINITE_TAGS, VERB_TAGS } from '../morphology/tags';
 import {
+  CAUSATIVES,
   COMPOUND_TENSES,
   COMPOUNDS,
   COPULA_TENSES,
+  DIR_TENSES,
   IMPERATIVE_PERSONS,
   OPTATIVE_PERSONS,
   PERSONS,
@@ -61,6 +63,8 @@ export const Vocab = z.strictObject({
   proper: z.boolean().optional(),
   // großgeschrieben ohne Apostroph (Nationalitäten: Almanlar)
   capitalized: z.boolean().optional(),
+  // Kausativ-Endung, wenn die Regel nicht greift (pişirmek: ir, çıkarmak: ar, korkutmak: it)
+  causative: z.enum(CAUSATIVES).optional(),
   // y vor Genitiv und Possessiv (su → suyun, suyum)
   y_stem: z.boolean().optional(),
   // Auslaut verdoppelt sich vor vokalischem Suffix (hak → hakkı, ret → reddi)
@@ -159,6 +163,8 @@ export const SuffixBuilder = z
     negative: z.boolean().optional(),
     ability: z.boolean().optional(),
     passive: z.boolean().optional(),
+    causative: z.boolean().optional(),
+    reciprocal: z.boolean().optional(),
     suffixes: z.array(z.enum(MORPH_TAGS)).default([]),
     target: nonEmpty,
   })
@@ -166,12 +172,15 @@ export const SuffixBuilder = z
     if (!e.verbal && e.suffixes.length === 0) {
       ctx.addIssue({ code: 'custom', path: ['suffixes'], message: 'mindestens eine Endung' });
     }
-    if (!e.verbal && (e.negative || e.ability || e.passive)) {
+    if (!e.verbal && (e.negative || e.ability || e.passive || e.causative || e.reciprocal)) {
       ctx.addIssue({
         code: 'custom',
         path: ['verbal'],
-        message: 'negative/ability/passive nur mit verbal',
+        message: 'negative/ability/passive/causative/reciprocal nur mit verbal',
       });
+    }
+    if (e.causative && e.reciprocal) {
+      ctx.addIssue({ code: 'custom', path: ['causative'], message: 'nur eins von beiden' });
     }
   });
 
@@ -184,6 +193,8 @@ function checkVerbForm(
     ability?: boolean;
     polite?: boolean;
     passive?: boolean;
+    causative?: boolean;
+    reciprocal?: boolean;
     question?: boolean;
     dir?: boolean;
     compound?: (typeof COMPOUNDS)[number];
@@ -193,8 +204,25 @@ function checkVerbForm(
   ctx: z.RefinementCtx,
 ) {
   // -DIr verbindet sich nicht mit idi/imiş/ise (die Engine ließe es stillschweigend weg).
-  if (e.dir && (!copula || (e.tense && e.tense !== 'present'))) {
+  if (e.dir && copula && e.tense && e.tense !== 'present') {
     ctx.addIssue({ code: 'custom', path: ['dir'], message: 'dir nur bei Kopula im Präsens' });
+  }
+  if (e.dir && !copula) {
+    const bad = persons.filter((p) => p !== '3sg' && p !== '3pl');
+    if (!DIR_TENSES.includes(e.tense ?? 'present') || e.question || e.compound || bad.length) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['dir'],
+        message:
+          'dir am Verb nur in der 3. Person, ohne Frage und Kopula, nach -iyor/-ecek/-miş/-meli/-mekte',
+      });
+    }
+  }
+  if (e.causative && e.reciprocal) {
+    ctx.addIssue({ code: 'custom', path: ['causative'], message: 'nur eins von beiden' });
+  }
+  if (copula && (e.causative || e.reciprocal)) {
+    ctx.addIssue({ code: 'custom', path: ['causative'], message: 'causative nur bei Verben' });
   }
   if (copula && e.tense && !COPULA_TENSE_SET.includes(e.tense)) {
     ctx.addIssue({ code: 'custom', path: ['tense'], message: `Kopula kennt kein ${e.tense}` });
@@ -259,6 +287,8 @@ export const Conjugation = z
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
+    causative: z.boolean().optional(),
+    reciprocal: z.boolean().optional(),
     compound: z.enum(COMPOUNDS).optional(),
     target: nonEmpty,
     /** Ebenso richtige Nebenformen der Engine; schreibt der Build (`withAlternatives`). */
@@ -284,9 +314,12 @@ export const Paradigm = z
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
+    causative: z.boolean().optional(),
+    reciprocal: z.boolean().optional(),
     compound: z.enum(COMPOUNDS).optional(),
     negative: z.boolean().optional(),
     question: z.boolean().optional(),
+    dir: z.boolean().optional(),
     targets: z.array(nonEmpty).min(2),
     /** Nebenformen je Zeile (leer = keine); schreibt der Build (`withAlternatives`). */
     alt_targets: z.array(z.array(nonEmpty)).optional(),
@@ -346,6 +379,8 @@ export const FormSpec = z.discriminatedUnion('kind', [
     ability: z.boolean().optional(),
     polite: z.boolean().optional(),
     passive: z.boolean().optional(),
+    causative: z.boolean().optional(),
+    reciprocal: z.boolean().optional(),
     compound: z.enum(COMPOUNDS).optional(),
   }),
   z.strictObject({
@@ -355,6 +390,8 @@ export const FormSpec = z.discriminatedUnion('kind', [
     negative: z.boolean().optional(),
     ability: z.boolean().optional(),
     passive: z.boolean().optional(),
+    causative: z.boolean().optional(),
+    reciprocal: z.boolean().optional(),
     tags: z.array(z.enum(MORPH_TAGS)).optional(),
   }),
 ]);

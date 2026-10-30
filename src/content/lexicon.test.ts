@@ -6,7 +6,7 @@ import {
   solveParadigm,
   withAlternatives,
 } from './lexicon';
-import type { Exercise } from './schema';
+import type { Exercise, Vocab } from './schema';
 
 describe('Nebenformen im Build', () => {
   it('formVariants: nur Verben mit Kopula in der 3. Person Plural', () => {
@@ -84,5 +84,25 @@ describe('infinite Formen über Übungen', () => {
       'gelmediğim',
       'gelmedikleri',
     ]);
+  });
+});
+
+describe('Formen für B2', () => {
+  it('Kausativ mit Wortschatz-Flag und -dir am Verb', () => {
+    const ex = {
+      id: 'b2-u02-l2-e1',
+      type: 'conjugation',
+      mode: 'verb',
+      lemma: 'pişmek',
+      person: '3sg',
+      tense: 'aorist',
+      causative: true,
+      target: 'pişirir',
+    } as Exercise;
+    const vocab: Vocab[] = [{ tr: 'pişmek', de: ['kochen'], pos: 'verb', causative: 'ir' }];
+    expect(solveExercise(ex as never, vocab).form).toBe('pişirir');
+    expect(formSpecOf(ex as never)).toMatchObject({ causative: true });
+    const dir = { ...ex, lemma: 'gelmek', tense: 'mekte', causative: undefined, dir: true };
+    expect(solveExercise(dir as never).form).toBe('gelmektedir');
   });
 });

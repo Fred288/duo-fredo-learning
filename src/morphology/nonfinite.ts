@@ -6,9 +6,11 @@ import type { Step } from './template';
 import {
   abilityStem,
   Builder,
+  causativeStem,
   isDe,
   raisedStem,
   passiveStem,
+  reciprocalStem,
   softenedStem,
   splitDerived,
   verbStem,
@@ -38,6 +40,10 @@ export interface NonfiniteOptions {
   ability?: boolean;
   /** Passiv: yapılan, okunduğu. */
   passive?: boolean;
+  /** Kausativ: yaptıran, okutulan. */
+  causative?: boolean;
+  /** Reziprok: görüşen, anlaşmak. */
+  reciprocal?: boolean;
   /** Nominale Endungen danach (Plural, Possessiv, Kasus). */
   tags?: MorphTag[];
 }
@@ -106,6 +112,7 @@ export function nonfinite(input: VerbStem | string, opts: NonfiniteOptions): Inf
   const stem = verbStem(verb.form);
   if (!lastVowel(stem)) throw new MorphError(`Verbstamm "${verb.form}" enthält keinen Vokal`);
   checkTags(opts);
+  if (opts.causative || opts.reciprocal) return voice(verb, stem, opts);
   if (opts.passive || opts.ability) return derived(verb, stem, opts);
 
   const b = new Builder();
@@ -143,6 +150,21 @@ export function nonfinite(input: VerbStem | string, opts: NonfiniteOptions): Inf
     segments: [...segments, ...noun.segments.slice(1)],
     steps: [...verbal.steps, ...noun.steps],
   };
+}
+
+/** Kausativ- bzw. Reziprokstamm (yaptır-, görüş-) wie ein eigenes Verb. */
+function voice(verb: VerbStem, stem: string, opts: NonfiniteOptions): Inflection {
+  if (opts.causative && opts.reciprocal) {
+    throw new MorphError('Kausativ und Reziprok nur über eine eigene Vokabel');
+  }
+  const steps: Step[] = [];
+  const tag = opts.causative ? 'CAUS' : 'RECIP';
+  const { base, tail } = (opts.causative ? causativeStem : reciprocalStem)(verb, stem, steps);
+  const inner = nonfinite(
+    { form: `${base}${tail}mek` },
+    { ...opts, causative: false, reciprocal: false },
+  );
+  return splitDerived(inner, base, tail, tag, steps, 'derived');
 }
 
 /** Passiv- bzw. „können“-Stamm (yapıl-, gelebil-, verneint gele-) wie ein eigenes Verb. */

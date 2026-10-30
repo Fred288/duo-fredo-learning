@@ -138,3 +138,17 @@ describe('Nebenformen (alt_targets)', () => {
     expect(conjugationTiles(ex).tokens).not.toContain('zim');
   });
 });
+
+describe('B2-Bausteine', () => {
+  it('Kausativ: eigener Baustein mit d/t-Verwechslung', () => {
+    const ex = conj({ lemma: 'yapmak', causative: true, target: 'yaptırıyorum' });
+    const { tokens } = conjugationTiles(ex);
+    expect(tokens).toEqual(expect.arrayContaining(['yap', 'tır', 'dır']));
+  });
+
+  it('bewertet -mekte und -dir am Verb', () => {
+    const ex = conj({ tense: 'evidential', dir: true, person: '3sg', target: 'gelmiştir' });
+    expect(conjugationTiles(ex).tokens).toEqual(expect.arrayContaining(['gel', 'miş', 'tir']));
+    expect(grade(ex, 'gelmiştir', opts).verdict).toBe('correct');
+  });
+});

@@ -128,6 +128,13 @@ const CONFUSABLE: readonly (readonly SegmentTag[])[] = [
   ['DIR', 'P3SG', 'LOC'],
 ];
 
+/** B2-Rollen nur als Einbahnstraße: sonst bekämen frühe Formen (yapıyor) Kausativ-Ablenker. */
+const CONFUSABLE_B2: Partial<Record<SegmentTag, readonly SegmentTag[]>> = {
+  CAUS: ['PASS', 'RECIP', 'ABIL'],
+  RECIP: ['PASS', 'CAUS'],
+  PROG: ['PRES', 'AOR', 'EVID'],
+};
+
 /** Höchstens so viele Rollen, die nicht im Wort vorkommen. */
 export const MAX_ROLE_DISTRACTORS = 4;
 
@@ -138,7 +145,10 @@ export const MAX_ROLE_DISTRACTORS = 4;
 export function segmentRoleOptions(ex: Segment): SegmentTag[] {
   const correct = [...new Set(ex.segments.slice(1).map((s) => s.tag))];
   const pool = [
-    ...new Set(CONFUSABLE.filter((g) => correct.some((c) => g.includes(c))).flat()),
+    ...new Set([
+      ...CONFUSABLE.filter((g) => correct.some((c) => g.includes(c))).flat(),
+      ...correct.flatMap((c) => CONFUSABLE_B2[c] ?? []),
+    ]),
   ].filter((tag) => !correct.includes(tag));
   const distractors = seededShuffle(pool, `${ex.id}:roles`).slice(0, MAX_ROLE_DISTRACTORS);
   return seededShuffle([...correct, ...distractors], `${ex.id}:options`);

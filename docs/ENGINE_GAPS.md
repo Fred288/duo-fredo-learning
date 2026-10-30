@@ -49,7 +49,9 @@ Legende: ✅ abgedeckt · 🟡 teilweise · ❌ fehlt. Priorität = wann der Ler
 
 **Stufe 4a umgesetzt (B1)**: Konditional -sA mit Typ 2 (gelsem, gelmesem, gelsem mi), Optativ 1sg/1pl -(y)AyIm/-(y)AlIm (geleyim, gelelim, gideyim, yiyelim), Kopula an der Zeitform über `compound` (idi: geliyordum, gelecektim, gelirdim/gelmezdim, gelmiştim, gelmeliydim, gelseydim; imiş: geliyormuşum, gelmişmiş; ise: geliyorsam, gelirse, geldiysem), Frage vor der Kopula (geliyor muydum), Kopula ise im Nominalsatz (öğrenciysem, değilse). 
 
-**Stufe 4b umgesetzt (B1)**: infinite Formen in `nonfinite.ts`: Partizipien -(y)An (gelen, gelenlere, yapılan), -DIk und -(y)AcAk mit Possessiv (okuduğum, geldiğini, geleceğimi, geldikten), Verbalnomen -mA (gelmesi, gelmesini), -mAk (gelmekte, gelmekten), -(y)Iş (gidiş), Konverbien -(y)Ip, -(y)ArAk, -(y)IncA, -(y)AlI, -mAdAn; de/ye nach TDK (yiyip, diyerek, aber deyip, deyince). Offen: Kausativ (B2), -DIkçA, -(y)IncAyA kadar.
+**Stufe 4b umgesetzt (B1)**: infinite Formen in `nonfinite.ts`: Partizipien -(y)An (gelen, gelenlere, yapılan), -DIk und -(y)AcAk mit Possessiv (okuduğum, geldiğini, geleceğimi, geldikten), Verbalnomen -mA (gelmesi, gelmesini), -mAk (gelmekte, gelmekten), -(y)Iş (gidiş), Konverbien -(y)Ip, -(y)ArAk, -(y)IncA, -(y)AlI, -mAdAn; de/ye nach TDK (yiyip, diyerek, aber deyip, deyince). Offen: -DIkçA, -(y)IncAyA kadar.
+
+**Stufe 5 umgesetzt (B2)**: Kausativ als Option `causative` (-DIr nach Konsonant, -t nach Vokal und mehrsilbig auf r/l, Vokabel-Flag `causative: ir|ar|it` für die geschlossene Liste; yedir-, dedirt-), Reziprok `reciprocal` (-(I)ş), beide in finiten und infiniten Formen, vor Passiv und „können“ (yaptırılabilir). Tense `mekte` (gelmekteyim), Option `dir` am Verb nur 3. Person (gelmiştir, gelmektedir, gelmişlerdir). Lexikalisierte Kausative (öğretmek, göstermek) sind eigene Vokabeln; im Nachschlagen führen Kausativformen nur auf ein Verb zurück, wenn der Kausativ selbst als Vokabel im Kurs steht.
 
 **Passiv umgesetzt** (Option `passive` in `conjugate()`, `conjugation` und `paradigm`): -Il nach Konsonant, -In nach l, -n nach Vokal (yapılıyor, bilinir, okunur, yenir), Aorist immer -Ir, kombinierbar mit `ability` (yapılabilir). Reflexiv ist lexikalisch (yıkanmak, giyinmek) und über das Pronomen kendi (kendim, kendine).
 
@@ -81,7 +83,7 @@ Zusätzlich nötig:
 4. ✅ Stufe 2: -DI mit Typ 2, -(y)AcAk, Aorist mit Lexikon-Flag
 5. ✅ Stufe 3: -(y)Abil, -mAlI, Imperativ, -mIş, idi/imiş
 6. ✅ -ki, Ableitungen -lI/-sIz/-lIk/-CI mit `C`, Passiv
-7. 🟡 Stufe 4: ✅ Optativ, idi/imiş/ise, -sA (4a); ✅ Partizipien, Verbalnomen, Konverbien (4b); ✅ `doubles`, `poss_no_s`, Zirkumflex; offen Kausativ, `G`
+7. 🟡 Stufe 4: ✅ Optativ, idi/imiş/ise, -sA (4a); ✅ Partizipien, Verbalnomen, Konverbien (4b); ✅ `doubles`, `poss_no_s`, Zirkumflex; ✅ Kausativ, Reziprok, -mAktA, -DIr am Verb; offen `G`
 
 Jede Regel bekommt Tabellentests nach dem Muster von `src/morphology/inflect.test.ts`; offene
 Punkte stehen dort als `it.todo`.

@@ -47,7 +47,7 @@ export class MorphError extends Error {}
 // Noch nicht abgedeckt; später über weitere Vocab-Flags lösbar.
 export const KNOWN_LIMITS = [
   'Nebenform camisi neben camii: die Engine bildet nur camii (Freitext-Übungen nennen beide)',
-  'Kausativ (B2); -DIkçA, -(y)IncAyA kadar, -(y)AsI, -mAktAnsA nicht gebildet',
+  'Zweifacher Kausativ (yaptırtmak) und Kausativ + Reziprok (görüştürmek) nur als eigene Vokabel; -DIkçA, -(y)IncAyA kadar, -(y)AsI, -mAktAnsA nicht gebildet',
   'Passiv von de-/ye- nur denir/yenir; denilmek und yenilmek sind eigene Vokabeln',
   'Infinite Formen: -(y)An ohne Possessiv (sevenlerim fehlt), -(y)AcAk ohne Possessiv ohne Endungen (gelecekler fehlt), -DIk ohne Possessiv nur mit Ablativ (geldikten), -mAk nur mit -DA/-DAn/-(y)lA, Konverbien ohne Endungen',
   'Optativ nur 1sg/1pl (gelesin, geleler veraltet); geldiydi, gelseymiş bewusst nicht',

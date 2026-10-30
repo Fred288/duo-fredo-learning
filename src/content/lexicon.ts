@@ -6,6 +6,7 @@ import {
   nonfinite,
   PERSONS,
   predicate,
+  type Causative,
   type ConjugateOptions,
   type Inflection,
   type MorphTag,
@@ -22,7 +23,7 @@ export type ParadigmExercise = Extract<Exercise, { type: 'paradigm' }>;
 export function stemFromVocab(
   form: string,
   vocab: readonly Vocab[] = [],
-): Stem & { aorist?: 'ar' | 'ir' } {
+): Stem & { aorist?: 'ar' | 'ir'; causative?: Causative } {
   const v = vocab.find((x) => x.tr === form);
   return {
     form,
@@ -35,6 +36,7 @@ export function stemFromVocab(
     doubles: v?.doubles,
     possNoS: v?.poss_no_s,
     aorist: v?.aorist,
+    causative: v?.causative,
   };
 }
 
@@ -48,6 +50,8 @@ export function solveForm(spec: FormSpec, vocab: readonly Vocab[] = []): Inflect
       negative: spec.negative,
       ability: spec.ability,
       passive: spec.passive,
+      causative: spec.causative,
+      reciprocal: spec.reciprocal,
       tags: spec.tags,
     });
   }
@@ -62,6 +66,9 @@ const verbOptions = (spec: Extract<FormSpec, { kind: 'verb' | 'copula' }>): Conj
   ability: spec.ability,
   polite: spec.polite,
   passive: spec.passive,
+  causative: spec.causative,
+  reciprocal: spec.reciprocal,
+  dir: spec.dir,
   compound: spec.compound,
   person: spec.person,
   negative: spec.negative,
@@ -112,10 +119,13 @@ export function formSpecOf(ex: EngineExercise | ParadigmExercise, row = 0): Form
     ability: ex.ability,
     polite: ex.polite,
     passive: ex.passive,
+    causative: ex.causative,
+    reciprocal: ex.reciprocal,
+    dir: ex.dir,
     compound: ex.compound,
   };
   if (ex.type === 'conjugation') {
-    return defined({ kind: ex.mode, lemma: ex.lemma, person: ex.person, dir: ex.dir, ...verbal });
+    return defined({ kind: ex.mode, lemma: ex.lemma, person: ex.person, ...verbal });
   }
   const r = paradigmRows(ex)[row];
   if (r === undefined) throw new RangeError(`${ex.id}: keine Zeile ${row}`);
@@ -132,7 +142,13 @@ export function formSpecOf(ex: EngineExercise | ParadigmExercise, row = 0): Form
 const verbalSpec = (
   lemma: string,
   form: NonfiniteTag,
-  ex: { negative?: boolean; ability?: boolean; passive?: boolean },
+  ex: {
+    negative?: boolean;
+    ability?: boolean;
+    passive?: boolean;
+    causative?: boolean;
+    reciprocal?: boolean;
+  },
   tags: MorphTag[],
 ): FormSpec =>
   defined({
@@ -142,6 +158,8 @@ const verbalSpec = (
     negative: ex.negative,
     ability: ex.ability,
     passive: ex.passive,
+    causative: ex.causative,
+    reciprocal: ex.reciprocal,
     tags: tags.length ? tags : undefined,
   });
 
