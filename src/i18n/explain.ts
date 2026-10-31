@@ -38,6 +38,8 @@ export function explainSteps(steps: Step[]): string[] {
         return t('explain.doubling', { letter: step.letter, tag });
       case 'no_buffer':
         return t('explain.no_buffer', { letter: step.letter, tag });
+      case 'compound_stem':
+        return t('explain.compound_stem', { tag });
       case 'stem_vowel_drop':
         return t('explain.stem_vowel_drop', { vowel: step.vowel, tag });
       case 'narrowing':

@@ -122,6 +122,7 @@ function entryOf(spec: FormSpec, vocab: readonly Vocab[]): VocabEntry {
     y_stem: stem.yStem,
     doubles: stem.doubles,
     poss_no_s: stem.possNoS,
+    compound_stem: stem.compoundStem,
     aorist: stem.aorist,
   };
 }

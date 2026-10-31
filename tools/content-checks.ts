@@ -1,10 +1,16 @@
 import { isScalar, parse as parseYaml, parseDocument, Scalar, visit } from 'yaml';
 import { Unit, vocabId, type Vocab } from '../src/content/schema';
 import { PlacementOverrides } from '../src/placement/select';
-import { sameForm, solveExercise, solveForm, solveParadigm } from '../src/content/lexicon';
+import {
+  sameForm,
+  solveExercise,
+  solveForm,
+  solveParadigm,
+  stemFromVocab,
+} from '../src/content/lexicon';
 import { isAmbiguous, pieces, presentAlternative } from '../src/content/segmenting';
 import { segmentLetters } from '../src/session/segment';
-import { MorphError, type Step } from '../src/morphology';
+import { inflect, MorphError, type Step } from '../src/morphology';
 import { explainSteps } from '../src/i18n/explain';
 import { speechText } from '../src/audio/speech-text';
 import { trLower } from '../src/lib/turkish';
@@ -96,6 +102,16 @@ export function splitSentences(file: string, text: string): string[] {
   return errors;
 }
 
+/** Stamm + Possessiv 3. Sg. muss die Vokabel selbst ergeben (atasöz + ü = atasözü). */
+function compoundStemFits(v: Vocab): boolean {
+  try {
+    return sameForm(inflect(stemFromVocab(v.tr, [v]), ['POSS_3SG']).form, v.tr);
+  } catch (e) {
+    if (e instanceof MorphError) return false;
+    throw e;
+  }
+}
+
 /** Prüfungen über alle Units hinweg (doppelte IDs, Dateiverweise, Review-Stand). */
 export function checkUnits(units: LoadedUnit[], fileExists: (path: string) => boolean): Report {
   const errors: string[] = [];
@@ -131,6 +147,9 @@ export function checkUnits(units: LoadedUnit[], fileExists: (path: string) => bo
       // hâl → hâli: nach â/û + l oft helle Harmonie, das muss die Vokabel festlegen.
       if (/[âû]l$/.test(v.tr) && !v.harmony_vowel) {
         warnings.push(`${file}: ${v.tr}: Harmonie prüfen (harmony_vowel?)`);
+      }
+      if (v.compound_stem && !compoundStemFits(v)) {
+        errors.push(`${file}: ${v.tr}: compound_stem "${v.compound_stem}" + -(s)I ergibt nicht tr`);
       }
     }
   }

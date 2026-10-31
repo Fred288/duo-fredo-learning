@@ -38,6 +38,7 @@ export function buildLookup(
       y_stem: v.y_stem,
       doubles: v.doubles,
       poss_no_s: v.poss_no_s,
+      compound_stem: v.compound_stem,
       aorist: v.aorist,
       register: v.register,
     })),

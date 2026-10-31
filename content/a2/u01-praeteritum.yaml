@@ -596,7 +596,7 @@ vocab:
   - { tr: tanışmak, de: [kennenlernen], pos: verb }
   - { tr: yaşamak, de: [leben, wohnen], pos: verb }
   - { tr: arkadaş, de: [Freund, Freundin], pos: noun }
-  - { tr: doğum günü, de: [Geburtstag], pos: noun }
+  - { tr: doğum günü, de: [Geburtstag], pos: noun, compound_stem: doğum gün }
   - { tr: geçen, de: [letzte, vergangene], pos: adj }
   - { tr: önce, de: ['vor (zeitlich)', zuerst], pos: postp }
   - { tr: sonra, de: [danach, dann, nach], pos: postp }

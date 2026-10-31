@@ -71,6 +71,8 @@ export const Vocab = z.strictObject({
   doubles: z.boolean().optional(),
   // Possessiv 3. Sg. ohne Puffer-s (cami → camii, mevzu → mevzuu)
   poss_no_s: z.boolean().optional(),
+  // Kompositum mit Possessivendung: Stamm ohne -(s)I (atasözü: atasöz, trafik ışığı: trafik ışık)
+  compound_stem: nonEmpty.optional(),
   // Aorist-Vokal von Verben, wenn die Regel nicht greift (ar: yapar, ir: gelir)
   aorist: z.enum(['ar', 'ir']).optional(),
   register: register.optional(),

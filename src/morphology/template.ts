@@ -26,6 +26,7 @@ export type Step =
   | { tag: AnyTag; rule: 'vowel_drop'; vowel: string }
   | { tag: AnyTag; rule: 'doubling'; letter: string }
   | { tag: AnyTag; rule: 'no_buffer'; letter: string }
+  | { tag: AnyTag; rule: 'compound_stem' }
   | { tag: AnyTag; rule: 'stem_vowel_drop'; vowel: string }
   | { tag: AnyTag; rule: 'narrowing'; chose: string }
   | { tag: AnyTag; rule: 'apostrophe' }

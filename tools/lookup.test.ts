@@ -62,6 +62,23 @@ describe('Suche über die echten Inhalte', () => {
     expect(top(q)).toContain(id);
   });
 
+  it('Komposita mit Possessivendung', () => {
+    expect(top('atasözleri', 1)).toEqual(['atasözü']);
+    expect(top('atasözünde', 1)).toEqual(['atasözü']);
+    expect(top('trafik ışığında', 1)).toEqual(['trafik ışığı']);
+    expect(top('iş görüşmeleri', 1)).toEqual(['iş görüşmesi']);
+    expect(top('cep telefonumu', 1)).toEqual(['cep telefonu']);
+    expect(top('buzdolabında', 1)).toEqual(['buzdolabı']);
+    expect(top('birbirine', 1)).toEqual(['birbiri']);
+    const atasozu = index.vocab.find((v) => v.tr === 'atasözü')!;
+    const table = formTable(atasozu);
+    expect(table?.kind === 'noun' && table.rows[0]).toMatchObject({
+      sg: 'atasözü',
+      pl: 'atasözleri',
+    });
+    expect(allForms(atasozu).map((f) => f.form)).not.toContain('atasözüler');
+  });
+
   it('yemek findet Verb und Nomen', () => {
     expect(top('yemek', 2).sort()).toEqual(['yemek', 'yemek-essen']);
   });

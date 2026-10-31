@@ -527,7 +527,7 @@ vocab:
   - { tr: mutfak, de: [Küche], pos: noun, softens: true }
   - { tr: banyo, de: [Bad, Badezimmer], pos: noun }
   - { tr: salon, de: [Wohnzimmer], pos: noun }
-  - { tr: yatak odası, de: [Schlafzimmer], pos: noun }
+  - { tr: yatak odası, de: [Schlafzimmer], pos: noun, compound_stem: yatak oda }
   - { tr: yatak, de: [Bett], pos: noun, softens: true }
   - { tr: dolap, de: [Schrank], pos: noun, softens: true }
   - { tr: sandalye, de: [Stuhl], pos: noun }
@@ -543,6 +543,6 @@ vocab:
   - { tr: merdiven, de: [Treppe], pos: noun }
   - { tr: duvar, de: [Wand], pos: noun }
   - { tr: çiçek, de: [Blume], pos: noun, softens: true }
-  - { tr: hafta sonu, de: [Wochenende], pos: noun }
+  - { tr: hafta sonu, de: [Wochenende], pos: noun, compound_stem: hafta son }
   - { tr: sabahları, de: [morgens, jeden Morgen], pos: adv }
   - { tr: çıkmak, de: [hinausgehen, hinaufgehen], pos: verb, causative: ar }

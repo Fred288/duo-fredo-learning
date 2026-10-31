@@ -347,12 +347,15 @@ export const de = {
   'explain.vowel_drop': 'Der Vokal „{vowel}“ im Stamm fällt vor einem Vokal aus ({tag})',
   'explain.doubling': 'Das „{letter}“ am Stammende verdoppelt sich vor einem Vokal ({tag})',
   'explain.no_buffer': 'Dieses Lehnwort nimmt hier kein Puffer-„{letter}“ ({tag})',
+  'explain.compound_stem':
+    'Zusammengesetztes Wort: Es endet schon auf das Possessiv -(s)I. Kasus folgen mit n, -lAr tritt davor, ein anderes Possessiv ersetzt es ({tag})',
   'explain.stem_vowel_drop':
     'Der Stamm endet auf „{vowel}“; vor -iyor fällt dieser Vokal weg ({tag})',
   'explain.narrowing': 'Vor -yor wird die Verneinung -me/-ma zu „m{chose}“ ({tag})',
   'explain.apostrophe': 'Eigennamen trennt ein Apostroph von der Endung ({tag})',
   'explain.stem_raising': 'Vor dem Pufferlaut y wird „{from}“ zu „{to}“ (yiyecek, diyeyim) → {tag}',
-  'explain.no_raising': 'de- behält vor -ip, -ince, -inceye und -iş sein e (deyip, deyince, deyiş) → {tag}',
+  'explain.no_raising':
+    'de- behält vor -ip, -ince, -inceye und -iş sein e (deyip, deyince, deyiş) → {tag}',
   'explain.aorist.vowel_stem': 'Stamm endet auf Vokal → Aorist nur -r',
   'explain.aorist.monosyllabic': 'Einsilbiger Stamm auf Konsonant → Aorist -ar/-er',
   'explain.aorist.polysyllabic': 'Mehrsilbiger Stamm auf Konsonant → Aorist -ır/-ir/-ur/-ür',

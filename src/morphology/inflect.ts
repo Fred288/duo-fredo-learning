@@ -24,6 +24,8 @@ export interface Stem {
   doubles?: boolean;
   /** Possessiv 3. Sg. ohne Puffer-s, arabische Lehnwörter (cami → camii, mevzu → mevzuu). */
   possNoS?: boolean;
+  /** Kompositum mit Possessivendung: Stamm ohne -(s)I (atasözü → atasöz, trafik ışığı → trafik ışık). */
+  compoundStem?: string;
 }
 
 // Suffixe, vor denen ein y-Stamm sein y zeigt (nicht POSS_3PL: suları).
@@ -66,8 +68,22 @@ export const asStem = (input: Stem | string): Stem =>
 export const stemSpelling = (stem: Stem): string =>
   stem.proper || stem.capitalized ? stem.form.normalize('NFC').trim() : normalize(stem.form);
 
+/**
+ * Endungen am Stamm eines Kompositums: die eingebaute -(s)I bleibt vor Kasus (atasöz-ü-nde), steht
+ * im Plural nach -lAr (atasöz-ler-i) und weicht jedem anderen Possessiv (atasöz-üm, atasöz-leri).
+ */
+function compoundTags(tags: MorphTag[]): MorphTag[] {
+  if (tags.some((t) => t.startsWith('POSS_')) || DERIVATIONS.has(tags[0]!)) return tags;
+  return tags[0] === 'PL' ? ['PL', 'POSS_3SG', ...tags.slice(1)] : ['POSS_3SG', ...tags];
+}
+
 export function inflect(input: Stem | string, tags: MorphTag[]): Inflection {
   const stem = asStem(input);
+  if (stem.compoundStem && tags.length) {
+    const { compoundStem, ...rest } = stem;
+    const inner = inflect({ ...rest, form: compoundStem }, compoundTags(tags));
+    return { ...inner, steps: [{ tag: tags[0]!, rule: 'compound_stem' }, ...inner.steps] };
+  }
   let stemForm = stemSpelling(stem);
   if (!lastVowel(trLower(stemForm)) && !stem.harmonyVowel) {
     throw new MorphError(`Stamm "${stem.form}" enthält keinen Vokal`);

@@ -557,7 +557,7 @@ vocab:
   - { tr: saygı, de: [Respekt], pos: noun }
   - { tr: dost, de: [guter Freund, gute Freundin], pos: noun }
   - { tr: bayram, de: [Feiertag], pos: noun }
-  - { tr: birbiri, de: [einander], pos: noun }
+  - { tr: birbiri, de: [einander], pos: noun, compound_stem: birbir }
   - { tr: anlaşmak, de: [sich verstehen, sich einigen], pos: verb }
   - { tr: barışmak, de: [sich versöhnen], pos: verb }
   - { tr: kavga etmek, de: [sich streiten], pos: verb, softens: true }

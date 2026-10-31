@@ -234,6 +234,34 @@ describe('Formtabellen', () => {
     expect(formTable(entry('hoşça kal'))).toBeUndefined();
   });
 
+  it('Kompositum: Tabelle, Formen ohne doppeltes Possessiv, auch mehrwortig', () => {
+    const compound = (tr: string, compound_stem: string, softens?: boolean) =>
+      v(tr, ['-'], 'noun', { compound_stem, softens });
+    const table = formTable(compound('atasözü', 'atasöz'));
+    expect(table).toMatchObject({
+      kind: 'noun',
+      rows: expect.arrayContaining([
+        expect.objectContaining({ sg: 'atasözü', pl: 'atasözleri' }),
+        expect.objectContaining({ sg: 'atasözünde', pl: 'atasözlerinde' }),
+      ]),
+    });
+    const forms = nounForms(compound('atasözü', 'atasöz'));
+    // „im Sprichwort“ oder „in deinem Sprichwort“, aber nicht zusätzlich POSS_3SG + LOC
+    expect(forms.filter((f) => f.form === 'atasözünde').map((f) => f.label)).toEqual([
+      { kind: 'noun', tags: ['LOC'] },
+      { kind: 'noun', tags: ['POSS_2SG', 'LOC'] },
+    ]);
+    expect(forms.map((f) => f.form)).not.toContain('atasözüler');
+
+    const prepared = prepareLookup({
+      ...index,
+      vocab: [compound('atasözü', 'atasöz'), compound('trafik ışığı', 'trafik ışık', true)],
+    });
+    expect(lemmatize(prepared, 'atasözleri').map((m) => m.entry.tr)).toEqual(['atasözü']);
+    expect(lemmatize(prepared, 'trafik ışığında').map((m) => m.entry.tr)).toEqual(['trafik ışığı']);
+    expect(lemmatize(prepared, 'trafik ışıkları').map((m) => m.entry.tr)).toEqual(['trafik ışığı']);
+  });
+
   it('Formenmengen sind begrenzt', () => {
     expect(nounForms(entry('ev')).length).toBe(97);
     // Zeiten, zusammengesetzte Zeiten (idi/imiş/ise), können und Passiv

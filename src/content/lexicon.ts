@@ -36,6 +36,7 @@ export function stemFromVocab(
     yStem: v?.y_stem,
     doubles: v?.doubles,
     possNoS: v?.poss_no_s,
+    compoundStem: v?.compound_stem,
     aorist: v?.aorist,
     causative: v?.causative,
   };

@@ -86,6 +86,17 @@ describe('checkUnits', () => {
     );
   });
 
+  it('compound_stem muss mit -(s)I die Vokabel ergeben', () => {
+    const withVocab = (line: string) =>
+      yamlUnit('a1-u01').replace('- { tr: ev, de: [Haus], pos: noun }', line);
+    const ok = '- { tr: atasözü, de: [Sprichwort], pos: noun, compound_stem: atasöz }';
+    const wrong = '- { tr: atasözü, de: [Sprichwort], pos: noun, compound_stem: atasö }';
+    expect(checkUnits([load('a.yaml', withVocab(ok))], () => true).errors).toEqual([]);
+    expect(checkUnits([load('a.yaml', withVocab(wrong))], () => true).errors).toEqual([
+      'a.yaml: atasözü: compound_stem "atasö" + -(s)I ergibt nicht tr',
+    ]);
+  });
+
   it('warnt vor ungeprüften Inhalten', () => {
     const units = [load('a.yaml', yamlUnit('a1-u01'))];
     const { errors, warnings } = checkUnits(units, () => true);

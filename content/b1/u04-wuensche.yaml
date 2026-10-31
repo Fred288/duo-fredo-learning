@@ -511,7 +511,7 @@ vocab:
   - { tr: buz, de: [Eis], pos: noun }
   - { tr: kuraklık, de: [Dürre, Trockenheit], pos: noun, softens: true }
   - { tr: sel, de: [Hochwasser, Überschwemmung], pos: noun }
-  - { tr: hava durumu, de: [Wetterbericht], pos: noun }
+  - { tr: hava durumu, de: [Wetterbericht], pos: noun, compound_stem: hava durum }
   - { tr: umut, de: [Hoffnung], pos: noun, softens: true }
   - { tr: umarım, de: [hoffentlich, ich hoffe], pos: phrase }
   - { tr: inşallah, de: [hoffentlich, so Gott will], pos: interj }

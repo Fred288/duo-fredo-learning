@@ -62,7 +62,7 @@ function stemsOf(e: VocabEntry): string[] {
   const kind = formKind(e);
   if (!kind) return [];
   if (kind === 'pronoun') return [searchKey(e.tr).slice(0, 1)];
-  const base = searchKey(kind === 'verb' ? verbStem(e.tr) : e.tr);
+  const base = searchKey(kind === 'verb' ? verbStem(e.tr) : (e.compound_stem ?? e.tr));
   // Mehrwortverben (evet de-) fängt die Regel für Stämme auf -a/-e unten ab.
   const irregular = kind === 'verb' && /^[dy]e$/.test(base);
   const cut = e.drops_vowel ? 2 : e.softens || irregular ? 1 : 0;

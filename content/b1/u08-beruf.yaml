@@ -504,7 +504,7 @@ vocab:
   - { tr: bölüm, de: [Studienfach, Abteilung], pos: noun }
   - { tr: kurs, de: [Kurs], pos: noun }
   - { tr: staj, de: [Praktikum], pos: noun }
-  - { tr: iş görüşmesi, de: [Vorstellungsgespräch], pos: noun }
+  - { tr: iş görüşmesi, de: [Vorstellungsgespräch], pos: noun, compound_stem: iş görüşme }
   - { tr: deneyim, de: [Erfahrung], pos: noun }
   - { tr: tecrübe, de: [Erfahrung], pos: noun }
   - { tr: başvurmak, de: [sich bewerben], pos: verb }

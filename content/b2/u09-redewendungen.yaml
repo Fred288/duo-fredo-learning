@@ -471,7 +471,7 @@ vocab:
   - { tr: kulak, de: [Ohr], pos: noun, softens: true }
   - { tr: gönül, de: ['Herz, Gemüt'], pos: noun, drops_vowel: true }
   - { id: yüz-gesicht, tr: yüz, de: [Gesicht], pos: noun }
-  - { tr: atasözü, de: [Sprichwort], pos: phrase }
+  - { tr: atasözü, de: [Sprichwort], pos: noun, compound_stem: atasöz }
   - { tr: deyim, de: [Redewendung], pos: noun }
   - { tr: canı sıkılmak, de: [sich langweilen], pos: phrase }
   - { tr: göz kulak olmak, de: [aufpassen auf], pos: verb }

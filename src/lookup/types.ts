@@ -14,6 +14,7 @@ export type VocabEntry = Pick<
   | 'y_stem'
   | 'doubles'
   | 'poss_no_s'
+  | 'compound_stem'
   | 'aorist'
   | 'register'
 > & {

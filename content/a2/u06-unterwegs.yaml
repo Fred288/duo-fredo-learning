@@ -680,7 +680,7 @@ vocab:
   - { tr: köprü, de: [Brücke], pos: noun }
   - { tr: durak, de: [Haltestelle], pos: noun, softens: true }
   - { tr: meydan, de: [Platz], pos: noun }
-  - { tr: trafik ışığı, de: [Ampel], pos: noun }
+  - { tr: trafik ışığı, de: [Ampel], pos: noun, compound_stem: trafik ışık, softens: true }
   - { tr: geçmek, de: [überqueren, vorbeigehen, vergehen], pos: verb, causative: ir }
   - { tr: inmek, de: [aussteigen, hinuntergehen], pos: verb }
   - { tr: uzak, de: [weit, fern], pos: adj }

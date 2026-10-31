@@ -513,7 +513,7 @@ vocab:
   - { tr: yok, de: [es gibt nicht, nicht vorhanden], pos: particle }
   - { tr: zaman, de: [Zeit], pos: noun }
   - { tr: para, de: [Geld], pos: noun }
-  - { tr: buzdolabı, de: [Kühlschrank], pos: noun }
+  - { tr: buzdolabı, de: [Kühlschrank], pos: noun, compound_stem: buzdolap, softens: true }
   - { tr: istiyorum, de: [ich möchte, ich will], pos: phrase }
   - { tr: ve, de: [und], pos: conj }
   - { tr: ama, de: [aber], pos: conj }

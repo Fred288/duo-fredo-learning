@@ -217,6 +217,60 @@ describe('Possessiv ohne Puffer-s (cami, mevzu)', () => {
   });
 });
 
+describe('Kompositum mit Possessivendung (compoundStem)', () => {
+  const atasozu = { form: 'atasözü', compoundStem: 'atasöz' };
+  const isik = { form: 'trafik ışığı', compoundStem: 'trafik ışık', softens: true };
+  const gorusme = { form: 'iş görüşmesi', compoundStem: 'iş görüşme' };
+  const cep = { form: 'cep telefonu', compoundStem: 'cep telefon' };
+  it.each([
+    [atasozu, [], 'atasözü'],
+    [atasozu, ['ACC'], 'atasözünü'],
+    [atasozu, ['DAT'], 'atasözüne'],
+    [atasozu, ['LOC'], 'atasözünde'],
+    [atasozu, ['ABL'], 'atasözünden'],
+    [atasozu, ['GEN'], 'atasözünün'],
+    [atasozu, ['INS'], 'atasözüyle'],
+    [atasozu, ['POSS_3SG'], 'atasözü'],
+    // Plural: -lAr vor der Endung, nicht danach.
+    [atasozu, ['PL'], 'atasözleri'],
+    [atasozu, ['PL', 'ACC'], 'atasözlerini'],
+    [atasozu, ['PL', 'LOC'], 'atasözlerinde'],
+    [atasozu, ['POSS_3PL'], 'atasözleri'],
+    // Ein anderes Possessiv ersetzt die Endung.
+    [atasozu, ['POSS_1SG'], 'atasözüm'],
+    [atasozu, ['POSS_1PL', 'LOC'], 'atasözümüzde'],
+    [atasozu, ['PL', 'POSS_1SG'], 'atasözlerim'],
+    [gorusme, ['LOC'], 'iş görüşmesinde'],
+    [gorusme, ['PL'], 'iş görüşmeleri'],
+    [gorusme, ['POSS_1SG'], 'iş görüşmem'],
+    [cep, ['ACC'], 'cep telefonunu'],
+    [cep, ['PL'], 'cep telefonları'],
+    [cep, ['POSS_1SG'], 'cep telefonum'],
+    // Erweichung gilt am Stamm: vor Vokal ğ, vor -lAr wieder k.
+    [isik, ['LOC'], 'trafik ışığında'],
+    [isik, ['PL'], 'trafik ışıkları'],
+    [isik, ['POSS_1SG'], 'trafik ışığım'],
+    [{ form: 'buzdolabı', compoundStem: 'buzdolap', softens: true }, ['PL'], 'buzdolapları'],
+    // y-Stamm: meyve suyu, meyve suları
+    [{ form: 'meyve suyu', compoundStem: 'meyve su', yStem: true }, ['LOC'], 'meyve suyunda'],
+    [{ form: 'meyve suyu', compoundStem: 'meyve su', yStem: true }, ['PL'], 'meyve suları'],
+    // Ableitungen hängen am Stamm.
+    [atasozu, ['LI'], 'atasözlü'],
+  ] as const)('%o + %j → %s', (stem, tags, form) => {
+    expect(inflect(stem, [...tags]).form).toBe(form);
+  });
+
+  it('zeigt die Possessivendung als eigenes Stück und nennt die Regel', () => {
+    const r = inflect(atasozu, ['LOC']);
+    expect(r.segments).toEqual([
+      { tag: 'STEM', text: 'atasöz' },
+      { tag: 'POSS_3SG', text: 'ü' },
+      { tag: 'LOC', text: 'nde' },
+    ]);
+    expect(r.steps[0]).toEqual({ tag: 'LOC', rule: 'compound_stem' });
+  });
+});
+
 describe('Nebenform mit Puffer-s', () => {
   it('nur bei poss_no_s und Possessiv 3. Sg.', () => {
     const cami = { form: 'cami', possNoS: true };

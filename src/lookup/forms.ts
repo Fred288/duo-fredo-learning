@@ -57,12 +57,14 @@ const NOUN_POS: ReadonlySet<VocabEntry['pos']> = new Set(['noun', 'adj', 'num'])
 const POSS: MorphTag[] = ['POSS_1SG', 'POSS_2SG', 'POSS_3SG', 'POSS_1PL', 'POSS_2PL', 'POSS_3PL'];
 const CASES: MorphTag[] = ['ACC', 'DAT', 'LOC', 'ABL', 'GEN', 'INS'];
 
-/** Wie das Wort gebeugt wird; Mehrwort-Nomen (yatak odası) kann die Engine nicht. */
+/** Wie das Wort gebeugt wird; Mehrwort-Nomen nur als Kompositum mit `compound_stem` (yatak odası). */
 export function formKind(entry: VocabEntry): 'noun' | 'verb' | 'pronoun' | undefined {
   if (entry.pos === 'verb') return 'verb';
   if (entry.pos === 'pron')
     return PRONOUN_LEMMAS.includes(entry.tr as PronounLemma) ? 'pronoun' : undefined;
-  return NOUN_POS.has(entry.pos) && !entry.tr.includes(' ') ? 'noun' : undefined;
+  return NOUN_POS.has(entry.pos) && (entry.compound_stem || !entry.tr.includes(' '))
+    ? 'noun'
+    : undefined;
 }
 
 export const nounStem = (e: VocabEntry): Stem => ({
@@ -75,6 +77,7 @@ export const nounStem = (e: VocabEntry): Stem => ({
   yStem: e.y_stem,
   doubles: e.doubles,
   possNoS: e.poss_no_s,
+  compoundStem: e.compound_stem,
 });
 
 const verbStemOf = (e: VocabEntry): VerbStem => ({
@@ -97,8 +100,10 @@ function attempt(fn: () => string): string | undefined {
 export function nounForms(entry: VocabEntry): Form[] {
   const stem = nounStem(entry);
   const out: Form[] = [];
+  // Ein Kompositum trägt POSS_3SG schon in sich, das gäbe jede Form ein zweites Mal.
+  const possessives = entry.compound_stem ? POSS.filter((p) => p !== 'POSS_3SG') : POSS;
   for (const pl of [[], ['PL']] as MorphTag[][]) {
-    for (const poss of [[], ...POSS.map((p) => [p])]) {
+    for (const poss of [[], ...possessives.map((p) => [p])]) {
       for (const kase of [[], ...CASES.map((c) => [c])]) {
         const tags = [...pl, ...poss, ...kase];
         if (!tags.length) continue;

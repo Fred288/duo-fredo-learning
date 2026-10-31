@@ -700,7 +700,7 @@ vocab:
   - { tr: indirimli, de: [reduziert], pos: adj }
   - { tr: kasa, de: [Kasse], pos: noun }
   - { tr: nakit, de: [bar, Bargeld], pos: noun }
-  - { tr: kredi kartı, de: [Kreditkarte], pos: noun }
+  - { tr: kredi kartı, de: [Kreditkarte], pos: noun, compound_stem: kredi kart }
   - { tr: beden, de: [Kleidergröße], pos: noun }
   - { tr: numara, de: [Nummer, Schuhgröße], pos: noun }
   - { tr: poşet, de: [Tüte], pos: noun }

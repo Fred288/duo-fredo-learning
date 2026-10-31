@@ -493,7 +493,7 @@ lessons:
 
 vocab:
   - { tr: bilim, de: [Wissenschaft], pos: noun }
-  - { tr: bilim insanı, de: [Wissenschaftler(in)], pos: noun }
+  - { tr: bilim insanı, de: [Wissenschaftler(in)], pos: noun, compound_stem: bilim insan }
   - { tr: deney, de: [Versuch, Experiment], pos: noun }
   - { tr: araştırma, de: [Forschung], pos: noun }
   - { tr: araştırmak, de: [forschen, untersuchen], pos: verb }

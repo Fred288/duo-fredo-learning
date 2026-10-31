@@ -516,9 +516,9 @@ vocab:
   - { tr: olay, de: [Ereignis, Vorfall], pos: noun }
   - { tr: bence, de: [meiner Meinung nach], pos: adv }
   - { tr: sence, de: [deiner Meinung nach], pos: adv }
-  - { tr: cep telefonu, de: [Handy], pos: noun }
+  - { tr: cep telefonu, de: [Handy], pos: noun, compound_stem: cep telefon }
   - { tr: tartışmak, de: [diskutieren], pos: verb }
   - { tr: açıklamak, de: [erklären], pos: verb }
   - { tr: kontrol etmek, de: [prüfen, kontrollieren], pos: verb, softens: true }
   - { tr: muhabir, de: [Reporter(in)], pos: noun }
-  - { tr: bakış açısı, de: [Sichtweise], pos: noun }
+  - { tr: bakış açısı, de: [Sichtweise], pos: noun, compound_stem: bakış açı }

@@ -778,4 +778,4 @@ vocab:
   - { tr: kere, de: [Mal], pos: noun }
   - { tr: şikâyet, de: [Beschwerde, Klage], pos: noun }
   - { tr: ağız, de: [Mund], pos: noun, drops_vowel: true }
-  - { tr: baş ağrısı, de: [Kopfschmerzen], pos: noun }
+  - { tr: baş ağrısı, de: [Kopfschmerzen], pos: noun, compound_stem: baş ağrı }
