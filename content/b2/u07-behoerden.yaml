@@ -126,7 +126,7 @@ lessons:
       - id: b2-u07-l2-e10
         type: word_bank
         prompt: Die Arbeiten dauern noch an.
-        answers: [Çalışmalar hâlâ devam etmektedir.]
+        answers: [Çalışmalar hâlâ devam etmektedir., Hâlâ çalışmalar devam etmektedir.]
         chunks:
           - { text: "Çalışmalar", role: subject }
           - { text: "hâlâ", role: time }
@@ -189,7 +189,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Gerekli belgeler tarafınıza gönderilecektir.
-        answers: [Die erforderlichen Dokumente werden Ihnen zugesandt., Die erforderlichen Unterlagen werden Ihnen zugesandt., Die notwendigen Dokumente werden Ihnen zugesandt., Die notwendigen Unterlagen werden Ihnen zugesandt., Die erforderlichen Dokumente werden Ihnen geschickt., Die erforderlichen Unterlagen werden Ihnen geschickt., Die notwendigen Dokumente werden Ihnen geschickt., Die notwendigen Unterlagen werden Ihnen geschickt.]
+        answers: [Die erforderlichen Dokumente werden Ihnen zugesandt., Die erforderlichen Unterlagen werden Ihnen zugesandt., Die notwendigen Dokumente werden Ihnen zugesandt., Die notwendigen Unterlagen werden Ihnen zugesandt., Die erforderlichen Dokumente werden Ihnen geschickt., Die erforderlichen Unterlagen werden Ihnen geschickt., Die notwendigen Dokumente werden Ihnen geschickt., Die notwendigen Unterlagen werden Ihnen geschickt., Die erforderlichen Dokumente werden Ihnen zugeschickt., Die erforderlichen Unterlagen werden Ihnen zugeschickt., Die erforderlichen Dokumente werden Ihnen zugesendet., Die erforderlichen Unterlagen werden Ihnen zugesendet.]
       - id: b2-u07-l3-e13
         type: multiple_choice
         prompt: Was bedeutet „Gelmiştir.“ im Gespräch und im amtlichen Brief?
@@ -212,7 +212,7 @@ lessons:
         explanation: -iniz ist die förmliche Bitte auf Formularen und Schildern.
       - { id: b2-u07-l4-e2, type: conjugation, mode: verb, lemma: imzalamak, person: 2pl, tense: imperative, polite: true, target: imzalayınız, gloss_de: unterschreiben Sie }
       - { id: b2-u07-l4-e3, type: conjugation, mode: verb, lemma: beklemek, person: 2pl, tense: imperative, polite: true, target: bekleyiniz, gloss_de: warten Sie }
-      - { id: b2-u07-l4-e4, type: conjugation, mode: verb, lemma: başvurmak, person: 2pl, tense: imperative, polite: true, target: başvurunuz, gloss_de: wenden Sie sich }
+      - { id: b2-u07-l4-e4, type: conjugation, mode: verb, lemma: başvurmak, person: 2pl, tense: imperative, polite: true, target: başvurunuz, gloss_de: wenden Sie sich, explanation: Gleich geschrieben wie başvuru + -nuz = Ihr Antrag. }
       - { id: b2-u07-l4-e5, type: conjugation, mode: verb, lemma: bildirmek, person: 2pl, tense: imperative, polite: true, negative: true, target: bildirmeyiniz, gloss_de: teilen Sie nicht mit }
       - id: b2-u07-l4-e6
         type: word_bank
@@ -228,21 +228,21 @@ lessons:
       - id: b2-u07-l4-e8
         type: word_bank
         prompt: Die Besucher werden gebeten, im Flur zu warten.
-        answers: [Ziyaretçilerin koridorda beklemesi rica olunur.]
+        answers: [Ziyaretçilerin koridorda beklemeleri rica olunur., Ziyaretçilerin koridorda beklemesi rica olunur.]
         distractors: [ziyaretçiler, bekliyor]
       - id: b2-u07-l4-e9
         type: free_text
         direction: tr_de
         prompt: Bilgilerinize sunarız.
-        answers: [Zu Ihrer Kenntnisnahme., Wir bringen dies zu Ihrer Kenntnis., Wir teilen Ihnen dies zur Kenntnisnahme mit., Zur Kenntnisnahme.]
+        answers: [Zu Ihrer Kenntnisnahme., Wir bringen dies zu Ihrer Kenntnis., Wir teilen Ihnen dies zur Kenntnisnahme mit., Zur Kenntnisnahme., Zu Ihrer Information.]
       - id: b2-u07-l4-e10
         type: free_text
         direction: de_tr
         prompt: Bitte warten Sie.
-        answers: [Lütfen bekleyiniz., Lütfen bekleyin.]
+        answers: [Lütfen bekleyiniz., Lütfen bekleyin., Bekleyin lütfen., Bekleyiniz lütfen.]
       - id: b2-u07-l4-e11
         type: multiple_choice
-        prompt: Wie beginnt ein Brief an Frau Ayşe Yılmaz?
+        prompt: Wie beginnt ein amtlicher Brief an Frau Ayşe Yılmaz?
         options: [Sayın Ayşe Yılmaz, Canım Ayşe, Selam Ayşe]
         answer: Sayın Ayşe Yılmaz
       - id: b2-u07-l4-e12
@@ -274,7 +274,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Wo muss ich unterschreiben?
-        answers: [Nereyi imzalamalıyım?, Nereye imza atmalıyım?, Nereyi imzalayacağım?, Nereye imza atacağım?, Nerede imzalamalıyım?, Nereyi imzalamam gerekiyor?]
+        answers: [Nereyi imzalamalıyım?, Nereye imza atmalıyım?, Nereyi imzalayacağım?, Nereye imza atacağım?, Nerede imzalamalıyım?, Nereyi imzalamam gerekiyor?, Nereye imza atmam gerekiyor?]
       - id: b2-u07-l5-e5
         type: word_bank
         prompt: Das Verfahren dauert zehn Tage.
@@ -379,7 +379,7 @@ lessons:
         - { tr: "sayfasında", de: "auf der Seite (sayfa)" }
         - { tr: "duyurulmuştur", de: "wurde bekannt gegeben (duyurmak)", vocab: "duymak" }
         - { tr: "sırasında", de: "während" }
-        - { tr: "suların", de: "der Wasser (su, Plural, Genitiv)", vocab: "su" }
+        - { tr: "suların", de: "des Wassers (sular = Leitungswasser, Genitiv)", vocab: "su" }
         - { tr: "kesilmesi", de: "das Abstellen (kesmek + Passiv + -me + -si)", vocab: "kesmek" }
         - { tr: "mümkündür", de: "ist möglich (mümkün + dür)" }
         - { tr: "kesintileri", de: "Unterbrechungen (kesinti)" }
@@ -465,7 +465,7 @@ lessons:
       - id: b2-u07-l7-e3
         type: multiple_choice
         prompt: Welche Form ist richtig? (wird gemacht, formell)
-        options: [yapılmaktadır, yapmaktadır, yapılıyordur]
+        options: [yapılmaktadır, yapmaktadır, yapılmaktaydım]
         answer: yapılmaktadır
       - id: b2-u07-l7-e4
         type: multiple_choice
@@ -487,11 +487,13 @@ lessons:
       - id: b2-u07-l7-e9
         type: word_bank
         prompt: Die erforderlichen Dokumente müssen bis Montag eingereicht werden.
-        answers: [Gerekli belgeler pazartesiye kadar verilmelidir.]
+        answers: [Gerekli belgeler pazartesiye kadar verilmelidir., Pazartesiye kadar gerekli belgeler verilmelidir.]
         chunks:
           - { text: "Gerekli belgeler", role: subject }
           - { text: "pazartesiye kadar", role: time }
           - { text: "verilmelidir", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
         distractors: [vermelidir, belgeleri]
       - { id: b2-u07-l7-e10, type: suffix_builder, stem: başvurmak, verbal: PART_AN, suffixes: [PL], target: başvuranlar, gloss_de: die Antragstellenden }
 
@@ -512,7 +514,7 @@ vocab:
   - { tr: süre, de: [Frist, Dauer], pos: noun }
   - { tr: ilgili, de: [zuständig, betreffend], pos: adj }
   - { tr: saygılarımla, de: [Mit freundlichen Grüßen], pos: phrase }
-  - { tr: bulunmak, de: [sich befinden], pos: verb, causative: none }
+  - { tr: bulunmak, de: [sich befinden], pos: verb }
   - { tr: gerekmek, de: [erforderlich sein], pos: verb }
   - { tr: ziyaretçi, de: [Besucher(in)], pos: noun }
   - { tr: koridor, de: [Flur], pos: noun }

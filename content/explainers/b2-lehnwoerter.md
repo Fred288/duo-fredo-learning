@@ -11,7 +11,7 @@ Einige kurze Wörter verdoppeln den letzten Konsonanten **vor einem Vokal**:
 | hak  | hakkım     | haklar        |
 | sır  | sırrı      | sırlar        |
 | his  | hissim     | hisler        |
-| af   | affım      |               |
+| af   | affınız    |               |
 | hat  | hattı      | hatlar        |
 | ret  | reddi      |               |
 
@@ -19,7 +19,7 @@ Bei ret wird zusätzlich t zu d. Die Verben zeigen dasselbe: affetmek, hissetmek
 
 ## Camii und saati: stumme Endung und helle Laute
 
-**cami** und **mevzu** endeten früher auf einem Konsonanten, der in der Schrift verschwunden ist. Beim Possessiv der 3. Person fällt darum das s weg: Süleymaniye Camii, bu mevzuu. Heute ist auch **camisi** üblich, beide Formen gelten. Bei allen anderen Endungen ist cami regulär: camiyi, camide.
+**cami** und **mevzu** endeten früher auf einem Konsonanten, der in der Schrift verschwunden ist. Beim Possessiv der 3. Person fällt darum das s weg: Süleymaniye Camii, kitabın mevzuu. In Namen steht meist Camii, sonst auch **camisi** und mevzusu; beide Formen gelten. Bei allen anderen Endungen ist cami regulär: camiyi, camide.
 
 Manche Wörter nehmen trotz dunklem letztem Vokal **helle** Endungen:
 
@@ -28,7 +28,7 @@ Manche Wörter nehmen trotz dunklem letztem Vokal **helle** Endungen:
 - hâl → hâli
 - kalp → kalbi, kalbim
 
-Das **Zirkumflex** (şapka) zeigt einen langen Vokal, ein helles k oder l an, oder unterscheidet Wörter: kâr (Gewinn), kar (Schnee), hâlâ (immer noch), hala (Tante). Bei Sonderzeichen ist die Schreibung im Alltag schwankend.
+Der **Zirkumflex** (şapka) zeigt einen langen Vokal, ein helles k oder l an, oder unterscheidet Wörter: kâr (Gewinn), kar (Schnee), hâlâ (immer noch), hala (Tante). Bei Sonderzeichen ist die Schreibung im Alltag schwankend.
 
 ## Sätze verbinden: ancak, oysa, dolayısıyla
 

@@ -48,7 +48,7 @@ lessons:
         prompt: Was heißt „canı sıkılmak“?
         options: [sich langweilen, Herzweh haben, Angst haben]
         answer: sich langweilen
-        explanation: Canım sıkılıyor = Mir ist langweilig.
+        explanation: Canım sıkılıyor = Mir ist langweilig. Auch bedrückt, ärgerlich sein.
       - id: b2-u09-l1-e8
         type: multiple_choice
         prompt: Was heißt „göz kulak olmak“?
@@ -106,13 +106,13 @@ lessons:
         stem: görmek
         verbal: PART_MIS
         target: görmüş
-        gloss_de: 'der gesehen hat (görmüş adam = ein erfahrener Mann)'
+        gloss_de: 'der gesehen hat (görmüş geçirmiş = lebenserfahren)'
         explanation: -miş kann vor einem Nomen stehen, dann beschreibt es einen Zustand.
       - { id: b2-u09-l2-e2, type: suffix_builder, stem: geçmek, verbal: PART_MIS, target: geçmiş, gloss_de: 'vergangen (geçmiş günler = vergangene Tage)' }
       - { id: b2-u09-l2-e3, type: suffix_builder, stem: pişmek, verbal: PART_MIS, target: pişmiş, gloss_de: 'gekocht, gar (pişmiş et = gegartes Fleisch)' }
       - { id: b2-u09-l2-e4, type: suffix_builder, stem: bozulmak, verbal: PART_MIS, target: bozulmuş, gloss_de: 'kaputt, verdorben (bozulmuş süt = verdorbene Milch)' }
       - { id: b2-u09-l2-e5, type: suffix_builder, stem: kırılmak, verbal: PART_MIS, target: kırılmış, gloss_de: 'zerbrochen (kırılmış cam = zerbrochenes Glas)' }
-      - { id: b2-u09-l2-e6, type: suffix_builder, stem: görmek, verbal: PART_MIS, suffixes: [PL, DAT], target: görmüşlere, gloss_de: den Erfahrenen }
+      - { id: b2-u09-l2-e6, type: suffix_builder, stem: okumak, verbal: PART_MIS, suffixes: [PL, DAT], target: okumuşlara, gloss_de: den Gebildeten }
       - { id: b2-u09-l2-e7, type: suffix_builder, stem: yorulmak, verbal: PART_MIS, target: yorulmuş, gloss_de: ermüdet }
       - id: b2-u09-l2-e8
         type: multiple_choice
@@ -127,7 +127,7 @@ lessons:
           - { text: "Geçmiş günler", role: subject }
           - { text: "geri", role: complement }
           - { text: "gelmez", role: predicate }
-        distractors: [geçen, gelir]
+        distractors: [geçiyor, gelir]
       - id: b2-u09-l2-e10
         type: word_bank
         prompt: Wirf die verdorbene Milch weg.
@@ -137,12 +137,12 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Kırılmış cama dikkat et.
-        answers: [Pass auf das zerbrochene Glas auf., Achte auf das zerbrochene Glas., Pass auf die zerbrochene Scheibe auf., Achte auf die zerbrochene Scheibe., Vorsicht vor dem zerbrochenen Glas.]
+        answers: [Pass auf das zerbrochene Glas auf., Achte auf das zerbrochene Glas., Pass auf die zerbrochene Scheibe auf., Achte auf die zerbrochene Scheibe., Vorsicht vor dem zerbrochenen Glas., Pass auf das kaputte Glas auf.]
       - id: b2-u09-l2-e12
         type: multiple_choice
-        prompt: Was ist der Unterschied? „Adam gelmiş.“ / „Gelmiş adam“
-        options: [Der Mann ist wohl gekommen. / der gekommene Mann, Der Mann kam gerne. / Der Mann kommt., Beides ist ein ganzer Satz.]
-        answer: Der Mann ist wohl gekommen. / der gekommene Mann
+        prompt: Was ist der Unterschied? „Süt bozulmuş.“ / „bozulmuş süt“
+        options: [Die Milch ist wohl verdorben. / die verdorbene Milch, Die Milch verdirbt. / Die Milch ist frisch., Beides ist ein ganzer Satz.]
+        answer: Die Milch ist wohl verdorben. / die verdorbene Milch
 
   - id: b2-u09-l3
     type: grammar
@@ -184,7 +184,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Seni çok göresim geldi.
-        answers: [Ich wollte dich so gern sehen., Ich möchte dich so gern sehen., Ich will dich unbedingt sehen., 'Ich habe große Lust, dich zu sehen.', Ich vermisse dich sehr.]
+        answers: [Ich wollte dich so gern sehen., Ich möchte dich so gern sehen., Ich will dich unbedingt sehen., 'Ich habe große Lust, dich zu sehen.', Ich vermisse dich sehr., 'Ich hatte große Lust, dich zu sehen.']
       - id: b2-u09-l3-e11
         type: multiple_choice
         prompt: Welches Register passt zu „gidesim var“?
@@ -218,8 +218,9 @@ lessons:
       - id: b2-u09-l4-e4
         type: multiple_choice
         prompt: Was bedeutet „Gözüm yolda kaldı.“?
-        options: [Ich habe lange gewartet., Ich habe etwas im Auge., Ich habe mich verlaufen.]
-        answer: Ich habe lange gewartet.
+        options: [Ich habe lange sehnsüchtig gewartet., Ich habe etwas im Auge., Ich habe mich verlaufen.]
+        answer: Ich habe lange sehnsüchtig gewartet.
+        explanation: gözü yolda = jemand, der ständig wartet.
       - id: b2-u09-l4-e5
         type: multiple_choice
         prompt: Was bedeutet „Elinden geleni yaptı.“?
@@ -249,7 +250,7 @@ lessons:
       - id: b2-u09-l4-e10
         type: word_bank
         prompt: Mein Freund ist verschwiegen, du kannst ihm vertrauen.
-        answers: ['Arkadaşım ağzı sıkıdır, ona güvenebilirsin.']
+        answers: ['Arkadaşımın ağzı sıkıdır, ona güvenebilirsin.']
         distractors: [onu, güveniyor]
       - id: b2-u09-l4-e11
         type: free_text
@@ -285,7 +286,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Bleib ruhig.
-        answers: [Sakin ol., Sakin kal., Sakin ol lütfen.]
+        answers: [Sakin ol., Sakin kal., Sakin ol lütfen., Lütfen sakin ol.]
       - id: b2-u09-l5-e5
         type: word_bank
         prompt: Hab Geduld, alles wird gut.
@@ -327,10 +328,10 @@ lessons:
         type: paradigm
         kind: verbal
         verbal: PART_MIS
-        lemma: görmek
+        lemma: okumak
         rows: [[PL], [DAT], [PL, DAT], [PL, ABL]]
-        targets: [görmüşler, görmüşe, görmüşlere, görmüşlerden]
-        gloss_de: der Erfahrene (substantiviert)
+        targets: [okumuşlar, okumuşa, okumuşlara, okumuşlardan]
+        gloss_de: der Gebildete (substantiviert)
       - id: b2-u09-l6-e4
         type: paradigm
         kind: verb
@@ -352,14 +353,14 @@ lessons:
         - { tr: "Anneannem gülümsedi ve “Sabrın sonu selamettir.” dedi.", de: "Meine Großmutter lächelte und sagte: „Geduld führt zum guten Ende.“" }
         - { tr: "Sonra bana küçük bir kutu verdi.", de: "Dann gab sie mir eine kleine Schachtel." }
         - { tr: "İçinde biraz para vardı.", de: "Darin war etwas Geld." }
-        - { tr: "“Her hafta buraya küçük bir para koy.” dedi.", de: "„Leg jede Woche ein wenig Geld hier hinein“, sagte sie." }
+        - { tr: "“Her hafta buraya biraz para koy.” dedi.", de: "„Leg jede Woche ein wenig Geld hier hinein“, sagte sie." }
         - { tr: "“Damlaya damlaya göl olur.”", de: "„Kleinvieh macht auch Mist.“" }
         - { tr: "O gün bu sözün anlamını anlamadım.", de: "An dem Tag verstand ich die Bedeutung dieses Satzes nicht." }
         - { tr: "Yıllar sonra üniversiteye başladığımda o kutuyu buldum.", de: "Jahre später, als ich mit dem Studium anfing, fand ich die Schachtel." }
         - { tr: "İçindeki para bir ay yetti.", de: "Das Geld darin reichte für einen Monat." }
         - { tr: "Bir gün komşumuz kardeşime kızmıştı.", de: "Eines Tages war unser Nachbar böse auf meinen Bruder." }
         - { tr: "Anneannem kardeşime “Kulak ver, kötü söz söyleme, kalbini kırma.” dedi.", de: "Meine Großmutter sagte zu meinem Bruder: „Hör zu, sag nichts Böses, kränke ihn nicht.“" }
-        - { tr: "Bana da “Ağzın sıkı olsun, herkesin sırrını söyleme.” derdi.", de: "Zu mir sagte sie immer: „Sei verschwiegen, erzähl nicht jedes Geheimnis weiter.“" }
+        - { tr: "Bana da “Ağzın sıkı olsun, herkesin sırrını söyleme.” derdi.", de: "Auch zu mir sagte sie immer: „Sei verschwiegen, erzähl nicht jedes Geheimnis weiter.“" }
         - { tr: "Elinden geleni yapar, kimseyi kırmazdı.", de: "Sie tat ihr Bestes und kränkte niemanden." }
         - { tr: "Geçmiş günleri düşününce ağlayasım geliyor.", de: "Wenn ich an die vergangenen Tage denke, ist mir zum Weinen zumute." }
         - { tr: "Anneannemi çok özlüyorum.", de: "Ich vermisse meine Großmutter sehr." }
@@ -369,6 +370,9 @@ lessons:
         - { tr: "geçirmiş", de: "der durchgemacht hat (görmüş geçirmiş = lebenserfahren)" }
         - { tr: "kadındı", de: "war eine Frau (kadın + -dı)", vocab: "kadın" }
         - { tr: "her", de: "jeder" }
+        - { tr: "sıkı", de: "fest (ağzın sıkı olsun = sei verschwiegen)", vocab: "ağzı sıkı" }
+        - { tr: "elinden", de: "elinden geleni yapmak = sein Bestes tun", vocab: "elinden geleni yapmak" }
+        - { tr: "geleni", de: "elinden geleni yapmak = sein Bestes tun", vocab: "elinden geleni yapmak" }
         - { tr: "söz", de: "Wort, Satz" }
         - { tr: "sözü", de: "ihr Wort (söz)" }
         - { tr: "sözün", de: "des Wortes, Satzes (söz)" }
@@ -399,8 +403,8 @@ lessons:
         answer: Eine Schachtel mit etwas Geld.
       - id: b2-u09-r1-e3
         type: multiple_choice
-        prompt: Wofür reichte das Geld später?
-        options: [Für einen Monat., Für ein Jahr., Für ein Auto.]
+        prompt: Wie lange reichte das Geld später?
+        options: [Für einen Monat., Für ein Jahr., Für eine Woche.]
         answer: Für einen Monat.
       - id: b2-u09-r1-e4
         type: multiple_choice
@@ -443,12 +447,12 @@ lessons:
         answers: [Elinden geleni yaparsan her şey iyi olur.]
         distractors: [yaptı, kötü]
       - { id: b2-u09-l7-e6, type: suffix_builder, stem: çalışmak, verbal: PART_ASI, suffixes: [POSS_1SG], target: çalışasım, gloss_de: meine Lust zu arbeiten }
-      - { id: b2-u09-l7-e7, type: suffix_builder, stem: bozulmak, verbal: PART_MIS, suffixes: [PL], target: bozulmuşlar, gloss_de: die Verdorbenen }
+      - { id: b2-u09-l7-e7, type: suffix_builder, stem: okumak, verbal: PART_MIS, suffixes: [PL], target: okumuşlar, gloss_de: die Gebildeten }
       - id: b2-u09-l7-e8
         type: free_text
         direction: tr_de
         prompt: Başımıza büyük bir iş geldi.
-        answers: [Uns ist etwas Großes passiert., Uns ist etwas Schlimmes passiert., Uns ist ein großes Problem passiert., Wir hatten ein großes Problem., Uns ist Großes widerfahren.]
+        answers: [Uns ist etwas Großes passiert., Uns ist etwas Schlimmes passiert., Uns ist ein großes Problem passiert., Wir hatten ein großes Problem., Uns ist Großes widerfahren., Wir sind in große Schwierigkeiten geraten., Uns ist etwas Schlimmes zugestoßen.]
       - id: b2-u09-l7-e9
         type: word_bank
         prompt: Mir ist heute sehr langweilig.
@@ -467,15 +471,18 @@ vocab:
   - { tr: kulak, de: [Ohr], pos: noun, softens: true }
   - { tr: gönül, de: ['Herz, Gemüt'], pos: noun, drops_vowel: true }
   - { id: yüz-gesicht, tr: yüz, de: [Gesicht], pos: noun }
-  - { tr: atasözü, de: [Sprichwort], pos: noun }
+  - { tr: atasözü, de: [Sprichwort], pos: phrase }
   - { tr: deyim, de: [Redewendung], pos: noun }
-  - { tr: canı sıkılmak, de: [sich langweilen], pos: verb, causative: none }
+  - { tr: canı sıkılmak, de: [sich langweilen], pos: phrase }
   - { tr: göz kulak olmak, de: [aufpassen auf], pos: verb }
   - { tr: kulak vermek, de: [zuhören], pos: verb }
+  - { tr: ağzından kaçırmak, de: [ausplaudern], pos: phrase }
+  - { tr: elinden geleni yapmak, de: [sein Bestes tun], pos: phrase }
+  - { tr: kalbini kırmak, de: [jemanden kränken], pos: phrase }
   - { tr: ağzı sıkı, de: [verschwiegen], pos: adj }
   - { tr: eli açık, de: [großzügig], pos: adj }
   - { tr: özlemek, de: [vermissen], pos: verb }
-  - { tr: başına gelmek, de: [passieren (jemandem)], pos: verb }
+  - { tr: başına gelmek, de: [passieren (jemandem)], pos: phrase }
   - { tr: kırılmak, de: ['zerbrechen, gekränkt sein'], pos: verb, causative: none }
   - { tr: kırmak, de: [zerbrechen (etwas), kränken], pos: verb }
   - { tr: sabır, de: [Geduld], pos: noun, drops_vowel: true }

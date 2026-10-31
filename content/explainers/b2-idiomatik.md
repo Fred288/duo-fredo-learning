@@ -11,7 +11,7 @@ Lehrbuchtürkisch reicht weit, aber im Gespräch hörst du viele feste Bilder. S
 - bozulmuş süt (verdorbene Milch)
 - kırılmış cam (zerbrochenes Glas)
 
-Das feste Paar **görmüş geçirmiş** bedeutet „lebenserfahren“: görmüş geçirmiş bir kadın.
+Das feste Paar **görmüş geçirmiş** bedeutet „lebenserfahren“: görmüş geçirmiş bir kadın. Als Nomen ist vor allem **okumuş** üblich: okumuşlar (die Gebildeten).
 
 ## Ich habe Lust: -esim var
 
@@ -35,7 +35,7 @@ Viele Wendungen beginnen mit einem Körperteil. Das Possessiv zeigt, wen es betr
 | başına gelmek      | jemandem passieren         | Başına ne geldi?             |
 | ağzından kaçırmak  | ausplaudern                | Ağzımdan kaçırdım.           |
 | elinden geleni yapmak | sein Bestes tun         | Elimden geleni yaptım.       |
-| ağzı sıkı          | verschwiegen               | Ali ağzı sıkıdır.            |
+| ağzı sıkı          | verschwiegen               | Ali'nin ağzı sıkıdır.        |
 | kalbini kırmak     | jemanden kränken           | Onun kalbini kırma.          |
 
 Sprichwörter (atasözleri) sind feste Sätze:

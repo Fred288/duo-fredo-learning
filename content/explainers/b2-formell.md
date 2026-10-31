@@ -25,6 +25,8 @@ In der 3. Person Plural steht -ler am Ende: yaşamaktadırlar. Bei unbelebtem Su
 - Başvurunuz onaylanmıştır. (Ihr Antrag wurde genehmigt.)
 - Toplantı cumaya ertelenmiştir. (Die Sitzung wurde auf Freitag verschoben.)
 
+In der 3. Person Plural steht -ler hier vor -dir: katılmışlardır.
+
 Für die Zukunft steht **-ecektir**: Sonuçlar açıklanacaktır. (Die Ergebnisse werden bekannt gegeben.)
 
 **-ip** verbindet Sätze, in sehr formellen Texten auch **olup**: Çalışmalar başlamış olup üç ay sürecektir. (Die Arbeiten haben begonnen und werden drei Monate dauern.)
@@ -38,5 +40,5 @@ Feste Wendungen in Briefen:
 - **Sayın Ayşe Yılmaz** (Sehr geehrte Frau Ayşe Yılmaz)
 - **Bilgilerinize sunarız.** (Zu Ihrer Kenntnisnahme.)
 - **Gereğini arz ederim.** (Ich bitte um die erforderliche Bearbeitung; Schlussformel eines Antrags.)
-- **… rica olunur.** (Es wird gebeten, …): Ziyaretçilerin koridorda beklemesi rica olunur.
+- **… rica olunur.** (Es wird gebeten, …): Ziyaretçilerin koridorda beklemeleri rica olunur.
 - **Saygılarımla** (Mit freundlichen Grüßen)

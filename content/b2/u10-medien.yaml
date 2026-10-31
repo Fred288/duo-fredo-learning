@@ -87,7 +87,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Falschmeldung
-        answers: [yalan haber, sahte haber]
+        answers: [yalan haber, sahte haber, asılsız haber]
       - id: b2-u10-l1-e16
         type: multiple_choice
         prompt: Was heißt „yazı“?
@@ -109,7 +109,7 @@ lessons:
       - id: b2-u10-l2-e9
         type: word_bank
         prompt: Die Zeitung hat den Text von einem Journalisten schreiben lassen.
-        answers: [Gazete yazıyı bir gazeteciye yazdırdı.]
+        answers: [Gazete yazıyı bir gazeteciye yazdırdı., Gazete bir gazeteciye yazıyı yazdırdı.]
         chunks:
           - { text: "Gazete", role: subject }
           - { text: "yazıyı", role: object }
@@ -158,7 +158,7 @@ lessons:
         type: word_bank
         prompt: Obwohl die Nachricht falsch war, haben sie alle geteilt.
         answers: [Haberin yalan olmasına rağmen herkes paylaştı.]
-        distractors: [haber, için]
+        distractors: [haberi, için]
       - id: b2-u10-l3-e10
         type: word_bank
         prompt: Teile es nicht, bis du es überprüft hast.
@@ -184,7 +184,7 @@ lessons:
       - { id: b2-u10-l4-e3, type: conjugation, mode: verb, lemma: yazmak, person: 3sg, tense: evidential, dir: true, target: yazmıştır, gloss_de: 'er, sie hat wohl geschrieben' }
       - { id: b2-u10-l4-e4, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: present, dir: true, target: okuyordur, gloss_de: 'er, sie liest wohl gerade' }
       - { id: b2-u10-l4-e5, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: conditional, target: gelsen, gloss_de: wenn du kämst }
-      - { id: b2-u10-l4-e6, type: conjugation, mode: copula, lemma: yanlış, person: 3sg, dir: true, target: yanlıştır, gloss_de: ist wohl falsch }
+      - { id: b2-u10-l4-e6, type: conjugation, mode: copula, lemma: yanlış, person: 3sg, dir: true, target: yanlıştır, gloss_de: 'ist falsch (formell), ist wohl falsch' }
       - id: b2-u10-l4-e7
         type: word_bank
         prompt: Wenn wir die Quelle geprüft hätten, wäre das nicht passiert.
@@ -208,7 +208,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Hätte ich es doch nicht geteilt.
-        answers: [Keşke paylaşmasaydım.]
+        answers: [Keşke paylaşmasaydım., Keşke bunu paylaşmasaydım.]
       - id: b2-u10-l4-e11
         type: multiple_choice
         prompt: Welcher Satz sagt, dass etwas nicht eingetreten ist?
@@ -228,7 +228,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Bu haberi nereden duydun?
-        answers: [Woher hast du diese Nachricht?, Wo hast du diese Nachricht gehört?, Woher kennst du diese Nachricht?, Wo hast du das gehört?]
+        answers: [Woher hast du diese Nachricht?, Wo hast du diese Nachricht gehört?, Woher kennst du diese Nachricht?, Wo hast du das gehört?, Wo hast du von dieser Nachricht gehört?]
       - id: b2-u10-l5-e2
         type: word_bank
         prompt: Diese Quelle ist nicht verlässlich.
@@ -243,7 +243,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Glaub nicht alles, was du liest.
-        answers: [Okuduğun her şeye inanma., Her okuduğuna inanma., Okuduğun her şeye inanmayın.]
+        answers: [Okuduğun her şeye inanma., Her okuduğuna inanma., Her okuduğun şeye inanma., Okuduklarının hepsine inanma.]
       - id: b2-u10-l5-e5
         type: word_bank
         prompt: Ich bin Abonnent dieser Zeitung.
@@ -305,13 +305,13 @@ lessons:
         - { tr: "Geçen ay küçük bir şehirde ilginç bir olay yaşandı.", de: "Letzten Monat ereignete sich in einer kleinen Stadt etwas Interessantes." }
         - { tr: "Sosyal medyada bir haber paylaşıldı.", de: "In den sozialen Medien wurde eine Nachricht geteilt." }
         - { tr: "Habere göre şehirdeki su içilemez durumdaydı.", de: "Laut der Nachricht war das Wasser in der Stadt nicht trinkbar." }
-        - { tr: "Kaynağı belli olmamasına rağmen haber hızla yayıldı.", de: "Obwohl die Quelle nicht bekannt war, verbreitete sich die Nachricht schnell." }
-        - { tr: "İnsanlar korktukları için marketlere koştu.", de: "Weil die Menschen Angst hatten, rannten sie in die Supermärkte." }
+        - { tr: "Kaynağının belli olmamasına rağmen haber hızla yayıldı.", de: "Obwohl die Quelle nicht bekannt war, verbreitete sich die Nachricht schnell." }
+        - { tr: "İnsanlar korktukları için marketlere koştular.", de: "Weil die Menschen Angst hatten, rannten sie in die Supermärkte." }
         - { tr: "Birkaç saat içinde bütün su şişeleri satıldı.", de: "Innerhalb weniger Stunden waren alle Wasserflaschen verkauft." }
         - { tr: "Yerel bir gazetenin muhabiri Selin Hanım haberi duyunca şüphelendi.", de: "Die Reporterin einer Lokalzeitung, Frau Selin, wurde misstrauisch, als sie die Nachricht hörte." }
         - { tr: "Haberi yayımlamaktansa önce kaynağını araştırmaya karar verdi.", de: "Statt die Nachricht zu veröffentlichen, beschloss sie, zuerst die Quelle zu recherchieren." }
         - { tr: "Belediyeyi aradı ve suyu test ettirip ettirmediklerini sordu.", de: "Sie rief die Stadtverwaltung an und fragte, ob das Wasser getestet worden sei." }
-        - { tr: "Belediye suyun her gün ölçüldüğünü ve temiz olduğunu söyledi.", de: "Die Stadtverwaltung sagte, das Wasser werde jeden Tag gemessen und sei sauber." }
+        - { tr: "Belediye suyun her gün kontrol edildiğini ve temiz olduğunu söyledi.", de: "Die Stadtverwaltung sagte, das Wasser werde jeden Tag kontrolliert und sei sauber." }
         - { tr: "Selin Hanım araştırdıkça yeni bilgiler buldu.", de: "Je mehr Frau Selin recherchierte, desto mehr neue Informationen fand sie." }
         - { tr: "Haber aslında başka bir ülkedeki eski bir olayı anlatıyordu.", de: "Die Nachricht handelte eigentlich von einem alten Ereignis in einem anderen Land." }
         - { tr: "Birisi şehrin adını değiştirip yeniden paylaşmıştı.", de: "Jemand hatte den Namen der Stadt geändert und es erneut geteilt." }
@@ -327,6 +327,7 @@ lessons:
         - { tr: "Basın özgürlüğü ancak dikkatli okurlarla anlam kazanır.", de: "Pressefreiheit bekommt erst mit aufmerksamen Lesern ihren Sinn." }
       glossary:
         - { tr: "selin", de: "Selin (Name)" }
+        - { tr: "ancak", de: "jedoch; im letzten Satz: erst, nur", vocab: "ancak" }
         - { tr: "yaşandı", de: "ereignete sich", vocab: "yaşamak" }
         - { tr: "sosyal", de: "sozial (sosyal medya = soziale Medien)", vocab: "sosyal medya" }
         - { tr: "medyada", de: "in den Medien (sosyal medya)", vocab: "sosyal medya" }
@@ -345,7 +346,8 @@ lessons:
         - { tr: "test", de: "Test (test etmek = testen)" }
         - { tr: "ettirip", de: "lassen und (test ettirip ettirmediklerini = ob sie testen ließen)" }
         - { tr: "ettirmediklerini", de: "dass sie nicht machen ließen" }
-        - { tr: "ölçüldüğünü", de: "dass es gemessen wird", vocab: "ölçmek" }
+        - { tr: "kontrol", de: "Kontrolle (kontrol etmek = kontrollieren)", vocab: "kontrol etmek" }
+        - { tr: "edildiğini", de: "dass es gemacht wird (kontrol edildiğini = dass es kontrolliert wird)", vocab: "kontrol etmek" }
         - { tr: "ülkedeki", de: "im Land befindlich", vocab: "ülke" }
         - { tr: "birisi", de: "jemand" }
         - { tr: "ertesi", de: "folgend (ertesi gün = am nächsten Tag)" }
@@ -399,7 +401,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: 'Obwohl es falsch war, haben sie es geglaubt.'
-        answers: [Yanlış olmasına rağmen inandılar., Yanlış olduğu halde inandılar.]
+        answers: [Yanlış olmasına rağmen inandılar., Yanlış olduğu halde inandılar., Yalan olmasına rağmen inandılar., Yanlış olmasına rağmen buna inandılar.]
       - id: b2-u10-l7-e3
         type: multiple_choice
         prompt: Welche Form ist richtig? (wurde veröffentlicht, formell)

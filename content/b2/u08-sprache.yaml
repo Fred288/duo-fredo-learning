@@ -64,7 +64,7 @@ lessons:
         prompt: Was heißt „kâr“?
         options: [Gewinn, Schnee, Arbeit]
         answer: Gewinn
-        explanation: Das Zirkumflex trennt es von kar (Schnee).
+        explanation: Der Zirkumflex trennt es von kar (Schnee).
       - id: b2-u08-l1-e11
         type: multiple_choice
         prompt: Was heißt „ancak“?
@@ -79,7 +79,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: folglich, deshalb
-        answers: [dolayısıyla, bu yüzden, bu nedenle]
+        answers: [dolayısıyla, bu yüzden, bu nedenle, bu sebeple, bundan dolayı]
       - id: b2-u08-l1-e14
         type: multiple_choice
         prompt: Was heißt „hatta“?
@@ -109,7 +109,7 @@ lessons:
         explanation: Vor einem Vokal verdoppelt sich der letzte Konsonant.
       - { id: b2-u08-l2-e2, type: suffix_builder, stem: sır, suffixes: [ACC], target: sırrı, gloss_de: das Geheimnis (Akkusativ) }
       - { id: b2-u08-l2-e3, type: suffix_builder, stem: his, suffixes: [POSS_2SG], target: hissin, gloss_de: dein Gefühl }
-      - { id: b2-u08-l2-e4, type: suffix_builder, stem: af, suffixes: [POSS_1SG], target: affım, gloss_de: meine Vergebung }
+      - { id: b2-u08-l2-e4, type: suffix_builder, stem: af, suffixes: [POSS_2PL], target: affınız, gloss_de: Ihre Nachsicht }
       - { id: b2-u08-l2-e5, type: suffix_builder, stem: ret, suffixes: [POSS_3SG], target: reddi, gloss_de: seine Ablehnung }
       - { id: b2-u08-l2-e6, type: suffix_builder, stem: hat, suffixes: [ACC], target: hattı, gloss_de: die Linie (Akkusativ) }
       - id: b2-u08-l2-e7
@@ -133,7 +133,7 @@ lessons:
       - id: b2-u08-l2-e11
         type: word_bank
         prompt: Niemand kennt dieses Geheimnis.
-        answers: [Bu sırrı kimse bilmiyor.]
+        answers: [Bu sırrı kimse bilmiyor., Kimse bu sırrı bilmiyor.]
         chunks:
           - { text: "Bu sırrı", role: object }
           - { text: "kimse", role: subject }
@@ -145,7 +145,7 @@ lessons:
         type: free_text
         direction: tr_de
         prompt: Bu konuda haklısın ama hakkını böyle aramamalısın.
-        answers: ['In dieser Sache hast du recht, aber du solltest dein Recht nicht so suchen.', 'In dieser Sache hast du recht, aber du solltest dein Recht nicht so einfordern.', 'Du hast in dieser Sache recht, aber du solltest dein Recht nicht so einfordern.', 'Du hast in dieser Sache recht, aber du solltest dein Recht nicht so suchen.', 'In diesem Punkt hast du recht, aber du solltest dein Recht nicht so einfordern.']
+        answers: ['In dieser Sache hast du recht, aber du solltest dein Recht nicht so suchen.', 'In dieser Sache hast du recht, aber du solltest dein Recht nicht so einfordern.', 'Du hast in dieser Sache recht, aber du solltest dein Recht nicht so einfordern.', 'Du hast in dieser Sache recht, aber du solltest dein Recht nicht so suchen.', 'In diesem Punkt hast du recht, aber du solltest dein Recht nicht so einfordern.', 'In dieser Sache hast du recht, aber du solltest dein Recht nicht so durchsetzen.']
 
   - id: b2-u08-l3
     type: grammar
@@ -157,7 +157,7 @@ lessons:
         suffixes: [POSS_3SG]
         target: camii
         gloss_de: seine Moschee (Süleymaniye Camii)
-        explanation: Früher endete das Wort auf einem Konsonanten, darum ohne s. Heute ist auch camisi üblich.
+        explanation: Früher endete das Wort auf einem Konsonanten, darum ohne s. In Namen steht meist Camii, sonst auch camisi.
       - { id: b2-u08-l3-e2, type: suffix_builder, stem: mevzu, suffixes: [POSS_3SG], target: mevzuu, gloss_de: sein Thema }
       - id: b2-u08-l3-e3
         type: suffix_builder
@@ -178,8 +178,8 @@ lessons:
         answer: 'Lehnwort, das Endungen hell bildet.'
       - id: b2-u08-l3-e10
         type: word_bank
-        prompt: Die Hagia Sophia ist eine alte Moschee in Istanbul.
-        answers: [Ayasofya İstanbul'da eski bir camidir., Ayasofya İstanbul'da eski bir cami.]
+        prompt: Die Süleymaniye ist eine alte Moschee in Istanbul.
+        answers: [Süleymaniye İstanbul'da eski bir camidir., Süleymaniye İstanbul'da eski bir cami.]
         distractors: [camii, camiyi]
       - id: b2-u08-l3-e11
         type: free_text
@@ -289,11 +289,11 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Was bedeutet das auf Deutsch?
-        answers: [Bu Almanca ne demek?, Almanca ne demek?, Bunun Almancası ne?, Bu ne demek Almanca?]
+        answers: [Bu Almanca ne demek?, Almanca ne demek?, Bunun Almancası ne?, Bu ne demek Almanca?, Bunun Almancası nedir?]
       - id: b2-u08-l5-e5
         type: word_bank
         prompt: Dieses Wort wird heute nicht mehr benutzt.
-        answers: [Bu kelime artık kullanılmıyor.]
+        answers: [Bu kelime artık kullanılmıyor., Artık bu kelime kullanılmıyor.]
         chunks:
           - { text: "Bu kelime", role: subject }
           - { text: "artık", role: time }
@@ -458,7 +458,7 @@ lessons:
         type: free_text
         direction: de_tr
         prompt: Sie hat kein Recht dazu.
-        answers: [Buna hakkı yok., Bunu yapmaya hakkı yok., Onun buna hakkı yok.]
+        answers: [Buna hakkı yok., Bunu yapmaya hakkı yok., Onun buna hakkı yok., Bunu yapma hakkı yok., Onun bunu yapma hakkı yok., Onun bunu yapmaya hakkı yok.]
       - id: b2-u08-l7-e3
         type: multiple_choice
         prompt: Welche Form ist richtig? (das Geheimnis, Akkusativ)
@@ -466,7 +466,7 @@ lessons:
         answer: sırrı
       - id: b2-u08-l7-e4
         type: multiple_choice
-        prompt: Welche Form ist richtig? (zur Uhr)
+        prompt: Welche Form ist richtig? (saat, Dativ)
         options: [saate, saata, saatte]
         answer: saate
       - id: b2-u08-l7-e5
@@ -479,8 +479,8 @@ lessons:
       - id: b2-u08-l7-e8
         type: free_text
         direction: tr_de
-        prompt: Fiyatlar yüksek, dolayısıyla kârımız az.
-        answers: ['Die Preise sind hoch, deshalb ist unser Gewinn gering.', 'Die Preise sind hoch, folglich ist unser Gewinn gering.', 'Die Preise sind hoch, deshalb ist unser Gewinn klein.', 'Die Preise sind hoch, folglich ist unser Gewinn klein.', 'Die Preise sind hoch, also ist unser Gewinn gering.', 'Die Preise sind hoch, daher ist unser Gewinn gering.']
+        prompt: Giderler yüksek, dolayısıyla kârımız az.
+        answers: ['Die Kosten sind hoch, deshalb ist unser Gewinn gering.', 'Die Kosten sind hoch, folglich ist unser Gewinn gering.', 'Die Kosten sind hoch, deshalb ist unser Gewinn klein.', 'Die Kosten sind hoch, folglich ist unser Gewinn klein.', 'Die Kosten sind hoch, also ist unser Gewinn gering.', 'Die Kosten sind hoch, daher ist unser Gewinn gering.', 'Die Ausgaben sind hoch, deshalb ist unser Gewinn gering.', 'Die Ausgaben sind hoch, folglich ist unser Gewinn gering.']
       - id: b2-u08-l7-e9
         type: word_bank
         prompt: Er kennt viele Dichter, besonders aus dem 20. Jahrhundert.
