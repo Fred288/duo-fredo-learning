@@ -1,0 +1,451 @@
+# B2-10: Wiederholung B2, längere Texte; Medien. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u10
+level: B2
+title: Medien
+grammar_focus: [wiederholung-b2]
+explainer: explainers/b2-medien.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u10-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u10-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „basın“?
+        options: [Presse, Wahl, Bühne]
+        answer: Presse
+        explanation: Auch basın özgürlüğü = Pressefreiheit.
+      - id: b2-u10-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Freiheit
+        answers: [özgürlük, hürriyet]
+      - id: b2-u10-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „yayımlamak“?
+        options: [veröffentlichen, übersetzen, drucken lassen]
+        answer: veröffentlichen
+      - id: b2-u10-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „okur“?
+        options: [Leser(in), Schüler(in), Autor(in)]
+        answer: Leser(in)
+      - id: b2-u10-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Kommentar
+        answers: [yorum]
+      - id: b2-u10-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „güvenilir“?
+        options: [verlässlich, gefährlich, wichtig]
+        answer: verlässlich
+      - id: b2-u10-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „doğrulamak“?
+        options: ['überprüfen, bestätigen', verbreiten, löschen]
+        answer: 'überprüfen, bestätigen'
+      - id: b2-u10-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „etkilemek“?
+        options: [beeinflussen, erklären, beschweren]
+        answer: beeinflussen
+      - id: b2-u10-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: Wirkung, Einfluss
+        answers: [etki]
+      - id: b2-u10-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „izleyici“?
+        options: [Zuschauer(in), Sänger(in), Reporter(in)]
+        answer: Zuschauer(in)
+      - id: b2-u10-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „manşet“?
+        options: [Schlagzeile, Abonnement, Werbung]
+        answer: Schlagzeile
+      - id: b2-u10-l1-e12
+        type: free_text
+        direction: de_tr
+        prompt: Interview
+        answers: [röportaj]
+      - id: b2-u10-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „yayılmak“?
+        options: [sich verbreiten, schrumpfen, verschwinden]
+        answer: sich verbreiten
+      - id: b2-u10-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „abone“?
+        options: [Abonnent(in), Redakteur(in), Absender(in)]
+        answer: Abonnent(in)
+      - id: b2-u10-l1-e15
+        type: free_text
+        direction: de_tr
+        prompt: Falschmeldung
+        answers: [yalan haber, sahte haber]
+      - id: b2-u10-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „yazı“?
+        options: [Text, Sommer, Wort]
+        answer: Text
+
+  - id: b2-u10-l2
+    type: grammar
+    title: 'Wiederholung: Verbformen (Kausativ, Reziprok, Passiv)'
+    exercises:
+      - { id: b2-u10-l2-e1, type: conjugation, mode: verb, lemma: yayımlamak, person: 3sg, tense: past, passive: true, target: yayımlandı, gloss_de: wurde veröffentlicht }
+      - { id: b2-u10-l2-e2, type: conjugation, mode: verb, lemma: yayımlamak, person: 3sg, tense: past, causative: true, target: yayımlattı, gloss_de: 'er, sie hat veröffentlichen lassen' }
+      - { id: b2-u10-l2-e3, type: conjugation, mode: verb, lemma: doğrulamak, person: 3sg, tense: evidential, dir: true, passive: true, target: doğrulanmıştır, gloss_de: wurde bestätigt }
+      - { id: b2-u10-l2-e4, type: conjugation, mode: verb, lemma: yaymak, person: 3pl, tense: present, target: yayıyorlar, gloss_de: sie verbreiten }
+      - { id: b2-u10-l2-e5, type: conjugation, mode: verb, lemma: etkilemek, person: 3sg, tense: mekte, dir: true, target: etkilemektedir, gloss_de: beeinflusst (formell) }
+      - { id: b2-u10-l2-e6, type: conjugation, mode: verb, lemma: görmek, person: 1pl, tense: future, reciprocal: true, target: görüşeceğiz, gloss_de: wir werden uns treffen }
+      - { id: b2-u10-l2-e7, type: conjugation, mode: verb, lemma: yazmak, person: 1sg, tense: past, causative: true, target: yazdırdım, gloss_de: ich habe schreiben lassen }
+      - { id: b2-u10-l2-e8, type: conjugation, mode: verb, lemma: gitmek, person: 3sg, tense: aorist, passive: true, target: gidilir, gloss_de: man geht }
+      - id: b2-u10-l2-e9
+        type: word_bank
+        prompt: Die Zeitung hat den Text von einem Journalisten schreiben lassen.
+        answers: [Gazete yazıyı bir gazeteciye yazdırdı.]
+        chunks:
+          - { text: "Gazete", role: subject }
+          - { text: "yazıyı", role: object }
+          - { text: "bir gazeteciye", role: complement }
+          - { text: "yazdırdı", role: predicate }
+        orders:
+          - { order: [0, 2, 1, 3] }
+        distractors: [gazeteciyi, yazdı]
+      - id: b2-u10-l2-e10
+        type: word_bank
+        prompt: Die Nachricht wurde von niemandem bestätigt.
+        answers: [Haber kimse tarafından doğrulanmadı.]
+        chunks:
+          - { text: "Haber", role: subject }
+          - { text: "kimse tarafından", role: complement }
+          - { text: "doğrulanmadı", role: predicate }
+        distractors: [doğrulamadı, haberi]
+      - id: b2-u10-l2-e11
+        type: free_text
+        direction: tr_de
+        prompt: Yalan haberler hızla yayılıyor.
+        answers: [Falschmeldungen verbreiten sich schnell., Falsche Nachrichten verbreiten sich schnell., Fake News verbreiten sich schnell., Lügennachrichten verbreiten sich schnell., Falschmeldungen breiten sich schnell aus., Falsche Nachrichten breiten sich schnell aus.]
+      - id: b2-u10-l2-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Haber yayımlatıldı.“?
+        options: [Man ließ die Nachricht veröffentlichen., Die Nachricht verbreitete sich von selbst., Die Nachricht wurde gelöscht.]
+        answer: Man ließ die Nachricht veröffentlichen.
+
+  - id: b2-u10-l3
+    type: grammar
+    title: 'Wiederholung: Nebensätze'
+    exercises:
+      - { id: b2-u10-l3-e1, type: suffix_builder, stem: okumak, verbal: PART_DIK, suffixes: [POSS_1SG], target: okuduğum, gloss_de: 'weil ich lese (okuduğum için)' }
+      - { id: b2-u10-l3-e2, type: suffix_builder, stem: yayımlamak, verbal: VN_MA, passive: true, suffixes: [POSS_3SG, DAT], target: yayımlanmasına, gloss_de: 'obwohl es veröffentlicht wird (… rağmen)' }
+      - { id: b2-u10-l3-e3, type: suffix_builder, stem: okumak, verbal: CV_DIKCA, target: okudukça, gloss_de: je mehr … liest }
+      - { id: b2-u10-l3-e4, type: suffix_builder, stem: doğrulamak, verbal: CV_INCAYA, target: doğrulayıncaya, gloss_de: 'bis … überprüft (… kadar)' }
+      - { id: b2-u10-l3-e5, type: suffix_builder, stem: düşünmek, verbal: CV_MAKSIZIN, target: düşünmeksizin, gloss_de: ohne nachzudenken }
+      - { id: b2-u10-l3-e6, type: suffix_builder, stem: paylaşmak, verbal: CV_MAKTANSA, target: paylaşmaktansa, gloss_de: statt zu teilen }
+      - { id: b2-u10-l3-e7, type: suffix_builder, stem: bilmek, verbal: PART_DIK, negative: true, suffixes: [POSS_3SG, ABL], target: bilmediğinden, gloss_de: 'da er, sie nicht weiß' }
+      - id: b2-u10-l3-e8
+        type: word_bank
+        prompt: Je mehr ich lese, desto weniger glaube ich.
+        answers: [Okudukça daha az inanıyorum.]
+        distractors: [okuyunca, çok]
+      - id: b2-u10-l3-e9
+        type: word_bank
+        prompt: Obwohl die Nachricht falsch war, haben sie alle geteilt.
+        answers: [Haberin yalan olmasına rağmen herkes paylaştı.]
+        distractors: [haber, için]
+      - id: b2-u10-l3-e10
+        type: word_bank
+        prompt: Teile es nicht, bis du es überprüft hast.
+        answers: [Doğrulayıncaya kadar paylaşma.]
+        distractors: [paylaş, doğrulayınca]
+      - id: b2-u10-l3-e11
+        type: free_text
+        direction: tr_de
+        prompt: Kaynağı bilmediğim için paylaşmadım.
+        answers: ['Weil ich die Quelle nicht kannte, habe ich es nicht geteilt.', 'Ich habe es nicht geteilt, weil ich die Quelle nicht kannte.', 'Da ich die Quelle nicht kannte, habe ich es nicht geteilt.', 'Weil ich die Quelle nicht kenne, habe ich es nicht geteilt.']
+      - id: b2-u10-l3-e12
+        type: multiple_choice
+        prompt: Welches Wort passt? „Haberi okumadığı … yorum yazdı.“ (obwohl)
+        options: [halde, zaman, kadar]
+        answer: halde
+
+  - id: b2-u10-l4
+    type: grammar
+    title: 'Wiederholung: Bedingung und Vermutung'
+    exercises:
+      - { id: b2-u10-l4-e1, type: conjugation, mode: verb, lemma: bilmek, person: 1pl, tense: conditional, compound: past, target: bilseydik, gloss_de: wenn wir gewusst hätten }
+      - { id: b2-u10-l4-e2, type: conjugation, mode: verb, lemma: paylaşmak, person: 1pl, tense: aorist, compound: past, negative: true, target: paylaşmazdık, gloss_de: wir hätten nicht geteilt }
+      - { id: b2-u10-l4-e3, type: conjugation, mode: verb, lemma: yazmak, person: 3sg, tense: evidential, dir: true, target: yazmıştır, gloss_de: 'er, sie hat wohl geschrieben' }
+      - { id: b2-u10-l4-e4, type: conjugation, mode: verb, lemma: okumak, person: 3sg, tense: present, dir: true, target: okuyordur, gloss_de: 'er, sie liest wohl gerade' }
+      - { id: b2-u10-l4-e5, type: conjugation, mode: verb, lemma: gelmek, person: 2sg, tense: conditional, target: gelsen, gloss_de: wenn du kämst }
+      - { id: b2-u10-l4-e6, type: conjugation, mode: copula, lemma: yanlış, person: 3sg, dir: true, target: yanlıştır, gloss_de: ist wohl falsch }
+      - id: b2-u10-l4-e7
+        type: word_bank
+        prompt: Wenn wir die Quelle geprüft hätten, wäre das nicht passiert.
+        answers: [Kaynağı kontrol etseydik bu olmazdı.]
+        chunks:
+          - { text: "Kaynağı kontrol etseydik", role: complement }
+          - { text: "bu", role: subject }
+          - { text: "olmazdı", role: predicate }
+        distractors: [olur, ettik]
+      - id: b2-u10-l4-e8
+        type: word_bank
+        prompt: Der Journalist muss sich geirrt haben.
+        answers: [Gazeteci yanılmış olmalı.]
+        distractors: [yanılmalı, yanılıyor]
+      - id: b2-u10-l4-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bu haber doğru olabilir.
+        answers: [Diese Nachricht könnte stimmen., Diese Nachricht kann stimmen., Diese Nachricht könnte wahr sein., Diese Nachricht kann wahr sein., Die Nachricht könnte stimmen., Die Nachricht kann stimmen., Die Nachricht könnte wahr sein., Die Nachricht kann wahr sein.]
+      - id: b2-u10-l4-e10
+        type: free_text
+        direction: de_tr
+        prompt: Hätte ich es doch nicht geteilt.
+        answers: [Keşke paylaşmasaydım.]
+      - id: b2-u10-l4-e11
+        type: multiple_choice
+        prompt: Welcher Satz sagt, dass etwas nicht eingetreten ist?
+        options: [Okusaydım bilirdim., Okursam bilirim., Okuyorum ve biliyorum.]
+        answer: Okusaydım bilirdim.
+      - id: b2-u10-l4-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Haberi okumuş olmalısın.“?
+        options: [Du musst die Nachricht gelesen haben., Du musst die Nachricht lesen., Du solltest nicht lesen.]
+        answer: Du musst die Nachricht gelesen haben.
+
+  - id: b2-u10-l5
+    type: dialog
+    title: Was steht in der Zeitung?
+    exercises:
+      - id: b2-u10-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Bu haberi nereden duydun?
+        answers: [Woher hast du diese Nachricht?, Wo hast du diese Nachricht gehört?, Woher kennst du diese Nachricht?, Wo hast du das gehört?]
+      - id: b2-u10-l5-e2
+        type: word_bank
+        prompt: Diese Quelle ist nicht verlässlich.
+        answers: [Bu kaynak güvenilir değil.]
+        distractors: [kaynağı, yok]
+      - id: b2-u10-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Ich habe die Schlagzeile gelesen.“?
+        options: [Manşeti okudum., Manşet okudu., Manşette okuyorum.]
+        answer: Manşeti okudum.
+      - id: b2-u10-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Glaub nicht alles, was du liest.
+        answers: [Okuduğun her şeye inanma., Her okuduğuna inanma., Okuduğun her şeye inanmayın.]
+      - id: b2-u10-l5-e5
+        type: word_bank
+        prompt: Ich bin Abonnent dieser Zeitung.
+        answers: [Bu gazeteye aboneyim.]
+        distractors: [gazete, abone]
+      - id: b2-u10-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Yorum yazmak istemiyorum.“
+        options: [Ich möchte keinen Kommentar schreiben., Ich möchte den Text nicht lesen., Ich kann nicht schreiben.]
+        answer: Ich möchte keinen Kommentar schreiben.
+      - { id: b2-u10-l5-e7, type: conjugation, mode: verb, lemma: etkilemek, person: 3sg, tense: past, passive: true, target: etkilendi, gloss_de: wurde beeinflusst }
+      - id: b2-u10-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Basın özgürlüğü çok önemlidir.
+        answers: [Pressefreiheit ist sehr wichtig., Die Pressefreiheit ist sehr wichtig.]
+
+  - id: b2-u10-l6
+    type: grammar
+    title: 'Tabellen: Wiederholung B2'
+    exercises:
+      - id: b2-u10-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: yazmak
+        tense: past
+        causative: true
+        targets: [yazdırdım, yazdırdın, yazdırdı, yazdırdık, yazdırdınız, yazdırdılar]
+        gloss_de: schreiben lassen
+      - id: b2-u10-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: paylaşmak
+        tense: conditional
+        compound: past
+        targets: [paylaşsaydım, paylaşsaydın, paylaşsaydı, paylaşsaydık, paylaşsaydınız, paylaşsalardı]
+        gloss_de: wenn … geteilt hätte
+      - id: b2-u10-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: VN_MA
+        lemma: okumak
+        rows: [[POSS_1SG, DAT], [POSS_2SG, DAT], [POSS_3SG, DAT], [POSS_1PL, DAT], [POSS_2PL, DAT], [POSS_3PL, DAT]]
+        targets: [okumama, okumana, okumasına, okumamıza, okumanıza, okumalarına]
+        gloss_de: 'obwohl … liest (… rağmen)'
+      - id: b2-u10-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: yazmak
+        tense: mekte
+        targets: [yazmaktayım, yazmaktasın, yazmakta, yazmaktayız, yazmaktasınız, yazmaktalar]
+        gloss_de: schreiben (formell)
+
+  - id: b2-u10-r1
+    type: reading
+    title: 'Lesetext: Eine Falschmeldung'
+    passage:
+      sentences:
+        - { tr: "Geçen ay küçük bir şehirde ilginç bir olay yaşandı.", de: "Letzten Monat ereignete sich in einer kleinen Stadt etwas Interessantes." }
+        - { tr: "Sosyal medyada bir haber paylaşıldı.", de: "In den sozialen Medien wurde eine Nachricht geteilt." }
+        - { tr: "Habere göre şehirdeki su içilemez durumdaydı.", de: "Laut der Nachricht war das Wasser in der Stadt nicht trinkbar." }
+        - { tr: "Kaynağı belli olmamasına rağmen haber hızla yayıldı.", de: "Obwohl die Quelle nicht bekannt war, verbreitete sich die Nachricht schnell." }
+        - { tr: "İnsanlar korktukları için marketlere koştu.", de: "Weil die Menschen Angst hatten, rannten sie in die Supermärkte." }
+        - { tr: "Birkaç saat içinde bütün su şişeleri satıldı.", de: "Innerhalb weniger Stunden waren alle Wasserflaschen verkauft." }
+        - { tr: "Yerel bir gazetenin muhabiri Selin Hanım haberi duyunca şüphelendi.", de: "Die Reporterin einer Lokalzeitung, Frau Selin, wurde misstrauisch, als sie die Nachricht hörte." }
+        - { tr: "Haberi yayımlamaktansa önce kaynağını araştırmaya karar verdi.", de: "Statt die Nachricht zu veröffentlichen, beschloss sie, zuerst die Quelle zu recherchieren." }
+        - { tr: "Belediyeyi aradı ve suyu test ettirip ettirmediklerini sordu.", de: "Sie rief die Stadtverwaltung an und fragte, ob das Wasser getestet worden sei." }
+        - { tr: "Belediye suyun her gün ölçüldüğünü ve temiz olduğunu söyledi.", de: "Die Stadtverwaltung sagte, das Wasser werde jeden Tag gemessen und sei sauber." }
+        - { tr: "Selin Hanım araştırdıkça yeni bilgiler buldu.", de: "Je mehr Frau Selin recherchierte, desto mehr neue Informationen fand sie." }
+        - { tr: "Haber aslında başka bir ülkedeki eski bir olayı anlatıyordu.", de: "Die Nachricht handelte eigentlich von einem alten Ereignis in einem anderen Land." }
+        - { tr: "Birisi şehrin adını değiştirip yeniden paylaşmıştı.", de: "Jemand hatte den Namen der Stadt geändert und es erneut geteilt." }
+        - { tr: "Ertesi gün gazetede “Su temiz, haber yalan” manşeti çıktı.", de: "Am nächsten Tag erschien in der Zeitung die Schlagzeile „Wasser sauber, Nachricht falsch“." }
+        - { tr: "Yazı yayımlandıktan sonra çok insan haberi sildi.", de: "Nachdem der Text erschienen war, löschten viele Menschen die Nachricht." }
+        - { tr: "Ancak bazı kişiler yanlış haberi paylaşmaya devam etti.", de: "Einige Leute teilten die Falschmeldung jedoch weiter." }
+        - { tr: "Kimi “Gazete de yalan söylüyor olabilir.” diye yazdı.", de: "Manche schrieben: „Auch die Zeitung könnte lügen.“" }
+        - { tr: "Uzmanlara göre yalan haberler doğru haberlerden daha hızlı yayılmaktadır.", de: "Laut Fachleuten verbreiten sich Falschmeldungen schneller als wahre Nachrichten." }
+        - { tr: "İnsanlar korkuyu ve öfkeyi daha çok paylaşırlar.", de: "Menschen teilen Angst und Wut häufiger." }
+        - { tr: "Selin Hanım “Herkes paylaşmadan önce düşünseydi bu olmazdı.” diyor.", de: "Frau Selin sagt: „Wenn alle vor dem Teilen nachgedacht hätten, wäre das nicht passiert.“" }
+        - { tr: "Bir haberi görünce önce kaynağına bakmak gerekir.", de: "Wenn man eine Nachricht sieht, sollte man zuerst die Quelle prüfen." }
+        - { tr: "Şüphe ediyorsanız paylaşmayın.", de: "Wenn Sie Zweifel haben, teilen Sie nicht." }
+        - { tr: "Basın özgürlüğü ancak dikkatli okurlarla anlam kazanır.", de: "Pressefreiheit bekommt erst mit aufmerksamen Lesern ihren Sinn." }
+      glossary:
+        - { tr: "selin", de: "Selin (Name)" }
+        - { tr: "yaşandı", de: "ereignete sich", vocab: "yaşamak" }
+        - { tr: "sosyal", de: "sozial (sosyal medya = soziale Medien)", vocab: "sosyal medya" }
+        - { tr: "medyada", de: "in den Medien (sosyal medya)", vocab: "sosyal medya" }
+        - { tr: "paylaşıldı", de: "wurde geteilt", vocab: "paylaşmak" }
+        - { tr: "şehirdeki", de: "in der Stadt befindlich", vocab: "şehir" }
+        - { tr: "içilemez", de: "nicht trinkbar (içmek, Passiv, nicht können)", vocab: "içmek" }
+        - { tr: "durumdaydı", de: "war im Zustand (durum + da + ydı)" }
+        - { tr: "belli", de: "bekannt, klar" }
+        - { tr: "hızla", de: "schnell", vocab: "hızlı" }
+        - { tr: "birkaç", de: "einige" }
+        - { tr: "bütün", de: "alle" }
+        - { tr: "satıldı", de: "wurden verkauft", vocab: "satmak" }
+        - { tr: "yerel", de: "lokal" }
+        - { tr: "hanım", de: "Frau (nach dem Vornamen)" }
+        - { tr: "şüphelendi", de: "wurde misstrauisch (şüphelenmek)", vocab: "şüphe" }
+        - { tr: "test", de: "Test (test etmek = testen)" }
+        - { tr: "ettirip", de: "lassen und (test ettirip ettirmediklerini = ob sie testen ließen)" }
+        - { tr: "ettirmediklerini", de: "dass sie nicht machen ließen" }
+        - { tr: "ölçüldüğünü", de: "dass es gemessen wird", vocab: "ölçmek" }
+        - { tr: "ülkedeki", de: "im Land befindlich", vocab: "ülke" }
+        - { tr: "birisi", de: "jemand" }
+        - { tr: "ertesi", de: "folgend (ertesi gün = am nächsten Tag)" }
+        - { tr: "yayımlandıktan", de: "nachdem … veröffentlicht wurde (… sonra)", vocab: "yayımlamak" }
+        - { tr: "bazı", de: "manche" }
+        - { tr: "kişiler", de: "Personen (kişi)" }
+        - { tr: "devam", de: "Fortsetzung (devam etmek)", vocab: "devam etmek" }
+        - { tr: "etti", de: "machte (devam etti = machte weiter)", vocab: "devam etmek" }
+        - { tr: "kimi", de: "manche" }
+        - { tr: "korkuyu", de: "die Angst (korku)", vocab: "korkmak" }
+        - { tr: "öfkeyi", de: "die Wut (öfke)" }
+        - { tr: "ediyorsanız", de: "wenn Sie machen (şüphe etmek)", vocab: "şüphe etmek" }
+        - { tr: "dikkatli", de: "aufmerksam" }
+    exercises:
+      - id: b2-u10-r1-e1
+        type: multiple_choice
+        prompt: Was behauptete die Nachricht?
+        options: [Das Wasser in der Stadt sei nicht trinkbar., Die Supermärkte seien geschlossen., Die Stadtverwaltung sei umgezogen.]
+        answer: Das Wasser in der Stadt sei nicht trinkbar.
+      - id: b2-u10-r1-e2
+        type: multiple_choice
+        prompt: Was tat die Reporterin?
+        options: [Sie recherchierte die Quelle., Sie teilte die Nachricht sofort., Sie kaufte Wasser.]
+        answer: Sie recherchierte die Quelle.
+      - id: b2-u10-r1-e3
+        type: multiple_choice
+        prompt: Wovon handelte die Nachricht eigentlich?
+        options: [Von einem alten Ereignis in einem anderen Land., Von einem neuen Gesetz., Von der Zeitung selbst.]
+        answer: Von einem alten Ereignis in einem anderen Land.
+      - id: b2-u10-r1-e4
+        type: multiple_choice
+        prompt: Was sagen die Fachleute?
+        options: [Falschmeldungen verbreiten sich schneller., Wahre Nachrichten verbreiten sich schneller., Zeitungen werden nicht mehr gelesen.]
+        answer: Falschmeldungen verbreiten sich schneller.
+      - id: b2-u10-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Şüphe ediyorsanız paylaşmayın.
+        answers: ['Wenn Sie Zweifel haben, teilen Sie nicht.', 'Wenn Sie zweifeln, teilen Sie nicht.', 'Wenn ihr Zweifel habt, teilt nicht.', 'Wenn ihr zweifelt, teilt nicht.', 'Wenn Sie zweifeln, teilen Sie es nicht.', 'Wenn Sie Zweifel haben, teilen Sie es nicht.']
+
+  - id: b2-u10-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u10-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe die Nachricht bestätigen lassen.
+        answers: [Haberi doğrulattım.]
+      - id: b2-u10-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: 'Obwohl es falsch war, haben sie es geglaubt.'
+        answers: [Yanlış olmasına rağmen inandılar., Yanlış olduğu halde inandılar.]
+      - id: b2-u10-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wurde veröffentlicht, formell)
+        options: [yayımlanmıştır, yayımlamıştır, yayımlanmaktır]
+        answer: yayımlanmıştır
+      - id: b2-u10-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (einander)
+        options: [birbirimizi, birimizi, birlerimizi]
+        answer: birbirimizi
+      - id: b2-u10-l7-e5
+        type: word_bank
+        prompt: Wenn ich die Wahrheit gewusst hätte, hätte ich es nicht geschrieben.
+        answers: [Gerçeği bilseydim yazmazdım.]
+        distractors: [gerçek, yazdım]
+      - { id: b2-u10-l7-e6, type: suffix_builder, stem: yazmak, verbal: PART_AN, passive: true, target: yazılan, gloss_de: 'der, die, das geschrieben wird' }
+      - { id: b2-u10-l7-e7, type: suffix_builder, stem: hak, suffixes: [POSS_3SG], target: hakkı, gloss_de: sein Recht }
+      - id: b2-u10-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Elinden geleni yaptı ama sonucu değiştiremedi.
+        answers: ['Er hat sein Bestes getan, aber das Ergebnis nicht ändern können.', 'Sie hat ihr Bestes getan, aber das Ergebnis nicht ändern können.', 'Er tat sein Bestes, konnte das Ergebnis aber nicht ändern.', 'Sie tat ihr Bestes, konnte das Ergebnis aber nicht ändern.', 'Er hat sein Bestes getan, konnte aber das Ergebnis nicht ändern.', 'Sie hat ihr Bestes getan, konnte aber das Ergebnis nicht ändern.']
+      - id: b2-u10-l7-e9
+        type: word_bank
+        prompt: Dieser Text wird von vielen Lesern gelesen.
+        answers: [Bu yazı birçok okur tarafından okunuyor.]
+        distractors: [okuyor, okuru]
+      - { id: b2-u10-l7-e10, type: conjugation, mode: verb, lemma: yayımlamak, person: 3sg, tense: evidential, dir: true, passive: true, target: yayımlanmıştır, gloss_de: wurde veröffentlicht }
+
+vocab:
+  - { tr: basın, de: [Presse], pos: noun }
+  - { tr: özgürlük, de: [Freiheit], pos: noun, softens: true }
+  - { tr: yayımlamak, de: [veröffentlichen], pos: verb }
+  - { tr: okur, de: [Leser(in)], pos: noun }
+  - { tr: yorum, de: [Kommentar], pos: noun }
+  - { tr: güvenilir, de: [verlässlich], pos: adj }
+  - { tr: doğrulamak, de: ['überprüfen, bestätigen'], pos: verb }
+  - { tr: etkilemek, de: [beeinflussen], pos: verb }
+  - { tr: etki, de: [Wirkung, Einfluss], pos: noun }
+  - { tr: izleyici, de: [Zuschauer(in)], pos: noun }
+  - { tr: manşet, de: [Schlagzeile], pos: noun }
+  - { tr: röportaj, de: [Interview], pos: noun }
+  - { tr: yaymak, de: [verbreiten], pos: verb }
+  - { tr: yayılmak, de: [sich verbreiten], pos: verb, causative: none }
+  - { tr: abone, de: [Abonnent(in)], pos: noun }
+  - { tr: yalan haber, de: [Falschmeldung], pos: noun }
+  - { tr: yazı, de: [Text], pos: noun }
+  - { tr: uzman, de: [Fachmann, Fachfrau], pos: noun }
+  - { tr: şüphe etmek, de: [zweifeln], pos: verb, softens: true }

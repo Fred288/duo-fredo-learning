@@ -832,6 +832,6 @@ vocab:
   - { tr: kapalı, de: [geschlossen, ausgeschaltet], pos: adj }
   - { tr: şarj, de: [Akkuladung], pos: noun }
   - { tr: görüşmek, de: [sprechen (miteinander), sich treffen], pos: verb }
-  - { tr: hat, de: [Leitung, Linie], pos: noun }
+  - { tr: hat, de: [Leitung, Linie], pos: noun, doubles: true }
   - { tr: düğün, de: [Hochzeit], pos: noun }
   - { tr: kargo, de: [Paketdienst, Sendung], pos: noun }

@@ -1,0 +1,519 @@
+# B2-08: Lehnwörter (Verdopplung, stumme Endung, Zirkumflex), Konnektoren (ancak, oysa, dolayısıyla, hatta); Sprache und Schrift. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u08
+level: B2
+title: Sprache und Schrift
+grammar_focus: [verdopplung, poss-no-s, zirkumflex, konnektoren]
+explainer: explainers/b2-lehnwoerter.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u08-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u08-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „harf“?
+        options: [Buchstabe, Wort, Satz]
+        answer: Buchstabe
+      - id: b2-u08-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Alphabet
+        answers: [alfabe]
+      - id: b2-u08-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „anlam“?
+        options: [Bedeutung, Herkunft, Aussprache]
+        answer: Bedeutung
+      - id: b2-u08-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „köken“?
+        options: [Herkunft, Sprache, Gedicht]
+        answer: Herkunft
+      - id: b2-u08-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Schriftsteller(in)
+        answers: [yazar]
+      - id: b2-u08-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „şiir“?
+        options: [Gedicht, Roman, Lied]
+        answer: Gedicht
+        explanation: şair = Dichter(in).
+      - id: b2-u08-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „sır“?
+        options: [Geheimnis, Gefühl, Vergebung]
+        answer: Geheimnis
+        explanation: Vor Vokal verdoppelt sich r, sırrı.
+      - id: b2-u08-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „his“?
+        options: [Gefühl, Geschichte, Herz]
+        answer: Gefühl
+      - id: b2-u08-l1-e9
+        type: free_text
+        direction: de_tr
+        prompt: Moschee
+        answers: [cami]
+      - id: b2-u08-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „kâr“?
+        options: [Gewinn, Schnee, Arbeit]
+        answer: Gewinn
+        explanation: Das Zirkumflex trennt es von kar (Schnee).
+      - id: b2-u08-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „ancak“?
+        options: [jedoch, sofort, deshalb]
+        answer: jedoch
+      - id: b2-u08-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „oysa“?
+        options: [dabei doch, außerdem, weil]
+        answer: dabei doch
+      - id: b2-u08-l1-e13
+        type: free_text
+        direction: de_tr
+        prompt: folglich, deshalb
+        answers: [dolayısıyla, bu yüzden, bu nedenle]
+      - id: b2-u08-l1-e14
+        type: multiple_choice
+        prompt: Was heißt „hatta“?
+        options: [sogar, kaum, leider]
+        answer: sogar
+      - id: b2-u08-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „özellikle“?
+        options: [besonders, zufällig, selten]
+        answer: besonders
+      - id: b2-u08-l1-e16
+        type: free_text
+        direction: de_tr
+        prompt: zum Beispiel
+        answers: [örneğin, mesela]
+
+  - id: b2-u08-l2
+    type: grammar
+    title: Hakkım – Verdopplung
+    exercises:
+      - id: b2-u08-l2-e1
+        type: suffix_builder
+        stem: hak
+        suffixes: [POSS_1SG]
+        target: hakkım
+        gloss_de: mein Recht
+        explanation: Vor einem Vokal verdoppelt sich der letzte Konsonant.
+      - { id: b2-u08-l2-e2, type: suffix_builder, stem: sır, suffixes: [ACC], target: sırrı, gloss_de: das Geheimnis (Akkusativ) }
+      - { id: b2-u08-l2-e3, type: suffix_builder, stem: his, suffixes: [POSS_2SG], target: hissin, gloss_de: dein Gefühl }
+      - { id: b2-u08-l2-e4, type: suffix_builder, stem: af, suffixes: [POSS_1SG], target: affım, gloss_de: meine Vergebung }
+      - { id: b2-u08-l2-e5, type: suffix_builder, stem: ret, suffixes: [POSS_3SG], target: reddi, gloss_de: seine Ablehnung }
+      - { id: b2-u08-l2-e6, type: suffix_builder, stem: hat, suffixes: [ACC], target: hattı, gloss_de: die Linie (Akkusativ) }
+      - id: b2-u08-l2-e7
+        type: suffix_builder
+        stem: hak
+        suffixes: [PL]
+        target: haklar
+        gloss_de: Rechte
+        explanation: Vor Konsonant bleibt der einfache Stamm, darum keine Verdopplung.
+      - { id: b2-u08-l2-e8, type: suffix_builder, stem: sır, suffixes: [PL], target: sırlar, gloss_de: Geheimnisse }
+      - id: b2-u08-l2-e9
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (dein Recht)
+        options: [hakkın, hakın, hakkının]
+        answer: hakkın
+      - id: b2-u08-l2-e10
+        type: word_bank
+        prompt: Das ist mein Recht.
+        answers: [Bu benim hakkım.]
+        distractors: [hakım, hak]
+      - id: b2-u08-l2-e11
+        type: word_bank
+        prompt: Niemand kennt dieses Geheimnis.
+        answers: [Bu sırrı kimse bilmiyor.]
+        chunks:
+          - { text: "Bu sırrı", role: object }
+          - { text: "kimse", role: subject }
+          - { text: "bilmiyor", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [sırı, sırlar]
+      - id: b2-u08-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: Bu konuda haklısın ama hakkını böyle aramamalısın.
+        answers: ['In dieser Sache hast du recht, aber du solltest dein Recht nicht so suchen.', 'In dieser Sache hast du recht, aber du solltest dein Recht nicht so einfordern.', 'Du hast in dieser Sache recht, aber du solltest dein Recht nicht so einfordern.', 'Du hast in dieser Sache recht, aber du solltest dein Recht nicht so suchen.', 'In diesem Punkt hast du recht, aber du solltest dein Recht nicht so einfordern.']
+
+  - id: b2-u08-l3
+    type: grammar
+    title: Camii und saati – stumme Endung und helle Laute
+    exercises:
+      - id: b2-u08-l3-e1
+        type: suffix_builder
+        stem: cami
+        suffixes: [POSS_3SG]
+        target: camii
+        gloss_de: seine Moschee (Süleymaniye Camii)
+        explanation: Früher endete das Wort auf einem Konsonanten, darum ohne s. Heute ist auch camisi üblich.
+      - { id: b2-u08-l3-e2, type: suffix_builder, stem: mevzu, suffixes: [POSS_3SG], target: mevzuu, gloss_de: sein Thema }
+      - id: b2-u08-l3-e3
+        type: suffix_builder
+        stem: cami
+        suffixes: [ACC]
+        target: camiyi
+        gloss_de: die Moschee (Akkusativ)
+        explanation: Nur beim Possessiv der 3. Person fällt s weg, sonst regulär.
+      - { id: b2-u08-l3-e4, type: suffix_builder, stem: saat, suffixes: [ACC], target: saati, gloss_de: die Uhr (Akkusativ) }
+      - { id: b2-u08-l3-e5, type: suffix_builder, stem: kalp, suffixes: [POSS_1SG], target: kalbim, gloss_de: mein Herz }
+      - { id: b2-u08-l3-e6, type: suffix_builder, stem: hâl, suffixes: [ACC], target: hâli, gloss_de: den Zustand }
+      - { id: b2-u08-l3-e7, type: suffix_builder, stem: ihtimal, suffixes: [PL], target: ihtimaller, gloss_de: Möglichkeiten }
+      - { id: b2-u08-l3-e8, type: suffix_builder, stem: kâğıt, suffixes: [ACC], target: kâğıdı, gloss_de: das Papier (Akkusativ) }
+      - id: b2-u08-l3-e9
+        type: multiple_choice
+        prompt: Warum heißt es saati und nicht saatı?
+        options: ['Lehnwort, das Endungen hell bildet.', Weil t weich wird., Das ist ein Tippfehler.]
+        answer: 'Lehnwort, das Endungen hell bildet.'
+      - id: b2-u08-l3-e10
+        type: word_bank
+        prompt: Die Hagia Sophia ist eine alte Moschee in Istanbul.
+        answers: [Ayasofya İstanbul'da eski bir camidir., Ayasofya İstanbul'da eski bir cami.]
+        distractors: [camii, camiyi]
+      - id: b2-u08-l3-e11
+        type: free_text
+        direction: de_tr
+        prompt: die Moschee meines Viertels
+        answers: [mahallemin camii, mahallemin camisi]
+      - id: b2-u08-l3-e12
+        type: multiple_choice
+        prompt: Was unterscheidet „kâr“ und „kar“?
+        options: [Gewinn und Schnee, Schnee und Gewinn, Sie bedeuten dasselbe.]
+        answer: Gewinn und Schnee
+      - id: b2-u08-l3-e13
+        type: multiple_choice
+        prompt: Was bedeutet „hâlâ“?
+        options: [immer noch, Tante, jetzt nicht]
+        answer: immer noch
+        explanation: hala ohne Zeichen ist die Tante väterlicherseits.
+
+  - id: b2-u08-l4
+    type: grammar
+    title: Sätze verbinden (ancak, oysa, dolayısıyla)
+    exercises:
+      - id: b2-u08-l4-e1
+        type: multiple_choice
+        prompt: Welches Wort passt? „Çok çalıştı, … sınavı geçemedi.“ (jedoch)
+        options: [ancak, çünkü, hatta]
+        answer: ancak
+        explanation: ancak ist die förmlichere Schwester von ama.
+      - id: b2-u08-l4-e2
+        type: multiple_choice
+        prompt: Welches Wort passt? „Hava çok soğuktu, … dışarı çıkmadık.“ (deshalb)
+        options: [dolayısıyla, oysa, üstelik]
+        answer: dolayısıyla
+      - id: b2-u08-l4-e3
+        type: multiple_choice
+        prompt: Welches Wort passt? „Ali gelmedi, … gelmeye söz vermişti.“ (dabei hatte er doch)
+        options: [oysa, örneğin, dolayısıyla]
+        answer: oysa
+        explanation: oysa stellt die Erwartung gegen die Wirklichkeit.
+      - id: b2-u08-l4-e4
+        type: multiple_choice
+        prompt: Welches Wort passt? „Türkçe biliyor, … şiir yazıyor.“ (sogar)
+        options: [hatta, ancak, oysa]
+        answer: hatta
+      - id: b2-u08-l4-e5
+        type: multiple_choice
+        prompt: Welches Wort passt? „Birçok dil öğrendi, … Türkçe ve Japonca.“ (besonders)
+        options: [özellikle, ancak, oysa]
+        answer: özellikle
+      - id: b2-u08-l4-e6
+        type: word_bank
+        prompt: Das Wort ist schwer, jedoch sehr wichtig.
+        answers: ['Kelime zor, ancak çok önemli.']
+        distractors: [çünkü, hatta]
+      - id: b2-u08-l4-e7
+        type: word_bank
+        prompt: Viele Wörter kommen aus dem Arabischen, zum Beispiel kitap.
+        answers: ['Birçok kelime Arapçadan gelir, örneğin kitap.']
+        distractors: [Arapça, oysa]
+      - id: b2-u08-l4-e8
+        type: word_bank
+        prompt: Bücher sind teuer, außerdem haben wir keinen Platz.
+        answers: ['Kitaplar pahalı, üstelik yerimiz yok.']
+        distractors: [oysa, yeri]
+      - id: b2-u08-l4-e9
+        type: free_text
+        direction: tr_de
+        prompt: Çok okuyor, hatta her gün bir şiir ezberliyor.
+        answers: ['Er liest viel, er lernt sogar jeden Tag ein Gedicht auswendig.', 'Sie liest viel, sie lernt sogar jeden Tag ein Gedicht auswendig.', 'Er liest viel und lernt sogar jeden Tag ein Gedicht auswendig.', 'Sie liest viel und lernt sogar jeden Tag ein Gedicht auswendig.']
+      - id: b2-u08-l4-e10
+        type: free_text
+        direction: tr_de
+        prompt: Kolay sanıyordum, oysa çok zormuş.
+        answers: ['Ich dachte, es sei leicht, dabei ist es sehr schwer.', 'Ich dachte, es wäre leicht, dabei ist es sehr schwer.', 'Ich dachte, es ist leicht, dabei ist es sehr schwer.', 'Ich hielt es für leicht, dabei ist es sehr schwer.', 'Ich dachte, es sei einfach, dabei ist es sehr schwer.', 'Ich dachte, es ist einfach, dabei ist es sehr schwer.', 'Ich dachte, es wäre einfach, dabei ist es sehr schwer.']
+      - id: b2-u08-l4-e11
+        type: free_text
+        direction: de_tr
+        prompt: Zum Beispiel ist „kitap“ ein arabisches Wort.
+        answers: [Örneğin kitap Arapça bir kelimedir., Örneğin kitap Arapça bir kelime., Mesela kitap Arapça bir kelimedir., Mesela kitap Arapça bir kelime.]
+      - id: b2-u08-l4-e12
+        type: multiple_choice
+        prompt: Welches Wort klingt am förmlichsten?
+        options: [bununla birlikte, ama, ya]
+        answer: bununla birlikte
+        explanation: Bedeutet „dennoch“ und steht vor allem in geschriebenen Texten.
+
+  - id: b2-u08-l5
+    type: dialog
+    title: Über Wörter sprechen
+    exercises:
+      - id: b2-u08-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Bu kelimenin anlamı ne?
+        answers: [Was bedeutet dieses Wort?, Was ist die Bedeutung dieses Wortes?, Was heißt dieses Wort?, Was bedeutet das Wort?]
+      - id: b2-u08-l5-e2
+        type: word_bank
+        prompt: Woher kommt dieses Wort?
+        answers: [Bu kelime nereden geliyor?]
+        distractors: [nerede, gidiyor]
+      - id: b2-u08-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Wie schreibt man das?“
+        options: [Nasıl yazılır?, Nasıl yazdın?, Kim yazar?]
+        answer: Nasıl yazılır?
+      - id: b2-u08-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Was bedeutet das auf Deutsch?
+        answers: [Bu Almanca ne demek?, Almanca ne demek?, Bunun Almancası ne?, Bu ne demek Almanca?]
+      - id: b2-u08-l5-e5
+        type: word_bank
+        prompt: Dieses Wort wird heute nicht mehr benutzt.
+        answers: [Bu kelime artık kullanılmıyor.]
+        chunks:
+          - { text: "Bu kelime", role: subject }
+          - { text: "artık", role: time }
+          - { text: "kullanılmıyor", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [kullanmıyor, kelimeyi]
+      - id: b2-u08-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Şapkalı a ile yazılır.“
+        options: [Es wird mit Zirkumflex-a geschrieben., Es wird mit Hut geschrieben., Das a wird nicht geschrieben.]
+        answer: Es wird mit Zirkumflex-a geschrieben.
+      - { id: b2-u08-l5-e7, type: conjugation, mode: verb, lemma: kullanmak, person: 3sg, tense: aorist, passive: true, target: kullanılır, gloss_de: wird benutzt }
+      - id: b2-u08-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Bu kelimenin kökeni Farsçadır.
+        answers: [Die Herkunft dieses Wortes ist persisch., Dieses Wort stammt aus dem Persischen., Dieses Wort kommt aus dem Persischen., Der Ursprung dieses Wortes ist persisch.]
+
+  - id: b2-u08-l6
+    type: grammar
+    title: 'Tabellen: Lehnwörter'
+    exercises:
+      - id: b2-u08-l6-e1
+        type: paradigm
+        kind: noun
+        lemma: hak
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL], [POSS_3PL]]
+        targets: [hakkım, hakkın, hakkı, hakkımız, hakkınız, hakları]
+        gloss_de: Recht
+      - id: b2-u08-l6-e2
+        type: paradigm
+        kind: noun
+        lemma: sır
+        rows: [[ACC], [DAT], [LOC], [ABL], [PL]]
+        targets: [sırrı, sırra, sırda, sırdan, sırlar]
+        gloss_de: Geheimnis
+      - id: b2-u08-l6-e3
+        type: paradigm
+        kind: noun
+        lemma: saat
+        rows: [[ACC], [DAT], [LOC], [ABL], [PL]]
+        targets: [saati, saate, saatte, saatten, saatler]
+        gloss_de: Uhr
+      - id: b2-u08-l6-e4
+        type: paradigm
+        kind: noun
+        lemma: cami
+        rows: [[ACC], [DAT], [LOC], [ABL], [POSS_3SG]]
+        targets: [camiyi, camiye, camide, camiden, camii]
+        gloss_de: Moschee
+
+  - id: b2-u08-r1
+    type: reading
+    title: 'Lesetext: Die Geschichte der Wörter'
+    passage:
+      sentences:
+        - { tr: "Türkçenin tarihi çok uzundur.", de: "Die Geschichte des Türkischen ist sehr lang." }
+        - { tr: "Osmanlı döneminde Türkçe Arap harfleriyle yazılırdı.", de: "In osmanischer Zeit wurde Türkisch mit arabischen Buchstaben geschrieben." }
+        - { tr: "Ancak bu alfabe Türkçenin seslerine uygun değildi.", de: "Dieses Alphabet passte jedoch nicht zu den Lauten des Türkischen." }
+        - { tr: "Türkçede sekiz ünlü vardır, oysa Arap alfabesi bunları göstermekte zorlanır.", de: "Das Türkische hat acht Vokale, das arabische Alphabet tut sich dagegen schwer, sie darzustellen." }
+        - { tr: "1928 yılında Latin harflerine dayanan yeni alfabe kabul edildi.", de: "1928 wurde das neue, auf lateinischen Buchstaben beruhende Alphabet eingeführt." }
+        - { tr: "Değişiklik kısa sürede uygulandı, hatta yetişkinler için okullar açıldı.", de: "Die Änderung wurde schnell umgesetzt, es wurden sogar Schulen für Erwachsene eröffnet." }
+        - { tr: "Harflerle birlikte dil de değişmeye başladı.", de: "Mit den Buchstaben begann sich auch die Sprache zu ändern." }
+        - { tr: "Osmanlıcada Arapça ve Farsça kelimeler çoktu.", de: "Im Osmanischen gab es viele arabische und persische Wörter." }
+        - { tr: "1932'de kurulan Türk Dil Kurumu bunların yerine Türkçe kelimeler önerdi.", de: "Die 1932 gegründete Türkische Sprachgesellschaft schlug stattdessen türkische Wörter vor." }
+        - { tr: "Mektep yerine okul, talebe yerine öğrenci, tayyare yerine uçak denmeye başlandı.", de: "Statt mektep sagte man nun okul, statt talebe öğrenci, statt tayyare uçak." }
+        - { tr: "Bununla birlikte eski kelimelerin hepsi kaybolmadı.", de: "Dennoch verschwanden nicht alle alten Wörter." }
+        - { tr: "Kitap ve hak kelimeleri Arapçadan gelir.", de: "Die Wörter kitap und hak kommen aus dem Arabischen." }
+        - { tr: "Pencere ve şehir ise Farsça kökenlidir.", de: "Pencere und şehir dagegen sind persischer Herkunft." }
+        - { tr: "Otobüs ve kuaför Fransızcadan girmiştir.", de: "Otobüs und kuaför kamen aus dem Französischen." }
+        - { tr: "Bu kelimelerin bir kısmı kurallara uymaz.", de: "Ein Teil dieser Wörter folgt nicht den Regeln." }
+        - { tr: "Örneğin hak hakkı olur, saat ise saati olur.", de: "Zum Beispiel wird hak zu hakkı und saat zu saati." }
+        - { tr: "Dolayısıyla Türkçe öğrenenler bu kelimeleri tek tek öğrenmek zorundadır.", de: "Folglich müssen Türkischlernende diese Wörter einzeln lernen." }
+        - { tr: "Şapkalı harfler de bu tarihin izidir.", de: "Auch die Buchstaben mit Zirkumflex sind eine Spur dieser Geschichte." }
+        - { tr: "Kâr ve kar kelimeleri bu işaretle ayrılır.", de: "Die Wörter kâr und kar werden durch dieses Zeichen unterschieden." }
+        - { tr: "Bir dilin kelimeleri o dili konuşan toplumun tarihini anlatır.", de: "Die Wörter einer Sprache erzählen die Geschichte der Gesellschaft, die sie spricht." }
+      glossary:
+        - { tr: "kâr", de: "Gewinn", vocab: "kâr" }
+        - { tr: "uzundur", de: "ist lang (uzun + dur)", vocab: "uzun" }
+        - { tr: "osmanlı", de: "osmanisch" }
+        - { tr: "döneminde", de: "in der Zeit (dönem)" }
+        - { tr: "arap", de: "arabisch, Araber" }
+        - { tr: "harfleriyle", de: "mit den Buchstaben", vocab: "harf" }
+        - { tr: "uygun", de: "passend" }
+        - { tr: "değildi", de: "war nicht", vocab: "değil" }
+        - { tr: "ünlü", de: "Vokal" }
+        - { tr: "vardır", de: "es gibt (formell)", vocab: "var" }
+        - { tr: "bunları", de: "diese (Akkusativ)", vocab: "bu" }
+        - { tr: "bunların", de: "dieser (Genitiv)", vocab: "bu" }
+        - { tr: "zorlanır", de: "tut sich schwer (zorlanmak)", vocab: "zor" }
+        - { tr: "latin", de: "lateinisch" }
+        - { tr: "harflerine", de: "auf die Buchstaben", vocab: "harf" }
+        - { tr: "dayanan", de: "beruhend auf (dayanmak)" }
+        - { tr: "kabul", de: "Annahme (kabul etmek)", vocab: "kabul etmek" }
+        - { tr: "edildi", de: "wurde gemacht (etmek, Passiv)", vocab: "kabul etmek" }
+        - { tr: "değişiklik", de: "Änderung", vocab: "değişmek" }
+        - { tr: "uygulandı", de: "wurde umgesetzt (uygulamak)" }
+        - { tr: "yetişkinler", de: "Erwachsene" }
+        - { tr: "açıldı", de: "wurden eröffnet", vocab: "açmak" }
+        - { tr: "harflerle", de: "mit den Buchstaben", vocab: "harf" }
+        - { tr: "birlikte", de: "zusammen" }
+        - { tr: "osmanlıcada", de: "im Osmanischen" }
+        - { tr: "çoktu", de: "waren viele (çok + -tu)", vocab: "çok" }
+        - { tr: "1932'de", de: "im Jahr 1932" }
+        - { tr: "kurulan", de: "gegründet (kurmak, Passiv)" }
+        - { tr: "kurumu", de: "Gesellschaft, Institution (kurum)" }
+        - { tr: "mektep", de: "Schule (altes Wort)" }
+        - { tr: "talebe", de: "Schüler, Student (altes Wort)" }
+        - { tr: "tayyare", de: "Flugzeug (altes Wort)" }
+        - { tr: "denmeye", de: "gesagt zu werden (demek, Passiv)", vocab: "demek" }
+        - { tr: "başlandı", de: "man begann", vocab: "başlamak" }
+        - { tr: "hepsi", de: "alle (von ihnen)" }
+        - { tr: "ise", de: "dagegen, hingegen" }
+        - { tr: "kökenlidir", de: "ist von … Herkunft", vocab: "köken" }
+        - { tr: "kısmı", de: "ein Teil (kısım)" }
+        - { tr: "kurallara", de: "den Regeln (kural)" }
+        - { tr: "uymaz", de: "folgt nicht (uymak)" }
+        - { tr: "tek", de: "einzeln (tek tek = einzeln)" }
+        - { tr: "zorundadır", de: "muss (zorunda + dır)", vocab: "zorunda" }
+        - { tr: "şapkalı", de: "mit Zirkumflex (şapka + lı)", vocab: "şapka" }
+        - { tr: "harfler", de: "Buchstaben", vocab: "harf" }
+        - { tr: "izidir", de: "ist die Spur (iz)" }
+        - { tr: "işaretle", de: "mit dem Zeichen (işaret)" }
+    exercises:
+      - id: b2-u08-r1-e1
+        type: multiple_choice
+        prompt: Warum passte das alte Alphabet schlecht?
+        options: [Es passte nicht zu den Lauten des Türkischen., Es hatte zu viele Buchstaben., Niemand konnte es drucken.]
+        answer: Es passte nicht zu den Lauten des Türkischen.
+      - id: b2-u08-r1-e2
+        type: multiple_choice
+        prompt: Wann wurde das neue Alphabet eingeführt?
+        options: ['1928.', '1932.', '1923.']
+        answer: '1928.'
+      - id: b2-u08-r1-e3
+        type: multiple_choice
+        prompt: Was tat die Sprachgesellschaft?
+        options: [Sie schlug türkische Wörter vor., Sie verbot alle Lehnwörter., Sie schrieb ein Märchenbuch.]
+        answer: Sie schlug türkische Wörter vor.
+      - id: b2-u08-r1-e4
+        type: multiple_choice
+        prompt: Woher kommt das Wort „pencere“ laut Text?
+        options: [Aus dem Persischen., Aus dem Französischen., Aus dem Arabischen.]
+        answer: Aus dem Persischen.
+      - id: b2-u08-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Bir dilin kelimeleri o dili konuşan toplumun tarihini anlatır.
+        answers: ['Die Wörter einer Sprache erzählen die Geschichte der Gesellschaft, die sie spricht.', 'Die Wörter einer Sprache erzählen die Geschichte der Gesellschaft, die diese Sprache spricht.', 'Die Wörter einer Sprache erzählen die Geschichte des Volkes, das sie spricht.']
+
+  - id: b2-u08-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u08-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: mein Gefühl
+        answers: [hissim, duygum]
+      - id: b2-u08-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Sie hat kein Recht dazu.
+        answers: [Buna hakkı yok., Bunu yapmaya hakkı yok., Onun buna hakkı yok.]
+      - id: b2-u08-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (das Geheimnis, Akkusativ)
+        options: [sırrı, sırı, sırrıyı]
+        answer: sırrı
+      - id: b2-u08-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (zur Uhr)
+        options: [saate, saata, saatte]
+        answer: saate
+      - id: b2-u08-l7-e5
+        type: word_bank
+        prompt: Mein Herz schlägt schnell.
+        answers: [Kalbim hızlı atıyor.]
+        distractors: [kalpım, yavaş]
+      - { id: b2-u08-l7-e6, type: suffix_builder, stem: kalp, suffixes: [ACC], target: kalbi, gloss_de: das Herz (Akkusativ) }
+      - { id: b2-u08-l7-e7, type: suffix_builder, stem: hak, suffixes: [POSS_1PL], target: hakkımız, gloss_de: unser Recht }
+      - id: b2-u08-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Fiyatlar yüksek, dolayısıyla kârımız az.
+        answers: ['Die Preise sind hoch, deshalb ist unser Gewinn gering.', 'Die Preise sind hoch, folglich ist unser Gewinn gering.', 'Die Preise sind hoch, deshalb ist unser Gewinn klein.', 'Die Preise sind hoch, folglich ist unser Gewinn klein.', 'Die Preise sind hoch, also ist unser Gewinn gering.', 'Die Preise sind hoch, daher ist unser Gewinn gering.']
+      - id: b2-u08-l7-e9
+        type: word_bank
+        prompt: Er kennt viele Dichter, besonders aus dem 20. Jahrhundert.
+        answers: ['Birçok şair tanıyor, özellikle yirminci yüzyıldan.']
+        distractors: [oysa, şiir]
+      - { id: b2-u08-l7-e10, type: suffix_builder, stem: harf, suffixes: [PL, ACC], target: harfleri, gloss_de: die Buchstaben (Akkusativ) }
+
+vocab:
+  - { tr: harf, de: [Buchstabe], pos: noun, harmony_vowel: e }
+  - { tr: alfabe, de: [Alphabet], pos: noun }
+  - { tr: anlam, de: [Bedeutung], pos: noun }
+  - { tr: köken, de: [Herkunft], pos: noun }
+  - { tr: yazar, de: [Schriftsteller(in)], pos: noun }
+  - { tr: şiir, de: [Gedicht], pos: noun }
+  - { tr: şair, de: [Dichter(in)], pos: noun }
+  - { tr: sır, de: [Geheimnis], pos: noun, doubles: true }
+  - { tr: his, de: [Gefühl], pos: noun, doubles: true }
+  - { tr: af, de: [Vergebung], pos: noun, doubles: true }
+  - { tr: ret, de: [Ablehnung], pos: noun, doubles: true, softens: true }
+  - { tr: cami, de: [Moschee], pos: noun, poss_no_s: true }
+  - { tr: mevzu, de: [Thema], pos: noun, poss_no_s: true }
+  - { tr: kalp, de: [Herz], pos: noun, softens: true, harmony_vowel: e }
+  - { tr: hâl, de: [Zustand], pos: noun, harmony_vowel: e }
+  - { tr: kâr, de: [Gewinn], pos: noun }
+  - { tr: kâğıt, de: [Papier], pos: noun, softens: true }
+  - { tr: ancak, de: [jedoch], pos: conj }
+  - { tr: hâlâ, de: [immer noch], pos: adv }
+  - { tr: oysa, de: [dabei doch], pos: conj }
+  - { tr: dolayısıyla, de: [folglich, deshalb], pos: adv }
+  - { tr: hatta, de: [sogar], pos: adv }
+  - { tr: özellikle, de: [besonders], pos: adv }
+  - { tr: örneğin, de: [zum Beispiel], pos: adv }
+  - { tr: bununla birlikte, de: [dennoch], pos: phrase }
+  - { tr: Arapça, de: [Arabisch], pos: noun, capitalized: true }
+  - { tr: Farsça, de: [Persisch], pos: noun, capitalized: true }
+  - { tr: Fransızca, de: [Französisch], pos: noun, capitalized: true }

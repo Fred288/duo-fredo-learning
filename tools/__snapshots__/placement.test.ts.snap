@@ -147,12 +147,28 @@ exports[`placement.json aus content/ > Auswahl bleibt stabil 1`] = `
     "b2-u04-l3-e5",
   ],
   "b2-u05": [
-    "b2-u05-l3-e4",
-    "b2-u05-l4-e6",
+    "b2-u05-l2-e6",
+    "b2-u05-l4-e4",
   ],
   "b2-u06": [
     "b2-u06-l3-e8",
     "b2-u06-l4-e2",
+  ],
+  "b2-u07": [
+    "b2-u07-l2-e1",
+    "b2-u07-l3-e2",
+  ],
+  "b2-u08": [
+    "b2-u08-l2-e3",
+    "b2-u08-l3-e5",
+  ],
+  "b2-u09": [
+    "b2-u09-l3-e1",
+    "b2-u09-l2-e9",
+  ],
+  "b2-u10": [
+    "b2-u10-l4-e3",
+    "b2-u10-l2-e8",
   ],
 }
 `;

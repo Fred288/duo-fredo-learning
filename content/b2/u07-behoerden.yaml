@@ -1,0 +1,518 @@
+# B2-07: Formelles Register: -mektedir, -miştir, -ınız im Imperativ, Höflichkeit; Behörden, Briefe. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u07
+level: B2
+title: Behörden und Briefe
+grammar_focus: [mektedir, mistir, resmi-rica]
+explainer: explainers/b2-formell.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u07-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u07-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „dilekçe“?
+        options: [schriftlicher Antrag, Ausweis, Stempel]
+        answer: schriftlicher Antrag
+        explanation: dilekçe vermek = einen Antrag einreichen.
+      - id: b2-u07-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Dokument, Bescheinigung
+        answers: [belge]
+      - id: b2-u07-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „vatandaş“?
+        options: [Bürger(in), Beamter, Nachbar]
+        answer: Bürger(in)
+      - id: b2-u07-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „memur“?
+        options: [Beamte(r), Bürgermeister, Kunde]
+        answer: Beamte(r)
+      - id: b2-u07-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: offiziell, amtlich
+        answers: [resmî, resmi]
+      - id: b2-u07-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „sayın“?
+        options: [verehrte(r), liebe(r) Freund(in), zählbar]
+        answer: verehrte(r)
+        explanation: In Briefen vor dem Namen, Sayın Ayşe Yılmaz.
+      - id: b2-u07-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „işlem“?
+        options: [Vorgang, Arbeitsplatz, Lohn]
+        answer: Vorgang
+      - id: b2-u07-l1-e8
+        type: free_text
+        direction: de_tr
+        prompt: Datum, Geschichte
+        answers: [tarih]
+      - id: b2-u07-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „bilgi“?
+        options: [Information, Rechnung, Einladung]
+        answer: Information
+      - id: b2-u07-l1-e10
+        type: multiple_choice
+        prompt: Was heißt „bildirmek“?
+        options: [mitteilen, kaufen, bezahlen]
+        answer: mitteilen
+      - id: b2-u07-l1-e11
+        type: free_text
+        direction: de_tr
+        prompt: genehmigen, bestätigen
+        answers: [onaylamak]
+      - id: b2-u07-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „talep etmek“?
+        options: [beantragen, ablehnen, verschieben]
+        answer: beantragen
+      - id: b2-u07-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „kayıt“?
+        options: [Eintrag, Schlüssel, Kosten]
+        answer: Eintrag
+        explanation: Vor Vokal kaydı, kayıt yaptırmak = sich anmelden.
+      - id: b2-u07-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: Frist, Dauer
+        answers: [süre]
+      - id: b2-u07-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „ilgili“?
+        options: [zuständig, müde, gerecht]
+        answer: zuständig
+        explanation: Auch betreffend, interessiert; ilgili memur = der zuständige Beamte.
+      - id: b2-u07-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „Saygılarımla“?
+        options: [Mit freundlichen Grüßen, Herzlichen Glückwunsch, Vielen Dank im Voraus]
+        answer: Mit freundlichen Grüßen
+
+  - id: b2-u07-l2
+    type: grammar
+    title: Es wird gearbeitet (-mektedir)
+    exercises:
+      - id: b2-u07-l2-e1
+        type: conjugation
+        mode: verb
+        lemma: çalışmak
+        person: 3sg
+        tense: mekte
+        dir: true
+        target: çalışmaktadır
+        gloss_de: 'er, sie arbeitet (formell)'
+        explanation: -mekte + -dir ist das Präsens von Texten und Nachrichten.
+      - { id: b2-u07-l2-e2, type: conjugation, mode: verb, lemma: devam etmek, person: 3sg, tense: mekte, dir: true, target: devam etmektedir, gloss_de: dauert an }
+      - { id: b2-u07-l2-e3, type: conjugation, mode: verb, lemma: yaşamak, person: 3pl, tense: mekte, dir: true, target: yaşamaktadırlar, gloss_de: sie leben (formell) }
+      - { id: b2-u07-l2-e4, type: conjugation, mode: verb, lemma: yapmak, person: 3sg, tense: mekte, dir: true, passive: true, target: yapılmaktadır, gloss_de: wird gemacht }
+      - { id: b2-u07-l2-e5, type: conjugation, mode: verb, lemma: beklemek, person: 3sg, tense: mekte, dir: true, passive: true, target: beklenmektedir, gloss_de: wird erwartet }
+      - { id: b2-u07-l2-e6, type: conjugation, mode: verb, lemma: bulunmak, person: 3sg, tense: mekte, dir: true, target: bulunmaktadır, gloss_de: befindet sich }
+      - { id: b2-u07-l2-e7, type: conjugation, mode: verb, lemma: gelmek, person: 1sg, tense: mekte, target: gelmekteyim, gloss_de: ich komme (formell) }
+      - { id: b2-u07-l2-e8, type: conjugation, mode: verb, lemma: artmak, person: 3sg, tense: mekte, dir: true, negative: true, target: artmamaktadır, gloss_de: nimmt nicht zu }
+      - id: b2-u07-l2-e9
+        type: multiple_choice
+        prompt: Was entspricht im Gespräch „Çalışmalar devam etmektedir.“?
+        options: [Çalışmalar devam ediyor., Çalışmalar devam etti., Çalışmalar devam etsin.]
+        answer: Çalışmalar devam ediyor.
+      - id: b2-u07-l2-e10
+        type: word_bank
+        prompt: Die Arbeiten dauern noch an.
+        answers: [Çalışmalar hâlâ devam etmektedir.]
+        chunks:
+          - { text: "Çalışmalar", role: subject }
+          - { text: "hâlâ", role: time }
+          - { text: "devam etmektedir", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [etti, çalışmayı]
+      - id: b2-u07-l2-e11
+        type: word_bank
+        prompt: Das Büro befindet sich im zweiten Stock.
+        answers: [Büro ikinci katta bulunmaktadır.]
+        distractors: [kat, buluyor]
+      - id: b2-u07-l2-e12
+        type: free_text
+        direction: tr_de
+        prompt: Bu konuda çalışmalar yapılmaktadır.
+        answers: [Zu diesem Thema werden Arbeiten durchgeführt., In dieser Sache wird gearbeitet., An diesem Thema wird gearbeitet., Zu diesem Thema wird gearbeitet., In dieser Angelegenheit wird gearbeitet.]
+
+  - id: b2-u07-l3
+    type: grammar
+    title: Wurde getan (-miştir)
+    exercises:
+      - id: b2-u07-l3-e1
+        type: conjugation
+        mode: verb
+        lemma: başlamak
+        person: 3sg
+        tense: evidential
+        dir: true
+        target: başlamıştır
+        gloss_de: hat begonnen (formell)
+        explanation: In amtlichen Texten ist -miştir eine sichere Feststellung, keine Vermutung.
+      - { id: b2-u07-l3-e2, type: conjugation, mode: verb, lemma: bitmek, person: 3sg, tense: evidential, dir: true, target: bitmiştir, gloss_de: ist beendet }
+      - { id: b2-u07-l3-e3, type: conjugation, mode: verb, lemma: onaylamak, person: 3sg, tense: evidential, dir: true, passive: true, target: onaylanmıştır, gloss_de: wurde genehmigt }
+      - { id: b2-u07-l3-e4, type: conjugation, mode: verb, lemma: bildirmek, person: 3sg, tense: evidential, dir: true, passive: true, target: bildirilmiştir, gloss_de: wurde mitgeteilt }
+      - { id: b2-u07-l3-e5, type: conjugation, mode: verb, lemma: açıklamak, person: 3sg, tense: evidential, dir: true, passive: true, target: açıklanmıştır, gloss_de: wurde bekannt gegeben }
+      - { id: b2-u07-l3-e6, type: conjugation, mode: verb, lemma: katılmak, person: 3pl, tense: evidential, dir: true, target: katılmışlardır, gloss_de: sie haben teilgenommen }
+      - { id: b2-u07-l3-e7, type: conjugation, mode: verb, lemma: iptal etmek, person: 3sg, tense: future, dir: true, passive: true, target: iptal edilecektir, gloss_de: wird abgesagt werden }
+      - { id: b2-u07-l3-e8, type: conjugation, mode: verb, lemma: gerekmek, person: 3sg, tense: mekte, dir: true, target: gerekmektedir, gloss_de: ist erforderlich }
+      - id: b2-u07-l3-e9
+        type: multiple_choice
+        prompt: Welcher Satz passt in ein amtliches Schreiben?
+        options: [Başvurunuz onaylanmıştır., Başvurun tamam oldu., Başvurunu onayladık ya.]
+        answer: Başvurunuz onaylanmıştır.
+      - id: b2-u07-l3-e10
+        type: word_bank
+        prompt: Ihr Antrag wurde genehmigt.
+        answers: [Başvurunuz onaylanmıştır.]
+        distractors: [onayladı, başvuru]
+      - id: b2-u07-l3-e11
+        type: word_bank
+        prompt: Die Sitzung wurde auf Freitag verschoben.
+        answers: [Toplantı cumaya ertelenmiştir.]
+        chunks:
+          - { text: "Toplantı", role: subject }
+          - { text: "cumaya", role: time }
+          - { text: "ertelenmiştir", role: predicate }
+        distractors: [ertelemiştir, cuma]
+      - id: b2-u07-l3-e12
+        type: free_text
+        direction: tr_de
+        prompt: Gerekli belgeler tarafınıza gönderilecektir.
+        answers: [Die erforderlichen Dokumente werden Ihnen zugesandt., Die erforderlichen Unterlagen werden Ihnen zugesandt., Die notwendigen Dokumente werden Ihnen zugesandt., Die notwendigen Unterlagen werden Ihnen zugesandt., Die erforderlichen Dokumente werden Ihnen geschickt., Die erforderlichen Unterlagen werden Ihnen geschickt., Die notwendigen Dokumente werden Ihnen geschickt., Die notwendigen Unterlagen werden Ihnen geschickt.]
+      - id: b2-u07-l3-e13
+        type: multiple_choice
+        prompt: Was bedeutet „Gelmiştir.“ im Gespräch und im amtlichen Brief?
+        options: [Er ist wohl gekommen. / Er ist gekommen., Er kommt. / Er kam gestern., Er soll kommen. / Er kommt bestimmt nicht.]
+        answer: Er ist wohl gekommen. / Er ist gekommen.
+
+  - id: b2-u07-l4
+    type: grammar
+    title: Höflich bitten (-iniz, rica)
+    exercises:
+      - id: b2-u07-l4-e1
+        type: conjugation
+        mode: verb
+        lemma: doldurmak
+        person: 2pl
+        tense: imperative
+        polite: true
+        target: doldurunuz
+        gloss_de: füllen Sie aus
+        explanation: -iniz ist die förmliche Bitte auf Formularen und Schildern.
+      - { id: b2-u07-l4-e2, type: conjugation, mode: verb, lemma: imzalamak, person: 2pl, tense: imperative, polite: true, target: imzalayınız, gloss_de: unterschreiben Sie }
+      - { id: b2-u07-l4-e3, type: conjugation, mode: verb, lemma: beklemek, person: 2pl, tense: imperative, polite: true, target: bekleyiniz, gloss_de: warten Sie }
+      - { id: b2-u07-l4-e4, type: conjugation, mode: verb, lemma: başvurmak, person: 2pl, tense: imperative, polite: true, target: başvurunuz, gloss_de: wenden Sie sich }
+      - { id: b2-u07-l4-e5, type: conjugation, mode: verb, lemma: bildirmek, person: 2pl, tense: imperative, polite: true, negative: true, target: bildirmeyiniz, gloss_de: teilen Sie nicht mit }
+      - id: b2-u07-l4-e6
+        type: word_bank
+        prompt: Bitte füllen Sie das Formular aus.
+        answers: [Lütfen formu doldurunuz.]
+        distractors: [doldur, form]
+      - id: b2-u07-l4-e7
+        type: word_bank
+        prompt: Ich bitte um die erforderliche Bearbeitung.
+        answers: [Gereğini arz ederim.]
+        distractors: [gerek, ediyorum]
+        explanation: Feste Schlussformel eines Antrags an eine Behörde.
+      - id: b2-u07-l4-e8
+        type: word_bank
+        prompt: Die Besucher werden gebeten, im Flur zu warten.
+        answers: [Ziyaretçilerin koridorda beklemesi rica olunur.]
+        distractors: [ziyaretçiler, bekliyor]
+      - id: b2-u07-l4-e9
+        type: free_text
+        direction: tr_de
+        prompt: Bilgilerinize sunarız.
+        answers: [Zu Ihrer Kenntnisnahme., Wir bringen dies zu Ihrer Kenntnis., Wir teilen Ihnen dies zur Kenntnisnahme mit., Zur Kenntnisnahme.]
+      - id: b2-u07-l4-e10
+        type: free_text
+        direction: de_tr
+        prompt: Bitte warten Sie.
+        answers: [Lütfen bekleyiniz., Lütfen bekleyin.]
+      - id: b2-u07-l4-e11
+        type: multiple_choice
+        prompt: Wie beginnt ein Brief an Frau Ayşe Yılmaz?
+        options: [Sayın Ayşe Yılmaz, Canım Ayşe, Selam Ayşe]
+        answer: Sayın Ayşe Yılmaz
+      - id: b2-u07-l4-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Sigara içilmemesi rica olunur.“?
+        options: [Bitte nicht rauchen., Rauchen ist erlaubt., Zigaretten werden hier verkauft.]
+        answer: Bitte nicht rauchen.
+
+  - id: b2-u07-l5
+    type: dialog
+    title: Am Schalter
+    exercises:
+      - id: b2-u07-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Size nasıl yardımcı olabilirim?
+        answers: [Wie kann ich Ihnen helfen?, Wie kann ich euch helfen?, Womit kann ich Ihnen helfen?, Wie kann ich Ihnen behilflich sein?]
+      - id: b2-u07-l5-e2
+        type: word_bank
+        prompt: Ich möchte einen Antrag stellen.
+        answers: [Başvuru yapmak istiyorum., Dilekçe vermek istiyorum.]
+        distractors: [yapıyorum, başvuruyu]
+      - id: b2-u07-l5-e3
+        type: multiple_choice
+        prompt: Wie fragst du „Welche Dokumente sind nötig?“
+        options: [Hangi belgeler gerekli?, Belgeler nerede kaldı?, Kaç belge verdiniz?]
+        answer: Hangi belgeler gerekli?
+      - id: b2-u07-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Wo muss ich unterschreiben?
+        answers: [Nereyi imzalamalıyım?, Nereye imza atmalıyım?, Nereyi imzalayacağım?, Nereye imza atacağım?, Nerede imzalamalıyım?, Nereyi imzalamam gerekiyor?]
+      - id: b2-u07-l5-e5
+        type: word_bank
+        prompt: Das Verfahren dauert zehn Tage.
+        answers: [İşlem on gün sürüyor., İşlem on gün sürer.]
+        distractors: [günü, süre]
+      - id: b2-u07-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Bir fotokopisini de getirin.“
+        options: [Bringen Sie auch eine Fotokopie mit., Machen Sie ein Foto von mir., Das Foto ist nicht nötig.]
+        answer: Bringen Sie auch eine Fotokopie mit.
+      - { id: b2-u07-l5-e7, type: conjugation, mode: verb, lemma: talep etmek, person: 1sg, tense: present, target: talep ediyorum, gloss_de: ich beantrage }
+      - id: b2-u07-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: İlgili memur şu anda burada değil.
+        answers: [Der zuständige Beamte ist gerade nicht hier., Der zuständige Beamte ist im Moment nicht hier., Die zuständige Beamtin ist gerade nicht hier., Die zuständige Beamtin ist im Moment nicht hier., Der zuständige Beamte ist zurzeit nicht hier., Die zuständige Beamtin ist zurzeit nicht hier., Der zuständige Beamte ist jetzt nicht hier., Die zuständige Beamtin ist jetzt nicht hier.]
+
+  - id: b2-u07-l6
+    type: grammar
+    title: 'Tabellen: formelle Formen'
+    exercises:
+      - id: b2-u07-l6-e1
+        type: paradigm
+        kind: verb
+        lemma: çalışmak
+        tense: mekte
+        targets: [çalışmaktayım, çalışmaktasın, çalışmakta, çalışmaktayız, çalışmaktasınız, çalışmaktalar]
+        gloss_de: arbeiten (formell)
+      - id: b2-u07-l6-e2
+        type: paradigm
+        kind: verb
+        lemma: gelmek
+        tense: mekte
+        negative: true
+        targets: [gelmemekteyim, gelmemektesin, gelmemekte, gelmemekteyiz, gelmemektesiniz, gelmemekteler]
+        gloss_de: nicht kommen (formell)
+      - id: b2-u07-l6-e3
+        type: paradigm
+        kind: verb
+        lemma: başlamak
+        tense: evidential
+        dir: true
+        persons: [3sg, 3pl]
+        targets: [başlamıştır, başlamışlardır]
+        gloss_de: 'hat, haben begonnen (formell)'
+      - id: b2-u07-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: yaşamak
+        tense: mekte
+        dir: true
+        persons: [3sg, 3pl]
+        targets: [yaşamaktadır, yaşamaktadırlar]
+        gloss_de: 'lebt, leben (formell)'
+
+  - id: b2-u07-r1
+    type: reading
+    title: 'Lesetext: Bekanntmachung der Stadt'
+    passage:
+      sentences:
+        - { tr: "Sayın vatandaşlarımız,", de: "Verehrte Bürgerinnen und Bürger," }
+        - { tr: "Belediyemiz tarafından şehir merkezinde yeni bir proje yürütülmektedir.", de: "Unsere Stadtverwaltung führt im Stadtzentrum ein neues Projekt durch." }
+        - { tr: "Bu proje kapsamında ana caddedeki eski su boruları değiştirilecektir.", de: "Im Rahmen dieses Projekts werden die alten Wasserrohre an der Hauptstraße ausgetauscht." }
+        - { tr: "Çalışmalar mart ayında başlamış olup üç ay sürecektir.", de: "Die Arbeiten haben im März begonnen und werden drei Monate dauern." }
+        - { tr: "Bu süre içinde cadde araçlara kapalı olacaktır.", de: "In dieser Zeit ist die Straße für Fahrzeuge gesperrt." }
+        - { tr: "Otobüsler başka yollardan gidecektir.", de: "Die Busse werden andere Wege nehmen." }
+        - { tr: "Yeni hatlar belediyenin internet sayfasında duyurulmuştur.", de: "Die neuen Linien wurden auf der Internetseite der Stadtverwaltung bekannt gegeben." }
+        - { tr: "Çalışmalar sırasında suların zaman zaman kesilmesi mümkündür.", de: "Während der Arbeiten kann das Wasser zeitweise abgestellt werden." }
+        - { tr: "Su kesintileri vatandaşlarımıza bir gün önceden bildirilecektir.", de: "Wasserunterbrechungen werden unseren Bürgerinnen und Bürgern einen Tag vorher mitgeteilt." }
+        - { tr: "Bu konuda sorusu olan vatandaşlarımız belediyemize başvurabilirler.", de: "Bürgerinnen und Bürger, die Fragen dazu haben, können sich an unsere Stadtverwaltung wenden." }
+        - { tr: "Başvurular belediye binasındaki danışma bürosuna yapılmalıdır.", de: "Anfragen sind an das Informationsbüro im Gebäude der Stadtverwaltung zu richten." }
+        - { tr: "Büromuz hafta içi dokuzdan on yediye kadar açıktır.", de: "Unser Büro ist werktags von neun bis siebzehn Uhr geöffnet." }
+        - { tr: "Dilekçe vermek isteyen vatandaşlarımızın kimliklerini getirmeleri gerekmektedir.", de: "Bürgerinnen und Bürger, die einen Antrag stellen möchten, müssen ihren Ausweis mitbringen." }
+        - { tr: "Dilekçeler on gün içinde cevaplanacaktır.", de: "Anträge werden innerhalb von zehn Tagen beantwortet." }
+        - { tr: "Çalışmalardan zarar gören esnaf için bir destek programı hazırlanmaktadır.", de: "Für die von den Arbeiten betroffenen Händler wird ein Hilfsprogramm vorbereitet." }
+        - { tr: "Bu program hakkındaki bilgiler önümüzdeki hafta açıklanacaktır.", de: "Die Informationen zu diesem Programm werden nächste Woche bekannt gegeben." }
+        - { tr: "Çalışmalar sırasında yaşanacak zorluklar için özür dileriz.", de: "Für die Schwierigkeiten während der Arbeiten bitten wir um Entschuldigung." }
+        - { tr: "Anlayışınız için teşekkür ederiz.", de: "Wir danken für Ihr Verständnis." }
+        - { tr: "Bu duyuru bütün mahallelere dağıtılmıştır.", de: "Diese Bekanntmachung wurde an alle Viertel verteilt." }
+        - { tr: "Saygılarımızla,", de: "Mit freundlichen Grüßen," }
+        - { tr: "Belediye Başkanlığı", de: "Das Bürgermeisteramt" }
+      glossary:
+        - { tr: "vatandaşlarımız", de: "unsere Bürger", vocab: "vatandaş" }
+        - { tr: "çalışmalar", de: "Arbeiten (çalışma)", vocab: "çalışmak" }
+        - { tr: "çalışmalardan", de: "von den Arbeiten", vocab: "çalışmak" }
+        - { tr: "belediyemiz", de: "unsere Stadtverwaltung", vocab: "belediye" }
+        - { tr: "belediyemize", de: "an unsere Stadtverwaltung", vocab: "belediye" }
+        - { tr: "merkezinde", de: "im Zentrum (merkez + i + nde)", vocab: "merkez" }
+        - { tr: "yürütülmektedir", de: "wird durchgeführt (yürütmek)" }
+        - { tr: "kapsamında", de: "im Rahmen (kapsam + ı + nda)" }
+        - { tr: "ana", de: "Haupt-" }
+        - { tr: "caddedeki", de: "an der Straße befindlich", vocab: "cadde" }
+        - { tr: "boruları", de: "Rohre (boru)" }
+        - { tr: "değiştirilecektir", de: "werden ausgetauscht", vocab: "değiştirmek" }
+        - { tr: "mart", de: "März" }
+        - { tr: "olup", de: "und (formell für: … ve)", vocab: "olmak" }
+        - { tr: "sürecektir", de: "wird dauern (sürmek)" }
+        - { tr: "araçlara", de: "für Fahrzeuge (araç)" }
+        - { tr: "olacaktır", de: "wird sein", vocab: "olmak" }
+        - { tr: "gidecektir", de: "werden gehen, fahren", vocab: "gitmek" }
+        - { tr: "hatlar", de: "Linien", vocab: "hat" }
+        - { tr: "sayfasında", de: "auf der Seite (sayfa)" }
+        - { tr: "duyurulmuştur", de: "wurde bekannt gegeben (duyurmak)", vocab: "duymak" }
+        - { tr: "sırasında", de: "während" }
+        - { tr: "suların", de: "der Wasser (su, Plural, Genitiv)", vocab: "su" }
+        - { tr: "kesilmesi", de: "das Abstellen (kesmek + Passiv + -me + -si)", vocab: "kesmek" }
+        - { tr: "mümkündür", de: "ist möglich (mümkün + dür)" }
+        - { tr: "kesintileri", de: "Unterbrechungen (kesinti)" }
+        - { tr: "önceden", de: "im Voraus", vocab: "önce" }
+        - { tr: "bildirilecektir", de: "wird mitgeteilt", vocab: "bildirmek" }
+        - { tr: "vatandaşlarımıza", de: "unseren Bürgern", vocab: "vatandaş" }
+        - { tr: "sorusu", de: "Frage (soru + su)", vocab: "soru" }
+        - { tr: "başvurabilirler", de: "können sich wenden", vocab: "başvurmak" }
+        - { tr: "başvurular", de: "Anfragen", vocab: "başvuru" }
+        - { tr: "binasındaki", de: "im Gebäude befindlich", vocab: "bina" }
+        - { tr: "danışma", de: "Information, Beratung" }
+        - { tr: "bürosuna", de: "an das Büro", vocab: "büro" }
+        - { tr: "yapılmalıdır", de: "ist zu machen", vocab: "yapmak" }
+        - { tr: "büromuz", de: "unser Büro", vocab: "büro" }
+        - { tr: "dokuzdan", de: "ab neun", vocab: "dokuz" }
+        - { tr: "yediye", de: "bis sieben (on yedi = siebzehn)", vocab: "yedi" }
+        - { tr: "açıktır", de: "ist geöffnet", vocab: "açık" }
+        - { tr: "isteyen", de: "die wollen", vocab: "istemek" }
+        - { tr: "vatandaşlarımızın", de: "unserer Bürger (Genitiv)", vocab: "vatandaş" }
+        - { tr: "kimliklerini", de: "ihre Ausweise", vocab: "kimlik" }
+        - { tr: "getirmeleri", de: "dass sie bringen (getirmek)" }
+        - { tr: "cevaplanacaktır", de: "werden beantwortet", vocab: "cevap" }
+        - { tr: "zarar", de: "Schaden (zarar görmek = Schaden nehmen)", vocab: "zarar vermek" }
+        - { tr: "gören", de: "der, die nimmt, sieht", vocab: "görmek" }
+        - { tr: "destek", de: "Unterstützung" }
+        - { tr: "hazırlanmaktadır", de: "wird vorbereitet", vocab: "hazırlamak" }
+        - { tr: "hakkındaki", de: "über, betreffend" }
+        - { tr: "bilgiler", de: "Informationen", vocab: "bilgi" }
+        - { tr: "önümüzdeki", de: "kommend", vocab: "ön" }
+        - { tr: "açıklanacaktır", de: "wird bekannt gegeben", vocab: "açıklamak" }
+        - { tr: "yaşanacak", de: "die erlebt werden", vocab: "yaşamak" }
+        - { tr: "zorluklar", de: "Schwierigkeiten", vocab: "zor" }
+        - { tr: "özür", de: "Entschuldigung (özür dilemek)" }
+        - { tr: "dileriz", de: "wir bitten (özür dileriz = wir entschuldigen uns)" }
+        - { tr: "anlayışınız", de: "Ihr Verständnis", vocab: "anlamak" }
+        - { tr: "teşekkür", de: "Dank (teşekkür etmek)" }
+        - { tr: "ederiz", de: "wir machen (teşekkür ederiz = wir danken)" }
+        - { tr: "duyuru", de: "Bekanntmachung" }
+        - { tr: "bütün", de: "alle" }
+        - { tr: "dağıtılmıştır", de: "wurde verteilt", vocab: "dağıtmak" }
+        - { tr: "başkanlığı", de: "Amt des Vorsitzenden (başkan + lık + ı)", vocab: "başkan" }
+    exercises:
+      - id: b2-u07-r1-e1
+        type: multiple_choice
+        prompt: Was wird an der Hauptstraße ausgetauscht?
+        options: [Die Wasserrohre., Die Busse., Die Laternen.]
+        answer: Die Wasserrohre.
+      - id: b2-u07-r1-e2
+        type: multiple_choice
+        prompt: Wie lange dauern die Arbeiten?
+        options: [Drei Monate., Zehn Tage., Ein Jahr.]
+        answer: Drei Monate.
+      - id: b2-u07-r1-e3
+        type: multiple_choice
+        prompt: Was muss mitbringen, wer einen Antrag stellt?
+        options: [Den Ausweis., Eine Rechnung., Ein Foto.]
+        answer: Den Ausweis.
+      - id: b2-u07-r1-e4
+        type: multiple_choice
+        prompt: Was wird für die Händler vorbereitet?
+        options: [Ein Hilfsprogramm., Ein neuer Markt., Eine Versammlung.]
+        answer: Ein Hilfsprogramm.
+      - id: b2-u07-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Dilekçeler on gün içinde cevaplanacaktır.
+        answers: [Anträge werden innerhalb von zehn Tagen beantwortet., Die Anträge werden innerhalb von zehn Tagen beantwortet., Die Anträge werden in zehn Tagen beantwortet., Anträge werden binnen zehn Tagen beantwortet., Die Anträge werden binnen zehn Tagen beantwortet.]
+
+  - id: b2-u07-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u07-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: Bitte unterschreiben Sie hier.
+        answers: [Lütfen burayı imzalayınız., Lütfen burayı imzalayın., Lütfen buraya imza atınız., Lütfen buraya imza atın.]
+      - id: b2-u07-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Ich möchte Informationen.
+        answers: [Bilgi istiyorum., Bilgi almak istiyorum.]
+      - id: b2-u07-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (wird gemacht, formell)
+        options: [yapılmaktadır, yapmaktadır, yapılıyordur]
+        answer: yapılmaktadır
+      - id: b2-u07-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (warten Sie, formell)
+        options: [bekleyiniz, bekleyin mi, beklersiniz]
+        answer: bekleyiniz
+      - id: b2-u07-l7-e5
+        type: word_bank
+        prompt: Das Dokument wurde per Post zugesandt.
+        answers: [Belge posta ile gönderilmiştir.]
+        distractors: [göndermiştir, belgeyi]
+      - { id: b2-u07-l7-e6, type: conjugation, mode: verb, lemma: bildirmek, person: 3sg, tense: mekte, dir: true, passive: true, target: bildirilmektedir, gloss_de: wird mitgeteilt }
+      - { id: b2-u07-l7-e7, type: conjugation, mode: verb, lemma: onaylamak, person: 3sg, tense: future, dir: true, passive: true, target: onaylanacaktır, gloss_de: wird genehmigt werden }
+      - id: b2-u07-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Başvurunuz kabul edilmiştir.
+        answers: [Ihr Antrag wurde angenommen., Ihre Bewerbung wurde angenommen., Ihr Antrag ist angenommen worden., Ihre Bewerbung ist angenommen worden., Ihr Antrag wurde akzeptiert., Ihre Bewerbung wurde akzeptiert.]
+      - id: b2-u07-l7-e9
+        type: word_bank
+        prompt: Die erforderlichen Dokumente müssen bis Montag eingereicht werden.
+        answers: [Gerekli belgeler pazartesiye kadar verilmelidir.]
+        chunks:
+          - { text: "Gerekli belgeler", role: subject }
+          - { text: "pazartesiye kadar", role: time }
+          - { text: "verilmelidir", role: predicate }
+        distractors: [vermelidir, belgeleri]
+      - { id: b2-u07-l7-e10, type: suffix_builder, stem: başvurmak, verbal: PART_AN, suffixes: [PL], target: başvuranlar, gloss_de: die Antragstellenden }
+
+vocab:
+  - { tr: dilekçe, de: [schriftlicher Antrag], pos: noun }
+  - { tr: belge, de: [Dokument, Bescheinigung], pos: noun }
+  - { tr: vatandaş, de: [Bürger(in)], pos: noun }
+  - { tr: memur, de: [Beamte(r)], pos: noun }
+  - { tr: resmî, de: ['offiziell, amtlich'], pos: adj }
+  - { tr: sayın, de: [verehrte(r)], pos: adj }
+  - { tr: işlem, de: [Vorgang], pos: noun }
+  - { tr: tarih, de: [Datum, Geschichte], pos: noun }
+  - { tr: bilgi, de: [Information], pos: noun }
+  - { tr: bildirmek, de: [mitteilen], pos: verb }
+  - { tr: onaylamak, de: [genehmigen, bestätigen], pos: verb }
+  - { tr: talep etmek, de: [beantragen], pos: verb, softens: true }
+  - { tr: kayıt, de: [Eintrag], pos: noun, softens: true, drops_vowel: true }
+  - { tr: süre, de: [Frist, Dauer], pos: noun }
+  - { tr: ilgili, de: [zuständig, betreffend], pos: adj }
+  - { tr: saygılarımla, de: [Mit freundlichen Grüßen], pos: phrase }
+  - { tr: bulunmak, de: [sich befinden], pos: verb, causative: none }
+  - { tr: gerekmek, de: [erforderlich sein], pos: verb }
+  - { tr: ziyaretçi, de: [Besucher(in)], pos: noun }
+  - { tr: koridor, de: [Flur], pos: noun }

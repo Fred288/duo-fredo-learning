@@ -11,3 +11,6 @@ overrides:
   b1-u05: [b1-u05-l3-e1, b1-u05-l4-e2] # -mek için, -mekte statt Kopula-Vergangenheit
   b1-u09: [b1-u09-l2-e11, b1-u09-l4-e7] # -ip und -meden im Satz
   b1-u10: [b1-u10-l4-e1, b1-u10-l2-e8] # -diğini und -ince statt b1-u09-Stoff
+  b2-u05: [b2-u05-l2-e6, b2-u05-l4-e4] # -mesine rağmen und -mektense statt einfachem -se
+  b2-u08: [b2-u08-l2-e3, b2-u08-l3-e5] # Verdopplung und Lehnwort-Harmonie statt Konnektor-Satz
+  b2-u09: [b2-u09-l3-e1, b2-u09-l2-e9] # -esi und -miş vor dem Nomen statt substantivierter Form

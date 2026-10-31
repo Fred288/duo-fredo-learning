@@ -1,0 +1,485 @@
+# B2-09: Partizip -miş (görmüş adam), -esi + Possessiv (gidesim var), Redewendungen; Alltagssprache. Claude-Entwurf, ungeprüft (reviewed: false).
+id: b2-u09
+level: B2
+title: Redewendungen
+grammar_focus: [part-mis, part-asi, idiomatik]
+explainer: explainers/b2-idiomatik.md
+source: eigene Formulierung (Claude-Entwurf)
+license: CC BY-SA 4.0
+reviewed: false
+lessons:
+  - id: b2-u09-l1
+    type: vocab
+    title: Wortschatz
+    exercises:
+      - id: b2-u09-l1-e1
+        type: multiple_choice
+        prompt: Was heißt „can“?
+        options: ['Seele, Leben', Hand, Kopf]
+        answer: 'Seele, Leben'
+      - id: b2-u09-l1-e2
+        type: free_text
+        direction: de_tr
+        prompt: Ohr
+        answers: [kulak]
+      - id: b2-u09-l1-e3
+        type: multiple_choice
+        prompt: Was heißt „gönül“?
+        options: ['Herz, Gemüt', Fuß, Stimme]
+        answer: 'Herz, Gemüt'
+        explanation: Vor Vokal fällt ü weg, gönlüm.
+      - id: b2-u09-l1-e4
+        type: multiple_choice
+        prompt: Was heißt „yüz“ als Körperteil?
+        options: [Gesicht, Stirn, Kinn]
+        answer: Gesicht
+      - id: b2-u09-l1-e5
+        type: free_text
+        direction: de_tr
+        prompt: Sprichwort
+        answers: [atasözü]
+      - id: b2-u09-l1-e6
+        type: multiple_choice
+        prompt: Was heißt „deyim“?
+        options: [Redewendung, Märchen, Rede]
+        answer: Redewendung
+      - id: b2-u09-l1-e7
+        type: multiple_choice
+        prompt: Was heißt „canı sıkılmak“?
+        options: [sich langweilen, Herzweh haben, Angst haben]
+        answer: sich langweilen
+        explanation: Canım sıkılıyor = Mir ist langweilig.
+      - id: b2-u09-l1-e8
+        type: multiple_choice
+        prompt: Was heißt „göz kulak olmak“?
+        options: [aufpassen auf, sich wundern, zuhören]
+        answer: aufpassen auf
+        explanation: Mit Dativ, çocuğa göz kulak ol = pass auf das Kind auf.
+      - id: b2-u09-l1-e9
+        type: multiple_choice
+        prompt: Was heißt „ağzı sıkı“?
+        options: [verschwiegen, hungrig, laut]
+        answer: verschwiegen
+        explanation: Wörtlich mit festem Mund.
+      - id: b2-u09-l1-e10
+        type: free_text
+        direction: de_tr
+        prompt: vermissen, sich sehnen
+        answers: [özlemek]
+      - id: b2-u09-l1-e11
+        type: multiple_choice
+        prompt: Was heißt „eli açık“?
+        options: [großzügig, arm, geschickt]
+        answer: großzügig
+      - id: b2-u09-l1-e12
+        type: multiple_choice
+        prompt: Was heißt „başına gelmek“?
+        options: [passieren (jemandem), einfallen, an die Reihe kommen]
+        answer: passieren (jemandem)
+      - id: b2-u09-l1-e13
+        type: multiple_choice
+        prompt: Was heißt „kırılmak“?
+        options: ['zerbrechen, gekränkt sein', fliegen, klingen]
+        answer: 'zerbrechen, gekränkt sein'
+      - id: b2-u09-l1-e14
+        type: free_text
+        direction: de_tr
+        prompt: Geduld
+        answers: [sabır]
+      - id: b2-u09-l1-e15
+        type: multiple_choice
+        prompt: Was heißt „şaka“?
+        options: [Scherz, Streit, Lüge]
+        answer: Scherz
+      - id: b2-u09-l1-e16
+        type: multiple_choice
+        prompt: Was heißt „yalan“?
+        options: [Lüge, Wahrheit, Traum]
+        answer: Lüge
+
+  - id: b2-u09-l2
+    type: grammar
+    title: Der Gewesene (-miş als Partizip)
+    exercises:
+      - id: b2-u09-l2-e1
+        type: suffix_builder
+        stem: görmek
+        verbal: PART_MIS
+        target: görmüş
+        gloss_de: 'der gesehen hat (görmüş adam = ein erfahrener Mann)'
+        explanation: -miş kann vor einem Nomen stehen, dann beschreibt es einen Zustand.
+      - { id: b2-u09-l2-e2, type: suffix_builder, stem: geçmek, verbal: PART_MIS, target: geçmiş, gloss_de: 'vergangen (geçmiş günler = vergangene Tage)' }
+      - { id: b2-u09-l2-e3, type: suffix_builder, stem: pişmek, verbal: PART_MIS, target: pişmiş, gloss_de: 'gekocht, gar (pişmiş et = gegartes Fleisch)' }
+      - { id: b2-u09-l2-e4, type: suffix_builder, stem: bozulmak, verbal: PART_MIS, target: bozulmuş, gloss_de: 'kaputt, verdorben (bozulmuş süt = verdorbene Milch)' }
+      - { id: b2-u09-l2-e5, type: suffix_builder, stem: kırılmak, verbal: PART_MIS, target: kırılmış, gloss_de: 'zerbrochen (kırılmış cam = zerbrochenes Glas)' }
+      - { id: b2-u09-l2-e6, type: suffix_builder, stem: görmek, verbal: PART_MIS, suffixes: [PL, DAT], target: görmüşlere, gloss_de: den Erfahrenen }
+      - { id: b2-u09-l2-e7, type: suffix_builder, stem: yorulmak, verbal: PART_MIS, target: yorulmuş, gloss_de: ermüdet }
+      - id: b2-u09-l2-e8
+        type: multiple_choice
+        prompt: Was bedeutet „Görmüş geçirmiş bir adam.“?
+        options: [Ein Mann mit viel Lebenserfahrung., Ein Mann ohne Augen., 'Ein Mann, der heute vorbeikam.']
+        answer: Ein Mann mit viel Lebenserfahrung.
+      - id: b2-u09-l2-e9
+        type: word_bank
+        prompt: Vergangene Tage kehren nicht zurück.
+        answers: [Geçmiş günler geri gelmez.]
+        chunks:
+          - { text: "Geçmiş günler", role: subject }
+          - { text: "geri", role: complement }
+          - { text: "gelmez", role: predicate }
+        distractors: [geçen, gelir]
+      - id: b2-u09-l2-e10
+        type: word_bank
+        prompt: Wirf die verdorbene Milch weg.
+        answers: [Bozulmuş sütü at.]
+        distractors: [bozuyor, süt]
+      - id: b2-u09-l2-e11
+        type: free_text
+        direction: tr_de
+        prompt: Kırılmış cama dikkat et.
+        answers: [Pass auf das zerbrochene Glas auf., Achte auf das zerbrochene Glas., Pass auf die zerbrochene Scheibe auf., Achte auf die zerbrochene Scheibe., Vorsicht vor dem zerbrochenen Glas.]
+      - id: b2-u09-l2-e12
+        type: multiple_choice
+        prompt: Was ist der Unterschied? „Adam gelmiş.“ / „Gelmiş adam“
+        options: [Der Mann ist wohl gekommen. / der gekommene Mann, Der Mann kam gerne. / Der Mann kommt., Beides ist ein ganzer Satz.]
+        answer: Der Mann ist wohl gekommen. / der gekommene Mann
+
+  - id: b2-u09-l3
+    type: grammar
+    title: Ich habe Lust (-esim var)
+    exercises:
+      - id: b2-u09-l3-e1
+        type: suffix_builder
+        stem: gitmek
+        verbal: PART_ASI
+        suffixes: [POSS_1SG]
+        target: gidesim
+        gloss_de: 'meine Lust zu gehen (gidesim var = ich habe Lust zu gehen)'
+        explanation: Umgangssprachlich, -esi + Possessiv + var oder geldi.
+      - { id: b2-u09-l3-e2, type: suffix_builder, stem: uyumak, verbal: PART_ASI, suffixes: [POSS_1SG], target: uyuyasım, gloss_de: meine Lust zu schlafen }
+      - { id: b2-u09-l3-e3, type: suffix_builder, stem: ağlamak, verbal: PART_ASI, suffixes: [POSS_1SG], target: ağlayasım, gloss_de: mein Drang zu weinen }
+      - { id: b2-u09-l3-e4, type: suffix_builder, stem: gülmek, verbal: PART_ASI, suffixes: [POSS_2SG], target: gülesin, gloss_de: deine Lust zu lachen }
+      - { id: b2-u09-l3-e5, type: suffix_builder, stem: görmek, verbal: PART_ASI, suffixes: [POSS_1PL], target: göresimiz, gloss_de: unsere Lust zu sehen }
+      - { id: b2-u09-l3-e6, type: suffix_builder, stem: yemek, verbal: PART_ASI, suffixes: [POSS_1SG], target: yiyesim, gloss_de: meine Lust zu essen }
+      - id: b2-u09-l3-e7
+        type: word_bank
+        prompt: Ich möchte heute gar nicht arbeiten.
+        answers: [Bugün hiç çalışasım yok.]
+        chunks:
+          - { text: "Bugün", role: time }
+          - { text: "hiç", role: complement }
+          - { text: "çalışasım yok", role: predicate }
+        distractors: [çalışan, var]
+      - id: b2-u09-l3-e8
+        type: word_bank
+        prompt: Mir war zum Weinen zumute.
+        answers: [Ağlayasım geldi.]
+        distractors: [ağladım, gitti]
+      - id: b2-u09-l3-e9
+        type: word_bank
+        prompt: Ich habe Lust, nach Hause zu gehen.
+        answers: [Eve gidesim var.]
+        distractors: [gitti, evi]
+      - id: b2-u09-l3-e10
+        type: free_text
+        direction: tr_de
+        prompt: Seni çok göresim geldi.
+        answers: [Ich wollte dich so gern sehen., Ich möchte dich so gern sehen., Ich will dich unbedingt sehen., 'Ich habe große Lust, dich zu sehen.', Ich vermisse dich sehr.]
+      - id: b2-u09-l3-e11
+        type: multiple_choice
+        prompt: Welches Register passt zu „gidesim var“?
+        options: [Gespräch mit Freunden, amtlicher Brief, Zeitungsbericht]
+        answer: Gespräch mit Freunden
+      - id: b2-u09-l3-e12
+        type: multiple_choice
+        prompt: Was bedeutet „Görülesi bir yer.“?
+        options: ['Ein Ort, den man gesehen haben sollte.', 'Ein Ort, der nicht sichtbar ist.', Ein Ort voller Menschen.]
+        answer: 'Ein Ort, den man gesehen haben sollte.'
+
+  - id: b2-u09-l4
+    type: grammar
+    title: Redewendungen im Satz
+    exercises:
+      - id: b2-u09-l4-e1
+        type: multiple_choice
+        prompt: Was bedeutet „Canım sıkılıyor.“?
+        options: [Mir ist langweilig., Meine Seele tut weh., Ich bin glücklich.]
+        answer: Mir ist langweilig.
+      - id: b2-u09-l4-e2
+        type: multiple_choice
+        prompt: Was bedeutet „Kulak ver.“?
+        options: [Hör zu., Gib mir dein Ohr., Sei still.]
+        answer: Hör zu.
+      - id: b2-u09-l4-e3
+        type: multiple_choice
+        prompt: Was bedeutet „Ağzından kaçırdı.“?
+        options: [Er hat es versehentlich ausgeplaudert., Er hat den Bus verpasst., Er hat Zahnschmerzen.]
+        answer: Er hat es versehentlich ausgeplaudert.
+      - id: b2-u09-l4-e4
+        type: multiple_choice
+        prompt: Was bedeutet „Gözüm yolda kaldı.“?
+        options: [Ich habe lange gewartet., Ich habe etwas im Auge., Ich habe mich verlaufen.]
+        answer: Ich habe lange gewartet.
+      - id: b2-u09-l4-e5
+        type: multiple_choice
+        prompt: Was bedeutet „Elinden geleni yaptı.“?
+        options: [Er hat sein Bestes getan., Er hat sich die Hand verletzt., Er hat etwas gebracht.]
+        answer: Er hat sein Bestes getan.
+      - id: b2-u09-l4-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Damlaya damlaya göl olur.“?
+        options: [Kleinvieh macht auch Mist., Stille Wasser sind tief., Es regnet in Strömen.]
+        answer: Kleinvieh macht auch Mist.
+        explanation: Wörtlich tropfend entsteht ein See.
+      - id: b2-u09-l4-e7
+        type: multiple_choice
+        prompt: Was bedeutet „Sabrın sonu selamettir.“?
+        options: [Geduld führt zum guten Ende., Am Ende verliert man die Geduld., Schluss mit der Geduld.]
+        answer: Geduld führt zum guten Ende.
+      - id: b2-u09-l4-e8
+        type: word_bank
+        prompt: Pass bitte auf das Kind auf.
+        answers: [Lütfen çocuğa göz kulak ol.]
+        distractors: [çocuğu, gözü]
+      - id: b2-u09-l4-e9
+        type: word_bank
+        prompt: Was ist dir passiert?
+        answers: [Başına ne geldi?]
+        distractors: [başın, gitti]
+      - id: b2-u09-l4-e10
+        type: word_bank
+        prompt: Mein Freund ist verschwiegen, du kannst ihm vertrauen.
+        answers: ['Arkadaşım ağzı sıkıdır, ona güvenebilirsin.']
+        distractors: [onu, güveniyor]
+      - id: b2-u09-l4-e11
+        type: free_text
+        direction: tr_de
+        prompt: Elinden geleni yap.
+        answers: [Tu dein Bestes., Gib dein Bestes., 'Tu, was du kannst.', Mach dein Bestes.]
+      - id: b2-u09-l4-e12
+        type: free_text
+        direction: de_tr
+        prompt: Mir ist langweilig.
+        answers: [Canım sıkılıyor., Sıkılıyorum.]
+
+  - id: b2-u09-l5
+    type: dialog
+    title: Unter Freunden
+    exercises:
+      - id: b2-u09-l5-e1
+        type: free_text
+        direction: tr_de
+        prompt: Şaka yapıyorsun, değil mi?
+        answers: ['Du machst Witze, oder?', 'Du scherzt, oder?', 'Das ist ein Scherz, oder?', 'Du machst Spaß, oder?', 'Du machst Witze, nicht wahr?', 'Du scherzt, nicht wahr?']
+      - id: b2-u09-l5-e2
+        type: word_bank
+        prompt: Ich habe dich sehr vermisst.
+        answers: [Seni çok özledim.]
+        distractors: [sana, özlüyor]
+      - id: b2-u09-l5-e3
+        type: multiple_choice
+        prompt: Wie sagst du „Lüg mich nicht an.“?
+        options: [Bana yalan söyleme., Bana şaka yap., Beni özleme.]
+        answer: Bana yalan söyleme.
+      - id: b2-u09-l5-e4
+        type: free_text
+        direction: de_tr
+        prompt: Bleib ruhig.
+        answers: [Sakin ol., Sakin kal., Sakin ol lütfen.]
+      - id: b2-u09-l5-e5
+        type: word_bank
+        prompt: Hab Geduld, alles wird gut.
+        answers: ['Sabret, her şey iyi olacak.']
+        distractors: [sabır, kötü]
+      - id: b2-u09-l5-e6
+        type: multiple_choice
+        prompt: Was bedeutet „Bana kırıldın mı?“
+        options: [Bist du gekränkt?, Hast du mich zerbrochen?, Bist du krank?]
+        answer: Bist du gekränkt?
+      - { id: b2-u09-l5-e7, type: conjugation, mode: verb, lemma: özlemek, person: 1pl, tense: present, target: özlüyoruz, gloss_de: wir vermissen }
+      - id: b2-u09-l5-e8
+        type: free_text
+        direction: tr_de
+        prompt: Ağzımdan kaçırdım, özür dilerim.
+        answers: ['Es ist mir herausgerutscht, entschuldige.', 'Es ist mir herausgerutscht, entschuldigung.', 'Es ist mir herausgerutscht, es tut mir leid.', 'Ich habe es ausgeplaudert, entschuldige.', 'Ich habe es ausgeplaudert, es tut mir leid.']
+
+  - id: b2-u09-l6
+    type: grammar
+    title: 'Tabellen: -esi und -miş'
+    exercises:
+      - id: b2-u09-l6-e1
+        type: paradigm
+        kind: verbal
+        verbal: PART_ASI
+        lemma: gitmek
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL]]
+        targets: [gidesim, gidesin, gidesi, gidesimiz, gidesiniz]
+        gloss_de: Lust zu gehen
+      - id: b2-u09-l6-e2
+        type: paradigm
+        kind: verbal
+        verbal: PART_ASI
+        lemma: görmek
+        rows: [[POSS_1SG], [POSS_2SG], [POSS_3SG], [POSS_1PL], [POSS_2PL]]
+        targets: [göresim, göresin, göresi, göresimiz, göresiniz]
+        gloss_de: Lust zu sehen
+      - id: b2-u09-l6-e3
+        type: paradigm
+        kind: verbal
+        verbal: PART_MIS
+        lemma: görmek
+        rows: [[PL], [DAT], [PL, DAT], [PL, ABL]]
+        targets: [görmüşler, görmüşe, görmüşlere, görmüşlerden]
+        gloss_de: der Erfahrene (substantiviert)
+      - id: b2-u09-l6-e4
+        type: paradigm
+        kind: verb
+        lemma: özlemek
+        tense: past
+        targets: [özledim, özledin, özledi, özledik, özlediniz, özlediler]
+        gloss_de: vermissen
+
+  - id: b2-u09-r1
+    type: reading
+    title: 'Lesetext: Die Worte meiner Großmutter'
+    passage:
+      sentences:
+        - { tr: "Anneannem görmüş geçirmiş bir kadındı.", de: "Meine Großmutter war eine lebenserfahrene Frau." }
+        - { tr: "Küçük bir köyde yaşardı ve her konuda söyleyecek bir sözü vardı.", de: "Sie lebte in einem kleinen Dorf und hatte zu allem etwas zu sagen." }
+        - { tr: "Yazları onu görmeye giderdik.", de: "Im Sommer fuhren wir sie besuchen." }
+        - { tr: "Bir yaz canım çok sıkılıyordu.", de: "In einem Sommer war mir sehr langweilig." }
+        - { tr: "“Eve gidesim var, burada hiçbir şey yapasım yok.” dedim.", de: "„Ich möchte nach Hause, hier habe ich zu nichts Lust“, sagte ich." }
+        - { tr: "Anneannem gülümsedi ve “Sabrın sonu selamettir.” dedi.", de: "Meine Großmutter lächelte und sagte: „Geduld führt zum guten Ende.“" }
+        - { tr: "Sonra bana küçük bir kutu verdi.", de: "Dann gab sie mir eine kleine Schachtel." }
+        - { tr: "İçinde biraz para vardı.", de: "Darin war etwas Geld." }
+        - { tr: "“Her hafta buraya küçük bir para koy.” dedi.", de: "„Leg jede Woche ein wenig Geld hier hinein“, sagte sie." }
+        - { tr: "“Damlaya damlaya göl olur.”", de: "„Kleinvieh macht auch Mist.“" }
+        - { tr: "O gün bu sözün anlamını anlamadım.", de: "An dem Tag verstand ich die Bedeutung dieses Satzes nicht." }
+        - { tr: "Yıllar sonra üniversiteye başladığımda o kutuyu buldum.", de: "Jahre später, als ich mit dem Studium anfing, fand ich die Schachtel." }
+        - { tr: "İçindeki para bir ay yetti.", de: "Das Geld darin reichte für einen Monat." }
+        - { tr: "Bir gün komşumuz kardeşime kızmıştı.", de: "Eines Tages war unser Nachbar böse auf meinen Bruder." }
+        - { tr: "Anneannem kardeşime “Kulak ver, kötü söz söyleme, kalbini kırma.” dedi.", de: "Meine Großmutter sagte zu meinem Bruder: „Hör zu, sag nichts Böses, kränke ihn nicht.“" }
+        - { tr: "Bana da “Ağzın sıkı olsun, herkesin sırrını söyleme.” derdi.", de: "Zu mir sagte sie immer: „Sei verschwiegen, erzähl nicht jedes Geheimnis weiter.“" }
+        - { tr: "Elinden geleni yapar, kimseyi kırmazdı.", de: "Sie tat ihr Bestes und kränkte niemanden." }
+        - { tr: "Geçmiş günleri düşününce ağlayasım geliyor.", de: "Wenn ich an die vergangenen Tage denke, ist mir zum Weinen zumute." }
+        - { tr: "Anneannemi çok özlüyorum.", de: "Ich vermisse meine Großmutter sehr." }
+        - { tr: "Ama onun sözleri hâlâ kulağımda.", de: "Aber ihre Worte klingen mir noch im Ohr." }
+      glossary:
+        - { tr: "görmüş", de: "der gesehen hat (görmüş geçirmiş = lebenserfahren)", vocab: "görmek" }
+        - { tr: "geçirmiş", de: "der durchgemacht hat (görmüş geçirmiş = lebenserfahren)" }
+        - { tr: "kadındı", de: "war eine Frau (kadın + -dı)", vocab: "kadın" }
+        - { tr: "her", de: "jeder" }
+        - { tr: "söz", de: "Wort, Satz" }
+        - { tr: "sözü", de: "ihr Wort (söz)" }
+        - { tr: "sözün", de: "des Wortes, Satzes (söz)" }
+        - { tr: "sözleri", de: "ihre Worte (söz)" }
+        - { tr: "vardı", de: "es gab", vocab: "var" }
+        - { tr: "sıkılıyordu", de: "canım sıkılıyordu = mir war langweilig", vocab: "canı sıkılmak" }
+        - { tr: "hiçbir", de: "kein, gar kein" }
+        - { tr: "şey", de: "Sache, Ding" }
+        - { tr: "gülümsedi", de: "lächelte (gülümsemek)" }
+        - { tr: "selamettir", de: "ist Heil, gutes Ende (selamet)" }
+        - { tr: "damlaya", de: "tropfend (damlaya damlaya = Tropfen für Tropfen)" }
+        - { tr: "içindeki", de: "darin befindlich", vocab: "iç" }
+        - { tr: "yetti", de: "reichte (yetmek)" }
+        - { tr: "kötü", de: "schlecht, böse" }
+        - { tr: "da", de: "auch" }
+        - { tr: "herkesin", de: "von jedem", vocab: "herkes" }
+        - { tr: "kimseyi", de: "niemanden (mit Verneinung)" }
+    exercises:
+      - id: b2-u09-r1-e1
+        type: multiple_choice
+        prompt: Warum wollte die erzählende Person nach Hause?
+        options: [Weil ihr langweilig war., Weil sie krank war., Weil die Schule anfing.]
+        answer: Weil ihr langweilig war.
+      - id: b2-u09-r1-e2
+        type: multiple_choice
+        prompt: Was schenkte die Großmutter?
+        options: [Eine Schachtel mit etwas Geld., Ein Buch., Ein Foto.]
+        answer: Eine Schachtel mit etwas Geld.
+      - id: b2-u09-r1-e3
+        type: multiple_choice
+        prompt: Wofür reichte das Geld später?
+        options: [Für einen Monat., Für ein Jahr., Für ein Auto.]
+        answer: Für einen Monat.
+      - id: b2-u09-r1-e4
+        type: multiple_choice
+        prompt: Was riet die Großmutter?
+        options: [Nicht jedes Geheimnis weiterzuerzählen., Früh aufzustehen., Viel zu reisen.]
+        answer: Nicht jedes Geheimnis weiterzuerzählen.
+      - id: b2-u09-r1-e5
+        type: free_text
+        direction: tr_de
+        prompt: Geçmiş günleri düşününce ağlayasım geliyor.
+        answers: ['Wenn ich an die vergangenen Tage denke, ist mir zum Weinen zumute.', 'Wenn ich an vergangene Tage denke, ist mir zum Weinen zumute.', 'Wenn ich an die vergangenen Tage denke, möchte ich weinen.', 'Wenn ich an vergangene Tage denke, möchte ich weinen.', 'Wenn ich an die Vergangenheit denke, ist mir zum Weinen zumute.', 'Wenn ich an die Vergangenheit denke, möchte ich weinen.']
+
+  - id: b2-u09-l7
+    type: review
+    title: Wiederholung
+    exercises:
+      - id: b2-u09-l7-e1
+        type: free_text
+        direction: de_tr
+        prompt: Ich habe keine Lust zu gehen.
+        answers: [Gidesim yok., Gitmek istemiyorum., Hiç gidesim yok.]
+      - id: b2-u09-l7-e2
+        type: free_text
+        direction: de_tr
+        prompt: Hör zu!
+        answers: [Dinle!, Kulak ver!, Bana kulak ver!, Beni dinle!]
+      - id: b2-u09-l7-e3
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (Ich habe Lust zu schlafen.)
+        options: [Uyuyasım var., Uyumak var., Uyuyanım var.]
+        answer: Uyuyasım var.
+      - id: b2-u09-l7-e4
+        type: multiple_choice
+        prompt: Welche Form ist richtig? (zerbrochen)
+        options: [kırılmış, kırıyormuş, kırmayan]
+        answer: kırılmış
+      - id: b2-u09-l7-e5
+        type: word_bank
+        prompt: Wenn du dein Bestes tust, wird alles gut.
+        answers: [Elinden geleni yaparsan her şey iyi olur.]
+        distractors: [yaptı, kötü]
+      - { id: b2-u09-l7-e6, type: suffix_builder, stem: çalışmak, verbal: PART_ASI, suffixes: [POSS_1SG], target: çalışasım, gloss_de: meine Lust zu arbeiten }
+      - { id: b2-u09-l7-e7, type: suffix_builder, stem: bozulmak, verbal: PART_MIS, suffixes: [PL], target: bozulmuşlar, gloss_de: die Verdorbenen }
+      - id: b2-u09-l7-e8
+        type: free_text
+        direction: tr_de
+        prompt: Başımıza büyük bir iş geldi.
+        answers: [Uns ist etwas Großes passiert., Uns ist etwas Schlimmes passiert., Uns ist ein großes Problem passiert., Wir hatten ein großes Problem., Uns ist Großes widerfahren.]
+      - id: b2-u09-l7-e9
+        type: word_bank
+        prompt: Mir ist heute sehr langweilig.
+        answers: [Bugün canım çok sıkılıyor., Canım bugün çok sıkılıyor.]
+        chunks:
+          - { text: "Bugün", role: time }
+          - { text: "canım", role: subject }
+          - { text: "çok sıkılıyor", role: predicate }
+        orders:
+          - { order: [1, 0, 2] }
+        distractors: [sıkıyor, canı]
+      - { id: b2-u09-l7-e10, type: conjugation, mode: verb, lemma: kırılmak, person: 3sg, tense: past, target: kırıldı, gloss_de: 'zerbrach, war gekränkt' }
+
+vocab:
+  - { tr: can, de: ['Seele, Leben'], pos: noun }
+  - { tr: kulak, de: [Ohr], pos: noun, softens: true }
+  - { tr: gönül, de: ['Herz, Gemüt'], pos: noun, drops_vowel: true }
+  - { id: yüz-gesicht, tr: yüz, de: [Gesicht], pos: noun }
+  - { tr: atasözü, de: [Sprichwort], pos: noun }
+  - { tr: deyim, de: [Redewendung], pos: noun }
+  - { tr: canı sıkılmak, de: [sich langweilen], pos: verb, causative: none }
+  - { tr: göz kulak olmak, de: [aufpassen auf], pos: verb }
+  - { tr: kulak vermek, de: [zuhören], pos: verb }
+  - { tr: ağzı sıkı, de: [verschwiegen], pos: adj }
+  - { tr: eli açık, de: [großzügig], pos: adj }
+  - { tr: özlemek, de: [vermissen], pos: verb }
+  - { tr: başına gelmek, de: [passieren (jemandem)], pos: verb }
+  - { tr: kırılmak, de: ['zerbrechen, gekränkt sein'], pos: verb, causative: none }
+  - { tr: kırmak, de: [zerbrechen (etwas), kränken], pos: verb }
+  - { tr: sabır, de: [Geduld], pos: noun, drops_vowel: true }
+  - { tr: sabretmek, de: [Geduld haben], pos: verb, softens: true, aorist: ar }
+  - { tr: şaka, de: [Scherz], pos: noun }
+  - { tr: yalan, de: [Lüge], pos: noun }
+  - { tr: sıkı, de: [fest], pos: adj }
