@@ -60,8 +60,8 @@ export function MistakesScreen() {
       .catch(() => setFailed(true));
   }, []);
 
-  if (failed) return <p className="text-rose-700 dark:text-rose-400">{t('home.error')}</p>;
-  if (run === undefined) return <p className="text-stone-500">{t('mistakes.loading')}</p>;
+  if (failed) return <p className="text-danger">{t('home.error')}</p>;
+  if (run === undefined) return <p className="text-ink-subtle">{t('mistakes.loading')}</p>;
   if (run === null) {
     return (
       <section className="space-y-4 text-center">
@@ -70,7 +70,7 @@ export function MistakesScreen() {
           type="button"
           autoFocus
           onClick={goHome}
-          className="min-h-12 w-full rounded-xl bg-teal-700 px-5 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+          className="min-h-12 w-full rounded-xl bg-brand px-5 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t('done.home')}
         </button>

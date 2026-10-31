@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { t } from '../../i18n';
 
 const tile =
-  'min-h-11 rounded-lg border border-stone-300 bg-white px-3 shadow-sm focus-visible:outline-2 focus-visible:outline-teal-600 disabled:opacity-30 dark:border-stone-700 dark:bg-stone-900';
+  'min-h-11 rounded-lg border border-line-strong bg-surface px-3 shadow-sm focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-30';
 
 interface Props {
   tokens: string[];
@@ -36,11 +36,11 @@ export function TileBuilder({ tokens, joiner, emptyLabel, onChange, disabled }: 
     <>
       <div
         aria-label={emptyLabel}
-        className="flex min-h-14 flex-wrap gap-2 border-b-2 border-stone-300 pb-2 dark:border-stone-700"
+        className="flex min-h-14 flex-wrap gap-2 border-b-2 border-line-strong pb-2"
         lang="tr"
       >
         {picked.length === 0 && (
-          <span className="self-center text-sm text-stone-400">{emptyLabel}</span>
+          <span className="self-center text-sm text-ink-subtle">{emptyLabel}</span>
         )}
         {picked.map((i, pos) => (
           <button

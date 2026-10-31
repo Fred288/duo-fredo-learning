@@ -18,7 +18,7 @@ import { useSettings } from '../store/settings';
 import { ExerciseView } from './ExerciseView';
 
 const buttonBase =
-  'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 disabled:opacity-40';
+  'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-40';
 
 /**
  * Doppeltippen (Klick mit `detail` > 1) und gehaltene Tasten auf den Antwortknöpfen zählen
@@ -49,7 +49,7 @@ export function PlacementScreen() {
     // Der Stand `flow` bleibt erhalten: nach „Nochmal versuchen“ geht es bei derselben Aufgabe weiter.
     return (
       <section className="space-y-4">
-        <p role="alert" className="text-rose-700 dark:text-rose-400">
+        <p role="alert" className="text-danger">
           {t('placement.error')}
         </p>
         <button
@@ -59,7 +59,7 @@ export function PlacementScreen() {
             setFailed(false);
             setTries((n) => n + 1);
           }}
-          className={`${buttonBase} bg-teal-700 text-white`}
+          className={`${buttonBase} bg-brand text-white`}
         >
           {t('placement.retry')}
         </button>
@@ -67,7 +67,7 @@ export function PlacementScreen() {
       </section>
     );
   }
-  if (!plan) return <p className="text-stone-500 dark:text-stone-400">{t('placement.loading')}</p>;
+  if (!plan) return <p className="text-ink-subtle">{t('placement.loading')}</p>;
   if (!flow) return <Intro onStart={() => setFlow(startPlacement(plan))} onBack={goHome} />;
   if (flow.done) return <Result plan={plan} flow={flow} />;
   return <Question plan={plan} flow={flow} onFlow={setFlow} onFail={fail} />;
@@ -78,7 +78,7 @@ function BackButton({ onClick, label }: { onClick: () => void; label: string }) 
     <button
       type="button"
       onClick={onClick}
-      className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800"
+      className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
     >
       ← {label}
     </button>
@@ -103,7 +103,7 @@ function Intro({ onStart, onBack }: { onStart: () => void; onBack: () => void })
         type="button"
         autoFocus
         onClick={onStart}
-        className={`${buttonBase} bg-teal-700 text-white`}
+        className={`${buttonBase} bg-brand text-white`}
       >
         {t('placement.intro.start')}
       </button>
@@ -205,7 +205,7 @@ function Question({
           id="placement-progress"
           ref={heading}
           tabIndex={-1}
-          className="flex-1 text-sm text-stone-600 outline-none dark:text-stone-400"
+          className="flex-1 text-sm text-ink-muted outline-none"
         >
           {t('placement.progress', {
             level: cur.level,
@@ -219,7 +219,7 @@ function Question({
         <div
           role="group"
           aria-labelledby="placement-leave"
-          className="space-y-3 rounded-xl border border-stone-300 p-4 dark:border-stone-700"
+          className="space-y-3 rounded-xl border border-line-strong p-4"
         >
           <p id="placement-leave">{t('placement.leave.confirm')}</p>
           <div className="flex flex-wrap gap-2">
@@ -227,14 +227,14 @@ function Question({
               type="button"
               autoFocus
               onClick={() => setLeaving(false)}
-              className="min-h-11 rounded-lg bg-teal-700 px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
               {t('placement.leave.keep')}
             </button>
             <button
               type="button"
               onClick={goHome}
-              className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+              className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
             >
               {t('placement.leave.yes')}
             </button>
@@ -243,7 +243,7 @@ function Question({
       )}
 
       {!supported ? (
-        <p className="text-stone-500 dark:text-stone-400">{t('placement.unit.loading')}</p>
+        <p className="text-ink-subtle">{t('placement.unit.loading')}</p>
       ) : (
         <>
           <div key={supported.id} data-exercise-id={supported.id}>
@@ -261,7 +261,7 @@ function Question({
               onClick={(e) => !repeated(e) && send(false)}
               onKeyDown={noKeyRepeat}
               disabled={!value.trim()}
-              className={`${buttonBase} bg-teal-700 text-white`}
+              className={`${buttonBase} bg-brand text-white`}
             >
               {t('runner.continue')}
             </button>
@@ -269,7 +269,7 @@ function Question({
               type="button"
               onClick={(e) => !repeated(e) && send(true)}
               onKeyDown={noKeyRepeat}
-              className={`${buttonBase} bg-stone-200 dark:bg-stone-800`}
+              className={`${buttonBase} bg-fill`}
             >
               {t('placement.unknown')}
             </button>
@@ -318,7 +318,7 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
         </p>
         {catchUp.length > 0 && <p>{t('placement.result.catchUp', { units: names(catchUp) })}</p>}
         {rec.skipped.length > 0 && (
-          <p className="text-sm text-stone-600 dark:text-stone-400">
+          <p className="text-sm text-ink-muted">
             {t('placement.result.effect')}
           </p>
         )}
@@ -328,7 +328,7 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
       <Group title={t('placement.section.shaky')} units={byStatus('shaky')} />
       <Group title={t('placement.section.secure')} units={byStatus('secure')} fold />
       {untested > 0 && (
-        <p className="text-sm text-stone-500 dark:text-stone-400">
+        <p className="text-sm text-ink-subtle">
           {t('placement.section.untested', { count: untested })}
         </p>
       )}
@@ -348,14 +348,14 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
             if (rec.startUnit) goHomeTo(rec.startUnit);
             else goHome();
           }}
-          className={`${buttonBase} bg-teal-700 text-white`}
+          className={`${buttonBase} bg-brand text-white`}
         >
           {t('placement.accept')}
         </button>
         <button
           type="button"
           onClick={goHome}
-          className={`${buttonBase} bg-stone-200 dark:bg-stone-800`}
+          className={`${buttonBase} bg-fill`}
         >
           {t('placement.decline')}
         </button>
@@ -379,7 +379,7 @@ function Group({
       {units.map((u) => (
         <li key={u.unitId}>
           <span className="font-medium">{u.title}</span>
-          {u.topic && <span className="text-stone-600 dark:text-stone-400"> · {u.topic}</span>}
+          {u.topic && <span className="text-ink-muted"> · {u.topic}</span>}
         </li>
       ))}
     </ul>

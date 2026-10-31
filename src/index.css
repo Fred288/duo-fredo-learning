@@ -2,3 +2,149 @@
 
 /* Dunkelmodus über Klasse auf <html> (siehe applyTheme), nicht nur per Systemeinstellung. */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Farb-Tokens: semantische Namen statt fester Tailwind-Farben. Hell steht in :root, dunkel in
+ * .dark; Komponenten schreiben nur `bg-surface`, `text-ink-muted` usw. und brauchen kein `dark:`.
+ * Die Werte prüft `src/ui/tokens.test.ts` auf Kontrast (WCAG AA).
+ */
+:root {
+  --canvas: #fafaf9;
+  --surface: #ffffff;
+  --fill-soft: #f5f5f4;
+  --fill: #e7e5e4;
+  --hover: #e7e5e4;
+  --line: #e7e5e4;
+  --line-strong: #d6d3d1;
+  --ink: #1c1917;
+  --ink-muted: #57534e;
+  --ink-subtle: #6b6560;
+  --inverse: #292524;
+  --on-inverse: #ffffff;
+
+  --brand: #0f766e;
+  --brand-strong: #115e59;
+  --brand-bar: #0d9488;
+  --brand-soft: #f0fdfa;
+  --brand-soft-hover: #ccfbf1;
+  --brand-line: #5eead4;
+  --brand-edge: #0f766e;
+  --brand-ink: #115e59;
+  --focus: #0d9488;
+
+  --warn: #b45309;
+  --warn-soft: #fffbeb;
+  --warn-soft-hover: #fef3c7;
+  --warn-line: #fcd34d;
+  --warn-ink: #78350f;
+
+  --danger: #be123c;
+  --danger-soft: #fff1f2;
+  --danger-line: #fda4af;
+  --danger-edge: #f43f5e;
+  --danger-ink: #881337;
+
+  --success: #047857;
+  --success-soft: #ecfdf5;
+  --success-line: #6ee7b7;
+  --success-edge: #059669;
+  --success-ink: #064e3b;
+}
+
+.dark {
+  --canvas: #0c0a09;
+  --surface: #1c1917;
+  --fill-soft: #292524;
+  --fill: #44403c;
+  --hover: #292524;
+  --line: #292524;
+  --line-strong: #44403c;
+  --ink: #f5f5f4;
+  --ink-muted: #a8a29e;
+  --ink-subtle: #a8a29e;
+  --inverse: #e7e5e4;
+  --on-inverse: #1c1917;
+
+  --brand: #0f766e;
+  --brand-strong: #115e59;
+  --brand-bar: #0d9488;
+  --brand-soft: #042f2e;
+  --brand-soft-hover: #134e4a;
+  --brand-line: #115e59;
+  --brand-edge: #14b8a6;
+  --brand-ink: #5eead4;
+  --focus: #2dd4bf;
+
+  --warn: #fbbf24;
+  --warn-soft: #451a03;
+  --warn-soft-hover: #78350f;
+  --warn-line: #92400e;
+  --warn-ink: #fef3c7;
+
+  --danger: #fb7185;
+  --danger-soft: #4c0519;
+  --danger-line: #9f1239;
+  --danger-edge: #f43f5e;
+  --danger-ink: #ffe4e6;
+
+  --success: #34d399;
+  --success-soft: #022c22;
+  --success-line: #065f46;
+  --success-edge: #10b981;
+  --success-ink: #d1fae5;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-fill-soft: var(--fill-soft);
+  --color-fill: var(--fill);
+  --color-hover: var(--hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-inverse: var(--inverse);
+  --color-on-inverse: var(--on-inverse);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-bar: var(--brand-bar);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-soft-hover: var(--brand-soft-hover);
+  --color-brand-line: var(--brand-line);
+  --color-brand-edge: var(--brand-edge);
+  --color-brand-ink: var(--brand-ink);
+  --color-focus: var(--focus);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-warn-soft-hover: var(--warn-soft-hover);
+  --color-warn-line: var(--warn-line);
+  --color-warn-ink: var(--warn-ink);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-line: var(--danger-line);
+  --color-danger-edge: var(--danger-edge);
+  --color-danger-ink: var(--danger-ink);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-line: var(--success-line);
+  --color-success-edge: var(--success-edge);
+  --color-success-ink: var(--success-ink);
+}
+
+/* Sichere Bereiche (Notch, Home-Indikator); Einsatz in M2 an Navigation und Kopfzeilen. */
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+html {
+  color-scheme: light;
+  background-color: var(--canvas);
+}
+html.dark {
+  color-scheme: dark;
+}

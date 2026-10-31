@@ -83,7 +83,7 @@ export function Home() {
         <button
           type="button"
           onClick={openStats}
-          className="min-h-11 rounded-lg px-2 text-sm text-teal-700 underline hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-teal-400 dark:hover:bg-stone-800"
+          className="min-h-11 rounded-lg px-2 text-sm text-brand-ink underline hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
         >
           {t('stats.open')}
         </button>
@@ -91,12 +91,12 @@ export function Home() {
       {offerPlacement && (
         <section
           aria-labelledby="placement-offer"
-          className="mt-4 rounded-xl border border-teal-300 bg-teal-50 p-4 dark:border-teal-800 dark:bg-teal-950"
+          className="mt-4 rounded-xl border border-brand-line bg-brand-soft p-4"
         >
           <h2 id="placement-offer" className="font-medium">
             {t('placement.offer.title')}
           </h2>
-          <p className="mt-1 text-sm text-stone-600 dark:text-stone-400">
+          <p className="mt-1 text-sm text-ink-muted">
             {t('placement.offer.text')}
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -106,14 +106,14 @@ export function Home() {
                 setSetting('placementOffered', true);
                 openPlacement();
               }}
-              className="min-h-11 rounded-lg bg-teal-700 px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
               {t('placement.offer.start')}
             </button>
             <button
               type="button"
               onClick={() => setSetting('placementOffered', true)}
-              className="min-h-11 rounded-lg border border-teal-700 px-4 text-teal-800 hover:bg-teal-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-teal-500 dark:text-teal-300 dark:hover:bg-teal-900"
+              className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
             >
               {t('placement.offer.decline')}
             </button>
@@ -124,35 +124,35 @@ export function Home() {
         <button
           type="button"
           onClick={openRepeat}
-          className="mt-4 block min-h-11 w-full rounded-xl border border-teal-300 bg-teal-50 p-4 text-left hover:bg-teal-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-teal-800 dark:bg-teal-950 dark:hover:bg-teal-900"
+          className="mt-4 block min-h-11 w-full rounded-xl border border-brand-line bg-brand-soft p-4 text-left hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
         >
           <span className="block font-medium">{t('repeat.title')}</span>
-          <span className="block text-sm text-stone-600 dark:text-stone-400">{repeatCount}</span>
+          <span className="block text-sm text-ink-muted">{repeatCount}</span>
         </button>
       )}
       {mistakes > 0 && (
         <button
           type="button"
           onClick={openMistakesScreen}
-          className="mt-4 block min-h-11 w-full rounded-xl border border-amber-300 bg-amber-50 p-4 text-left hover:bg-amber-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-amber-800 dark:bg-amber-950 dark:hover:bg-amber-900"
+          className="mt-4 block min-h-11 w-full rounded-xl border border-warn-line bg-warn-soft p-4 text-left hover:bg-warn-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
         >
           <span className="block font-medium">{t('mistakes.title')}</span>
-          <span className="block text-sm text-stone-600 dark:text-stone-400">
+          <span className="block text-sm text-ink-muted">
             {t('mistakes.count', { count: mistakes })}
           </span>
         </button>
       )}
       {failed ? (
-        <p className="mt-6 text-rose-700 dark:text-rose-400">{t('home.error')}</p>
+        <p className="mt-6 text-danger">{t('home.error')}</p>
       ) : !manifest ? (
-        <p className="mt-6 text-stone-500">{t('home.loading')}</p>
+        <p className="mt-6 text-ink-subtle">{t('home.loading')}</p>
       ) : (
         <div className="mt-6 space-y-8">
           {/* Einmal oben statt in jeder Unit-Karte. */}
           {!canListen &&
             !voicesLoading &&
             manifest.units.some((u) => u.lessons.some((l) => l.type === 'listening')) && (
-              <p className="text-sm text-stone-500">{t('home.listen.unavailable')}</p>
+              <p className="text-sm text-ink-subtle">{t('home.listen.unavailable')}</p>
             )}
           {LEVELS.map((level) => {
             const units = manifest.units.filter((u) => u.level === level);
@@ -161,7 +161,7 @@ export function Home() {
               <section key={level} aria-labelledby={`level-${level}`}>
                 <h2
                   id={`level-${level}`}
-                  className="text-sm font-medium tracking-wide text-stone-500"
+                  className="text-sm font-medium tracking-wide text-ink-subtle"
                 >
                   {t('home.level', { level })}
                 </h2>
@@ -177,27 +177,27 @@ export function Home() {
                       <li
                         key={unit.id}
                         id={`unit-${unit.id}`}
-                        className="scroll-mt-4 rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+                        className="scroll-mt-4 rounded-xl border border-line bg-surface p-4"
                       >
                         <h3 className="font-medium">{unit.title}</h3>
                         {mark && (
                           <p
-                            className={`mt-1 text-xs ${mark === 'start' ? 'font-medium text-teal-700 dark:text-teal-400' : 'text-stone-500 dark:text-stone-400'}`}
+                            className={`mt-1 text-xs ${mark === 'start' ? 'font-medium text-brand-ink' : 'text-ink-subtle'}`}
                           >
                             {t(`placement.mark.${mark}`)}
                           </p>
                         )}
-                        <div className="mt-2 flex items-center gap-3 text-xs text-stone-500">
+                        <div className="mt-2 flex items-center gap-3 text-xs text-ink-subtle">
                           <div
                             role="progressbar"
                             aria-label={`${unit.title}: ${label}`}
                             aria-valuemin={0}
                             aria-valuemax={total}
                             aria-valuenow={done}
-                            className="h-1.5 flex-1 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-800"
+                            className="h-1.5 flex-1 overflow-hidden rounded-full bg-fill"
                           >
                             <div
-                              className="h-full bg-teal-600"
+                              className="h-full bg-brand-bar"
                               style={{ width: `${total ? (done / total) * 100 : 0}%` }}
                             />
                           </div>
@@ -208,7 +208,7 @@ export function Home() {
                             <button
                               type="button"
                               onClick={() => openExplainer(unit.id)}
-                              className="min-h-11 rounded-lg border border-teal-700 px-4 text-teal-800 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-teal-500 dark:text-teal-300 dark:hover:bg-stone-800"
+                              className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-focus"
                             >
                               {t('home.explainer')}
                             </button>
@@ -220,9 +220,9 @@ export function Home() {
                                 key={lesson.id}
                                 type="button"
                                 onClick={() => openLesson(unit.id, lesson.id)}
-                                className="min-h-11 rounded-lg bg-stone-100 px-4 text-left hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:bg-stone-800 dark:hover:bg-stone-700"
+                                className="min-h-11 rounded-lg bg-fill-soft px-4 text-left hover:bg-fill focus-visible:outline-2 focus-visible:outline-focus"
                               >
-                                <span className="block text-xs text-stone-500">
+                                <span className="block text-xs text-ink-subtle">
                                   {t(`lesson.type.${lesson.type}`)}
                                   {completed.has(lesson.id) && (
                                     <span role="img" aria-label={t('home.lessonDone')}>

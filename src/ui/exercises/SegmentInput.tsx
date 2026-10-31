@@ -17,7 +17,7 @@ interface Props {
 }
 
 const letterButton =
-  'min-h-11 min-w-7 rounded-md px-0.5 text-xl font-medium focus-visible:outline-2 focus-visible:outline-teal-600 disabled:cursor-default';
+  'min-h-11 min-w-7 rounded-md px-0.5 text-xl font-medium focus-visible:outline-2 focus-visible:outline-focus disabled:cursor-default';
 
 /**
  * Wort zerlegen: Antippen eines Buchstabens setzt (oder entfernt) die Grenze danach; feste
@@ -108,13 +108,13 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
             aria-pressed={cuts.has(at)}
             aria-label={t('ex.segment.cut', { prefix: letters.slice(0, at) })}
             onClick={() => toggle(at)}
-            className={`${letterButton} hover:bg-stone-200 dark:hover:bg-stone-800`}
+            className={`${letterButton} hover:bg-hover`}
           >
             {letter}
           </button>
         )}
         {cuts.has(at) && !isFixed && (
-          <span className="mx-0.5 h-8 w-0.5 rounded bg-teal-600" aria-hidden="true" />
+          <span className="mx-0.5 h-8 w-0.5 rounded bg-brand-bar" aria-hidden="true" />
         )}
       </span>
     );
@@ -140,8 +140,8 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
   return (
     <div className="space-y-4">
       <Prompt instruction={t('ex.segment')} text={ex.word} ex={ex} lang="tr" />
-      {ex.gloss_de && <p className="-mt-2 text-stone-600 dark:text-stone-400">„{ex.gloss_de}“</p>}
-      <p className="text-sm text-stone-500">{t('ex.segment.help')}</p>
+      {ex.gloss_de && <p className="-mt-2 text-ink-muted">„{ex.gloss_de}“</p>}
+      <p className="text-sm text-ink-subtle">{t('ex.segment.help')}</p>
       <div
         role="group"
         aria-label={t('ex.segment.letters')}
@@ -158,20 +158,20 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
         {pieces.map((piece, i) => (
           <li
             key={`${starts[i]}-${piece}`}
-            className="flex flex-col gap-1 rounded-lg border border-stone-300 p-2 dark:border-stone-700"
+            className="flex flex-col gap-1 rounded-lg border border-line-strong p-2"
           >
             <span className="font-medium" lang="tr">
               {piece}
             </span>
             {i === 0 ? (
-              <span className="text-sm text-stone-500">{t('tag.STEM')}</span>
+              <span className="text-sm text-ink-subtle">{t('tag.STEM')}</span>
             ) : (
               <select
                 aria-label={t('ex.segment.role', { n: i + 1, piece })}
                 disabled={disabled}
                 value={roles.get(starts[i]!) ?? ''}
                 onChange={(e) => choose(starts[i]!, e.target.value as SegmentTag | '')}
-                className="min-h-11 rounded-md border border-stone-300 bg-white px-2 text-sm dark:border-stone-700 dark:bg-stone-900"
+                className="min-h-11 rounded-md border border-line-strong bg-surface px-2 text-sm"
               >
                 <option value="">{t('ex.segment.choose')}</option>
                 {options.map((tag) => (

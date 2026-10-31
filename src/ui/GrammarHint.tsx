@@ -7,7 +7,7 @@ export function GrammarHint({ section }: { section: ExplainerSection }) {
   return (
     <details
       open
-      className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900"
+      className="rounded-xl border border-line bg-surface p-4"
     >
       <summary className="cursor-pointer font-medium">
         {t('grammar.title', { section: section.title })}

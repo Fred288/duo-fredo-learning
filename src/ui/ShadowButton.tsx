@@ -5,7 +5,7 @@ import { speak, stopSpeaking, useCanSpeak } from '../store/audio';
 import { useSettings } from '../store/settings';
 
 const small =
-  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-stone-600 hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-stone-400 dark:hover:bg-stone-800';
+  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
 const Mic = () => (
   <svg
@@ -114,7 +114,7 @@ export function ShadowButton({ text }: { text: string }) {
         aria-label={
           state === 'recording' ? t('shadow.stop', { text }) : t('shadow.record', { text })
         }
-        className={`${small} ${state === 'recording' ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300' : ''}`}
+        className={`${small} ${state === 'recording' ? 'bg-danger-soft text-danger' : ''}`}
       >
         <Mic />
       </button>
@@ -141,7 +141,7 @@ export function ShadowButton({ text }: { text: string }) {
         </>
       )}
       {(state === 'denied' || state === 'failed') && (
-        <span role="status" className="px-1 text-xs text-stone-500">
+        <span role="status" className="px-1 text-xs text-ink-subtle">
           {t(`shadow.${state}`)}
         </span>
       )}

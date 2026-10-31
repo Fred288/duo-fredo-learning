@@ -140,10 +140,10 @@ export function RepeatScreen() {
     buildRun().then(setRun, () => setFailed(true));
   }, [waitForVoices]);
 
-  if (failed) return <p className="text-rose-700 dark:text-rose-400">{t('home.error')}</p>;
+  if (failed) return <p className="text-danger">{t('home.error')}</p>;
   if (run === undefined) {
     return (
-      <p className="text-stone-500">
+      <p className="text-ink-subtle">
         {t(waitForVoices ? 'audio.status.loading' : 'repeat.loading')}
       </p>
     );
@@ -156,7 +156,7 @@ export function RepeatScreen() {
           type="button"
           autoFocus
           onClick={goHome}
-          className="min-h-12 w-full rounded-xl bg-teal-700 px-5 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+          className="min-h-12 w-full rounded-xl bg-brand px-5 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t('done.home')}
         </button>

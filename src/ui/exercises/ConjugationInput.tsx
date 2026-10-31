@@ -64,7 +64,7 @@ export function ConjugationInput({ ex, vocab, onChange, disabled }: Props) {
   return (
     <div className="space-y-4">
       <Prompt instruction={t('ex.conjugation')} text={formula} ex={ex} lang="de" />
-      {ex.gloss_de && <p className="-mt-2 text-stone-600 dark:text-stone-400">„{ex.gloss_de}“</p>}
+      {ex.gloss_de && <p className="-mt-2 text-ink-muted">„{ex.gloss_de}“</p>}
       <TileBuilder
         tokens={tokens}
         joiner=""

@@ -9,7 +9,7 @@ import { ShadowButton } from './ShadowButton';
 import { SpeakButton } from './SpeakButton';
 
 const wordButton =
-  'rounded underline decoration-stone-400 decoration-dotted underline-offset-4 hover:bg-teal-50 focus-visible:outline-2 focus-visible:outline-teal-600 dark:hover:bg-stone-800';
+  'rounded underline decoration-ink-subtle decoration-dotted underline-offset-4 hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-focus';
 
 /** Antippbares Wort: Eintrag aus dem Nachschlagewerk (Grundform) und/oder Glosse des Textes. */
 function WordSheet({
@@ -40,12 +40,12 @@ function WordSheet({
       role="dialog"
       tabIndex={-1}
       aria-label={t('reading.word', { word: token.text })}
-      className="fixed inset-x-0 bottom-0 z-10 max-h-[70dvh] overflow-y-auto rounded-t-2xl border-t border-stone-300 bg-white p-4 shadow-lg outline-none dark:border-stone-700 dark:bg-stone-900"
+      className="fixed inset-x-0 bottom-0 z-10 max-h-[70dvh] overflow-y-auto rounded-t-2xl border-t border-line-strong bg-surface p-4 shadow-lg outline-none"
     >
       <div className="mx-auto max-w-xl space-y-3">
         <div className="flex items-start justify-between gap-3">
-          <p className="text-sm text-stone-500">
-            <span lang="tr" className="font-medium text-stone-800 dark:text-stone-200">
+          <p className="text-sm text-ink-subtle">
+            <span lang="tr" className="font-medium text-ink">
               {token.text}
             </span>
             {token.gloss && ` · ${token.gloss}`}
@@ -53,7 +53,7 @@ function WordSheet({
           <button
             type="button"
             onClick={onClose}
-            className="min-h-11 shrink-0 rounded-lg px-3 hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:hover:bg-stone-800"
+            className="min-h-11 shrink-0 rounded-lg px-3 hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
           >
             {t('reading.close')}
           </button>
@@ -65,7 +65,7 @@ function WordSheet({
             {token.text}
           </h2>
         )}
-        {!entry && !token.gloss && <p className="text-sm text-stone-500">{t('reading.noEntry')}</p>}
+        {!entry && !token.gloss && <p className="text-sm text-ink-subtle">{t('reading.noEntry')}</p>}
       </div>
     </div>
   );
@@ -103,11 +103,11 @@ export function ReadingPassage({ passage }: { passage: Passage }) {
             type="checkbox"
             checked={translate}
             onChange={(e) => setTranslate(e.target.checked)}
-            className="size-5 accent-teal-700"
+            className="size-5 accent-brand"
           />
           {t('reading.translate')}
         </label>
-        <span className="flex items-center gap-1 text-sm text-stone-600 dark:text-stone-400">
+        <span className="flex items-center gap-1 text-sm text-ink-muted">
           {t('reading.readAll')}
           <SpeakButton text={whole} />
         </span>
@@ -141,7 +141,7 @@ export function ReadingPassage({ passage }: { passage: Passage }) {
                 )}
               </p>
               {translate && (
-                <p className="text-sm text-stone-600 dark:text-stone-400" lang="de">
+                <p className="text-sm text-ink-muted" lang="de">
                   {s.de}
                 </p>
               )}

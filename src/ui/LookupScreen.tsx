@@ -8,9 +8,9 @@ import { LookupEntry, formLabelsText } from './LookupEntry';
 import { SpecialCharBar } from './SpecialCharBar';
 
 const backButton =
-  'min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-stone-400 dark:hover:bg-stone-800';
+  'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 const rowButton =
-  'block min-h-11 w-full rounded-xl border border-stone-200 bg-white p-3 text-left hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-stone-800 dark:bg-stone-900 dark:hover:bg-stone-800';
+  'block min-h-11 w-full rounded-xl border border-line bg-surface p-3 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
 /** Nachschlagewerk: Suche in Vokabeln (Türkisch/Deutsch, auch gebeugt) und Grammatik-Abschnitten. */
 export function LookupScreen() {
@@ -80,7 +80,7 @@ export function LookupScreen() {
       </button>
       {failed ? (
         <div className="space-y-2">
-          <p className="text-rose-700 dark:text-rose-400">{t('lookup.error')}</p>
+          <p className="text-danger">{t('lookup.error')}</p>
           <button
             type="button"
             onClick={() => {
@@ -93,7 +93,7 @@ export function LookupScreen() {
           </button>
         </div>
       ) : !prepared ? (
-        <p className="text-stone-500">{t('lookup.loading')}</p>
+        <p className="text-ink-subtle">{t('lookup.loading')}</p>
       ) : entry ? (
         <LookupEntry entry={entry} index={prepared.index} cards={cards} />
       ) : (
@@ -112,7 +112,7 @@ export function LookupScreen() {
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            className="min-h-11 w-full rounded-lg border border-stone-300 bg-white px-3 text-lg focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-stone-700 dark:bg-stone-900"
+            className="min-h-11 w-full rounded-lg border border-line-strong bg-surface px-3 text-lg focus-visible:outline-2 focus-visible:outline-focus"
           />
           <SpecialCharBar
             disabled={false}
@@ -132,7 +132,7 @@ export function LookupScreen() {
           <p
             role="status"
             aria-live="polite"
-            className="text-sm text-stone-600 dark:text-stone-400"
+            className="text-sm text-ink-muted"
           >
             {!query.trim()
               ? ''
@@ -143,7 +143,7 @@ export function LookupScreen() {
                   : t('lookup.count', { count: total })}
           </p>
           {query.trim() && total === 0 && (
-            <p className="text-sm text-stone-600 dark:text-stone-400">{t('lookup.noneHint')}</p>
+            <p className="text-sm text-ink-muted">{t('lookup.noneHint')}</p>
           )}
           {!query.trim() ? (
             <Register prepared={prepared} onOpen={openSection} />
@@ -161,11 +161,11 @@ export function LookupScreen() {
                         <span className="font-medium" lang="tr">
                           {h.entry.tr}
                         </span>{' '}
-                        <span className="text-sm text-stone-600 dark:text-stone-400">
+                        <span className="text-sm text-ink-muted">
                           {h.entry.de.join(', ')} · {t(`pos.${h.entry.pos}`)}
                         </span>
                         {h.form && (
-                          <span className="block text-sm text-teal-800 dark:text-teal-300">
+                          <span className="block text-sm text-brand-ink">
                             {t('lookup.formOf', {
                               form: h.form.form,
                               label: formLabelsText(h.form.labels),
@@ -189,7 +189,7 @@ export function LookupScreen() {
                           className={rowButton}
                         >
                           <span className="font-medium">{h.section.title}</span>
-                          <span className="block text-sm text-stone-600 dark:text-stone-400">
+                          <span className="block text-sm text-ink-muted">
                             {unitTitle(h.section.unit)}
                           </span>
                         </button>
@@ -217,13 +217,13 @@ function Register({
   const { units, sections } = prepared.index;
   return (
     <div className="space-y-4">
-      <p className="text-stone-600 dark:text-stone-400">{t('lookup.hint')}</p>
+      <p className="text-ink-muted">{t('lookup.hint')}</p>
       <h2 className="font-medium">{t('lookup.registry')}</h2>
       {units.map((u) => {
         const own = sections.filter((s) => s.unit === u.id);
         if (!own.length) return null;
         return (
-          <details key={u.id} className="rounded-xl border border-stone-200 dark:border-stone-800">
+          <details key={u.id} className="rounded-xl border border-line">
             <summary className="min-h-11 cursor-pointer p-3">{u.title}</summary>
             <ul className="px-3 pb-2">
               {own.map((s) => (
@@ -231,7 +231,7 @@ function Register({
                   <button
                     type="button"
                     onClick={() => onOpen(u.id, s.slug)}
-                    className="min-h-11 w-full rounded-lg px-2 text-left hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:hover:bg-stone-800"
+                    className="min-h-11 w-full rounded-lg px-2 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
                   >
                     {s.title}
                   </button>

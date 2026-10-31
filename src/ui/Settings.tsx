@@ -11,7 +11,7 @@ import { GOAL_RANGE, NEW_WORDS_RANGE, useSettings, type Theme } from '../store/s
 const THEMES: Theme[] = ['system', 'light', 'dark'];
 
 const stepButton =
-  'min-h-11 min-w-11 rounded-lg border border-stone-300 bg-white text-lg focus-visible:outline-2 focus-visible:outline-teal-600 disabled:opacity-40 dark:border-stone-700 dark:bg-stone-900';
+  'min-h-11 min-w-11 rounded-lg border border-line-strong bg-surface text-lg focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-40';
 
 export function Settings() {
   const goHome = useApp((s) => s.goHome);
@@ -44,7 +44,7 @@ export function Settings() {
         <button
           type="button"
           onClick={goHome}
-          className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800"
+          className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
         >
           ← {t('settings.back')}
         </button>
@@ -106,7 +106,7 @@ export function Settings() {
           </button>
         </div>
       </div>
-      <p className="-mt-4 text-sm text-stone-500">{t('settings.newWords.hint')}</p>
+      <p className="-mt-4 text-sm text-ink-subtle">{t('settings.newWords.hint')}</p>
 
       <label className="flex min-h-11 items-center justify-between gap-4">
         <span>{t('settings.streak')}</span>
@@ -114,7 +114,7 @@ export function Settings() {
           type="checkbox"
           checked={showStreak}
           onChange={(e) => set('showStreak', e.target.checked)}
-          className="size-6 accent-teal-700"
+          className="size-6 accent-brand"
         />
       </label>
 
@@ -125,10 +125,10 @@ export function Settings() {
             type="checkbox"
             checked={tolerateDiacritics}
             onChange={(e) => set('tolerateDiacritics', e.target.checked)}
-            className="size-6 accent-teal-700"
+            className="size-6 accent-brand"
           />
         </label>
-        <p className="text-sm text-stone-500" lang="de">
+        <p className="text-sm text-ink-subtle" lang="de">
           {t('settings.tolerate.hint')}
         </p>
       </div>
@@ -141,10 +141,10 @@ export function Settings() {
             type="checkbox"
             checked={audioEnabled}
             onChange={(e) => set('audioEnabled', e.target.checked)}
-            className="size-6 accent-teal-700"
+            className="size-6 accent-brand"
           />
         </label>
-        <p className="text-sm text-stone-500" role="status">
+        <p className="text-sm text-ink-subtle" role="status">
           {t(`audio.status.${status}` as MessageKey, { name: current?.name ?? '' })}
         </p>
         {audioEnabled && canSpeak(status) && (
@@ -156,17 +156,17 @@ export function Settings() {
                   type="checkbox"
                   checked={autoplay}
                   onChange={(e) => set('autoplay', e.target.checked)}
-                  className="size-6 accent-teal-700"
+                  className="size-6 accent-brand"
                 />
               </label>
-              <p className="text-sm text-stone-500">{t('settings.audio.autoplay.hint')}</p>
+              <p className="text-sm text-ink-subtle">{t('settings.audio.autoplay.hint')}</p>
             </div>
             <label className="flex min-h-11 items-center justify-between gap-4">
               <span>{t('settings.audio.voice')}</span>
               <select
                 value={voiceURI}
                 onChange={(e) => set('voiceURI', e.target.value)}
-                className="min-h-11 max-w-[60%] rounded-lg border border-stone-300 bg-white px-2 dark:border-stone-700 dark:bg-stone-900"
+                className="min-h-11 max-w-[60%] rounded-lg border border-line-strong bg-surface px-2"
               >
                 <option value="">{t('settings.audio.voice.auto')}</option>
                 {voices.map((v) => (
@@ -179,7 +179,7 @@ export function Settings() {
             <button
               type="button"
               onClick={() => void speak(t('audio.sample'))}
-              className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+              className="min-h-11 w-full rounded-lg border border-line-strong px-4 text-left hover:bg-hover"
             >
               {t('settings.audio.test')}
             </button>
@@ -195,17 +195,17 @@ export function Settings() {
               type="checkbox"
               checked={shadowing}
               onChange={(e) => set('shadowing', e.target.checked)}
-              className="size-6 accent-teal-700"
+              className="size-6 accent-brand"
             />
           </label>
-          <p className="text-sm text-stone-500">{t('settings.shadow.hint')}</p>
+          <p className="text-sm text-ink-subtle">{t('settings.shadow.hint')}</p>
         </div>
       )}
 
       <button
         type="button"
         onClick={openReview}
-        className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+        className="min-h-11 w-full rounded-lg border border-line-strong px-4 text-left hover:bg-hover"
       >
         {t('review.open')}
       </button>
@@ -213,7 +213,7 @@ export function Settings() {
       <button
         type="button"
         onClick={openStats}
-        className="min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+        className="min-h-11 w-full rounded-lg border border-line-strong px-4 text-left hover:bg-hover"
       >
         {t('stats.title')}
       </button>
@@ -222,7 +222,7 @@ export function Settings() {
         <h2 id="placement-settings" className="font-medium">
           {t('settings.placement')}
         </h2>
-        <p className="text-sm text-stone-600 dark:text-stone-400">
+        <p className="text-sm text-ink-muted">
           {placement
             ? placement.skipped.length > 0
               ? t('settings.placement.current', { count: placement.skipped.length })
@@ -233,7 +233,7 @@ export function Settings() {
           <button
             type="button"
             onClick={openPlacement}
-            className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+            className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
           >
             {t('settings.placement.run')}
           </button>
@@ -241,7 +241,7 @@ export function Settings() {
             <button
               type="button"
               onClick={() => recordPlacement(clearedPlacement(Date.now()))}
-              className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+              className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
             >
               {t('settings.placement.clear')}
             </button>
@@ -255,10 +255,10 @@ export function Settings() {
           {THEMES.map((value) => (
             <label
               key={value}
-              className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 has-focus-visible:outline-2 has-focus-visible:outline-teal-600 ${
+              className={`flex min-h-11 flex-1 cursor-pointer items-center justify-center rounded-lg border px-3 has-focus-visible:outline-2 has-focus-visible:outline-focus ${
                 theme === value
-                  ? 'border-teal-600 bg-teal-50 dark:bg-teal-950'
-                  : 'border-stone-300 bg-white dark:border-stone-700 dark:bg-stone-900'
+                  ? 'border-brand-edge bg-brand-soft'
+                  : 'border-line-strong bg-surface'
               }`}
             >
               <input

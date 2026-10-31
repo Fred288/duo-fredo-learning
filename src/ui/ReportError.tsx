@@ -24,7 +24,7 @@ export function ReportError({ exerciseId, unitId, unreviewed }: Props) {
 
   return (
     <div className="space-y-2 text-sm">
-      {unreviewed && <p className="text-stone-500">{t('report.unreviewed')}</p>}
+      {unreviewed && <p className="text-ink-subtle">{t('report.unreviewed')}</p>}
       {saved && !open && <p role="status">{t('report.saved')}</p>}
       {open ? (
         <div className="space-y-2">
@@ -38,7 +38,7 @@ export function ReportError({ exerciseId, unitId, unreviewed }: Props) {
               rows={3}
               // Enter im Textfeld soll nicht die Lektion weiterschalten
               onKeyDown={(e) => e.stopPropagation()}
-              className="w-full rounded-lg border border-stone-300 bg-white p-2 text-base text-stone-900 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-100"
+              className="w-full rounded-lg border border-line-strong bg-surface p-2 text-base text-ink"
             />
           </label>
           <div className="flex gap-2">
@@ -46,7 +46,7 @@ export function ReportError({ exerciseId, unitId, unreviewed }: Props) {
               type="button"
               disabled={!text.trim()}
               onClick={() => void save()}
-              className="min-h-11 rounded-lg bg-stone-800 px-4 text-white disabled:opacity-40 dark:bg-stone-200 dark:text-stone-900"
+              className="min-h-11 rounded-lg bg-inverse px-4 text-on-inverse disabled:opacity-40"
             >
               {t('report.save')}
             </button>

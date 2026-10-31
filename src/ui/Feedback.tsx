@@ -5,11 +5,11 @@ import type { AnswerResult } from '../lib/answer';
 
 const tone = {
   correct:
-    'border-emerald-300 bg-emerald-50 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-100',
+    'border-success-line bg-success-soft text-success-ink',
   almost:
-    'border-amber-300 bg-amber-50 text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100',
+    'border-warn-line bg-warn-soft text-warn-ink',
   wrong:
-    'border-rose-300 bg-rose-50 text-rose-900 dark:border-rose-800 dark:bg-rose-950 dark:text-rose-100',
+    'border-danger-line bg-danger-soft text-danger-ink',
 };
 
 interface Props {

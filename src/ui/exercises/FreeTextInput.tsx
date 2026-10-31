@@ -49,7 +49,7 @@ export function FreeTextInput({ ex, value, onChange, disabled }: Props) {
         autoComplete="off"
         autoCorrect="off"
         spellCheck={false}
-        className="min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 text-lg focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-stone-700 dark:bg-stone-900"
+        className="min-h-12 w-full rounded-xl border border-line-strong bg-surface px-4 text-lg focus-visible:outline-2 focus-visible:outline-focus"
       />
       {toTurkish && <SpecialCharBar onInsert={insert} disabled={disabled} />}
     </div>

@@ -46,14 +46,14 @@ export function ExplainerScreen({
       <button
         type="button"
         onClick={goBack}
-        className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-stone-400 dark:hover:bg-stone-800"
+        className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
       >
         ← {t(from === 'lookup' ? 'lookup.title' : 'explainer.back')}
       </button>
       {failed ? (
-        <p className="text-rose-700 dark:text-rose-400">{t('explainer.error')}</p>
+        <p className="text-danger">{t('explainer.error')}</p>
       ) : text === undefined ? (
-        <p className="text-stone-500">{t('explainer.loading')}</p>
+        <p className="text-ink-subtle">{t('explainer.loading')}</p>
       ) : (
         <Markdown source={text} />
       )}

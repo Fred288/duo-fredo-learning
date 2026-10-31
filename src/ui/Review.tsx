@@ -32,7 +32,7 @@ export function Review() {
         <button
           type="button"
           onClick={openSettings}
-          className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800"
+          className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
         >
           ← {t('review.back')}
         </button>
@@ -41,7 +41,7 @@ export function Review() {
         </h1>
       </header>
 
-      <p className="text-sm text-stone-600 dark:text-stone-400">{t('review.hint')}</p>
+      <p className="text-sm text-ink-muted">{t('review.hint')}</p>
 
       <div>
         <h2 className="mb-2 font-medium">{t('review.units')}</h2>
@@ -49,10 +49,10 @@ export function Review() {
           {manifest?.units.map((u) => (
             <li
               key={u.id}
-              className="flex items-center justify-between gap-3 rounded-lg border border-stone-200 bg-white px-3 py-2 dark:border-stone-800 dark:bg-stone-900"
+              className="flex items-center justify-between gap-3 rounded-lg border border-line bg-surface px-3 py-2"
             >
               <span>{u.title}</span>
-              <span className="text-sm text-stone-500">
+              <span className="text-sm text-ink-subtle">
                 {u.unreviewed > 0
                   ? t('review.unitCount', { count: u.unreviewed })
                   : t('review.unitDone')}
@@ -69,23 +69,23 @@ export function Review() {
             <button
               type="button"
               onClick={() => void copy()}
-              className="min-h-11 rounded-lg border border-stone-300 px-3 text-sm dark:border-stone-700"
+              className="min-h-11 rounded-lg border border-line-strong px-3 text-sm"
             >
               {copied ? t('review.copied') : t('review.copy')}
             </button>
           )}
         </div>
         {notes.length === 0 ? (
-          <p className="text-stone-500">{t('review.notes.empty')}</p>
+          <p className="text-ink-subtle">{t('review.notes.empty')}</p>
         ) : (
           <ul className="space-y-2">
             {notes.map((n) => (
               <li
                 key={n.id}
-                className="flex items-start justify-between gap-3 rounded-lg border border-stone-200 bg-white p-3 dark:border-stone-800 dark:bg-stone-900"
+                className="flex items-start justify-between gap-3 rounded-lg border border-line bg-surface p-3"
               >
                 <div>
-                  <p className="text-xs text-stone-500">
+                  <p className="text-xs text-ink-subtle">
                     {n.itemId} · {new Date(n.at).toLocaleDateString('de-DE')}
                   </p>
                   <p className="mt-1 whitespace-pre-wrap">{n.text}</p>
@@ -94,7 +94,7 @@ export function Review() {
                   type="button"
                   aria-label={t('review.delete', { item: n.itemId })}
                   onClick={() => void remove(n.id!)}
-                  className="min-h-11 min-w-11 rounded-lg text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800"
+                  className="min-h-11 min-w-11 rounded-lg text-ink-subtle hover:bg-hover"
                 >
                   ✕
                 </button>

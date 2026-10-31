@@ -54,6 +54,18 @@ export function applyTheme(theme: Theme): void {
     theme === 'dark' ||
     (theme === 'system' && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
   document.documentElement.classList.toggle('dark', dark);
+  // Leistenfarbe des Browsers/der installierten App folgt dem Hintergrund (Tokens: canvas).
+  document
+    .querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', dark ? '#0c0a09' : '#fafaf9');
+}
+
+// „System“ folgt einem Wechsel im Betriebssystem auch während die App läuft.
+if (typeof window !== 'undefined') {
+  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
+    const { theme } = useSettings.getState();
+    if (theme === 'system') applyTheme(theme);
+  });
 }
 
 export const useSettings = create<SettingsState>((set) => ({

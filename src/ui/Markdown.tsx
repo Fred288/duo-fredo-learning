@@ -13,7 +13,7 @@ function inline(text: string): ReactNode[] {
     }
     if (part.startsWith('`') && part.endsWith('`') && part.length > 2) {
       return (
-        <code key={i} className="rounded bg-stone-200 px-1 dark:bg-stone-800">
+        <code key={i} className="rounded bg-fill px-1">
           {part.slice(1, -1)}
         </code>
       );
@@ -74,10 +74,10 @@ export function Markdown({ source }: { source: string }) {
       blocks.push(
         <div
           key={key}
-          className="overflow-x-auto rounded-lg border border-stone-200 dark:border-stone-800"
+          className="overflow-x-auto rounded-lg border border-line"
         >
           <table className="w-full min-w-max border-collapse text-left text-sm">
-            <thead className="bg-stone-100 dark:bg-stone-800">
+            <thead className="bg-fill-soft">
               <tr>
                 {head.map((c, j) => (
                   <th key={j} scope="col" className="px-3 py-2 font-medium">
@@ -88,7 +88,7 @@ export function Markdown({ source }: { source: string }) {
             </thead>
             <tbody>
               {rows.map((row, r) => (
-                <tr key={r} className="border-t border-stone-200 dark:border-stone-800">
+                <tr key={r} className="border-t border-line">
                   {head.map((_, j) => (
                     <td key={j} className="px-3 py-2 align-top">
                       {inline(row[j] ?? '')}

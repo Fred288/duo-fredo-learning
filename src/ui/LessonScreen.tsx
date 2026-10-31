@@ -9,7 +9,7 @@ import { LessonRunner } from './LessonRunner';
 import { ReadingPassage } from './ReadingPassage';
 
 const buttonBase =
-  'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600';
+  'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus';
 
 export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: string }) {
   const goHome = useApp((s) => s.goHome);
@@ -38,8 +38,8 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       .catch(() => setFailed(true));
   }, [unitId, lessonId]);
 
-  if (failed) return <p className="text-rose-700 dark:text-rose-400">{t('home.error')}</p>;
-  if (!lesson) return <p className="text-stone-500">{t('runner.loading')}</p>;
+  if (failed) return <p className="text-danger">{t('home.error')}</p>;
+  if (!lesson) return <p className="text-ink-subtle">{t('runner.loading')}</p>;
   const { passage } = lesson;
   if (passage && reading) {
     return (
@@ -48,7 +48,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
           <button
             type="button"
             onClick={goHome}
-            className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800"
+            className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
           >
             ← {t('runner.back')}
           </button>
@@ -56,12 +56,12 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
             {lesson.title}
           </h1>
         </header>
-        <p className="text-sm text-stone-500">{t('reading.hint')}</p>
+        <p className="text-sm text-ink-subtle">{t('reading.hint')}</p>
         <ReadingPassage passage={passage} />
         <button
           type="button"
           onClick={() => setReading(false)}
-          className={`${buttonBase} bg-teal-700 text-white`}
+          className={`${buttonBase} bg-brand text-white`}
         >
           {t('reading.start')}
         </button>
@@ -80,7 +80,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       grammarFor={explainer ? (ex) => sectionFor(explainer, ex, lesson.title) : undefined}
       aside={
         passage && (
-          <details className="rounded-xl border border-stone-200 bg-white p-3 dark:border-stone-800 dark:bg-stone-900">
+          <details className="rounded-xl border border-line bg-surface p-3">
             <summary className="min-h-11 cursor-pointer content-center font-medium">
               {t('reading.show')}
             </summary>

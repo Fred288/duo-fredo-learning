@@ -38,14 +38,14 @@ export function App() {
   }, [onHome, openLookup]);
 
   return (
-    <div className="min-h-dvh bg-stone-50 text-stone-900 dark:bg-stone-950 dark:text-stone-100">
+    <div className="min-h-dvh bg-canvas text-ink">
       <main className="mx-auto max-w-xl px-4 py-6">
         {screen.name === 'home' && (
           <>
             <header className="flex items-start justify-between gap-3">
               <div>
                 <h1 className="text-2xl font-semibold">{t('app.title')}</h1>
-                <p className="mt-1 text-stone-600 dark:text-stone-400">{t('app.tagline')}</p>
+                <p className="mt-1 text-ink-muted">{t('app.tagline')}</p>
               </div>
               <div className="flex">
                 <button
@@ -53,7 +53,7 @@ export function App() {
                   onClick={openLookup}
                   aria-label={t('home.lookup')}
                   aria-keyshortcuts="/"
-                  className="min-h-11 min-w-11 rounded-lg hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:hover:bg-stone-800"
+                  className="min-h-11 min-w-11 rounded-lg hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
                 >
                   <svg
                     aria-hidden="true"
@@ -73,7 +73,7 @@ export function App() {
                   type="button"
                   onClick={openSettings}
                   aria-label={t('home.settings')}
-                  className="min-h-11 min-w-11 rounded-lg text-xl hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:hover:bg-stone-800"
+                  className="min-h-11 min-w-11 rounded-lg text-xl hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
                 >
                   <svg
                     aria-hidden="true"

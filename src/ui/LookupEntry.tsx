@@ -50,13 +50,13 @@ const caseLabel = (c: string): string =>
 const th = 'px-2 py-1 text-left font-medium';
 const td = 'px-2 py-1';
 // Zeilenkopf bleibt beim waagerechten Scrollen stehen (breite Verbtabellen auf dem Handy).
-const rowHead = `${th} sticky left-0 bg-white dark:bg-stone-900`;
-const rowLine = 'border-b border-stone-100 dark:border-stone-800';
+const rowHead = `${th} sticky left-0 bg-surface`;
+const rowLine = 'border-b border-line';
 
 /** Aufklappbarer Kasten mit einer waagerecht scrollbaren Tabelle (Formen türkisch). */
 function FormDetails({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <details className="rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900">
+    <details className="rounded-xl border border-line bg-surface p-4">
       <summary className="cursor-pointer font-medium">{title}</summary>
       <div className="relative mt-2 overflow-x-auto" lang="tr">
         <table className="w-full text-sm">{children}</table>
@@ -76,7 +76,7 @@ function PersonTable({
   return (
     <>
       <thead>
-        <tr className="border-b border-stone-200 dark:border-stone-800">
+        <tr className="border-b border-line">
           <th className={rowHead} lang="de" />
           {columns.map((c, i) => (
             <th key={i} className={`${th} whitespace-nowrap`} scope="col" lang="de" title={c.full}>
@@ -126,7 +126,7 @@ function Forms({ entry }: { entry: VocabEntry }) {
   return (
     <FormDetails title={t('lookup.forms')}>
       <thead>
-        <tr className="border-b border-stone-200 dark:border-stone-800">
+        <tr className="border-b border-line">
           {table.kind === 'noun' && (
             <>
               <th className={th} lang="de" />
@@ -221,9 +221,9 @@ function SrsStatus({ cards, id }: { cards: readonly Card[]; id: string }) {
     <section>
       <h3 className="font-medium">{t('lookup.srs.title')}</h3>
       {dirs.length === 0 ? (
-        <p className="text-sm text-stone-600 dark:text-stone-400">{t('lookup.srs.none')}</p>
+        <p className="text-sm text-ink-muted">{t('lookup.srs.none')}</p>
       ) : (
-        <ul className="text-sm text-stone-600 dark:text-stone-400">
+        <ul className="text-sm text-ink-muted">
           {dirs.map((d) => (
             <li key={d}>
               {t('lookup.srs.card', {
@@ -270,7 +270,7 @@ export function LookupEntry({
           {speechText(entry.tr) && <ShadowButton text={speechText(entry.tr)!} />}
         </div>
         <p className="mt-1">{entry.de.join(', ')}</p>
-        <p className="text-sm text-stone-600 dark:text-stone-400">
+        <p className="text-sm text-ink-muted">
           {t(`pos.${entry.pos}`)}
           {entry.register &&
             ` · ${t(entry.register === 'formal' ? 'lookup.formal' : 'lookup.informal')}`}
@@ -288,7 +288,7 @@ export function LookupEntry({
               <button
                 type="button"
                 onClick={() => openExplainer(unit.id, { from: 'lookup' })}
-                className="min-h-11 rounded-lg px-2 text-teal-700 underline focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-teal-400"
+                className="min-h-11 rounded-lg px-2 text-brand-ink underline focus-visible:outline-2 focus-visible:outline-focus"
               >
                 {t('lookup.explainer')}
               </button>

@@ -85,7 +85,7 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
   return (
     <div className="space-y-4">
       <Prompt instruction={t(`ex.paradigm.${ex.kind}`)} text={formula} ex={ex} lang="de" />
-      {ex.gloss_de && <p className="-mt-2 text-stone-600 dark:text-stone-400">„{ex.gloss_de}“</p>}
+      {ex.gloss_de && <p className="-mt-2 text-ink-muted">„{ex.gloss_de}“</p>}
       <div className="space-y-2">
         {labels.map((label, i) => (
           <div
@@ -94,7 +94,7 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
           >
             <label
               htmlFor={`${ex.id}-cell-${i}`}
-              className="text-sm text-stone-600 dark:text-stone-400"
+              className="text-sm text-ink-muted"
             >
               {label}
             </label>
@@ -125,22 +125,22 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
                 autoCorrect="off"
                 spellCheck={false}
                 aria-invalid={results ? !results[i] : undefined}
-                className={`min-h-11 w-full rounded-lg border bg-white px-3 text-lg focus-visible:outline-2 focus-visible:outline-teal-600 dark:bg-stone-900 ${
+                className={`min-h-11 w-full rounded-lg border bg-surface px-3 text-lg focus-visible:outline-2 focus-visible:outline-focus ${
                   results
                     ? results[i]
-                      ? 'border-emerald-500'
-                      : 'border-rose-500'
-                    : 'border-stone-300 dark:border-stone-700'
+                      ? 'border-success-edge'
+                      : 'border-danger-edge'
+                    : 'border-line-strong'
                 }`}
               />
               {results && (
                 <p className="mt-1 text-sm" lang="tr">
                   {results[i] ? (
-                    <span className="text-emerald-700 dark:text-emerald-400">
+                    <span className="text-success">
                       ✓ {t('ex.paradigm.ok')}
                     </span>
                   ) : (
-                    <span className="text-rose-700 dark:text-rose-400">
+                    <span className="text-danger">
                       ✗ {t('ex.paradigm.expected', { form: ex.targets[i]! })}
                     </span>
                   )}

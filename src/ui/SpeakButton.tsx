@@ -2,9 +2,9 @@ import { t } from '../i18n';
 import { speak, useCanSpeak } from '../store/audio';
 
 const small =
-  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-stone-600 hover:bg-stone-200 focus-visible:outline-2 focus-visible:outline-teal-600 dark:text-stone-400 dark:hover:bg-stone-800';
+  'inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 const large =
-  'inline-flex min-h-14 flex-1 items-center justify-center gap-2 rounded-xl border border-stone-300 bg-white px-5 font-medium hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-stone-700 dark:bg-stone-900 dark:hover:bg-stone-800';
+  'inline-flex min-h-14 flex-1 items-center justify-center gap-2 rounded-xl border border-line-strong bg-surface px-5 font-medium hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
 const Icon = () => (
   <svg

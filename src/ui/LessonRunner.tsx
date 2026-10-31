@@ -26,7 +26,7 @@ import { GrammarHint } from './GrammarHint';
 import { ReportError } from './ReportError';
 
 const buttonBase =
-  'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 disabled:opacity-40';
+  'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-40';
 
 interface Props {
   lesson: Lesson;
@@ -74,7 +74,7 @@ export function LessonRunner(props: Props) {
   const loading = useAudio((s) => s.status === 'loading');
   const audioEnabled = useSettings((s) => s.audioEnabled);
   const needsVoice = audioEnabled && props.lesson.exercises.some((e) => e.type === 'listen');
-  if (needsVoice && loading) return <p className="text-stone-500">{t('audio.status.loading')}</p>;
+  if (needsVoice && loading) return <p className="text-ink-subtle">{t('audio.status.loading')}</p>;
   return <Runner {...props} canListen={can} />;
 }
 
@@ -175,7 +175,7 @@ function Runner({
           {exercises.length > 0 && (
             <button
               type="button"
-              className={`${buttonBase} bg-stone-200 dark:bg-stone-800`}
+              className={`${buttonBase} bg-fill`}
               onClick={() => setSession(createSession(exercises))}
             >
               {t('done.again')}
@@ -184,7 +184,7 @@ function Runner({
           <button
             type="button"
             autoFocus
-            className={`${buttonBase} bg-teal-700 text-white`}
+            className={`${buttonBase} bg-brand text-white`}
             onClick={onExit}
           >
             {t('done.home')}
@@ -208,7 +208,7 @@ function Runner({
         <button
           type="button"
           onClick={onExit}
-          className="min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800"
+          className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
         >
           ← {t('runner.back')}
         </button>
@@ -218,10 +218,10 @@ function Runner({
           aria-valuemin={0}
           aria-valuemax={total}
           aria-valuenow={session.index}
-          className="h-2 flex-1 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-800"
+          className="h-2 flex-1 overflow-hidden rounded-full bg-fill"
         >
           <div
-            className="h-full bg-teal-600 transition-[width]"
+            className="h-full bg-brand-bar transition-[width]"
             style={{ width: `${(session.index / total) * 100}%` }}
           />
         </div>
@@ -249,7 +249,7 @@ function Runner({
             type="button"
             onClick={check}
             disabled={!answer.trim()}
-            className={`${buttonBase} bg-teal-700 text-white`}
+            className={`${buttonBase} bg-brand text-white`}
           >
             {t('runner.check')}
           </button>
@@ -261,7 +261,7 @@ function Runner({
                 setAnswer('');
                 setSession((s) => skip(s, { sameType: true }));
               }}
-              className={`${buttonBase} bg-stone-200 dark:bg-stone-800`}
+              className={`${buttonBase} bg-fill`}
             >
               {t('ex.listen.skip')}
             </button>
@@ -296,7 +296,7 @@ function Runner({
             type="button"
             autoFocus
             onClick={proceed}
-            className={`${buttonBase} bg-teal-700 text-white`}
+            className={`${buttonBase} bg-brand text-white`}
           >
             {t('runner.continue')}
           </button>

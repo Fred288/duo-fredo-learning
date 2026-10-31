@@ -13,11 +13,11 @@ import { currentPlacement } from '../placement/record';
 import { useProgress } from '../store/progress';
 
 const backButton =
-  'min-h-11 rounded-lg px-3 text-stone-600 hover:bg-stone-200 dark:text-stone-400 dark:hover:bg-stone-800';
+  'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover';
 const rowButton =
-  'flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:hover:bg-stone-800';
+  'flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 const card =
-  'rounded-xl border border-stone-200 bg-white p-4 dark:border-stone-800 dark:bg-stone-900';
+  'rounded-xl border border-line bg-surface p-4';
 
 /** 'YYYY-MM-DD' → Heute / Morgen / 30.10. */
 function dayLabel(day: string, today: string): string {
@@ -36,20 +36,20 @@ function Boxes({ counts, label }: { counts: BoxCounts; label: string }) {
       <ul className="space-y-1">
         {counts.boxes.map((n, i) => (
           <li key={i} className="flex items-center gap-3 text-sm">
-            <span className="w-36 shrink-0 text-stone-600 dark:text-stone-400">
+            <span className="w-36 shrink-0 text-ink-muted">
               {t('stats.box', { box: i + 1, days: INTERVALS[i] ?? '' })}
             </span>
             <span
               aria-hidden="true"
-              className="h-2 flex-1 overflow-hidden rounded-full bg-stone-100 dark:bg-stone-800"
+              className="h-2 flex-1 overflow-hidden rounded-full bg-fill-soft"
             >
-              <span className="block h-full bg-teal-600" style={{ width: `${(n / max) * 100}%` }} />
+              <span className="block h-full bg-brand-bar" style={{ width: `${(n / max) * 100}%` }} />
             </span>
             <span className="w-8 text-right tabular-nums">{n}</span>
           </li>
         ))}
       </ul>
-      <p className="text-sm text-stone-500">{t('stats.unseen', { count: counts.unseen })}</p>
+      <p className="text-sm text-ink-subtle">{t('stats.unseen', { count: counts.unseen })}</p>
     </div>
   );
 }
@@ -112,9 +112,9 @@ export function StatsScreen() {
       </header>
 
       {failed ? (
-        <p className="text-rose-700 dark:text-rose-400">{t('home.error')}</p>
+        <p className="text-danger">{t('home.error')}</p>
       ) : !data ? (
-        <p className="text-stone-500">{t('home.loading')}</p>
+        <p className="text-ink-subtle">{t('home.loading')}</p>
       ) : (
         <>
           <section className={`${card} space-y-4`} aria-labelledby="stats-words">
@@ -131,8 +131,8 @@ export function StatsScreen() {
             </h2>
             <ul className="mt-2 grid grid-cols-7 gap-1 text-center text-sm">
               {data.due.map((d) => (
-                <li key={d.day} className="rounded-lg bg-stone-100 px-1 py-2 dark:bg-stone-800">
-                  <span className="block text-xs text-stone-500">{dayLabel(d.day, today)}</span>
+                <li key={d.day} className="rounded-lg bg-fill-soft px-1 py-2">
+                  <span className="block text-xs text-ink-subtle">{dayLabel(d.day, today)}</span>
                   <span className="block tabular-nums">{d.count}</span>
                 </li>
               ))}
@@ -144,7 +144,7 @@ export function StatsScreen() {
               {t('stats.hard')}
             </h2>
             {data.hardWords.length + data.hardForms.length === 0 ? (
-              <p className="mt-2 text-sm text-stone-500">{t('stats.hard.none')}</p>
+              <p className="mt-2 text-sm text-ink-subtle">{t('stats.hard.none')}</p>
             ) : (
               <>
                 {data.hardWords.length > 0 && (
@@ -166,16 +166,16 @@ export function StatsScreen() {
                                   {v?.tr ?? (c.ref.kind === 'vocab' ? c.ref.vocabId : c.id)}
                                 </span>
                                 {v && (
-                                  <span className="text-stone-600 dark:text-stone-400">
+                                  <span className="text-ink-muted">
                                     {' '}
                                     · {v.de.join(', ')}
                                   </span>
                                 )}
-                                <span className="block text-xs text-stone-500">
+                                <span className="block text-xs text-ink-subtle">
                                   {c.ref.kind === 'vocab' && t(`lookup.srs.${c.ref.dir}`)}
                                 </span>
                               </span>
-                              <span className="shrink-0 text-sm text-stone-500">
+                              <span className="shrink-0 text-sm text-ink-subtle">
                                 {t('stats.lapses', { count: c.lapses })}
                               </span>
                             </button>
@@ -202,12 +202,12 @@ export function StatsScreen() {
                               <span>
                                 <span className="font-medium">{at?.lesson.title ?? c.id}</span>
                                 {at && (
-                                  <span className="block text-xs text-stone-500">
+                                  <span className="block text-xs text-ink-subtle">
                                     {at.unit.title}
                                   </span>
                                 )}
                               </span>
-                              <span className="shrink-0 text-sm text-stone-500">
+                              <span className="shrink-0 text-sm text-ink-subtle">
                                 {t('stats.lapses', { count: c.lapses })}
                               </span>
                             </button>
@@ -225,12 +225,12 @@ export function StatsScreen() {
             <h2 id="stats-units" className="font-medium">
               {t('stats.units')}
             </h2>
-            <p className="mt-1 text-xs text-stone-500">{t('stats.units.hint')}</p>
-            <ul className="mt-2 divide-y divide-stone-200 dark:divide-stone-800">
+            <p className="mt-1 text-xs text-ink-subtle">{t('stats.units.hint')}</p>
+            <ul className="mt-2 divide-y divide-line">
               {data.units.map((u) => (
                 <li key={u.id} className="py-2 text-sm">
                   <span className="block font-medium">{u.title}</span>
-                  <span className="block text-stone-600 dark:text-stone-400">
+                  <span className="block text-ink-muted">
                     {[
                       t('home.unitProgress', { done: u.done, total: u.total }),
                       u.accuracy === undefined

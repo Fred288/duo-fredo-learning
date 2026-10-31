@@ -33,10 +33,10 @@ export function MultipleChoiceInput({ ex, value, onChange, disabled }: Props) {
           return (
             <label
               key={option}
-              className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 has-focus-visible:outline-2 has-focus-visible:outline-teal-600 ${
+              className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 has-focus-visible:outline-2 has-focus-visible:outline-focus ${
                 selected
-                  ? 'border-teal-600 bg-teal-50 dark:bg-teal-950'
-                  : 'border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900'
+                  ? 'border-brand-edge bg-brand-soft'
+                  : 'border-line bg-surface'
               }`}
             >
               <input
@@ -48,7 +48,7 @@ export function MultipleChoiceInput({ ex, value, onChange, disabled }: Props) {
                 onChange={() => onChange(option)}
                 className="sr-only"
               />
-              <kbd className="text-xs text-stone-400">{i + 1}</kbd>
+              <kbd className="text-xs text-ink-subtle">{i + 1}</kbd>
               <span lang="tr">{option}</span>
             </label>
           );

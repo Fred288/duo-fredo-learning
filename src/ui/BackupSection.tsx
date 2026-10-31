@@ -13,7 +13,7 @@ import { dayKey } from '../progress/day';
 import { useSettings } from '../store/settings';
 
 const button =
-  'min-h-11 w-full rounded-lg border border-stone-300 px-4 text-left hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-stone-700 dark:hover:bg-stone-800';
+  'min-h-11 w-full rounded-lg border border-line-strong px-4 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
 /** 'YYYY-MM-DD' → 28.10.2026 */
 const formatDay = (day: string) => {
@@ -155,15 +155,15 @@ export function BackupSection() {
   return (
     <fieldset className="space-y-2">
       <legend className="mb-1 font-medium">{t('backup.title')}</legend>
-      <p className="text-sm text-stone-500">{t('backup.privacy')}</p>
-      <p className="text-sm text-stone-500">
+      <p className="text-sm text-ink-subtle">{t('backup.privacy')}</p>
+      <p className="text-sm text-ink-subtle">
         {lastBackup ? t('backup.last', { date: formatDay(lastBackup) }) : t('backup.last.never')}
       </p>
       <button type="button" disabled={busy} onClick={() => void onExport()} className={button}>
         {t('backup.export')}
       </button>
       <label
-        className={`${button} flex cursor-pointer items-center has-focus-visible:outline-2 has-focus-visible:outline-teal-600`}
+        className={`${button} flex cursor-pointer items-center has-focus-visible:outline-2 has-focus-visible:outline-focus`}
       >
         {t('backup.import')}
         <input
@@ -178,7 +178,7 @@ export function BackupSection() {
 
       {pending && data && merge && replace && (
         <div
-          className="space-y-3 rounded-lg border border-stone-300 p-3 dark:border-stone-700"
+          className="space-y-3 rounded-lg border border-line-strong p-3"
           role="group"
           aria-labelledby="backup-preview"
         >
@@ -195,7 +195,7 @@ export function BackupSection() {
             })}
           </p>
           {skipped > 0 && (
-            <p className="text-sm text-amber-700 dark:text-amber-400">
+            <p className="text-sm text-warn">
               {t('backup.skipped', { count: skipped })}
             </p>
           )}
@@ -212,12 +212,12 @@ export function BackupSection() {
                     setMode(m);
                     setConfirming(false);
                   }}
-                  className="mt-1 size-5 accent-teal-700"
+                  className="mt-1 size-5 accent-brand"
                 />
                 <span>
                   <span className="block">{t(`backup.mode.${m}`)}</span>
-                  <span className="block text-sm text-stone-500">{t(`backup.mode.${m}.hint`)}</span>
-                  <span className="block text-sm text-stone-500">
+                  <span className="block text-sm text-ink-subtle">{t(`backup.mode.${m}.hint`)}</span>
+                  <span className="block text-sm text-ink-subtle">
                     {m === 'merge'
                       ? t('backup.mode.merge.effect', {
                           ...merge.added,
@@ -234,7 +234,7 @@ export function BackupSection() {
             ))}
           </fieldset>
           {confirming && (
-            <p role="alert" className="text-sm text-red-700 dark:text-red-400">
+            <p role="alert" className="text-sm text-danger">
               {t('backup.confirm')}
             </p>
           )}
@@ -243,14 +243,14 @@ export function BackupSection() {
               type="button"
               disabled={busy}
               onClick={() => void onApply()}
-              className="min-h-11 flex-1 rounded-lg bg-teal-700 px-4 text-white hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-teal-600 disabled:opacity-40"
+              className="min-h-11 flex-1 rounded-lg bg-brand px-4 text-white hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-40"
             >
               {confirming ? t('backup.confirm.yes') : t('backup.apply')}
             </button>
             <button
               type="button"
               onClick={reset}
-              className="min-h-11 rounded-lg border border-stone-300 px-4 hover:bg-stone-100 dark:border-stone-700 dark:hover:bg-stone-800"
+              className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
             >
               {t('backup.cancel')}
             </button>
@@ -261,7 +261,7 @@ export function BackupSection() {
       {message && (
         <p
           role={message.kind === 'error' ? 'alert' : 'status'}
-          className={`text-sm ${message.kind === 'error' ? 'text-red-700 dark:text-red-400' : 'text-teal-800 dark:text-teal-300'}`}
+          className={`text-sm ${message.kind === 'error' ? 'text-danger' : 'text-brand-ink'}`}
         >
           {t(message.key)}
         </p>

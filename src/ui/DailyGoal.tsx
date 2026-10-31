@@ -20,7 +20,7 @@ export function DailyGoal() {
       <div className="flex items-baseline justify-between gap-3 text-sm">
         <span>{done >= goal ? t('goal.reached') : label}</span>
         {showStreak && days > 0 && (
-          <span className="text-stone-500">
+          <span className="text-ink-subtle">
             {days === 1 ? t('goal.streak.one') : t('goal.streak.many', { count: days })}
           </span>
         )}
@@ -31,10 +31,10 @@ export function DailyGoal() {
         aria-valuemin={0}
         aria-valuemax={goal}
         aria-valuenow={Math.min(done, goal)}
-        className="h-2 overflow-hidden rounded-full bg-stone-200 dark:bg-stone-800"
+        className="h-2 overflow-hidden rounded-full bg-fill"
       >
         <div
-          className="h-full bg-teal-600 transition-[width]"
+          className="h-full bg-brand-bar transition-[width]"
           style={{ width: `${(Math.min(done, goal) / goal) * 100}%` }}
         />
       </div>

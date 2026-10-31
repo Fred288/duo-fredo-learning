@@ -27,7 +27,7 @@ export function ListenInput({ ex, value, onChange, disabled }: Props) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-stone-500">{t(`ex.listen.${ex.mode}`)}</p>
+      <p className="text-sm text-ink-subtle">{t(`ex.listen.${ex.mode}`)}</p>
       {!disabled && <SpeakButton text={ex.text} size="large" />}
       {ex.mode === 'tiles' && <Tiles ex={ex} onChange={onChange} disabled={disabled} />}
       {ex.mode === 'dictation' && (
@@ -42,7 +42,7 @@ export function ListenInput({ ex, value, onChange, disabled }: Props) {
           <p className="text-xl font-medium" lang="tr">
             {ex.text}
           </p>
-          {ex.gloss_de && <p className="text-stone-600 dark:text-stone-400">„{ex.gloss_de}“</p>}
+          {ex.gloss_de && <p className="text-ink-muted">„{ex.gloss_de}“</p>}
         </div>
       )}
     </div>
@@ -90,7 +90,7 @@ function Dictation({ value, onChange, disabled }: Omit<Props, 'ex'>) {
         autoComplete="off"
         autoCorrect="off"
         spellCheck={false}
-        className="min-h-12 w-full rounded-xl border border-stone-300 bg-white px-4 text-lg focus-visible:outline-2 focus-visible:outline-teal-600 dark:border-stone-700 dark:bg-stone-900"
+        className="min-h-12 w-full rounded-xl border border-line-strong bg-surface px-4 text-lg focus-visible:outline-2 focus-visible:outline-focus"
       />
       <SpecialCharBar onInsert={insert} disabled={disabled} />
     </>
@@ -117,10 +117,10 @@ function Meaning({ ex, value, onChange, disabled }: Props) {
         return (
           <label
             key={option}
-            className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 has-focus-visible:outline-2 has-focus-visible:outline-teal-600 ${
+            className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 has-focus-visible:outline-2 has-focus-visible:outline-focus ${
               selected
-                ? 'border-teal-600 bg-teal-50 dark:bg-teal-950'
-                : 'border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900'
+                ? 'border-brand-edge bg-brand-soft'
+                : 'border-line bg-surface'
             }`}
           >
             <input
@@ -132,7 +132,7 @@ function Meaning({ ex, value, onChange, disabled }: Props) {
               onChange={() => onChange(option)}
               className="sr-only"
             />
-            <kbd className="text-xs text-stone-400">{i + 1}</kbd>
+            <kbd className="text-xs text-ink-subtle">{i + 1}</kbd>
             <span lang="de">{option}</span>
           </label>
         );

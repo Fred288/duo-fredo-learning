@@ -19,7 +19,7 @@ export function SpecialCharBar({
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => onInsert(c)}
           aria-label={t('chars.insert', { char: c })}
-          className="min-h-11 min-w-11 rounded-lg border border-stone-300 bg-white text-lg focus-visible:outline-2 focus-visible:outline-teal-600 disabled:opacity-40 dark:border-stone-700 dark:bg-stone-900"
+          className="min-h-11 min-w-11 rounded-lg border border-line-strong bg-surface text-lg focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-40"
         >
           {c}
         </button>
