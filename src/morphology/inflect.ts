@@ -59,6 +59,7 @@ export const KNOWN_LIMITS = [
   'Frage mit ise (geliyor muysa) nicht gebildet',
   'benimki/seninki: Pronomen + -ki nur als Text, nicht über die Engine',
   'Unregelmäßiges Passiv (anlamak → anlaşılmak) nicht abgedeckt',
+  'Mehrwort-Komposita (`compound_stem`): Nachschlagen führt nur die ganze Wendung zurück (trafik ışığında, nicht ışığında), Lesetexte erkennen sie gebeugt nicht als Wendung',
 ] as const;
 
 export const asStem = (input: Stem | string): Stem =>
