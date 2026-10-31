@@ -156,7 +156,7 @@ export function RepeatScreen() {
           type="button"
           autoFocus
           onClick={goHome}
-          className="min-h-12 w-full rounded-xl bg-brand px-5 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+          className="min-h-12 w-full rounded-xl bg-brand px-5 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t('done.home')}
         </button>

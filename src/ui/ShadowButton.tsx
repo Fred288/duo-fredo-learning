@@ -114,7 +114,7 @@ export function ShadowButton({ text }: { text: string }) {
         aria-label={
           state === 'recording' ? t('shadow.stop', { text }) : t('shadow.record', { text })
         }
-        className={`${small} ${state === 'recording' ? 'bg-danger-soft text-danger' : ''}`}
+        className={`${small} ${state === 'recording' ? 'bg-danger-soft text-danger ring-1 ring-danger-edge' : ''}`}
       >
         <Mic />
       </button>

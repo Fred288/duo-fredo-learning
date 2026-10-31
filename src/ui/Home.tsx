@@ -106,7 +106,7 @@ export function Home() {
                 setSetting('placementOffered', true);
                 openPlacement();
               }}
-              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
               {t('placement.offer.start')}
             </button>

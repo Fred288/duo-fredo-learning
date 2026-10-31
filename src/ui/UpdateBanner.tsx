@@ -18,7 +18,7 @@ export function UpdateBanner() {
   return (
     <div
       role="status"
-      className="fixed inset-x-4 bottom-4 z-10 mx-auto flex max-w-xl items-center justify-between gap-3 rounded-xl border border-line-strong bg-surface p-3 text-sm shadow-lg"
+      className="fixed inset-x-4 bottom-[calc(1rem+var(--safe-bottom))] z-10 mx-auto flex max-w-xl items-center justify-between gap-3 rounded-xl border border-line-strong bg-surface p-3 text-sm shadow-lg"
     >
       <span>{needRefresh ? t('pwa.update') : t('pwa.offlineReady')}</span>
       <span className="flex gap-2">
@@ -26,7 +26,7 @@ export function UpdateBanner() {
           <button
             type="button"
             onClick={() => void updateServiceWorker(true)}
-            className="min-h-11 rounded-lg bg-brand px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
           >
             {t('pwa.reload')}
           </button>

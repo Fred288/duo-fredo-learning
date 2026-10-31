@@ -61,7 +61,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
         <button
           type="button"
           onClick={() => setReading(false)}
-          className={`${buttonBase} bg-brand text-white`}
+          className={`${buttonBase} bg-brand text-on-brand`}
         >
           {t('reading.start')}
         </button>

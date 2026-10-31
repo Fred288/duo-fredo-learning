@@ -40,7 +40,7 @@ function WordSheet({
       role="dialog"
       tabIndex={-1}
       aria-label={t('reading.word', { word: token.text })}
-      className="fixed inset-x-0 bottom-0 z-10 max-h-[70dvh] overflow-y-auto rounded-t-2xl border-t border-line-strong bg-surface p-4 shadow-lg outline-none"
+      className="fixed inset-x-0 bottom-0 z-10 max-h-[70dvh] overflow-y-auto rounded-t-2xl border-t border-line-strong bg-surface p-4 pb-[calc(1rem+var(--safe-bottom))] shadow-lg outline-none"
     >
       <div className="mx-auto max-w-xl space-y-3">
         <div className="flex items-start justify-between gap-3">

@@ -61,12 +61,12 @@ export function applyTheme(theme: Theme): void {
 }
 
 // „System“ folgt einem Wechsel im Betriebssystem auch während die App läuft.
-if (typeof window !== 'undefined') {
-  window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
-    const { theme } = useSettings.getState();
-    if (theme === 'system') applyTheme(theme);
-  });
-}
+const systemTheme =
+  typeof window === 'undefined' ? undefined : window.matchMedia?.('(prefers-color-scheme: dark)');
+systemTheme?.addEventListener?.('change', () => {
+  const { theme } = useSettings.getState();
+  if (theme === 'system') applyTheme(theme);
+});
 
 export const useSettings = create<SettingsState>((set) => ({
   ...DEFAULT_SETTINGS,

@@ -184,7 +184,7 @@ function Runner({
           <button
             type="button"
             autoFocus
-            className={`${buttonBase} bg-brand text-white`}
+            className={`${buttonBase} bg-brand text-on-brand`}
             onClick={onExit}
           >
             {t('done.home')}
@@ -249,7 +249,7 @@ function Runner({
             type="button"
             onClick={check}
             disabled={!answer.trim()}
-            className={`${buttonBase} bg-brand text-white`}
+            className={`${buttonBase} bg-brand text-on-brand`}
           >
             {t('runner.check')}
           </button>
@@ -296,7 +296,7 @@ function Runner({
             type="button"
             autoFocus
             onClick={proceed}
-            className={`${buttonBase} bg-brand text-white`}
+            className={`${buttonBase} bg-brand text-on-brand`}
           >
             {t('runner.continue')}
           </button>

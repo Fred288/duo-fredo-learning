@@ -59,7 +59,7 @@ export function PlacementScreen() {
             setFailed(false);
             setTries((n) => n + 1);
           }}
-          className={`${buttonBase} bg-brand text-white`}
+          className={`${buttonBase} bg-brand text-on-brand`}
         >
           {t('placement.retry')}
         </button>
@@ -103,7 +103,7 @@ function Intro({ onStart, onBack }: { onStart: () => void; onBack: () => void })
         type="button"
         autoFocus
         onClick={onStart}
-        className={`${buttonBase} bg-brand text-white`}
+        className={`${buttonBase} bg-brand text-on-brand`}
       >
         {t('placement.intro.start')}
       </button>
@@ -227,7 +227,7 @@ function Question({
               type="button"
               autoFocus
               onClick={() => setLeaving(false)}
-              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
             >
               {t('placement.leave.keep')}
             </button>
@@ -261,7 +261,7 @@ function Question({
               onClick={(e) => !repeated(e) && send(false)}
               onKeyDown={noKeyRepeat}
               disabled={!value.trim()}
-              className={`${buttonBase} bg-brand text-white`}
+              className={`${buttonBase} bg-brand text-on-brand`}
             >
               {t('runner.continue')}
             </button>
@@ -348,7 +348,7 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
             if (rec.startUnit) goHomeTo(rec.startUnit);
             else goHome();
           }}
-          className={`${buttonBase} bg-brand text-white`}
+          className={`${buttonBase} bg-brand text-on-brand`}
         >
           {t('placement.accept')}
         </button>

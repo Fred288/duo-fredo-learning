@@ -243,7 +243,7 @@ export function BackupSection() {
               type="button"
               disabled={busy}
               onClick={() => void onApply()}
-              className="min-h-11 flex-1 rounded-lg bg-brand px-4 text-white hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-40"
+              className="min-h-11 flex-1 rounded-lg bg-brand px-4 text-on-brand hover:bg-brand-strong focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-40"
             >
               {confirming ? t('backup.confirm.yes') : t('backup.apply')}
             </button>

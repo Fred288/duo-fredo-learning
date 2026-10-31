@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 /** Liest die Token-Werte aus `index.css` (ein Block je Thema). */
@@ -22,11 +23,21 @@ export function contrast(a: string, b: string): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
+// Getönte Flächen: Karten mit Hover, Feedback-Boxen.
+const TINTS = [
+  'brand-soft',
+  'brand-soft-hover',
+  'warn-soft',
+  'warn-soft-hover',
+  'danger-soft',
+  'success-soft',
+];
+
 // Text (Vordergrund, Hintergründe), mindestens 4,5:1 (WCAG AA).
 const TEXT: Record<string, string[]> = {
-  ink: ['canvas', 'surface', 'fill-soft', 'fill', 'hover', 'brand-soft', 'warn-soft', 'danger-soft'],
-  'ink-muted': ['canvas', 'surface', 'fill-soft', 'hover'],
-  'ink-subtle': ['canvas', 'surface', 'fill-soft'],
+  ink: ['canvas', 'surface', 'fill-soft', 'fill', 'hover', ...TINTS],
+  'ink-muted': ['canvas', 'surface', 'fill-soft', 'hover', ...TINTS],
+  'ink-subtle': ['canvas', 'surface', 'fill-soft', 'hover'],
   'brand-ink': ['canvas', 'surface', 'brand-soft', 'brand-soft-hover', 'hover'],
   warn: ['canvas', 'surface'],
   'warn-ink': ['warn-soft', 'warn-soft-hover'],
@@ -35,6 +46,7 @@ const TEXT: Record<string, string[]> = {
   success: ['canvas', 'surface', 'success-soft'],
   'success-ink': ['success-soft'],
   'on-inverse': ['inverse'],
+  'on-brand': ['brand', 'brand-strong'],
 };
 
 // Bedienelemente und Rahmen von Zuständen: mindestens 3:1 (WCAG 1.4.11).
@@ -43,6 +55,7 @@ const UI: Record<string, string[]> = {
   'brand-edge': ['canvas', 'surface'],
   'danger-edge': ['canvas', 'surface'],
   'success-edge': ['canvas', 'surface'],
+  'brand-bar': ['fill', 'fill-soft'],
 };
 
 for (const [name, selector] of [['hell', ':root'], ['dunkel', '.dark']] as const) {
@@ -64,13 +77,23 @@ for (const [name, selector] of [['hell', ':root'], ['dunkel', '.dark']] as const
         });
       }
     }
-    it('weißer Text auf Markenfläche ≥ 4,5', () => {
-      expect(contrast('#ffffff', t.brand!)).toBeGreaterThanOrEqual(4.5);
-      expect(contrast('#ffffff', t['brand-strong']!)).toBeGreaterThanOrEqual(4.5);
-    });
   });
 }
 
 it('beide Themen definieren dieselben Tokens', () => {
   expect(Object.keys(tokens('.dark')).sort()).toEqual(Object.keys(tokens(':root')).sort());
+});
+
+function sources(dir: string): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const path = join(dir, e.name);
+    if (e.isDirectory()) return sources(path);
+    return /\.tsx$/.test(e.name) && !/\.test\./.test(e.name) ? [path] : [];
+  });
+}
+
+it('Komponenten nutzen nur Tokens: keine festen Farben, kein dark:', () => {
+  const fixed =
+    /\bdark:|\b(?:bg|text|border|divide|decoration|accent|outline)-(?:white|black|stone|teal|amber|rose|red|emerald)\b/;
+  expect(sources('src').filter((f) => fixed.test(readFileSync(f, 'utf8')))).toEqual([]);
 });

@@ -39,7 +39,7 @@ export function App() {
 
   return (
     <div className="min-h-dvh bg-canvas text-ink">
-      <main className="mx-auto max-w-xl px-4 py-6">
+      <main className="mx-auto max-w-xl px-4 pt-[calc(1.5rem+var(--safe-top))] pb-[calc(1.5rem+var(--safe-bottom))]">
         {screen.name === 'home' && (
           <>
             <header className="flex items-start justify-between gap-3">
