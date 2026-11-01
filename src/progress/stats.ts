@@ -39,6 +39,26 @@ export function streak(days: ReadonlySet<string>, today: string): number {
   return count;
 }
 
+/**
+ * Serie mit übernommenem Startwert: `carry` gilt bis einschließlich `carryDay`, eigene Tage danach
+ * zählen oben drauf. Fehlt ein Tag dazwischen, fällt der Startwert weg.
+ */
+export function carriedStreak(
+  days: ReadonlySet<string>,
+  today: string,
+  carry: number,
+  carryDay: string,
+): number {
+  if (carry <= 0 || !carryDay) return streak(days, today);
+  let cursor = days.has(today) ? today : addDays(today, -1);
+  let count = 0;
+  while (cursor > carryDay && days.has(cursor)) {
+    count++;
+    cursor = addDays(cursor, -1);
+  }
+  return cursor <= carryDay ? carry + count : streak(days, today);
+}
+
 export const activeDays = (completions: readonly Completion[]): Set<string> =>
   new Set(completions.map((c) => c.day));
 

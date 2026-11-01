@@ -182,6 +182,9 @@ export const de = {
   'settings.newWords.dec': 'Neue Wörter verringern',
   'settings.newWords.inc': 'Neue Wörter erhöhen',
   'settings.streak': 'Serie anzeigen',
+  'settings.streakCarry': 'Bisherige Serie (Tage)',
+  'settings.streakCarry.hint':
+    'Aus einer anderen App, gilt ab heute. Eigene Tage zählen oben drauf; lässt du einen Tag aus, fällt der Wert weg.',
   'settings.tolerate': 'Fehlende Sonderzeichen tolerieren',
   'settings.tolerate.hint': 'Zum Beispiel s statt ş: richtig, aber mit Hinweis.',
   'settings.audio': 'Audio',

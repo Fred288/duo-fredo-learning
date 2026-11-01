@@ -1,6 +1,6 @@
 import { t } from '../i18n';
 import { dayKey } from '../progress/day';
-import { activeDays, lessonsOnDay, streak } from '../progress/stats';
+import { activeDays, carriedStreak, lessonsOnDay } from '../progress/stats';
 import { useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
 
@@ -9,10 +9,12 @@ export function DailyGoal() {
   const completions = useProgress((s) => s.completions);
   const goal = useSettings((s) => s.dailyGoal);
   const showStreak = useSettings((s) => s.showStreak);
+  const streakCarry = useSettings((s) => s.streakCarry);
+  const streakCarryDay = useSettings((s) => s.streakCarryDay);
 
   const today = dayKey();
   const done = lessonsOnDay(completions, today);
-  const days = streak(activeDays(completions), today);
+  const days = carriedStreak(activeDays(completions), today, streakCarry, streakCarryDay);
   const label = t('goal.today', { done: Math.min(done, goal), goal });
 
   return (

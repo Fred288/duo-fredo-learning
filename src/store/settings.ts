@@ -10,6 +10,10 @@ export interface Settings {
   /** Neue Wörter pro Tag im Wiederholen; 0 = keine neuen, schon eingeführte bleiben fällig. */
   newWordsPerDay: number;
   showStreak: boolean;
+  /** Übernommene Serie aus einer anderen App; 0 = keine. */
+  streakCarry: number;
+  /** Letzter Tag, den `streakCarry` abdeckt, 'YYYY-MM-DD'; '' = keiner. */
+  streakCarryDay: string;
   theme: Theme;
   /** Türkisch vorlesen (Knöpfe, Hörübungen). */
   audioEnabled: boolean;
@@ -30,6 +34,8 @@ export const DEFAULT_SETTINGS: Settings = {
   dailyGoal: 1,
   newWordsPerDay: 10,
   showStreak: true,
+  streakCarry: 0,
+  streakCarryDay: '',
   theme: 'system',
   audioEnabled: true,
   autoplay: false,
@@ -41,6 +47,7 @@ export const DEFAULT_SETTINGS: Settings = {
 
 export const GOAL_RANGE = { min: 1, max: 10 } as const;
 export const NEW_WORDS_RANGE = { min: 0, max: 30 } as const;
+export const STREAK_CARRY_MAX = 9999;
 
 interface SettingsState extends Settings {
   loaded: boolean;
@@ -98,6 +105,19 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
   if (typeof stored.lastBackup === 'string' && /^(\d{4}-\d{2}-\d{2})?$/.test(stored.lastBackup)) {
     out.lastBackup = stored.lastBackup;
+  }
+  if (
+    typeof stored.streakCarry === 'number' &&
+    stored.streakCarry >= 0 &&
+    stored.streakCarry <= STREAK_CARRY_MAX
+  ) {
+    out.streakCarry = Math.round(stored.streakCarry);
+  }
+  if (
+    typeof stored.streakCarryDay === 'string' &&
+    /^(\d{4}-\d{2}-\d{2})?$/.test(stored.streakCarryDay)
+  ) {
+    out.streakCarryDay = stored.streakCarryDay;
   }
   if (
     typeof stored.dailyGoal === 'number' &&

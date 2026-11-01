@@ -4,9 +4,16 @@ import { t, type MessageKey } from '../i18n';
 import { useApp } from '../store/app';
 import { getSpeaker, speak, useAudio } from '../store/audio';
 import { clearedPlacement, currentPlacement } from '../placement';
+import { dayKey } from '../progress/day';
 import { useProgress } from '../store/progress';
 import { BackupSection } from './BackupSection';
-import { GOAL_RANGE, NEW_WORDS_RANGE, useSettings, type Theme } from '../store/settings';
+import {
+  GOAL_RANGE,
+  NEW_WORDS_RANGE,
+  STREAK_CARRY_MAX,
+  useSettings,
+  type Theme,
+} from '../store/settings';
 
 const THEMES: Theme[] = ['system', 'light', 'dark'];
 
@@ -25,6 +32,7 @@ export function Settings() {
     dailyGoal,
     newWordsPerDay,
     showStreak,
+    streakCarry,
     tolerateDiacritics,
     theme,
     audioEnabled,
@@ -117,6 +125,29 @@ export function Settings() {
           className="size-6 accent-brand"
         />
       </label>
+
+      {showStreak && (
+        <div>
+          <label className="flex min-h-11 items-center justify-between gap-4">
+            <span>{t('settings.streakCarry')}</span>
+            <input
+              type="number"
+              inputMode="numeric"
+              min={0}
+              max={STREAK_CARRY_MAX}
+              value={streakCarry || ''}
+              onChange={(e) => {
+                const value = Math.round(Number(e.target.value));
+                if (!Number.isFinite(value) || value < 0 || value > STREAK_CARRY_MAX) return;
+                set('streakCarry', value);
+                set('streakCarryDay', value > 0 ? dayKey() : '');
+              }}
+              className="min-h-11 w-24 rounded-lg border border-line-strong bg-surface px-3 text-right focus-visible:outline-2 focus-visible:outline-focus"
+            />
+          </label>
+          <p className="text-sm text-ink-subtle">{t('settings.streakCarry.hint')}</p>
+        </div>
+      )}
 
       <div>
         <label className="flex min-h-11 items-center justify-between gap-4">

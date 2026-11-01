@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { addDays, dayKey } from './day';
 import {
   activeDays,
+  carriedStreak,
   completedLessonIds,
   lessonsOnDay,
   openMistakes,
@@ -50,6 +51,33 @@ describe('streak', () => {
   });
   it('ist ohne Aktivität 0', () => {
     expect(streak(days(), '2026-03-01')).toBe(0);
+  });
+});
+
+describe('carriedStreak', () => {
+  const days = (...d: string[]) => new Set(d);
+  const carryDay = '2026-03-01';
+
+  it('zeigt am Tag der Eingabe den Startwert, auch mit Lektion', () => {
+    expect(carriedStreak(days(), carryDay, 472, carryDay)).toBe(472);
+    expect(carriedStreak(days(carryDay), carryDay, 472, carryDay)).toBe(472);
+  });
+  it('zählt eigene Tage oben drauf', () => {
+    expect(carriedStreak(days('2026-03-02'), '2026-03-02', 472, carryDay)).toBe(473);
+    expect(carriedStreak(days('2026-03-02', '2026-03-03'), '2026-03-03', 472, carryDay)).toBe(474);
+  });
+  it('bricht nicht an einem noch leeren heutigen Tag', () => {
+    expect(carriedStreak(days(), '2026-03-02', 472, carryDay)).toBe(472);
+    expect(carriedStreak(days('2026-03-02'), '2026-03-03', 472, carryDay)).toBe(473);
+  });
+  it('verliert den Startwert nach einem ausgelassenen Tag', () => {
+    expect(carriedStreak(days(), '2026-03-03', 472, carryDay)).toBe(0);
+    expect(carriedStreak(days('2026-03-03'), '2026-03-03', 472, carryDay)).toBe(1);
+    expect(carriedStreak(days('2026-03-02', '2026-03-04'), '2026-03-04', 472, carryDay)).toBe(1);
+  });
+  it('entspricht ohne Startwert der normalen Serie', () => {
+    expect(carriedStreak(days('2026-03-01'), '2026-03-01', 0, '')).toBe(1);
+    expect(carriedStreak(days('2026-03-01'), '2026-03-01', 5, '')).toBe(1);
   });
 });
 
