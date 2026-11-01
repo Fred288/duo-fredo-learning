@@ -148,9 +148,9 @@ function CourseList({
               if (now !== isOpen)
                 setCourseOpen(now ? [...open, level] : open.filter((l) => l !== level));
             }}
-            className="group rounded-xl border border-line bg-surface"
+            className="group card rounded-2xl border border-line"
           >
-            <summary className="flex min-h-12 cursor-pointer items-center rounded-xl px-4 py-2 focus-visible:outline-2 focus-visible:outline-focus">
+            <summary className="flex min-h-12 cursor-pointer items-center rounded-2xl px-4 py-2 focus-visible:outline-2 focus-visible:outline-focus">
               <h2 className="flex flex-1 items-center gap-2">
                 <svg
                   aria-hidden="true"
@@ -218,7 +218,7 @@ function UnitRow({
   return (
     <li
       id={`unit-${unit.id}`}
-      className={`relative scroll-mt-4 rounded-lg border p-3 hover:bg-hover ${
+      className={`relative scroll-mt-4 rounded-xl border p-3 hover:bg-hover ${
         selected ? 'border-brand-edge bg-brand-soft' : 'border-line bg-surface'
       }`}
     >

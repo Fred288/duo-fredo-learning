@@ -205,7 +205,7 @@ function Runner({
   return (
     <section className="space-y-6">
       <h1 className="sr-only">{lesson.title}</h1>
-      <header className="flex items-center gap-3">
+      <header className="sticky top-[max(0.5rem,var(--safe-top))] z-10 flex items-center gap-3 rounded-2xl border border-line glass px-2 py-1">
         <button
           type="button"
           onClick={onExit}
@@ -245,7 +245,7 @@ function Runner({
       </div>
 
       {answering ? (
-        <div className="space-y-2">
+        <div className="sticky bottom-[max(0.75rem,var(--safe-bottom))] z-10 space-y-2 rounded-2xl border border-line glass p-3">
           <button
             type="button"
             onClick={check}

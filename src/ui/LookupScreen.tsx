@@ -11,7 +11,7 @@ import { useBackGuard } from './useBackGuard';
 const backButton =
   'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 const rowButton =
-  'block min-h-11 w-full rounded-xl border border-line bg-surface p-3 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
+  'card block min-h-11 w-full rounded-2xl border border-line p-3 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
 /** Nachschlagewerk: Suche in Vokabeln (Türkisch/Deutsch, auch gebeugt) und Grammatik-Abschnitten. */
 export function LookupScreen() {

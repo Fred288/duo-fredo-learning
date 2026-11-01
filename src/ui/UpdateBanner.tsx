@@ -18,7 +18,7 @@ export function UpdateBanner() {
   return (
     <div
       role="status"
-      className="fixed inset-x-4 bottom-[calc(1rem+var(--nav-offset,0px)+var(--safe-bottom))] z-10 mx-auto md:left-[calc(var(--side-w,0px)+var(--safe-left)+1rem)] flex max-w-xl items-center justify-between gap-3 rounded-xl border border-line-strong bg-surface p-3 text-sm shadow-lg"
+      className="fixed inset-x-4 bottom-[calc(1rem+var(--nav-offset,0px)+var(--safe-bottom))] z-10 mx-auto md:left-[calc(var(--side-w,0px)+var(--safe-left)+1rem)] flex max-w-xl items-center justify-between gap-3 rounded-2xl border border-line-strong glass-strong p-3 text-sm"
     >
       <span>{needRefresh ? t('pwa.update') : t('pwa.offlineReady')}</span>
       <span className="flex gap-2">

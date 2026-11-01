@@ -22,6 +22,15 @@
   --inverse: #292524;
   --on-inverse: #ffffff;
 
+  /* Glas: Grundfarbe plus Deckkraft (Leisten, Sheets, Karten); Hintergrund: zwei weiche Töne. */
+  --glass-base: #ffffff;
+  --glass-alpha: 0.78;
+  --glass-alpha-strong: 0.94;
+  --card-alpha: 0.72;
+  --edge-alpha: 0.85;
+  --bg-1: #d6efea;
+  --bg-2: #e0e7f7;
+
   --brand: #0f766e;
   --on-brand: #ffffff;
   --brand-strong: #115e59;
@@ -56,7 +65,7 @@
   --canvas: #0c0a09;
   --surface: #1c1917;
   --fill-soft: #292524;
-  --fill: #44403c;
+  --fill: #3a3633;
   --hover: #292524;
   --line: #292524;
   --line-strong: #44403c;
@@ -65,6 +74,14 @@
   --ink-subtle: #a8a29e;
   --inverse: #e7e5e4;
   --on-inverse: #1c1917;
+
+  --glass-base: #1c1917;
+  --glass-alpha: 0.88;
+  --glass-alpha-strong: 0.96;
+  --card-alpha: 0.78;
+  --edge-alpha: 0.12;
+  --bg-1: #0b2623;
+  --bg-2: #121a2e;
 
   --brand: #0f766e;
   --on-brand: #ffffff;
@@ -156,4 +173,111 @@ html {
 }
 html.dark {
   color-scheme: dark;
+}
+
+/*
+ * Glas, an die iOS-Anmutung angelehnt (kein Nachbau): durchscheinende, leicht unscharfe Flächen für
+ * Leisten, Sheets und Karten, feine Lichtkante oben. Unscharf (`backdrop-filter`) sind nur Leiste,
+ * Lektionskopf, Prüfen-Bereich, Sheet und Banner, die Karten nicht: vor dem weichen Verlauf wäre
+ * es nicht zu sehen und kostet nur Leistung.
+ *
+ * Der Rückfall ist deckend (`--surface`): ohne `color-mix` oder `backdrop-filter` (ältere Handys),
+ * bei `prefers-reduced-transparency`, `prefers-contrast: more` und `forced-colors`. Die
+ * Deckkraft ist so hoch gewählt, dass der Text auch über dem ungünstigsten Untergrund AA hält
+ * (geprüft in `src/ui/tokens.test.ts`).
+ */
+@layer components {
+  .glass,
+  .glass-strong,
+  .card {
+    background-color: var(--surface);
+    box-shadow: inset 0 1px 0 var(--edge, transparent);
+  }
+  .glass,
+  .glass-strong {
+    box-shadow:
+      inset 0 1px 0 var(--edge, transparent),
+      0 8px 28px -14px rgb(0 0 0 / 0.28);
+  }
+
+  @supports (color: color-mix(in srgb, red 50%, transparent)) {
+    .glass,
+    .glass-strong,
+    .card {
+      --edge: color-mix(in srgb, #ffffff calc(var(--edge-alpha) * 100%), transparent);
+    }
+    .card {
+      background-color: color-mix(in srgb, var(--glass-base) calc(var(--card-alpha) * 100%), transparent);
+    }
+  }
+
+  @supports (color: color-mix(in srgb, red 50%, transparent)) and
+    ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background-color: color-mix(in srgb, var(--glass-base) calc(var(--glass-alpha) * 100%), transparent);
+      -webkit-backdrop-filter: blur(16px) saturate(1.4);
+      backdrop-filter: blur(16px) saturate(1.4);
+    }
+    .glass-strong {
+      background-color: color-mix(
+        in srgb,
+        var(--glass-base) calc(var(--glass-alpha-strong) * 100%),
+        transparent
+      );
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      backdrop-filter: blur(20px) saturate(1.4);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .glass,
+    .glass-strong,
+    .card {
+      background-color: var(--surface);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    body::before {
+      display: none;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .glass,
+    .glass-strong,
+    .card {
+      background-color: Canvas;
+      border: 1px solid CanvasText;
+      box-shadow: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+    body::before {
+      display: none;
+    }
+  }
+}
+
+/* Weicher Verlauf hinter allen Navigationsbereichen; Fokusbereiche (Lektion, Test) decken ihn ab. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70rem 42rem at 0% -8%, var(--bg-1), transparent 70%),
+    radial-gradient(60rem 40rem at 100% -4%, var(--bg-2), transparent 70%);
+}
+
+/* Bewegung: nur kurze Übergänge, bei „weniger Bewegung“ keine. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

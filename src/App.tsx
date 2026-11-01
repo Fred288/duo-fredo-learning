@@ -100,10 +100,10 @@ export function App() {
 
   return (
     <div
-      className={`min-h-dvh bg-canvas text-ink ${
+      className={`min-h-dvh text-ink ${
         showNav
           ? '[--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:6rem] xl:[--side-w:15rem]'
-          : ''
+          : 'bg-canvas'
       }`}
     >
       <a

@@ -15,7 +15,7 @@ import { useProgress } from '../store/progress';
 const backButton = 'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover';
 const rowButton =
   'flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
-const card = 'rounded-xl border border-line bg-surface p-4';
+const card = 'card rounded-2xl border border-line p-4';
 
 /** 'YYYY-MM-DD' → Heute / Morgen / 30.10. */
 function dayLabel(day: string, today: string): string {

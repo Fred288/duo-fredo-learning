@@ -15,7 +15,7 @@ interface Item {
 }
 
 const itemBase =
-  'flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl px-2 text-xs ' +
+  'flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 rounded-2xl px-2 text-xs ' +
   'focus-visible:outline-2 focus-visible:outline-focus md:min-h-12 md:flex-none md:py-2 ' +
   'xl:flex-row xl:justify-start xl:gap-3 xl:px-4 xl:text-sm';
 
@@ -80,7 +80,7 @@ export function AppNav({ screen }: { screen: Screen }) {
   return (
     <nav
       aria-label={t('nav.label')}
-      className="fixed inset-x-0 bottom-0 z-20 flex gap-1 border-t border-line bg-surface pt-1 pr-[max(0.5rem,var(--safe-right))] pb-[max(0.25rem,var(--safe-bottom))] pl-[max(0.5rem,var(--safe-left))] md:inset-x-auto md:inset-y-0 md:left-0 md:w-[calc(var(--side-w)+var(--safe-left))] md:flex-col md:overflow-y-auto md:border-t-0 md:border-r md:pt-[calc(1.5rem+var(--safe-top))] md:pr-2"
+      className="fixed inset-x-0 bottom-0 z-20 flex gap-1 border-t border-line glass pt-1 pr-[max(0.5rem,var(--safe-right))] pb-[max(0.25rem,var(--safe-bottom))] pl-[max(0.5rem,var(--safe-left))] md:inset-x-auto md:inset-y-0 md:left-0 md:w-[calc(var(--side-w)+var(--safe-left))] md:flex-col md:overflow-y-auto md:border-t-0 md:border-r md:pt-[calc(1.5rem+var(--safe-top))] md:pr-2"
     >
       {items.map((item) => (
         <button
