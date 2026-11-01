@@ -155,7 +155,7 @@ export const de = {
     'Du kannst die geprüften Themen. Jede Unit bleibt frei anwählbar, zum Beispiel zum Wiederholen oder für Lesetexte.',
   'placement.result.catchUp': 'Davor noch nicht sicher, wird nicht übersprungen: {units}',
   'placement.result.effect':
-    'Themen vor dem Start gelten als bekannt und sind auf der Startseite markiert. Alles bleibt anwählbar; Fortschritt und Tagesziel ändern sich nicht.',
+    'Themen vor dem Start gelten als bekannt und sind im Kurs markiert. Alles bleibt anwählbar; Fortschritt und Tagesziel ändern sich nicht.',
   'placement.section.secure': 'Sicher',
   'placement.section.shaky': 'Wackelig',
   'placement.section.unsure': 'Noch nicht sicher',

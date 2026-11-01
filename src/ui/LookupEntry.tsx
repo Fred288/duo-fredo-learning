@@ -57,7 +57,7 @@ const rowLine = 'border-b border-line';
 function FormDetails({ title, children }: { title: string; children: ReactNode }) {
   return (
     <details className="rounded-xl border border-line bg-surface p-4">
-      <summary className="cursor-pointer font-medium">{title}</summary>
+      <summary className="min-h-11 cursor-pointer content-center font-medium">{title}</summary>
       <div className="relative mt-2 overflow-x-auto" lang="tr">
         <table className="w-full text-sm">{children}</table>
       </div>

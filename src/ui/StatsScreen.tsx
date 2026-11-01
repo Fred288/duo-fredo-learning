@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { isListeningCard } from '../content/listening';
-import { fetchLookup, fetchManifest, type Manifest } from '../content/load';
+import { fetchLookup } from '../content/load';
 import { t } from '../i18n';
 import type { LookupIndex } from '../lookup/types';
 import { addDays, dayKey } from '../progress/day';
@@ -11,6 +11,7 @@ import { useApp } from '../store/app';
 import { useCanSpeak } from '../store/audio';
 import { currentPlacement } from '../placement/record';
 import { useProgress } from '../store/progress';
+import { useManifest } from './useManifest';
 
 const backButton = 'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover';
 const rowButton =
@@ -63,14 +64,10 @@ export function StatsScreen() {
   const setLookup = useApp((s) => s.setLookup);
   const { completions, attempts, cards, placements } = useProgress();
   const canListen = useCanSpeak();
-  const [manifest, setManifest] = useState<Manifest>();
+  const { manifest, failed } = useManifest();
   const [index, setIndex] = useState<LookupIndex>();
-  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    fetchManifest()
-      .then(setManifest)
-      .catch(() => setFailed(true));
     // Ohne Index fehlen nur die Wörter der schwierigen Vokabeln; die IDs bleiben lesbar.
     fetchLookup()
       .then(setIndex)
@@ -118,105 +115,108 @@ export function StatsScreen() {
         <p className="text-ink-subtle">{t('home.loading')}</p>
       ) : (
         <div className="space-y-6 xl:grid xl:grid-cols-2 xl:items-start xl:gap-6 xl:space-y-0">
-          <section className={`${card} space-y-4`} aria-labelledby="stats-words">
-            <h2 id="stats-words" className="font-medium">
-              {t('stats.words')}
-            </h2>
-            <Boxes counts={data.vocab.tr_de} label={t('lookup.srs.tr_de')} />
-            <Boxes counts={data.vocab.de_tr} label={t('lookup.srs.de_tr')} />
-          </section>
+          <div className="space-y-6">
+            <section className={`${card} space-y-4`} aria-labelledby="stats-words">
+              <h2 id="stats-words" className="font-medium">
+                {t('stats.words')}
+              </h2>
+              <Boxes counts={data.vocab.tr_de} label={t('lookup.srs.tr_de')} />
+              <Boxes counts={data.vocab.de_tr} label={t('lookup.srs.de_tr')} />
+            </section>
 
-          <section className={card} aria-labelledby="stats-due">
-            <h2 id="stats-due" className="font-medium">
-              {t('stats.due')}
-            </h2>
-            <ul className="mt-2 grid grid-cols-7 gap-1 text-center text-sm">
-              {data.due.map((d) => (
-                <li key={d.day} className="rounded-lg bg-fill-soft px-1 py-2">
-                  <span className="block text-xs text-ink-subtle">{dayLabel(d.day, today)}</span>
-                  <span className="block tabular-nums">{d.count}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+            <section className={card} aria-labelledby="stats-due">
+              <h2 id="stats-due" className="font-medium">
+                {t('stats.due')}
+              </h2>
+              <ul className="mt-2 grid grid-cols-7 gap-1 text-center text-sm">
+                {data.due.map((d) => (
+                  <li key={d.day} className="rounded-lg bg-fill-soft px-1 py-2">
+                    <span className="block text-xs text-ink-subtle">{dayLabel(d.day, today)}</span>
+                    <span className="block tabular-nums">{d.count}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
 
-          <section className={card} aria-labelledby="stats-hard">
-            <h2 id="stats-hard" className="font-medium">
-              {t('stats.hard')}
-            </h2>
-            {data.hardWords.length + data.hardForms.length === 0 ? (
-              <p className="mt-2 text-sm text-ink-subtle">{t('stats.hard.none')}</p>
-            ) : (
-              <>
-                {data.hardWords.length > 0 && (
-                  <>
-                    <h3 className="mt-3 text-sm font-medium">{t('stats.hard.words')}</h3>
-                    <ul>
-                      {data.hardWords.map((c) => {
-                        const v = vocabOf(c);
-                        return (
-                          <li key={c.id}>
-                            <button
-                              type="button"
-                              disabled={!v}
-                              onClick={() => openWord(c)}
-                              className={rowButton}
-                            >
-                              <span>
-                                <span lang="tr" className="font-medium">
-                                  {v?.tr ?? (c.ref.kind === 'vocab' ? c.ref.vocabId : c.id)}
-                                </span>
-                                {v && <span className="text-ink-muted"> · {v.de.join(', ')}</span>}
-                                <span className="block text-xs text-ink-subtle">
-                                  {c.ref.kind === 'vocab' && t(`lookup.srs.${c.ref.dir}`)}
-                                </span>
-                              </span>
-                              <span className="shrink-0 text-sm text-ink-subtle">
-                                {t('stats.lapses', { count: c.lapses })}
-                              </span>
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </>
-                )}
-                {data.hardForms.length > 0 && (
-                  <>
-                    <h3 className="mt-3 text-sm font-medium">{t('stats.hard.forms')}</h3>
-                    <ul>
-                      {data.hardForms.map((c) => {
-                        const at = lessonOf(c);
-                        return (
-                          <li key={c.id}>
-                            <button
-                              type="button"
-                              disabled={!at}
-                              onClick={() => at && openLesson(at.unit.id, at.lesson.id)}
-                              className={rowButton}
-                            >
-                              <span>
-                                <span className="font-medium">{at?.lesson.title ?? c.id}</span>
-                                {at && (
-                                  <span className="block text-xs text-ink-subtle">
-                                    {at.unit.title}
+            <section className={card} aria-labelledby="stats-hard">
+              <h2 id="stats-hard" className="font-medium">
+                {t('stats.hard')}
+              </h2>
+              {data.hardWords.length + data.hardForms.length === 0 ? (
+                <p className="mt-2 text-sm text-ink-subtle">{t('stats.hard.none')}</p>
+              ) : (
+                <>
+                  {data.hardWords.length > 0 && (
+                    <>
+                      <h3 className="mt-3 text-sm font-medium">{t('stats.hard.words')}</h3>
+                      <ul>
+                        {data.hardWords.map((c) => {
+                          const v = vocabOf(c);
+                          return (
+                            <li key={c.id}>
+                              <button
+                                type="button"
+                                disabled={!v}
+                                onClick={() => openWord(c)}
+                                className={rowButton}
+                              >
+                                <span>
+                                  <span lang="tr" className="font-medium">
+                                    {v?.tr ?? (c.ref.kind === 'vocab' ? c.ref.vocabId : c.id)}
                                   </span>
-                                )}
-                              </span>
-                              <span className="shrink-0 text-sm text-ink-subtle">
-                                {t('stats.lapses', { count: c.lapses })}
-                              </span>
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </>
-                )}
-              </>
-            )}
-          </section>
-
+                                  {v && (
+                                    <span className="text-ink-muted"> · {v.de.join(', ')}</span>
+                                  )}
+                                  <span className="block text-xs text-ink-subtle">
+                                    {c.ref.kind === 'vocab' && t(`lookup.srs.${c.ref.dir}`)}
+                                  </span>
+                                </span>
+                                <span className="shrink-0 text-sm text-ink-subtle">
+                                  {t('stats.lapses', { count: c.lapses })}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  )}
+                  {data.hardForms.length > 0 && (
+                    <>
+                      <h3 className="mt-3 text-sm font-medium">{t('stats.hard.forms')}</h3>
+                      <ul>
+                        {data.hardForms.map((c) => {
+                          const at = lessonOf(c);
+                          return (
+                            <li key={c.id}>
+                              <button
+                                type="button"
+                                disabled={!at}
+                                onClick={() => at && openLesson(at.unit.id, at.lesson.id)}
+                                className={rowButton}
+                              >
+                                <span>
+                                  <span className="font-medium">{at?.lesson.title ?? c.id}</span>
+                                  {at && (
+                                    <span className="block text-xs text-ink-subtle">
+                                      {at.unit.title}
+                                    </span>
+                                  )}
+                                </span>
+                                <span className="shrink-0 text-sm text-ink-subtle">
+                                  {t('stats.lapses', { count: c.lapses })}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </>
+                  )}
+                </>
+              )}
+            </section>
+          </div>
           <section className={card} aria-labelledby="stats-units">
             <h2 id="stats-units" className="font-medium">
               {t('stats.units')}

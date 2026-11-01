@@ -97,3 +97,5 @@ Regeln:
 ## 8. Nächster Schritt
 
 M0 und M1 beginnen: Gerüst anlegen, dann Schema im Plan-Modus mit Opus 5.5 entwerfen. Vorher die Defaults aus Abschnitt 2 bestätigen oder ändern.
+
+Stand: A1 bis B2 sind fertig; das Oberflächen-Redesign (Heute und Kurs, Glas, Layout je Gerät) ist abgeschlossen, Details in `CLAUDE.md`.

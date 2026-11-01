@@ -106,6 +106,36 @@ test('Einstufung: Kurs öffnet das Niveau und scrollt zur Start-Unit; Unit-Wahl 
   }
 });
 
+test('Zurück aus der Erklärkarte: Register bleibt offen, der Scrollstand stimmt', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await openLookup(page);
+  const units = page.locator('details:has(summary)');
+  await expect(units.first()).toBeVisible();
+  const far = units.last();
+  await far.locator('summary').click();
+  await far.getByRole('button').first().scrollIntoViewIfNeeded();
+  const y = await page.evaluate(() => window.scrollY);
+  expect(y).toBeGreaterThan(300);
+  await far.getByRole('button').first().click();
+  await expect(page.getByRole('searchbox')).toHaveCount(0);
+  await page.goBack();
+  await expect(far.getByRole('button').first()).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(y - 100);
+});
+
+test('Das Update-Banner wartet, bis die Aufgabe vorbei ist', async ({ page }) => {
+  await page.goto('/');
+  const banner = page.getByText('Bereit für den Offline-Einsatz.');
+  await expect(banner).toBeVisible();
+  await (await openUnit(page, 'a1-u01')).getByRole('button', { name: /Begrüßen/ }).click();
+  await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
+  await expect(banner).toHaveCount(0);
+  await page.getByRole('button', { name: /Zurück/ }).click();
+  await expect(banner).toBeVisible();
+});
+
 test('Manifest ist installierbar konfiguriert', async ({ page, request }) => {
   await page.goto('/');
   const href = await page.locator('link[rel="manifest"]').getAttribute('href');

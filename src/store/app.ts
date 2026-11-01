@@ -49,6 +49,9 @@ interface AppState {
   /** Aufgeklappte Niveaus im Kurs (nur Sitzung); `undefined` = Standard (das aktuelle Niveau). */
   courseOpen?: string[];
   setCourseOpen: (levels: string[]) => void;
+  /** Aufgeklappte Units im Register des Nachschlagens (nur Sitzung). */
+  registerOpen: string[];
+  setRegisterOpen: (units: string[]) => void;
   openMore: () => void;
   openSettings: () => void;
   openReview: () => void;
@@ -191,6 +194,8 @@ export const useApp = create<AppState>((set, get) => {
       go({ name: 'unit', unitId }, get().screen.name === 'unit' ? 'replace' : 'push'),
     courseOpen: undefined,
     setCourseOpen: (courseOpen) => set({ courseOpen }),
+    registerOpen: [],
+    setRegisterOpen: (registerOpen) => set({ registerOpen }),
     openMore: () => go({ name: 'more' }),
     openSettings: () => go({ name: 'settings' }),
     openReview: () => go({ name: 'review' }),

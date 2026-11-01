@@ -155,7 +155,7 @@ function Runner({
     onComplete?.(correct, total);
   }, [session, exercises.length, onComplete]);
 
-  // Verlassen (Zurück, Startseite) beendet auch eine noch laufende Ansage.
+  // Verlassen beendet auch eine noch laufende Ansage.
   useEffect(() => stopSpeaking, []);
 
   const proceed = useCallback(() => {
@@ -182,7 +182,7 @@ function Runner({
     const { correct, total } = summary(session);
     return (
       <section aria-labelledby="done-title" className="space-y-4 text-center">
-        <h2 id="done-title" className="text-xl font-semibold">
+        <h1 id="done-title" className="text-xl font-semibold">
           {!exercises.length
             ? lesson.exercises.some((e) => e.type === 'listen')
               ? t('home.listen.unavailable')
@@ -190,7 +190,7 @@ function Runner({
             : total === 0
               ? t('runner.skipped')
               : doneTitle}
-        </h2>
+        </h1>
         {total > 0 && <p>{t('done.score', { correct, total })}</p>}
         <div className="space-y-2">
           {exercises.length > 0 && (
@@ -228,12 +228,12 @@ function Runner({
       <h1 className="sr-only">{lesson.title}</h1>
       <header
         ref={head}
-        className="sticky top-[max(0.5rem,var(--safe-top))] z-10 [@media(orientation:landscape)_and_(max-height:480px)]:static flex items-center gap-3 rounded-2xl border border-line glass-strong px-2 py-1"
+        className="sticky top-[max(0.5rem,var(--safe-top))] z-10 [@media(min-aspect-ratio:3/2)_and_(max-height:480px)]:static flex items-center gap-3 rounded-2xl border border-line glass-strong px-2 py-1"
       >
         <button
           type="button"
           onClick={onExit}
-          className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
+          className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
         >
           ← {t('runner.back')}
         </button>
@@ -271,7 +271,7 @@ function Runner({
       {answering ? (
         <div
           ref={actions}
-          className="sticky bottom-[calc(max(0.75rem,var(--safe-bottom))+var(--keyboard-inset,0px))] z-10 [@media(orientation:landscape)_and_(max-height:480px)]:static space-y-2 rounded-2xl border border-line glass-strong p-3 [--shadow-y:-8px]"
+          className="sticky bottom-[calc(max(0.75rem,var(--safe-bottom))+var(--keyboard-inset,0px))] z-10 [@media(min-aspect-ratio:3/2)_and_(max-height:480px)]:static space-y-2 rounded-2xl border border-line glass-strong p-3 [--shadow-y:-8px]"
         >
           <button
             type="button"

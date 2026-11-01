@@ -65,7 +65,7 @@ export function CourseScreen({ unitId }: { unitId?: string }) {
           </div>
           <div className="sticky top-[calc(1.5rem+var(--safe-top))] -m-0.5 max-h-[calc(100dvh-3rem-var(--safe-top))] self-start overflow-y-auto p-0.5">
             {unit ? (
-              <UnitDetail unit={unit} canListen={canListen} hint={hint} />
+              <UnitDetail unit={unit} canListen={canListen} />
             ) : (
               <p className="text-ink-subtle">{t('course.pick')}</p>
             )}

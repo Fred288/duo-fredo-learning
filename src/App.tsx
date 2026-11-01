@@ -53,6 +53,8 @@ export function App() {
       if (el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName))) return;
       e.preventDefault();
       openLookup();
+      // Schon im Nachschlagen: das Suchfeld nehmen (einspaltig mit Eintrag gibt es keins).
+      document.querySelector<HTMLElement>('input[type=search]')?.focus();
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -111,8 +113,8 @@ export function App() {
     <div
       className={`min-h-dvh text-ink ${
         showNav
-          ? '[--banner-offset:var(--nav-offset)] [--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:6rem] xl:[--side-w:15rem]'
-          : 'bg-canvas [--banner-offset:9.5rem] [@media(orientation:landscape)_and_(max-height:480px)]:[--banner-offset:0px]'
+          ? '[--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:6rem] xl:[--side-w:15rem]'
+          : 'bg-canvas'
       }`}
     >
       <a
@@ -121,7 +123,7 @@ export function App() {
           e.preventDefault();
           main.current?.focus();
         }}
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-3 focus:shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-[max(0.5rem,var(--safe-top))] focus:left-[max(0.5rem,var(--safe-left))] focus:z-30 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-3 focus:shadow-lg"
       >
         {t('nav.skip')}
       </a>

@@ -14,6 +14,9 @@ const backButton =
 const rowButton =
   'card block min-h-11 w-full rounded-2xl border border-line p-3 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
+// Einmal je Sitzung vorbereitet: Beim Zurückkehren steht die Liste sofort, der Scrollstand passt.
+let preparedOnce: PreparedLookup | undefined;
+
 /** Nachschlagewerk: Suche in Vokabeln (Türkisch/Deutsch, auch gebeugt) und Grammatik-Abschnitten. */
 export function LookupScreen() {
   const goBack = useApp((s) => s.goBack);
@@ -22,7 +25,7 @@ export function LookupScreen() {
   const entryId = useApp((s) => s.lookupEntry);
   const setLookup = useApp((s) => s.setLookup);
   const cards = useProgress((s) => s.cards);
-  const [prepared, setPrepared] = useState<PreparedLookup>();
+  const [prepared, setPrepared] = useState(preparedOnce);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const input = useRef<HTMLInputElement>(null);
@@ -31,7 +34,10 @@ export function LookupScreen() {
   useEffect(() => {
     let cancelled = false;
     fetchLookup()
-      .then((index) => !cancelled && setPrepared(prepareLookup(index)))
+      .then((index) => {
+        if (preparedOnce?.index !== index) preparedOnce = prepareLookup(index);
+        if (!cancelled) setPrepared(preparedOnce);
+      })
       .catch(() => !cancelled && setFailed(true));
     return () => {
       cancelled = true;
@@ -53,7 +59,12 @@ export function LookupScreen() {
   useBackGuard(hasEntry && !wide, () => setLookup(query));
   useEffect(() => {
     if (!hasEntry) return;
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setLookup(query);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setLookup(query);
+      // In zwei Spalten bleibt das Suchfeld stehen und holt sich den Fokus nicht von selbst.
+      requestAnimationFrame(() => input.current?.focus());
+    };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [hasEntry, query, setLookup]);
@@ -215,12 +226,18 @@ export function LookupScreen() {
         // Zwei Spalten: Suche und Treffer bleiben stehen, der Eintrag erscheint daneben.
         <div className="grid grid-cols-[minmax(0,24rem)_minmax(0,1fr)] gap-8">
           <div className="space-y-4">{panel(prepared)}</div>
-          <div className="self-start lg:sticky lg:top-[calc(1.5rem+var(--safe-top))] lg:max-h-[calc(100dvh-3rem-var(--safe-top))] lg:overflow-y-auto">
+          <div className="sticky top-[calc(1.5rem+var(--safe-top))] -m-0.5 max-h-[calc(100dvh-3rem-var(--safe-top))] self-start overflow-y-auto p-0.5">
             {entryView ?? <p className="text-ink-subtle">{t('lookup.pick')}</p>}
           </div>
         </div>
       ) : (
-        (entryView ?? panel(prepared))
+        ((entryView && (
+          <>
+            <h1 className="sr-only">{t('lookup.title')}</h1>
+            {entryView}
+          </>
+        )) ??
+        panel(prepared))
       )}
     </section>
   );
@@ -235,6 +252,9 @@ function Register({
   onOpen: (unit: string, slug: string) => void;
 }) {
   const { units, sections } = prepared.index;
+  // Aufgeklappte Units überleben den Sprung in die Erklärkarte und zurück.
+  const open = useApp((s) => s.registerOpen);
+  const setOpen = useApp((s) => s.setRegisterOpen);
   return (
     <div className="space-y-4">
       <p className="text-ink-muted">{t('lookup.hint')}</p>
@@ -243,7 +263,17 @@ function Register({
         const own = sections.filter((s) => s.unit === u.id);
         if (!own.length) return null;
         return (
-          <details key={u.id} className="rounded-xl border border-line">
+          <details
+            key={u.id}
+            open={open.includes(u.id)}
+            onToggle={(e) => {
+              const now = e.currentTarget.open;
+              if (now !== open.includes(u.id)) {
+                setOpen(now ? [...open, u.id] : open.filter((id) => id !== u.id));
+              }
+            }}
+            className="rounded-xl border border-line"
+          >
             <summary className="min-h-11 cursor-pointer p-3">{u.title}</summary>
             <ul className="px-3 pb-2">
               {own.map((s) => (

@@ -29,18 +29,21 @@ test('Heute: ab 1280 px stehen Karten und Tagesziel nebeneinander, sonst unterei
   expect(await noOverflow(page)).toBe(true);
 });
 
-test('Statistik: ab 1280 px zwei Spalten', async ({ page }) => {
+test('Statistik: ab 1280 px links die Übersicht, rechts die Units', async ({ page }) => {
   await page.goto('/');
   await openStats(page);
   await expect(page.getByRole('heading', { name: 'Statistik', level: 1 })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Fällt schwer' })).toBeVisible();
   const words = await box(page, 'section[aria-labelledby="stats-words"]');
   const due = await box(page, 'section[aria-labelledby="stats-due"]');
+  const units = await box(page, 'section[aria-labelledby="stats-units"]');
+  // Fällig schließt ohne Lücke an, die lange Unit-Liste läuft daneben.
+  expect(due.y).toBeLessThan(words.y + words.height + 40);
   if (width(page) >= 1280) {
-    expect(due.x).toBeGreaterThan(words.x + words.width - 1);
-    expect(Math.abs(due.y - words.y)).toBeLessThan(2);
+    expect(units.x).toBeGreaterThan(words.x + words.width - 1);
+    expect(Math.abs(units.y - words.y)).toBeLessThan(2);
   } else {
-    expect(due.y).toBeGreaterThan(words.y);
+    expect(units.y).toBeGreaterThan(due.y);
   }
   expect(await noOverflow(page)).toBe(true);
 });
@@ -63,10 +66,11 @@ test('Nachschlagen: ab 1024 px bleibt die Liste neben dem Eintrag, sonst ersetzt
     const e = await entry.boundingBox();
     expect(e!.x).toBeGreaterThan(list.x + list.width - 1);
     // Escape im Suchfeld schließt zuerst den Eintrag, dann leert es die Suche.
-    await search.focus();
+    await entry.focus();
     await page.keyboard.press('Escape');
     await expect(entry).toHaveCount(0);
     await expect(search).toHaveValue('evlerde');
+    await expect(search).toBeFocused();
     await page.keyboard.press('Escape');
     await expect(search).toHaveValue('');
   } else {
