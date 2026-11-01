@@ -5,10 +5,7 @@ import { Markdown } from './Markdown';
 /** Passender Abschnitt der Erklärkarte nach einer falschen Antwort, aufklappbar. */
 export function GrammarHint({ section }: { section: ExplainerSection }) {
   return (
-    <details
-      open
-      className="rounded-xl border border-line bg-surface p-4"
-    >
+    <details open className="rounded-xl border border-line bg-surface p-4">
       <summary className="cursor-pointer font-medium">
         {t('grammar.title', { section: section.title })}
       </summary>

@@ -24,7 +24,7 @@ const explainerOf = (u: Unit) =>
   u.explainer ? fetchExplainer(u.explainer).catch(() => '') : Promise.resolve('');
 
 export function MistakesScreen() {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const recordAttempt = useProgress((s) => s.recordAttempt);
   const [run, setRun] = useState<Run | null>();
   const [failed, setFailed] = useState(false);
@@ -69,7 +69,7 @@ export function MistakesScreen() {
         <button
           type="button"
           autoFocus
-          onClick={goHome}
+          onClick={goBack}
           className="min-h-12 w-full rounded-xl bg-brand px-5 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t('done.home')}
@@ -81,7 +81,7 @@ export function MistakesScreen() {
     <LessonRunner
       lesson={run.lesson}
       vocab={run.vocab}
-      onExit={goHome}
+      onExit={goBack}
       doneTitle={t('mistakes.done')}
       grammarFor={(ex) => {
         const g = run.grammar.get(ex.id);

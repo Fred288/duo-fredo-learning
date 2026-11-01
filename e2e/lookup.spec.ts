@@ -1,8 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
+import { openLookup } from './nav';
 
 const open = async (page: Page) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Nachschlagen' }).click();
+  await openLookup(page);
   await expect(page.getByRole('searchbox')).toBeFocused();
 };
 
@@ -42,7 +43,8 @@ test('Grammatik-Abschnitt öffnet die Erklärkarte an der Überschrift, Zurück 
   const heading = page.getByRole('heading', { name: 'Der Plural: -ler oder -lar' });
   await expect(heading).toBeVisible();
   await expect(heading).toBeFocused();
-  await page.getByRole('button', { name: /Nachschlagen/ }).click();
+  // Der Rückweg steht im Inhalt (die Navigation hat ebenfalls einen Eintrag „Nachschlagen“).
+  await page.getByRole('main').getByRole('button', { name: /Nachschlagen/ }).click();
   await expect(page.getByRole('searchbox')).toHaveValue('Plural: -ler');
 });
 

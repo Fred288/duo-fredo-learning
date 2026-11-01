@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useBackGuard } from './useBackGuard';
 import { fetchLookup } from '../content/load';
 import type { Passage, PassageToken } from '../content/schema';
 import { t } from '../i18n';
@@ -28,6 +29,8 @@ function WordSheet({
   useEffect(() => {
     dialog.current?.focus();
   }, [token]);
+  // Zurück-Taste des Geräts schließt das Sheet, statt die Lektion zu verlassen.
+  useBackGuard(true, onClose);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
@@ -65,7 +68,9 @@ function WordSheet({
             {token.text}
           </h2>
         )}
-        {!entry && !token.gloss && <p className="text-sm text-ink-subtle">{t('reading.noEntry')}</p>}
+        {!entry && !token.gloss && (
+          <p className="text-sm text-ink-subtle">{t('reading.noEntry')}</p>
+        )}
       </div>
     </div>
   );

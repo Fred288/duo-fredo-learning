@@ -2,11 +2,12 @@ import { expect, test } from '@playwright/test';
 import { speakables } from '../src/audio/speakables';
 import { fakeSpeech, spokenTexts, TURKISH_VOICE as TURKISH } from './speech';
 import { answer, loadUnit, playLesson } from './solve';
+import { openCourse, openLookup, openSettings, openToday } from './nav';
 
 test('Nachschlagewerk: Anhören normal und langsam', async ({ page }) => {
   await fakeSpeech(page, TURKISH);
   await page.goto('/');
-  await page.getByRole('button', { name: 'Nachschlagen' }).click();
+  await openLookup(page);
   await page.getByRole('searchbox').fill('kitap');
   await page.getByRole('searchbox').press('Enter');
   await page.getByRole('button', { name: 'Anhören: kitap', exact: true }).click();
@@ -24,7 +25,7 @@ test('Einstellungen: Probe, Stimme wählen, Audio abschalten', async ({ page }) 
     { name: 'Anna', lang: 'de-DE', local: true },
   ]);
   await page.goto('/');
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByText('Türkische Stimme gefunden: Test Türkçe.')).toBeVisible();
   await expect(page.getByRole('option')).toHaveText([
     'Automatisch',
@@ -60,7 +61,7 @@ test('Einstellungen: Probe, Stimme wählen, Audio abschalten', async ({ page }) 
     )
     .toBe(false);
   await page.reload();
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByLabel('Türkisch vorlesen')).not.toBeChecked();
 });
 
@@ -69,12 +70,12 @@ test('ohne türkische Stimme: Hinweis statt Fehler, keine Knöpfe, Lektion läuf
 }) => {
   await fakeSpeech(page, [{ name: 'Anna', lang: 'de-DE', local: true }]);
   await page.goto('/');
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByText(/Keine türkische Stimme gefunden/)).toBeVisible();
   await expect(page.getByRole('button', { name: 'Probe abspielen' })).toHaveCount(0);
 
   await page.getByRole('button', { name: /Zurück/ }).click();
-  await page.getByRole('button', { name: 'Nachschlagen' }).click();
+  await openLookup(page);
   await page.getByRole('searchbox').fill('kitap');
   await page.getByRole('searchbox').press('Enter');
   await expect(page.getByRole('heading', { name: 'kitap', exact: true })).toBeVisible();
@@ -86,7 +87,7 @@ test('Browser ohne Sprachausgabe: Hinweis, App läuft', async ({ page }) => {
     Object.defineProperty(window, 'speechSynthesis', { value: undefined, configurable: true });
   });
   await page.goto('/');
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByText(/unterstützt keine Sprachausgabe/)).toBeVisible();
 });
 
@@ -105,15 +106,16 @@ test('Automatisch abspielen: Prompt beim Anzeigen, Lösung im Feedback, standard
 
   // Standard: aus, auch wenn Knöpfe da sind.
   await page.goto('/');
+  await openCourse(page);
   await startLesson();
   await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
   expect(await spokenTexts(page)).toEqual([]);
 
   // Einschalten und dieselbe Lektion spielen.
   await page.getByRole('button', { name: /Zurück/ }).click();
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await page.getByLabel('Automatisch abspielen').check();
-  await page.getByRole('button', { name: /Zurück/ }).click();
+  await openCourse(page);
   await startLesson();
 
   const expected: string[] = [];
@@ -152,6 +154,7 @@ test.describe('Hörlektion', () => {
   test('Text bleibt bis zur Antwort verborgen, danach mit Bedeutung sichtbar', async ({ page }) => {
     await fakeSpeech(page, TURKISH);
     await page.goto('/');
+    await openCourse(page);
     const first = lesson.exercises[0]!;
     if (first.type !== 'listen') throw new Error('Hörübung erwartet');
     await page
@@ -169,6 +172,7 @@ test.describe('Hörlektion', () => {
   test('ohne Stimme: ausgeblendet mit Hinweis', async ({ page }) => {
     await fakeSpeech(page, []);
     await page.goto('/');
+    await openCourse(page);
     await expect(page.getByText(/Hörübungen brauchen eine türkische Stimme/).first()).toBeVisible();
     await expect(page.getByRole('button', { name: /^Hören/ })).toHaveCount(0);
   });
@@ -176,6 +180,7 @@ test.describe('Hörlektion', () => {
   test('Jetzt nicht hören: Lektion endet ohne Wertung und ohne Abschluss', async ({ page }) => {
     await fakeSpeech(page, TURKISH);
     await page.goto('/');
+    await openCourse(page);
     await page
       .getByRole('listitem')
       .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
@@ -184,6 +189,7 @@ test.describe('Hörlektion', () => {
     await page.getByRole('button', { name: 'Jetzt nicht hören' }).click();
     await expect(page.getByRole('heading', { name: 'Übersprungen' })).toBeVisible();
     await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+    await openToday(page);
     await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
   });
 });

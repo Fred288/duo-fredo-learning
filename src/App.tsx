@@ -1,29 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { t } from './i18n';
-import { useApp } from './store/app';
+import { isFocusScreen, useApp } from './store/app';
 import { useAudioSetup } from './store/audio';
+import { AppNav } from './ui/AppNav';
+import { CourseScreen } from './ui/CourseScreen';
 import { ExplainerScreen } from './ui/ExplainerScreen';
-import { Home } from './ui/Home';
 import { LookupScreen } from './ui/LookupScreen';
 import { LessonScreen } from './ui/LessonScreen';
 import { MistakesScreen } from './ui/MistakesScreen';
+import { MoreScreen } from './ui/MoreScreen';
 import { PlacementScreen } from './ui/PlacementScreen';
 import { RepeatScreen } from './ui/RepeatScreen';
 import { Review } from './ui/Review';
 import { Settings } from './ui/Settings';
 import { StatsScreen } from './ui/StatsScreen';
+import { Today } from './ui/Today';
 import { UpdateBanner } from './ui/UpdateBanner';
 
 export function App() {
   const screen = useApp((s) => s.screen);
-  const openSettings = useApp((s) => s.openSettings);
   const openLookup = useApp((s) => s.openLookup);
-  const onHome = screen.name === 'home';
+  // Fokusbereiche (Lektion, Wiederholen, Test) zeigen keine Navigation: eine Aufgabe nach der anderen.
+  const showNav = !isFocusScreen(screen);
+  const main = useRef<HTMLElement>(null);
+  const shownScreen = useRef(screen);
   useAudioSetup();
 
-  // Taste „/“ öffnet auf der Startseite das Nachschlagewerk (nicht beim Tippen in Feldern).
+  // Taste „/“ öffnet auf den Navigationsbildschirmen das Nachschlagewerk (nicht beim Tippen in Feldern).
   useEffect(() => {
-    if (!onHome) return;
+    if (!showNav) return;
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement | null;
       // Windows meldet AltGr als Strg+Alt; auf Layouts mit „/“ hinter AltGr soll die Taste gelten.
@@ -35,78 +40,67 @@ export function App() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [onHome, openLookup]);
+  }, [showNav, openLookup]);
+
+  // Beim Bildschirmwechsel an den Anfang und den Fokus auf die Überschrift (Ansage für Screenreader).
+  // Hat der neue Bildschirm schon ein Feld fokussiert (autoFocus), bleibt es dabei.
+  useEffect(() => {
+    // Nur bei einem echten Wechsel (nicht beim ersten Anzeigen, auch nicht im doppelten Effekt von StrictMode).
+    if (shownScreen.current === screen) return;
+    shownScreen.current = screen;
+    const el = main.current;
+    if (!el) return;
+    if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+    const active = document.activeElement;
+    if (active && active !== el && el.contains(active)) return;
+    const heading = el.querySelector<HTMLElement>('h1');
+    if (heading) heading.tabIndex = -1;
+    (heading ?? el).focus({ preventScroll: true });
+  }, [screen]);
 
   return (
-    <div className="min-h-dvh bg-canvas text-ink">
-      <main className="mx-auto max-w-xl px-4 pt-[calc(1.5rem+var(--safe-top))] pb-[calc(1.5rem+var(--safe-bottom))]">
-        {screen.name === 'home' && (
-          <>
-            <header className="flex items-start justify-between gap-3">
-              <div>
-                <h1 className="text-2xl font-semibold">{t('app.title')}</h1>
-                <p className="mt-1 text-ink-muted">{t('app.tagline')}</p>
-              </div>
-              <div className="flex">
-                <button
-                  type="button"
-                  onClick={openLookup}
-                  aria-label={t('home.lookup')}
-                  aria-keyshortcuts="/"
-                  className="min-h-11 min-w-11 rounded-lg hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="mx-auto size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="7" />
-                    <path d="m20 20-3.5-3.5" />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={openSettings}
-                  aria-label={t('home.settings')}
-                  className="min-h-11 min-w-11 rounded-lg text-xl hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
-                >
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    className="mx-auto size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="3" />
-                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z" />
-                  </svg>
-                </button>
-              </div>
-            </header>
-            <Home />
-          </>
-        )}
-        {screen.name === 'settings' && <Settings />}
-        {screen.name === 'review' && <Review />}
-        {screen.name === 'mistakes' && <MistakesScreen />}
-        {screen.name === 'repeat' && <RepeatScreen />}
-        {screen.name === 'lookup' && <LookupScreen />}
-        {screen.name === 'stats' && <StatsScreen />}
-        {screen.name === 'placement' && <PlacementScreen />}
-        {screen.name === 'explainer' && (
-          <ExplainerScreen unitId={screen.unitId} section={screen.section} from={screen.from} />
-        )}
-        {screen.name === 'lesson' && (
-          <LessonScreen key={screen.lessonId} unitId={screen.unitId} lessonId={screen.lessonId} />
-        )}
+    <div
+      className={`min-h-dvh bg-canvas text-ink ${
+        showNav
+          ? '[--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:5rem] xl:[--side-w:15rem]'
+          : ''
+      }`}
+    >
+      <a
+        href="#main"
+        onClick={(e) => {
+          e.preventDefault();
+          main.current?.focus();
+        }}
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-30 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-3 focus:shadow-lg"
+      >
+        {t('nav.skip')}
+      </a>
+      {showNav && <AppNav screen={screen} />}
+      <main
+        id="main"
+        ref={main}
+        tabIndex={-1}
+        className={`outline-none ${showNav ? 'md:pl-[calc(var(--side-w)+var(--safe-left))]' : ''}`}
+      >
+        <div className="mx-auto max-w-xl pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4">
+          {screen.name === 'today' && <Today />}
+          {screen.name === 'course' && <CourseScreen />}
+          {screen.name === 'more' && <MoreScreen />}
+          {screen.name === 'settings' && <Settings />}
+          {screen.name === 'review' && <Review />}
+          {screen.name === 'mistakes' && <MistakesScreen />}
+          {screen.name === 'repeat' && <RepeatScreen />}
+          {screen.name === 'lookup' && <LookupScreen />}
+          {screen.name === 'stats' && <StatsScreen />}
+          {screen.name === 'placement' && <PlacementScreen />}
+          {screen.name === 'explainer' && (
+            <ExplainerScreen unitId={screen.unitId} section={screen.section} from={screen.from} />
+          )}
+          {screen.name === 'lesson' && (
+            <LessonScreen key={screen.lessonId} unitId={screen.unitId} lessonId={screen.lessonId} />
+          )}
+        </div>
       </main>
       <UpdateBanner />
     </div>

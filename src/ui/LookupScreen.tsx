@@ -6,6 +6,7 @@ import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
 import { LookupEntry, formLabelsText } from './LookupEntry';
 import { SpecialCharBar } from './SpecialCharBar';
+import { useBackGuard } from './useBackGuard';
 
 const backButton =
   'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
@@ -14,7 +15,7 @@ const rowButton =
 
 /** Nachschlagewerk: Suche in Vokabeln (Türkisch/Deutsch, auch gebeugt) und Grammatik-Abschnitten. */
 export function LookupScreen() {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const openExplainer = useApp((s) => s.openExplainer);
   const query = useApp((s) => s.lookupQuery);
   const entryId = useApp((s) => s.lookupEntry);
@@ -45,6 +46,8 @@ export function LookupScreen() {
 
   // Escape schließt einen geöffneten Eintrag (das Suchfeld ist dann nicht im DOM).
   const hasEntry = !!entry;
+  // Zurück-Taste des Geräts geht vom Eintrag zur Trefferliste, nicht aus dem Nachschlagen.
+  useBackGuard(hasEntry, () => setLookup(query));
   useEffect(() => {
     if (!hasEntry) return;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setLookup(query);
@@ -63,7 +66,7 @@ export function LookupScreen() {
       else if (section) openSection(section.section.unit, section.section.slug);
     } else if (e.key === 'Escape') {
       if (query) setLookup('');
-      else goHome();
+      else goBack();
     }
   };
 
@@ -73,7 +76,7 @@ export function LookupScreen() {
     <section className="space-y-4">
       <button
         type="button"
-        onClick={() => (entry ? setLookup(query) : goHome())}
+        onClick={() => (entry ? setLookup(query) : goBack())}
         className={backButton}
       >
         ← {t('lookup.back')}
@@ -129,11 +132,7 @@ export function LookupScreen() {
             }}
           />
           {/* Dauerhaft im DOM, sonst lesen Screenreader die erste Trefferzahl nicht vor. */}
-          <p
-            role="status"
-            aria-live="polite"
-            className="text-sm text-ink-muted"
-          >
+          <p role="status" aria-live="polite" className="text-sm text-ink-muted">
             {!query.trim()
               ? ''
               : total === 0

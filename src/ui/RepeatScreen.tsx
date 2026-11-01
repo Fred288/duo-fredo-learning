@@ -121,7 +121,7 @@ async function buildRun(): Promise<Run | null> {
 }
 
 export function RepeatScreen() {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const { recordAttempt, recordVocab, recordCompletion } = useProgress.getState();
   const [run, setRun] = useState<Run | null>();
   const [failed, setFailed] = useState(false);
@@ -155,7 +155,7 @@ export function RepeatScreen() {
         <button
           type="button"
           autoFocus
-          onClick={goHome}
+          onClick={goBack}
           className="min-h-12 w-full rounded-xl bg-brand px-5 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
           {t('done.home')}
@@ -167,7 +167,7 @@ export function RepeatScreen() {
     <LessonRunner
       lesson={run.lesson}
       vocab={run.vocab}
-      onExit={goHome}
+      onExit={goBack}
       doneTitle={t('repeat.done')}
       attemptOnce
       reportFor={(ex) => run.reportOf.get(ex.id)}

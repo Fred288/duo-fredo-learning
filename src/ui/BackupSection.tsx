@@ -195,9 +195,7 @@ export function BackupSection() {
             })}
           </p>
           {skipped > 0 && (
-            <p className="text-sm text-warn">
-              {t('backup.skipped', { count: skipped })}
-            </p>
+            <p className="text-sm text-warn">{t('backup.skipped', { count: skipped })}</p>
           )}
           <fieldset className="space-y-2">
             <legend className="mb-1 text-sm">{t('backup.mode')}</legend>
@@ -216,7 +214,9 @@ export function BackupSection() {
                 />
                 <span>
                   <span className="block">{t(`backup.mode.${m}`)}</span>
-                  <span className="block text-sm text-ink-subtle">{t(`backup.mode.${m}.hint`)}</span>
+                  <span className="block text-sm text-ink-subtle">
+                    {t(`backup.mode.${m}.hint`)}
+                  </span>
                   <span className="block text-sm text-ink-subtle">
                     {m === 'merge'
                       ? t('backup.mode.merge.effect', {

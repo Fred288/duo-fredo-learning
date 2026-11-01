@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { playPlacement, startPlacementFromOffer } from './placement';
 import { playLesson } from './solve';
+import { openCourse, openSettings, openToday } from './nav';
 
 test('Sicherung speichern und auf einem leeren Gerät laden', async ({ page, browser }) => {
   await page.goto('/');
@@ -8,7 +9,7 @@ test('Sicherung speichern und auf einem leeren Gerät laden', async ({ page, bro
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
   await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
 
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByText('Noch keine Sicherung gespeichert.')).toBeVisible();
   const downloading = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Sicherung speichern' }).click();
@@ -22,25 +23,27 @@ test('Sicherung speichern und auf einem leeren Gerät laden', async ({ page, bro
   const other = await browser.newContext();
   const fresh = await other.newPage();
   await fresh.goto('/');
+  await openCourse(fresh);
   await expect(fresh.getByText('0 von 4 Lektionen')).toBeVisible();
-  await fresh.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(fresh);
   await fresh.getByLabel('Sicherung laden').setInputFiles(file);
   await expect(fresh.getByText(/^Sicherung vom /)).toBeVisible();
   await expect(fresh.getByRole('radio', { name: /Zusammenführen/ })).toBeChecked();
   await fresh.getByRole('button', { name: 'Laden', exact: true }).click();
   await expect(fresh.getByText('Sicherung geladen.')).toBeVisible();
 
-  await fresh.getByRole('button', { name: /Zurück/ }).click();
+  await openCourse(fresh);
   await expect(fresh.getByText('1 von 4 Lektionen')).toBeVisible();
   // Bleibt nach dem Neuladen erhalten (in IndexedDB geschrieben).
   await fresh.reload();
+  await openCourse(fresh);
   await expect(fresh.getByText('1 von 4 Lektionen')).toBeVisible();
   await other.close();
 });
 
 test('Ersetzen fragt nach; fremde Datei wird abgelehnt', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   const input = page.getByLabel('Sicherung laden');
 
   await input.setInputFiles({
@@ -79,7 +82,7 @@ test('Übernommene Einstufung gehört zur Sicherung', async ({ page, browser }) 
   await page.getByRole('button', { name: 'Empfehlung übernehmen' }).click();
   await expect(page.getByText('Empfohlener Start')).toBeVisible();
 
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   const downloading = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Sicherung speichern' }).click();
   const file = await (await downloading).path();
@@ -89,13 +92,14 @@ test('Übernommene Einstufung gehört zur Sicherung', async ({ page, browser }) 
   const fresh = await other.newPage();
   await fresh.goto('/');
   await expect(fresh.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toBeVisible();
-  await fresh.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(fresh);
   await fresh.getByLabel('Sicherung laden').setInputFiles(file);
   await expect(fresh.getByText(/Einstufungen: 1/).first()).toBeVisible();
   await fresh.getByRole('button', { name: 'Laden', exact: true }).click();
   await expect(fresh.getByText('Sicherung geladen.')).toBeVisible();
-  await fresh.getByRole('button', { name: /Zurück/ }).click();
-  await expect(fresh.getByText('Empfohlener Start')).toBeVisible();
+  await openToday(fresh);
   await expect(fresh.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
+  await openCourse(fresh);
+  await expect(fresh.getByText('Empfohlener Start')).toBeVisible();
   await other.close();
 });

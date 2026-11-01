@@ -12,7 +12,7 @@ const buttonBase =
   'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus';
 
 export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: string }) {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const recordAttempt = useProgress((s) => s.recordAttempt);
   const recordCompletion = useProgress((s) => s.recordCompletion);
   const [lesson, setLesson] = useState<Lesson>();
@@ -47,7 +47,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
         <header className="flex items-center gap-3">
           <button
             type="button"
-            onClick={goHome}
+            onClick={goBack}
             className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
           >
             ← {t('runner.back')}
@@ -74,7 +74,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       vocab={vocab}
       unitId={unitId}
       unitReviewed={unitReviewed}
-      onExit={goHome}
+      onExit={goBack}
       onAttempt={(ex, verdict) => recordAttempt(ex.id, lessonId, verdict, ex.type)}
       onComplete={(correct, total) => recordCompletion(unitId, lessonId, correct, total)}
       grammarFor={explainer ? (ex) => sectionFor(explainer, ex, lesson.title) : undefined}

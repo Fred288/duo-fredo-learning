@@ -6,7 +6,7 @@ import { notesAsText, useNotes } from '../store/notes';
 
 /** Prüfstand der Inhalte: ungeprüfte Units und lokal gesammelte Fehlernotizen. */
 export function Review() {
-  const openSettings = useApp((s) => s.openSettings);
+  const goBack = useApp((s) => s.goBack);
   const { notes, remove } = useNotes();
   const [manifest, setManifest] = useState<Manifest>();
   const [copied, setCopied] = useState(false);
@@ -31,7 +31,7 @@ export function Review() {
       <header className="flex items-center gap-3">
         <button
           type="button"
-          onClick={openSettings}
+          onClick={goBack}
           className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
         >
           ← {t('review.back')}

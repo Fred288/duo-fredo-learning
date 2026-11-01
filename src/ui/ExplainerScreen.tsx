@@ -14,7 +14,7 @@ export function ExplainerScreen({
   section?: string;
   from?: 'lookup';
 }) {
-  const goBack = useApp((s) => (from === 'lookup' ? s.openLookup : s.goHome));
+  const goBack = useApp((s) => s.goBack);
   const [text, setText] = useState<string>();
   const [failed, setFailed] = useState(false);
 

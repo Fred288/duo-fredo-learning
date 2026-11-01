@@ -16,6 +16,7 @@ import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
 import { ExerciseView } from './ExerciseView';
+import { useBackGuard } from './useBackGuard';
 
 const buttonBase =
   'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:opacity-40';
@@ -34,7 +35,7 @@ const noKeyRepeat = (e: React.KeyboardEvent) => {
  * nichts in Versuche, Abschlüsse oder Karten; nur die übernommene Empfehlung wird gespeichert.
  */
 export function PlacementScreen() {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const [plan, setPlan] = useState<PlacementPlan>();
   const [failed, setFailed] = useState(false);
   const [tries, setTries] = useState(0);
@@ -63,12 +64,12 @@ export function PlacementScreen() {
         >
           {t('placement.retry')}
         </button>
-        <BackButton label={t('placement.leave')} onClick={goHome} />
+        <BackButton label={t('placement.leave')} onClick={goBack} />
       </section>
     );
   }
   if (!plan) return <p className="text-ink-subtle">{t('placement.loading')}</p>;
-  if (!flow) return <Intro onStart={() => setFlow(startPlacement(plan))} onBack={goHome} />;
+  if (!flow) return <Intro onStart={() => setFlow(startPlacement(plan))} onBack={goBack} />;
   if (flow.done) return <Result plan={plan} flow={flow} />;
   return <Question plan={plan} flow={flow} onFlow={setFlow} onFail={fail} />;
 }
@@ -122,7 +123,7 @@ function Question({
   onFlow: (s: PlacementState) => void;
   onFail: () => void;
 }) {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const [value, setValue] = useState('');
   const [loaded, setLoaded] = useState<Unit>();
@@ -189,17 +190,20 @@ function Question({
     return () => window.removeEventListener('keydown', onKey);
   }, [send]);
 
-  if (!cur) return null;
-  const vocab: Vocab[] = ready ? [...(ready.vocab ?? []), ...(ready.lexicon ?? [])] : [];
   // Erst nach einer Antwort lohnt die Rückfrage vorm Verlassen.
   const answered = flow.step === 1 || Object.keys(flow.statuses).length > 0;
+  // Zurück-Taste des Geräts fragt nach dem Abbruch, statt die Antworten still zu verwerfen.
+  useBackGuard(answered && !leaving, () => setLeaving(true));
+
+  if (!cur) return null;
+  const vocab: Vocab[] = ready ? [...(ready.vocab ?? []), ...(ready.lexicon ?? [])] : [];
 
   return (
     <section className="space-y-6" aria-labelledby="placement-progress">
       <header className="flex items-center gap-3">
         <BackButton
           label={t('placement.leave')}
-          onClick={() => (answered ? setLeaving(true) : goHome())}
+          onClick={() => (answered ? setLeaving(true) : goBack())}
         />
         <h1
           id="placement-progress"
@@ -233,7 +237,7 @@ function Question({
             </button>
             <button
               type="button"
-              onClick={goHome}
+              onClick={goBack}
               className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
             >
               {t('placement.leave.yes')}
@@ -283,7 +287,7 @@ function Question({
 const names = (units: readonly UnitResult[]) => units.map((u) => u.title).join(', ');
 
 function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const goHomeTo = useApp((s) => s.goHomeTo);
   const recordPlacement = useProgress((s) => s.recordPlacement);
   const set = useSettings((s) => s.set);
@@ -318,9 +322,7 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
         </p>
         {catchUp.length > 0 && <p>{t('placement.result.catchUp', { units: names(catchUp) })}</p>}
         {rec.skipped.length > 0 && (
-          <p className="text-sm text-ink-muted">
-            {t('placement.result.effect')}
-          </p>
+          <p className="text-sm text-ink-muted">{t('placement.result.effect')}</p>
         )}
       </div>
 
@@ -346,17 +348,13 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
             });
             set('placementOffered', true);
             if (rec.startUnit) goHomeTo(rec.startUnit);
-            else goHome();
+            else goBack();
           }}
           className={`${buttonBase} bg-brand text-on-brand`}
         >
           {t('placement.accept')}
         </button>
-        <button
-          type="button"
-          onClick={goHome}
-          className={`${buttonBase} bg-fill`}
-        >
+        <button type="button" onClick={goBack} className={`${buttonBase} bg-fill`}>
           {t('placement.decline')}
         </button>
       </div>

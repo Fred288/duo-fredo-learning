@@ -72,10 +72,7 @@ export function Markdown({ source }: { source: string }) {
       const rows: string[][] = [];
       while (i < lines.length && at(i).trim().startsWith('|')) rows.push(splitRow(at(i++)));
       blocks.push(
-        <div
-          key={key}
-          className="overflow-x-auto rounded-lg border border-line"
-        >
+        <div key={key} className="overflow-x-auto rounded-lg border border-line">
           <table className="w-full min-w-max border-collapse text-left text-sm">
             <thead className="bg-fill-soft">
               <tr>

@@ -14,7 +14,7 @@ const stepButton =
   'min-h-11 min-w-11 rounded-lg border border-line-strong bg-surface text-lg focus-visible:outline-2 focus-visible:outline-focus disabled:opacity-40';
 
 export function Settings() {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const openReview = useApp((s) => s.openReview);
   const openStats = useApp((s) => s.openStats);
   const openPlacement = useApp((s) => s.openPlacement);
@@ -43,7 +43,7 @@ export function Settings() {
       <header className="flex items-center gap-3">
         <button
           type="button"
-          onClick={goHome}
+          onClick={goBack}
           className="min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover"
         >
           ← {t('settings.back')}

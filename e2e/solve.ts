@@ -6,6 +6,7 @@ import type { Exercise, Unit } from '../src/content/schema';
 import { solveExercise } from '../src/content/lexicon';
 import { t } from '../src/i18n';
 import { fixedBoundaries, segmentLetters } from '../src/session/segment';
+import { openCourse } from './nav';
 
 export function loadUnit(unitId: string): Unit {
   return JSON.parse(readFileSync(`public/content/units/${unitId}.json`, 'utf8')) as Unit;
@@ -98,10 +99,11 @@ export async function answer(page: Page, ex: Exercise, unit: Unit) {
   }
 }
 
-/** Öffnet die Lektion von der Startseite und beantwortet alle Übungen richtig. */
+/** Öffnet die Lektion im Kurs und beantwortet alle Übungen richtig. */
 export async function playLesson(page: Page, unitId: string, lessonId: string) {
   const unit = loadUnit(unitId);
   const lesson = unit.lessons.find((l) => l.id === lessonId)!;
+  await openCourse(page);
   // Lektionstitel wie „Wiederholung“ kommen in mehreren Units vor: innerhalb der Unit-Karte suchen.
   const card = page
     .getByRole('listitem')

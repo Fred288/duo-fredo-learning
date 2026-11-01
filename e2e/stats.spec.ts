@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { playLesson } from './solve';
+import { openStats } from './nav';
 
 const today = () => {
   const d = new Date();
@@ -9,7 +10,7 @@ const today = () => {
 
 test('Statistik: leer, dann mit Lektion und schwierigem Wort', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: 'Statistik' }).click();
+  await openStats(page);
   await expect(page.getByRole('heading', { name: 'Statistik', level: 1 })).toBeVisible();
   await expect(page.getByText('Noch nichts, das öfter falsch war.')).toBeVisible();
   await page.getByRole('button', { name: /Zurück/ }).click();
@@ -46,7 +47,7 @@ test('Statistik: leer, dann mit Lektion und schwierigem Wort', async ({ page }) 
     },
   );
   await page.reload();
-  await page.getByRole('button', { name: 'Statistik' }).click();
+  await openStats(page);
 
   const units = page.getByRole('region', { name: 'Units' });
   await expect(units.getByText(/1 von 4 Lektionen · \d+ % richtig/).first()).toBeVisible();

@@ -1,15 +1,19 @@
 import { expect, test } from '@playwright/test';
 import type { Exercise } from '../src/content/schema';
 import { answer, loadUnit, playLesson } from './solve';
+import { openCourse, openSettings, openToday } from './nav';
 
-test('Startseite listet die Units', async ({ page }) => {
+test('Heute zeigt den Titel, der Kurs listet die Units', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Yol' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toHaveCount(0);
+  await openCourse(page);
   await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toBeVisible();
 });
 
 test('Erklärkarte öffnen', async ({ page }) => {
   await page.goto('/');
+  await openCourse(page);
   const unit = page
     .getByRole('listitem')
     .filter({ has: page.getByRole('heading', { name: 'Alphabet und Begrüßung' }) });
@@ -34,22 +38,26 @@ test('Fortschritt und Einstellungen bleiben nach dem Neuladen erhalten', async (
   await playLesson(page, 'a1-u01', 'a1-u01-l1');
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
 
+  // Zurück im Kurs, dort steht der Unit-Fortschritt; das Tagesziel steht unter „Heute“.
+  await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
+  await openToday(page);
   await expect(page.getByText('Tagesziel erreicht')).toBeVisible();
   await expect(page.getByText('1 Tag in Folge')).toBeVisible();
-  await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
 
   // Einstellungen ändern: Dunkelmodus, Serie aus
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await page.getByText('Dunkel', { exact: true }).click();
   await page.getByLabel('Serie anzeigen').uncheck();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.getByRole('button', { name: /Zurück/ }).click();
+  await openToday(page);
   await expect(page.getByText('1 Tag in Folge')).toHaveCount(0);
 
   await page.reload();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await expect(page.getByText('Tagesziel erreicht')).toBeVisible();
   await expect(page.getByText('1 Tag in Folge')).toHaveCount(0);
+  await openCourse(page);
   await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
 });
 
@@ -57,6 +65,7 @@ test('Fehler melden: Notiz erscheint in der Review-Ansicht und bleibt erhalten',
   page,
 }) => {
   await page.goto('/');
+  await openCourse(page);
   await page.getByRole('button', { name: /Begrüßen/ }).click();
   await page.getByText('Merhaba').click();
   await page.getByRole('button', { name: 'Prüfen' }).click();
@@ -70,14 +79,14 @@ test('Fehler melden: Notiz erscheint in der Review-Ansicht und bleibt erhalten',
   await expect(page.getByRole('button', { name: 'Weiter' })).toBeVisible();
 
   await page.getByRole('button', { name: /Zurück/ }).click();
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await page.getByRole('button', { name: 'Inhalte prüfen' }).click();
   await expect(page.getByText('a1-u01-l1-e1 ·')).toBeVisible();
   await expect(page.getByText('Glosse unnatürlich')).toBeVisible();
   await expect(page.getByText(/^\d+ ungeprüft$/).first()).toBeVisible();
 
   await page.reload();
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await page.getByRole('button', { name: 'Inhalte prüfen' }).click();
   await expect(page.getByText('Glosse unnatürlich')).toBeVisible();
 
@@ -87,6 +96,7 @@ test('Fehler melden: Notiz erscheint in der Review-Ansicht und bleibt erhalten',
 
 test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page }) => {
   await page.goto('/');
+  await openCourse(page);
   await page.getByRole('button', { name: /Plural bauen/ }).click();
 
   // 1) ev + Plural
@@ -120,6 +130,7 @@ test('Fehler wiederholen: falsche Antwort bleibt offen, bis sie gelöst ist', as
 
   await page.goto('/');
   await expect(card).toHaveCount(0);
+  await openCourse(page);
   await page
     .getByRole('listitem')
     .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
@@ -132,6 +143,7 @@ test('Fehler wiederholen: falsche Antwort bleibt offen, bis sie gelöst ist', as
   for (const ex of [...rest, first]) await step(ex); // innerhalb der Lektion einmal wiederholt
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
 
+  await openToday(page);
   await expect(card).toContainText('Zuletzt falsch beantwortet: 1');
   await card.click();
   await step(first);

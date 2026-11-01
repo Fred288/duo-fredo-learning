@@ -1,47 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { currentPlacement, placementMark } from '../placement';
-import { fetchManifest, type Manifest } from '../content/load';
-import { isListeningCard } from '../content/listening';
 import { LEVELS } from '../content/schema';
 import { t } from '../i18n';
-import { dayKey } from '../progress/day';
-import { completedLessonIds, openMistakes, progressLessons, unitProgress } from '../progress/stats';
-import { planRepeat } from '../srs';
+import { completedLessonIds, progressLessons, unitProgress } from '../progress/stats';
 import { useApp } from '../store/app';
 import { useAudio, useCanSpeak } from '../store/audio';
 import { useProgress } from '../store/progress';
-import { useSettings } from '../store/settings';
-import { DailyGoal } from './DailyGoal';
+import { useManifest } from './useManifest';
 
-export function Home() {
+/** „Kurs“: alle Units nach Niveau (A1–B2) mit Fortschritt und Lektionen. */
+export function CourseScreen() {
   const openLesson = useApp((s) => s.openLesson);
   const openExplainer = useApp((s) => s.openExplainer);
   const completions = useProgress((s) => s.completions);
-  const attempts = useProgress((s) => s.attempts);
-  const openMistakesScreen = useApp((s) => s.openMistakes);
-  const openRepeat = useApp((s) => s.openRepeat);
-  const openStats = useApp((s) => s.openStats);
+  const placements = useProgress((s) => s.placements);
   // Hörlektionen brauchen eine Stimme; währenddessen laden die Stimmen noch.
   const canListen = useCanSpeak();
   const voicesLoading = useAudio((s) => s.status === 'loading');
-  const cards = useProgress((s) => s.cards);
-  const placements = useProgress((s) => s.placements);
-  const progressLoaded = useProgress((s) => s.loaded);
-  const settingsLoaded = useSettings((s) => s.loaded);
-  const placementOffered = useSettings((s) => s.placementOffered);
-  const setSetting = useSettings((s) => s.set);
-  const openPlacement = useApp((s) => s.openPlacement);
   const focusUnit = useApp((s) => s.focusUnit);
   const clearFocusUnit = useApp((s) => s.clearFocusUnit);
-  const newWordsPerDay = useSettings((s) => s.newWordsPerDay);
-  const [manifest, setManifest] = useState<Manifest>();
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    fetchManifest()
-      .then(setManifest)
-      .catch(() => setFailed(true));
-  }, []);
+  const { manifest, failed } = useManifest();
 
   // Nach übernommener Einstufung zur Start-Unit scrollen (einmal), sobald der Kurs steht.
   useEffect(() => {
@@ -54,94 +32,12 @@ export function Home() {
 
   const completed = completedLessonIds(completions);
   const placement = currentPlacement(placements);
-  // Angebot nur bei einem ersten Start: nichts gemacht, nichts eingestuft, noch nicht entschieden.
-  // Das rohe Protokoll zählt (nicht `currentPlacement`), damit eine Rücknahme es nicht zurückholt.
-  const offerPlacement =
-    progressLoaded &&
-    settingsLoaded &&
-    !placementOffered &&
-    completions.length === 0 &&
-    placements.length === 0;
-  const mistakes = openMistakes(attempts).length;
-  const plan = manifest
-    ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay, {
-        // Hörkarten ohne Stimme bleiben fällig, zählen aber nicht: Wiederholen zeigt sie nicht.
-        skip: canListen ? undefined : isListeningCard,
-      })
-    : undefined;
-  const repeatCount = [
-    plan && plan.due + plan.recall ? t('repeat.due', { count: plan.due + plan.recall }) : '',
-    plan?.fresh ? t('repeat.new', { count: plan.fresh }) : '',
-  ]
-    .filter(Boolean)
-    .join(' · ');
 
   return (
-    <>
-      <DailyGoal />
-      <div className="mt-1 text-right">
-        <button
-          type="button"
-          onClick={openStats}
-          className="min-h-11 rounded-lg px-2 text-sm text-brand-ink underline hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
-        >
-          {t('stats.open')}
-        </button>
-      </div>
-      {offerPlacement && (
-        <section
-          aria-labelledby="placement-offer"
-          className="mt-4 rounded-xl border border-brand-line bg-brand-soft p-4"
-        >
-          <h2 id="placement-offer" className="font-medium">
-            {t('placement.offer.title')}
-          </h2>
-          <p className="mt-1 text-sm text-ink-muted">
-            {t('placement.offer.text')}
-          </p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setSetting('placementOffered', true);
-                openPlacement();
-              }}
-              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-            >
-              {t('placement.offer.start')}
-            </button>
-            <button
-              type="button"
-              onClick={() => setSetting('placementOffered', true)}
-              className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
-            >
-              {t('placement.offer.decline')}
-            </button>
-          </div>
-        </section>
-      )}
-      {repeatCount && (
-        <button
-          type="button"
-          onClick={openRepeat}
-          className="mt-4 block min-h-11 w-full rounded-xl border border-brand-line bg-brand-soft p-4 text-left hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
-        >
-          <span className="block font-medium">{t('repeat.title')}</span>
-          <span className="block text-sm text-ink-muted">{repeatCount}</span>
-        </button>
-      )}
-      {mistakes > 0 && (
-        <button
-          type="button"
-          onClick={openMistakesScreen}
-          className="mt-4 block min-h-11 w-full rounded-xl border border-warn-line bg-warn-soft p-4 text-left hover:bg-warn-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
-        >
-          <span className="block font-medium">{t('mistakes.title')}</span>
-          <span className="block text-sm text-ink-muted">
-            {t('mistakes.count', { count: mistakes })}
-          </span>
-        </button>
-      )}
+    <section aria-labelledby="course-title">
+      <h1 id="course-title" className="text-2xl font-semibold">
+        {t('course.title')}
+      </h1>
       {failed ? (
         <p className="mt-6 text-danger">{t('home.error')}</p>
       ) : !manifest ? (
@@ -244,6 +140,6 @@ export function Home() {
           })}
         </div>
       )}
-    </>
+    </section>
   );
 }

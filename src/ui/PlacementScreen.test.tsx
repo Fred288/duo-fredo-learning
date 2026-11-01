@@ -104,7 +104,7 @@ describe('PlacementScreen', () => {
     render(<PlacementScreen />);
     expect(await screen.findByText(/keine Punkte/)).toBeTruthy();
     click(/Zurück/);
-    expect(useApp.getState().screen.name).toBe('home');
+    expect(useApp.getState().screen.name).toBe('today');
     expect(useProgress.getState().placements).toEqual([]);
   });
 
@@ -124,7 +124,7 @@ describe('PlacementScreen', () => {
     const s = useProgress.getState();
     expect(s.placements).toMatchObject([{ startUnit: null, skipped: ['a1-u01', 'a1-u02'] }]);
     expect(useSettings.getState().placementOffered).toBe(true);
-    expect(useApp.getState().screen.name).toBe('home');
+    expect(useApp.getState().screen.name).toBe('today');
     expect(s.attempts).toEqual([]);
     expect(s.completions).toEqual([]);
     expect(s.cards).toEqual([]);
@@ -152,7 +152,7 @@ describe('PlacementScreen', () => {
     expect(screen.getByText(/Noch nicht sicher/)).toBeTruthy();
     click('Nicht übernehmen');
     expect(useProgress.getState().placements).toEqual([]);
-    expect(useApp.getState().screen.name).toBe('home');
+    expect(useApp.getState().screen.name).toBe('today');
   });
 
   it('Übernehmen mit Start merkt die Unit zum Scrollen auf der Startseite', async () => {
@@ -226,7 +226,7 @@ describe('PlacementScreen', () => {
     expect(screen.queryByText('Test abbrechen? Es wird nichts gespeichert.')).toBeNull();
     click(/Abbrechen/);
     click('Ja, abbrechen');
-    expect(useApp.getState().screen.name).toBe('home');
+    expect(useApp.getState().screen.name).toBe('today');
     expect(useProgress.getState().placements).toEqual([]);
   });
 

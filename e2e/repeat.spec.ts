@@ -2,6 +2,7 @@ import { readdirSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 import type { Unit } from '../src/content/schema';
 import { answer, loadUnit, playLesson } from './solve';
+import { openCourse, openSettings, openToday } from './nav';
 
 /**
  * Beantwortet einen Wiederholen-Durchgang richtig. Die Karte wird über die Übungs-ID erkannt, die
@@ -51,14 +52,15 @@ test('Wiederholen: neue Wörter nach einer Lektion, zählt wie eine Lektion für
   await page.goto('/');
   await expect(tile(page)).toHaveCount(0); // ohne abgeschlossene Lektion keine neuen Wörter
 
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await page.getByRole('button', { name: 'Tagesziel erhöhen' }).click();
   await page.getByRole('button', { name: 'Tagesziel erhöhen' }).click();
-  await page.getByRole('button', { name: /Zurück/ }).click();
+  await openToday(page);
   await expect(page.getByText('Heute: 0 von 3 Lektionen')).toBeVisible();
 
   await playLesson(page, 'a1-u01', 'a1-u01-l1');
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+  await openToday(page);
   await expect(page.getByText('Heute: 1 von 3 Lektionen')).toBeVisible();
   await expect(tile(page)).toContainText('10 neue Wörter');
 
@@ -66,8 +68,9 @@ test('Wiederholen: neue Wörter nach einer Lektion, zählt wie eine Lektion für
   await playRepeat(page);
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
   await expect(page.getByText('Heute: 2 von 3 Lektionen')).toBeVisible();
-  await expect(page.getByText('1 von 4 Lektionen')).toBeVisible(); // Unit-Fortschritt unberührt
   await expect(tile(page)).toHaveCount(0); // Tageslimit neuer Wörter erreicht
+  await openCourse(page);
+  await expect(page.getByText('1 von 4 Lektionen')).toBeVisible(); // Unit-Fortschritt unberührt
 
   await page.reload();
   await expect(page.getByText('Heute: 2 von 3 Lektionen')).toBeVisible();
@@ -82,6 +85,7 @@ test('Wiederholen: falsch beantwortete Übung kommt am nächsten Tag zurück', a
 
   await page.clock.setFixedTime(new Date('2026-05-01T10:00:00'));
   await page.goto('/');
+  await openCourse(page);
   await page
     .getByRole('listitem')
     .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
@@ -97,6 +101,7 @@ test('Wiederholen: falsch beantwortete Übung kommt am nächsten Tag zurück', a
     await page.getByRole('button', { name: 'Weiter' }).click();
   }
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+  await openToday(page);
   await expect(tile(page)).toContainText('10 neue Wörter');
   await expect(tile(page)).not.toContainText('fällig');
 

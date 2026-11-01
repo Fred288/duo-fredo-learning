@@ -4,12 +4,9 @@ import type { ReactNode } from 'react';
 import type { AnswerResult } from '../lib/answer';
 
 const tone = {
-  correct:
-    'border-success-line bg-success-soft text-success-ink',
-  almost:
-    'border-warn-line bg-warn-soft text-warn-ink',
-  wrong:
-    'border-danger-line bg-danger-soft text-danger-ink',
+  correct: 'border-success-line bg-success-soft text-success-ink',
+  almost: 'border-warn-line bg-warn-soft text-warn-ink',
+  wrong: 'border-danger-line bg-danger-soft text-danger-ink',
 };
 
 interface Props {

@@ -12,12 +12,10 @@ import { useCanSpeak } from '../store/audio';
 import { currentPlacement } from '../placement/record';
 import { useProgress } from '../store/progress';
 
-const backButton =
-  'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover';
+const backButton = 'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover';
 const rowButton =
   'flex min-h-11 w-full items-center justify-between gap-3 rounded-lg px-3 py-2 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
-const card =
-  'rounded-xl border border-line bg-surface p-4';
+const card = 'rounded-xl border border-line bg-surface p-4';
 
 /** 'YYYY-MM-DD' → Heute / Morgen / 30.10. */
 function dayLabel(day: string, today: string): string {
@@ -43,7 +41,10 @@ function Boxes({ counts, label }: { counts: BoxCounts; label: string }) {
               aria-hidden="true"
               className="h-2 flex-1 overflow-hidden rounded-full bg-fill-soft"
             >
-              <span className="block h-full bg-brand-bar" style={{ width: `${(n / max) * 100}%` }} />
+              <span
+                className="block h-full bg-brand-bar"
+                style={{ width: `${(n / max) * 100}%` }}
+              />
             </span>
             <span className="w-8 text-right tabular-nums">{n}</span>
           </li>
@@ -56,7 +57,7 @@ function Boxes({ counts, label }: { counts: BoxCounts; label: string }) {
 
 /** Ruhige Übersicht: was steht wo, was kommt, was fällt schwer. Keine Punkte, keine Vergleiche. */
 export function StatsScreen() {
-  const goHome = useApp((s) => s.goHome);
+  const goBack = useApp((s) => s.goBack);
   const openLesson = useApp((s) => s.openLesson);
   const openLookup = useApp((s) => s.openLookup);
   const setLookup = useApp((s) => s.setLookup);
@@ -103,7 +104,7 @@ export function StatsScreen() {
   return (
     <section className="space-y-6" aria-labelledby="stats-title">
       <header className="flex items-center gap-3">
-        <button type="button" onClick={goHome} className={backButton}>
+        <button type="button" onClick={goBack} className={backButton}>
           ← {t('settings.back')}
         </button>
         <h1 id="stats-title" className="text-xl font-semibold">
@@ -165,12 +166,7 @@ export function StatsScreen() {
                                 <span lang="tr" className="font-medium">
                                   {v?.tr ?? (c.ref.kind === 'vocab' ? c.ref.vocabId : c.id)}
                                 </span>
-                                {v && (
-                                  <span className="text-ink-muted">
-                                    {' '}
-                                    · {v.de.join(', ')}
-                                  </span>
-                                )}
+                                {v && <span className="text-ink-muted"> · {v.de.join(', ')}</span>}
                                 <span className="block text-xs text-ink-subtle">
                                   {c.ref.kind === 'vocab' && t(`lookup.srs.${c.ref.dir}`)}
                                 </span>

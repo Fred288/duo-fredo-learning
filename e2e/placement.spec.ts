@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { playPlacement, startPlacementFromOffer, unitsAt } from './placement';
+import { openCourse, openSettings, openStats, openToday } from './nav';
 
 const unitCard = (page: import('@playwright/test').Page, title: string) =>
   page
@@ -12,8 +13,10 @@ test('Angebot beim ersten Start lässt sich ablehnen und kommt nicht wieder', as
   await page.getByRole('button', { name: 'Nein, von vorn' }).click();
   await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
   await page.reload();
-  await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Yol' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
+  await openCourse(page);
+  await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toBeVisible();
 });
 
 test('Anfänger: nur „Weiß ich nicht“ führt zum Start bei der ersten Unit', async ({ page }) => {
@@ -29,8 +32,9 @@ test('Anfänger: nur „Weiß ich nicht“ führt zum Start bei der ersten Unit'
   await expect(first.getByText('Empfohlener Start')).toBeVisible();
   await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(0);
   // Der Test zählt weder fürs Tagesziel noch für den Fortschritt.
-  await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
   await expect(first.getByText(/^0 von \d+ Lektionen$/)).toBeVisible();
+  await openToday(page);
+  await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
 });
 
 test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; zurücknehmbar', async ({
@@ -57,37 +61,40 @@ test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; z
 
   // Bleibt nach dem Neuladen erhalten.
   await page.reload();
+  await openCourse(page);
   await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(unitsAt('A1'));
 
   // Statistik nennt die übersprungenen Units.
-  await page.getByRole('button', { name: 'Statistik' }).first().click();
+  await openStats(page);
   await expect(page.getByText(/laut Einstufung bekannt/).first()).toBeVisible();
   await page.getByRole('button', { name: /Zurück/ }).click();
 
   // Zurücknehmen in den Einstellungen; das Angebot kommt nicht zurück.
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(
     page.getByText(`Einstufung übernommen. Als bekannt markierte Themen: ${unitsAt('A1')}.`),
   ).toBeVisible();
   await page.getByRole('button', { name: 'Einstufung zurücknehmen' }).click();
   await expect(page.getByText('Einstufung zurückgenommen.')).toBeVisible();
-  await page.getByRole('button', { name: /Zurück/ }).click();
+  await openCourse(page);
   await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(0);
   await expect(page.getByText('Empfohlener Start')).toHaveCount(0);
+  await openToday(page);
   await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
 });
 
 test('Abbrechen speichert nichts; aus den Einstellungen wiederholbar', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Nein, von vorn' }).click();
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByText('Noch keine Einstufung übernommen.')).toBeVisible();
   await page.getByRole('button', { name: 'Einstufung machen' }).click();
   await page.getByRole('button', { name: 'Test beginnen' }).click();
   await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
   await page.getByRole('button', { name: /Abbrechen/ }).click();
   await page.getByRole('button', { name: 'Ja, abbrechen' }).click();
+  await openCourse(page);
   await expect(page.getByText('Empfohlener Start')).toHaveCount(0);
-  await page.getByRole('button', { name: 'Einstellungen' }).click();
+  await openSettings(page);
   await expect(page.getByText('Noch keine Einstufung übernommen.')).toBeVisible();
 });
