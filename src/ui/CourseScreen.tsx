@@ -218,8 +218,10 @@ function UnitRow({
   return (
     <li
       id={`unit-${unit.id}`}
-      className={`relative scroll-mt-4 rounded-xl border p-3 hover:bg-hover ${
-        selected ? 'border-brand-edge bg-brand-soft' : 'border-line bg-surface'
+      className={`relative scroll-mt-4 rounded-xl border p-3 ${
+        selected
+          ? 'border-brand-edge bg-brand-soft hover:bg-brand-soft-hover'
+          : 'border-line bg-surface hover:bg-hover'
       }`}
     >
       <h3 className="font-medium">
@@ -228,7 +230,7 @@ function UnitRow({
           type="button"
           onClick={(e) => onOpen(e.detail === 0)}
           aria-current={selected ? 'true' : undefined}
-          className="text-left after:absolute after:inset-0 after:rounded-lg focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-focus"
+          className="text-left after:absolute after:inset-0 after:rounded-xl focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-focus"
         >
           {unit.title}
         </button>

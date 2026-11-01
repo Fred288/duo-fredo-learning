@@ -24,6 +24,7 @@
 
   /* Glas: Grundfarbe plus Deckkraft (Leisten, Sheets, Karten); Hintergrund: zwei weiche Töne. */
   --glass-base: #ffffff;
+  --glass-rgb: 255 255 255;
   --glass-alpha: 0.78;
   --glass-alpha-strong: 0.94;
   --card-alpha: 0.72;
@@ -40,9 +41,9 @@
   --brand-line: #5eead4;
   --brand-edge: #0f766e;
   --brand-ink: #115e59;
-  --focus: #0d9488;
+  --focus: #0f766e;
 
-  --warn: #b45309;
+  --warn: #92400e;
   --warn-soft: #fffbeb;
   --warn-soft-hover: #fef3c7;
   --warn-line: #fcd34d;
@@ -54,7 +55,7 @@
   --danger-edge: #f43f5e;
   --danger-ink: #881337;
 
-  --success: #047857;
+  --success: #036b4e;
   --success-soft: #ecfdf5;
   --success-line: #6ee7b7;
   --success-edge: #059669;
@@ -76,6 +77,7 @@
   --on-inverse: #1c1917;
 
   --glass-base: #1c1917;
+  --glass-rgb: 28 25 23;
   --glass-alpha: 0.88;
   --glass-alpha-strong: 0.96;
   --card-alpha: 0.78;
@@ -153,7 +155,7 @@
   --color-success-ink: var(--success-ink);
 }
 
-/* Sichere Bereiche (Notch, Home-Indikator); Einsatz in M2 an Navigation und Kopfzeilen. */
+/* Sichere Bereiche (Notch, Home-Indikator). */
 :root {
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
@@ -181,7 +183,7 @@ html.dark {
  * Lektionskopf, Prüfen-Bereich, Sheet und Banner, die Karten nicht: vor dem weichen Verlauf wäre
  * es nicht zu sehen und kostet nur Leistung.
  *
- * Der Rückfall ist deckend (`--surface`): ohne `color-mix` oder `backdrop-filter` (ältere Handys),
+ * Der Rückfall ist deckend (`--surface`): `glass` ohne `backdrop-filter` (ältere Handys), alle drei
  * bei `prefers-reduced-transparency`, `prefers-contrast: more` und `forced-colors`. Die
  * Deckkraft ist so hoch gewählt, dass der Text auch über dem ungünstigsten Untergrund AA hält
  * (geprüft in `src/ui/tokens.test.ts`).
@@ -191,39 +193,27 @@ html.dark {
   .glass-strong,
   .card {
     background-color: var(--surface);
-    box-shadow: inset 0 1px 0 var(--edge, transparent);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / var(--edge-alpha));
+  }
+  .card {
+    background-color: rgb(var(--glass-rgb) / var(--card-alpha));
   }
   .glass,
   .glass-strong {
+    /* Flächen am unteren Rand setzen `--shadow-y` negativ, ihr Schatten fällt nach oben. */
     box-shadow:
-      inset 0 1px 0 var(--edge, transparent),
-      0 8px 28px -14px rgb(0 0 0 / 0.28);
+      inset 0 1px 0 rgb(255 255 255 / var(--edge-alpha)),
+      0 var(--shadow-y, 8px) 28px -14px rgb(0 0 0 / 0.28);
   }
 
-  @supports (color: color-mix(in srgb, red 50%, transparent)) {
-    .glass,
-    .glass-strong,
-    .card {
-      --edge: color-mix(in srgb, #ffffff calc(var(--edge-alpha) * 100%), transparent);
-    }
-    .card {
-      background-color: color-mix(in srgb, var(--glass-base) calc(var(--card-alpha) * 100%), transparent);
-    }
-  }
-
-  @supports (color: color-mix(in srgb, red 50%, transparent)) and
-    ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
     .glass {
-      background-color: color-mix(in srgb, var(--glass-base) calc(var(--glass-alpha) * 100%), transparent);
+      background-color: rgb(var(--glass-rgb) / var(--glass-alpha));
       -webkit-backdrop-filter: blur(16px) saturate(1.4);
       backdrop-filter: blur(16px) saturate(1.4);
     }
     .glass-strong {
-      background-color: color-mix(
-        in srgb,
-        var(--glass-base) calc(var(--glass-alpha-strong) * 100%),
-        transparent
-      );
+      background-color: rgb(var(--glass-rgb) / var(--glass-alpha-strong));
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
       backdrop-filter: blur(20px) saturate(1.4);
     }

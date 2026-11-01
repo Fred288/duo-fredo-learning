@@ -10,6 +10,7 @@ export const de = {
   'nav.settings': 'Einstellungen',
   'nav.skip': 'Zum Inhalt springen',
   'course.title': 'Kurs',
+  'table.scroll': 'Tabelle: {head}',
   'course.pick': 'Unit wählen, um Erklärung und Lektionen zu sehen.',
   'today.continue.title': 'Weiterlernen',
   'more.title': 'Mehr',

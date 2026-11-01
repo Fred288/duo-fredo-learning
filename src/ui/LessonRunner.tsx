@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type FocusEvent,
+  type ReactNode,
+} from 'react';
 import type { Verdict } from '../lib/answer';
 import type { Exercise, Lesson, Vocab } from '../content/schema';
 import type { ExplainerSection } from '../content/explainer-section';
@@ -101,6 +109,19 @@ function Runner({
   const [session, setSession] = useState(() => createSession(exercises));
   const [answer, setAnswer] = useState('');
   const attempted = useRef(new Set<string>());
+  const head = useRef<HTMLElement>(null);
+  const actions = useRef<HTMLDivElement>(null);
+
+  // Tab und Bildschirmtastatur: Ein Feld darf nicht unter den klebenden Balken liegen. Der Browser
+  // scrollt nicht von selbst, weil es geometrisch im Bild ist.
+  const keepInView = (e: FocusEvent<HTMLElement>) => {
+    const box = e.target.getBoundingClientRect();
+    const top = head.current?.getBoundingClientRect().bottom ?? 0;
+    const bottom = actions.current?.getBoundingClientRect().top ?? Infinity;
+    if (box.height && (box.top < top || box.bottom > bottom)) {
+      e.target.scrollIntoView?.({ block: 'center' });
+    }
+  };
 
   const ex = currentExercise(session);
   const supported = ex && isSupported(ex) ? ex : undefined;
@@ -203,9 +224,12 @@ function Runner({
     (unitId ? { unitId, unreviewed: !(supported.reviewed ?? unitReviewed) } : undefined);
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-6" onFocus={keepInView}>
       <h1 className="sr-only">{lesson.title}</h1>
-      <header className="sticky top-[max(0.5rem,var(--safe-top))] z-10 flex items-center gap-3 rounded-2xl border border-line glass px-2 py-1">
+      <header
+        ref={head}
+        className="sticky top-[max(0.5rem,var(--safe-top))] z-10 flex items-center gap-3 rounded-2xl border border-line glass-strong px-2 py-1"
+      >
         <button
           type="button"
           onClick={onExit}
@@ -245,7 +269,10 @@ function Runner({
       </div>
 
       {answering ? (
-        <div className="sticky bottom-[max(0.75rem,var(--safe-bottom))] z-10 space-y-2 rounded-2xl border border-line glass p-3">
+        <div
+          ref={actions}
+          className="sticky bottom-[max(0.75rem,var(--safe-bottom))] z-10 space-y-2 rounded-2xl border border-line glass-strong p-3 [--shadow-y:-8px]"
+        >
           <button
             type="button"
             onClick={check}

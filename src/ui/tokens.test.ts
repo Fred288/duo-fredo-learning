@@ -27,6 +27,9 @@ export function contrast(a: string, b: string): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
+// Der Seitenuntergrund: Fokusbereiche `canvas`, Navigationsbereiche der feste Verlauf.
+const PAGE = ['canvas', 'bg-1', 'bg-2'];
+
 // Getönte Flächen: Karten mit Hover, Feedback-Boxen.
 const TINTS = [
   'brand-soft',
@@ -39,15 +42,15 @@ const TINTS = [
 
 // Text (Vordergrund, Hintergründe), mindestens 4,5:1 (WCAG AA).
 const TEXT: Record<string, string[]> = {
-  ink: ['canvas', 'surface', 'fill-soft', 'fill', 'hover', ...TINTS],
-  'ink-muted': ['canvas', 'surface', 'fill-soft', 'fill', 'hover', ...TINTS],
-  'ink-subtle': ['canvas', 'surface', 'fill-soft', 'fill', 'hover'],
-  'brand-ink': ['canvas', 'surface', 'brand-soft', 'brand-soft-hover', 'hover'],
-  warn: ['canvas', 'surface'],
+  ink: [...PAGE, 'surface', 'fill-soft', 'fill', 'hover', ...TINTS],
+  'ink-muted': [...PAGE, 'surface', 'fill-soft', 'fill', 'hover', ...TINTS],
+  'ink-subtle': [...PAGE, 'surface', 'fill-soft', 'fill', 'hover'],
+  'brand-ink': [...PAGE, 'surface', 'brand-soft', 'brand-soft-hover', 'hover'],
+  warn: [...PAGE, 'surface'],
   'warn-ink': ['warn-soft', 'warn-soft-hover'],
-  danger: ['canvas', 'surface', 'danger-soft'],
+  danger: [...PAGE, 'surface', 'danger-soft'],
   'danger-ink': ['danger-soft'],
-  success: ['canvas', 'surface', 'success-soft'],
+  success: [...PAGE, 'surface', 'success-soft'],
   'success-ink': ['success-soft'],
   'on-inverse': ['inverse'],
   'on-brand': ['brand', 'brand-strong'],
@@ -55,8 +58,8 @@ const TEXT: Record<string, string[]> = {
 
 // Bedienelemente und Rahmen von Zuständen: mindestens 3:1 (WCAG 1.4.11).
 const UI: Record<string, string[]> = {
-  focus: ['canvas', 'surface'],
-  'brand-edge': ['canvas', 'surface'],
+  focus: [...PAGE, 'surface'],
+  'brand-edge': [...PAGE, 'surface'],
   'danger-edge': ['canvas', 'surface'],
   'success-edge': ['canvas', 'surface'],
   'brand-bar': ['fill', 'fill-soft'],
@@ -146,6 +149,22 @@ for (const [name, selector] of [
         }
       }
     }
+    for (const [cls, { alpha, back }] of Object.entries(GLASS)) {
+      for (const b of back) {
+        it(`Fokusring auf .${cls} über ${b} ≥ 3`, () => {
+          expect(
+            contrast(t.focus!, over(t['glass-base']!, n[alpha]!, t[b]!)),
+          ).toBeGreaterThanOrEqual(3);
+        });
+      }
+    }
+    it('Glasfarbe gibt es als Hex und als RGB-Tripel, beide gleich', () => {
+      const css = readFileSync('src/index.css', 'utf8');
+      const start = css.indexOf(`\n${selector} {`);
+      const rgb = /--glass-rgb:\s*(\d+) (\d+) (\d+)/.exec(css.slice(start))!;
+      const hex = rgb.slice(1, 4).map((v) => Number(v).toString(16).padStart(2, '0'));
+      expect(`#${hex.join('')}`).toBe(t['glass-base']);
+    });
     it('Deckkräfte liegen zwischen 0 und 1, das Glas der Sheets ist dichter', () => {
       expect(n['glass-alpha']).toBeGreaterThan(0.5);
       expect(n['glass-alpha-strong']).toBeGreaterThan(n['glass-alpha']!);

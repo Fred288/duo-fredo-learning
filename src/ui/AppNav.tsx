@@ -80,7 +80,7 @@ export function AppNav({ screen }: { screen: Screen }) {
   return (
     <nav
       aria-label={t('nav.label')}
-      className="fixed inset-x-0 bottom-0 z-20 flex gap-1 border-t border-line glass pt-1 pr-[max(0.5rem,var(--safe-right))] pb-[max(0.25rem,var(--safe-bottom))] pl-[max(0.5rem,var(--safe-left))] md:inset-x-auto md:inset-y-0 md:left-0 md:w-[calc(var(--side-w)+var(--safe-left))] md:flex-col md:overflow-y-auto md:border-t-0 md:border-r md:pt-[calc(1.5rem+var(--safe-top))] md:pr-2"
+      className="fixed inset-x-0 bottom-0 z-20 flex gap-1 border-t border-line glass [--shadow-y:-8px] md:[--shadow-y:0px] pt-1 pr-[max(0.5rem,var(--safe-right))] pb-[max(0.25rem,var(--safe-bottom))] pl-[max(0.5rem,var(--safe-left))] md:inset-x-auto md:inset-y-0 md:left-0 md:w-[calc(var(--side-w)+var(--safe-left))] md:flex-col md:overflow-y-auto md:border-t-0 md:border-r md:pt-[calc(1.5rem+var(--safe-top))] md:pr-2"
     >
       {items.map((item) => (
         <button

@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
 import { sectionSlug } from '../content/explainer-section';
+import { t } from '../i18n';
 
 // Kleines Markdown-Subset für Erklärkarten: #-Überschriften, Absätze, - Listen,
 // Pipe-Tabellen, **fett**, `code`. Es werden nur React-Elemente gebaut, nie HTML.
@@ -72,7 +73,14 @@ export function Markdown({ source }: { source: string }) {
       const rows: string[][] = [];
       while (i < lines.length && at(i).trim().startsWith('|')) rows.push(splitRow(at(i++)));
       blocks.push(
-        <div key={key} className="overflow-x-auto rounded-lg border border-line">
+        // Breite Tabellen scrollen seitlich: per Tastatur nur erreichbar, wenn der Bereich Fokus nimmt.
+        <div
+          key={key}
+          role="region"
+          aria-label={t('table.scroll', { head: head.join(', ') })}
+          tabIndex={0}
+          className="overflow-x-auto rounded-lg border border-line focus-visible:outline-2 focus-visible:outline-focus"
+        >
           <table className="w-full min-w-max border-collapse text-left text-sm">
             <thead className="bg-fill-soft">
               <tr>
