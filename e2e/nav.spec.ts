@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
-import { startPlacementFromOffer } from './placement';
+import { playPlacement, startPlacementFromOffer } from './placement';
 import { openCourse, openLookup, openSettings, openStats, openToday } from './nav';
 
 const nav = (page: Page) => page.getByRole('navigation', { name: 'Hauptnavigation' });
@@ -114,6 +114,64 @@ test('Einstufungstest: Zurück-Taste fragt nach, statt Antworten zu verwerfen', 
   await expect(page.getByRole('heading', { name: 'Deine Empfehlung' })).toHaveCount(0);
 });
 
+test('Einstufungsergebnis: Zurück-Taste fragt nach, die Rückfrage schließt sich wieder', async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  await page.goto('/');
+  await startPlacementFromOffer(page);
+  await playPlacement(page, () => false);
+  const confirm = page.getByText('Test abbrechen? Es wird nichts gespeichert.');
+  await page.goBack();
+  await expect(confirm).toBeVisible();
+  await page.goBack();
+  await expect(confirm).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Deine Empfehlung' })).toBeVisible();
+  await page.goBack();
+  await page.getByRole('button', { name: 'Ja, abbrechen' }).click();
+  await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
+});
+
+test('Lesetext: Zurück-Taste schließt das Wort-Sheet, der Knopf verlässt die Lektion', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await openCourse(page);
+  await page.getByRole('button', { name: /Ein neues Leben in İzmir$/ }).click();
+  await page.getByRole('button', { name: 'taşındım', exact: true }).click();
+  const sheet = page.getByRole('dialog', { name: 'Wort: taşındım' });
+  await expect(sheet).toBeVisible();
+
+  await page.goBack();
+  await expect(sheet).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'Zu den Fragen' })).toBeVisible();
+
+  await page.getByRole('button', { name: 'taşındım', exact: true }).click();
+  await expect(sheet).toBeVisible();
+  await page.getByRole('button', { name: /Zurück/ }).click();
+  await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();
+});
+
+test('Fokus folgt auch geladenen Bildschirmen, Zurück stellt den Scrollstand her', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await openCourse(page);
+  const far = page.getByRole('button', { name: 'Erklärung' }).nth(10);
+  await far.scrollIntoViewIfNeeded();
+  const y = await page.evaluate(() => window.scrollY);
+  expect(y).toBeGreaterThan(1000);
+  await far.click();
+  await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  await page.goBack();
+  await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(y - 50);
+
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+});
+
 test('Neuladen beginnt bei „Heute“, ein alter Verlaufseintrag führt nicht in eine Lektion', async ({
   page,
 }) => {
@@ -125,6 +183,11 @@ test('Neuladen beginnt bei „Heute“, ein alter Verlaufseintrag führt nicht i
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
   await page.goBack();
+  await expect
+    .poll(() =>
+      page.evaluate(() => (history.state as { screen?: { name: string } } | null)?.screen?.name),
+    )
+    .toBe('today');
   await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Prüfen' })).toHaveCount(0);
 });
@@ -139,7 +202,9 @@ test('Statistik und Einstellungen sind auf jeder Breite erreichbar', async ({ pa
 
 test('Taste „/“ öffnet das Nachschlagen auf jedem Navigationsbildschirm', async ({ page }) => {
   await page.goto('/');
-  await openCourse(page);
-  await page.keyboard.press('/');
-  await expect(page.getByRole('searchbox')).toBeFocused();
+  for (const open of [openToday, openCourse, openStats, openSettings]) {
+    await open(page);
+    await page.keyboard.press('/');
+    await expect(page.getByRole('searchbox')).toBeFocused();
+  }
 });

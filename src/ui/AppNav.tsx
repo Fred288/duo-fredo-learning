@@ -9,6 +9,7 @@ interface Item {
   icon: ReactNode;
   current: boolean;
   onSelect: () => void;
+  keys?: string;
   /** Sichtbarkeit je Breite: Handy zeigt „Mehr“, ab Tablet stehen Statistik und Einstellungen direkt da. */
   show?: 'phone' | 'wide';
 }
@@ -48,6 +49,7 @@ export function AppNav({ screen }: { screen: Screen }) {
       icon: <SearchIcon />,
       current: name === 'lookup' || fromLookup,
       onSelect: openLookup,
+      keys: '/',
     },
     {
       id: 'stats',
@@ -86,6 +88,7 @@ export function AppNav({ screen }: { screen: Screen }) {
           type="button"
           onClick={item.onSelect}
           aria-current={item.current ? 'page' : undefined}
+          aria-keyshortcuts={item.keys}
           className={`${itemBase} ${
             item.current
               ? 'bg-brand-soft font-medium text-brand-ink'

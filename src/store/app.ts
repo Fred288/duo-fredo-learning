@@ -57,8 +57,6 @@ interface AppState {
   setLookup: (query: string, entry?: string) => void;
   /** Ein Schritt zurück: zum Eintrag davor, ohne ihn zum fachlichen Elternbildschirm. */
   goBack: () => void;
-  /** Zur Startseite „Heute“ (neuer Eintrag). */
-  goHome: () => void;
   /** Unit, zu der der Kurs beim nächsten Anzeigen scrollt (nach übernommener Einstufung). */
   focusUnit?: string;
   /** Ersetzt den aktuellen Bildschirm durch den Kurs (Einstufung übernommen) und scrollt zur Unit. */
@@ -78,22 +76,40 @@ interface Entry {
 
 const sid = Math.random().toString(36).slice(2);
 let idx = 0;
-/** Popstate-Ereignisse, die wir selbst auslösen (Zurück rückgängig machen) und überspringen. */
-let ignorePops = 0;
+/** Ziel einer laufenden Rücknahme: Ein Wächter hat Zurück abgefangen, der Verlauf geht dorthin zurück. */
+let undoTo: number | undefined;
+/** `goBack` läuft: dieser Schritt ist gewollt (kein Wächter), ein zweiter Tipp zählt nicht. */
+let ownBack = false;
+/** Scrollstand je Eintrag; Zurück stellt ihn wieder her. */
+const scrolls = new Map<number, number>();
+let restoreScroll: number | undefined;
+const scrollY = () => document.scrollingElement?.scrollTop ?? 0;
 const hasHistory = typeof window !== 'undefined' && typeof window.history?.pushState === 'function';
 
 const same = (a: Screen, b: Screen) => JSON.stringify(a) === JSON.stringify(b);
 
 function record(screen: Screen, mode: 'push' | 'replace'): void {
   if (!hasHistory) return;
-  if (mode === 'push') idx += 1;
-  const entry: Entry = { sid, idx, screen };
+  undoTo = undefined;
+  ownBack = false;
+  const next = mode === 'push' ? idx + 1 : idx;
+  const entry: Entry = { sid, idx: next, screen };
   try {
-    if (mode === 'push') window.history.pushState(entry, '');
-    else window.history.replaceState(entry, '');
+    if (mode === 'push') {
+      scrolls.set(idx, scrollY());
+      window.history.pushState(entry, '');
+    } else window.history.replaceState(entry, '');
+    idx = next;
   } catch {
     // Verlauf nicht erlaubt (z. B. eingebettet): die App läuft ohne Zurück-Taste weiter.
   }
+}
+
+/** Scrollstand für den gerade per Zurück/Vorwärts erreichten Eintrag, sonst `undefined`. */
+export function takeRestoreScroll(): number | undefined {
+  const y = restoreScroll;
+  restoreScroll = undefined;
+  return y;
 }
 
 // --- Zurück-Wächter --------------------------------------------------------------------------
@@ -118,11 +134,15 @@ export function addBackGuard(handler: () => void): () => void {
 if (hasHistory) {
   record({ name: 'today' }, 'replace');
   window.addEventListener('popstate', (e) => {
-    if (ignorePops > 0) {
-      ignorePops -= 1;
-      return;
-    }
     const state = e.state as Entry | null;
+    if (undoTo !== undefined) {
+      // Nur das erwartete Ziel überspringen; kam etwas anderes, gilt es als normaler Schritt.
+      const undone = state?.sid === sid && state.idx === undoTo;
+      undoTo = undefined;
+      if (undone) return;
+    }
+    const own = ownBack;
+    ownBack = false;
     if (!state || state.sid !== sid) {
       // Eintrag aus einer früheren Sitzung (vor dem Neuladen): neu bei „Heute“ beginnen.
       idx = 0;
@@ -131,23 +151,25 @@ if (hasHistory) {
       return;
     }
     const guard = guards[guards.length - 1];
-    if (guard && state.idx < idx) {
-      // Zurück wurde gedrückt, aber etwas ist offen: Schritt rückgängig machen, Wächter handeln lassen.
-      ignorePops += 1;
-      window.history.forward();
+    if (guard && !own && state.idx < idx) {
+      // Zurück wurde gedrückt, aber etwas ist offen: Schritte rückgängig machen, Wächter handeln lassen.
+      undoTo = idx;
+      window.history.go(idx - state.idx);
       guard.handler();
       return;
     }
+    scrolls.set(idx, scrollY());
+    restoreScroll = scrolls.get(state.idx);
     idx = state.idx;
-    useApp.setState({ screen: state.screen });
+    useApp.setState({ screen: state.screen, focusUnit: undefined });
   });
 }
 
 // Einstellungen und Fortschritt liegen in eigenen, persistenten Stores (settings.ts, progress.ts).
 export const useApp = create<AppState>((set, get) => {
-  const go = (screen: Screen, extra: Partial<AppState> = {}) => {
+  const go = (screen: Screen) => {
     if (!same(get().screen, screen)) record(screen, 'push');
-    set({ screen, ...extra });
+    set({ screen, focusUnit: undefined });
   };
   return {
     screen: { name: 'today' },
@@ -167,10 +189,13 @@ export const useApp = create<AppState>((set, get) => {
     lookupEntry: undefined,
     setLookup: (lookupQuery, lookupEntry) => set({ lookupQuery, lookupEntry }),
     goBack: () => {
-      if (hasHistory && idx > 0) window.history.back();
-      else set({ screen: parentOf(get().screen) });
+      if (ownBack) return;
+      const state = hasHistory ? (window.history.state as Entry | null) : null;
+      if (idx > 0 && state?.sid === sid) {
+        ownBack = true;
+        window.history.back();
+      } else set({ screen: parentOf(get().screen) });
     },
-    goHome: () => go({ name: 'today' }, { focusUnit: undefined }),
     focusUnit: undefined,
     goHomeTo: (focusUnit) => {
       const screen: Screen = { name: 'course' };

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { t } from './i18n';
-import { isFocusScreen, useApp } from './store/app';
+import { isFocusScreen, takeRestoreScroll, useApp } from './store/app';
 import { useAudioSetup } from './store/audio';
 import { AppNav } from './ui/AppNav';
 import { CourseScreen } from './ui/CourseScreen';
@@ -50,19 +50,29 @@ export function App() {
     shownScreen.current = screen;
     const el = main.current;
     if (!el) return;
-    if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
-    const active = document.activeElement;
-    if (active && active !== el && el.contains(active)) return;
-    const heading = el.querySelector<HTMLElement>('h1');
-    if (heading) heading.tabIndex = -1;
-    (heading ?? el).focus({ preventScroll: true });
+    if (document.scrollingElement) document.scrollingElement.scrollTop = takeRestoreScroll() ?? 0;
+    const focusHeading = () => {
+      const active = document.activeElement;
+      if (active && active !== el && active !== document.body && el.contains(active)) return true;
+      const heading = el.querySelector<HTMLElement>('h1');
+      if (heading) heading.tabIndex = -1;
+      (heading ?? el).focus({ preventScroll: true });
+      return !!heading;
+    };
+    if (focusHeading()) return;
+    // Der Bildschirm lädt noch: Überschrift übernimmt den Fokus, sobald sie erscheint.
+    const observer = new MutationObserver(() => {
+      if (el.querySelector('h1') && focusHeading()) observer.disconnect();
+    });
+    observer.observe(el, { childList: true, subtree: true });
+    return () => observer.disconnect();
   }, [screen]);
 
   return (
     <div
       className={`min-h-dvh bg-canvas text-ink ${
         showNav
-          ? '[--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:5rem] xl:[--side-w:15rem]'
+          ? '[--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:6rem] xl:[--side-w:15rem]'
           : ''
       }`}
     >

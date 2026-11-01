@@ -10,4 +10,8 @@ export default defineConfig({
     timeout: 120_000,
   },
   use: { baseURL: 'http://localhost:4173', serviceWorkers: 'allow' },
+  projects: [
+    { name: 'desktop', use: { viewport: { width: 1280, height: 720 } } },
+    { name: 'mobile', use: { viewport: { width: 390, height: 844 } } },
+  ],
 });

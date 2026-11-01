@@ -120,7 +120,11 @@ export function Today() {
           </span>
         </button>
       )}
-      {failed && <p className="mt-6 text-danger">{t('home.error')}</p>}
+      {failed ? (
+        <p className="mt-6 text-danger">{t('home.error')}</p>
+      ) : (
+        !manifest && <p className="mt-6 text-ink-subtle">{t('home.loading')}</p>
+      )}
     </section>
   );
 }

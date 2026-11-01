@@ -144,6 +144,11 @@
   --safe-left: env(safe-area-inset-left, 0px);
 }
 
+/* Programmatischer Fokus beim Bildschirmwechsel: für Screenreader, ohne sichtbaren Rahmen. */
+h1[tabindex='-1']:focus {
+  outline: none;
+}
+
 html {
   color-scheme: light;
   background-color: var(--canvas);

@@ -86,6 +86,36 @@ function BackButton({ onClick, label }: { onClick: () => void; label: string }) 
   );
 }
 
+/** Rückfrage vor dem Verlassen, im Test wie im Ergebnis. */
+function LeaveConfirm({ onKeep, onLeave }: { onKeep: () => void; onLeave: () => void }) {
+  return (
+    <div
+      role="group"
+      aria-labelledby="placement-leave"
+      className="space-y-3 rounded-xl border border-line-strong p-4"
+    >
+      <p id="placement-leave">{t('placement.leave.confirm')}</p>
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          autoFocus
+          onClick={onKeep}
+          className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+        >
+          {t('placement.leave.keep')}
+        </button>
+        <button
+          type="button"
+          onClick={onLeave}
+          className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
+        >
+          {t('placement.leave.yes')}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Intro({ onStart, onBack }: { onStart: () => void; onBack: () => void }) {
   return (
     <section className="space-y-6" aria-labelledby="placement-title">
@@ -193,7 +223,8 @@ function Question({
   // Erst nach einer Antwort lohnt die Rückfrage vorm Verlassen.
   const answered = flow.step === 1 || Object.keys(flow.statuses).length > 0;
   // Zurück-Taste des Geräts fragt nach dem Abbruch, statt die Antworten still zu verwerfen.
-  useBackGuard(answered && !leaving, () => setLeaving(true));
+  // Bei offener Rückfrage schließt Zurück sie wieder; verlassen wird nur über „Ja, abbrechen“.
+  useBackGuard(answered, () => setLeaving((open) => !open));
 
   if (!cur) return null;
   const vocab: Vocab[] = ready ? [...(ready.vocab ?? []), ...(ready.lexicon ?? [])] : [];
@@ -219,32 +250,7 @@ function Question({
         </h1>
       </header>
 
-      {leaving && (
-        <div
-          role="group"
-          aria-labelledby="placement-leave"
-          className="space-y-3 rounded-xl border border-line-strong p-4"
-        >
-          <p id="placement-leave">{t('placement.leave.confirm')}</p>
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              autoFocus
-              onClick={() => setLeaving(false)}
-              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-            >
-              {t('placement.leave.keep')}
-            </button>
-            <button
-              type="button"
-              onClick={goBack}
-              className="min-h-11 rounded-lg border border-line-strong px-4 hover:bg-hover"
-            >
-              {t('placement.leave.yes')}
-            </button>
-          </div>
-        </div>
-      )}
+      {leaving && <LeaveConfirm onKeep={() => setLeaving(false)} onLeave={goBack} />}
 
       {!supported ? (
         <p className="text-ink-subtle">{t('placement.unit.loading')}</p>
@@ -292,6 +298,9 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
   const recordPlacement = useProgress((s) => s.recordPlacement);
   const set = useSettings((s) => s.set);
   const heading = useRef<HTMLHeadingElement>(null);
+  const [leaving, setLeaving] = useState(false);
+  // Das Ergebnis ist die Arbeit des ganzen Tests: Zurück verwirft es nicht ohne Rückfrage.
+  useBackGuard(true, () => setLeaving((open) => !open));
   const rec = recommend(plan, flow.statuses);
   const byStatus = (status: UnitResult['status']) => rec.units.filter((u) => u.status === status);
   const start = rec.units.find((u) => u.unitId === rec.startUnit);
@@ -314,6 +323,7 @@ function Result({ plan, flow }: { plan: PlacementPlan; flow: PlacementState }) {
       >
         {t('placement.result.title')}
       </h1>
+      {leaving && <LeaveConfirm onKeep={() => setLeaving(false)} onLeave={goBack} />}
       <div className="space-y-2">
         <p className="font-medium">
           {start

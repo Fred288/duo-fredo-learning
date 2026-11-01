@@ -204,6 +204,7 @@ function Runner({
 
   return (
     <section className="space-y-6">
+      <h1 className="sr-only">{lesson.title}</h1>
       <header className="flex items-center gap-3">
         <button
           type="button"
