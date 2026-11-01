@@ -14,6 +14,7 @@ import { RepeatScreen } from './ui/RepeatScreen';
 import { Review } from './ui/Review';
 import { Settings } from './ui/Settings';
 import { StatsScreen } from './ui/StatsScreen';
+import { StreakBadge, useStreakDays } from './ui/StreakBadge';
 import { Today } from './ui/Today';
 import { UpdateBanner } from './ui/UpdateBanner';
 import { useKeyboardInset } from './ui/useKeyboardInset';
@@ -33,6 +34,8 @@ export function App() {
   const openLookup = useApp((s) => s.openLookup);
   // Fokusbereiche (Lektion, Wiederholen, Test) zeigen keine Navigation: eine Aufgabe nach der anderen.
   const showNav = !isFocusScreen(screen);
+  const streakDays = useStreakDays();
+  const showStreak = showNav && streakDays > 0;
   const inCourse = isCourse(screen);
   const wide = useWide();
   const main = useRef<HTMLElement>(null);
@@ -115,7 +118,7 @@ export function App() {
         showNav
           ? '[--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:6rem] xl:[--side-w:15rem]'
           : 'bg-canvas'
-      }`}
+      } ${showStreak ? '[--streak-h:1.5rem]' : ''}`}
     >
       <a
         href="#main"
@@ -134,8 +137,9 @@ export function App() {
         tabIndex={-1}
         className={`outline-none ${showNav ? 'md:pl-[calc(var(--side-w)+var(--safe-left))]' : ''}`}
       >
+        {showStreak && <StreakBadge days={streakDays} />}
         <div
-          className={`mx-auto pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4 ${widthOf(screen)}`}
+          className={`mx-auto pt-[calc(1.5rem+var(--streak-h,0px)+var(--safe-top))] md:pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4 ${widthOf(screen)}`}
         >
           {screen.name === 'today' && <Today />}
           {(screen.name === 'course' || screen.name === 'unit') && (
