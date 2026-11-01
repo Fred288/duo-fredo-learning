@@ -41,9 +41,9 @@ export function Today() {
     completions.length === 0 &&
     placements.length === 0;
   const mistakes = openMistakes(attempts).length;
-  // Weiterlernen: erst nach einem ersten Start (das Angebot zeigt sonst schon den Einstieg).
+  // Weiterlernen: erst mit geladenem Fortschritt und nach einem ersten Start (sonst das Angebot).
   const next =
-    manifest && !offerPlacement
+    manifest && progressLoaded && settingsLoaded && !offerPlacement
       ? nextLesson(manifest.units, completions, currentPlacement(placements))
       : undefined;
   const plan = manifest

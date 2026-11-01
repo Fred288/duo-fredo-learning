@@ -58,6 +58,9 @@ test('Anfänger: nur „Weiß ich nicht“ führt zum Start bei der ersten Unit'
   await expect(first.getByText(/^0 von \d+ Lektionen$/)).toBeVisible();
   await openToday(page);
   await expect(page.getByText('Heute: 0 von 1 Lektionen')).toBeVisible();
+  await expect(page.getByRole('button', { name: /^Weiterlernen/ })).toContainText(
+    'Alphabet und Begrüßung',
+  );
 });
 
 test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; zurücknehmbar', async ({

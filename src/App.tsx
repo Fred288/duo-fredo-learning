@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { t } from './i18n';
-import { isFocusScreen, takeRestoreScroll, useApp } from './store/app';
+import { isFocusScreen, takeRestoreScroll, useApp, type Screen } from './store/app';
 import { useAudioSetup } from './store/audio';
 import { AppNav } from './ui/AppNav';
 import { CourseScreen } from './ui/CourseScreen';
@@ -16,15 +16,21 @@ import { Settings } from './ui/Settings';
 import { StatsScreen } from './ui/StatsScreen';
 import { Today } from './ui/Today';
 import { UpdateBanner } from './ui/UpdateBanner';
+import { useWide } from './ui/useWide';
+
+const isCourse = (screen: Screen) => screen.name === 'course' || screen.name === 'unit';
 
 export function App() {
   const screen = useApp((s) => s.screen);
   const openLookup = useApp((s) => s.openLookup);
   // Fokusbereiche (Lektion, Wiederholen, Test) zeigen keine Navigation: eine Aufgabe nach der anderen.
   const showNav = !isFocusScreen(screen);
-  const inCourse = screen.name === 'course' || screen.name === 'unit';
+  const inCourse = isCourse(screen);
+  const wide = useWide();
   const main = useRef<HTMLElement>(null);
+  const scrolledScreen = useRef(screen);
   const shownScreen = useRef(screen);
+  const shownWide = useRef(wide);
   useAudioSetup();
 
   // Taste „/“ öffnet auf den Navigationsbildschirmen das Nachschlagewerk (nicht beim Tippen in Feldern).
@@ -43,7 +49,21 @@ export function App() {
     return () => window.removeEventListener('keydown', onKey);
   }, [showNav, openLookup]);
 
-  // Beim Bildschirmwechsel an den Anfang und den Fokus auf die Überschrift (Ansage für Screenreader).
+  // Beim Bildschirmwechsel an den Anfang, Zurück stellt den alten Stand her. Als Layout-Effekt vor
+  // den Effekten der Bildschirme, sonst überschriebe er deren Scrollen (Kurs zur Start-Unit).
+  // In zwei Spalten bleibt die Liste stehen, wenn man eine Unit wählt.
+  useLayoutEffect(() => {
+    const previous = scrolledScreen.current;
+    if (previous === screen) return;
+    scrolledScreen.current = screen;
+    const restore = takeRestoreScroll();
+    const stay = wide && isCourse(previous) && isCourse(screen);
+    if (document.scrollingElement && (restore !== undefined || !stay)) {
+      document.scrollingElement.scrollTop = restore ?? 0;
+    }
+  }, [screen, wide]);
+
+  // Beim Bildschirmwechsel bekommt die Überschrift den Fokus (Ansage für Screenreader).
   // Hat der neue Bildschirm schon ein Feld fokussiert (autoFocus), bleibt es dabei.
   useEffect(() => {
     // Nur bei einem echten Wechsel (nicht beim ersten Anzeigen, auch nicht im doppelten Effekt von StrictMode).
@@ -51,7 +71,6 @@ export function App() {
     shownScreen.current = screen;
     const el = main.current;
     if (!el) return;
-    if (document.scrollingElement) document.scrollingElement.scrollTop = takeRestoreScroll() ?? 0;
     const focusHeading = () => {
       const active = document.activeElement;
       if (active && active !== el && active !== document.body && el.contains(active)) return true;
@@ -68,6 +87,16 @@ export function App() {
     observer.observe(el, { childList: true, subtree: true });
     return () => observer.disconnect();
   }, [screen]);
+
+  // Drehen des Geräts baut den Kurs um (Spalten ↔ eigener Bildschirm): Fokus nicht verlieren.
+  useEffect(() => {
+    if (shownWide.current === wide) return;
+    shownWide.current = wide;
+    if (!inCourse || document.activeElement !== document.body) return;
+    const heading = main.current?.querySelector<HTMLElement>('h1');
+    if (heading) heading.tabIndex = -1;
+    heading?.focus({ preventScroll: true });
+  }, [wide, inCourse]);
 
   return (
     <div

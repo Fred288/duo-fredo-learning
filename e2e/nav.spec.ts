@@ -60,6 +60,7 @@ test('Fokusbereich blendet die Navigation aus, Zurück führt in den Kurs', asyn
   await expect(nav(page)).toBeVisible();
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Alphabet und Begrüßung' })).toHaveCount(0);
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
 });
@@ -169,7 +170,7 @@ test('Fokus folgt auch geladenen Bildschirmen, Zurück stellt den Scrollstand he
   const far = page.locator('#unit-b2-u10').getByRole('button');
   await far.scrollIntoViewIfNeeded();
   const y = await page.evaluate(() => window.scrollY);
-  expect(y).toBeGreaterThan(300);
+  expect(y).toBeGreaterThan(1000);
   await far.click();
   // Auf dem Handy ersetzt die Unit den Kurs, die Überschrift bekommt den Fokus; in zwei Spalten
   // bleibt der Fokus auf dem gewählten Eintrag.
@@ -177,6 +178,8 @@ test('Fokus folgt auch geladenen Bildschirmen, Zurück stellt den Scrollstand he
     await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
   } else {
     await expect(far).toBeFocused();
+    await expect(far).toBeInViewport();
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(y - 50);
   }
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();

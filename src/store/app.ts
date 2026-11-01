@@ -175,7 +175,11 @@ if (hasHistory) {
 // Einstellungen und Fortschritt liegen in eigenen, persistenten Stores (settings.ts, progress.ts).
 export const useApp = create<AppState>((set, get) => {
   const go = (screen: Screen, mode: 'push' | 'replace' = 'push') => {
-    if (!same(get().screen, screen)) record(screen, mode);
+    if (same(get().screen, screen)) {
+      set({ focusUnit: undefined });
+      return;
+    }
+    record(screen, mode);
     set({ screen, focusUnit: undefined });
   };
   return {

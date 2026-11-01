@@ -40,7 +40,7 @@ export function AppNav({ screen }: { screen: Screen }) {
       id: 'course',
       label: t('nav.course'),
       icon: <CourseIcon />,
-      current: name === 'course' || (name === 'explainer' && !fromLookup),
+      current: name === 'course' || name === 'unit' || (name === 'explainer' && !fromLookup),
       onSelect: openCourse,
     },
     {

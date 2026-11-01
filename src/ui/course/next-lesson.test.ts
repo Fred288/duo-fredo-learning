@@ -75,8 +75,45 @@ describe('nextLesson', () => {
     expect(nextLesson(units, [done('u1-l1', 90), done('u2-l1', 110)], p)?.lesson.id).toBe('u2-l2');
   });
 
-  it('verwaiste Start-Unit: Kurs von vorn', () => {
-    expect(nextLesson(units, [], placement('u9'))?.lesson.id).toBe('u1-l1');
+  it('verwaiste Start-Unit: die erste nicht bekannte Unit', () => {
+    expect(nextLesson(units, [], placement('u9'))?.lesson.id).toBe('u2-l1');
+  });
+
+  const known = (startUnit: string | null, skipped: string[]): Placement => ({
+    at: 100,
+    startUnit,
+    skipped,
+    shaky: [],
+  });
+
+  it('Nachzuholendes geht vor Bekanntes (kein Start, u2 unsicher)', () => {
+    expect(nextLesson(units, [], known(null, ['u1', 'u3']))?.lesson.id).toBe('u2-l1');
+  });
+
+  it('alles bekannt: die Karte bleibt, Kurs von vorn', () => {
+    expect(nextLesson(units, [], known(null, ['u1', 'u2', 'u3']))?.lesson.id).toBe('u1-l1');
+  });
+
+  it('nach dem Kursende: Nachzuholendes vor bekannten Units', () => {
+    const c = [done('u3-l1', 110)];
+    expect(nextLesson(units, c, known('u3', ['u1']))?.lesson.id).toBe('u2-l1');
+  });
+
+  it('Auffrischung in bekannter Unit: Rest der Unit, danach zurück zur Start-Unit', () => {
+    const p = known('u3', ['u1', 'u2']);
+    expect(nextLesson(units, [done('u1-l1', 110)], p)?.lesson.id).toBe('u1-l2');
+    const c = [done('u1-l1', 110), done('u1-l2', 120)];
+    expect(nextLesson(units, c, p)?.lesson.id).toBe('u3-l1');
+  });
+
+  it('Start-Unit längst fertig, davor offen: die Karte fehlt nicht', () => {
+    const c = [done('u3-l1', 10)];
+    expect(nextLesson(units, c, known('u3', []))?.lesson.id).toBe('u1-l1');
+  });
+
+  it('die Unit kommt aus dem Kursverzeichnis, nicht aus dem Abschluss', () => {
+    const moved = { ...done('u2-l1', 5), unitId: 'alt' };
+    expect(nextLesson(units, [moved])?.lesson.id).toBe('u2-l2');
   });
 
   it('Einstufung ohne Start (alles bekannt): der Kurs von vorn', () => {

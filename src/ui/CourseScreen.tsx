@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, type ReactNode } from 'react';
 import { currentPlacement, placementMark } from '../placement';
 import { LEVELS } from '../content/schema';
 import type { Manifest } from '../content/load';
@@ -23,15 +23,18 @@ export function CourseScreen({ unitId }: { unitId?: string }) {
   // Hörlektionen brauchen eine Stimme; währenddessen laden die Stimmen noch.
   const canListen = useCanSpeak();
   const voicesLoading = useAudio((s) => s.status === 'loading');
+  // Das offene Niveau hängt am Fortschritt: erst zeichnen, wenn er da ist.
+  const progressLoaded = useProgress((s) => s.loaded);
 
-  if (failed) return <p className="text-danger">{t('home.error')}</p>;
-  if (!manifest) {
+  if (failed || !manifest || !progressLoaded) {
     return (
       <section aria-labelledby="course-title">
         <h1 id="course-title" className="text-2xl font-semibold">
           {t('course.title')}
         </h1>
-        <p className="mt-6 text-ink-subtle">{t('home.loading')}</p>
+        <p className={`mt-6 ${failed ? 'text-danger' : 'text-ink-subtle'}`}>
+          {t(failed ? 'home.error' : 'home.loading')}
+        </p>
       </section>
     );
   }
@@ -44,9 +47,11 @@ export function CourseScreen({ unitId }: { unitId?: string }) {
       <p className="text-sm text-ink-subtle">{t('home.listen.unavailable')}</p>
     );
 
-  if (!wide && unit) return <UnitDetail unit={unit} page canListen={canListen} />;
+  if (!wide && unit) return <UnitDetail unit={unit} page canListen={canListen} hint={hint} />;
 
-  const list = <CourseList manifest={manifest} selected={wide ? unit?.id : undefined} />;
+  const list = (
+    <CourseList manifest={manifest} selected={wide ? unit?.id : undefined} wide={wide} />
+  );
   return (
     <section aria-labelledby="course-title">
       <h1 id="course-title" className="text-2xl font-semibold">
@@ -58,9 +63,9 @@ export function CourseScreen({ unitId }: { unitId?: string }) {
             {hint}
             {list}
           </div>
-          <div className="self-start lg:sticky lg:top-6">
+          <div className="sticky top-[calc(1.5rem+var(--safe-top))] -m-0.5 max-h-[calc(100dvh-3rem-var(--safe-top))] self-start overflow-y-auto p-0.5">
             {unit ? (
-              <UnitDetail unit={unit} canListen={canListen} />
+              <UnitDetail unit={unit} canListen={canListen} hint={hint} />
             ) : (
               <p className="text-ink-subtle">{t('course.pick')}</p>
             )}
@@ -76,7 +81,15 @@ export function CourseScreen({ unitId }: { unitId?: string }) {
   );
 }
 
-function CourseList({ manifest, selected }: { manifest: Manifest; selected?: string }) {
+function CourseList({
+  manifest,
+  selected,
+  wide,
+}: {
+  manifest: Manifest;
+  selected?: string;
+  wide: boolean;
+}) {
   const openUnit = useApp((s) => s.openUnit);
   const completions = useProgress((s) => s.completions);
   const placements = useProgress((s) => s.placements);
@@ -94,6 +107,11 @@ function CourseList({ manifest, selected }: { manifest: Manifest; selected?: str
     [manifest, completions, placement],
   );
   const open = useMemo(() => courseOpen ?? [current], [courseOpen, current]);
+
+  // Der Standard gilt einmal: Wer die letzte Lektion eines Niveaus schafft, behält es offen.
+  useEffect(() => {
+    if (!courseOpen) setCourseOpen([current]);
+  }, [courseOpen, current, setCourseOpen]);
 
   // Nach übernommener Einstufung zur Start-Unit scrollen (einmal): erst das Niveau öffnen.
   useEffect(() => {
@@ -130,13 +148,27 @@ function CourseList({ manifest, selected }: { manifest: Manifest; selected?: str
               if (now !== isOpen)
                 setCourseOpen(now ? [...open, level] : open.filter((l) => l !== level));
             }}
-            className="rounded-xl border border-line bg-surface"
+            className="group rounded-xl border border-line bg-surface"
           >
-            <summary className="flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-xl px-4 py-2 focus-visible:outline-2 focus-visible:outline-focus">
-              <span className="font-medium">{t('home.level', { level })}</span>
-              <span className="text-sm text-ink-subtle">
-                {t('home.unitProgress', { done, total })}
-              </span>
+            <summary className="flex min-h-12 cursor-pointer items-center rounded-xl px-4 py-2 focus-visible:outline-2 focus-visible:outline-focus">
+              <h2 className="flex flex-1 items-center gap-2">
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="size-4 shrink-0 text-ink-subtle transition-transform group-open:rotate-90 motion-reduce:transition-none"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m9 5 7 7-7 7" />
+                </svg>
+                <span className="flex-1 font-medium">{t('home.level', { level })}</span>
+                <span className="text-sm font-normal text-ink-subtle">
+                  {t('home.unitProgress', { done, total })}
+                </span>
+              </h2>
             </summary>
             <ul className="space-y-2 px-3 pb-3">
               {units.map((unit) => (
@@ -146,7 +178,15 @@ function CourseList({ manifest, selected }: { manifest: Manifest; selected?: str
                   completed={completed}
                   mark={placementMark(placement, unit.id)}
                   selected={selected === unit.id}
-                  onOpen={() => openUnit(unit.id)}
+                  onOpen={(keyboard) => {
+                    openUnit(unit.id);
+                    // Per Tastatur in die Spalte, sonst lägen die Lektionen hinter der ganzen Liste.
+                    if (keyboard && wide) {
+                      requestAnimationFrame(() =>
+                        document.getElementById('unit-title')?.focus({ preventScroll: true }),
+                      );
+                    }
+                  }}
                 />
               ))}
             </ul>
@@ -168,7 +208,7 @@ function UnitRow({
   completed: ReadonlySet<string>;
   mark?: 'start' | 'skipped';
   selected: boolean;
-  onOpen: () => void;
+  onOpen: (keyboard: boolean) => void;
 }) {
   const { done, total } = unitProgress(
     progressLessons(unit.lessons).map((l) => l.id),
@@ -186,7 +226,7 @@ function UnitRow({
         {/* Der ganze Eintrag ist der Knopf (die Fläche spannt über `after`). */}
         <button
           type="button"
-          onClick={onOpen}
+          onClick={(e) => onOpen(e.detail === 0)}
           aria-current={selected ? 'true' : undefined}
           className="text-left after:absolute after:inset-0 after:rounded-lg focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-focus"
         >
@@ -225,16 +265,24 @@ function UnitDetail({
   unit,
   page = false,
   canListen,
+  hint,
 }: {
   unit: ManifestUnit;
   page?: boolean;
   canListen: boolean;
+  hint?: ReactNode;
 }) {
   const openLesson = useApp((s) => s.openLesson);
   const openExplainer = useApp((s) => s.openExplainer);
   const goBack = useApp((s) => s.goBack);
   const completions = useProgress((s) => s.completions);
+  const placements = useProgress((s) => s.placements);
   const completed = completedLessonIds(completions);
+  const mark = placementMark(currentPlacement(placements), unit.id);
+  const { done, total } = unitProgress(
+    progressLessons(unit.lessons).map((l) => l.id),
+    completed,
+  );
   const Title = page ? 'h1' : 'h2';
   return (
     <section aria-labelledby="unit-title" className="space-y-4">
@@ -247,9 +295,16 @@ function UnitDetail({
           ← {t('runner.back')}
         </button>
       )}
-      <Title id="unit-title" className="text-xl font-semibold">
-        {unit.title}
-      </Title>
+      <div>
+        <Title id="unit-title" tabIndex={-1} className="text-xl font-semibold">
+          {unit.title}
+        </Title>
+        <p className="mt-1 text-sm text-ink-subtle">
+          {t('home.unitProgress', { done, total })}
+          {mark && ` · ${t(`placement.mark.${mark}`)}`}
+        </p>
+      </div>
+      {hint}
       <div className="flex flex-wrap gap-2">
         {unit.explainer && (
           <button

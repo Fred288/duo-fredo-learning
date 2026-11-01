@@ -56,12 +56,51 @@ test('Unit: Handy eigener Bildschirm mit Zurück, ab 1024 px neben der Liste', a
   }
 });
 
+test('Unit: Kurs bleibt in der Navigation markiert, Fortschritt und Hinweise stehen dabei', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const detail = await openUnit(page, 'a1-u01');
+  await expect(page.getByRole('navigation').getByRole('button', { name: 'Kurs' })).toHaveAttribute(
+    'aria-current',
+    'page',
+  );
+  await expect(detail.getByText(/^0 von 4 Lektionen/)).toBeVisible();
+});
+
+test('Tastatur: Unit wählen führt in zwei Spalten zur Überschrift der Unit', async ({ page }) => {
+  test.skip(!wide(page), 'nur zwei Spalten');
+  await page.goto('/');
+  await openCourse(page);
+  await page.locator('#unit-a1-u02').getByRole('button').focus();
+  await page.keyboard.press('Enter');
+  await expect(
+    page.getByRole('heading', { name: 'Vokalharmonie und Plural', level: 2 }),
+  ).toBeFocused();
+});
+
+test('Breitenwechsel bei offener Unit: Verlauf und Fokus bleiben', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  await openUnit(page, 'a1-u01');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(
+    page.getByRole('heading', { name: 'Alphabet und Begrüßung', level: 1 }),
+  ).toBeFocused();
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeFocused();
+  await expect(page.getByRole('region', { name: 'Alphabet und Begrüßung' })).toBeVisible();
+  await page.goBack();
+  await expect(page.getByRole('region', { name: 'Alphabet und Begrüßung' })).toHaveCount(0);
+});
+
 test('Heute: Weiterlernen führt zur nächsten offenen Lektion und rückt nach einer Lektion vor', async ({
   page,
 }) => {
   const [first, second] = loadUnit('a1-u01').lessons.filter((l) => l.type !== 'listening');
   await page.goto('/');
   // Beim ersten Start steht statt Weiterlernen das Angebot.
+  await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toBeVisible();
   await expect(page.getByRole('button', { name: /Weiterlernen/ })).toHaveCount(0);
   await page.getByRole('button', { name: 'Nein, von vorn' }).click();
 

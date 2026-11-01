@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
-import { openCourse, openLookup, openUnit } from '../e2e/nav';
+import { openCourse, openLookup, openToday, openUnit } from '../e2e/nav';
+import { playPlacement, startPlacementFromOffer } from '../e2e/placement';
 
 // Zahl der A1-Units laut Einstufungsplan (vom Build erzeugt).
 const a1Units = (
@@ -72,6 +73,37 @@ test('Einstufungstest läuft offline (placement.json und Units im Precache)', as
   await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
   await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
   await expect(page.getByText(`A1 · Thema 2 von ${a1Units}`)).toBeVisible();
+});
+
+// Im Build gibt es keinen doppelten Effekt wie unter StrictMode im Dev-Server: Scrollen lässt sich
+// nur hier ehrlich prüfen.
+test('Einstufung: Kurs öffnet das Niveau und scrollt zur Start-Unit; Unit-Wahl hält die Liste', async ({
+  page,
+}) => {
+  test.setTimeout(240_000);
+  await page.goto('/');
+  // Der Kurs war schon offen: A2 ist zu, wenn die Empfehlung kommt.
+  await openCourse(page);
+  await openToday(page);
+  await startPlacementFromOffer(page);
+  const sure = /^a1-|^a2-u0[1-5]/;
+  await playPlacement(page, (unitId) => sure.test(unitId));
+  await page.getByRole('button', { name: 'Empfehlung übernehmen' }).click();
+
+  const start = page.locator('#unit-a2-u06');
+  await expect(start.getByText('Empfohlener Start')).toBeVisible();
+  await expect(start).toBeInViewport();
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+
+  // Zwei Spalten: Wählen wirft die Liste nicht nach oben.
+  if ((page.viewportSize()?.width ?? 0) >= 1024) {
+    const y = await page.evaluate(() => window.scrollY);
+    await start.getByRole('button').click();
+    await expect(page.locator('#unit-title')).toBeVisible();
+    await expect(start).toBeInViewport();
+    // Der Klick selbst darf die Zeile ein Stück nachführen, nach oben springen darf sie nicht.
+    expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(y - 100);
+  }
 });
 
 test('Manifest ist installierbar konfiguriert', async ({ page, request }) => {
