@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { fakeSpeech, TURKISH_VOICE } from './speech';
-import { openCourse, openSettings } from './nav';
+import { openSettings, openUnit } from './nav';
 
 declare global {
   interface Window {
@@ -40,10 +40,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Lesetext: Wort nachschlagen, Übersetzung, Nachsprechen, dann Fragen', async ({ page }) => {
   await page.goto('/');
-  await openCourse(page);
-  const unit = page
-    .getByRole('listitem')
-    .filter({ has: page.getByRole('heading', { name: 'Was hast du gemacht?', exact: true }) });
+  const unit = await openUnit(page, 'a2-u01');
   await unit.getByRole('button', { name: /Ein neues Leben in İzmir$/ }).click();
   await expect(
     page.getByRole('heading', { name: 'Lesetext: Ein neues Leben in İzmir' }),
@@ -101,7 +98,10 @@ test('Nachsprechen lässt sich in den Einstellungen abschalten', async ({ page }
   await openSettings(page);
   await page.getByLabel('Nachsprechen (Mikrofon)').uncheck();
   await page.getByRole('button', { name: /Zurück/ }).click();
-  await openCourse(page);
-  await page.getByRole('button', { name: /Ein neues Leben in İzmir$/ }).click();
+  await (
+    await openUnit(page, 'a2-u01')
+  )
+    .getByRole('button', { name: /Ein neues Leben in İzmir$/ })
+    .click();
   await expect(page.getByRole('button', { name: /^Nachsprechen aufnehmen/ })).toHaveCount(0);
 });

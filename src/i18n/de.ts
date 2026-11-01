@@ -10,6 +10,8 @@ export const de = {
   'nav.settings': 'Einstellungen',
   'nav.skip': 'Zum Inhalt springen',
   'course.title': 'Kurs',
+  'course.pick': 'Unit wählen, um Erklärung und Lektionen zu sehen.',
+  'today.continue.title': 'Weiterlernen',
   'more.title': 'Mehr',
   'more.stats.hint': 'Wörter, Fälligkeit und Fortschritt',
   'more.settings.hint': 'Tagesziel, Darstellung, Audio, Sicherung',

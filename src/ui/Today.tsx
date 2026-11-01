@@ -3,11 +3,13 @@ import { t } from '../i18n';
 import { dayKey } from '../progress/day';
 import { openMistakes } from '../progress/stats';
 import { planRepeat } from '../srs';
+import { currentPlacement } from '../placement';
 import { useApp } from '../store/app';
 import { useCanSpeak } from '../store/audio';
 import { useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
 import { DailyGoal } from './DailyGoal';
+import { nextLesson } from './course/next-lesson';
 import { useManifest } from './useManifest';
 
 /** „Heute“: was jetzt dran ist (Tagesziel, Angebot, Fälliges). Der Kurs liegt im Bereich „Kurs“. */
@@ -25,6 +27,7 @@ export function Today() {
   const openRepeat = useApp((s) => s.openRepeat);
   const openStats = useApp((s) => s.openStats);
   const openPlacement = useApp((s) => s.openPlacement);
+  const openLesson = useApp((s) => s.openLesson);
   // Hörkarten ohne Stimme bleiben fällig, zählen aber nicht: Wiederholen zeigt sie nicht.
   const canListen = useCanSpeak();
   const { manifest, failed } = useManifest();
@@ -38,6 +41,11 @@ export function Today() {
     completions.length === 0 &&
     placements.length === 0;
   const mistakes = openMistakes(attempts).length;
+  // Weiterlernen: erst nach einem ersten Start (das Angebot zeigt sonst schon den Einstieg).
+  const next =
+    manifest && !offerPlacement
+      ? nextLesson(manifest.units, completions, currentPlacement(placements))
+      : undefined;
   const plan = manifest
     ? planRepeat(manifest.units, completions, cards, dayKey(), newWordsPerDay, {
         skip: canListen ? undefined : isListeningCard,
@@ -68,6 +76,18 @@ export function Today() {
           {t('stats.open')}
         </button>
       </div>
+      {next && (
+        <button
+          type="button"
+          onClick={() => openLesson(next.unit.id, next.lesson.id)}
+          className="mt-4 block min-h-11 w-full rounded-xl bg-brand p-4 text-left text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+        >
+          <span className="block font-medium">{t('today.continue.title')}</span>
+          <span className="block text-sm">
+            {next.unit.title} · {next.lesson.title}
+          </span>
+        </button>
+      )}
       {offerPlacement && (
         <section
           aria-labelledby="placement-offer"

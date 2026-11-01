@@ -3,6 +3,7 @@ import { create } from 'zustand';
 export type Screen =
   | { name: 'today' }
   | { name: 'course' }
+  | { name: 'unit'; unitId: string }
   | { name: 'more' }
   | { name: 'settings' }
   | { name: 'review' }
@@ -31,6 +32,7 @@ export function parentOf(screen: Screen): Screen {
     case 'explainer':
       return screen.from === 'lookup' ? { name: 'lookup' } : { name: 'course' };
     case 'lesson':
+    case 'unit':
       return { name: 'course' };
     default:
       return { name: 'today' };
@@ -42,6 +44,11 @@ interface AppState {
   openLesson: (unitId: string, lessonId: string) => void;
   openToday: () => void;
   openCourse: () => void;
+  /** Unit im Kurs; auf einer Unit ersetzt es den Eintrag (Durchklicken füllt den Verlauf nicht). */
+  openUnit: (unitId: string) => void;
+  /** Aufgeklappte Niveaus im Kurs (nur Sitzung); `undefined` = Standard (das aktuelle Niveau). */
+  courseOpen?: string[];
+  setCourseOpen: (levels: string[]) => void;
   openMore: () => void;
   openSettings: () => void;
   openReview: () => void;
@@ -167,8 +174,8 @@ if (hasHistory) {
 
 // Einstellungen und Fortschritt liegen in eigenen, persistenten Stores (settings.ts, progress.ts).
 export const useApp = create<AppState>((set, get) => {
-  const go = (screen: Screen) => {
-    if (!same(get().screen, screen)) record(screen, 'push');
+  const go = (screen: Screen, mode: 'push' | 'replace' = 'push') => {
+    if (!same(get().screen, screen)) record(screen, mode);
     set({ screen, focusUnit: undefined });
   };
   return {
@@ -176,6 +183,10 @@ export const useApp = create<AppState>((set, get) => {
     openLesson: (unitId, lessonId) => go({ name: 'lesson', unitId, lessonId }),
     openToday: () => go({ name: 'today' }),
     openCourse: () => go({ name: 'course' }),
+    openUnit: (unitId) =>
+      go({ name: 'unit', unitId }, get().screen.name === 'unit' ? 'replace' : 'push'),
+    courseOpen: undefined,
+    setCourseOpen: (courseOpen) => set({ courseOpen }),
     openMore: () => go({ name: 'more' }),
     openSettings: () => go({ name: 'settings' }),
     openReview: () => go({ name: 'review' }),

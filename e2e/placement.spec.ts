@@ -12,6 +12,29 @@ test('Angebot beim ersten Start lässt sich ablehnen und kommt nicht wieder', as
   await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toBeVisible();
   await page.getByRole('button', { name: 'Nein, von vorn' }).click();
   await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
+  // Erst neu laden, wenn die Entscheidung in IndexedDB steht (das Schreiben läuft asynchron).
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          new Promise<unknown>((resolve) => {
+            const open = indexedDB.open('yol');
+            open.onerror = () => resolve(undefined);
+            open.onsuccess = () => {
+              const get = open.result
+                .transaction('settings')
+                .objectStore('settings')
+                .get('placementOffered');
+              get.onsuccess = () => {
+                open.result.close();
+                resolve((get.result as { value?: unknown } | undefined)?.value);
+              };
+              get.onerror = () => resolve(undefined);
+            };
+          }),
+      ),
+    )
+    .toBe(true);
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Yol' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Schon Vorkenntnisse?' })).toHaveCount(0);
@@ -54,7 +77,8 @@ test('Könner: A1 richtig, A2 nicht – Start bei A2, A1 als bekannt markiert; z
   await expect(page.getByText('laut Einstufung bekannt')).toHaveCount(unitsAt('A1'));
   const start = page.getByRole('listitem').filter({ has: page.getByText('Empfohlener Start') });
   await expect(start).toBeInViewport();
-  // Fortschrittsbalken bleiben echt.
+  // Fortschrittsbalken bleiben echt (A1 ist zu, weil es bei A2 weitergeht).
+  await page.locator('summary', { hasText: 'Niveau A1' }).click();
   await expect(
     unitCard(page, 'Alphabet und Begrüßung').getByText(/^0 von \d+ Lektionen$/),
   ).toBeVisible();

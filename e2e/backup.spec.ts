@@ -7,6 +7,7 @@ test('Sicherung speichern und auf einem leeren Gerät laden', async ({ page, bro
   await page.goto('/');
   await playLesson(page, 'a1-u01', 'a1-u01-l1');
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+  await openCourse(page);
   await expect(page.getByText('1 von 4 Lektionen')).toBeVisible();
 
   await openSettings(page);

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { speakables } from '../src/audio/speakables';
 import { fakeSpeech, spokenTexts, TURKISH_VOICE as TURKISH } from './speech';
 import { answer, loadUnit, playLesson } from './solve';
-import { openCourse, openLookup, openSettings, openToday } from './nav';
+import { openCourse, openLookup, openSettings, openToday, openUnit } from './nav';
 
 test('Nachschlagewerk: Anhören normal und langsam', async ({ page }) => {
   await fakeSpeech(page, TURKISH);
@@ -49,7 +49,10 @@ test('Einstellungen: Probe, Stimme wählen, Audio abschalten', async ({ page }) 
             const open = indexedDB.open('yol');
             open.onerror = () => resolve(undefined);
             open.onsuccess = () => {
-              const get = open.result.transaction('settings').objectStore('settings').get('audioEnabled');
+              const get = open.result
+                .transaction('settings')
+                .objectStore('settings')
+                .get('audioEnabled');
               get.onsuccess = () => {
                 open.result.close();
                 resolve(get.result?.value);
@@ -98,7 +101,9 @@ test('Automatisch abspielen: Prompt beim Anzeigen, Lösung im Feedback, standard
   const unit = loadUnit('a1-u01');
   const lesson = unit.lessons[0]!;
   const startLesson = async () => {
-    await page
+    await (
+      await openUnit(page, unit.id)
+    )
       .getByRole('button', { name: new RegExp(`${lesson.title}$`) })
       .first()
       .click();
@@ -106,7 +111,6 @@ test('Automatisch abspielen: Prompt beim Anzeigen, Lösung im Feedback, standard
 
   // Standard: aus, auch wenn Knöpfe da sind.
   await page.goto('/');
-  await openCourse(page);
   await startLesson();
   await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
   expect(await spokenTexts(page)).toEqual([]);
@@ -115,7 +119,6 @@ test('Automatisch abspielen: Prompt beim Anzeigen, Lösung im Feedback, standard
   await page.getByRole('button', { name: /Zurück/ }).click();
   await openSettings(page);
   await page.getByLabel('Automatisch abspielen').check();
-  await openCourse(page);
   await startLesson();
 
   const expected: string[] = [];
@@ -154,12 +157,11 @@ test.describe('Hörlektion', () => {
   test('Text bleibt bis zur Antwort verborgen, danach mit Bedeutung sichtbar', async ({ page }) => {
     await fakeSpeech(page, TURKISH);
     await page.goto('/');
-    await openCourse(page);
     const first = lesson.exercises[0]!;
     if (first.type !== 'listen') throw new Error('Hörübung erwartet');
-    await page
-      .getByRole('listitem')
-      .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
+    await (
+      await openUnit(page, unit.id)
+    )
       .getByRole('button', { name: new RegExp(`${lesson.title}$`) })
       .click();
     await expect(page.getByRole('button', { name: 'Anhören', exact: true })).toBeVisible();
@@ -180,10 +182,9 @@ test.describe('Hörlektion', () => {
   test('Jetzt nicht hören: Lektion endet ohne Wertung und ohne Abschluss', async ({ page }) => {
     await fakeSpeech(page, TURKISH);
     await page.goto('/');
-    await openCourse(page);
-    await page
-      .getByRole('listitem')
-      .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
+    await (
+      await openUnit(page, unit.id)
+    )
       .getByRole('button', { name: new RegExp(`${lesson.title}$`) })
       .click();
     await page.getByRole('button', { name: 'Jetzt nicht hören' }).click();

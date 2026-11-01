@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { playPlacement, startPlacementFromOffer } from './placement';
-import { openCourse, openLookup, openSettings, openStats, openToday } from './nav';
+import { openCourse, openLookup, openSettings, openStats, openToday, openUnit } from './nav';
 
 const nav = (page: Page) => page.getByRole('navigation', { name: 'Hauptnavigation' });
 const phone = (page: Page) => (page.viewportSize()?.width ?? 1280) < 768;
@@ -50,14 +50,16 @@ test('Navigation ist per Tastatur bedienbar, der Fokus folgt dem Bildschirmwechs
 
 test('Fokusbereich blendet die Navigation aus, Zurück führt in den Kurs', async ({ page }) => {
   await page.goto('/');
-  await openCourse(page);
-  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await (await openUnit(page, 'a1-u01')).getByRole('button', { name: /Begrüßen/ }).click();
   await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
   await expect(nav(page)).toHaveCount(0);
 
+  // Lektion → Unit → Kurs → Heute: jeder Schritt ein Eintrag.
+  await page.goBack();
+  await expect(page.getByRole('region', { name: 'Alphabet und Begrüßung' })).toBeVisible();
+  await expect(nav(page)).toBeVisible();
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();
-  await expect(nav(page)).toBeVisible();
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
 });
@@ -136,8 +138,11 @@ test('Lesetext: Zurück-Taste schließt das Wort-Sheet, der Knopf verlässt die 
   page,
 }) => {
   await page.goto('/');
-  await openCourse(page);
-  await page.getByRole('button', { name: /Ein neues Leben in İzmir$/ }).click();
+  await (
+    await openUnit(page, 'a2-u01')
+  )
+    .getByRole('button', { name: /Ein neues Leben in İzmir$/ })
+    .click();
   await page.getByRole('button', { name: 'taşındım', exact: true }).click();
   const sheet = page.getByRole('dialog', { name: 'Wort: taşındım' });
   await expect(sheet).toBeVisible();
@@ -149,7 +154,7 @@ test('Lesetext: Zurück-Taste schließt das Wort-Sheet, der Knopf verlässt die 
   await page.getByRole('button', { name: 'taşındım', exact: true }).click();
   await expect(sheet).toBeVisible();
   await page.getByRole('button', { name: /Zurück/ }).click();
-  await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Was hast du gemacht?' })).toBeVisible();
 });
 
 test('Fokus folgt auch geladenen Bildschirmen, Zurück stellt den Scrollstand her', async ({
@@ -157,18 +162,29 @@ test('Fokus folgt auch geladenen Bildschirmen, Zurück stellt den Scrollstand he
 }) => {
   await page.goto('/');
   await openCourse(page);
-  const far = page.getByRole('button', { name: 'Erklärung' }).nth(10);
+  // Alle Niveaus aufklappen, damit die Seite auf jeder Höhe scrollt.
+  for (const level of ['A2', 'B1', 'B2']) {
+    await page.locator('summary', { hasText: `Niveau ${level}` }).click();
+  }
+  const far = page.locator('#unit-b2-u10').getByRole('button');
   await far.scrollIntoViewIfNeeded();
   const y = await page.evaluate(() => window.scrollY);
-  expect(y).toBeGreaterThan(1000);
+  expect(y).toBeGreaterThan(300);
   await far.click();
-  await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  // Auf dem Handy ersetzt die Unit den Kurs, die Überschrift bekommt den Fokus; in zwei Spalten
+  // bleibt der Fokus auf dem gewählten Eintrag.
+  if ((page.viewportSize()?.width ?? 1280) < 1024) {
+    await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
+  } else {
+    await expect(far).toBeFocused();
+  }
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Kurs', level: 1 })).toBeVisible();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(y - 50);
 
   await page.evaluate(() => window.scrollTo(0, 0));
-  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await (await openUnit(page, 'a1-u01')).getByRole('button', { name: /Begrüßen/ }).click();
+  // Die Lektion lädt: die unsichtbare Überschrift des Durchgangs bekommt den Fokus.
   await expect(page.getByRole('heading', { level: 1 })).toBeFocused();
 });
 
@@ -176,8 +192,7 @@ test('Neuladen beginnt bei „Heute“, ein alter Verlaufseintrag führt nicht i
   page,
 }) => {
   await page.goto('/');
-  await openCourse(page);
-  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await (await openUnit(page, 'a1-u01')).getByRole('button', { name: /Begrüßen/ }).click();
   await expect(page.getByRole('button', { name: 'Prüfen' })).toBeVisible();
 
   await page.reload();

@@ -44,7 +44,10 @@ test('Grammatik-Abschnitt öffnet die Erklärkarte an der Überschrift, Zurück 
   await expect(heading).toBeVisible();
   await expect(heading).toBeFocused();
   // Der Rückweg steht im Inhalt (die Navigation hat ebenfalls einen Eintrag „Nachschlagen“).
-  await page.getByRole('main').getByRole('button', { name: /Nachschlagen/ }).click();
+  await page
+    .getByRole('main')
+    .getByRole('button', { name: /Nachschlagen/ })
+    .click();
   await expect(page.getByRole('searchbox')).toHaveValue('Plural: -ler');
 });
 

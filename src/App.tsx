@@ -22,6 +22,7 @@ export function App() {
   const openLookup = useApp((s) => s.openLookup);
   // Fokusbereiche (Lektion, Wiederholen, Test) zeigen keine Navigation: eine Aufgabe nach der anderen.
   const showNav = !isFocusScreen(screen);
+  const inCourse = screen.name === 'course' || screen.name === 'unit';
   const main = useRef<HTMLElement>(null);
   const shownScreen = useRef(screen);
   useAudioSetup();
@@ -93,9 +94,15 @@ export function App() {
         tabIndex={-1}
         className={`outline-none ${showNav ? 'md:pl-[calc(var(--side-w)+var(--safe-left))]' : ''}`}
       >
-        <div className="mx-auto max-w-xl pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4">
+        <div
+          className={`mx-auto pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4 ${
+            inCourse ? 'max-w-xl lg:max-w-5xl' : 'max-w-xl'
+          }`}
+        >
           {screen.name === 'today' && <Today />}
-          {screen.name === 'course' && <CourseScreen />}
+          {(screen.name === 'course' || screen.name === 'unit') && (
+            <CourseScreen unitId={screen.name === 'unit' ? screen.unitId : undefined} />
+          )}
           {screen.name === 'more' && <MoreScreen />}
           {screen.name === 'settings' && <Settings />}
           {screen.name === 'review' && <Review />}

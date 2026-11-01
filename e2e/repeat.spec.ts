@@ -2,7 +2,7 @@ import { readdirSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 import type { Unit } from '../src/content/schema';
 import { answer, loadUnit, playLesson } from './solve';
-import { openCourse, openSettings, openToday } from './nav';
+import { openCourse, openSettings, openToday, openUnit } from './nav';
 
 /**
  * Beantwortet einen Wiederholen-Durchgang richtig. Die Karte wird über die Übungs-ID erkannt, die
@@ -85,12 +85,7 @@ test('Wiederholen: falsch beantwortete Übung kommt am nächsten Tag zurück', a
 
   await page.clock.setFixedTime(new Date('2026-05-01T10:00:00'));
   await page.goto('/');
-  await openCourse(page);
-  await page
-    .getByRole('listitem')
-    .filter({ has: page.getByRole('heading', { name: unit.title, exact: true }) })
-    .getByRole('button', { name: lesson.title })
-    .click();
+  await (await openUnit(page, unit.id)).getByRole('button', { name: lesson.title }).click();
   const wrong = first.options.find((o) => o !== first.answer)!;
   await page.locator('label', { has: page.getByText(wrong, { exact: true }) }).click();
   await page.getByRole('button', { name: 'Prüfen' }).click();

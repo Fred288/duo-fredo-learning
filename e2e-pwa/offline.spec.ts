@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { expect, test } from '@playwright/test';
-import { openCourse, openLookup } from '../e2e/nav';
+import { openCourse, openLookup, openUnit } from '../e2e/nav';
 
 // Zahl der A1-Units laut Einstufungsplan (vom Build erzeugt).
 const a1Units = (
@@ -29,7 +29,7 @@ test('App und Lektion laufen nach dem ersten Besuch offline', async ({ page, con
   await expect(page.getByRole('heading', { name: 'Alphabet und Begrüßung' })).toBeVisible();
 
   // Lektionsdaten kommen aus dem Precache
-  await page.getByRole('button', { name: /Begrüßen/ }).click();
+  await (await openUnit(page, 'a1-u01')).getByRole('button', { name: /Begrüßen/ }).click();
   await expect(page.getByText('Was heißt „Hallo“?')).toBeVisible();
 });
 
