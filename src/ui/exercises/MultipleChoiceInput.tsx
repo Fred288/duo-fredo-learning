@@ -34,9 +34,7 @@ export function MultipleChoiceInput({ ex, value, onChange, disabled }: Props) {
             <label
               key={option}
               className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 has-focus-visible:outline-2 has-focus-visible:outline-focus ${
-                selected
-                  ? 'border-brand-edge bg-brand-soft'
-                  : 'border-line bg-surface'
+                selected ? 'border-brand-edge bg-brand-soft' : 'border-line bg-surface'
               }`}
             >
               <input

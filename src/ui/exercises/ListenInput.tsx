@@ -90,7 +90,7 @@ function Dictation({ value, onChange, disabled }: Omit<Props, 'ex'>) {
         autoComplete="off"
         autoCorrect="off"
         spellCheck={false}
-        className="min-h-12 w-full rounded-xl border border-line-strong bg-surface px-4 text-lg focus-visible:outline-2 focus-visible:outline-focus"
+        className="min-h-12 w-full rounded-xl border border-field-edge bg-surface px-4 text-lg focus-visible:outline-2 focus-visible:outline-focus"
       />
       <SpecialCharBar onInsert={insert} disabled={disabled} />
     </>
@@ -118,9 +118,7 @@ function Meaning({ ex, value, onChange, disabled }: Props) {
           <label
             key={option}
             className={`flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border px-4 has-focus-visible:outline-2 has-focus-visible:outline-focus ${
-              selected
-                ? 'border-brand-edge bg-brand-soft'
-                : 'border-line bg-surface'
+              selected ? 'border-brand-edge bg-brand-soft' : 'border-line bg-surface'
             }`}
           >
             <input

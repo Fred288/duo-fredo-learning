@@ -166,7 +166,7 @@ export function Settings() {
               <select
                 value={voiceURI}
                 onChange={(e) => set('voiceURI', e.target.value)}
-                className="min-h-11 max-w-[60%] rounded-lg border border-line-strong bg-surface px-2"
+                className="min-h-11 max-w-[60%] rounded-lg border border-field-edge bg-surface px-2"
               >
                 <option value="">{t('settings.audio.voice.auto')}</option>
                 {voices.map((v) => (

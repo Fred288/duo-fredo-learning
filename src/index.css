@@ -16,6 +16,7 @@
   --hover: #e7e5e4;
   --line: #e7e5e4;
   --line-strong: #d6d3d1;
+  --field-edge: #857f79;
   --ink: #1c1917;
   --ink-muted: #57534e;
   --ink-subtle: #6b6560;
@@ -70,6 +71,7 @@
   --hover: #292524;
   --line: #292524;
   --line-strong: #44403c;
+  --field-edge: #78716c;
   --ink: #f5f5f4;
   --ink-muted: #a8a29e;
   --ink-subtle: #a8a29e;
@@ -123,6 +125,7 @@
   --color-hover: var(--hover);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-field-edge: var(--field-edge);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-ink-subtle: var(--ink-subtle);
@@ -175,6 +178,13 @@ html {
 }
 html.dark {
   color-scheme: dark;
+}
+
+/* Installiert: kein Ziehen zum Neuladen mitten in einer Übung. */
+@media (display-mode: standalone) {
+  html {
+    overscroll-behavior-y: none;
+  }
 }
 
 /*

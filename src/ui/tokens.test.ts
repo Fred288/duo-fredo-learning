@@ -60,6 +60,7 @@ const TEXT: Record<string, string[]> = {
 const UI: Record<string, string[]> = {
   focus: [...PAGE, 'surface'],
   'brand-edge': [...PAGE, 'surface'],
+  'field-edge': [...PAGE, 'surface'],
   'danger-edge': ['canvas', 'surface'],
   'success-edge': ['canvas', 'surface'],
   'brand-bar': ['fill', 'fill-soft'],

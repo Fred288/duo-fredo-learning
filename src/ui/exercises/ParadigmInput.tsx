@@ -92,10 +92,7 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
             key={label}
             className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-center gap-3"
           >
-            <label
-              htmlFor={`${ex.id}-cell-${i}`}
-              className="text-sm text-ink-muted"
-            >
+            <label htmlFor={`${ex.id}-cell-${i}`} className="text-sm text-ink-muted">
               {label}
             </label>
             <div>
@@ -130,15 +127,13 @@ export function ParadigmInput({ ex, onChange, disabled }: Props) {
                     ? results[i]
                       ? 'border-success-edge'
                       : 'border-danger-edge'
-                    : 'border-line-strong'
+                    : 'border-field-edge'
                 }`}
               />
               {results && (
                 <p className="mt-1 text-sm" lang="tr">
                   {results[i] ? (
-                    <span className="text-success">
-                      ✓ {t('ex.paradigm.ok')}
-                    </span>
+                    <span className="text-success">✓ {t('ex.paradigm.ok')}</span>
                   ) : (
                     <span className="text-danger">
                       ✗ {t('ex.paradigm.expected', { form: ex.targets[i]! })}

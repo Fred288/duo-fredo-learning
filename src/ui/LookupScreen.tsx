@@ -7,6 +7,7 @@ import { useProgress } from '../store/progress';
 import { LookupEntry, formLabelsText } from './LookupEntry';
 import { SpecialCharBar } from './SpecialCharBar';
 import { useBackGuard } from './useBackGuard';
+import { useWide } from './useWide';
 
 const backButton =
   'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
@@ -25,6 +26,7 @@ export function LookupScreen() {
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const input = useRef<HTMLInputElement>(null);
+  const wide = useWide();
 
   useEffect(() => {
     let cancelled = false;
@@ -44,10 +46,11 @@ export function LookupScreen() {
   const entry = entryId ? prepared?.index.vocab.find((v) => v.id === entryId) : undefined;
   const total = result.vocab.length + result.sections.length;
 
-  // Escape schließt einen geöffneten Eintrag (das Suchfeld ist dann nicht im DOM).
+  // Escape schließt einen geöffneten Eintrag (einspaltig ist das Suchfeld dann nicht im DOM).
   const hasEntry = !!entry;
-  // Zurück-Taste des Geräts geht vom Eintrag zur Trefferliste, nicht aus dem Nachschlagen.
-  useBackGuard(hasEntry, () => setLookup(query));
+  // Zurück-Taste des Geräts geht vom Eintrag zur Trefferliste, nicht aus dem Nachschlagen. In zwei
+  // Spalten steht die Liste ohnehin neben dem Eintrag: dort verlässt Zurück das Nachschlagen.
+  useBackGuard(hasEntry && !wide, () => setLookup(query));
   useEffect(() => {
     if (!hasEntry) return;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setLookup(query);
@@ -65,18 +68,129 @@ export function LookupScreen() {
       if (hit) setLookup(query, hit.entry.id);
       else if (section) openSection(section.section.unit, section.section.slug);
     } else if (e.key === 'Escape') {
-      if (query) setLookup('');
+      // Chromium leert Suchfelder bei Escape selbst; hier entscheidet die App.
+      e.preventDefault();
+      // Erst den Eintrag schließen (zwei Spalten), dann die Suche leeren, dann hinaus.
+      if (entry && wide) setLookup(query);
+      else if (query) setLookup('');
       else goBack();
     }
   };
 
   const unitTitle = (id: string) => prepared?.index.units.find((u) => u.id === id)?.title ?? id;
 
+  const panel = (p: PreparedLookup) => (
+    <>
+      <h1 className="text-2xl font-semibold">{t('lookup.title')}</h1>
+      <input
+        ref={input}
+        type="search"
+        autoFocus
+        value={query}
+        onChange={(e) => setLookup(e.target.value)}
+        onKeyDown={onKeyDown}
+        aria-label={t('lookup.search')}
+        placeholder={t('lookup.search')}
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck={false}
+        className="min-h-11 w-full rounded-lg border border-field-edge bg-surface px-3 text-lg focus-visible:outline-2 focus-visible:outline-focus"
+      />
+      <SpecialCharBar
+        disabled={false}
+        onInsert={(c) => {
+          // An der Cursorposition einfügen, nicht ans Ende.
+          const el = input.current;
+          const start = el?.selectionStart ?? query.length;
+          const end = el?.selectionEnd ?? query.length;
+          setLookup(query.slice(0, start) + c + query.slice(end));
+          requestAnimationFrame(() => {
+            el?.focus();
+            el?.setSelectionRange(start + c.length, start + c.length);
+          });
+        }}
+      />
+      {/* Dauerhaft im DOM, sonst lesen Screenreader die erste Trefferzahl nicht vor. */}
+      <p role="status" aria-live="polite" className="text-sm text-ink-muted">
+        {!query.trim()
+          ? ''
+          : total === 0
+            ? t('lookup.none')
+            : result.more
+              ? t('lookup.countMore', { count: MAX_RESULTS })
+              : t('lookup.count', { count: total })}
+      </p>
+      {query.trim() && total === 0 && (
+        <p className="text-sm text-ink-muted">{t('lookup.noneHint')}</p>
+      )}
+      {!query.trim() ? (
+        <Register prepared={p} onOpen={openSection} />
+      ) : (
+        <>
+          {result.vocab.length > 0 && (
+            <ul className="space-y-2" aria-label={t('lookup.words')}>
+              {result.vocab.map((h) => (
+                <li key={h.entry.id}>
+                  <button
+                    type="button"
+                    onClick={() => setLookup(query, h.entry.id)}
+                    className={rowButton}
+                  >
+                    <span className="font-medium" lang="tr">
+                      {h.entry.tr}
+                    </span>{' '}
+                    <span className="text-sm text-ink-muted">
+                      {h.entry.de.join(', ')} · {t(`pos.${h.entry.pos}`)}
+                    </span>
+                    {h.form && (
+                      <span className="block text-sm text-brand-ink">
+                        {t('lookup.formOf', {
+                          form: h.form.form,
+                          label: formLabelsText(h.form.labels),
+                        })}
+                      </span>
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          {result.sections.length > 0 && (
+            <>
+              <h2 className="font-medium">{t('lookup.grammar')}</h2>
+              <ul className="space-y-2">
+                {result.sections.map((h) => (
+                  <li key={`${h.section.unit}/${h.section.slug}`}>
+                    <button
+                      type="button"
+                      onClick={() => openSection(h.section.unit, h.section.slug)}
+                      className={rowButton}
+                    >
+                      <span className="font-medium">{h.section.title}</span>
+                      <span className="block text-sm text-ink-muted">
+                        {unitTitle(h.section.unit)}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </>
+      )}
+    </>
+  );
+  const entryView =
+    entry && prepared ? (
+      <LookupEntry entry={entry} index={prepared.index} cards={cards} />
+    ) : undefined;
+
   return (
     <section className="space-y-4">
       <button
         type="button"
-        onClick={() => (entry ? setLookup(query) : goBack())}
+        onClick={() => (entry && !wide ? setLookup(query) : goBack())}
         className={backButton}
       >
         ← {t('lookup.back')}
@@ -97,109 +211,16 @@ export function LookupScreen() {
         </div>
       ) : !prepared ? (
         <p className="text-ink-subtle">{t('lookup.loading')}</p>
-      ) : entry ? (
-        <LookupEntry entry={entry} index={prepared.index} cards={cards} />
+      ) : wide ? (
+        // Zwei Spalten: Suche und Treffer bleiben stehen, der Eintrag erscheint daneben.
+        <div className="grid grid-cols-[minmax(0,24rem)_minmax(0,1fr)] gap-8">
+          <div className="space-y-4">{panel(prepared)}</div>
+          <div className="self-start lg:sticky lg:top-[calc(1.5rem+var(--safe-top))] lg:max-h-[calc(100dvh-3rem-var(--safe-top))] lg:overflow-y-auto">
+            {entryView ?? <p className="text-ink-subtle">{t('lookup.pick')}</p>}
+          </div>
+        </div>
       ) : (
-        <>
-          <h1 className="text-2xl font-semibold">{t('lookup.title')}</h1>
-          <input
-            ref={input}
-            type="search"
-            autoFocus
-            value={query}
-            onChange={(e) => setLookup(e.target.value)}
-            onKeyDown={onKeyDown}
-            aria-label={t('lookup.search')}
-            placeholder={t('lookup.search')}
-            autoCapitalize="off"
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck={false}
-            className="min-h-11 w-full rounded-lg border border-line-strong bg-surface px-3 text-lg focus-visible:outline-2 focus-visible:outline-focus"
-          />
-          <SpecialCharBar
-            disabled={false}
-            onInsert={(c) => {
-              // An der Cursorposition einfügen, nicht ans Ende.
-              const el = input.current;
-              const start = el?.selectionStart ?? query.length;
-              const end = el?.selectionEnd ?? query.length;
-              setLookup(query.slice(0, start) + c + query.slice(end));
-              requestAnimationFrame(() => {
-                el?.focus();
-                el?.setSelectionRange(start + c.length, start + c.length);
-              });
-            }}
-          />
-          {/* Dauerhaft im DOM, sonst lesen Screenreader die erste Trefferzahl nicht vor. */}
-          <p role="status" aria-live="polite" className="text-sm text-ink-muted">
-            {!query.trim()
-              ? ''
-              : total === 0
-                ? t('lookup.none')
-                : result.more
-                  ? t('lookup.countMore', { count: MAX_RESULTS })
-                  : t('lookup.count', { count: total })}
-          </p>
-          {query.trim() && total === 0 && (
-            <p className="text-sm text-ink-muted">{t('lookup.noneHint')}</p>
-          )}
-          {!query.trim() ? (
-            <Register prepared={prepared} onOpen={openSection} />
-          ) : (
-            <>
-              {result.vocab.length > 0 && (
-                <ul className="space-y-2" aria-label={t('lookup.words')}>
-                  {result.vocab.map((h) => (
-                    <li key={h.entry.id}>
-                      <button
-                        type="button"
-                        onClick={() => setLookup(query, h.entry.id)}
-                        className={rowButton}
-                      >
-                        <span className="font-medium" lang="tr">
-                          {h.entry.tr}
-                        </span>{' '}
-                        <span className="text-sm text-ink-muted">
-                          {h.entry.de.join(', ')} · {t(`pos.${h.entry.pos}`)}
-                        </span>
-                        {h.form && (
-                          <span className="block text-sm text-brand-ink">
-                            {t('lookup.formOf', {
-                              form: h.form.form,
-                              label: formLabelsText(h.form.labels),
-                            })}
-                          </span>
-                        )}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {result.sections.length > 0 && (
-                <>
-                  <h2 className="font-medium">{t('lookup.grammar')}</h2>
-                  <ul className="space-y-2">
-                    {result.sections.map((h) => (
-                      <li key={`${h.section.unit}/${h.section.slug}`}>
-                        <button
-                          type="button"
-                          onClick={() => openSection(h.section.unit, h.section.slug)}
-                          className={rowButton}
-                        >
-                          <span className="font-medium">{h.section.title}</span>
-                          <span className="block text-sm text-ink-muted">
-                            {unitTitle(h.section.unit)}
-                          </span>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </>
-          )}
-        </>
+        (entryView ?? panel(prepared))
       )}
     </section>
   );

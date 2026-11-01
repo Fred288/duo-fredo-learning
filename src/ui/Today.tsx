@@ -66,80 +66,86 @@ export function Today() {
         </h1>
         <p className="mt-1 text-ink-muted">{t('app.tagline')}</p>
       </header>
-      <DailyGoal />
-      <div className="mt-1 text-right">
-        <button
-          type="button"
-          onClick={openStats}
-          className="min-h-11 rounded-lg px-2 text-sm text-brand-ink underline hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
-        >
-          {t('stats.open')}
-        </button>
-      </div>
-      {next && (
-        <button
-          type="button"
-          onClick={() => openLesson(next.unit.id, next.lesson.id)}
-          className="mt-4 block min-h-11 w-full rounded-xl bg-brand p-4 text-left text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-        >
-          <span className="block font-medium">{t('today.continue.title')}</span>
-          <span className="block text-sm">
-            {next.unit.title} · {next.lesson.title}
-          </span>
-        </button>
-      )}
-      {offerPlacement && (
-        <section
-          aria-labelledby="placement-offer"
-          className="mt-4 rounded-xl border border-brand-line bg-brand-soft p-4"
-        >
-          <h2 id="placement-offer" className="font-medium">
-            {t('placement.offer.title')}
-          </h2>
-          <p className="mt-1 text-sm text-ink-muted">{t('placement.offer.text')}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
+      <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,18rem)] xl:items-start xl:gap-x-10">
+        <div className="xl:col-start-2 xl:row-start-1">
+          <DailyGoal />
+          <div className="mt-1 text-right">
             <button
               type="button"
-              onClick={() => {
-                setSetting('placementOffered', true);
-                openPlacement();
-              }}
-              className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+              onClick={openStats}
+              className="min-h-11 rounded-lg px-2 text-sm text-brand-ink underline hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
             >
-              {t('placement.offer.start')}
-            </button>
-            <button
-              type="button"
-              onClick={() => setSetting('placementOffered', true)}
-              className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
-            >
-              {t('placement.offer.decline')}
+              {t('stats.open')}
             </button>
           </div>
-        </section>
-      )}
-      {repeatCount && (
-        <button
-          type="button"
-          onClick={openRepeat}
-          className="mt-4 block min-h-11 w-full rounded-xl border border-brand-line bg-brand-soft p-4 text-left hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
-        >
-          <span className="block font-medium">{t('repeat.title')}</span>
-          <span className="block text-sm text-ink-muted">{repeatCount}</span>
-        </button>
-      )}
-      {mistakes > 0 && (
-        <button
-          type="button"
-          onClick={openMistakesScreen}
-          className="mt-4 block min-h-11 w-full rounded-xl border border-warn-line bg-warn-soft p-4 text-left hover:bg-warn-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
-        >
-          <span className="block font-medium">{t('mistakes.title')}</span>
-          <span className="block text-sm text-ink-muted">
-            {t('mistakes.count', { count: mistakes })}
-          </span>
-        </button>
-      )}
+        </div>
+        <div className="mt-4 space-y-4 xl:col-start-1 xl:row-start-1 xl:mt-6">
+          {next && (
+            <button
+              type="button"
+              onClick={() => openLesson(next.unit.id, next.lesson.id)}
+              className="block min-h-11 w-full rounded-xl bg-brand p-4 text-left text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            >
+              <span className="block font-medium">{t('today.continue.title')}</span>
+              <span className="block text-sm">
+                {next.unit.title} · {next.lesson.title}
+              </span>
+            </button>
+          )}
+          {offerPlacement && (
+            <section
+              aria-labelledby="placement-offer"
+              className="rounded-xl border border-brand-line bg-brand-soft p-4"
+            >
+              <h2 id="placement-offer" className="font-medium">
+                {t('placement.offer.title')}
+              </h2>
+              <p className="mt-1 text-sm text-ink-muted">{t('placement.offer.text')}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSetting('placementOffered', true);
+                    openPlacement();
+                  }}
+                  className="min-h-11 rounded-lg bg-brand px-4 font-medium text-on-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                >
+                  {t('placement.offer.start')}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSetting('placementOffered', true)}
+                  className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
+                >
+                  {t('placement.offer.decline')}
+                </button>
+              </div>
+            </section>
+          )}
+          {repeatCount && (
+            <button
+              type="button"
+              onClick={openRepeat}
+              className="block min-h-11 w-full rounded-xl border border-brand-line bg-brand-soft p-4 text-left hover:bg-brand-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
+            >
+              <span className="block font-medium">{t('repeat.title')}</span>
+              <span className="block text-sm text-ink-muted">{repeatCount}</span>
+            </button>
+          )}
+          {mistakes > 0 && (
+            <button
+              type="button"
+              onClick={openMistakesScreen}
+              className="block min-h-11 w-full rounded-xl border border-warn-line bg-warn-soft p-4 text-left hover:bg-warn-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
+            >
+              <span className="block font-medium">{t('mistakes.title')}</span>
+              <span className="block text-sm text-ink-muted">
+                {t('mistakes.count', { count: mistakes })}
+              </span>
+            </button>
+          )}
+        </div>
+      </div>
       {failed ? (
         <p className="mt-6 text-danger">{t('home.error')}</p>
       ) : (

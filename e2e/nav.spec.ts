@@ -79,7 +79,13 @@ test('Zurück-Taste geht Schritt für Schritt durch die App', async ({ page }) =
   await expect(page.getByRole('searchbox')).toBeVisible();
 });
 
-test('Nachschlage-Eintrag: Zurück-Taste geht zuerst zur Trefferliste', async ({ page }) => {
+test('Nachschlage-Eintrag: Zurück-Taste geht zuerst zur Trefferliste (einspaltig)', async ({
+  page,
+}) => {
+  test.skip(
+    (page.viewportSize()?.width ?? 1280) >= 1024,
+    'in zwei Spalten steht die Liste daneben',
+  );
   await page.goto('/');
   await openLookup(page);
   await page.getByRole('searchbox').fill('evlerde');
@@ -91,6 +97,20 @@ test('Nachschlage-Eintrag: Zurück-Taste geht zuerst zur Trefferliste', async ({
   await expect(page.getByRole('heading', { name: 'ev', exact: true })).toHaveCount(0);
   await expect(nav(page)).toBeVisible();
 
+  await page.goBack();
+  await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
+});
+
+test('Nachschlage-Eintrag in zwei Spalten: Zurück-Taste verlässt das Nachschlagen', async ({
+  page,
+}) => {
+  test.skip((page.viewportSize()?.width ?? 1280) < 1024, 'nur zwei Spalten');
+  await page.goto('/');
+  await openLookup(page);
+  await page.getByRole('searchbox').fill('evlerde');
+  await page.getByRole('searchbox').press('Enter');
+  await expect(page.getByRole('heading', { name: 'ev', exact: true })).toBeVisible();
+  await expect(page.getByRole('searchbox')).toHaveValue('evlerde');
   await page.goBack();
   await expect(page.getByRole('heading', { name: 'Yol', level: 1 })).toBeVisible();
 });

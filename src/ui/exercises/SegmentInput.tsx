@@ -171,7 +171,7 @@ export function SegmentInput({ ex, onChange, disabled }: Props) {
                 disabled={disabled}
                 value={roles.get(starts[i]!) ?? ''}
                 onChange={(e) => choose(starts[i]!, e.target.value as SegmentTag | '')}
-                className="min-h-11 rounded-md border border-line-strong bg-surface px-2 text-sm"
+                className="min-h-11 rounded-md border border-field-edge bg-surface px-2 text-sm"
               >
                 <option value="">{t('ex.segment.choose')}</option>
                 {options.map((tag) => (

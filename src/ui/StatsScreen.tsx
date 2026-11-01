@@ -117,7 +117,7 @@ export function StatsScreen() {
       ) : !data ? (
         <p className="text-ink-subtle">{t('home.loading')}</p>
       ) : (
-        <>
+        <div className="space-y-6 xl:grid xl:grid-cols-2 xl:items-start xl:gap-6 xl:space-y-0">
           <section className={`${card} space-y-4`} aria-labelledby="stats-words">
             <h2 id="stats-words" className="font-medium">
               {t('stats.words')}
@@ -240,7 +240,7 @@ export function StatsScreen() {
               ))}
             </ul>
           </section>
-        </>
+        </div>
       )}
     </section>
   );

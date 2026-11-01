@@ -38,7 +38,7 @@ export function ReportError({ exerciseId, unitId, unreviewed }: Props) {
               rows={3}
               // Enter im Textfeld soll nicht die Lektion weiterschalten
               onKeyDown={(e) => e.stopPropagation()}
-              className="w-full rounded-lg border border-line-strong bg-surface p-2 text-base text-ink"
+              className="w-full rounded-lg border border-field-edge bg-surface p-2 text-base text-ink"
             />
           </label>
           <div className="flex gap-2">

@@ -24,7 +24,10 @@ test('gebeugte Form führt auf die Grundform, Eintrag zeigt Formtabelle', async 
   await page.getByText('Formen', { exact: true }).click();
   await expect(page.getByRole('cell', { name: 'evlerden' })).toBeVisible();
   await expect(page.getByText('Noch nicht im Wiederholen.')).toBeVisible();
-  await page.getByRole('button', { name: /Zurück/ }).click();
+  // Einspaltig führt Zurück vom Eintrag zur Liste, in zwei Spalten steht die Suche schon daneben.
+  if ((page.viewportSize()?.width ?? 1280) < 1024) {
+    await page.getByRole('button', { name: /Zurück/ }).click();
+  }
   await expect(page.getByRole('searchbox')).toHaveValue('evlerde');
 });
 

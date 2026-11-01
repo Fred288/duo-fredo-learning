@@ -16,9 +16,17 @@ import { Settings } from './ui/Settings';
 import { StatsScreen } from './ui/StatsScreen';
 import { Today } from './ui/Today';
 import { UpdateBanner } from './ui/UpdateBanner';
+import { useKeyboardInset } from './ui/useKeyboardInset';
 import { useWide } from './ui/useWide';
 
 const isCourse = (screen: Screen) => screen.name === 'course' || screen.name === 'unit';
+
+/** Lesebreite; Kurs und Nachschlagen haben ab 1024 px zwei Spalten, Heute und Statistik ab 1280 px. */
+function widthOf(screen: Screen): string {
+  if (isCourse(screen) || screen.name === 'lookup') return 'max-w-xl lg:max-w-5xl';
+  if (screen.name === 'today' || screen.name === 'stats') return 'max-w-xl xl:max-w-4xl';
+  return 'max-w-xl';
+}
 
 export function App() {
   const screen = useApp((s) => s.screen);
@@ -32,6 +40,7 @@ export function App() {
   const shownScreen = useRef(screen);
   const shownWide = useRef(wide);
   useAudioSetup();
+  useKeyboardInset();
 
   // Taste „/“ öffnet auf den Navigationsbildschirmen das Nachschlagewerk (nicht beim Tippen in Feldern).
   useEffect(() => {
@@ -103,7 +112,7 @@ export function App() {
       className={`min-h-dvh text-ink ${
         showNav
           ? '[--banner-offset:var(--nav-offset)] [--nav-offset:4.5rem] md:[--nav-offset:0px] md:[--side-w:6rem] xl:[--side-w:15rem]'
-          : 'bg-canvas [--banner-offset:9.5rem]'
+          : 'bg-canvas [--banner-offset:9.5rem] [@media(orientation:landscape)_and_(max-height:480px)]:[--banner-offset:0px]'
       }`}
     >
       <a
@@ -124,9 +133,7 @@ export function App() {
         className={`outline-none ${showNav ? 'md:pl-[calc(var(--side-w)+var(--safe-left))]' : ''}`}
       >
         <div
-          className={`mx-auto pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4 ${
-            inCourse ? 'max-w-xl lg:max-w-5xl' : 'max-w-xl'
-          }`}
+          className={`mx-auto pt-[calc(1.5rem+var(--safe-top))] pr-[max(1rem,var(--safe-right))] pb-[calc(1.5rem+var(--nav-offset,0px)+var(--safe-bottom))] pl-[max(1rem,var(--safe-left))] md:pl-4 ${widthOf(screen)}`}
         >
           {screen.name === 'today' && <Today />}
           {(screen.name === 'course' || screen.name === 'unit') && (

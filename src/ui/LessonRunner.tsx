@@ -228,7 +228,7 @@ function Runner({
       <h1 className="sr-only">{lesson.title}</h1>
       <header
         ref={head}
-        className="sticky top-[max(0.5rem,var(--safe-top))] z-10 flex items-center gap-3 rounded-2xl border border-line glass-strong px-2 py-1"
+        className="sticky top-[max(0.5rem,var(--safe-top))] z-10 [@media(orientation:landscape)_and_(max-height:480px)]:static flex items-center gap-3 rounded-2xl border border-line glass-strong px-2 py-1"
       >
         <button
           type="button"
@@ -271,7 +271,7 @@ function Runner({
       {answering ? (
         <div
           ref={actions}
-          className="sticky bottom-[max(0.75rem,var(--safe-bottom))] z-10 space-y-2 rounded-2xl border border-line glass-strong p-3 [--shadow-y:-8px]"
+          className="sticky bottom-[calc(max(0.75rem,var(--safe-bottom))+var(--keyboard-inset,0px))] z-10 [@media(orientation:landscape)_and_(max-height:480px)]:static space-y-2 rounded-2xl border border-line glass-strong p-3 [--shadow-y:-8px]"
         >
           <button
             type="button"
