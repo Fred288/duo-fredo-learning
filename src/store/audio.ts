@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { create } from 'zustand';
 import { playClip, resolveClip, stopClips } from '../audio/clip';
+import { setAudioSession } from '../audio/session';
 import {
   canSpeak,
   type Rate,
@@ -74,6 +75,8 @@ export function useCanSpeak(): boolean {
 export function speak(text: string, rate: Rate = 'normal'): Promise<void> {
   const s = getSpeaker();
   if (!useSettings.getState().audioEnabled || !canSpeak(s.status())) return Promise.resolve();
+  // Auch im Stummmodus hörbar (iOS); Aufnahmen stellen vorher wieder auf „auto“.
+  setAudioSession('playback');
   return playClip(resolveClip(text), rate, { speaker: s });
 }
 

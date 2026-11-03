@@ -1,6 +1,8 @@
 // Nachsprechen: eigene Aufnahme hinter einem Interface (MediaRecorder heute, Fake in Tests).
 // Aufnahmen bleiben nur im Speicher, werden nie gespeichert oder gesendet und nicht bewertet.
 
+import { setAudioSession } from './session';
+
 /** Längste Aufnahme; danach stoppt sie von selbst (ein Satz dauert wenige Sekunden). */
 export const MAX_RECORDING_MS = 15_000;
 
@@ -54,6 +56,7 @@ export function createMediaRecorder(
       cancel();
       const mine = generation;
       let media: MediaStream;
+      setAudioSession('auto');
       try {
         media = await nav!.mediaDevices.getUserMedia({ audio: true });
       } catch (e) {

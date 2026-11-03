@@ -27,6 +27,15 @@ describe('Stimmenwahl', () => {
     expect(list.map((v) => v.name)).toEqual(['Cem', 'Yelda', 'Google Türkçe']);
   });
 
+  it('bevorzugt geladene iOS-Stimmen (Premium vor Erweitert vor kompakt)', () => {
+    const list = turkishVoices([
+      voice({ name: 'Yelda', voiceURI: 'com.apple.voice.compact.tr-TR.Yelda', default: true }),
+      voice({ name: 'Yelda (Erweitert)', voiceURI: 'com.apple.voice.enhanced.tr-TR.Yelda' }),
+      voice({ name: 'Yelda (Premium)', voiceURI: 'com.apple.voice.premium.tr-TR.Yelda' }),
+    ]);
+    expect(list.map((v) => v.name)).toEqual(['Yelda (Premium)', 'Yelda (Erweitert)', 'Yelda']);
+  });
+
   it('nimmt die gewünschte Stimme, sonst die beste', () => {
     const voices = [voice({ name: 'Yelda' }), voice({ name: 'Cem' })];
     expect(pickVoice(voices, { preferredURI: 'Yelda' }).voice?.name).toBe('Yelda');

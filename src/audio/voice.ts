@@ -4,13 +4,22 @@ import type { VoiceInfo, VoiceStatus } from './types';
 export const isTurkishVoice = (v: Pick<VoiceInfo, 'lang'>): boolean =>
   /^tr(?:[-_]|$)/i.test(v.lang);
 
-/** Türkische Stimmen: lokale zuerst (laufen offline), dann Standardstimme, dann nach Name. */
+/** iOS/macOS: geladene Stimmen „Premium“/„Erweitert“ klingen besser als die vorinstallierte. */
+export function voiceQuality(v: Pick<VoiceInfo, 'voiceURI' | 'name'>): number {
+  const id = `${v.voiceURI} ${v.name}`.toLocaleLowerCase('tr');
+  if (id.includes('premium')) return 2;
+  if (/enhanced|erweitert|gelişmiş/.test(id)) return 1;
+  return 0;
+}
+
+/** Türkische Stimmen: lokale zuerst (laufen offline), dann Qualität, Standardstimme, Name. */
 export function turkishVoices(voices: readonly VoiceInfo[]): VoiceInfo[] {
   return voices
     .filter(isTurkishVoice)
     .sort(
       (a, b) =>
         Number(b.localService) - Number(a.localService) ||
+        voiceQuality(b) - voiceQuality(a) ||
         Number(b.default) - Number(a.default) ||
         a.name.localeCompare(b.name),
     );
