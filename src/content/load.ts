@@ -12,7 +12,12 @@ export interface Manifest {
     explainer?: string;
     /** Anzahl noch nicht geprüfter Übungen und Vokabeln. */
     unreviewed: number;
-    lessons: Pick<Lesson, 'id' | 'type' | 'title'>[];
+    lessons: (Pick<Lesson, 'id' | 'type' | 'title'> & {
+      /** Karteikarten: Vokabel-IDs, die diese Lektion einführt. */
+      vocab?: string[];
+      /** Karteikarten: Übungs-IDs der Satzkarten dieser Lektion. */
+      phrases?: string[];
+    })[];
     /** Vokabel-IDs der Unit (`vocabId`), Grundlage neuer SRS-Karten. */
     vocab: string[];
   }[];

@@ -259,6 +259,17 @@ describe('manifestEntry', () => {
       vocab: ['ev', 'yüz-sayı'],
     });
   });
+
+  it('schreibt Karteikarten je Lektion, leere Listen fallen weg', () => {
+    const { unit } = load('a.yaml', yamlUnit('a1-u01'));
+    const cards = {
+      vocab: new Map([['a1-u01-l1', ['ev']]]),
+      phrases: new Map([['a1-u01-l1', []]]),
+    };
+    expect(manifestEntry(unit, cards).lessons).toEqual([
+      { id: 'a1-u01-l1', type: 'vocab', title: 'Wörter', vocab: ['ev'] },
+    ]);
+  });
 });
 
 describe('checkSegments', () => {

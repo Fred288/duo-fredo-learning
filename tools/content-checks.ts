@@ -363,7 +363,13 @@ export function foreignLexicon(unit: Unit, units: LoadedUnit[]): Vocab[] {
 }
 
 /** Eintrag der Unit in public/content/index.json (Typ `Manifest` in src/content/load.ts). */
-export function manifestEntry(unit: Unit) {
+/** Karteikarten je Lektion (`lessonVocab`, `phraseCards`); fehlt = keine. */
+export interface LessonCards {
+  vocab?: ReadonlyMap<string, string[]>;
+  phrases?: ReadonlyMap<string, string[]>;
+}
+
+export function manifestEntry(unit: Unit, cards: LessonCards = {}) {
   return {
     id: unit.id,
     level: unit.level,
@@ -371,7 +377,17 @@ export function manifestEntry(unit: Unit) {
     explainer: unit.explainer,
     reviewed: unit.reviewed,
     unreviewed: countUnreviewed(unit),
-    lessons: unit.lessons.map((l) => ({ id: l.id, type: l.type, title: l.title })),
+    lessons: unit.lessons.map((l) => {
+      const vocab = cards.vocab?.get(l.id);
+      const phrases = cards.phrases?.get(l.id);
+      return {
+        id: l.id,
+        type: l.type,
+        title: l.title,
+        ...(vocab?.length && { vocab }),
+        ...(phrases?.length && { phrases }),
+      };
+    }),
     // Vokabel-IDs für neue SRS-Karten, ohne die Unit laden zu müssen.
     vocab: (unit.vocab ?? []).map(vocabId),
   };

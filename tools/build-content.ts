@@ -17,6 +17,7 @@ import { checkGlossary, withPassages } from '../src/content/reading';
 import { vocabId } from '../src/content/schema';
 import { withSegments } from '../src/content/segmenting';
 import { caseHints, withWordOrder } from '../src/content/word-order';
+import { checkCardFields, lessonVocab, phraseCards } from '../src/flashcards/build';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import { prepareLookup } from '../src/lookup/search';
@@ -91,6 +92,20 @@ const built: LoadedUnit[] = units.map(({ file, unit }) => {
   return { file, unit: annotateSpeech(out, words) };
 });
 errors.push(...checkListen(built), ...checkSegments(built), ...checkWordOrder(built));
+// Karteikarten: neue Wörter und übliche Sätze je Lektion (src/flashcards/build.ts).
+for (const { file, unit } of units)
+  errors.push(...checkCardFields(unit).map((e) => `${file}: ${e}`));
+const phrases = phraseCards(built.map(({ unit }) => unit));
+const cards = new Map(
+  built.map(({ unit }) => [
+    unit.id,
+    { vocab: lessonVocab(unit, reading), phrases: phrases.get(unit.id) },
+  ]),
+);
+console.info(
+  `Karteikarten: ${allVocab.length} Wörter, ` +
+    `${[...phrases.values()].reduce((n, m) => n + [...m.values()].flat().length, 0)} Sätze`,
+);
 if (SEGMENT_LESSONS) {
   const counts = built.map(
     ({ unit }) => unit.lessons.find((l) => l.type === 'segmenting')?.exercises.length ?? 0,
@@ -142,7 +157,7 @@ for (const { unit } of units) {
   mkdirSync(dirname(target), { recursive: true });
   copyFileSync(join(CONTENT_DIR, unit.explainer), target);
 }
-const manifest = built.map(({ unit }) => manifestEntry(unit));
+const manifest = built.map(({ unit }) => manifestEntry(unit, cards.get(unit.id)));
 writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));
 writeFileSync(join(OUT_DIR, 'placement.json'), JSON.stringify(placement.plan));
 const lookup = JSON.stringify(

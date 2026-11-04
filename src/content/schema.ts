@@ -75,6 +75,11 @@ export const Vocab = z.strictObject({
   compound_stem: nonEmpty.optional(),
   // Aorist-Vokal von Verben, wenn die Regel nicht greift (ar: yapar, ir: gelir)
   aorist: z.enum(['ar', 'ir']).optional(),
+  // Karteikarten: Lektion, zu der das Wort gehört, wenn die Ableitung im Build nicht passt
+  lesson: z
+    .string()
+    .regex(/^(a1|a2|b1|b2)-u\d{2}-[a-z]\d+$/, 'Lektions-ID wie a1-u03-l2')
+    .optional(),
   register: register.optional(),
   reviewed: z.boolean().optional(),
   ...provenanceOverride,
@@ -138,6 +143,8 @@ export const WordBank = z
     // Satzglieder der ersten Antwort in Grundreihenfolge; daraus entsteht die Satzbau-Übung.
     chunks: z.array(Chunk).min(3).optional(),
     orders: z.array(ChunkOrder).min(1).optional(),
+    // Satzkarte: false = nie, true = auch gegen die Regeln von `phraseCards`
+    card: z.boolean().optional(),
   })
   .refine((e) => !e.orders || e.chunks, {
     message: 'orders nur mit chunks',
@@ -150,6 +157,8 @@ export const FreeText = z.strictObject({
   prompt: nonEmpty,
   direction: z.enum(['de_tr', 'tr_de']),
   answers: z.array(nonEmpty).min(1),
+  // Satzkarte (nur de_tr): false = nie, true = auch gegen die Regeln von `phraseCards`
+  card: z.boolean().optional(),
 });
 
 /**
