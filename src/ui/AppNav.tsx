@@ -1,7 +1,15 @@
 import type { ReactNode } from 'react';
 import { t } from '../i18n';
 import { useApp, type Screen } from '../store/app';
-import { CourseIcon, MoreIcon, SearchIcon, SettingsIcon, StatsIcon, TodayIcon } from './NavIcons';
+import {
+  CardsIcon,
+  CourseIcon,
+  MoreIcon,
+  SearchIcon,
+  SettingsIcon,
+  StatsIcon,
+  TodayIcon,
+} from './NavIcons';
 
 interface Item {
   id: string;
@@ -24,7 +32,7 @@ const itemBase =
  * Eine einzige `<nav>`, nur das Layout ändert sich mit der Breite.
  */
 export function AppNav({ screen }: { screen: Screen }) {
-  const { openToday, openCourse, openLookup, openMore, openStats, openSettings } =
+  const { openToday, openCourse, openLookup, openMore, openStats, openSettings, openFlashcards } =
     useApp.getState();
   const name = screen.name;
   const fromLookup = name === 'explainer' && screen.from === 'lookup';
@@ -52,6 +60,14 @@ export function AppNav({ screen }: { screen: Screen }) {
       keys: '/',
     },
     {
+      id: 'flashcards',
+      label: t('nav.flashcards'),
+      icon: <CardsIcon />,
+      current: name === 'flashcards',
+      onSelect: () => openFlashcards(),
+      show: 'wide',
+    },
+    {
       id: 'stats',
       label: t('nav.stats'),
       icon: <StatsIcon />,
@@ -71,7 +87,12 @@ export function AppNav({ screen }: { screen: Screen }) {
       id: 'more',
       label: t('nav.more'),
       icon: <MoreIcon />,
-      current: name === 'more' || name === 'stats' || name === 'settings' || name === 'review',
+      current:
+        name === 'more' ||
+        name === 'flashcards' ||
+        name === 'stats' ||
+        name === 'settings' ||
+        name === 'review',
       onSelect: openMore,
       show: 'phone',
     },

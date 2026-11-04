@@ -1,6 +1,6 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
-import { openCourse, openLookup, openSettings, openStats, openUnit } from './nav';
+import { openCourse, openFlashcards, openLookup, openSettings, openStats, openUnit } from './nav';
 import { playPlacement } from './placement';
 import { loadUnit } from './solve';
 
@@ -80,6 +80,25 @@ for (const scheme of ['light', 'dark'] as const) {
 
     await page.getByRole('button', { name: 'Inhalte prüfen' }).click();
     await clean(page, 'Inhalte prüfen');
+  });
+
+  test(`axe: Karteikasten (${scheme})`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('/');
+    await openFlashcards(page);
+    await expect(page.getByRole('heading', { name: 'Karteikasten', level: 1 })).toBeVisible();
+    await clean(page, 'Karteikasten: Auswahl');
+    await page.getByRole('button', { name: /^Los/ }).click();
+    await page.getByRole('button', { name: 'Umdrehen' }).click();
+    await expect(page.getByRole('button', { name: 'Gewusst', exact: true })).toBeVisible();
+    await clean(page, 'Karteikasten: Rückseite');
+    await page.getByRole('button', { name: 'Beenden' }).click();
+    await page.getByRole('radio', { name: 'Eintippen' }).check({ force: true });
+    await page.getByRole('button', { name: /^Los/ }).click();
+    await page.getByRole('textbox', { name: 'Deine Antwort' }).fill('xyz');
+    await page.getByRole('button', { name: 'Prüfen' }).click();
+    await expect(page.getByText('Nicht richtig')).toBeVisible();
+    await clean(page, 'Karteikasten: Eintippen');
   });
 
   test(`axe: Einstufung (${scheme})`, async ({ page }) => {

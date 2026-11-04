@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import type { Selection } from '../flashcards/deck';
+import type { FlashMode } from '../flashcards/types';
 
 export type Screen =
   | { name: 'today' }
@@ -12,6 +14,9 @@ export type Screen =
   | { name: 'lookup' }
   | { name: 'stats' }
   | { name: 'placement' }
+  /** Karteikasten: Auswahl; `unitId` legt den Stapel auf diese Unit vor. */
+  | { name: 'flashcards'; unitId?: string }
+  | { name: 'flashcards-run'; selection: Selection; mode: FlashMode }
   | { name: 'explainer'; unitId: string; section?: string; from?: 'lookup' }
   | { name: 'lesson'; unitId: string; lessonId: string };
 
@@ -21,6 +26,7 @@ const FOCUS_SCREENS: ReadonlySet<Screen['name']> = new Set([
   'repeat',
   'mistakes',
   'placement',
+  'flashcards-run',
 ]);
 export const isFocusScreen = (screen: Screen): boolean => FOCUS_SCREENS.has(screen.name);
 
@@ -34,6 +40,8 @@ export function parentOf(screen: Screen): Screen {
     case 'lesson':
     case 'unit':
       return { name: 'course' };
+    case 'flashcards-run':
+      return { name: 'flashcards' };
     default:
       return { name: 'today' };
   }
@@ -61,6 +69,8 @@ interface AppState {
   openLookup: () => void;
   openStats: () => void;
   openPlacement: () => void;
+  openFlashcards: (unitId?: string) => void;
+  openFlashRun: (selection: Selection, mode: FlashMode) => void;
   /** Suchtext und geöffneter Eintrag bleiben erhalten, wenn man aus einer Erklärkarte zurückkehrt. */
   lookupQuery: string;
   lookupEntry?: string;
@@ -205,6 +215,9 @@ export const useApp = create<AppState>((set, get) => {
     openLookup: () => go({ name: 'lookup' }),
     openStats: () => go({ name: 'stats' }),
     openPlacement: () => go({ name: 'placement' }),
+    openFlashcards: (unitId) =>
+      go(unitId ? { name: 'flashcards', unitId } : { name: 'flashcards' }),
+    openFlashRun: (selection, mode) => go({ name: 'flashcards-run', selection, mode }),
     lookupQuery: '',
     lookupEntry: undefined,
     setLookup: (lookupQuery, lookupEntry) => set({ lookupQuery, lookupEntry }),

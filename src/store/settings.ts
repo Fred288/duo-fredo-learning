@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 import { db, safely } from '../db/db';
+import type { Content, DirChoice, Order } from '../flashcards/deck';
+import type { FlashMode } from '../flashcards/types';
 
 export type Theme = 'system' | 'light' | 'dark';
 
@@ -27,6 +29,11 @@ export interface Settings {
   lastBackup: string;
   /** Einstufung beim ersten Start angeboten (angenommen oder abgelehnt). */
   placementOffered: boolean;
+  /** Karteikasten: zuletzt gewählte Einstellungen. */
+  flashContent: Content;
+  flashDir: DirChoice;
+  flashMode: FlashMode;
+  flashOrder: Order;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -43,7 +50,14 @@ export const DEFAULT_SETTINGS: Settings = {
   shadowing: true,
   lastBackup: '',
   placementOffered: false,
+  flashContent: 'both',
+  flashDir: 'tr_de',
+  flashMode: 'flip',
+  flashOrder: 'course',
 };
+
+const oneOf = <T extends string>(values: readonly T[], v: unknown): v is T =>
+  typeof v === 'string' && (values as readonly string[]).includes(v);
 
 export const GOAL_RANGE = { min: 1, max: 10 } as const;
 export const NEW_WORDS_RANGE = { min: 0, max: 30 } as const;
@@ -103,6 +117,11 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.shadowing === 'boolean') out.shadowing = stored.shadowing;
   if (typeof stored.placementOffered === 'boolean') out.placementOffered = stored.placementOffered;
   if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
+  if (oneOf(['vocab', 'phrase', 'both'], stored.flashContent))
+    out.flashContent = stored.flashContent;
+  if (oneOf(['tr_de', 'de_tr', 'mixed'], stored.flashDir)) out.flashDir = stored.flashDir;
+  if (oneOf(['flip', 'type'], stored.flashMode)) out.flashMode = stored.flashMode;
+  if (oneOf(['course', 'shuffled'], stored.flashOrder)) out.flashOrder = stored.flashOrder;
   if (typeof stored.lastBackup === 'string' && /^(\d{4}-\d{2}-\d{2})?$/.test(stored.lastBackup)) {
     out.lastBackup = stored.lastBackup;
   }

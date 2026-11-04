@@ -27,11 +27,19 @@ it('Taste „/“ öffnet das Nachschlagewerk, nicht beim Tippen in einem Feld',
   expect(useApp.getState().screen.name).toBe('lookup');
 });
 
-it('Navigation: vier Ziele plus Statistik und Einstellungen, das aktuelle ist markiert', () => {
+it('Navigation: vier Ziele plus Karteikasten, Statistik und Einstellungen, das aktuelle ist markiert', () => {
   render(<App />);
   const nav = screen.getByRole('navigation', { name: 'Hauptnavigation' });
   const names = Array.from(nav.querySelectorAll('button')).map((b) => b.textContent);
-  expect(names).toEqual(['Heute', 'Kurs', 'Nachschlagen', 'Statistik', 'Einstellungen', 'Mehr']);
+  expect(names).toEqual([
+    'Heute',
+    'Kurs',
+    'Nachschlagen',
+    'Karteikasten',
+    'Statistik',
+    'Einstellungen',
+    'Mehr',
+  ]);
   const current = nav.querySelectorAll('[aria-current="page"]');
   expect(current).toHaveLength(1);
   expect(current[0]?.textContent).toBe('Heute');

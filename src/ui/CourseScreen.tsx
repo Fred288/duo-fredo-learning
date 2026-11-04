@@ -276,6 +276,7 @@ function UnitDetail({
 }) {
   const openLesson = useApp((s) => s.openLesson);
   const openExplainer = useApp((s) => s.openExplainer);
+  const openFlashcards = useApp((s) => s.openFlashcards);
   const goBack = useApp((s) => s.goBack);
   const completions = useProgress((s) => s.completions);
   const placements = useProgress((s) => s.placements);
@@ -286,6 +287,10 @@ function UnitDetail({
     completed,
   );
   const Title = page ? 'h1' : 'h2';
+  const flashCount = unit.lessons.reduce(
+    (n, l) => n + (l.vocab?.length ?? 0) + (l.phrases?.length ?? 0),
+    0,
+  );
   return (
     <section aria-labelledby="unit-title" className="space-y-4">
       {page && (
@@ -315,6 +320,15 @@ function UnitDetail({
             className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-focus"
           >
             {t('home.explainer')}
+          </button>
+        )}
+        {flashCount > 0 && (
+          <button
+            type="button"
+            onClick={() => openFlashcards(unit.id)}
+            className="min-h-11 rounded-lg border border-brand-edge px-4 text-brand-ink hover:bg-brand-soft focus-visible:outline-2 focus-visible:outline-focus"
+          >
+            {t('flash.unit.open', { count: flashCount })}
           </button>
         )}
         {unit.lessons

@@ -1,4 +1,5 @@
 import { isListeningCard } from '../content/listening';
+import { openWrong } from '../flashcards/deck';
 import { t } from '../i18n';
 import { dayKey } from '../progress/day';
 import { openMistakes } from '../progress/stats';
@@ -6,6 +7,7 @@ import { planRepeat } from '../srs';
 import { currentPlacement } from '../placement';
 import { useApp } from '../store/app';
 import { useCanSpeak } from '../store/audio';
+import { useFlashcards } from '../store/flashcards';
 import { useProgress } from '../store/progress';
 import { useSettings } from '../store/settings';
 import { DailyGoal } from './DailyGoal';
@@ -28,6 +30,9 @@ export function Today() {
   const openStats = useApp((s) => s.openStats);
   const openPlacement = useApp((s) => s.openPlacement);
   const openLesson = useApp((s) => s.openLesson);
+  const openFlashRun = useApp((s) => s.openFlashRun);
+  const flashMode = useSettings((s) => s.flashMode);
+  const flashWrong = openWrong(useFlashcards((s) => s.flashes)).length;
   // Hörkarten ohne Stimme bleiben fällig, zählen aber nicht: Wiederholen zeigt sie nicht.
   const canListen = useCanSpeak();
   const { manifest, failed } = useManifest();
@@ -141,6 +146,23 @@ export function Today() {
               <span className="block font-medium">{t('mistakes.title')}</span>
               <span className="block text-sm text-ink-muted">
                 {t('mistakes.count', { count: mistakes })}
+              </span>
+            </button>
+          )}
+          {flashWrong > 0 && (
+            <button
+              type="button"
+              onClick={() =>
+                openFlashRun(
+                  { scope: { scope: 'wrong' }, content: 'both', dir: 'mixed', order: 'course' },
+                  flashMode,
+                )
+              }
+              className="block min-h-11 w-full rounded-xl card border border-line p-4 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
+            >
+              <span className="block font-medium">{t('flash.title')}</span>
+              <span className="block text-sm text-ink-muted">
+                {t('flash.today.wrong', { count: flashWrong })}
               </span>
             </button>
           )}

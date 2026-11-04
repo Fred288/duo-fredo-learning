@@ -5,6 +5,8 @@ import { useAudioSetup } from './store/audio';
 import { AppNav } from './ui/AppNav';
 import { CourseScreen } from './ui/CourseScreen';
 import { ExplainerScreen } from './ui/ExplainerScreen';
+import { FlashcardsRunScreen } from './ui/FlashcardsRunScreen';
+import { FlashcardsScreen } from './ui/FlashcardsScreen';
 import { LookupScreen } from './ui/LookupScreen';
 import { LessonScreen } from './ui/LessonScreen';
 import { MistakesScreen } from './ui/MistakesScreen';
@@ -153,6 +155,12 @@ export function App() {
           {screen.name === 'lookup' && <LookupScreen />}
           {screen.name === 'stats' && <StatsScreen />}
           {screen.name === 'placement' && <PlacementScreen />}
+          {screen.name === 'flashcards' && (
+            <FlashcardsScreen key={screen.unitId ?? ''} unitId={screen.unitId} />
+          )}
+          {screen.name === 'flashcards-run' && (
+            <FlashcardsRunScreen selection={screen.selection} mode={screen.mode} />
+          )}
           {screen.name === 'explainer' && (
             <ExplainerScreen unitId={screen.unitId} section={screen.section} from={screen.from} />
           )}

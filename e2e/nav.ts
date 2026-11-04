@@ -57,3 +57,4 @@ async function openFromMore(page: Page, name: string) {
 
 export const openSettings = (page: Page) => openFromMore(page, 'Einstellungen');
 export const openStats = (page: Page) => openFromMore(page, 'Statistik');
+export const openFlashcards = (page: Page) => openFromMore(page, 'Karteikasten');
