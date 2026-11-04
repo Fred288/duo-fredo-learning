@@ -1,7 +1,10 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
+import { FakeSpeaker } from '../audio/fake';
 import { clearLookupCache } from '../content/load';
 import type { Selection } from '../flashcards/deck';
+import type { Card } from '../srs/card';
+import { setSpeaker } from '../store/audio';
 import { useFlashcards } from '../store/flashcards';
 import { useProgress } from '../store/progress';
 import { FlashcardsRunScreen } from './FlashcardsRunScreen';
@@ -57,11 +60,12 @@ const unit = {
   ],
 };
 
-const selection = (content: Selection['content']): Selection => ({
+const selection = (content: Selection['content'], over: Partial<Selection> = {}): Selection => ({
   scope: { scope: 'unit', unitId: 'a1-u01' },
   content,
   dir: 'tr_de',
   order: 'course',
+  ...over,
 });
 
 beforeEach(() => {
@@ -83,6 +87,7 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup();
+  setSpeaker(new FakeSpeaker('unsupported'));
   vi.unstubAllGlobals();
 });
 
@@ -154,4 +159,42 @@ it('Eintippen: Tippfehler zählt als gewusst, Satzkarten zeigen ihren Hinweis', 
     ['vocab', true],
     ['phrase', true],
   ]);
+});
+
+it('Hörkarte: vorn nur der Ton, die Lösung erscheint erst nach dem Aufdecken', async () => {
+  const speaker = new FakeSpeaker('ready');
+  setSpeaker(speaker);
+  render(<FlashcardsRunScreen selection={selection('vocab', { dir: 'listen' })} mode="flip" />);
+
+  expect(await screen.findByRole('heading', { name: 'Was bedeutet das?' })).toBeTruthy();
+  expect(screen.queryByText('ev')).toBeNull();
+  expect(screen.getByRole('button', { name: /Anhören|Vorlesen/ })).toBeTruthy();
+
+  click('Umdrehen');
+  expect(screen.getByText('ev')).toBeTruthy();
+  expect(screen.getByText('Haus')).toBeTruthy();
+});
+
+it('Hörkarte ohne Stimme fällt auf Türkisch → Deutsch zurück', async () => {
+  render(<FlashcardsRunScreen selection={selection('vocab', { dir: 'listen' })} mode="flip" />);
+  expect(await screen.findByRole('heading', { name: 'ev' })).toBeTruthy();
+});
+
+it('Schwer-Stapel: nur Wörter mit Fehlern im SRS', async () => {
+  const hard: Card = {
+    id: 'vo:tr_de:kitap',
+    ref: { kind: 'vocab', vocabId: 'kitap', dir: 'tr_de' },
+    unitId: 'a1-u01',
+    box: 1,
+    due: '2026-11-04',
+    introduced: '2026-11-01',
+    lastAt: 0,
+    lapses: 2,
+  };
+  useProgress.setState({ cards: [hard] });
+  render(
+    <FlashcardsRunScreen selection={selection('both', { scope: { scope: 'hard' } })} mode="flip" />,
+  );
+  expect(await screen.findByRole('heading', { name: 'kitap' })).toBeTruthy();
+  expect(screen.getByText('Karte 1 von 1')).toBeTruthy();
 });

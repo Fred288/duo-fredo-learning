@@ -2,7 +2,9 @@ import { useMemo, useState } from 'react';
 import { LEVELS, type Level } from '../content/schema';
 import {
   deckFor,
+  hardVocabIds,
   lessonSummary,
+  type DirChoice,
   markedKeys,
   openWrong,
   type Scope,
@@ -11,13 +13,22 @@ import {
 import { t, type MessageKey } from '../i18n';
 import { completedLessonIds } from '../progress/stats';
 import { useApp } from '../store/app';
+import { useCanSpeak } from '../store/audio';
 import { useFlashcards } from '../store/flashcards';
 import { useProgress } from '../store/progress';
 import { useSettings, type Settings } from '../store/settings';
 import { useManifest } from './useManifest';
 
 type ScopeName = Scope['scope'];
-const SCOPES: readonly ScopeName[] = ['learned', 'unit', 'lesson', 'level', 'wrong', 'marked'];
+const SCOPES: readonly ScopeName[] = [
+  'learned',
+  'unit',
+  'lesson',
+  'level',
+  'wrong',
+  'marked',
+  'hard',
+];
 
 const select = 'min-h-11 w-full rounded-lg border border-field-edge bg-surface px-2';
 
@@ -69,8 +80,12 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
   const openFlashRun = useApp((s) => s.openFlashRun);
   const { manifest, failed } = useManifest();
   const completions = useProgress((s) => s.completions);
+  const srsCards = useProgress((s) => s.cards);
   const { flashes, marks } = useFlashcards();
   const settings = useSettings();
+  const canListen = useCanSpeak();
+  // Eine gemerkte Hör-Wahl gilt ohne Stimme nicht (der Stapel fällt auf Türkisch → Deutsch zurück).
+  const dir = settings.flashDir === 'listen' && !canListen ? 'tr_de' : settings.flashDir;
   const setSetting = useSettings((s) => s.set);
 
   const completed = useMemo(() => completedLessonIds(completions), [completions]);
@@ -94,11 +109,12 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
 
   const wrongCount = openWrong(flashes).length;
   const markedCount = markedKeys(marks).size;
+  const hardCount = hardVocabIds(srsCards).size;
 
   const selection: Selection | undefined = (() => {
     const base = {
       content: settings.flashContent,
-      dir: settings.flashDir,
+      dir,
       order: settings.flashOrder,
     };
     switch (scope) {
@@ -115,12 +131,17 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
   // Zählen ohne Zufall: nur die Menge zählt, nicht Richtung oder Reihenfolge.
   const cards =
     manifest && selection
-      ? deckFor(manifest.units, selection, { flashes, marks, completedLessons: completed }, () => 0)
+      ? deckFor(
+          manifest.units,
+          selection,
+          { flashes, marks, completedLessons: completed, srsCards, canListen },
+          () => 0,
+        )
       : [];
   const count = cards.length;
   // „Zuletzt gewusst x von n“ für Lektion, Unit, Niveau und Gelerntes (nicht für Falsch/Markiert).
   const last =
-    scope !== 'wrong' && scope !== 'marked' && count > 0
+    scope !== 'wrong' && scope !== 'marked' && scope !== 'hard' && count > 0
       ? lessonSummary(cards, flashes)
       : undefined;
 
@@ -129,7 +150,9 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
       ? t('flash.scope.wrong', { count: wrongCount })
       : s === 'marked'
         ? t('flash.scope.marked', { count: markedCount })
-        : t(`flash.scope.${s}` as MessageKey);
+        : s === 'hard'
+          ? t('flash.scope.hard', { count: hardCount })
+          : t(`flash.scope.${s}` as MessageKey);
   const pref = <K extends 'flashContent' | 'flashDir' | 'flashMode' | 'flashOrder'>(
     key: K,
     prefix: string,
@@ -238,8 +261,13 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
           <Choice
             name="flash-dir"
             legend={t('flash.dir')}
-            values={['tr_de', 'de_tr', 'mixed'] as const}
+            values={
+              (canListen
+                ? ['tr_de', 'de_tr', 'listen', 'mixed']
+                : ['tr_de', 'de_tr', 'mixed']) as readonly DirChoice[]
+            }
             {...pref('flashDir', 'flash.dir')}
+            value={dir}
           />
           <Choice
             name="flash-mode"

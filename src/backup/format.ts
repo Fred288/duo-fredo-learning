@@ -95,7 +95,7 @@ const PlacementRow = z.object({
 const FlashRow = z.object({
   kind: z.enum(['vocab', 'phrase']),
   ref: id,
-  dir: z.enum(['tr_de', 'de_tr']),
+  dir: z.enum(['tr_de', 'de_tr', 'listen']),
   correct: z.boolean(),
   mode: z.enum(['flip', 'type']),
   at: time,

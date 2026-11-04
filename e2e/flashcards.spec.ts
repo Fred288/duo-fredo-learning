@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { fakeSpeech, TURKISH_VOICE } from './speech';
 import { openFlashcards, openStats, openToday, openUnit } from './nav';
 
 test('Karteikasten: Runde, Falsch-Stapel und Einstiege', async ({ page }) => {
@@ -7,7 +8,7 @@ test('Karteikasten: Runde, Falsch-Stapel und Einstiege', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Karteikasten', level: 1 })).toBeVisible();
 
   await page.getByRole('radio', { name: 'Eine Lektion' }).check();
-  await page.getByRole('radio', { name: 'Wörter' }).check({ force: true });
+  await page.locator('label', { hasText: /^Wörter$/ }).click();
   await page.getByRole('button', { name: /^Los \(\d+ Karten\)$/ }).click();
 
   // Fokusbereich ohne Navigation; erste Karte nicht gewusst, der Rest gewusst.
@@ -49,4 +50,32 @@ test('Karteikasten: Runde, Falsch-Stapel und Einstiege', async ({ page }) => {
   await unit.getByRole('button', { name: /^Karteikarten \(\d+\)$/ }).click();
   await expect(page.getByRole('radio', { name: 'Eine Unit' })).toBeChecked();
   await expect(page.getByRole('combobox', { name: 'Unit' })).toHaveValue('a1-u02');
+});
+
+test('Karteikasten: Hörkarte mit Stimme, Schwer-Stapel leer ohne Fehler', async ({ page }) => {
+  await fakeSpeech(page, TURKISH_VOICE);
+  await page.goto('/');
+  await openFlashcards(page);
+
+  await expect(page.getByRole('radio', { name: 'Schwer (0)' })).toBeVisible();
+  await page.getByRole('radio', { name: 'Schwer (0)' }).check();
+  await expect(page.getByText('In diesem Stapel sind keine Karten.')).toBeVisible();
+
+  await page.getByRole('radio', { name: 'Eine Lektion' }).check();
+  await page.locator('label', { hasText: /^Wörter$/ }).click();
+  await page.locator('label', { hasText: /^Hören → Deutsch$/ }).click();
+  await page.getByRole('button', { name: /^Los \(\d+ Karten\)$/ }).click();
+
+  // Vorn steht kein türkischer Text, nur die Frage und der Ton.
+  await expect(page.getByRole('heading', { name: 'Was bedeutet das?' })).toBeVisible();
+  await page.getByRole('button', { name: 'Umdrehen' }).click();
+  await expect(page.getByRole('button', { name: 'Gewusst', exact: true })).toBeVisible();
+});
+
+test('Karteikasten: ohne Stimme keine Hörkarten', async ({ page }) => {
+  await fakeSpeech(page, []);
+  await page.goto('/');
+  await openFlashcards(page);
+  await expect(page.getByRole('radio', { name: 'Türkisch → Deutsch' })).toBeVisible();
+  await expect(page.getByRole('radio', { name: 'Hören → Deutsch' })).toHaveCount(0);
 });

@@ -2,7 +2,8 @@
 
 /** Wortkarte (Vokabel-ID) oder Satzkarte (Übungs-ID). */
 export type FlashKind = 'vocab' | 'phrase';
-export type FlashDir = 'tr_de' | 'de_tr';
+/** `listen`: nur der gesprochene türkische Text, die Bedeutung (Deutsch) ist die Antwort. */
+export type FlashDir = 'tr_de' | 'de_tr' | 'listen';
 /** Aufdecken und selbst bewerten oder Antwort eintippen. */
 export type FlashMode = 'flip' | 'type';
 

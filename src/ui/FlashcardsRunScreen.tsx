@@ -25,6 +25,7 @@ import { completedLessonIds } from '../progress/stats';
 import { useApp } from '../store/app';
 import { useFlashcards, useIsMarked } from '../store/flashcards';
 import { useProgress } from '../store/progress';
+import { useAudio, useAutoplay, useCanSpeak } from '../store/audio';
 import { useSettings } from '../store/settings';
 import { formLabelText } from './LookupEntry';
 import { ShadowButton } from './ShadowButton';
@@ -85,7 +86,12 @@ function Back({ faces, card }: { faces: Faces; card: DeckCard }) {
   const note = faces.phrase?.hint ?? faces.phrase?.explanation;
   return (
     <div className="space-y-3 border-t border-line pt-4">
-      <p className="text-xl font-medium" lang={backLang}>
+      {faces.listen && (
+        <p className="text-xl font-medium" lang="tr">
+          {faces.turkish}
+        </p>
+      )}
+      <p className={faces.listen ? 'text-lg' : 'text-xl font-medium'} lang={backLang}>
         {faces.back}
       </p>
       {faces.vocab && (
@@ -142,7 +148,12 @@ function CardView({
   const next = useRef<HTMLButtonElement>(null);
   const shown = mode === 'flip' ? flipped : verdict !== undefined;
   const toTurkish = faces.frontLang === 'de';
-  const say = faces.frontLang === 'tr' ? speechText(faces.front) : undefined;
+  const say = faces.listen
+    ? speechText(faces.turkish)
+    : faces.frontLang === 'tr'
+      ? speechText(faces.front)
+      : undefined;
+  useAutoplay(say, !!faces.listen);
 
   // Neue Karte: Fokus auf die Vorderseite (Ansage) bzw. ins Feld.
   useEffect(() => {
@@ -200,10 +211,10 @@ function CardView({
         <h2
           ref={front}
           tabIndex={-1}
-          lang={faces.frontLang}
+          lang={faces.listen ? 'de' : faces.frontLang}
           className="flex-1 text-2xl font-semibold outline-none"
         >
-          {faces.front}
+          {faces.listen ? t('flash.listen.prompt') : faces.front}
         </h2>
         {say && <SpeakButton text={say} />}
       </div>
@@ -315,6 +326,9 @@ export function FlashcardsRunScreen({
   const recordFlash = useFlashcards((s) => s.recordFlash);
   const flashesLoaded = useFlashcards((s) => s.loaded);
   const progressLoaded = useProgress((s) => s.loaded);
+  const canListen = useCanSpeak();
+  // Hörkarten brauchen die Stimme: erst starten, wenn sie geladen sind (oder fehlen).
+  const voicesLoading = useAudio((s) => s.status === 'loading') && selection.dir === 'listen';
   const { manifest, failed } = useManifest();
   const [data, setData] = useState<CardData>();
   const [round, setRound] = useState<Round>();
@@ -325,11 +339,18 @@ export function FlashcardsRunScreen({
 
   // Stapel einmal beim Öffnen (Momentaufnahme); neue Antworten ändern die laufende Runde nicht.
   useEffect(() => {
-    if (!manifest || !flashesLoaded || !progressLoaded || started.current) return;
+    if (!manifest || !flashesLoaded || !progressLoaded || voicesLoading || started.current) return;
     started.current = true;
     const { flashes, marks } = useFlashcards.getState();
-    const completedLessons = completedLessonIds(useProgress.getState().completions);
-    const cards = deckFor(manifest.units, selection, { flashes, marks, completedLessons });
+    const { completions, cards: srsCards } = useProgress.getState();
+    const completedLessons = completedLessonIds(completions);
+    const cards = deckFor(manifest.units, selection, {
+      flashes,
+      marks,
+      completedLessons,
+      srsCards,
+      canListen,
+    });
     loadData(cards)
       .then((d) => {
         setData(d);
@@ -337,7 +358,7 @@ export function FlashcardsRunScreen({
         setRound(startRound(cards.filter((c) => facesOf(c, d))));
       })
       .catch(() => setLoadFailed(true));
-  }, [manifest, flashesLoaded, progressLoaded, selection]);
+  }, [manifest, flashesLoaded, progressLoaded, voicesLoading, canListen, selection]);
 
   const finished = round !== undefined && isDone(round);
   useEffect(() => {

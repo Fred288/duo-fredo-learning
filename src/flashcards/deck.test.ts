@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   allItems,
   deckFor,
+  hardVocabIds,
   lessonSummary,
   markedKeys,
   openWrong,
@@ -9,6 +10,7 @@ import {
   type DeckState,
   type Selection,
 } from './deck';
+import type { Card } from '../srs/card';
 import { cardKey, type Flash, type FlashDir, type FlashMark } from './types';
 
 const units = [
@@ -127,6 +129,61 @@ describe('deckFor', () => {
   it('gemischte Reihenfolge über den Zufall', () => {
     const cards = deckFor(units, sel({ content: 'vocab', order: 'shuffled' }), state(), seq(0));
     expect(refs(cards)).toEqual(['evet', 'hayır', 'merhaba']);
+  });
+});
+
+const srs = (vocabId: string, dir: 'tr_de' | 'de_tr', lapses: number): Card => ({
+  id: `vo:${dir}:${vocabId}`,
+  ref: { kind: 'vocab', vocabId, dir },
+  unitId: 'a1-u01',
+  box: 1,
+  due: '2026-11-04',
+  introduced: '2026-11-01',
+  lastAt: 0,
+  lapses,
+});
+
+describe('Schwer-Stapel', () => {
+  it('Fehler beider Richtungen zählen zusammen, Gleichstand nach ID, höchstens max', () => {
+    const cards = [
+      srs('evet', 'tr_de', 1),
+      srs('evet', 'de_tr', 2),
+      srs('merhaba', 'tr_de', 3),
+      srs('hayır', 'tr_de', 1),
+      srs('dün', 'tr_de', 0),
+    ];
+    expect([...hardVocabIds(cards)]).toEqual(['evet', 'merhaba', 'hayır']);
+    expect([...hardVocabIds(cards, 2)]).toEqual(['evet', 'merhaba']);
+  });
+
+  it('Stapel nimmt nur Wörter mit Fehlern, in Kursreihenfolge, ohne Sätze', () => {
+    const srsCards = [srs('hayır', 'tr_de', 2), srs('merhaba', 'de_tr', 1), srs('dün', 'tr_de', 0)];
+    const hard = deckFor(units, sel({ scope: { scope: 'hard' } }), state({ srsCards }));
+    expect(refs(hard)).toEqual(['merhaba', 'hayır']);
+    expect(deckFor(units, sel({ scope: { scope: 'hard' } }), state())).toEqual([]);
+  });
+});
+
+describe('Hörkarten', () => {
+  it('ohne Stimme fällt „Hören“ auf Türkisch → Deutsch zurück', () => {
+    const cards = deckFor(units, sel({ dir: 'listen' }), state());
+    expect(new Set(cards.map((c) => c.dir))).toEqual(new Set(['tr_de']));
+  });
+
+  it('mit Stimme: Hörkarten; „gemischt“ würfelt nur zwischen den Leserichtungen', () => {
+    const listen = deckFor(units, sel({ dir: 'listen' }), state({ canListen: true }));
+    expect(new Set(listen.map((c) => c.dir))).toEqual(new Set(['listen']));
+    const mixed = deckFor(units, sel({ dir: 'mixed' }), state({ canListen: true }), seq(0.1, 0.9));
+    expect(mixed.every((c) => c.dir !== 'listen')).toBe(true);
+  });
+
+  it('Falsch-Stapel: Hörkarten nur mit Stimme', () => {
+    const flashes = [flash('merhaba', 'listen', false, 1), flash('evet', 'tr_de', false, 2)];
+    const wrong = sel({ scope: { scope: 'wrong' }, dir: 'mixed' });
+    expect(deckFor(units, wrong, state({ flashes })).map((c) => c.ref)).toEqual(['evet']);
+    expect(
+      deckFor(units, wrong, state({ flashes, canListen: true })).map((c) => `${c.ref}:${c.dir}`),
+    ).toEqual(['merhaba:listen', 'evet:tr_de']);
   });
 });
 

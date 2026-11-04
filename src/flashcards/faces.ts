@@ -23,15 +23,23 @@ export interface Faces {
   turkish: string;
   vocab?: VocabEntry;
   phrase?: PhraseExercise;
+  /** Hörkarte: Die Vorderseite ist nur der gespeicherte Ton, `front` ist leer. */
+  listen?: true;
 }
 
 /** Vorder-/Rückseite; `undefined`, wenn Wort oder Satz nicht (mehr) im Inhalt steht. */
 export function facesOf(card: DeckCard, data: CardData): Faces | undefined {
+  const base = facesOfText(card, data);
+  // Hören: wie Türkisch → Deutsch, aber ohne den türkischen Text vorn.
+  return base && card.dir === 'listen' ? { ...base, front: '', listen: true } : base;
+}
+
+function facesOfText(card: DeckCard, data: CardData): Faces | undefined {
   if (card.kind === 'vocab') {
     const entry = data.vocab.get(card.ref);
     if (!entry) return undefined;
     const de = entry.de.join(', ');
-    return card.dir === 'tr_de'
+    return card.dir !== 'de_tr'
       ? {
           front: entry.tr,
           back: de,

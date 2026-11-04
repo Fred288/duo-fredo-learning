@@ -59,6 +59,24 @@ describe('facesOf', () => {
     });
   });
 
+  it('Hörkarte: Vorderseite leer, Bedeutung ist die Antwort, Türkisch bleibt zum Vorlesen', () => {
+    const word = facesOf(card('vocab', 'ev', 'listen'), data);
+    expect(word).toMatchObject({
+      front: '',
+      listen: true,
+      back: 'Haus, Wohnung',
+      answers: ['Haus', 'Wohnung'],
+      turkish: 'ev',
+    });
+    expect(facesOf(card('phrase', phrase.id, 'listen'), data)).toMatchObject({
+      front: '',
+      listen: true,
+      answers: ['Wie geht es dir?'],
+      turkish: 'Nasılsın?',
+    });
+    expect(facesOf(card('vocab', 'ev', 'tr_de'), data)?.listen).toBeUndefined();
+  });
+
   it('fehlender Inhalt = keine Karte', () => {
     expect(facesOf(card('vocab', 'yok', 'tr_de'), data)).toBeUndefined();
     expect(facesOf(card('phrase', 'a9-u01-l1-e1', 'tr_de'), data)).toBeUndefined();
