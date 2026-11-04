@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { openFlashcards, openToday, openUnit } from './nav';
+import { openFlashcards, openStats, openToday, openUnit } from './nav';
 
 test('Karteikasten: Runde, Falsch-Stapel und Einstiege', async ({ page }) => {
   await page.goto('/');
@@ -30,6 +30,18 @@ test('Karteikasten: Runde, Falsch-Stapel und Einstiege', async ({ page }) => {
   await page.getByRole('button', { name: /Karteikasten.*Zuletzt falsch: 1/ }).click();
   await expect(page.getByText('Karte 1 von 1')).toBeVisible();
   await page.getByRole('button', { name: 'Beenden' }).click();
+
+  // Statistik nennt den Stand, die Übersicht der Auswahl auch.
+  await openStats(page);
+  await expect(
+    page.getByRole('region', { name: 'Karteikasten' }).getByText(/zuletzt falsch: 1/),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Falsche üben' }).click();
+  await expect(page.getByText('Karte 1 von 1')).toBeVisible();
+  await page.getByRole('button', { name: 'Beenden' }).click();
+  await openFlashcards(page);
+  await page.getByRole('radio', { name: 'Eine Lektion' }).check();
+  await expect(page.getByText(/Zuletzt gewusst: \d+ von \d+ · zuletzt falsch: 1/)).toBeVisible();
 
   // Aus der Unit: Stapel steht auf dieser Unit.
   await openToday(page);

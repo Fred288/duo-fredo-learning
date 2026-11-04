@@ -1,6 +1,13 @@
 import { useMemo, useState } from 'react';
 import { LEVELS, type Level } from '../content/schema';
-import { deckFor, markedKeys, openWrong, type Scope, type Selection } from '../flashcards/deck';
+import {
+  deckFor,
+  lessonSummary,
+  markedKeys,
+  openWrong,
+  type Scope,
+  type Selection,
+} from '../flashcards/deck';
 import { t, type MessageKey } from '../i18n';
 import { completedLessonIds } from '../progress/stats';
 import { useApp } from '../store/app';
@@ -106,11 +113,16 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
     }
   })();
   // Zählen ohne Zufall: nur die Menge zählt, nicht Richtung oder Reihenfolge.
-  const count =
+  const cards =
     manifest && selection
       ? deckFor(manifest.units, selection, { flashes, marks, completedLessons: completed }, () => 0)
-          .length
-      : 0;
+      : [];
+  const count = cards.length;
+  // „Zuletzt gewusst x von n“ für Lektion, Unit, Niveau und Gelerntes (nicht für Falsch/Markiert).
+  const last =
+    scope !== 'wrong' && scope !== 'marked' && count > 0
+      ? lessonSummary(cards, flashes)
+      : undefined;
 
   const scopeLabel = (s: ScopeName): string =>
     s === 'wrong'
@@ -243,6 +255,13 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
           />
 
           {count === 0 && <p className="text-ink-muted">{t('flash.empty')}</p>}
+          {last && (
+            <p className="text-sm text-ink-muted">
+              {last.known + last.wrong === 0
+                ? t('flash.last.none')
+                : t('flash.last', { known: last.known, total: last.total, wrong: last.wrong })}
+            </p>
+          )}
           <button
             type="submit"
             disabled={!count}

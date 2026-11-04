@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isListeningCard } from '../content/listening';
 import { fetchLookup } from '../content/load';
+import { allItems, lessonSummary, markedKeys } from '../flashcards/deck';
 import { t } from '../i18n';
 import type { LookupIndex } from '../lookup/types';
 import { addDays, dayKey } from '../progress/day';
@@ -9,8 +10,10 @@ import type { Card } from '../srs/card';
 import { INTERVALS } from '../srs/leitner';
 import { useApp } from '../store/app';
 import { useCanSpeak } from '../store/audio';
+import { useFlashcards } from '../store/flashcards';
 import { currentPlacement } from '../placement/record';
 import { useProgress } from '../store/progress';
+import { useSettings } from '../store/settings';
 import { useManifest } from './useManifest';
 
 const backButton = 'min-h-11 rounded-lg px-3 text-ink-muted hover:bg-hover';
@@ -61,6 +64,9 @@ export function StatsScreen() {
   const goBack = useApp((s) => s.goBack);
   const openLesson = useApp((s) => s.openLesson);
   const openLookup = useApp((s) => s.openLookup);
+  const openFlashRun = useApp((s) => s.openFlashRun);
+  const flashMode = useSettings((s) => s.flashMode);
+  const { flashes, marks } = useFlashcards();
   const setLookup = useApp((s) => s.setLookup);
   const { completions, attempts, cards, placements } = useProgress();
   const canListen = useCanSpeak();
@@ -81,6 +87,10 @@ export function StatsScreen() {
         placement: currentPlacement(placements),
       })
     : undefined;
+  const flashSummary = manifest
+    ? lessonSummary(allItems(manifest.units), flashes)
+    : { total: 0, known: 0, wrong: 0 };
+  const markedCount = markedKeys(marks).size;
   const vocabOf = (c: Card) => {
     const ref = c.ref;
     return ref.kind === 'vocab' ? index?.vocab.find((v) => v.id === ref.vocabId) : undefined;
@@ -214,6 +224,42 @@ export function StatsScreen() {
                     </>
                   )}
                 </>
+              )}
+            </section>
+
+            <section className={`${card} space-y-1`} aria-labelledby="stats-flash">
+              <h2 id="stats-flash" className="font-medium">
+                {t('flash.stats.title')}
+              </h2>
+              {flashSummary.known + flashSummary.wrong === 0 ? (
+                <p className="text-sm text-ink-subtle">{t('flash.stats.none')}</p>
+              ) : (
+                <p className="text-sm text-ink-muted">
+                  {t('flash.stats.line', {
+                    known: flashSummary.known,
+                    total: flashSummary.total,
+                    wrong: flashSummary.wrong,
+                  })}
+                </p>
+              )}
+              {markedCount > 0 && (
+                <p className="text-sm text-ink-muted">
+                  {t('flash.stats.marked', { count: markedCount })}
+                </p>
+              )}
+              {flashSummary.wrong > 0 && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    openFlashRun(
+                      { scope: { scope: 'wrong' }, content: 'both', dir: 'mixed', order: 'course' },
+                      flashMode,
+                    )
+                  }
+                  className="min-h-11 rounded-lg px-2 text-sm text-brand-ink underline hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
+                >
+                  {t('flash.stats.practice')}
+                </button>
               )}
             </section>
           </div>
