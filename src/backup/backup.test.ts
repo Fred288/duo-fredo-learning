@@ -5,6 +5,8 @@ import type { Placement } from '../placement/record';
 import type { Attempt, Completion } from '../progress/stats';
 import { cardId, type Card, type CardRef } from '../srs/card';
 import { reconcileCards } from '../srs/reconcile';
+import type { Flash, FlashMark } from '../flashcards/types';
+import { useFlashcards } from '../store/flashcards';
 import { useNotes } from '../store/notes';
 import { useProgress } from '../store/progress';
 import { DEFAULT_SETTINGS, useSettings } from '../store/settings';
@@ -55,6 +57,15 @@ const placement = (at: number, startUnit: string | null = 'a1-u03'): Placement =
   skipped: startUnit ? ['a1-u01', 'a1-u02'] : [],
   shaky: startUnit ? ['a1-u02'] : [],
 });
+const flash = (ref: string, at: number, correct = false): Flash => ({
+  kind: 'vocab',
+  ref,
+  dir: 'tr_de',
+  correct,
+  mode: 'flip',
+  at,
+});
+const mark = (key: string, at: number, marked = true): FlashMark => ({ key, marked, at });
 const ev: CardRef = { kind: 'vocab', vocabId: 'ev', dir: 'tr_de' };
 const ex: CardRef = { kind: 'exercise', exerciseId: 'a1-u02-l2-e1' };
 
@@ -65,6 +76,8 @@ const empty = (): BackupData => ({
   cards: [],
   notes: [],
   placements: [],
+  flashes: [],
+  flashMarks: [],
 });
 const sample = (): BackupData => ({
   settings: { dailyGoal: 3, theme: 'dark' },
@@ -73,6 +86,8 @@ const sample = (): BackupData => ({
   cards: [card(ev, 'a1-u02', 300), card(ex, 'a1-u02', 100, 1)],
   notes: [{ itemId: 'a1-u02-l2-e1', unitId: 'a1-u02', text: 'Glosse prüfen', at: 400 }],
   placements: [placement(500)],
+  flashes: [flash('ev', 600), flash('ev', 700, true)],
+  flashMarks: [mark('phrase:a1-u01-l3-e2', 800)],
 });
 const json = (v: unknown) => JSON.stringify(v);
 const file = (data: BackupData = sample()) => makeBackup(data, 3, new Date('2026-10-28T10:00:00Z'));
@@ -133,6 +148,8 @@ describe('parseBackup', () => {
         cards: [...f.data.cards, { ...card(ev, 'a1-u02', 1), id: 'vo:de_tr:ev' }, 'Unsinn'],
         notes: [...f.data.notes, { itemId: 'x', unitId: 'a1-u01', text: '', at: 1 }],
         placements: [...f.data.placements, { at: 1, startUnit: '', skipped: [], shaky: [] }],
+        flashes: [...f.data.flashes, { ...flash('ev', 1), dir: 'quer' }],
+        flashMarks: [...f.data.flashMarks, mark('unbekannt:ev', 1)],
       },
     };
     const r = parseBackup(json(broken));
@@ -145,6 +162,8 @@ describe('parseBackup', () => {
       cards: 2,
       notes: 1,
       placements: 1,
+      flashes: 1,
+      flashMarks: 1,
     });
     expect(r.backup.data.settings).toEqual({ theme: 'dark' });
     expect(r.backup.data.attempts).toHaveLength(2);
@@ -195,6 +214,8 @@ describe('mergeBackup', () => {
       cards: 2,
       notes: 1,
       placements: 1,
+      flashes: 2,
+      flashMarks: 1,
     });
   });
 
@@ -215,6 +236,8 @@ describe('mergeBackup', () => {
       cards: 0,
       notes: 1,
       placements: 1,
+      flashes: 0,
+      flashMarks: 0,
     });
     expect(summary.settings).toBe(false);
     // Die jüngere Rücknahme aus der Datei gilt danach (`currentPlacement`).
@@ -225,6 +248,28 @@ describe('mergeBackup', () => {
     const local = { ...empty(), placements: [placement(100), placement(200, null)] };
     const { data } = mergeBackup(local, { ...empty(), placements: [placement(300)] }, 'merge');
     expect(currentPlacement(data.placements)?.at).toBe(300);
+  });
+
+  it('Karteikasten: Antworten ohne Dubletten, je Markierung der jüngere Stand', () => {
+    const local = {
+      ...empty(),
+      flashes: [flash('ev', 100)],
+      flashMarks: [mark('vocab:ev', 100), mark('vocab:kitap', 300)],
+    };
+    const incoming = {
+      ...empty(),
+      flashes: [flash('ev', 100), flash('ev', 200, true)],
+      flashMarks: [
+        mark('vocab:ev', 200, false),
+        mark('vocab:kitap', 100, false),
+        mark('vocab:su', 50),
+      ],
+    };
+    const { data, summary } = mergeBackup(local, incoming, 'merge');
+    expect(data.flashes).toEqual([flash('ev', 100), flash('ev', 200, true)]);
+    const marked = Object.fromEntries(data.flashMarks.map((m) => [m.key, m.marked]));
+    expect(marked).toEqual({ 'vocab:ev': false, 'vocab:kitap': true, 'vocab:su': true });
+    expect(summary.added).toMatchObject({ flashes: 1, flashMarks: 1 });
   });
 
   it('nimmt bei gleicher Karte den jüngeren Stand, bei Gleichstand den lokalen', () => {
@@ -259,9 +304,16 @@ describe('mergeBackup', () => {
 describe('Export und Import über IndexedDB', () => {
   beforeEach(async () => {
     await Promise.all(
-      [db.settings, db.attempts, db.completions, db.cards, db.notes, db.placements].map((t) =>
-        t.clear(),
-      ),
+      [
+        db.settings,
+        db.attempts,
+        db.completions,
+        db.cards,
+        db.notes,
+        db.placements,
+        db.flashes,
+        db.flashMarks,
+      ].map((t) => t.clear()),
     );
     useSettings.setState({ ...DEFAULT_SETTINGS, loaded: false });
     useProgress.setState({
@@ -272,6 +324,7 @@ describe('Export und Import über IndexedDB', () => {
       loaded: false,
     });
     useNotes.setState({ notes: [] });
+    useFlashcards.setState({ flashes: [], marks: [], loaded: false });
   });
 
   async function seed(data: BackupData) {
@@ -283,6 +336,8 @@ describe('Export und Import über IndexedDB', () => {
     await db.cards.bulkPut(data.cards);
     await db.notes.bulkAdd(data.notes);
     await db.placements.bulkAdd(data.placements);
+    await db.flashes.bulkAdd(data.flashes);
+    await db.flashMarks.bulkPut(data.flashMarks);
   }
 
   it('Rundlauf: Export, leeren, Import (ersetzen) ergibt denselben Stand', async () => {
@@ -295,6 +350,8 @@ describe('Export und Import über IndexedDB', () => {
       db.cards.clear(),
       db.notes.clear(),
       db.placements.clear(),
+      db.flashes.clear(),
+      db.flashMarks.clear(),
     ]);
     const parsed = parseBackup(json(exported));
     if (!parsed.ok) throw new Error(parsed.reason);
@@ -308,6 +365,9 @@ describe('Export und Import über IndexedDB', () => {
     expect(useSettings.getState().dailyGoal).toBe(3);
     expect(useNotes.getState().notes).toHaveLength(1);
     expect(currentPlacement(useProgress.getState().placements)?.startUnit).toBe('a1-u03');
+    expect(useFlashcards.getState()).toMatchObject({ loaded: true });
+    expect(useFlashcards.getState().flashes).toHaveLength(2);
+    expect(useFlashcards.getState().marks).toEqual([mark('phrase:a1-u01-l3-e2', 800)]);
   });
 
   it('Zusammenführen zweimal hintereinander verdoppelt nichts', async () => {
@@ -321,8 +381,11 @@ describe('Export und Import über IndexedDB', () => {
       cards: 0,
       notes: 0,
       placements: 0,
+      flashes: 0,
+      flashMarks: 0,
     });
     expect(await db.placements.count()).toBe(1);
+    expect(await db.flashes.count()).toBe(2);
     expect(await db.attempts.count()).toBe(2);
     expect(useProgress.getState().attempts).toHaveLength(2);
   });

@@ -2,6 +2,7 @@ import Dexie, { type EntityTable } from 'dexie';
 import type { Verdict } from '../lib/answer';
 import type { Completion } from '../progress/stats';
 import type { Placement } from '../placement/record';
+import type { Flash, FlashMark } from '../flashcards/types';
 import type { Card } from '../srs/card';
 import { addDays } from '../progress/day';
 import { seedFromAttempts } from '../srs/seed';
@@ -56,6 +57,12 @@ export type PlacementRow = Placement & { id?: number };
 /** SRS-Karte; Schlüssel ist die Karten-ID (ex:…, vo:…). */
 export type CardRow = Card;
 
+/** Antwort im Karteikasten (nur anhängen). */
+export type FlashRow = Flash & { id?: number };
+
+/** Markierung im Karteikasten; Schlüssel ist `itemKey`. */
+export type FlashMarkRow = FlashMark;
+
 export interface NoteRow {
   id?: number;
   /** ID der gemeldeten Übung. */
@@ -72,6 +79,8 @@ class YolDb extends Dexie {
   completions!: EntityTable<CompletionRow, 'id'>;
   cards!: EntityTable<CardRow, 'id'>;
   placements!: EntityTable<PlacementRow, 'id'>;
+  flashes!: EntityTable<FlashRow, 'id'>;
+  flashMarks!: EntityTable<FlashMarkRow, 'key'>;
 
   constructor() {
     super('yol');
@@ -95,6 +104,10 @@ class YolDb extends Dexie {
     // v4: angenommene Einstufungen (nur anhängen). Neue, leere Tabelle; nichts umzurechnen.
     this.version(4)
       .stores({ placements: '++id, at' })
+      .upgrade(() => undefined);
+    // v5: Karteikasten (Antworten nur anhängen, Markierungen je Wort/Satz). Neue, leere Tabellen.
+    this.version(5)
+      .stores({ flashes: '++id, at, ref', flashMarks: 'key' })
       .upgrade(() => undefined);
   }
 }

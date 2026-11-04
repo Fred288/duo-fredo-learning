@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Flash, FlashMark } from '../flashcards/types';
 import type { Placement } from '../placement/record';
 import type { Attempt, Completion } from '../progress/stats';
 import { cardId, type Card } from '../srs/card';
@@ -27,6 +28,9 @@ export interface BackupData {
   notes: BackupNote[];
   /** Angenommene Einstufungen; fehlt in Dateien vor dem Einstufungstest (dann leer). */
   placements: Placement[];
+  /** Karteikasten; fehlt in älteren Dateien (dann leer). */
+  flashes: Flash[];
+  flashMarks: FlashMark[];
 }
 
 export interface Backup {
@@ -39,7 +43,15 @@ export interface Backup {
 }
 
 export type Table = Exclude<keyof BackupData, 'settings'>;
-export const TABLES: readonly Table[] = ['attempts', 'completions', 'cards', 'notes', 'placements'];
+export const TABLES: readonly Table[] = [
+  'attempts',
+  'completions',
+  'cards',
+  'notes',
+  'placements',
+  'flashes',
+  'flashMarks',
+];
 
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 const time = z.number().int().nonnegative();
@@ -80,12 +92,28 @@ const PlacementRow = z.object({
   shaky: z.array(id),
 });
 
+const FlashRow = z.object({
+  kind: z.enum(['vocab', 'phrase']),
+  ref: id,
+  dir: z.enum(['tr_de', 'de_tr']),
+  correct: z.boolean(),
+  mode: z.enum(['flip', 'type']),
+  at: time,
+});
+const FlashMarkRow = z.object({
+  key: z.string().regex(/^(vocab|phrase):.+$/),
+  marked: z.boolean(),
+  at: time,
+});
+
 const ROWS: { [T in Table]: z.ZodType<BackupData[T][number]> } = {
   attempts: AttemptRow,
   completions: CompletionRow,
   cards: CardRow,
   notes: NoteRow,
   placements: PlacementRow,
+  flashes: FlashRow,
+  flashMarks: FlashMarkRow,
 };
 
 const Envelope = z.object({
@@ -100,6 +128,8 @@ const Envelope = z.object({
     cards: z.array(z.unknown()).optional(),
     notes: z.array(z.unknown()).optional(),
     placements: z.array(z.unknown()).optional(),
+    flashes: z.array(z.unknown()).optional(),
+    flashMarks: z.array(z.unknown()).optional(),
   }),
 });
 type Envelope = z.infer<typeof Envelope>;
@@ -150,6 +180,8 @@ export function parseBackup(text: string): ParseResult {
     cards: 0,
     notes: 0,
     placements: 0,
+    flashes: 0,
+    flashMarks: 0,
   };
   const rows = <T extends Table>(table: T): BackupData[T] => {
     const out: BackupData[T][number][] = [];
@@ -188,6 +220,8 @@ export function parseBackup(text: string): ParseResult {
         cards: [...cards.values()],
         notes: rows('notes'),
         placements: rows('placements'),
+        flashes: rows('flashes'),
+        flashMarks: rows('flashMarks'),
       },
     },
   };
@@ -213,6 +247,8 @@ export function makeBackup(data: BackupData, dbVersion: number, now: Date): Back
       cards: data.cards.map((c) => ({ ...c })),
       notes: strip(data.notes),
       placements: strip(data.placements),
+      flashes: strip(data.flashes),
+      flashMarks: data.flashMarks.map((m) => ({ ...m })),
     },
   };
 }

@@ -55,6 +55,8 @@ async function saveFile(file: File): Promise<void> {
 /** Einstufungen nennt die Vorschau nur, wenn welche betroffen sind (meist keine). */
 const placementNote = (count: number) =>
   count > 0 ? t('backup.counts.placements', { count }) : '';
+/** Ebenso der Karteikasten (Antworten und Markierungen zusammen). */
+const flashNote = (count: number) => (count > 0 ? t('backup.counts.flashes', { count }) : '');
 
 export function BackupSection() {
   const lastBackup = useSettings((s) => s.lastBackup);
@@ -192,6 +194,7 @@ export function BackupSection() {
               cards: data.cards.length,
               notes: data.notes.length,
               placementNote: placementNote(data.placements.length),
+              flashNote: flashNote(data.flashes.length + data.flashMarks.length),
             })}
           </p>
           {skipped > 0 && (
@@ -223,10 +226,14 @@ export function BackupSection() {
                           ...merge.added,
                           updated: merge.updatedCards,
                           placementNote: placementNote(merge.added.placements),
+                          flashNote: flashNote(merge.added.flashes + merge.added.flashMarks),
                         })
                       : t('backup.mode.replace.effect', {
                           ...replace.dropped,
                           placementNote: placementNote(replace.dropped.placements),
+                          flashNote: flashNote(
+                            replace.dropped.flashes + replace.dropped.flashMarks,
+                          ),
                         })}
                   </span>
                 </span>

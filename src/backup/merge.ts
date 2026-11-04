@@ -1,4 +1,5 @@
 import type { Card } from '../srs/card';
+import type { FlashMark } from '../flashcards/types';
 import { TABLES, type BackupData, type Table } from './format';
 
 export type ImportMode = 'merge' | 'replace';
@@ -26,16 +27,33 @@ const zero = (): Record<Table, number> => ({
   cards: 0,
   notes: 0,
   placements: 0,
+  flashes: 0,
+  flashMarks: 0,
 });
 
 /** Dublettenschlüssel je Tabelle: Auto-IDs sind gerätelokal, gleiche Einträge erkennt man am Inhalt. */
-const KEYS: { [T in Exclude<Table, 'cards'>]: (row: BackupData[T][number]) => string } = {
+const KEYS: {
+  [T in Exclude<Table, 'cards' | 'flashMarks'>]: (row: BackupData[T][number]) => string;
+} = {
   attempts: (a) => `${a.exerciseId}|${a.at}|${a.verdict}`,
   completions: (c) => `${c.lessonId}|${c.at}`,
   notes: (n) => `${n.itemId}|${n.at}|${n.text}`,
   // Gültig ist die jüngste Einstufung (`currentPlacement`), auch über Geräte hinweg.
   placements: (p) => `${p.at}|${p.startUnit ?? ''}`,
+  flashes: (f) => `${f.kind}|${f.ref}|${f.dir}|${f.at}|${f.correct}`,
 };
+
+/** Markierungen: je Schlüssel gilt der jüngere Stand, bei Gleichstand der lokale. */
+function mergeMarks(local: readonly FlashMark[], incoming: readonly FlashMark[]) {
+  const byKey = new Map(local.map((m) => [m.key, m]));
+  let added = 0;
+  for (const mark of incoming) {
+    const mine = byKey.get(mark.key);
+    if (!mine) added++;
+    if (!mine || mark.at > mine.at) byKey.set(mark.key, mark);
+  }
+  return { rows: [...byKey.values()], added };
+}
 
 function union<T>(local: readonly T[], incoming: readonly T[], key: (row: T) => string) {
   const seen = new Set(local.map(key));
@@ -88,6 +106,8 @@ export function mergeBackup(local: BackupData, incoming: BackupData, mode: Impor
   const notes = union(local.notes, incoming.notes, KEYS.notes);
   const placements = union(local.placements, incoming.placements, KEYS.placements);
   const cards = mergeCards(local.cards, incoming.cards);
+  const flashes = union(local.flashes, incoming.flashes, KEYS.flashes);
+  const flashMarks = mergeMarks(local.flashMarks, incoming.flashMarks);
   return {
     data: {
       settings: local.settings,
@@ -96,6 +116,8 @@ export function mergeBackup(local: BackupData, incoming: BackupData, mode: Impor
       notes: notes.rows,
       cards: cards.rows,
       placements: placements.rows,
+      flashes: flashes.rows,
+      flashMarks: flashMarks.rows,
     },
     summary: {
       mode,
@@ -105,6 +127,8 @@ export function mergeBackup(local: BackupData, incoming: BackupData, mode: Impor
         notes: notes.added,
         cards: cards.added,
         placements: placements.added,
+        flashes: flashes.added,
+        flashMarks: flashMarks.added,
       },
       dropped: zero(),
       updatedCards: cards.updated,

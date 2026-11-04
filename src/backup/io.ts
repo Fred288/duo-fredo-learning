@@ -1,4 +1,5 @@
 import { db, safely } from '../db/db';
+import { useFlashcards } from '../store/flashcards';
 import { useNotes } from '../store/notes';
 import { useProgress } from '../store/progress';
 import { DEFAULT_SETTINGS, pickKnown, useSettings, type Settings } from '../store/settings';
@@ -9,16 +10,28 @@ import { mergeBackup, type ImportMode, type Merged } from './merge';
 async function readLocal(): Promise<BackupData> {
   return db.transaction(
     'r',
-    [db.settings, db.attempts, db.completions, db.cards, db.notes, db.placements],
+    [
+      db.settings,
+      db.attempts,
+      db.completions,
+      db.cards,
+      db.notes,
+      db.placements,
+      db.flashes,
+      db.flashMarks,
+    ],
     async () => {
-      const [settings, attempts, completions, cards, notes, placements] = await Promise.all([
-        db.settings.toArray(),
-        db.attempts.toArray(),
-        db.completions.toArray(),
-        db.cards.toArray(),
-        db.notes.toArray(),
-        db.placements.toArray(),
-      ]);
+      const [settings, attempts, completions, cards, notes, placements, flashes, flashMarks] =
+        await Promise.all([
+          db.settings.toArray(),
+          db.attempts.toArray(),
+          db.completions.toArray(),
+          db.cards.toArray(),
+          db.notes.toArray(),
+          db.placements.toArray(),
+          db.flashes.toArray(),
+          db.flashMarks.toArray(),
+        ]);
       return {
         settings: pickKnown(
           Object.fromEntries(settings.map((r) => [r.key, r.value])) as Partial<Settings>,
@@ -28,6 +41,8 @@ async function readLocal(): Promise<BackupData> {
         cards,
         notes,
         placements,
+        flashes,
+        flashMarks,
       };
     },
   );
@@ -47,6 +62,8 @@ function fromStores(): BackupData {
     cards,
     notes: useNotes.getState().notes,
     placements,
+    flashes: useFlashcards.getState().flashes,
+    flashMarks: useFlashcards.getState().marks,
   };
 }
 
@@ -65,7 +82,16 @@ export async function planImport(backup: Backup, mode: ImportMode): Promise<Merg
  * wenn IndexedDB fehlt: ein Import nur in den Speicher wäre beim nächsten Start verloren.
  */
 export async function importBackup(backup: Backup, mode: ImportMode): Promise<Merged> {
-  const tables = [db.settings, db.attempts, db.completions, db.cards, db.notes, db.placements];
+  const tables = [
+    db.settings,
+    db.attempts,
+    db.completions,
+    db.cards,
+    db.notes,
+    db.placements,
+    db.flashes,
+    db.flashMarks,
+  ];
   const merged = await db.transaction('rw', tables, async () => {
     const result = mergeBackup(await readLocal(), backup.data, mode);
     const { data } = result;
@@ -78,12 +104,15 @@ export async function importBackup(backup: Backup, mode: ImportMode): Promise<Me
     await db.cards.bulkPut(data.cards.map((c) => ({ ...c })));
     await db.notes.bulkAdd(data.notes.map(withoutId));
     await db.placements.bulkAdd(data.placements.map(withoutId));
+    await db.flashes.bulkAdd(data.flashes.map(withoutId));
+    await db.flashMarks.bulkPut(data.flashMarks.map((m) => ({ ...m })));
     return result;
   });
   await Promise.all([
     useProgress.getState().reload(),
     useSettings.getState().load(),
     useNotes.getState().reload(),
+    useFlashcards.getState().reload(),
   ]);
   return merged;
 }

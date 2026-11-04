@@ -1,6 +1,6 @@
 # Erweiterungsplan: Karteikarten
 
-Stand: 2026-11-04. K1 umgesetzt (1057 Wörter je Lektion zugeordnet, 212 Satzkarten); K2–K6 offen. Offene Entscheidungen stehen am Ende.
+Stand: 2026-11-04. K1 umgesetzt (1057 Wörter je Lektion zugeordnet, 212 Satzkarten), K2 umgesetzt (Dexie v5, Stapel, Runde, Sicherung); K3–K6 offen. Offene Entscheidungen stehen am Ende.
 
 ## Ziel
 

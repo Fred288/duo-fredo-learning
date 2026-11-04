@@ -264,21 +264,23 @@ export const de = {
   'backup.exported': 'Sicherung gespeichert.',
   'backup.preview': 'Sicherung vom {date}',
   'backup.counts':
-    '{attempts} Versuche, {completions} abgeschlossene Lektionen, {cards} Wiederholungskarten, {notes} Notizen{placementNote}',
+    '{attempts} Versuche, {completions} abgeschlossene Lektionen, {cards} Wiederholungskarten, {notes} Notizen{placementNote}{flashNote}',
   /** Nur bei Einstufungen in der Datei, sonst leer; angehängt an die Zählungen. */
   'backup.counts.placements': '; Einstufungen: {count}',
+  /** Nur bei Karteikasten-Einträgen (Antworten und Markierungen), sonst leer. */
+  'backup.counts.flashes': '; Karteikasten: {count}',
   'backup.skipped': '{count} ungültige Einträge werden übersprungen.',
   'backup.mode': 'Wie laden?',
   'backup.mode.merge': 'Zusammenführen',
   'backup.mode.merge.hint':
     'Neues aus der Datei kommt dazu, nichts geht verloren. Bei derselben Karte gilt der zuletzt geübte Stand. Deine Einstellungen bleiben.',
   'backup.mode.merge.effect':
-    'Kommt dazu: {attempts} Versuche, {completions} Lektionen, {cards} Karten ({updated} aktualisiert), {notes} Notizen{placementNote}.',
+    'Kommt dazu: {attempts} Versuche, {completions} Lektionen, {cards} Karten ({updated} aktualisiert), {notes} Notizen{placementNote}{flashNote}.',
   'backup.mode.replace': 'Ersetzen',
   'backup.mode.replace.hint':
     'Der Stand auf diesem Gerät wird durch die Datei ersetzt, Einstellungen eingeschlossen.',
   'backup.mode.replace.effect':
-    'Geht verloren: {attempts} Versuche, {completions} Lektionen, {cards} Karten, {notes} Notizen{placementNote}.',
+    'Geht verloren: {attempts} Versuche, {completions} Lektionen, {cards} Karten, {notes} Notizen{placementNote}{flashNote}.',
   'backup.apply': 'Laden',
   'backup.confirm': 'Wirklich ersetzen? Das lässt sich nicht rückgängig machen.',
   'backup.confirm.yes': 'Ja, ersetzen',
