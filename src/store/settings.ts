@@ -117,7 +117,7 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.shadowing === 'boolean') out.shadowing = stored.shadowing;
   if (typeof stored.placementOffered === 'boolean') out.placementOffered = stored.placementOffered;
   if (typeof stored.voiceURI === 'string') out.voiceURI = stored.voiceURI;
-  if (oneOf(['vocab', 'phrase', 'both'], stored.flashContent))
+  if (oneOf(['vocab', 'phrase', 'both', 'form'], stored.flashContent))
     out.flashContent = stored.flashContent;
   if (oneOf(['tr_de', 'de_tr', 'listen', 'mixed'], stored.flashDir)) out.flashDir = stored.flashDir;
   if (oneOf(['flip', 'type'], stored.flashMode)) out.flashMode = stored.flashMode;

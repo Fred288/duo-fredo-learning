@@ -117,9 +117,10 @@ function MarkButton({ card }: { card: DeckCard }) {
 
 /** Rückseite: Lösung, Vorlesen/Nachsprechen, Wortart und Formhinweise bzw. Hinweis der Übung. */
 function Back({ faces, card }: { faces: Faces; card: DeckCard }) {
-  const backLang = faces.frontLang === 'tr' ? 'de' : 'tr';
+  const backLang = faces.form || faces.frontLang === 'de' ? 'tr' : 'de';
   const say = speechText(faces.turkish);
-  const hints = faces.vocab ? flagHints(faces.vocab) : [];
+  // Formkarten: Bedeutung statt Formhinweisen und Beispiel (die Form steht ja schon da).
+  const hints = faces.vocab && !faces.form ? flagHints(faces.vocab) : [];
   const note = faces.phrase?.hint ?? faces.phrase?.explanation;
   return (
     <div className="space-y-3 border-t border-line pt-4">
@@ -131,7 +132,12 @@ function Back({ faces, card }: { faces: Faces; card: DeckCard }) {
       <p className={faces.listen ? 'text-lg' : 'text-xl font-medium'} lang={backLang}>
         {backLang === 'tr' ? <Turkish text={faces.back} tokens={faces.tokens} /> : faces.back}
       </p>
-      {faces.vocab && (
+      {faces.form && faces.vocab && (
+        <p className="text-sm text-ink-muted" lang="de">
+          {faces.vocab.tr} = {faces.vocab.de.join(', ')}
+        </p>
+      )}
+      {faces.vocab && !faces.form && (
         <p className="text-sm text-ink-muted">
           {t(`pos.${faces.vocab.pos}`)}
           {faces.vocab.register &&
@@ -154,7 +160,7 @@ function Back({ faces, card }: { faces: Faces; card: DeckCard }) {
         </div>
       )}
       {note && <p className="text-sm text-ink-muted">{note}</p>}
-      {faces.example && <ExampleBlock example={faces.example} />}
+      {faces.example && !faces.form && <ExampleBlock example={faces.example} />}
       <div className="flex flex-wrap items-center gap-2">
         {say && <SpeakButton text={say} />}
         {say && <ShadowButton text={say} />}
@@ -185,7 +191,8 @@ function CardView({
   const input = useRef<HTMLInputElement>(null);
   const next = useRef<HTMLButtonElement>(null);
   const shown = mode === 'flip' ? flipped : verdict !== undefined;
-  const toTurkish = faces.frontLang === 'de';
+  // Eintippen auf Türkisch: bei de→tr und bei Formkarten (Grundform vorn, Form als Antwort).
+  const toTurkish = !!faces.form || faces.frontLang === 'de';
   const say = faces.listen
     ? speechText(faces.turkish)
     : faces.frontLang === 'tr'
@@ -207,7 +214,10 @@ function CardView({
   const doFlip = () => setFlipped(true);
   const check = () => {
     if (!value.trim()) return;
-    setVerdict(checkAnswer(value, faces.answers, { tolerateDiacritics }).verdict);
+    // Formen ohne Tippfehler-Toleranz: sonst gälte evda als evde (wie in Grammatikübungen).
+    setVerdict(
+      checkAnswer(value, faces.answers, { tolerateDiacritics, allowTypos: !faces.form }).verdict,
+    );
   };
 
   useEffect(() => {
@@ -242,7 +252,7 @@ function CardView({
   return (
     <div className="card space-y-4 rounded-2xl border border-line p-5" data-card={cardKey(card)}>
       <p className="text-sm text-ink-subtle">
-        {t(`flash.dir.${card.dir}`)}
+        {card.kind === 'form' ? t('flash.content.form') : t(`flash.dir.${card.dir}`)}
         {card.kind === 'phrase' && ` · ${t('flash.content.phrase')}`}
       </p>
       <div className="flex items-start gap-1">
@@ -252,7 +262,14 @@ function CardView({
           lang={faces.listen ? 'de' : faces.frontLang}
           className="flex-1 text-2xl font-semibold outline-none"
         >
-          {faces.listen ? (
+          {faces.form ? (
+            <>
+              {faces.front}{' '}
+              <span lang="de" className="block text-base font-normal text-ink-muted">
+                {formLabelText(faces.form.label)}
+              </span>
+            </>
+          ) : faces.listen ? (
             t('flash.listen.prompt')
           ) : shown && faces.frontLang === 'tr' ? (
             // Aufgedeckt: Wörter des türkischen Satzes antippbar (vorher wäre es eine Hilfe).
@@ -395,6 +412,7 @@ export function FlashcardsRunScreen({
       completedLessons,
       srsCards,
       canListen,
+      forms: manifest.forms,
     });
     loadData(cards)
       .then((d) => {

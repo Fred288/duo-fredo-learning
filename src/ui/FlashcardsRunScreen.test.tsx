@@ -28,6 +28,7 @@ const manifest = {
       vocab: ['ev', 'kitap'],
     },
   ],
+  forms: { intro: { 'noun:ACC': 'a1-u01-l1' }, nouns: ['kitap'], verbs: [] },
 };
 const lookup = {
   v: 1,
@@ -242,4 +243,23 @@ it('Rückseite: Beispielsatz und Satzwörter antippbar, Tasten im Sheet bewerten
   click('Umdrehen');
   click('Nasılsın');
   expect((await screen.findByRole('dialog')).textContent).toContain('wie geht es dir');
+});
+
+it('Formkarte: Grundform und Angabe vorn, Form ohne Tippfehler-Toleranz', async () => {
+  render(<FlashcardsRunScreen selection={selection('form')} mode="type" />);
+  expect(await screen.findByRole('heading', { name: 'kitap Akkusativ' })).toBeTruthy();
+  expect(screen.getByText('Formen')).toBeTruthy();
+
+  // kitapı statt kitabı: in Grammatik kein Tippfehler, sondern falsch.
+  fireEvent.change(screen.getByRole('textbox', { name: 'Deine Antwort' }), {
+    target: { value: 'kitapı' },
+  });
+  click('Prüfen');
+  expect(screen.getByText('Nicht richtig')).toBeTruthy();
+  expect(screen.getByText('kitabı')).toBeTruthy();
+  expect(screen.getByText('kitap = Buch')).toBeTruthy();
+  click('Weiter');
+  expect(useFlashcards.getState().flashes.map((f) => [f.kind, f.ref, f.dir, f.correct])).toEqual([
+    ['form', 'kitap|noun:ACC', 'de_tr', false],
+  ]);
 });

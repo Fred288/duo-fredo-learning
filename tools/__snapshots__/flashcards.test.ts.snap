@@ -846,6 +846,32 @@ exports[`Karteikarten aus content/ > Beispielsätze: Felder example gültig, Aus
 }
 `;
 
+exports[`Karteikarten aus content/ > Formkarten: Rundlauf gegen allForms, Einführung der Muster bleibt stabil 1`] = `
+{
+  "noun:ABL": "a1-u03-l3",
+  "noun:ACC": "a1-u07-l4",
+  "noun:DAT": "a1-u03-l3",
+  "noun:GEN": "a1-u06-l3",
+  "noun:LOC": "a1-u02-l4",
+  "noun:PL": "a1-u02-l3",
+  "noun:PL+LOC": "a1-u02-l4",
+  "noun:POSS_1SG": "a1-u06-l2",
+  "noun:POSS_1SG+DAT": "a1-u06-l2",
+  "noun:POSS_3SG": "a1-u06-l2",
+  "verb:aorist": "a2-u03-l2",
+  "verb:aorist-neg": "a2-u03-l3",
+  "verb:conditional": "b1-u03-l4",
+  "verb:evidential": "a2-u04-l2",
+  "verb:future": "a2-u02-l2",
+  "verb:necessitative": "a2-u05-l5",
+  "verb:past": "a2-u01-l2",
+  "verb:past-neg": "a2-u01-l3",
+  "verb:present": "a1-u08-l2",
+  "verb:present-abil": "a2-u05-l3",
+  "verb:present-neg": "a1-u09-l2",
+}
+`;
+
 exports[`Karteikarten aus content/ > Satzkarten bleiben stabil 1`] = `
 {
   "a1-u01-l3": [

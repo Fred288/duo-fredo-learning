@@ -1,6 +1,7 @@
 import type { Exercise, FlashData, PassageToken } from '../content/schema';
 import { formKind, nounForms, verbForms, type Form } from '../lookup/forms';
 import type { VocabEntry } from '../lookup/types';
+import { formAnswer, type FormAnswer } from './forms';
 import type { DeckCard } from './types';
 
 // Was auf einer Karte steht (rein): Vorder- und Rückseite, Lösungen fürs Eintippen und der
@@ -36,6 +37,8 @@ export interface Faces {
   tokens?: readonly PassageToken[];
   /** Beispielsatz für die Rückseite (nur Wortkarten). */
   example?: FlashExample;
+  /** Formkarte: vorn Grundform + Angabe (`form.label`), Antwort ist die Form (Türkisch). */
+  form?: FormAnswer;
 }
 
 /** Vorder-/Rückseite; `undefined`, wenn Wort oder Satz nicht (mehr) im Inhalt steht. */
@@ -46,6 +49,20 @@ export function facesOf(card: DeckCard, data: CardData): Faces | undefined {
 }
 
 function facesOfText(card: DeckCard, data: CardData): Faces | undefined {
+  if (card.kind === 'form') {
+    const entry = data.vocab.get(card.ref.slice(0, card.ref.lastIndexOf('|')));
+    const form = entry && formAnswer(entry, card.ref);
+    if (!entry || !form) return undefined;
+    return {
+      front: entry.tr,
+      back: form.forms[0]!,
+      frontLang: 'tr',
+      answers: form.forms,
+      turkish: form.forms[0]!,
+      vocab: entry,
+      form,
+    };
+  }
   if (card.kind === 'vocab') {
     const entry = data.vocab.get(card.ref);
     if (!entry) return undefined;

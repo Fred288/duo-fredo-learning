@@ -134,7 +134,14 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
       ? deckFor(
           manifest.units,
           selection,
-          { flashes, marks, completedLessons: completed, srsCards, canListen },
+          {
+            flashes,
+            marks,
+            completedLessons: completed,
+            srsCards,
+            canListen,
+            forms: manifest.forms,
+          },
           () => 0,
         )
       : [];
@@ -255,20 +262,23 @@ export function FlashcardsScreen({ unitId: presetUnit }: { unitId?: string }) {
           <Choice
             name="flash-content"
             legend={t('flash.content')}
-            values={['vocab', 'phrase', 'both'] as const}
+            values={['vocab', 'phrase', 'both', 'form'] as const}
             {...pref('flashContent', 'flash.content')}
           />
-          <Choice
-            name="flash-dir"
-            legend={t('flash.dir')}
-            values={
-              (canListen
-                ? ['tr_de', 'de_tr', 'listen', 'mixed']
-                : ['tr_de', 'de_tr', 'mixed']) as readonly DirChoice[]
-            }
-            {...pref('flashDir', 'flash.dir')}
-            value={dir}
-          />
+          {/* Formkarten fragen immer die Form ab; eine Richtung gibt es dort nicht. */}
+          {settings.flashContent !== 'form' && (
+            <Choice
+              name="flash-dir"
+              legend={t('flash.dir')}
+              values={
+                (canListen
+                  ? ['tr_de', 'de_tr', 'listen', 'mixed']
+                  : ['tr_de', 'de_tr', 'mixed']) as readonly DirChoice[]
+              }
+              {...pref('flashDir', 'flash.dir')}
+              value={dir}
+            />
+          )}
           <Choice
             name="flash-mode"
             legend={t('flash.mode')}

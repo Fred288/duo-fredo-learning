@@ -1,4 +1,5 @@
 import type { LookupIndex } from '../lookup/types';
+import type { FormIndex } from '../flashcards/forms';
 import type { PlacementPlan } from '../placement/select';
 import type { Lesson, Level, Unit } from './schema';
 
@@ -21,6 +22,8 @@ export interface Manifest {
     /** Vokabel-IDs der Unit (`vocabId`), Grundlage neuer SRS-Karten. */
     vocab: string[];
   }[];
+  /** Karteikarten: Formwörter und Einführung der Muster (`src/flashcards/forms.ts`). */
+  forms?: FormIndex;
 }
 
 const url = (path: string) => `${import.meta.env.BASE_URL}content/${path}`;

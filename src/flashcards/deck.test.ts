@@ -211,3 +211,43 @@ describe('openWrong / lessonSummary / shuffle', () => {
     expect(list).toEqual([1, 2, 3]);
   });
 });
+
+describe('Formkarten', () => {
+  // merhaba/evet/hayır (a1-u01) und dün (a2-u01) als Formwörter; Plural ab a1-u01-l2,
+  // Dativ erst ab a2-u01-l1, Präsens ist unbekannt.
+  const forms = {
+    intro: { 'noun:PL': 'a1-u01-l2', 'noun:DAT': 'a2-u01-l1' },
+    nouns: ['evet', 'dün'],
+    verbs: ['hayır'],
+  };
+  const formRefs = (s: Partial<Selection>, st: Partial<DeckState> = {}) =>
+    deckFor(units, sel({ content: 'form', ...s }), state({ forms, ...st })).map(
+      (c) => `${c.ref}@${c.lessonId}:${c.dir}`,
+    );
+
+  it('je Muster in der späteren Lektion von Wort und Muster, Richtung immer de_tr', () => {
+    expect(formRefs({ scope: { scope: 'level', level: 'A1' }, dir: 'tr_de' })).toEqual([
+      'evet|noun:PL@a1-u01-l2:de_tr',
+    ]);
+    expect(formRefs({ scope: { scope: 'level', level: 'A2' }, dir: 'mixed' })).toEqual([
+      'evet|noun:DAT@a2-u01-l1:de_tr',
+      'dün|noun:PL@a2-u01-l1:de_tr',
+      'dün|noun:DAT@a2-u01-l1:de_tr',
+    ]);
+  });
+
+  it('„Wörter und Sätze“ enthält keine Formen; ohne Index keine Formkarten', () => {
+    const both = deckFor(units, sel({ content: 'both' }), state({ forms }));
+    expect(both.some((c) => c.kind === 'form')).toBe(false);
+    expect(deckFor(units, sel({ content: 'form' }), state())).toEqual([]);
+  });
+
+  it('Falsch-Stapel nimmt Formkarten unabhängig von der gewählten Richtung', () => {
+    const flashes: Flash[] = [
+      { kind: 'form', ref: 'evet|noun:PL', dir: 'de_tr', correct: false, mode: 'type', at: 1 },
+    ];
+    expect(formRefs({ scope: { scope: 'wrong' }, dir: 'tr_de' }, { flashes })).toEqual([
+      'evet|noun:PL@a1-u01-l2:de_tr',
+    ]);
+  });
+});

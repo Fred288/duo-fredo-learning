@@ -1,7 +1,7 @@
 // Karteikarten (App): getrennt vom SRS, verändern keine Leitner-Boxen (Nutzerentscheidung).
 
-/** Wortkarte (Vokabel-ID) oder Satzkarte (Übungs-ID). */
-export type FlashKind = 'vocab' | 'phrase';
+/** Wortkarte (Vokabel-ID), Satzkarte (Übungs-ID) oder Formkarte (`formRef`: Vokabel + Muster). */
+export type FlashKind = 'vocab' | 'phrase' | 'form';
 /** `listen`: nur der gesprochene türkische Text, die Bedeutung (Deutsch) ist die Antwort. */
 export type FlashDir = 'tr_de' | 'de_tr' | 'listen';
 /** Aufdecken und selbst bewerten oder Antwort eintippen. */

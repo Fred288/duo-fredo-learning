@@ -19,6 +19,7 @@ import { withSegments } from '../src/content/segmenting';
 import { caseHints, withWordOrder } from '../src/content/word-order';
 import { checkCardFields, lessonVocab, phraseCards } from '../src/flashcards/build';
 import { phraseTokens, vocabExamples } from '../src/flashcards/examples';
+import { formIndex } from '../src/flashcards/forms';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import { prepareLookup } from '../src/lookup/search';
@@ -184,7 +185,12 @@ for (const { unit } of units) {
   copyFileSync(join(CONTENT_DIR, unit.explainer), target);
 }
 const manifest = built.map(({ unit }) => manifestEntry(unit, cards.get(unit.id)));
-writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest }, null, 2));
+// Formkarten: welche Wörter Nomen/Verben sind und ab welcher Lektion jedes Muster gilt.
+const forms = formIndex(
+  built.flatMap(({ unit }) => unit.lessons),
+  allVocab.map((v) => ({ ...v, id: vocabId(v) })),
+);
+writeFileSync(join(OUT_DIR, 'index.json'), JSON.stringify({ units: manifest, forms }, null, 2));
 writeFileSync(join(OUT_DIR, 'placement.json'), JSON.stringify(placement.plan));
 const lookup = JSON.stringify(
   buildLookup(

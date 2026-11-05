@@ -525,6 +525,7 @@ export const de = {
   'flash.content': 'Inhalt',
   'flash.content.vocab': 'Wörter',
   'flash.content.phrase': 'Sätze',
+  'flash.content.form': 'Formen',
   'flash.content.both': 'Beides',
   'flash.dir': 'Richtung',
   'flash.dir.tr_de': 'Türkisch → Deutsch',

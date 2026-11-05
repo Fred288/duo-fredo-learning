@@ -1,5 +1,6 @@
 import type { Level } from '../content/schema';
 import type { Card } from '../srs/card';
+import { formRef, patternKey, patternsFor, type FormIndex, type FormWord } from './forms';
 import {
   cardKey,
   itemKey,
@@ -32,6 +33,7 @@ export type Scope =
   /** Wörter, die im SRS oft falsch waren (`HARD_MAX` mit den meisten Fehlern). */
   | { scope: 'hard' };
 
+/** `both` = Wörter und Sätze; Formen sind ein eigener Stapel (viele Karten je Wort). */
 export type Content = FlashKind | 'both';
 export type DirChoice = FlashDir | 'mixed';
 export type Order = 'course' | 'shuffled';
@@ -51,6 +53,8 @@ export interface DeckState {
   srsCards?: readonly Card[];
   /** Hörkarten nur mit Stimme; sonst fällt „Hören“ auf Türkisch → Deutsch zurück. */
   canListen?: boolean;
+  /** Formwörter und Muster aus dem Manifest; ohne sie gibt es keine Formkarten. */
+  forms?: FormIndex;
 }
 
 /** So viele Wörter enthält der „Schwer“-Stapel höchstens. */
@@ -74,8 +78,46 @@ export function hardVocabIds(cards: readonly Card[], max = HARD_MAX): Set<string
   );
 }
 
-/** Alle Wörter und Sätze in Kursreihenfolge (je Lektion erst Wörter, dann Sätze). */
-export function allItems(units: readonly ManifestUnit[]): FlashItem[] {
+/**
+ * Formkarten je Lektion: Jedes Formwort bekommt je Muster eine Karte in der späteren der beiden
+ * Lektionen „Wort eingeführt“ und „Muster eingeführt“ (`FormIndex.intro`). So erscheint
+ * „gelmek · Präteritum“ erst, wenn beides bekannt ist.
+ */
+function formItemsByLesson(
+  units: readonly ManifestUnit[],
+  forms: FormIndex,
+): Map<string, FlashItem[]> {
+  const lessons = units.flatMap((u) => u.lessons.map((l) => ({ unitId: u.id, lessonId: l.id })));
+  const at = new Map(lessons.map((l, i) => [l.lessonId, i]));
+  const kinds = new Map<string, FormWord>([
+    ...forms.nouns.map((id): [string, FormWord] => [id, { kind: 'noun' }]),
+    ...forms.verbs.map((id): [string, FormWord] => [id, { kind: 'verb' }]),
+  ]);
+  for (const id of forms.proper ?? []) kinds.set(id, { kind: 'noun', proper: true });
+  for (const id of forms.compound ?? []) kinds.set(id, { kind: 'noun', compound: true });
+  const out = new Map<string, FlashItem[]>();
+  for (const u of units)
+    for (const l of u.lessons)
+      for (const vocabId of l.vocab ?? []) {
+        const word = kinds.get(vocabId);
+        if (!word) continue;
+        for (const p of patternsFor(word)) {
+          const intro = at.get(forms.intro[patternKey(p)] ?? '');
+          if (intro === undefined) continue;
+          const target = lessons[Math.max(intro, at.get(l.id)!)]!;
+          const item: FlashItem = { kind: 'form', ref: formRef(vocabId, p), ...target };
+          out.set(target.lessonId, [...(out.get(target.lessonId) ?? []), item]);
+        }
+      }
+  return out;
+}
+
+/**
+ * Alle Karten in Kursreihenfolge (je Lektion erst Wörter, dann Sätze, dann Formen). Formkarten
+ * nur mit `forms` aus dem Manifest.
+ */
+export function allItems(units: readonly ManifestUnit[], forms?: FormIndex): FlashItem[] {
+  const formItems = forms ? formItemsByLesson(units, forms) : new Map<string, FlashItem[]>();
   return units.flatMap((u) =>
     u.lessons.flatMap((l) => [
       ...(l.vocab ?? []).map((ref): FlashItem => ({
@@ -90,6 +132,7 @@ export function allItems(units: readonly ManifestUnit[]): FlashItem[] {
         unitId: u.id,
         lessonId: l.id,
       })),
+      ...(formItems.get(l.id) ?? []),
     ]),
   );
 }
@@ -169,8 +212,10 @@ export function deckFor(
   const canListen = state.canListen ?? false;
   // Ohne Stimme gibt es keine Hörkarten: die Wahl „Hören“ fällt auf Türkisch → Deutsch zurück.
   const dir: DirChoice = wanted === 'listen' && !canListen ? 'tr_de' : wanted;
-  const items = allItems(units).filter(
-    (i) => (content === 'both' || i.kind === content) && inScope(i, scope, units, state),
+  const items = allItems(units, state.forms).filter(
+    (i) =>
+      (content === 'both' ? i.kind !== 'form' : i.kind === content) &&
+      inScope(i, scope, units, state),
   );
   let cards: DeckCard[];
   if (scope.scope === 'wrong') {
@@ -183,12 +228,15 @@ export function deckFor(
       .map((k) => byKey.get(k))
       .filter(
         (c): c is DeckCard =>
-          !!c && (canListen || c.dir !== 'listen') && (dir === 'mixed' || c.dir === dir),
+          !!c &&
+          (canListen || c.dir !== 'listen') &&
+          (c.kind === 'form' || dir === 'mixed' || c.dir === dir),
       );
   } else {
+    // Formkarten fragen immer die Form ab (Deutsch-Angabe → Türkisch), die Richtung gilt nicht.
     cards = items.map((i) => ({
       ...i,
-      dir: dir === 'mixed' ? TEXT_DIRS[random() < 0.5 ? 0 : 1]! : dir,
+      dir: i.kind === 'form' ? 'de_tr' : dir === 'mixed' ? TEXT_DIRS[random() < 0.5 ? 0 : 1]! : dir,
     }));
   }
   return order === 'shuffled' ? shuffle(cards, random) : cards;

@@ -80,14 +80,14 @@ export const nounStem = (e: VocabEntry): Stem => ({
   compoundStem: e.compound_stem,
 });
 
-const verbStemOf = (e: VocabEntry): VerbStem => ({
+export const verbStemOf = (e: VocabEntry): VerbStem => ({
   form: e.tr,
   softens: e.softens,
   aorist: e.aorist,
 });
 
 /** Engine-Form oder undefined, wo die Engine die Kombination ablehnt (Imperativ 1sg …). */
-function attempt(fn: () => string): string | undefined {
+export function attempt(fn: () => string): string | undefined {
   try {
     return fn();
   } catch (e) {

@@ -101,3 +101,20 @@ test('Karteikasten: Beispielsatz mit antippbaren Wörtern', async ({ page }) => 
   await expect(sheet).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'okula' })).toBeFocused();
 });
+
+test('Karteikasten: Formkarten aus der Engine', async ({ page }) => {
+  await page.goto('/');
+  const unit = await openUnit(page, 'a1-u02');
+  await unit.getByRole('button', { name: /^Karteikarten \(\d+\)$/ }).click();
+  await page.locator('label', { hasText: /^Formen$/ }).click();
+  // Formkarten haben keine Richtung.
+  await expect(page.locator('label', { hasText: /^Türkisch → Deutsch$/ })).toHaveCount(0);
+  await page.getByRole('button', { name: /^Los \(\d+ Karten\)$/ }).click();
+
+  // çay stammt aus a1-u01, der Plural kommt erst in a1-u02: die Karte steht dort.
+  await expect(page.getByRole('heading', { name: 'çay Plural', level: 2 })).toBeVisible();
+  await page.getByRole('button', { name: 'Umdrehen' }).click();
+  await expect(page.getByText('çaylar', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Gewusst', exact: true }).click();
+  await expect(page.getByText(/^Karte 2 von \d+/)).toBeVisible();
+});
