@@ -94,10 +94,10 @@ export function readingResolver(
 }
 
 /** Zerlegt und löst die Sätze auf; `unknown` = Wörter ohne Auflösung (Build-Warnung). */
-export function annotatePassage(
-  passage: Passage,
+export function annotatePassage<P extends Passage>(
+  passage: P,
   resolver: ReadingResolver,
-): { passage: Passage; unknown: string[] } {
+): { passage: P & { tokens: PassageToken[][] }; unknown: string[] } {
   const unknown: string[] = [];
   const tokens = passage.sentences.map((s) => {
     const parts = tokenize(s.tr);
@@ -149,11 +149,15 @@ export function withPassages(
   return { unit: { ...unit, lessons }, warnings };
 }
 
-/** Glossar-Verweise müssen auf eine Vokabel des Kurses zeigen. */
+/** Glossar-Verweise (Lesetexte und Übungstexte) müssen auf eine Vokabel des Kurses zeigen. */
 export function checkGlossary(unit: Unit, vocabIds: ReadonlySet<string>): string[] {
-  return unit.lessons.flatMap((l) =>
-    (l.passage?.glossary ?? [])
+  const sources = [
+    ...unit.lessons.map((l) => ({ id: l.id, glossary: l.passage?.glossary })),
+    ...(unit.texts ?? []).map((t) => ({ id: t.id, glossary: t.glossary })),
+  ];
+  return sources.flatMap(({ id, glossary }) =>
+    (glossary ?? [])
       .filter((g) => g.vocab && !vocabIds.has(g.vocab))
-      .map((g) => `${l.id}: glossary ${g.tr} verweist auf unbekannte Vokabel ${g.vocab}`),
+      .map((g) => `${id}: glossary ${g.tr} verweist auf unbekannte Vokabel ${g.vocab}`),
   );
 }

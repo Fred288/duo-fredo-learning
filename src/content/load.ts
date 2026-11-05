@@ -21,6 +21,8 @@ export interface Manifest {
     })[];
     /** Vokabel-IDs der Unit (`vocabId`), Grundlage neuer SRS-Karten. */
     vocab: string[];
+    /** Übungstexte nach der Lektion (Sätze in der Unit-JSON). */
+    texts?: { id: string; title: string }[];
   }[];
   /** Karteikarten: Formwörter und Einführung der Muster (`src/flashcards/forms.ts`). */
   forms?: FormIndex;

@@ -390,6 +390,8 @@ export function manifestEntry(unit: Unit, cards: LessonCards = {}) {
     }),
     // Vokabel-IDs für neue SRS-Karten, ohne die Unit laden zu müssen.
     vocab: (unit.vocab ?? []).map(vocabId),
+    // Übungstexte für das Angebot nach der Lektion; die Sätze stehen in der Unit-JSON.
+    ...(unit.texts?.length && { texts: unit.texts.map((x) => ({ id: x.id, title: x.title })) }),
   };
 }
 
@@ -415,7 +417,7 @@ export function checkListen(units: LoadedUnit[]): string[] {
 }
 
 /**
- * Anzahl ungeprüfter Übungen, Vokabeln und Lesetexte einer Unit (Item-Flag überschreibt Unit-Flag).
+ * Anzahl ungeprüfter Übungen, Vokabeln, Lesetexte und Übungstexte einer Unit (Item-Flag überschreibt Unit-Flag).
  * Erzeugte Übungen (Hören, Zerlegen, Satzbau; mit `from`) zählen nicht extra: ihr Stand folgt der Quelle.
  */
 export function countUnreviewed(unit: Unit): number {
@@ -425,7 +427,7 @@ export function countUnreviewed(unit: Unit): number {
       (e) => !((e.type === 'listen' || e.type === 'segment' || e.type === 'sov_puzzle') && e.from),
     );
   const passages = unit.lessons.flatMap((l) => (l.passage ? [l.passage] : []));
-  return [...exercises, ...(unit.vocab ?? []), ...passages].filter(
+  return [...exercises, ...(unit.vocab ?? []), ...passages, ...(unit.texts ?? [])].filter(
     (i) => !(i.reviewed ?? unit.reviewed),
   ).length;
 }

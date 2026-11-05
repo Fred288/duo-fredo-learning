@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { db, safely } from '../db/db';
 import type { Content, DirChoice, Order } from '../flashcards/deck';
 import type { FlashMode } from '../flashcards/types';
+import { RECENT_MAX } from '../practice/pick';
 
 export type Theme = 'system' | 'light' | 'dark';
 
@@ -34,6 +35,8 @@ export interface Settings {
   flashDir: DirChoice;
   flashMode: FlashMode;
   flashOrder: Order;
+  /** Übungstexte: zuletzt gelesene IDs, jüngste zuerst (nur gegen Wiederholung, keine Wertung). */
+  practiceRecent: string[];
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -54,6 +57,7 @@ export const DEFAULT_SETTINGS: Settings = {
   flashDir: 'tr_de',
   flashMode: 'flip',
   flashOrder: 'course',
+  practiceRecent: [],
 };
 
 const oneOf = <T extends string>(values: readonly T[], v: unknown): v is T =>
@@ -122,6 +126,12 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (oneOf(['tr_de', 'de_tr', 'listen', 'mixed'], stored.flashDir)) out.flashDir = stored.flashDir;
   if (oneOf(['flip', 'type'], stored.flashMode)) out.flashMode = stored.flashMode;
   if (oneOf(['course', 'shuffled'], stored.flashOrder)) out.flashOrder = stored.flashOrder;
+  if (
+    Array.isArray(stored.practiceRecent) &&
+    stored.practiceRecent.every((id) => typeof id === 'string')
+  ) {
+    out.practiceRecent = stored.practiceRecent.slice(0, RECENT_MAX);
+  }
   if (typeof stored.lastBackup === 'string' && /^(\d{4}-\d{2}-\d{2})?$/.test(stored.lastBackup)) {
     out.lastBackup = stored.lastBackup;
   }

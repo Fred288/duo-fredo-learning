@@ -563,6 +563,16 @@ export const Passage = z.strictObject({
   ...provenanceOverride,
 });
 
+/**
+ * Übungstext nach der Lektion (`texts` der Unit, ID `<unit>-t<n>`): kurzer Text, der nur
+ * Wortschatz bis zu dieser Unit benutzt; lesen oder Satz für Satz übersetzen, ohne Wertung.
+ * Gleiche Form wie ein Lesetext, dazu eine stabile ID und ein deutscher Titel.
+ */
+export const PracticeText = Passage.extend({
+  id: z.string().regex(/^(a1|a2|b1|b2)-u\d{2}-t\d+$/, 'Text-ID wie a1-u01-t1'),
+  title: nonEmpty,
+});
+
 /** Karteikarten-Daten einer Unit (nur Build-Ausgabe, nicht in der YAML). */
 export const FlashData = z.strictObject({
   /** Vokabel-ID → Beispielsatz aus vorhandenen Inhalten. */
@@ -606,6 +616,8 @@ export const Unit = z
     reviewed: z.boolean().default(false),
     lessons: z.array(Lesson).min(1),
     vocab: z.array(Vocab).optional(),
+    /** Übungstexte nach der Lektion (`docs/TEXT_PRACTICE_PLAN.md`). */
+    texts: z.array(PracticeText).optional(),
     // Vom Build ergänzt: Einträge anderer Units, die Grammatikübungen dieser Unit brauchen.
     lexicon: z.array(Vocab).optional(),
     // Vom Build ergänzt: Karteikarten-Beispielsätze je Vokabel und Wörter der Satzkarten.
@@ -616,6 +628,20 @@ export const Unit = z
     if (!unit.id.startsWith(unit.level.toLocaleLowerCase('tr'))) {
       ctx.addIssue({ code: 'custom', path: ['level'], message: `Level passt nicht zu ${unit.id}` });
     }
+    const textIds = new Set<string>();
+    unit.texts?.forEach((text, ti) => {
+      if (!text.id.startsWith(`${unit.id}-t`)) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['texts', ti, 'id'],
+          message: `Text-ID muss mit ${unit.id}-t beginnen`,
+        });
+      }
+      if (textIds.has(text.id)) {
+        ctx.addIssue({ code: 'custom', path: ['texts', ti, 'id'], message: 'Text-ID doppelt' });
+      }
+      textIds.add(text.id);
+    });
     unit.lessons.forEach((lesson, li) => {
       if (!lesson.id.startsWith(`${unit.id}-`)) {
         ctx.addIssue({
@@ -642,6 +668,7 @@ export type Exercise = z.infer<typeof Exercise>;
 export type Lesson = z.infer<typeof Lesson>;
 export type Passage = z.infer<typeof Passage>;
 export type FlashData = z.infer<typeof FlashData>;
+export type PracticeText = z.infer<typeof PracticeText>;
 export type PassageToken = z.infer<typeof PassageToken>;
 export type Unit = z.infer<typeof Unit>;
 export type FormSpec = z.infer<typeof FormSpec>;

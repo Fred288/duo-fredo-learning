@@ -13,6 +13,7 @@ import { dirname, join, relative } from 'node:path';
 import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
 import { withAlternatives } from '../src/content/lexicon';
 import { withListening } from '../src/content/listening';
+import { withTexts } from '../src/content/practice';
 import { checkGlossary, withPassages } from '../src/content/reading';
 import { vocabId } from '../src/content/schema';
 import { withSegments } from '../src/content/segmenting';
@@ -84,6 +85,11 @@ const built: LoadedUnit[] = units.map(({ file, unit }) => {
   errors.push(...checkGlossary(unit, vocabIds).map((e) => `${file}: ${e}`));
   const annotated = withPassages(unit, reading);
   readingWarnings.push(...annotated.warnings.map((w) => `${file}: ${w}`));
+  // Übungstexte: nur Wörter bis zu dieser Unit (src/content/practice.ts).
+  const texts = withTexts(annotated.unit, reading);
+  errors.push(...texts.errors.map((e) => `${file}: ${e}`));
+  readingWarnings.push(...texts.warnings.map((w) => `${file}: ${w}`));
+  annotated.unit = texts.unit;
   let out = READING_LESSONS
     ? annotated.unit
     : { ...annotated.unit, lessons: annotated.unit.lessons.filter((l) => !l.passage) };

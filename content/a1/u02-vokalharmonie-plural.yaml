@@ -385,3 +385,12 @@ vocab:
   - { tr: köpek, de: [Hund], pos: noun, softens: true }
   - { tr: ağaç, de: [Baum], pos: noun, softens: true }
   - { tr: bahçe, de: [Garten], pos: noun }
+texts:
+  - id: a1-u02-t1
+    title: Wo ist was?
+    reviewed: false
+    sentences:
+      - { tr: Merhaba!, de: Hallo! }
+      - { tr: Öğrenciler okulda., de: Die Schüler sind in der Schule. }
+      - { tr: Köpekler bahçede., de: Die Hunde sind im Garten. }
+      - { tr: Elmalar masada., de: Die Äpfel liegen auf dem Tisch. }

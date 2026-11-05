@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Übungstexte aus content/ > nur Bekanntes, IDs und Satzzahl bleiben stabil 1`] = `
+{
+  "a1-u02-t1": 4,
+}
+`;
