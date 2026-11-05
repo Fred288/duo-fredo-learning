@@ -58,6 +58,24 @@ const unit = {
       ],
     },
   ],
+  flash: {
+    examples: {
+      ev: {
+        tr: 'Evim büyük.',
+        de: 'Mein Haus ist groß.',
+        from: 'a1-u01-l1-e5',
+        tokens: [
+          { text: 'Evim', w: true, vocab: 'ev' },
+          { text: ' ' },
+          { text: 'büyük', w: true },
+          { text: '.' },
+        ],
+      },
+    },
+    phrases: {
+      'a1-u01-l1-e2': [{ text: 'Nasılsın', w: true, gloss: 'wie geht es dir' }, { text: '?' }],
+    },
+  },
 };
 
 const selection = (content: Selection['content'], over: Partial<Selection> = {}): Selection => ({
@@ -197,4 +215,31 @@ it('Schwer-Stapel: nur Wörter mit Fehlern im SRS', async () => {
   );
   expect(await screen.findByRole('heading', { name: 'kitap' })).toBeTruthy();
   expect(screen.getByText('Karte 1 von 1')).toBeTruthy();
+});
+
+it('Rückseite: Beispielsatz und Satzwörter antippbar, Tasten im Sheet bewerten nicht', async () => {
+  render(<FlashcardsRunScreen selection={selection('both')} mode="flip" />);
+  await screen.findByRole('heading', { name: 'ev' });
+  click('Umdrehen');
+
+  // Beispielsatz: aufgelöstes Wort ist ein Knopf, unaufgelöstes nur Text.
+  expect(screen.getByText('Beispiel')).toBeTruthy();
+  expect(screen.getByText('Mein Haus ist groß.')).toBeTruthy();
+  expect(screen.queryByRole('button', { name: 'büyük' })).toBeNull();
+  click('Evim');
+  const sheet = await screen.findByRole('dialog');
+  fireEvent.keyDown(sheet, { key: 'ArrowRight' });
+  expect(document.querySelector('[data-card]')?.getAttribute('data-card')).toBe('vocab:ev:tr_de');
+  expect(useFlashcards.getState().flashes).toEqual([]);
+  fireEvent.keyDown(window, { key: 'Escape' });
+  expect(screen.queryByRole('dialog')).toBeNull();
+
+  click('Gewusst');
+  click('Umdrehen');
+  click('Gewusst');
+  // Satzkarte (tr→de): nach dem Aufdecken sind die Wörter vorn antippbar.
+  expect(screen.queryByRole('button', { name: 'Nasılsın' })).toBeNull();
+  click('Umdrehen');
+  click('Nasılsın');
+  expect((await screen.findByRole('dialog')).textContent).toContain('wie geht es dir');
 });

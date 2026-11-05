@@ -7,7 +7,7 @@ import type { PreparedLookup } from '../lookup/search';
 // Hier entsteht beides aus vorhandenen Inhalten, ohne neuen türkischen Text.
 
 /** Lektionsarten, deren Übungen ein Wort einführen; erzeugte und Wiederholung zählen nicht. */
-const SOURCE_TYPES: ReadonlySet<Lesson['type']> = new Set([
+export const SOURCE_TYPES: ReadonlySet<Lesson['type']> = new Set([
   'vocab',
   'grammar',
   'dialog',
@@ -125,10 +125,11 @@ export function phraseCards(units: readonly Unit[]): Map<string, Map<string, str
   return out;
 }
 
-/** `lesson` an Vokabeln muss eine Lektion der Unit sein; `card` nur bei de→tr. */
+/** `lesson` an Vokabeln muss eine Lektion der Unit sein; `card` nur bei de→tr; kein `flash`. */
 export function checkCardFields(unit: Unit): string[] {
   const lessons = new Set(unit.lessons.map((l) => l.id));
   return [
+    ...(unit.flash ? [`${unit.id}: flash erzeugt der Build, nicht in der YAML setzen`] : []),
     ...(unit.vocab ?? [])
       .filter((v) => v.lesson && !lessons.has(v.lesson))
       .map((v) => `Vokabel ${vocabId(v)}: lesson ${v.lesson} gibt es in ${unit.id} nicht`),

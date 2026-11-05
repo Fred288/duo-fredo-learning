@@ -1,6 +1,6 @@
 # Erweiterungsplan: Karteikarten
 
-Stand: 2026-11-04. K1 umgesetzt (1057 Wörter je Lektion zugeordnet, 212 Satzkarten), K2 umgesetzt (Dexie v5, Stapel, Runde, Sicherung), K3 umgesetzt (Auswahl, Runde, Rückseite, Einstiege); K4 umgesetzt (Zusammenfassung in der Auswahl, Statistik-Abschnitt); K5 teilweise (Hörkarte und Schwer-Stapel umgesetzt; Beispielsatz auf der Rückseite und antippbare Wörter in Satzkarten offen, Satzauswahl ist Opus-Arbeit); K6 offen. Abweichungen in K3: ein Knopf je Unit statt je Lektion (die Lektion wählt man in der Auswahl), kein Sprung ins Nachschlagen aus der Runde, antippbare Wörter in Satzkarten erst mit K5; Markieren und der Falsch-Stapel sind schon bedienbar. Offene Entscheidungen stehen am Ende.
+Stand: 2026-11-04. K1 umgesetzt (1057 Wörter je Lektion zugeordnet, 212 Satzkarten), K2 umgesetzt (Dexie v5, Stapel, Runde, Sicherung), K3 umgesetzt (Auswahl, Runde, Rückseite, Einstiege); K4 umgesetzt (Zusammenfassung in der Auswahl, Statistik-Abschnitt); K5 umgesetzt (Hörkarte, Schwer-Stapel, Beispielsatz auf der Rückseite für 757 von 1057 Wörtern, antippbare Wörter in Beispiel- und Satzkarten); K6 offen. Abweichungen in K3: ein Knopf je Unit statt je Lektion (die Lektion wählt man in der Auswahl), kein Sprung ins Nachschlagen aus der Runde, antippbare Wörter in Satzkarten erst mit K5; Markieren und der Falsch-Stapel sind schon bedienbar. Offene Entscheidungen stehen am Ende.
 
 ## Ziel
 

@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { speechText } from '../audio/speech-text';
 import { fetchLookup, fetchUnit } from '../content/load';
+import type { PassageToken } from '../content/schema';
 import { deckFor, type Selection } from '../flashcards/deck';
 import {
   facesOf,
   flagHints,
   type CardData,
   type Faces,
+  type FlashExample,
   type PhraseExercise,
 } from '../flashcards/faces';
 import {
@@ -31,6 +33,7 @@ import { formLabelText } from './LookupEntry';
 import { ShadowButton } from './ShadowButton';
 import { SpeakButton } from './SpeakButton';
 import { SpecialCharBar } from './SpecialCharBar';
+import { TokenText } from './TokenText';
 import { useManifest } from './useManifest';
 
 const primary =
@@ -38,24 +41,58 @@ const primary =
 const secondary =
   'min-h-12 flex-1 rounded-xl border border-line-strong bg-surface px-5 font-medium hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus';
 
-/** Tasten, die nicht dem Karteikasten gehören: Tippen in Feldern, Leertaste/Enter auf Knöpfen. */
+/**
+ * Tasten, die nicht dem Karteikasten gehören: Tippen in Feldern, Leertaste/Enter auf Knöpfen,
+ * alles im offenen Wort-Sheet (sonst bewertet ← die Karte dahinter).
+ */
 const ownsKeys = (el: EventTarget | null, key: string) =>
   el instanceof HTMLElement &&
   (/^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName) ||
+    !!el.closest('[role="dialog"]') ||
     ((key === ' ' || key === 'Enter') && /^(BUTTON|A|SUMMARY)$/.test(el.tagName)));
 
+/** Wörter aus dem Nachschlage-Index; Sätze, Beispielsätze und Satzwörter aus den Unit-Daten. */
 async function loadData(cards: readonly DeckCard[]): Promise<CardData> {
-  const unitIds = [...new Set(cards.filter((c) => c.kind === 'phrase').map((c) => c.unitId))];
+  const unitIds = [...new Set(cards.map((c) => c.unitId))];
   const [index, ...units] = await Promise.all([
     fetchLookup(),
     ...unitIds.map((id) => fetchUnit(id)),
   ]);
   const phrases = new Map<string, PhraseExercise>();
-  for (const u of units)
+  const examples = new Map<string, FlashExample>();
+  const phraseTokens = new Map<string, readonly PassageToken[]>();
+  for (const u of units) {
     for (const l of u.lessons)
       for (const e of l.exercises)
         if (e.type === 'word_bank' || e.type === 'free_text') phrases.set(e.id, e);
-  return { vocab: new Map(index.vocab.map((v) => [v.id, v])), phrases };
+    for (const [id, ex] of Object.entries(u.flash?.examples ?? {})) examples.set(id, ex);
+    for (const [id, tokens] of Object.entries(u.flash?.phrases ?? {})) phraseTokens.set(id, tokens);
+  }
+  return { vocab: new Map(index.vocab.map((v) => [v.id, v])), phrases, examples, phraseTokens };
+}
+
+/** Türkischer Text, mit antippbaren Wörtern, wenn der Build sie aufgelöst hat. */
+function Turkish({ text, tokens }: { text: string; tokens?: readonly PassageToken[] }) {
+  return tokens ? <TokenText tokens={tokens} /> : <>{text}</>;
+}
+
+/** Beispielsatz zum Wort: antippbar, vorlesbar, mit Übersetzung. */
+function ExampleBlock({ example }: { example: FlashExample }) {
+  const say = speechText(example.tr);
+  return (
+    <div className="space-y-1 text-sm">
+      <p className="text-ink-muted">{t('flash.example')}</p>
+      <div className="flex items-start gap-1">
+        <p lang="tr" className="flex-1 text-base leading-relaxed">
+          <TokenText tokens={example.tokens} />
+        </p>
+        {say && <SpeakButton text={say} slow={false} />}
+      </div>
+      <p lang="de" className="text-ink-muted">
+        {example.de}
+      </p>
+    </div>
+  );
 }
 
 function MarkButton({ card }: { card: DeckCard }) {
@@ -88,11 +125,11 @@ function Back({ faces, card }: { faces: Faces; card: DeckCard }) {
     <div className="space-y-3 border-t border-line pt-4">
       {faces.listen && (
         <p className="text-xl font-medium" lang="tr">
-          {faces.turkish}
+          <Turkish text={faces.turkish} tokens={faces.tokens} />
         </p>
       )}
       <p className={faces.listen ? 'text-lg' : 'text-xl font-medium'} lang={backLang}>
-        {faces.back}
+        {backLang === 'tr' ? <Turkish text={faces.back} tokens={faces.tokens} /> : faces.back}
       </p>
       {faces.vocab && (
         <p className="text-sm text-ink-muted">
@@ -117,6 +154,7 @@ function Back({ faces, card }: { faces: Faces; card: DeckCard }) {
         </div>
       )}
       {note && <p className="text-sm text-ink-muted">{note}</p>}
+      {faces.example && <ExampleBlock example={faces.example} />}
       <div className="flex flex-wrap items-center gap-2">
         {say && <SpeakButton text={say} />}
         {say && <ShadowButton text={say} />}
@@ -214,7 +252,14 @@ function CardView({
           lang={faces.listen ? 'de' : faces.frontLang}
           className="flex-1 text-2xl font-semibold outline-none"
         >
-          {faces.listen ? t('flash.listen.prompt') : faces.front}
+          {faces.listen ? (
+            t('flash.listen.prompt')
+          ) : shown && faces.frontLang === 'tr' ? (
+            // Aufgedeckt: Wörter des türkischen Satzes antippbar (vorher wäre es eine Hilfe).
+            <Turkish text={faces.front} tokens={faces.tokens} />
+          ) : (
+            faces.front
+          )}
         </h2>
         {say && <SpeakButton text={say} />}
       </div>

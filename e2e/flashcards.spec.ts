@@ -79,3 +79,25 @@ test('Karteikasten: ohne Stimme keine Hörkarten', async ({ page }) => {
   await expect(page.getByRole('radio', { name: 'Türkisch → Deutsch' })).toBeVisible();
   await expect(page.getByRole('radio', { name: 'Hören → Deutsch' })).toHaveCount(0);
 });
+
+test('Karteikasten: Beispielsatz mit antippbaren Wörtern', async ({ page }) => {
+  await page.goto('/');
+  const unit = await openUnit(page, 'a1-u02');
+  await unit.getByRole('button', { name: /^Karteikarten \(\d+\)$/ }).click();
+  await page.getByRole('button', { name: /^Los \(\d+ Karten\)$/ }).click();
+  await expect(page.getByRole('heading', { name: 'okul', level: 2 })).toBeVisible();
+  await page.getByRole('button', { name: 'Umdrehen' }).click();
+
+  await expect(page.getByText('Beispiel', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'okula' }).click();
+  const sheet = page.getByRole('dialog', { name: 'Wort: okula' });
+  await expect(sheet).toBeVisible();
+  // Tasten im Sheet bewerten die Karte nicht; Esc schließt und gibt den Fokus zurück.
+  await page.keyboard.press('ArrowRight');
+  // Noch dieselbe, aufgedeckte Karte (die nächste stünde wieder auf „Umdrehen“).
+  await expect(page.getByText(/^Karte 1 von \d+/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Gewusst', exact: true })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(sheet).toHaveCount(0);
+  await expect(page.getByRole('button', { name: 'okula' })).toBeFocused();
+});

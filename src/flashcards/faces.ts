@@ -1,4 +1,4 @@
-import type { Exercise } from '../content/schema';
+import type { Exercise, FlashData, PassageToken } from '../content/schema';
 import { formKind, nounForms, verbForms, type Form } from '../lookup/forms';
 import type { VocabEntry } from '../lookup/types';
 import type { DeckCard } from './types';
@@ -8,9 +8,16 @@ import type { DeckCard } from './types';
 
 export type PhraseExercise = Extract<Exercise, { type: 'word_bank' | 'free_text' }>;
 
+/** Beispielsatz zu einem Wort (vom Build gewählt, `src/flashcards/examples.ts`). */
+export type FlashExample = NonNullable<FlashData['examples']>[string];
+
 export interface CardData {
   vocab: ReadonlyMap<string, VocabEntry>;
   phrases: ReadonlyMap<string, PhraseExercise>;
+  /** Vokabel-ID → Beispielsatz (aus den Unit-Daten); fehlt, wenn der Build keinen fand. */
+  examples?: ReadonlyMap<string, FlashExample>;
+  /** Übungs-ID einer Satzkarte → antippbare Wörter des türkischen Satzes. */
+  phraseTokens?: ReadonlyMap<string, readonly PassageToken[]>;
 }
 
 export interface Faces {
@@ -25,6 +32,10 @@ export interface Faces {
   phrase?: PhraseExercise;
   /** Hörkarte: Die Vorderseite ist nur der gespeicherte Ton, `front` ist leer. */
   listen?: true;
+  /** Antippbare Wörter des türkischen Textes (nur Satzkarten). */
+  tokens?: readonly PassageToken[];
+  /** Beispielsatz für die Rückseite (nur Wortkarten). */
+  example?: FlashExample;
 }
 
 /** Vorder-/Rückseite; `undefined`, wenn Wort oder Satz nicht (mehr) im Inhalt steht. */
@@ -47,6 +58,7 @@ function facesOfText(card: DeckCard, data: CardData): Faces | undefined {
           answers: [...entry.de],
           turkish: entry.tr,
           vocab: entry,
+          example: data.examples?.get(card.ref),
         }
       : {
           front: de,
@@ -55,11 +67,13 @@ function facesOfText(card: DeckCard, data: CardData): Faces | undefined {
           answers: [entry.tr],
           turkish: entry.tr,
           vocab: entry,
+          example: data.examples?.get(card.ref),
         };
   }
   const ex = data.phrases.get(card.ref);
   if (!ex) return undefined;
   const tr = ex.answers[0]!;
+  const tokens = data.phraseTokens?.get(card.ref);
   return card.dir === 'de_tr'
     ? {
         front: ex.prompt,
@@ -68,6 +82,7 @@ function facesOfText(card: DeckCard, data: CardData): Faces | undefined {
         answers: [...ex.answers],
         turkish: tr,
         phrase: ex,
+        tokens,
       }
     : {
         front: tr,
@@ -76,6 +91,7 @@ function facesOfText(card: DeckCard, data: CardData): Faces | undefined {
         answers: [ex.prompt],
         turkish: tr,
         phrase: ex,
+        tokens,
       };
 }
 

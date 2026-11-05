@@ -18,6 +18,7 @@ import { vocabId } from '../src/content/schema';
 import { withSegments } from '../src/content/segmenting';
 import { caseHints, withWordOrder } from '../src/content/word-order';
 import { checkCardFields, lessonVocab, phraseCards } from '../src/flashcards/build';
+import { phraseTokens, vocabExamples } from '../src/flashcards/examples';
 import { t } from '../src/i18n';
 import { buildLookup, duplicateSlugs, LOOKUP_WARN_BYTES } from '../src/lookup/index-build';
 import { prepareLookup } from '../src/lookup/search';
@@ -102,9 +103,29 @@ const cards = new Map(
     { vocab: lessonVocab(unit, reading), phrases: phrases.get(unit.id) },
   ]),
 );
+// Beispielsatz je Wort und antippbare Wörter der Satzkarten (src/flashcards/examples.ts).
+const examples = vocabExamples(
+  built.map(({ unit }) => unit),
+  reading,
+);
+errors.push(...examples.errors);
+const flash = new Map(
+  built.map(({ unit }) => {
+    const ex = examples.examples.get(unit.id) ?? new Map();
+    const words = phraseTokens(unit, [...(phrases.get(unit.id)?.values() ?? [])].flat(), reading);
+    return [
+      unit.id,
+      {
+        ...(ex.size > 0 && { examples: Object.fromEntries(ex) }),
+        ...(words.size > 0 && { phrases: Object.fromEntries(words) }),
+      },
+    ];
+  }),
+);
 console.info(
   `Karteikarten: ${allVocab.length} Wörter, ` +
-    `${[...phrases.values()].reduce((n, m) => n + [...m.values()].flat().length, 0)} Sätze`,
+    `${[...phrases.values()].reduce((n, m) => n + [...m.values()].flat().length, 0)} Sätze, ` +
+    `${[...examples.examples.values()].reduce((n, m) => n + m.size, 0)} Beispielsätze`,
 );
 if (SEGMENT_LESSONS) {
   const counts = built.map(
@@ -148,7 +169,12 @@ rmSync(OUT_DIR, { recursive: true, force: true });
 mkdirSync(join(OUT_DIR, 'units'), { recursive: true });
 for (const { unit } of built) {
   const lexicon = foreignLexicon(unit, units);
-  const out = lexicon.length > 0 ? { ...unit, lexicon } : unit;
+  const cardData = flash.get(unit.id);
+  const out = {
+    ...unit,
+    ...(lexicon.length > 0 && { lexicon }),
+    ...(cardData && Object.keys(cardData).length > 0 && { flash: cardData }),
+  };
   writeFileSync(join(OUT_DIR, 'units', `${unit.id}.json`), JSON.stringify(out));
 }
 for (const { unit } of units) {

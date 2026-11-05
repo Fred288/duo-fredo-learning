@@ -80,6 +80,9 @@ export const Vocab = z.strictObject({
     .string()
     .regex(/^(a1|a2|b1|b2)-u\d{2}-[a-z]\d+$/, 'Lektions-ID wie a1-u03-l2')
     .optional(),
+  // Karteikarten: Beispielsatz erzwingen (Übungs-ID oder <lektion>-p<n> für einen Lesetext-Satz)
+  // oder mit false keinen zeigen; sonst wählt der Build (src/flashcards/examples.ts)
+  example: z.union([z.literal(false), nonEmpty]).optional(),
   register: register.optional(),
   reviewed: z.boolean().optional(),
   ...provenanceOverride,
@@ -560,6 +563,24 @@ export const Passage = z.strictObject({
   ...provenanceOverride,
 });
 
+/** Karteikarten-Daten einer Unit (nur Build-Ausgabe, nicht in der YAML). */
+export const FlashData = z.strictObject({
+  /** Vokabel-ID → Beispielsatz aus vorhandenen Inhalten. */
+  examples: z
+    .record(
+      z.string(),
+      z.strictObject({
+        tr: nonEmpty,
+        de: nonEmpty,
+        from: nonEmpty,
+        tokens: z.array(PassageToken),
+      }),
+    )
+    .optional(),
+  /** Übungs-ID einer Satzkarte → Wörter der türkischen Antwort. */
+  phrases: z.record(z.string(), z.array(PassageToken)).optional(),
+});
+
 export const Lesson = z
   .strictObject({
     id: nonEmpty,
@@ -587,6 +608,8 @@ export const Unit = z
     vocab: z.array(Vocab).optional(),
     // Vom Build ergänzt: Einträge anderer Units, die Grammatikübungen dieser Unit brauchen.
     lexicon: z.array(Vocab).optional(),
+    // Vom Build ergänzt: Karteikarten-Beispielsätze je Vokabel und Wörter der Satzkarten.
+    flash: FlashData.optional(),
     ...provenanceFields,
   })
   .superRefine((unit, ctx) => {
@@ -618,6 +641,7 @@ export type Vocab = z.infer<typeof Vocab>;
 export type Exercise = z.infer<typeof Exercise>;
 export type Lesson = z.infer<typeof Lesson>;
 export type Passage = z.infer<typeof Passage>;
+export type FlashData = z.infer<typeof FlashData>;
 export type PassageToken = z.infer<typeof PassageToken>;
 export type Unit = z.infer<typeof Unit>;
 export type FormSpec = z.infer<typeof FormSpec>;

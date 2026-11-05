@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { annotateSpeech, courseWords } from '../src/audio/turkish-detect';
 import { vocabId } from '../src/content/schema';
 import { checkCardFields, lessonVocab, phraseCards } from '../src/flashcards/build';
+import { vocabExamples } from '../src/flashcards/examples';
 import { buildLookup } from '../src/lookup/index-build';
 import { prepareLookup } from '../src/lookup/search';
 import { isUnitFile, parseUnitFile } from './content-checks';
@@ -32,6 +33,16 @@ describe('Karteikarten aus content/', () => {
       expect([...got.values()].flat().sort()).toEqual((u.vocab ?? []).map(vocabId).sort());
       for (const [lessonId, ids] of got) all[lessonId] = ids;
     }
+    expect(all).toMatchSnapshot();
+  }, 120_000);
+
+  // Beispielsatz je Wort (Quelle); bewusst erneuern wie oben.
+  it('Beispielsätze: Felder example gültig, Auswahl bleibt stabil', () => {
+    const { examples, errors } = vocabExamples(units, prepared);
+    expect(errors).toEqual([]);
+    const all = Object.fromEntries(
+      [...examples].map(([unitId, m]) => [unitId, [...m].map(([id, e]) => `${id} ← ${e.from}`)]),
+    );
     expect(all).toMatchSnapshot();
   }, 120_000);
 

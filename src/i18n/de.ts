@@ -518,6 +518,7 @@ export const de = {
   'flash.scope.marked': 'Markiert ({count})',
   'flash.scope.hard': 'Schwer ({count})',
   'flash.listen.prompt': 'Was bedeutet das?',
+  'flash.example': 'Beispiel',
   'flash.unit': 'Unit',
   'flash.lesson': 'Lektion',
   'flash.level': 'Niveau',
