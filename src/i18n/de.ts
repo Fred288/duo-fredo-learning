@@ -40,6 +40,7 @@ export const de = {
   'mistakes.loading': 'Lade Aufgaben …',
   'lookup.title': 'Nachschlagen',
   'lookup.back': 'Zurück',
+  'lookup.results': 'Treffer',
   'lookup.search': 'Türkisch oder Deutsch suchen',
   'lookup.hint':
     'Tippe ein Wort, auch gebeugt (evlerde) oder auf Deutsch (Tisch). Sonderzeichen sind egal.',

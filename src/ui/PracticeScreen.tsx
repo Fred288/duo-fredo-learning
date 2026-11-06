@@ -5,6 +5,7 @@ import { t } from '../i18n';
 import { pickText, rememberText, type TextRef } from '../practice/pick';
 import { useApp } from '../store/app';
 import { useSettings, type PracticeMode } from '../store/settings';
+import { LookupButton } from './LookupSheet';
 import { ReadingPassage } from './ReadingPassage';
 import { SpeakButton } from './SpeakButton';
 import { TokenText } from './TokenText';
@@ -79,6 +80,9 @@ export function PracticeScreen({ unitId, text: ref }: { unitId: string; text: Te
             {t('practice.kind')}
             {level && ` · ${level}`}
           </p>
+        </div>
+        <div className="ml-auto">
+          <LookupButton />
         </div>
       </header>
       <fieldset>

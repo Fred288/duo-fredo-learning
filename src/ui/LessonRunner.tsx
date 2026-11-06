@@ -31,6 +31,7 @@ import { OrderFeedback, SegmentFeedback } from './StructureFeedback';
 import { ExerciseView } from './ExerciseView';
 import { Feedback } from './Feedback';
 import { GrammarHint } from './GrammarHint';
+import { LookupButton } from './LookupSheet';
 import { ReportError } from './ReportError';
 
 const buttonBase =
@@ -60,6 +61,8 @@ interface Props {
   aside?: ReactNode;
   /** Zusätzlicher Knopf auf dem Abschlussbildschirm (Übungstext), zwischen „Nochmal“ und „Zur Übersicht“. */
   doneExtra?: ReactNode;
+  /** Knopf „Nachschlagen“ im Kopf (Sheet über der Aufgabe). Die Einstufung nutzt den Runner nicht. */
+  lookup?: boolean;
 }
 
 /** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
@@ -103,6 +106,7 @@ function Runner({
   grammarFor,
   aside,
   doneExtra,
+  lookup = true,
 }: Props & { canListen: boolean }) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(
@@ -254,6 +258,7 @@ function Runner({
             style={{ width: `${(session.index / total) * 100}%` }}
           />
         </div>
+        {lookup && <LookupButton />}
       </header>
 
       {aside && (

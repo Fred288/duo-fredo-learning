@@ -107,7 +107,8 @@ export async function playLesson(page: Page, unitId: string, lessonId: string) {
   const card = await openUnit(page, unitId);
   // Der Button-Name beginnt mit dem Lektionstyp; der Titel steht am Ende („Plural und Ort“ ≠ „Tabellen: Plural und Ort“).
   const title = lesson.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const name = new RegExp(`^\\p{L}+(\\s*abgeschlossen)?\\s*${title}$`, 'u');
+  // Übungstexte können wie eine Lektion heißen („Mein Tag“); ihr Knopf beginnt mit „Übungstext“.
+  const name = new RegExp(`^(?!Übungstext)\\p{L}+(\\s*abgeschlossen)?\\s*${title}$`, 'u');
   await card.getByRole('button', { name }).click();
   // Lesetext: erst der Text, dann die Fragen.
   if (lesson.passage) await page.getByRole('button', { name: 'Zu den Fragen' }).click();

@@ -125,6 +125,20 @@ for (const scheme of ['light', 'dark'] as const) {
     await clean(page, 'Wort-Sheet');
   });
 
+  test(`axe: Nachschlagen in der Lektion (${scheme})`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('/');
+    const unit = await openUnit(page, 'a1-u02');
+    await unit.getByRole('button', { name: /^\p{L}+\s*Plural bauen$/u }).click();
+    await page.getByRole('button', { name: 'Nachschlagen' }).click();
+    await page.getByRole('searchbox').fill('ev');
+    await expect(page.getByRole('dialog').getByRole('status')).toContainText('Treffer');
+    await clean(page, 'Nachschlagen in der Lektion: Treffer');
+    await page.getByRole('searchbox').press('Enter');
+    await expect(page.getByRole('heading', { name: 'ev', level: 2 })).toBeVisible();
+    await clean(page, 'Nachschlagen in der Lektion: Eintrag');
+  });
+
   test(`axe: Übungstext (${scheme})`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: scheme });
     await page.goto('/');
