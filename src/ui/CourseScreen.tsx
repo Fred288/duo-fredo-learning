@@ -277,6 +277,7 @@ function UnitDetail({
   const openLesson = useApp((s) => s.openLesson);
   const openExplainer = useApp((s) => s.openExplainer);
   const openFlashcards = useApp((s) => s.openFlashcards);
+  const openTextPractice = useApp((s) => s.openTextPractice);
   const goBack = useApp((s) => s.goBack);
   const completions = useProgress((s) => s.completions);
   const placements = useProgress((s) => s.placements);
@@ -352,6 +353,17 @@ function UnitDetail({
               {lesson.title}
             </button>
           ))}
+        {unit.texts?.map((text) => (
+          <button
+            key={text.id}
+            type="button"
+            onClick={() => openTextPractice(unit.id, { unitId: unit.id, ...text })}
+            className="min-h-11 rounded-lg bg-fill-soft px-4 text-left hover:bg-fill focus-visible:outline-2 focus-visible:outline-focus"
+          >
+            <span className="block text-xs text-ink-subtle">{t('practice.kind')}</span>
+            {text.title}
+          </button>
+        ))}
       </div>
     </section>
   );

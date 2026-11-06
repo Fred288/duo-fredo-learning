@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Selection } from '../flashcards/deck';
 import type { FlashMode } from '../flashcards/types';
+import type { TextRef } from '../practice/pick';
 
 export type Screen =
   | { name: 'today' }
@@ -17,6 +18,8 @@ export type Screen =
   /** Karteikasten: Auswahl; `unitId` legt den Stapel auf diese Unit vor. */
   | { name: 'flashcards'; unitId?: string }
   | { name: 'flashcards-run'; selection: Selection; mode: FlashMode }
+  /** Übungstext; `unitId` = Unit, aus der er angeboten wurde (Kandidaten für „Anderer Text“). */
+  | { name: 'text-practice'; unitId: string; text: TextRef }
   | { name: 'explainer'; unitId: string; section?: string; from?: 'lookup' }
   | { name: 'lesson'; unitId: string; lessonId: string };
 
@@ -27,6 +30,7 @@ const FOCUS_SCREENS: ReadonlySet<Screen['name']> = new Set([
   'mistakes',
   'placement',
   'flashcards-run',
+  'text-practice',
 ]);
 export const isFocusScreen = (screen: Screen): boolean => FOCUS_SCREENS.has(screen.name);
 
@@ -42,6 +46,8 @@ export function parentOf(screen: Screen): Screen {
       return { name: 'course' };
     case 'flashcards-run':
       return { name: 'flashcards' };
+    case 'text-practice':
+      return { name: 'unit', unitId: screen.unitId };
     default:
       return { name: 'today' };
   }
@@ -71,6 +77,11 @@ interface AppState {
   openPlacement: () => void;
   openFlashcards: (unitId?: string) => void;
   openFlashRun: (selection: Selection, mode: FlashMode) => void;
+  /**
+   * Übungstext öffnen. Vom Abschlussbildschirm ersetzt er die Lektion (`replace`), damit „Fertig“
+   * und Zurück nicht in eine neu startende Lektion führen.
+   */
+  openTextPractice: (unitId: string, text: TextRef, opts?: { replace?: boolean }) => void;
   /** Suchtext und geöffneter Eintrag bleiben erhalten, wenn man aus einer Erklärkarte zurückkehrt. */
   lookupQuery: string;
   lookupEntry?: string;
@@ -218,6 +229,8 @@ export const useApp = create<AppState>((set, get) => {
     openFlashcards: (unitId) =>
       go(unitId ? { name: 'flashcards', unitId } : { name: 'flashcards' }),
     openFlashRun: (selection, mode) => go({ name: 'flashcards-run', selection, mode }),
+    openTextPractice: (unitId, text, opts) =>
+      go({ name: 'text-practice', unitId, text }, opts?.replace ? 'replace' : 'push'),
     lookupQuery: '',
     lookupEntry: undefined,
     setLookup: (lookupQuery, lookupEntry) => set({ lookupQuery, lookupEntry }),

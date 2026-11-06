@@ -37,7 +37,11 @@ export interface Settings {
   flashOrder: Order;
   /** Übungstexte: zuletzt gelesene IDs, jüngste zuerst (nur gegen Wiederholung, keine Wertung). */
   practiceRecent: string[];
+  /** Übungstexte: zuletzt gewählte Art (lesen oder Satz für Satz übersetzen). */
+  practiceMode: PracticeMode;
 }
+
+export type PracticeMode = 'read' | 'translate';
 
 export const DEFAULT_SETTINGS: Settings = {
   tolerateDiacritics: true,
@@ -58,6 +62,7 @@ export const DEFAULT_SETTINGS: Settings = {
   flashMode: 'flip',
   flashOrder: 'course',
   practiceRecent: [],
+  practiceMode: 'read',
 };
 
 const oneOf = <T extends string>(values: readonly T[], v: unknown): v is T =>
@@ -126,6 +131,7 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (oneOf(['tr_de', 'de_tr', 'listen', 'mixed'], stored.flashDir)) out.flashDir = stored.flashDir;
   if (oneOf(['flip', 'type'], stored.flashMode)) out.flashMode = stored.flashMode;
   if (oneOf(['course', 'shuffled'], stored.flashOrder)) out.flashOrder = stored.flashOrder;
+  if (oneOf(['read', 'translate'], stored.practiceMode)) out.practiceMode = stored.practiceMode;
   if (
     Array.isArray(stored.practiceRecent) &&
     stored.practiceRecent.every((id) => typeof id === 'string')

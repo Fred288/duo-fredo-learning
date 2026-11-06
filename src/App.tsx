@@ -6,6 +6,7 @@ import { AppNav } from './ui/AppNav';
 import { CourseScreen } from './ui/CourseScreen';
 import { ExplainerScreen } from './ui/ExplainerScreen';
 import { FlashcardsRunScreen } from './ui/FlashcardsRunScreen';
+import { PracticeScreen } from './ui/PracticeScreen';
 import { FlashcardsScreen } from './ui/FlashcardsScreen';
 import { LookupScreen } from './ui/LookupScreen';
 import { LessonScreen } from './ui/LessonScreen';
@@ -160,6 +161,9 @@ export function App() {
           )}
           {screen.name === 'flashcards-run' && (
             <FlashcardsRunScreen selection={screen.selection} mode={screen.mode} />
+          )}
+          {screen.name === 'text-practice' && (
+            <PracticeScreen key={screen.text.id} unitId={screen.unitId} text={screen.text} />
           )}
           {screen.name === 'explainer' && (
             <ExplainerScreen unitId={screen.unitId} section={screen.section} from={screen.from} />

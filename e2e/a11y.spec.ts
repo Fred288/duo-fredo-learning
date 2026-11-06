@@ -124,6 +124,26 @@ for (const scheme of ['light', 'dark'] as const) {
     await expect(page.getByRole('dialog', { name: 'Wort: taşındım' })).toBeVisible();
     await clean(page, 'Wort-Sheet');
   });
+
+  test(`axe: Übungstext (${scheme})`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme: scheme });
+    await page.goto('/');
+    const unit = await openUnit(page, 'a1-u02');
+    await unit.getByRole('button', { name: /Wo ist was\?/ }).click();
+    await expect(page.getByRole('button', { name: 'Öğrenciler', exact: true })).toBeVisible();
+    await clean(page, 'Übungstext: Lesen');
+    await page.locator('label', { hasText: /^Übersetzen$/ }).click();
+    await page.getByRole('button', { name: 'Vergleichen' }).click();
+    await expect(page.getByRole('button', { name: 'Passt' })).toBeVisible();
+    await clean(page, 'Übungstext: Vergleich');
+    await page.getByRole('button', { name: 'Daneben' }).click();
+    for (let i = 0; i < 3; i++) {
+      await page.getByRole('button', { name: 'Vergleichen' }).click();
+      await page.getByRole('button', { name: 'Passt' }).click();
+    }
+    await expect(page.getByRole('heading', { name: 'Text geschafft' })).toBeVisible();
+    await clean(page, 'Übungstext: Ende');
+  });
 }
 
 // --- Glas und seine Rückfälle ---------------------------------------------------------------

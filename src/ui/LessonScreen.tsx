@@ -3,16 +3,22 @@ import { sectionFor } from '../content/explainer-section';
 import { fetchExplainer, fetchUnit } from '../content/load';
 import type { Lesson, Vocab } from '../content/schema';
 import { t } from '../i18n';
+import { pickText } from '../practice/pick';
 import { useApp } from '../store/app';
 import { useProgress } from '../store/progress';
+import { useSettings } from '../store/settings';
 import { LessonRunner } from './LessonRunner';
 import { ReadingPassage } from './ReadingPassage';
+import { useManifest } from './useManifest';
 
 const buttonBase =
   'min-h-12 w-full rounded-xl px-5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus';
 
 export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: string }) {
   const goBack = useApp((s) => s.goBack);
+  const openTextPractice = useApp((s) => s.openTextPractice);
+  const practiceRecent = useSettings((s) => s.practiceRecent);
+  const { manifest } = useManifest();
   const recordAttempt = useProgress((s) => s.recordAttempt);
   const recordCompletion = useProgress((s) => s.recordCompletion);
   const [lesson, setLesson] = useState<Lesson>();
@@ -41,6 +47,11 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
   if (failed) return <p className="text-danger">{t('home.error')}</p>;
   if (!lesson) return <p className="text-ink-subtle">{t('runner.loading')}</p>;
   const { passage } = lesson;
+  // Übungstext als Angebot nach der Lektion (nicht nach Hörlektionen); der Zufall wählt erst beim Klick.
+  const offer =
+    manifest && lesson.type !== 'listening'
+      ? pickText(manifest.units, unitId, practiceRecent, () => 0)
+      : undefined;
   if (passage && reading) {
     return (
       <section className="space-y-6" aria-labelledby="reading-title">
@@ -78,6 +89,21 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       onAttempt={(ex, verdict) => recordAttempt(ex.id, lessonId, verdict, ex.type)}
       onComplete={(correct, total) => recordCompletion(unitId, lessonId, correct, total)}
       grammarFor={explainer ? (ex) => sectionFor(explainer, ex, lesson.title) : undefined}
+      doneExtra={
+        manifest &&
+        offer && (
+          <button
+            type="button"
+            className={`${buttonBase} bg-fill`}
+            onClick={() => {
+              const text = pickText(manifest.units, unitId, practiceRecent);
+              if (text) openTextPractice(unitId, text, { replace: true });
+            }}
+          >
+            {t('practice.offer')}
+          </button>
+        )
+      }
       aside={
         passage && (
           <details className="rounded-xl border border-line bg-surface p-3">

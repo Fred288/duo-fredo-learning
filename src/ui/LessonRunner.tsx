@@ -58,6 +58,8 @@ interface Props {
   grammarFor?: (ex: Exercise) => ExplainerSection | undefined;
   /** Unter der Kopfzeile, solange Aufgaben laufen (Lesetext zum Nachsehen). */
   aside?: ReactNode;
+  /** Zusätzlicher Knopf auf dem Abschlussbildschirm (Übungstext), zwischen „Nochmal“ und „Zur Übersicht“. */
+  doneExtra?: ReactNode;
 }
 
 /** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
@@ -100,6 +102,7 @@ function Runner({
   doneTitle = t('done.title'),
   grammarFor,
   aside,
+  doneExtra,
 }: Props & { canListen: boolean }) {
   const tolerateDiacritics = useSettings((s) => s.tolerateDiacritics);
   const exercises = useMemo(
@@ -202,6 +205,7 @@ function Runner({
               {t('done.again')}
             </button>
           )}
+          {total > 0 && doneExtra}
           <button
             type="button"
             autoFocus
