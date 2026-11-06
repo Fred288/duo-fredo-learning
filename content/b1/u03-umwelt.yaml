@@ -556,3 +556,30 @@ vocab:
   - { tr: eğer, de: [wenn, falls], pos: conj }
   - { tr: vakit, de: [Zeit], pos: noun, drops_vowel: true }
   - { tr: sorun, de: [Problem], pos: noun }
+texts:
+  - id: b1-u03-t1
+    title: "Unser See"
+    reviewed: false
+    glossary:
+      - { tr: "temizdi", de: "war sauber (temiz + Vergangenheit)", vocab: "temiz" }
+      - { tr: "varsa", de: "wenn es gibt, wenn … hat (var + ise)", vocab: "var" }
+    sentences:
+      - { tr: "Köyümüzün yanında küçük bir göl var.", de: "Neben unserem Dorf gibt es einen kleinen See." }
+      - { tr: "Eskiden göl çok temizdi.", de: "Früher war der See sehr sauber." }
+      - { tr: "Şimdi gölde çok çöp var.", de: "Jetzt liegt viel Müll im See." }
+      - { tr: "Eğer herkes çöpünü toplarsa, göl tekrar temiz olur.", de: "Wenn alle ihren Müll aufsammeln, wird der See wieder sauber." }
+      - { tr: "Hafta sonu vaktin varsa, sen de gel!", de: "Wenn du am Wochenende Zeit hast, komm auch!" }
+      - { tr: "Çöpleri toplayacağız ve ayıracağız.", de: "Wir werden den Müll sammeln und trennen." }
+      - { tr: "Hayvanlar ve bitkiler için temiz bir göl çok önemli.", de: "Für Tiere und Pflanzen ist ein sauberer See sehr wichtig." }
+  - id: b1-u03-t2
+    title: "Strom sparen"
+    reviewed: false
+    glossary:
+      - { tr: "varsa", de: "wenn es gibt, wenn … hat (var + ise)", vocab: "var" }
+    sentences:
+      - { tr: "Evde çok elektrik kullanıyoruz.", de: "Zu Hause verbrauchen wir viel Strom." }
+      - { tr: "Eğer lambaları kapatırsak, daha az elektrik kullanırız.", de: "Wenn wir die Lampen ausschalten, verbrauchen wir weniger Strom." }
+      - { tr: "Televizyonu izlemiyorsan, kapat.", de: "Wenn du nicht fernsiehst, schalte den Fernseher aus." }
+      - { tr: "Bisikletin varsa, arabaya binme.", de: "Wenn du ein Fahrrad hast, fahr nicht mit dem Auto." }
+      - { tr: "Herkes öyle yapsa, dünya daha temiz olur.", de: "Wenn alle es so machten, wäre die Welt sauberer." }
+      - { tr: "Ama çok insan çevreyi düşünmüyor.", de: "Aber viele Menschen denken nicht an die Umwelt." }

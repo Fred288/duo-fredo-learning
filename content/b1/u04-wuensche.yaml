@@ -524,3 +524,30 @@ vocab:
   - { tr: durmak, de: [aufhören, stehen bleiben], pos: verb }
   - { tr: plan, de: [Plan], pos: noun }
   - { tr: o zaman, de: [dann, damals], pos: phrase }
+texts:
+  - id: b1-u04-t1
+    title: "Ein Picknick"
+    reviewed: false
+    glossary:
+      - { tr: "al", de: "kauf (almak, Imperativ)", vocab: "almak" }
+    sentences:
+      - { tr: "Hadi, cumartesi piknik yapalım!", de: "Komm, lass uns am Samstag ein Picknick machen!" }
+      - { tr: "Ben ekmek ve peynir alayım.", de: "Ich kaufe Brot und Käse." }
+      - { tr: "Sen de su al.", de: "Und du kaufst Wasser." }
+      - { tr: "Ama cumartesi yağmur yağacakmış.", de: "Aber am Samstag soll es regnen." }
+      - { tr: "Keşke güneşli olsa!", de: "Wenn es doch nur sonnig wäre!" }
+      - { tr: "O zaman pazar günü yapalım.", de: "Dann machen wir es am Sonntag." }
+      - { tr: "Umarım pazar günü hava güzel olur.", de: "Hoffentlich ist das Wetter am Sonntag schön." }
+  - id: b1-u04-t2
+    title: "Hätte ich doch …"
+    reviewed: false
+    glossary:
+      - { tr: "hastayım", de: "ich bin krank (hasta + ich)", vocab: "hasta" }
+    sentences:
+      - { tr: "Dün sabah şemsiyemi evde unuttum.", de: "Gestern Morgen habe ich meinen Regenschirm zu Hause vergessen." }
+      - { tr: "Öğleden sonra büyük bir fırtına başladı.", de: "Am Nachmittag begann ein großer Sturm." }
+      - { tr: "Akşama kadar yağmur yağdı.", de: "Bis zum Abend regnete es." }
+      - { tr: "Keşke şemsiyemi yanıma alsaydım!", de: "Hätte ich doch meinen Regenschirm mitgenommen!" }
+      - { tr: "Keşke sabah haberleri izleseydim!", de: "Hätte ich doch morgens die Nachrichten gesehen!" }
+      - { tr: "Şimdi hastayım ve evde yatıyorum.", de: "Jetzt bin ich krank und liege zu Hause." }
+      - { tr: "Umarım yarın işe gidebilirim.", de: "Hoffentlich kann ich morgen zur Arbeit gehen." }

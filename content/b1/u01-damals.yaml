@@ -616,3 +616,32 @@ vocab:
   - { tr: karar, de: [Entscheidung], pos: noun }
   - { tr: karar vermek, de: [sich entscheiden, beschließen], pos: verb }
   - { tr: ya da, de: [oder], pos: conj }
+texts:
+  - id: b1-u01-t1
+    title: "Sommer im Dorf"
+    reviewed: false
+    glossary:
+      - { tr: "vardı", de: "es gab, hatte (var + Vergangenheit)", vocab: "var" }
+      - { tr: "mutluydum", de: "ich war glücklich (mutlu + Vergangenheit)", vocab: "mutlu" }
+    sentences:
+      - { tr: "Çocukken yazın köye giderdik.", de: "Als Kind fuhren wir im Sommer immer ins Dorf." }
+      - { tr: "Dedemin büyük bir tarlası ve iki ineği vardı.", de: "Mein Großvater hatte ein großes Feld und zwei Kühe." }
+      - { tr: "Sabahları erken kalkardık.", de: "Morgens standen wir früh auf." }
+      - { tr: "Öğleden sonra derede yüzerdik ya da ağaçlara tırmanırdık.", de: "Nachmittags schwammen wir im Bach oder kletterten auf Bäume." }
+      - { tr: "Akşamları mahallenin çocuklarıyla saklambaç oynardık.", de: "Abends spielten wir mit den Kindern aus dem Viertel Verstecken." }
+      - { tr: "Bir gün ağaçtan düşmüştüm.", de: "Einmal war ich vom Baum gefallen." }
+      - { tr: "O zamanlar çok mutluydum.", de: "Damals war ich sehr glücklich." }
+  - id: b1-u01-t2
+    title: "Der verpasste Zug"
+    reviewed: false
+    glossary:
+      - { tr: "çıkarken", de: "beim Hinausgehen (çıkmak + -ken)", vocab: "çıkmak" }
+      - { tr: "konuşurken", de: "während ich sprach (konuşmak + -ken)", vocab: "konuşmak" }
+    sentences:
+      - { tr: "Geçen hafta İzmir'e gidecektim.", de: "Letzte Woche wollte ich nach Izmir fahren." }
+      - { tr: "Sabah evden çıkarken annem aradı.", de: "Als ich morgens aus dem Haus ging, rief meine Mutter an." }
+      - { tr: "Annemle konuşurken zamanı unuttum.", de: "Während ich mit meiner Mutter sprach, vergaß ich die Zeit." }
+      - { tr: "Sonra istasyona koştum.", de: "Dann rannte ich zum Bahnhof." }
+      - { tr: "Ama tren çoktan gitmişti.", de: "Aber der Zug war längst abgefahren." }
+      - { tr: "Treni kaçırmıştım!", de: "Ich hatte den Zug verpasst!" }
+      - { tr: "Bir saat bekledim ve başka bir trene bindim.", de: "Ich wartete eine Stunde und stieg in einen anderen Zug." }

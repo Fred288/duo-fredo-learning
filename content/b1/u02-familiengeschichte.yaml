@@ -543,3 +543,33 @@ vocab:
   - { tr: ağlamak, de: [weinen], pos: verb }
   - { tr: fotoğraf, de: [Foto], pos: noun }
   - { tr: öyle, de: [so], pos: adv }
+texts:
+  - id: b1-u02-t1
+    title: "Die Reise nach Deutschland"
+    reviewed: false
+    glossary:
+      - { tr: "göçmenmiş", de: "war (wie sich herausstellte) Einwanderin (göçmen + imiş)", vocab: "göçmen" }
+    sentences:
+      - { tr: "Büyük dedem çok fakir bir köyde doğmuş.", de: "Mein Urgroßvater wurde in einem sehr armen Dorf geboren." }
+      - { tr: "Gençliğinde bir fabrikada çalışıyormuş.", de: "In seiner Jugend arbeitete er in einer Fabrik." }
+      - { tr: "1962 yılında köyden ayrılmış.", de: "1962 verließ er das Dorf." }
+      - { tr: "Trenle Almanya'ya gitmiş.", de: "Mit dem Zug fuhr er nach Deutschland." }
+      - { tr: "Orada büyük ninemle tanışmış.", de: "Dort lernte er meine Urgroßmutter kennen." }
+      - { tr: "Meğer büyük ninem de bir göçmenmiş.", de: "Wie sich herausstellte, war auch meine Urgroßmutter eine Einwanderin." }
+      - { tr: "İki yıl sonra evlenmişler.", de: "Zwei Jahre später heirateten sie." }
+      - { tr: "Büyük dedem hep Türkiye'ye dönecekmiş, ama hiç dönmemiş.", de: "Mein Urgroßvater wollte immer in die Türkei zurück, ist aber nie zurückgekehrt." }
+  - id: b1-u02-t2
+    title: "Alte Fotos"
+    reviewed: false
+    glossary:
+      - { tr: "vardı", de: "es gab, war da (var + Vergangenheit)", vocab: "var" }
+      - { tr: "terziymiş", de: "soll Schneiderin gewesen sein (terzi + imiş)", vocab: "terzi" }
+      - { tr: "mutluymuş", de: "soll glücklich gewesen sein (mutlu + imiş)", vocab: "mutlu" }
+    sentences:
+      - { tr: "Dün annemle eski fotoğraflara baktık.", de: "Gestern haben meine Mutter und ich alte Fotos angeschaut." }
+      - { tr: "Bir fotoğrafta büyük ninem vardı.", de: "Auf einem Foto war meine Urgroßmutter." }
+      - { tr: "Anneme göre büyük ninem terziymiş.", de: "Laut meiner Mutter war meine Urgroßmutter Schneiderin." }
+      - { tr: "Herkes ona elbise için gelirmiş.", de: "Alle kamen wegen Kleidern zu ihr." }
+      - { tr: "Çok çalışırmış ama hep mutluymuş.", de: "Sie soll viel gearbeitet haben, aber immer glücklich gewesen sein." }
+      - { tr: "Bir gün kızı İstanbul'a taşınacakmış, ama savaş başlamış.", de: "Eines Tages wollte ihre Tochter nach Istanbul ziehen, aber dann begann der Krieg." }
+      - { tr: "Bu hikâyeyi hiç duymamıştım!", de: "Diese Geschichte hatte ich noch nie gehört!" }

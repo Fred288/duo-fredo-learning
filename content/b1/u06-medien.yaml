@@ -522,3 +522,28 @@ vocab:
   - { tr: kontrol etmek, de: [prüfen, kontrollieren], pos: verb, softens: true }
   - { tr: muhabir, de: [Reporter(in)], pos: noun }
   - { tr: bakış açısı, de: [Sichtweise], pos: noun, compound_stem: bakış açı }
+texts:
+  - id: b1-u06-t1
+    title: "Falsche Nachrichten"
+    reviewed: false
+    sentences:
+      - { tr: "İnternette her gün çok haber okuyorum.", de: "Im Internet lese ich jeden Tag viele Nachrichten." }
+      - { tr: "Ama yanlış haberler de var.", de: "Aber es gibt auch falsche Nachrichten." }
+      - { tr: "Kaynağa bakmayı unutmamalıyız.", de: "Wir dürfen nicht vergessen, nach der Quelle zu schauen." }
+      - { tr: "Dün kardeşim yanlış bir haber paylaştı.", de: "Gestern hat mein Bruder eine falsche Nachricht geteilt." }
+      - { tr: "Haberi silmesini istedim.", de: "Ich bat ihn, die Nachricht zu löschen." }
+      - { tr: "Ona bunu açıklamam lazım.", de: "Ich muss ihm das erklären." }
+      - { tr: "Bence okulda bunu öğrenmeye başlamalıyız.", de: "Ich finde, wir sollten in der Schule anfangen, das zu lernen." }
+  - id: b1-u06-t2
+    title: "Eine neue Serie"
+    reviewed: false
+    glossary:
+      - { tr: "mu", de: "Fragepartikel (… ?)" }
+    sentences:
+      - { tr: "Bu akşam yeni bir dizi başlıyor.", de: "Heute Abend beginnt eine neue Serie." }
+      - { tr: "Arkadaşım dizileri izlemeyi çok seviyor.", de: "Meine Freundin schaut sehr gern Serien." }
+      - { tr: "Benim de izlememi istiyor.", de: "Sie möchte, dass ich auch zuschaue." }
+      - { tr: "Ama reklamlardan hiç hoşlanmıyorum.", de: "Aber Werbung mag ich überhaupt nicht." }
+      - { tr: "Bu kanalda çok reklam var.", de: "Auf diesem Sender gibt es viel Werbung." }
+      - { tr: "Diziyi internette izleyeceğiz.", de: "Wir werden die Serie im Internet schauen." }
+      - { tr: "Sence bu doğru mu?", de: "Ist das deiner Meinung nach richtig?" }

@@ -534,3 +534,28 @@ vocab:
   - { tr: yorulmak, de: [müde werden], pos: verb, causative: none }
   - { tr: zorunda, de: [gezwungen (… zorundayım = ich muss)], pos: phrase }
   - { tr: artık, de: [nicht mehr (mit Verneinung), inzwischen], pos: adv }
+texts:
+  - id: b1-u05-t1
+    title: "Ein neuer Computer"
+    reviewed: false
+    glossary:
+      - { tr: "zorundayım", de: "ich muss (zorunda + ich)", vocab: "zorunda" }
+    sentences:
+      - { tr: "Babam yeni bir bilgisayar almak istiyor.", de: "Mein Vater möchte einen neuen Computer kaufen." }
+      - { tr: "Eski bilgisayarı bozuldu.", de: "Sein alter Computer ist kaputtgegangen." }
+      - { tr: "Fotoğraflarını kaydetmek için büyük bir bilgisayar lazım.", de: "Um seine Fotos zu speichern, braucht er einen großen Computer." }
+      - { tr: "Ama yeni programları öğrenmekten korkuyor.", de: "Aber er hat Angst davor, neue Programme zu lernen." }
+      - { tr: "Ona yardım etmek zorundayım.", de: "Ich muss ihm helfen." }
+      - { tr: "Şimdi ona şifreleri anlatmaktayım.", de: "Gerade erkläre ich ihm die Passwörter." }
+      - { tr: "Babam hızlı öğreniyor.", de: "Mein Vater lernt schnell." }
+  - id: b1-u05-t2
+    title: "Computerspiele"
+    reviewed: false
+    sentences:
+      - { tr: "Kardeşim bilgisayarda oyun oynamaktan çok hoşlanıyor.", de: "Mein Bruder spielt sehr gern Computerspiele." }
+      - { tr: "Akşamları üç saat oynuyor.", de: "Abends spielt er drei Stunden." }
+      - { tr: "Annem bundan hiç hoşlanmıyor.", de: "Meiner Mutter gefällt das gar nicht." }
+      - { tr: "Kardeşim önce ödevlerini yapmak zorunda.", de: "Mein Bruder muss zuerst seine Hausaufgaben machen." }
+      - { tr: "Ama oynamaktan vazgeçmek istemiyor.", de: "Aber er will das Spielen nicht aufgeben." }
+      - { tr: "Dün akşam yeni bir oyun indirdi.", de: "Gestern Abend hat er ein neues Spiel heruntergeladen." }
+      - { tr: "Ama sonra bilgisayar bozuldu!", de: "Aber dann ist der Computer kaputtgegangen!" }

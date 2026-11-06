@@ -525,3 +525,35 @@ vocab:
   - { tr: atlamak, de: [springen], pos: verb }
   - { tr: ip, de: [Seil], pos: noun }
   - { tr: hemen, de: [sofort], pos: adv }
+texts:
+  - id: b1-u09-t1
+    title: "Der König und der Riese"
+    reviewed: false
+    glossary:
+      - { tr: "varmış", de: "es gab, hatte (var + imiş, Erzählform)", vocab: "var" }
+      - { tr: "yokmuş", de: "es gab nicht (yok + imiş, Erzählform)", vocab: "yok" }
+      - { tr: "uyurken", de: "während er schlief (uyumak + -ken)", vocab: "uyumak" }
+    sentences:
+      - { tr: "Bir varmış, bir yokmuş.", de: "Es war einmal." }
+      - { tr: "Büyük bir sarayda yaşlı bir kral yaşarmış.", de: "In einem großen Palast lebte ein alter König." }
+      - { tr: "Kralın güzel bir kızı varmış.", de: "Der König hatte eine schöne Tochter." }
+      - { tr: "Bir gün bir dev saraya girip prensesi alarak kaçmış.", de: "Eines Tages drang ein Riese in den Palast ein, nahm die Prinzessin und floh." }
+      - { tr: "Kral çok ağlamış.", de: "Der König weinte sehr." }
+      - { tr: "Genç bir kahraman hiç korkmadan devin evine gitmiş.", de: "Ein junger Held ging ohne Angst zum Haus des Riesen." }
+      - { tr: "Dev uyurken prensesi alıp kaçmış.", de: "Während der Riese schlief, nahm er die Prinzessin und floh." }
+      - { tr: "Sonra kahraman ile prenses evlenmişler.", de: "Danach heirateten der Held und die Prinzessin." }
+  - id: b1-u09-t2
+    title: "Die Zauberflasche"
+    reviewed: false
+    glossary:
+      - { tr: "varmış", de: "es gab, hatte (var + imiş, Erzählform)", vocab: "var" }
+    sentences:
+      - { tr: "Küçük bir köyde fakir bir çocuk yaşarmış.", de: "In einem kleinen Dorf lebte ein armer Junge." }
+      - { tr: "Çocuk bir gün ormanda bir cadı görmüş.", de: "Eines Tages sah der Junge im Wald eine Hexe." }
+      - { tr: "Cadı gülerek ona sihirli bir şişe vermiş.", de: "Die Hexe gab ihm lachend eine Zauberflasche." }
+      - { tr: "\"Bu şişeyi açmadan eve git\" demiş.", de: "„Geh nach Hause, ohne diese Flasche zu öffnen“, sagte sie." }
+      - { tr: "Ama çocuk yolda şişeyi açmış.", de: "Aber der Junge öffnete die Flasche unterwegs." }
+      - { tr: "Şişeden altın yerine su çıkmış.", de: "Statt Gold kam Wasser aus der Flasche." }
+      - { tr: "Çocuk ağlayarak eve dönmüş.", de: "Der Junge kehrte weinend nach Hause zurück." }
+      - { tr: "Sabah uyanıp bahçeye bakmış.", de: "Am Morgen wachte er auf und schaute in den Garten." }
+      - { tr: "Bahçede büyük bir altın ağaç varmış!", de: "Im Garten stand ein großer goldener Baum!" }

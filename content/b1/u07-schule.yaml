@@ -522,3 +522,30 @@ vocab:
   - { tr: başarılı, de: [erfolgreich], pos: adj }
   - { tr: gürültü, de: [Lärm], pos: noun }
   - { tr: adam, de: [Mann], pos: noun }
+texts:
+  - id: b1-u07-t1
+    title: "Der erste Schultag"
+    reviewed: false
+    glossary:
+      - { tr: "Elif", de: "Elif (Frauenname)" }
+    sentences:
+      - { tr: "Bugün yeni bir okula başladım.", de: "Heute habe ich an einer neuen Schule angefangen." }
+      - { tr: "Sınıfta yirmi öğrenci var.", de: "In der Klasse sind zwanzig Schüler." }
+      - { tr: "Yanımda oturan kızın adı Elif.", de: "Das Mädchen, das neben mir sitzt, heißt Elif." }
+      - { tr: "Matematik dersini veren öğretmen çok sakin.", de: "Der Lehrer, der Mathematik unterrichtet, ist sehr ruhig." }
+      - { tr: "Soru soran öğrencilere her zaman cevap veriyor.", de: "Schülern, die Fragen stellen, antwortet er immer." }
+      - { tr: "Teneffüste konuşan çocuklar çok gürültü yapıyor.", de: "Die Kinder, die in der Pause reden, machen viel Lärm." }
+      - { tr: "Türkçe bilmeyen bir öğrenci de var.", de: "Es gibt auch einen Schüler, der kein Türkisch kann." }
+  - id: b1-u07-t2
+    title: "Vor der Prüfung"
+    reviewed: false
+    glossary:
+      - { tr: "geçen", de: "die bestehen (geçmek + Partizip -en)", vocab: "geçmek" }
+      - { tr: "çalışıyor", de: "lernt (ders çalışmak = lernen)", vocab: "ders çalışmak" }
+    sentences:
+      - { tr: "Yarın zor bir sınav var.", de: "Morgen gibt es eine schwere Prüfung." }
+      - { tr: "Sınava girecek öğrenciler bugün kütüphanede ders çalışıyor.", de: "Die Schüler, die die Prüfung schreiben, lernen heute in der Bibliothek." }
+      - { tr: "Konuları anlamayan öğrenciler öğretmene soru soruyor.", de: "Schüler, die die Themen nicht verstehen, stellen dem Lehrer Fragen." }
+      - { tr: "Bilinen soruları tekrarlıyoruz.", de: "Wir wiederholen die bekannten Fragen." }
+      - { tr: "Sınavda konuşan öğrenciler sınıftan çıkmak zorunda.", de: "Schüler, die in der Prüfung reden, müssen die Klasse verlassen." }
+      - { tr: "Sınavı geçen öğrenciler cuma günü bir parti yapacak.", de: "Die Schüler, die die Prüfung bestehen, machen am Freitag eine Party." }
