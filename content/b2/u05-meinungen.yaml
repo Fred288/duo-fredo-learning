@@ -506,7 +506,7 @@ vocab:
   - { tr: ikna etmek, de: [überzeugen], pos: verb, softens: true }
 texts:
   - id: b2-u05-t1
-    title: "Ein Park statt Parkplatz"
+    title: "Park statt Parkplatz"
     reviewed: false
     glossary:
       - { tr: "çıkıyor", de: "ist dagegen (karşı çıkmak)", vocab: "karşı çıkmak" }
@@ -531,7 +531,7 @@ texts:
       - { tr: "bile", de: "sogar, selbst (-se bile = selbst wenn)" }
     sentences:
       - { tr: "Gelecek ay mahallemizde seçim var.", de: "Nächsten Monat gibt es in unserem Viertel eine Wahl." }
-      - { tr: "Komşum hiç düşünmeksizin eski başkanı destekleyecek.", de: "Mein Nachbar wird, ohne nachzudenken, den alten Vorsitzenden unterstützen." }
+      - { tr: "Komşum hiç düşünmeksizin eski başkanı destekleyecek.", de: "Mein Nachbar wird, ohne nachzudenken, den bisherigen Vorsitzenden unterstützen." }
       - { tr: "Ama ben önce başka görüşleri de dinlemek istiyorum.", de: "Ich aber möchte zuerst auch andere Ansichten hören." }
       - { tr: "Genç bir kadın da seçime katılıyor.", de: "Auch eine junge Frau tritt bei der Wahl an." }
       - { tr: "Deneyimi az olmasına rağmen halk onu seviyor.", de: "Obwohl sie wenig Erfahrung hat, mögen die Leute sie." }

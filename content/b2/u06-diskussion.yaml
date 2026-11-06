@@ -520,7 +520,7 @@ texts:
       - { tr: "Herhalde işte unutmuşumdur.", de: "Wahrscheinlich habe ich sie bei der Arbeit vergessen." }
       - { tr: "Ya da otobüste düşürmüş olabilirim.", de: "Oder ich könnte sie im Bus verloren haben." }
       - { tr: "Eşim çantama bakmamı önerdi.", de: "Meine Frau schlug vor, in meiner Tasche nachzusehen." }
-      - { tr: "Çantamda olsaydı, onları görürdüm.", de: "Wären sie in meiner Tasche, hätte ich sie gesehen." }
+      - { tr: "Çantamda olsaydı, onları görürdüm.", de: "Wären sie in meiner Tasche gewesen, hätte ich sie gesehen." }
       - { tr: "Ama yanılmışım.", de: "Aber ich hatte mich geirrt." }
       - { tr: "Anahtarlar çantanın içindeymiş.", de: "Die Schlüssel waren doch in der Tasche." }
       - { tr: "Keşke önce çantama baksaydım!", de: "Hätte ich doch zuerst in meiner Tasche nachgesehen!" }
@@ -538,4 +538,4 @@ texts:
       - { tr: "Ama gerçekte param yok.", de: "Aber in Wirklichkeit habe ich kein Geld." }
       - { tr: "Geçen yıl daha çok çalışsaydım, şimdi daha zengin olurdum.", de: "Hätte ich letztes Jahr mehr gearbeitet, wäre ich jetzt reicher." }
       - { tr: "Ama pişman değilim.", de: "Aber ich bereue nichts." }
-      - { tr: "Herhalde sağlık paradan daha önemlidir.", de: "Gesundheit ist wohl wichtiger als Geld." }
+      - { tr: "Bence sağlık paradan daha önemlidir.", de: "Für mich ist Gesundheit wichtiger als Geld." }

@@ -533,9 +533,9 @@ texts:
       - { tr: "şaşırttı", de: "überraschte (şaşırmak + Kausativ -t)", vocab: "şaşırmak" }
     sentences:
       - { tr: "Üniversitede yeni bir deney yaptık.", de: "An der Uni haben wir einen neuen Versuch gemacht." }
-      - { tr: "Amacımız suyu daha az enerjiyle ısıtmak.", de: "Unser Ziel: Wasser mit weniger Energie zu erwärmen." }
+      - { tr: "Amacımız suyu daha az enerjiyle ısıtmak.", de: "Unser Ziel ist es, Wasser mit weniger Energie zu erwärmen." }
       - { tr: "Önce suyun sıcaklığını ölçtük.", de: "Zuerst haben wir die Temperatur des Wassers gemessen." }
-      - { tr: "Sonra makineye yeni bir cihaz yerleştirdik.", de: "Dann haben wir ein neues Gerät an der Maschine angebracht." }
+      - { tr: "Sonra makineye yeni bir cihaz yerleştirdik.", de: "Dann haben wir ein neues Gerät in die Maschine eingebaut." }
       - { tr: "Bu cihazla su daha hızlı ısındı.", de: "Mit diesem Gerät wurde das Wasser schneller warm." }
       - { tr: "Sonuçlar bizi çok şaşırttı.", de: "Die Ergebnisse haben uns sehr überrascht." }
       - { tr: "Enerji maliyeti çok azaldı.", de: "Die Energiekosten sind stark gesunken." }

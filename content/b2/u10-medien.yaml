@@ -465,7 +465,7 @@ texts:
       - { tr: "Dün bir gazetenin manşeti herkesi şaşırttı.", de: "Gestern überraschte die Schlagzeile einer Zeitung alle." }
       - { tr: "Manşete göre bir kurt şehrin parkına girmiş.", de: "Laut der Schlagzeile soll ein Wolf in den Stadtpark gekommen sein." }
       - { tr: "Haber internette çok hızlı yayıldı.", de: "Die Nachricht verbreitete sich im Internet sehr schnell." }
-      - { tr: "Okurlar korkarak çocuklarını parka göndermedi.", de: "Aus Angst schickten die Leser ihre Kinder nicht in den Park." }
+      - { tr: "Korkan okurlar çocuklarını parka göndermedi.", de: "Verängstigte Leser schickten ihre Kinder nicht in den Park." }
       - { tr: "Ancak bir uzman haberi doğrulamak istedi.", de: "Doch ein Fachmann wollte die Nachricht überprüfen." }
       - { tr: "Meğer fotoğrafta bir köpek varmış!", de: "Wie sich herausstellte, war auf dem Foto ein Hund!" }
       - { tr: "Gazete bir gün sonra özür diledi.", de: "Die Zeitung entschuldigte sich einen Tag später." }
@@ -482,5 +482,5 @@ texts:
       - { tr: "İnsanlar okudukları haberlere hemen inanıyor.", de: "Die Menschen glauben sofort den Nachrichten, die sie lesen." }
       - { tr: "Yazar, okurların daha çok şüphe etmesi gerektiğini söyledi.", de: "Der Schriftsteller sagte, dass die Leser mehr zweifeln sollten." }
       - { tr: "Gazete röportajımı yarın yayımlayacak.", de: "Die Zeitung wird mein Interview morgen veröffentlichen." }
-      - { tr: "Okurların yorumlarını okuyasım var.", de: "Ich bin gespannt auf die Kommentare der Leser." }
+      - { tr: "Okurların yorumlarını okuyasım var.", de: "Ich habe große Lust, die Kommentare der Leser zu lesen." }
       - { tr: "Umarım röportaj okurları etkiler.", de: "Hoffentlich regt das Interview die Leser zum Nachdenken an." }
