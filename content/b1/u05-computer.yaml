@@ -543,10 +543,10 @@ texts:
     sentences:
       - { tr: "Babam yeni bir bilgisayar almak istiyor.", de: "Mein Vater möchte einen neuen Computer kaufen." }
       - { tr: "Eski bilgisayarı bozuldu.", de: "Sein alter Computer ist kaputtgegangen." }
-      - { tr: "Fotoğraflarını kaydetmek için büyük bir bilgisayar lazım.", de: "Um seine Fotos zu speichern, braucht er einen großen Computer." }
+      - { tr: "Fotoğraflarını kaydetmek için yeni bir bilgisayar lazım.", de: "Um seine Fotos zu speichern, braucht er einen neuen Computer." }
       - { tr: "Ama yeni programları öğrenmekten korkuyor.", de: "Aber er hat Angst davor, neue Programme zu lernen." }
       - { tr: "Ona yardım etmek zorundayım.", de: "Ich muss ihm helfen." }
-      - { tr: "Şimdi ona şifreleri anlatmaktayım.", de: "Gerade erkläre ich ihm die Passwörter." }
+      - { tr: "Şimdi ona yeni programları anlatmaktayım.", de: "Gerade erkläre ich ihm die neuen Programme." }
       - { tr: "Babam hızlı öğreniyor.", de: "Mein Vater lernt schnell." }
   - id: b1-u05-t2
     title: "Computerspiele"

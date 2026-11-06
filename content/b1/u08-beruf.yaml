@@ -531,18 +531,19 @@ texts:
       - { tr: "Çalıştığım proje çok zordu.", de: "Das Projekt, an dem ich arbeitete, war sehr schwer." }
       - { tr: "Müdürümün söylediğini hiç unutmayacağım.", de: "Was mein Chef gesagt hat, werde ich nie vergessen." }
       - { tr: "Şimdi üniversitede okuduğum bölümü çok seviyorum.", de: "Jetzt liebe ich das Fach, das ich an der Uni studiere." }
-      - { tr: "Gelecek yıl yapacağım staj için başvurdum.", de: "Für das Praktikum, das ich nächstes Jahr mache, habe ich mich beworben." }
+      - { tr: "Gelecek yıl yapmak istediğim staj için başvurdum.", de: "Für das Praktikum, das ich nächstes Jahr machen möchte, habe ich mich beworben." }
       - { tr: "Cevabı henüz bilmiyorum.", de: "Die Antwort kenne ich noch nicht." }
   - id: b1-u08-t2
     title: "Vor dem Vorstellungsgespräch"
     reviewed: false
     glossary:
+      - { tr: "yıllık", de: "… Jahre lang (yıl + -lık): üç yıllık = dreijährig", vocab: "yıl" }
       - { tr: "arıyorlar", de: "sie suchen (aramak)", vocab: "aramak" }
     sentences:
       - { tr: "Yarın bir şirkete gideceğim.", de: "Morgen gehe ich zu einer Firma." }
       - { tr: "Gazetede gördüğüm ilanda bir mühendis arıyorlar.", de: "In der Anzeige, die ich in der Zeitung gesehen habe, suchen sie einen Ingenieur." }
       - { tr: "Özgeçmişimi ve diplomamı hazırladım.", de: "Ich habe meinen Lebenslauf und mein Diplom vorbereitet." }
       - { tr: "Bu işi çok istediğimi göstermem lazım.", de: "Ich muss zeigen, dass ich diese Stelle wirklich möchte." }
-      - { tr: "Üç yıl deneyimim var.", de: "Ich habe drei Jahre Erfahrung." }
+      - { tr: "Üç yıllık deneyimim var.", de: "Ich habe drei Jahre Erfahrung." }
       - { tr: "Ne giyeceğimi bilmiyorum!", de: "Ich weiß nicht, was ich anziehen soll!" }
       - { tr: "Annem siyah ceketimi giymemi söyledi.", de: "Meine Mutter hat gesagt, ich soll meine schwarze Jacke anziehen." }

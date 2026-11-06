@@ -542,12 +542,13 @@ texts:
     title: "Hätte ich doch …"
     reviewed: false
     glossary:
+      - { tr: "durumuna", de: "Wetterbericht (hava durumu + Dativ)", vocab: "hava durumu" }
       - { tr: "hastayım", de: "ich bin krank (hasta + ich)", vocab: "hasta" }
     sentences:
       - { tr: "Dün sabah şemsiyemi evde unuttum.", de: "Gestern Morgen habe ich meinen Regenschirm zu Hause vergessen." }
       - { tr: "Öğleden sonra büyük bir fırtına başladı.", de: "Am Nachmittag begann ein großer Sturm." }
       - { tr: "Akşama kadar yağmur yağdı.", de: "Bis zum Abend regnete es." }
       - { tr: "Keşke şemsiyemi yanıma alsaydım!", de: "Hätte ich doch meinen Regenschirm mitgenommen!" }
-      - { tr: "Keşke sabah haberleri izleseydim!", de: "Hätte ich doch morgens die Nachrichten gesehen!" }
+      - { tr: "Keşke sabah hava durumuna baksaydım!", de: "Hätte ich doch morgens auf den Wetterbericht geschaut!" }
       - { tr: "Şimdi hastayım ve evde yatıyorum.", de: "Jetzt bin ich krank und liege zu Hause." }
       - { tr: "Umarım yarın işe gidebilirim.", de: "Hoffentlich kann ich morgen zur Arbeit gehen." }

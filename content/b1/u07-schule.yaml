@@ -544,8 +544,8 @@ texts:
       - { tr: "çalışıyor", de: "lernt (ders çalışmak = lernen)", vocab: "ders çalışmak" }
     sentences:
       - { tr: "Yarın zor bir sınav var.", de: "Morgen gibt es eine schwere Prüfung." }
-      - { tr: "Sınava girecek öğrenciler bugün kütüphanede ders çalışıyor.", de: "Die Schüler, die die Prüfung schreiben, lernen heute in der Bibliothek." }
+      - { tr: "Sınava giren öğrenciler bugün kütüphanede ders çalışıyor.", de: "Die Schüler, die die Prüfung schreiben, lernen heute in der Bibliothek." }
       - { tr: "Konuları anlamayan öğrenciler öğretmene soru soruyor.", de: "Schüler, die die Themen nicht verstehen, stellen dem Lehrer Fragen." }
-      - { tr: "Bilinen soruları tekrarlıyoruz.", de: "Wir wiederholen die bekannten Fragen." }
+      - { tr: "Eski sınavlarda sorulan soruları tekrarlıyoruz.", de: "Wir wiederholen die Fragen aus alten Prüfungen." }
       - { tr: "Sınavda konuşan öğrenciler sınıftan çıkmak zorunda.", de: "Schüler, die in der Prüfung reden, müssen die Klasse verlassen." }
       - { tr: "Sınavı geçen öğrenciler cuma günü bir parti yapacak.", de: "Die Schüler, die die Prüfung bestehen, machen am Freitag eine Party." }

@@ -537,8 +537,6 @@ texts:
   - id: b1-u06-t2
     title: "Eine neue Serie"
     reviewed: false
-    glossary:
-      - { tr: "mu", de: "Fragepartikel (… ?)" }
     sentences:
       - { tr: "Bu akşam yeni bir dizi başlıyor.", de: "Heute Abend beginnt eine neue Serie." }
       - { tr: "Arkadaşım dizileri izlemeyi çok seviyor.", de: "Meine Freundin schaut sehr gern Serien." }
@@ -546,4 +544,3 @@ texts:
       - { tr: "Ama reklamlardan hiç hoşlanmıyorum.", de: "Aber Werbung mag ich überhaupt nicht." }
       - { tr: "Bu kanalda çok reklam var.", de: "Auf diesem Sender gibt es viel Werbung." }
       - { tr: "Diziyi internette izleyeceğiz.", de: "Wir werden die Serie im Internet schauen." }
-      - { tr: "Sence bu doğru mu?", de: "Ist das deiner Meinung nach richtig?" }

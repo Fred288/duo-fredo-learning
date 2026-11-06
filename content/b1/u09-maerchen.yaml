@@ -546,14 +546,15 @@ texts:
     title: "Die Zauberflasche"
     reviewed: false
     glossary:
+      - { tr: "aç", de: "öffne (açmak, Imperativ)", vocab: "açmak" }
       - { tr: "varmış", de: "es gab, hatte (var + imiş, Erzählform)", vocab: "var" }
     sentences:
       - { tr: "Küçük bir köyde fakir bir çocuk yaşarmış.", de: "In einem kleinen Dorf lebte ein armer Junge." }
       - { tr: "Çocuk bir gün ormanda bir cadı görmüş.", de: "Eines Tages sah der Junge im Wald eine Hexe." }
       - { tr: "Cadı gülerek ona sihirli bir şişe vermiş.", de: "Die Hexe gab ihm lachend eine Zauberflasche." }
-      - { tr: "\"Bu şişeyi açmadan eve git\" demiş.", de: "„Geh nach Hause, ohne diese Flasche zu öffnen“, sagte sie." }
-      - { tr: "Ama çocuk yolda şişeyi açmış.", de: "Aber der Junge öffnete die Flasche unterwegs." }
-      - { tr: "Şişeden altın yerine su çıkmış.", de: "Statt Gold kam Wasser aus der Flasche." }
-      - { tr: "Çocuk ağlayarak eve dönmüş.", de: "Der Junge kehrte weinend nach Hause zurück." }
+      - { tr: "\"Bu şişeyi bahçende aç\" demiş.", de: "„Öffne diese Flasche in deinem Garten“, sagte sie." }
+      - { tr: "Çocuk eve koşarak gidip şişeyi bahçede açmış.", de: "Der Junge rannte nach Hause und öffnete die Flasche im Garten." }
+      - { tr: "Şişeden sadece biraz su çıkmış.", de: "Aus der Flasche kam nur ein bisschen Wasser." }
+      - { tr: "Çocuk ağlayarak yatmış.", de: "Der Junge ging weinend ins Bett." }
       - { tr: "Sabah uyanıp bahçeye bakmış.", de: "Am Morgen wachte er auf und schaute in den Garten." }
-      - { tr: "Bahçede büyük bir altın ağaç varmış!", de: "Im Garten stand ein großer goldener Baum!" }
+      - { tr: "Suyun düştüğü yerde büyük bir altın ağaç varmış!", de: "Wo das Wasser hingefallen war, stand ein großer goldener Baum!" }

@@ -628,8 +628,8 @@ texts:
       - { tr: "Dedemin büyük bir tarlası ve iki ineği vardı.", de: "Mein Großvater hatte ein großes Feld und zwei Kühe." }
       - { tr: "Sabahları erken kalkardık.", de: "Morgens standen wir früh auf." }
       - { tr: "Öğleden sonra derede yüzerdik ya da ağaçlara tırmanırdık.", de: "Nachmittags schwammen wir im Bach oder kletterten auf Bäume." }
-      - { tr: "Akşamları mahallenin çocuklarıyla saklambaç oynardık.", de: "Abends spielten wir mit den Kindern aus dem Viertel Verstecken." }
       - { tr: "Bir gün ağaçtan düşmüştüm.", de: "Einmal war ich vom Baum gefallen." }
+      - { tr: "Akşamları mahallenin çocuklarıyla saklambaç oynardık.", de: "Abends spielten wir mit den Kindern aus dem Viertel Verstecken." }
       - { tr: "O zamanlar çok mutluydum.", de: "Damals war ich sehr glücklich." }
   - id: b1-u01-t2
     title: "Der verpasste Zug"

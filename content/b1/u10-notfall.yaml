@@ -553,7 +553,7 @@ texts:
     title: "Ein Dieb im Bus"
     reviewed: false
     sentences:
-      - { tr: "Dün otobüse bindikten sonra cüzdanımı kaybettim.", de: "Gestern habe ich, nachdem ich in den Bus gestiegen war, meine Geldbörse verloren." }
+      - { tr: "Dün otobüse bindikten sonra cüzdanımı kaybettim.", de: "Gestern habe ich meine Geldbörse verloren, nachdem ich in den Bus gestiegen war." }
       - { tr: "Otobüsten inince cüzdanımın olmadığını gördüm.", de: "Als ich ausstieg, merkte ich, dass meine Geldbörse fehlte." }
       - { tr: "Hemen karakola gittim.", de: "Ich ging sofort zur Polizeiwache." }
       - { tr: "Polis bana ne olduğunu sordu.", de: "Der Polizist fragte mich, was passiert war." }
@@ -564,13 +564,14 @@ texts:
     title: "Ein Unfall an der Ecke"
     reviewed: false
     glossary:
+      - { tr: "112", de: "Notrufnummer in der Türkei" }
       - { tr: "giderken", de: "auf dem Weg (gitmek + -ken)", vocab: "gitmek" }
     sentences:
       - { tr: "Sabah işe giderken bir ses duydum.", de: "Morgens auf dem Weg zur Arbeit hörte ich ein Geräusch." }
       - { tr: "Köşede bir kaza olmuştu.", de: "An der Ecke war ein Unfall passiert." }
       - { tr: "Bir adam yerde yatıyordu.", de: "Ein Mann lag auf dem Boden." }
       - { tr: "Bacağından yaralanmıştı.", de: "Er war am Bein verletzt." }
-      - { tr: "Hemen ambulansı aradım.", de: "Ich rief sofort den Krankenwagen." }
+      - { tr: "Hemen 112'yi aradım.", de: "Ich rief sofort die 112 an." }
       - { tr: "Ambulans gelene kadar adamın yanında bekledim.", de: "Bis der Krankenwagen kam, wartete ich bei dem Mann." }
       - { tr: "Doktorlar adamın yarın eve döneceğini söyledi.", de: "Die Ärzte sagten, dass der Mann morgen nach Hause zurückkehren werde." }
       - { tr: "O günden beri o köşeden geçmeden önce iki kere bakıyorum.", de: "Seit diesem Tag schaue ich zweimal, bevor ich an dieser Ecke über die Straße gehe." }
