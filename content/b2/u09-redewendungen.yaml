@@ -490,3 +490,38 @@ vocab:
   - { tr: şaka, de: [Scherz], pos: noun }
   - { tr: yalan, de: [Lüge], pos: noun }
   - { tr: sıkı, de: [fest], pos: adj }
+texts:
+  - id: b2-u09-t1
+    title: "Ein unerwarteter Besuch"
+    reviewed: false
+    glossary:
+      - { tr: "çaldı", de: "klingelte (kapıyı çalmak = an der Tür klingeln)", vocab: "çalmak" }
+      - { tr: "açtım", de: "rief an (telefon açmak = anrufen)", vocab: "açmak" }
+      - { tr: "sıkıldı", de: "war bedrückt (canı sıkılmak)", vocab: "canı sıkılmak" }
+      - { tr: "vardı", de: "es gab, hatte (var + Vergangenheit)", vocab: "var" }
+      - { tr: "kitabımdı", de: "war mein Buch (kitap + Possessiv + Vergangenheit)", vocab: "kitap" }
+    sentences:
+      - { tr: "Eski bir arkadaşımı çok özledim.", de: "Ich habe einen alten Freund sehr vermisst." }
+      - { tr: "Onu göresim geldi.", de: "Ich hatte Lust, ihn zu sehen." }
+      - { tr: "Telefon açtım ama cevap vermedi.", de: "Ich rief an, aber er ging nicht ran." }
+      - { tr: "Canım sıkıldı.", de: "Ich war ganz bedrückt." }
+      - { tr: "Akşam kapı çaldı: Arkadaşım gelmiş!", de: "Am Abend klingelte es: Mein Freund war gekommen!" }
+      - { tr: "Elinde bir hediye vardı.", de: "Er hatte ein Geschenk in der Hand." }
+      - { tr: "Hediye, yıllar önce kaybolmuş kitabımdı!", de: "Das Geschenk war mein Buch, das vor Jahren verloren gegangen war!" }
+      - { tr: "Ona \"Çok teşekkür ederim!\" dedim.", de: "Ich sagte zu ihm: „Vielen Dank!“" }
+  - id: b2-u09-t2
+    title: "Ein verschwiegener Freund"
+    reviewed: false
+    glossary:
+      - { tr: "kaçırmaz", de: "plaudert nicht aus (ağzından kaçırmak)", vocab: "ağzından kaçırmak" }
+      - { tr: "verdi", de: "hörte zu (kulak vermek)", vocab: "kulak vermek" }
+      - { tr: "geleni", de: "sein Bestes (elinden geleni yapmak)", vocab: "elinden geleni yapmak" }
+    sentences:
+      - { tr: "Arkadaşım Mehmet ağzı sıkı bir insan.", de: "Mein Freund Mehmet ist ein verschwiegener Mensch." }
+      - { tr: "Ona bir sır verirsen hiç ağzından kaçırmaz.", de: "Wenn du ihm ein Geheimnis anvertraust, plaudert er es nie aus." }
+      - { tr: "Üstelik çok eli açık.", de: "Außerdem ist er sehr großzügig." }
+      - { tr: "Bir gün kardeşimin kalbini kırdım.", de: "Eines Tages habe ich meine Schwester gekränkt." }
+      - { tr: "Mehmet bana kulak verdi ve elinden geleni yaptı.", de: "Mehmet hörte mir zu und tat sein Bestes." }
+      - { tr: "Sabırla kardeşimle konuştu.", de: "Geduldig sprach er mit meiner Schwester." }
+      - { tr: "Sonunda kardeşimle barıştık.", de: "Schließlich haben meine Schwester und ich uns versöhnt." }
+      - { tr: "Öyle bir dostu herkes ister.", de: "So einen Freund wünscht sich jeder." }

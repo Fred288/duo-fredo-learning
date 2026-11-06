@@ -524,3 +524,39 @@ vocab:
   - { tr: kopmak, de: [abreißen, reißen], pos: verb, causative: ar }
   - { tr: akmak, de: [fließen], pos: verb, causative: it }
   - { tr: düşük, de: [niedrig], pos: adj, softens: true }
+texts:
+  - id: b2-u02-t1
+    title: "Ein Versuch im Labor"
+    reviewed: false
+    glossary:
+      - { tr: "da", de: "auch (de nach dunklem Vokal)", vocab: "de" }
+      - { tr: "şaşırttı", de: "überraschte (şaşırmak + Kausativ -t)", vocab: "şaşırmak" }
+    sentences:
+      - { tr: "Üniversitede yeni bir deney yaptık.", de: "An der Uni haben wir einen neuen Versuch gemacht." }
+      - { tr: "Amacımız suyu daha az enerjiyle ısıtmak.", de: "Unser Ziel: Wasser mit weniger Energie zu erwärmen." }
+      - { tr: "Önce suyun sıcaklığını ölçtük.", de: "Zuerst haben wir die Temperatur des Wassers gemessen." }
+      - { tr: "Sonra makineye yeni bir cihaz yerleştirdik.", de: "Dann haben wir ein neues Gerät an der Maschine angebracht." }
+      - { tr: "Bu cihazla su daha hızlı ısındı.", de: "Mit diesem Gerät wurde das Wasser schneller warm." }
+      - { tr: "Sonuçlar bizi çok şaşırttı.", de: "Die Ergebnisse haben uns sehr überrascht." }
+      - { tr: "Enerji maliyeti çok azaldı.", de: "Die Energiekosten sind stark gesunken." }
+      - { tr: "Cihaz şimdi bir fabrikada üretiliyor.", de: "Das Gerät wird jetzt in einer Fabrik hergestellt." }
+      - { tr: "Yeni cihazlar da geliştiriliyor.", de: "Es werden auch neue Geräte entwickelt." }
+  - id: b2-u02-t2
+    title: "Die Küche als Labor"
+    reviewed: false
+    glossary:
+      - { tr: "kaynatır", de: "bringt zum Kochen (kaynamak + Kausativ -t)" }
+      - { tr: "pişirir", de: "gart, kocht (pişmek + Kausativ -ir)", vocab: "pişmek" }
+      - { tr: "pişerken", de: "während es kocht (pişmek + -ken)", vocab: "pişmek" }
+      - { tr: "pişirdim", de: "ich habe gekocht (pişmek + Kausativ -ir)", vocab: "pişmek" }
+      - { tr: "pişirmeyi", de: "das Kochen (pişmek + Kausativ -ir + -meyi)", vocab: "pişmek" }
+      - { tr: "öğren", de: "lern (öğrenmek, Imperativ)", vocab: "öğrenmek" }
+    sentences:
+      - { tr: "Annem mutfakta bir bilim insanı gibi çalışır.", de: "Meine Mutter arbeitet in der Küche wie eine Wissenschaftlerin." }
+      - { tr: "Şekeri ve tuzu ölçer.", de: "Sie misst Zucker und Salz ab." }
+      - { tr: "Sonra suyu kaynatır.", de: "Dann bringt sie das Wasser zum Kochen." }
+      - { tr: "Tavuğu bir saat pişirir.", de: "Das Huhn gart sie eine Stunde lang." }
+      - { tr: "Yemek pişerken mutfaktan çıkmaz.", de: "Während das Essen kocht, verlässt sie die Küche nicht." }
+      - { tr: "Geçen hafta ben pişirdim, ama yemek hiç güzel olmadı.", de: "Letzte Woche habe ich gekocht, aber das Essen ist gar nicht gut geworden." }
+      - { tr: "Annem güldü ve \"Önce yöntemi öğren\" dedi.", de: "Meine Mutter lachte und sagte: „Lern erst die Methode.“" }
+      - { tr: "Şimdi pazar günleri onunla yemek pişirmeyi öğreniyorum.", de: "Jetzt lerne ich sonntags bei ihr das Kochen." }

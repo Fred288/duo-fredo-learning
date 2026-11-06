@@ -569,3 +569,37 @@ vocab:
   - { tr: üzülmek, de: ['traurig sein, bedauern'], pos: verb, causative: none }
   - { tr: övünmek, de: [prahlen], pos: verb }
   - { tr: taranmak, de: [sich kämmen], pos: verb }
+texts:
+  - id: b2-u03-t1
+    title: "Zwei Nachbarinnen"
+    reviewed: false
+    glossary:
+      - { tr: "çaldı", de: "klingelte (kapıyı çalmak = an der Tür klingeln)", vocab: "çalmak" }
+      - { tr: "ettiler", de: "sie stritten sich (kavga etmek)", vocab: "kavga etmek" }
+      - { tr: "Elif", de: "Elif (Frauenname)" }
+      - { tr: "yıllardır", de: "seit Jahren (yıl + Plural + -dır)", vocab: "yıl" }
+      - { tr: "yüzünden", de: "wegen (yüz + Possessiv + Ablativ)" }
+      - { tr: "kavga", de: "Streit (kavga etmek = sich streiten)", vocab: "kavga etmek" }
+    sentences:
+      - { tr: "Ayşe ile komşusu Elif yıllardır birbirini tanır.", de: "Ayşe und ihre Nachbarin Elif kennen sich seit Jahren." }
+      - { tr: "Sabahları merdivende karşılaşır ve selamlaşırlar.", de: "Morgens begegnen sie sich auf der Treppe und grüßen einander." }
+      - { tr: "Ama geçen ay çöp yüzünden kavga ettiler.", de: "Aber letzten Monat haben sie sich wegen des Mülls gestritten." }
+      - { tr: "Sonra birbirlerine küstüler.", de: "Danach redeten sie nicht mehr miteinander." }
+      - { tr: "İki hafta hiç konuşmadılar.", de: "Zwei Wochen lang sprachen sie kein Wort." }
+      - { tr: "Bayramda Elif, Ayşe'nin kapısını çaldı.", de: "Am Feiertag klingelte Elif an Ayşes Tür." }
+      - { tr: "İki komşu kucaklaştı ve barıştı.", de: "Die beiden Nachbarinnen umarmten sich und versöhnten sich." }
+      - { tr: "Bizim mahallede bayramda küsülmez!", de: "In unserem Viertel bleibt man am Feiertag nicht zerstritten!" }
+  - id: b2-u03-t2
+    title: "Geschwister am Morgen"
+    reviewed: false
+    glossary:
+      - { tr: "ise", de: "dagegen, hingegen (nachgestellt)" }
+    sentences:
+      - { tr: "Sabah yedide uyandım.", de: "Morgens um sieben bin ich aufgewacht." }
+      - { tr: "Hemen yıkandım ve giyindim.", de: "Ich habe mich sofort gewaschen und angezogen." }
+      - { tr: "Sonra taranıp kahvaltı hazırladım.", de: "Dann habe ich mich gekämmt und Frühstück gemacht." }
+      - { tr: "Kardeşim ise çok yavaş hazırlanır.", de: "Mein Bruder dagegen macht sich sehr langsam fertig." }
+      - { tr: "Sabahları banyoda yarım saat kalır.", de: "Morgens bleibt er eine halbe Stunde im Bad." }
+      - { tr: "Sık sık tartışıyoruz.", de: "Wir streiten uns oft." }
+      - { tr: "Ama akşam olunca barışırız.", de: "Aber wenn es Abend wird, versöhnen wir uns." }
+      - { tr: "Kardeşler bazen tartışır ama birbirini çok sever.", de: "Geschwister streiten manchmal, aber sie lieben einander sehr." }

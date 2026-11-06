@@ -507,3 +507,35 @@ vocab:
   - { tr: ilginç, de: [interessant], pos: adj, softens: true }
   - { tr: neden, de: [warum, Grund], pos: adv }
   - { tr: tartışma, de: [Diskussion, Streitgespräch], pos: noun }
+texts:
+  - id: b2-u06-t1
+    title: "Die verschwundenen Schlüssel"
+    reviewed: false
+    glossary:
+      - { tr: "unutmuşumdur", de: "ich habe sie wohl vergessen (unutmak + -miş + -dir)", vocab: "unutmak" }
+      - { tr: "düşürmüş", de: "fallen gelassen, verloren (düşmek + Kausativ -ür + -miş)", vocab: "düşmek" }
+      - { tr: "içindeymiş", de: "war (wie sich herausstellte) darin (iç + Lokativ + imiş)", vocab: "iç" }
+    sentences:
+      - { tr: "Anahtarlarımı bulamıyorum.", de: "Ich finde meine Schlüssel nicht." }
+      - { tr: "Herhalde işte unutmuşumdur.", de: "Wahrscheinlich habe ich sie bei der Arbeit vergessen." }
+      - { tr: "Ya da otobüste düşürmüş olabilirim.", de: "Oder ich könnte sie im Bus verloren haben." }
+      - { tr: "Eşim çantama bakmamı önerdi.", de: "Meine Frau schlug vor, in meiner Tasche nachzusehen." }
+      - { tr: "Çantamda olsaydı, onları görürdüm.", de: "Wären sie in meiner Tasche, hätte ich sie gesehen." }
+      - { tr: "Ama yanılmışım.", de: "Aber ich hatte mich geirrt." }
+      - { tr: "Anahtarlar çantanın içindeymiş.", de: "Die Schlüssel waren doch in der Tasche." }
+      - { tr: "Keşke önce çantama baksaydım!", de: "Hätte ich doch zuerst in meiner Tasche nachgesehen!" }
+  - id: b2-u06-t2
+    title: "Wenn ich reich wäre"
+    reviewed: false
+    glossary:
+      - { tr: "değilim", de: "ich bin nicht (değil + ich)", vocab: "değil" }
+      - { tr: "önemlidir", de: "ist wichtig (önemli + -dir)", vocab: "önemli" }
+    sentences:
+      - { tr: "Çok param olsa ne yapardım?", de: "Was würde ich tun, wenn ich viel Geld hätte?" }
+      - { tr: "Önce ailem için büyük bir ev alırdım.", de: "Zuerst würde ich für meine Familie ein großes Haus kaufen." }
+      - { tr: "Sonra dünyayı gezerdim.", de: "Dann würde ich die Welt bereisen." }
+      - { tr: "Belki bir köyde küçük bir okul açardım.", de: "Vielleicht würde ich in einem Dorf eine kleine Schule eröffnen." }
+      - { tr: "Ama gerçekte param yok.", de: "Aber in Wirklichkeit habe ich kein Geld." }
+      - { tr: "Geçen yıl daha çok çalışsaydım, şimdi daha zengin olurdum.", de: "Hätte ich letztes Jahr mehr gearbeitet, wäre ich jetzt reicher." }
+      - { tr: "Ama pişman değilim.", de: "Aber ich bereue nichts." }
+      - { tr: "Herhalde sağlık paradan daha önemlidir.", de: "Gesundheit ist wohl wichtiger als Geld." }

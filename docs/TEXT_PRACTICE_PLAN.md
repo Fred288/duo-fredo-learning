@@ -1,6 +1,6 @@
 # Erweiterungsplan: Übungstexte nach der Lektion
 
-Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T4 umgesetzt (A2: 20 Texte, 2 je Unit, 6–7 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden; offen fürs menschliche Review: „hasta değilmiş“ nach einem Sturz, „doktora“ bei Zahnschmerzen). T5 umgesetzt (B1: 20 Texte, 2 je Unit, 6–9 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T6 offen.
+Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T4 umgesetzt (A2: 20 Texte, 2 je Unit, 6–7 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden; offen fürs menschliche Review: „hasta değilmiş“ nach einem Sturz, „doktora“ bei Zahnschmerzen). T5 umgesetzt (B1: 20 Texte, 2 je Unit, 6–9 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T6 umgesetzt (B2: 20 Texte, 2 je Unit, 8–9 Sätze; Claude-Entwurf, `reviewed: false`, Gegenprüfung in frischer Session steht aus). Damit 84 Texte in allen 42 Units.
 
 ## Ziel
 
@@ -149,3 +149,8 @@ nur mit Opus, die Gegenprüfung jeweils in einer neuen Session.
   wie `ders çalışıyor` landen beim Einzelwort (çalışmak), dann Glossar mit `vocab` auf die Wendung.
 - Ein Glossar-Eintrag gilt für den ganzen Text: Dasselbe Wort in zwei Bedeutungen (Geçen yıl
   und Sınavı geçen) geht in einem Text nicht, dann einen Satz umformulieren.
+- B2 (aus T6): Kausativformen nur, wenn der Kausativ selbst Vokabel ist (yaptırmak ja,
+  boyatmak/kestirmek/pişirmek Glossar); Redewendungen zerfallen in Einzelwörter mit falscher
+  Bedeutung (kapı çaldı → „spielen“, ağzından kaçırmak → „verpassen“, sigara içmek →
+  „trinken“, karşı çıkmak → „hinausgehen“), dann Glossar am Verb mit `vocab` auf die Wendung.
+  `bu yüzden` → yüz „hundert“; `deneyimi` → deney „Versuch“. `bile`, `ise` sind keine Vokabeln.

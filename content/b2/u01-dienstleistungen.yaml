@@ -545,3 +545,38 @@ vocab:
   - { tr: izin, de: [Erlaubnis, Urlaub], pos: noun, drops_vowel: true }
   - { tr: müsait, de: ['frei, verfügbar'], pos: adj }
   - { tr: musluk, de: [Wasserhahn], pos: noun, softens: true }
+texts:
+  - id: b2-u01-t1
+    title: "Die Wohnung renovieren"
+    reviewed: false
+    glossary:
+      - { tr: "da", de: "auch (de nach dunklem Vokal)", vocab: "de" }
+      - { tr: "eskiydi", de: "war alt (eski + Vergangenheit)", vocab: "eski" }
+      - { tr: "boyattık", de: "wir ließen streichen (boyamak + Kausativ -t)", vocab: "boyamak" }
+      - { tr: "değiştirttik", de: "wir ließen austauschen (değiştirmek + Kausativ -t)", vocab: "değiştirmek" }
+      - { tr: "kendimiz", de: "wir selbst (kendi + Possessiv 1. Pl.)", vocab: "kendi" }
+    sentences:
+      - { tr: "Geçen ay başka bir mahalleye taşındık.", de: "Letzten Monat sind wir in ein anderes Viertel gezogen." }
+      - { tr: "Daire çok eskiydi.", de: "Die Wohnung war sehr alt." }
+      - { tr: "Odaları bir ustaya boyattık.", de: "Die Zimmer haben wir von einem Handwerker streichen lassen." }
+      - { tr: "Mutfakta musluğu da değiştirttik.", de: "In der Küche haben wir auch den Wasserhahn austauschen lassen." }
+      - { tr: "Usta işi üç günde bitirdi.", de: "Der Handwerker war in drei Tagen fertig." }
+      - { tr: "Ama bizi sabahları çok bekletti.", de: "Aber morgens ließ er uns lange warten." }
+      - { tr: "Taşınmadan önce evi bir şirkete temizlettik.", de: "Bevor wir eingezogen sind, haben wir die Wohnung von einer Firma putzen lassen." }
+      - { tr: "Faturayı görünce çok şaşırdık.", de: "Als wir die Rechnung sahen, staunten wir nicht schlecht." }
+      - { tr: "Bundan sonra odaları kendimiz boyayacağız.", de: "Ab jetzt streichen wir die Zimmer selbst." }
+  - id: b2-u01-t2
+    title: "Beim Friseur"
+    reviewed: false
+    glossary:
+      - { tr: "kestirmek", de: "schneiden lassen (kesmek + Kausativ -tir)", vocab: "kesmek" }
+      - { tr: "kısaydı", de: "war kurz (kısa + Vergangenheit)", vocab: "kısa" }
+    sentences:
+      - { tr: "Dün kuaföre gittim.", de: "Gestern war ich beim Friseur." }
+      - { tr: "Saçımı kestirmek istiyordum.", de: "Ich wollte mir die Haare schneiden lassen." }
+      - { tr: "Kuaför beni yarım saat bekletti.", de: "Der Friseur ließ mich eine halbe Stunde warten." }
+      - { tr: "Sonra saçımı yıkadı ve kesmeye başladı.", de: "Dann wusch er mir die Haare und fing an zu schneiden." }
+      - { tr: "Ama saçımı çok kısa kesti!", de: "Aber er hat sie viel zu kurz geschnitten!" }
+      - { tr: "Düzeltmek istedi, ama saçım artık kısaydı.", de: "Er wollte es korrigieren, aber die Haare waren nun einmal kurz." }
+      - { tr: "Kuaför bana indirim yaptı.", de: "Der Friseur gab mir einen Rabatt." }
+      - { tr: "Saçım uzun olunca başka bir kuaföre gideceğim.", de: "Wenn meine Haare wieder lang sind, gehe ich zu einem anderen Friseur." }

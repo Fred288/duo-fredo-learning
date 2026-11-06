@@ -504,3 +504,37 @@ vocab:
   - { tr: kesinlikle, de: [auf jeden Fall, unbedingt], pos: adv }
   - { tr: rağmen, de: [trotz], pos: postp }
   - { tr: ikna etmek, de: [überzeugen], pos: verb, softens: true }
+texts:
+  - id: b2-u05-t1
+    title: "Ein Park statt Parkplatz"
+    reviewed: false
+    glossary:
+      - { tr: "çıkıyor", de: "ist dagegen (karşı çıkmak)", vocab: "karşı çıkmak" }
+      - { tr: "çıkmasına", de: "dass … dagegen sind (karşı çıkmak + -mesine)", vocab: "karşı çıkmak" }
+      - { tr: "bile", de: "sogar, selbst (-se bile = selbst wenn)" }
+      - { tr: "kapatılacak", de: "wird geschlossen (kapatmak, Passiv, Futur)", vocab: "kapatmak" }
+    sentences:
+      - { tr: "Belediye şehir merkezinde bir park yapmak istiyor.", de: "Die Stadtverwaltung will im Stadtzentrum einen Park anlegen." }
+      - { tr: "Bunun için eski otopark kapatılacak.", de: "Dafür wird der alte Parkplatz geschlossen." }
+      - { tr: "Esnaf bu plana karşı çıkıyor.", de: "Die Händler sind gegen diesen Plan." }
+      - { tr: "Onlara göre müşteriler artık gelmeyecek.", de: "Ihrer Meinung nach werden die Kunden nicht mehr kommen." }
+      - { tr: "Belediye başkanı esnafın karşı çıkmasına rağmen planı destekliyor.", de: "Obwohl die Händler dagegen sind, unterstützt der Bürgermeister den Plan." }
+      - { tr: "Bence başkan haklı.", de: "Ich finde, der Bürgermeister hat recht." }
+      - { tr: "Arabayla gelmektense bisikletle gelmek daha sağlıklı.", de: "Statt mit dem Auto zu kommen, ist es gesünder, mit dem Fahrrad zu kommen." }
+      - { tr: "Biraz yürümek zorunda kalsak bile şehir daha güzel olur.", de: "Selbst wenn wir ein bisschen laufen müssen, wird die Stadt schöner." }
+  - id: b2-u05-t2
+    title: "Eine Wahl im Viertel"
+    reviewed: false
+    glossary:
+      - { tr: "Deneyimi", de: "ihre Erfahrung (deneyim + Possessiv)", vocab: "deneyim" }
+      - { tr: "da", de: "auch (de nach dunklem Vokal)", vocab: "de" }
+      - { tr: "bile", de: "sogar, selbst (-se bile = selbst wenn)" }
+    sentences:
+      - { tr: "Gelecek ay mahallemizde seçim var.", de: "Nächsten Monat gibt es in unserem Viertel eine Wahl." }
+      - { tr: "Komşum hiç düşünmeksizin eski başkanı destekleyecek.", de: "Mein Nachbar wird, ohne nachzudenken, den alten Vorsitzenden unterstützen." }
+      - { tr: "Ama ben önce başka görüşleri de dinlemek istiyorum.", de: "Ich aber möchte zuerst auch andere Ansichten hören." }
+      - { tr: "Genç bir kadın da seçime katılıyor.", de: "Auch eine junge Frau tritt bei der Wahl an." }
+      - { tr: "Deneyimi az olmasına rağmen halk onu seviyor.", de: "Obwohl sie wenig Erfahrung hat, mögen die Leute sie." }
+      - { tr: "Üstelik çevreyi korumak istiyor.", de: "Außerdem will sie die Umwelt schützen." }
+      - { tr: "Seçimi kaybetse bile mahalle için çok çalışacak.", de: "Selbst wenn sie die Wahl verliert, wird sie viel für das Viertel tun." }
+      - { tr: "Aslında ben de onu desteklemeyi düşünüyorum.", de: "Eigentlich überlege ich auch, sie zu unterstützen." }

@@ -505,3 +505,33 @@ vocab:
   - { tr: çağırmak, de: [rufen], pos: verb }
   - { tr: kızmak, de: [böse werden], pos: verb }
   - { tr: halde, de: [obwohl (nach -diği)], pos: conj }
+texts:
+  - id: b2-u04-t1
+    title: "Überstunden"
+    reviewed: false
+    glossary:
+      - { tr: "da", de: "auch (de nach dunklem Vokal)", vocab: "de" }
+      - { tr: "bitiremedim", de: "ich konnte nicht beenden (bitirmek + -eme)", vocab: "bitirmek" }
+    sentences:
+      - { tr: "Bu hafta çok fazla mesai yaptım.", de: "Diese Woche habe ich sehr viele Überstunden gemacht." }
+      - { tr: "Yöneticim raporu cumaya kadar istediği için akşamları da çalıştım.", de: "Weil meine Vorgesetzte den Bericht bis Freitag wollte, habe ich auch abends gearbeitet." }
+      - { tr: "Çok çalıştığım halde raporu zamanında bitiremedim.", de: "Obwohl ich viel gearbeitet habe, konnte ich den Bericht nicht rechtzeitig fertigstellen." }
+      - { tr: "Yöneticim bunu duyduğu zaman bana kızmadı.", de: "Als meine Vorgesetzte das hörte, wurde sie nicht böse auf mich." }
+      - { tr: "Görev çok büyük olduğundan raporu bir hafta erteledi.", de: "Da die Aufgabe sehr groß war, verschob sie den Bericht um eine Woche." }
+      - { tr: "Raporu yazdıkça daha çok hata buldum.", de: "Je mehr ich am Bericht schrieb, desto mehr Fehler fand ich." }
+      - { tr: "Hataları düzeltinceye kadar ofiste kaldım.", de: "Ich blieb im Büro, bis ich die Fehler korrigiert hatte." }
+      - { tr: "Sonunda raporu tamamladım.", de: "Schließlich habe ich den Bericht abgeschlossen." }
+  - id: b2-u04-t2
+    title: "Die neue Kollegin"
+    reviewed: false
+    glossary:
+      - { tr: "alışamadı", de: "konnte sich nicht gewöhnen (alışmak + -ama)", vocab: "alışmak" }
+    sentences:
+      - { tr: "Ofisimize yeni bir meslektaş geldi.", de: "In unser Büro ist eine neue Kollegin gekommen." }
+      - { tr: "Önce işe alışamadı.", de: "Zuerst konnte sie sich nicht an die Arbeit gewöhnen." }
+      - { tr: "Toplantılara geç kaldığı için yöneticimiz ona kızdı.", de: "Weil sie zu Besprechungen zu spät kam, wurde unser Chef böse auf sie." }
+      - { tr: "Ama sorumluluk aldıkça daha başarılı oldu.", de: "Aber je mehr Verantwortung sie übernahm, desto erfolgreicher wurde sie." }
+      - { tr: "Şimdi en zor görevleri o yapıyor.", de: "Jetzt übernimmt sie die schwierigsten Aufgaben." }
+      - { tr: "Çok stres olduğu halde hep sakin kalıyor.", de: "Obwohl es viel Stress gibt, bleibt sie immer ruhig." }
+      - { tr: "Geçen hafta yöneticimiz onu odasına çağırdı.", de: "Letzte Woche rief unser Chef sie in sein Zimmer." }
+      - { tr: "Çok çalıştığından ona zam verdi.", de: "Weil sie so viel arbeitete, gab er ihr eine Gehaltserhöhung." }

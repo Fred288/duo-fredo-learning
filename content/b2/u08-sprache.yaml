@@ -517,3 +517,35 @@ vocab:
   - { tr: Arapça, de: [Arabisch], pos: noun, capitalized: true }
   - { tr: Farsça, de: [Persisch], pos: noun, capitalized: true }
   - { tr: Fransızca, de: [Französisch], pos: noun, capitalized: true }
+texts:
+  - id: b2-u08-t1
+    title: "Wörter aus anderen Sprachen"
+    reviewed: false
+    glossary:
+      - { tr: "bile", de: "sogar, selbst (-se bile = selbst wenn)" }
+      - { tr: "kelimelerdir", de: "sind Wörter (kelime + Plural + -dir)", vocab: "kelime" }
+    sentences:
+      - { tr: "Türkçede Arapçadan ve Farsçadan gelen çok kelime var.", de: "Im Türkischen gibt es viele Wörter, die aus dem Arabischen und Persischen kommen." }
+      - { tr: "Örneğin \"kalp\", \"his\" ve \"hak\" Arapça kelimelerdir.", de: "Zum Beispiel sind „kalp“, „his“ und „hak“ arabische Wörter." }
+      - { tr: "\"Hak\" kelimesi Türkçede \"hakkım\" olur.", de: "Aus dem Wort „hak“ wird im Türkischen „hakkım“." }
+      - { tr: "Fransızcadan gelen kelimeler de çok.", de: "Auch aus dem Französischen kommen viele Wörter." }
+      - { tr: "Hatta \"otobüs\" ve \"telefon\" bile Fransızcadan gelir.", de: "Sogar „otobüs“ und „telefon“ kommen aus dem Französischen." }
+      - { tr: "Eski kelimeleri artık az insan kullanıyor.", de: "Alte Wörter benutzen heute nur noch wenige Menschen." }
+      - { tr: "Oysa şiirlerde hâlâ yaşıyorlar.", de: "Dabei leben sie in Gedichten immer noch weiter." }
+      - { tr: "Dolayısıyla eski şairleri okumak için onları bilmek lazım.", de: "Folglich muss man sie kennen, um die alten Dichter zu lesen." }
+  - id: b2-u08-t2
+    title: "Ein Gedicht in der Moschee"
+    reviewed: false
+    glossary:
+      - { tr: "ettik", de: "wir haben besucht (ziyaret etmek)", vocab: "ziyaret etmek" }
+      - { tr: "ziyaret", de: "Besuch (ziyaret etmek = besuchen)", vocab: "ziyaret etmek" }
+      - { tr: "vardı", de: "es gab, hatte (var + Vergangenheit)", vocab: "var" }
+    sentences:
+      - { tr: "Geçen hafta İstanbul'da eski bir camiyi ziyaret ettik.", de: "Letzte Woche haben wir in Istanbul eine alte Moschee besucht." }
+      - { tr: "Caminin bahçesinde büyük bir çeşme vardı.", de: "Im Hof der Moschee stand ein großer Brunnen." }
+      - { tr: "Bu mahallenin camii çok eski.", de: "Die Moschee dieses Viertels ist sehr alt." }
+      - { tr: "Bir yazar camiyi bir şiirde anlatmış.", de: "Ein Schriftsteller hat die Moschee in einem Gedicht beschrieben." }
+      - { tr: "Bir kâğıtta bu şiiri okudum.", de: "Ich habe das Gedicht auf einem Blatt Papier gelesen." }
+      - { tr: "Şiirin anlamını hemen anlamadım.", de: "Die Bedeutung des Gedichts habe ich nicht sofort verstanden." }
+      - { tr: "Ancak eşim bana anlattı.", de: "Mein Mann hat es mir jedoch erklärt." }
+      - { tr: "Şiiri hâlâ unutmadım.", de: "Das Gedicht habe ich bis heute nicht vergessen." }

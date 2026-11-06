@@ -451,3 +451,36 @@ vocab:
   - { tr: yazı, de: [Text], pos: noun }
   - { tr: uzman, de: [Fachmann, Fachfrau], pos: noun }
   - { tr: şüphe etmek, de: [zweifeln], pos: verb, softens: true }
+texts:
+  - id: b2-u10-t1
+    title: "Ein Wolf im Park?"
+    reviewed: false
+    glossary:
+      - { tr: "herkesi", de: "alle (herkes + Akkusativ)", vocab: "herkes" }
+      - { tr: "diledi", de: "entschuldigte sich (özür dilemek)", vocab: "özür dilerim" }
+      - { tr: "şaşırttı", de: "überraschte (şaşırmak + Kausativ -t)", vocab: "şaşırmak" }
+      - { tr: "varmış", de: "es gab (var + imiş, wie sich herausstellte)", vocab: "var" }
+      - { tr: "özür", de: "Entschuldigung (özür dilemek = sich entschuldigen)", vocab: "özür dilerim" }
+    sentences:
+      - { tr: "Dün bir gazetenin manşeti herkesi şaşırttı.", de: "Gestern überraschte die Schlagzeile einer Zeitung alle." }
+      - { tr: "Manşete göre bir kurt şehrin parkına girmiş.", de: "Laut der Schlagzeile soll ein Wolf in den Stadtpark gekommen sein." }
+      - { tr: "Haber internette çok hızlı yayıldı.", de: "Die Nachricht verbreitete sich im Internet sehr schnell." }
+      - { tr: "Okurlar korkarak çocuklarını parka göndermedi.", de: "Aus Angst schickten die Leser ihre Kinder nicht in den Park." }
+      - { tr: "Ancak bir uzman haberi doğrulamak istedi.", de: "Doch ein Fachmann wollte die Nachricht überprüfen." }
+      - { tr: "Meğer fotoğrafta bir köpek varmış!", de: "Wie sich herausstellte, war auf dem Foto ein Hund!" }
+      - { tr: "Gazete bir gün sonra özür diledi.", de: "Die Zeitung entschuldigte sich einen Tag später." }
+      - { tr: "Haberleri doğrulamadan paylaşmamak gerekir.", de: "Man sollte Nachrichten nicht teilen, ohne sie zu überprüfen." }
+  - id: b2-u10-t2
+    title: "Ein Interview"
+    reviewed: false
+    glossary:
+      - { tr: "etmesi", de: "dass … tut (etmek + -mesi): şüphe etmesi = dass sie zweifeln", vocab: "şüphe etmek" }
+    sentences:
+      - { tr: "Geçen hafta yaşlı bir yazarla röportaj yaptım.", de: "Letzte Woche habe ich ein Interview mit einem alten Schriftsteller geführt." }
+      - { tr: "Yazar, basın özgürlüğünün çok önemli olduğunu söyledi.", de: "Der Schriftsteller sagte, dass die Pressefreiheit sehr wichtig sei." }
+      - { tr: "Ona göre güvenilir haber az.", de: "Seiner Meinung nach gibt es wenige verlässliche Nachrichten." }
+      - { tr: "İnsanlar okudukları haberlere hemen inanıyor.", de: "Die Menschen glauben sofort den Nachrichten, die sie lesen." }
+      - { tr: "Yazar, okurların daha çok şüphe etmesi gerektiğini söyledi.", de: "Der Schriftsteller sagte, dass die Leser mehr zweifeln sollten." }
+      - { tr: "Gazete röportajımı yarın yayımlayacak.", de: "Die Zeitung wird mein Interview morgen veröffentlichen." }
+      - { tr: "Okurların yorumlarını okuyasım var.", de: "Ich bin gespannt auf die Kommentare der Leser." }
+      - { tr: "Umarım röportaj okurları etkiler.", de: "Hoffentlich regt das Interview die Leser zum Nachdenken an." }

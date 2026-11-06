@@ -518,3 +518,36 @@ vocab:
   - { tr: gerekmek, de: [erforderlich sein], pos: verb }
   - { tr: ziyaretçi, de: [Besucher(in)], pos: noun }
   - { tr: koridor, de: [Flur], pos: noun }
+texts:
+  - id: b2-u07-t1
+    title: "Ein Antrag"
+    reviewed: false
+    glossary:
+      - { tr: "nedenle", de: "aus diesem Grund (neden + Instrumental)", vocab: "neden" }
+      - { tr: "Yılmaz", de: "Yılmaz (Familienname)" }
+    sentences:
+      - { tr: "Sayın Müdür,", de: "Sehr geehrte Leitung," }
+      - { tr: "Ben 2019 yılından beri Ankara'da yaşamaktayım.", de: "Ich wohne seit 2019 in Ankara." }
+      - { tr: "Geçen ay yeni bir adrese taşındım.", de: "Letzten Monat bin ich an eine neue Adresse umgezogen." }
+      - { tr: "Bu nedenle adres kaydımı değiştirmenizi rica ederim.", de: "Daher bitte ich Sie, meinen Adresseintrag zu ändern." }
+      - { tr: "Gerekli belgeler zarfın içinde bulunmaktadır.", de: "Die erforderlichen Dokumente befinden sich im Umschlag." }
+      - { tr: "İşlemi en kısa sürede onaylamanızı rica ederim.", de: "Ich bitte Sie, den Vorgang so bald wie möglich zu genehmigen." }
+      - { tr: "Size teşekkür ederim.", de: "Ich danke Ihnen." }
+      - { tr: "Saygılarımla,", de: "Mit freundlichen Grüßen," }
+      - { tr: "Ayşe Yılmaz", de: "Ayşe Yılmaz" }
+  - id: b2-u07-t2
+    title: "Am Schalter"
+    reviewed: false
+    glossary:
+      - { tr: "geçtiğini", de: "dass … abgelaufen ist (tarihi geçmek)", vocab: "geçmek" }
+      - { tr: "içmek", de: "rauchen (sigara içmek)", vocab: "içmek" }
+      - { tr: "yasaktır", de: "ist verboten (yasak + -dır)", vocab: "yasak" }
+    sentences:
+      - { tr: "Dün belediyeye gittim.", de: "Gestern war ich bei der Stadtverwaltung." }
+      - { tr: "Koridorda çok ziyaretçi bekliyordu.", de: "Im Flur warteten viele Besucher." }
+      - { tr: "Bir memur bana bir numara verdi.", de: "Ein Beamter gab mir eine Nummer." }
+      - { tr: "Bir saat sonra memur beni çağırdı.", de: "Nach einer Stunde rief mich der Beamte auf." }
+      - { tr: "Dilekçemi ve belgelerimi gösterdim.", de: "Ich zeigte meinen Antrag und meine Dokumente." }
+      - { tr: "Memur bir belgenin tarihinin geçtiğini söyledi.", de: "Der Beamte sagte, dass ein Dokument abgelaufen sei." }
+      - { tr: "Yeni belge için bana iki hafta süre verdi.", de: "Für das neue Dokument gab er mir zwei Wochen Frist." }
+      - { tr: "Duvarda \"Sigara içmek yasaktır\" yazıyordu.", de: "An der Wand stand: „Rauchen verboten.“" }
