@@ -779,3 +779,27 @@ vocab:
   - { tr: şikâyet, de: [Beschwerde, Klage], pos: noun }
   - { tr: ağız, de: [Mund], pos: noun, drops_vowel: true }
   - { tr: baş ağrısı, de: [Kopfschmerzen], pos: noun, compound_stem: baş ağrı }
+texts:
+  - id: a2-u05-t1
+    title: "Mehmet ist krank"
+    reviewed: false
+    sentences:
+      - { tr: "Mehmet'in başı ağrıyor.", de: "Mehmet hat Kopfschmerzen." }
+      - { tr: "Ateşi de var.", de: "Er hat auch Fieber." }
+      - { tr: "Bugün işe gidemiyor.", de: "Heute kann er nicht zur Arbeit gehen." }
+      - { tr: "Doktora gitti.", de: "Er ist zum Arzt gegangen." }
+      - { tr: "Doktora göre grip olmuş.", de: "Laut dem Arzt hat er die Grippe." }
+      - { tr: "Üç gün evde yatmalı ve bol su içmeli.", de: "Er muss drei Tage im Bett bleiben und viel Wasser trinken." }
+      - { tr: "Geçmiş olsun, Mehmet!", de: "Gute Besserung, Mehmet!" }
+  - id: a2-u05-t2
+    title: "Zahnschmerzen"
+    reviewed: false
+    glossary:
+      - { tr: "misin", de: "Fragepartikel mi + du: … du …?" }
+    sentences:
+      - { tr: "Dişim çok ağrıyor.", de: "Mein Zahn tut sehr weh." }
+      - { tr: "Geceleri uyuyamıyorum.", de: "Nachts kann ich nicht schlafen." }
+      - { tr: "Yemek de yiyemiyorum.", de: "Essen kann ich auch nicht." }
+      - { tr: "Yarın doktora gitmeliyim.", de: "Morgen muss ich zum Arzt." }
+      - { tr: "Belki bir ilaç lazım.", de: "Vielleicht brauche ich ein Medikament." }
+      - { tr: "Eczaneye gidebilir misin?", de: "Kannst du in die Apotheke gehen?" }

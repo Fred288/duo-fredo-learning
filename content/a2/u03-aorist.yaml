@@ -651,3 +651,26 @@ vocab:
   - { tr: hep, de: [immer], pos: adv }
   - { tr: seve seve, de: [sehr gern], pos: phrase }
   - { tr: tabii, de: [natürlich, klar], pos: interj }
+texts:
+  - id: a2-u03-t1
+    title: "Was ich gern mache"
+    reviewed: false
+    sentences:
+      - { tr: "Akşamları genelde kitap okurum.", de: "Abends lese ich meistens ein Buch." }
+      - { tr: "Bazen gitar çalarım.", de: "Manchmal spiele ich Gitarre." }
+      - { tr: "Cumartesi günleri tenis oynarım.", de: "Samstags spiele ich Tennis." }
+      - { tr: "Ama asla futbol oynamam!", de: "Aber Fußball spiele ich nie!" }
+      - { tr: "Kardeşim her zaman şarkı söyler.", de: "Meine Schwester singt immer." }
+      - { tr: "Sen hafta içi ne yaparsın?", de: "Was machst du unter der Woche?" }
+  - id: a2-u03-t2
+    title: "Eine Einladung"
+    reviewed: false
+    glossary:
+      - { tr: "misin", de: "Fragepartikel mi + du: … du …?" }
+    sentences:
+      - { tr: "Yarın bir maç var.", de: "Morgen gibt es ein Spiel." }
+      - { tr: "Bizim takım oynuyor.", de: "Unsere Mannschaft spielt." }
+      - { tr: "Sen de gelir misin?", de: "Kommst du auch mit?" }
+      - { tr: "Tabii, seve seve gelirim!", de: "Natürlich, sehr gern!" }
+      - { tr: "Ama ben futboldan çok anlamam.", de: "Aber ich verstehe nicht viel von Fußball." }
+      - { tr: "Maç akşam yedide başlar.", de: "Das Spiel beginnt um sieben Uhr abends." }

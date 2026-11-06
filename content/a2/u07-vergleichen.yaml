@@ -808,3 +808,28 @@ vocab:
   - { tr: her yer, de: [überall], pos: pron }
   - { tr: temmuz, de: [Juli], pos: noun }
   - { tr: sağlıklı, de: [gesund], pos: adj }
+texts:
+  - id: a2-u07-t1
+    title: "Das Wetter"
+    reviewed: false
+    glossary:
+      - { tr: "dünden", de: "als gestern (dün + Ablativ)", vocab: "dün" }
+    sentences:
+      - { tr: "Bugün hava dünden daha güzel.", de: "Heute ist das Wetter schöner als gestern." }
+      - { tr: "Hava güneşli ama biraz rüzgârlı.", de: "Es ist sonnig, aber etwas windig." }
+      - { tr: "Yarın yağmur yağacak.", de: "Morgen wird es regnen." }
+      - { tr: "Ben en çok ilkbaharı severim.", de: "Am liebsten mag ich den Frühling." }
+      - { tr: "İlkbaharda hava ılık ve güneşli.", de: "Im Frühling ist das Wetter mild und sonnig." }
+      - { tr: "Kış benim için çok soğuk.", de: "Der Winter ist mir zu kalt." }
+  - id: a2-u07-t2
+    title: "Zwei Brüder"
+    reviewed: false
+    glossary:
+      - { tr: "Emre", de: "Emre (Männername)" }
+    sentences:
+      - { tr: "Mehmet ile Emre kardeşler.", de: "Mehmet und Emre sind Brüder." }
+      - { tr: "Mehmet Emre'den iki yaş büyük.", de: "Mehmet ist zwei Jahre älter als Emre." }
+      - { tr: "Ama Emre daha uzun.", de: "Aber Emre ist größer." }
+      - { tr: "Mehmet çok çalışkan, Emre biraz tembel.", de: "Mehmet ist sehr fleißig, Emre ein bisschen faul." }
+      - { tr: "Emre, Mehmet kadar sakin değil.", de: "Emre ist nicht so ruhig wie Mehmet." }
+      - { tr: "Ama Emre en neşeli kardeş.", de: "Aber Emre ist der fröhlichste der Geschwister." }

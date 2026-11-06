@@ -724,3 +724,27 @@ vocab:
   - { tr: Ali, de: [Ali], pos: noun, proper: true }
   - { tr: simit, de: [Sesamring], pos: noun }
   - { tr: ücret, de: [Gebühr, Lohn], pos: noun }
+texts:
+  - id: a2-u09-t1
+    title: "Im Büro"
+    reviewed: false
+    sentences:
+      - { tr: "Ablam bir şirkette çalışıyor.", de: "Meine ältere Schwester arbeitet in einer Firma." }
+      - { tr: "Ofisi şehir merkezinde.", de: "Ihr Büro ist im Stadtzentrum." }
+      - { tr: "Müdürü çok kibar.", de: "Ihr Chef ist sehr höflich." }
+      - { tr: "Sabahları toplantı var.", de: "Morgens gibt es eine Besprechung." }
+      - { tr: "Maaşı yüksek.", de: "Ihr Gehalt ist hoch." }
+      - { tr: "Kahve de ücretsiz.", de: "Der Kaffee ist auch kostenlos." }
+      - { tr: "Ablam çok mutlu.", de: "Meine Schwester ist sehr glücklich." }
+  - id: a2-u09-t2
+    title: "Die Jacke im Schaufenster"
+    reviewed: false
+    glossary:
+      - { tr: "Vitrindeki", de: "im Schaufenster befindlich (vitrin + Lokativ + -ki)", vocab: "vitrin" }
+    sentences:
+      - { tr: "Vitrindeki ceketi beğendim.", de: "Mir hat die Jacke im Schaufenster gefallen." }
+      - { tr: "Ceket indirimli.", de: "Die Jacke ist reduziert." }
+      - { tr: "Fiyatı sadece yüz lira.", de: "Sie kostet nur hundert Lira." }
+      - { tr: "Bedenim kırk iki.", de: "Meine Größe ist zweiundvierzig." }
+      - { tr: "Kasada nakit ödedim.", de: "An der Kasse habe ich bar bezahlt." }
+      - { tr: "Poşet için bir lira ödedim.", de: "Für die Tüte habe ich eine Lira bezahlt." }

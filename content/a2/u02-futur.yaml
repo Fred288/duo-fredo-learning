@@ -620,3 +620,27 @@ vocab:
   - { tr: yazın, de: [im Sommer], pos: adv }
   - { tr: kışın, de: [im Winter], pos: adv }
   - { tr: yağmur, de: [Regen], pos: noun }
+texts:
+  - id: a2-u02-t1
+    title: "Sommerurlaub"
+    reviewed: false
+    sentences:
+      - { tr: "Bu yaz iki hafta tatile gideceğiz.", de: "Diesen Sommer fahren wir zwei Wochen in den Urlaub." }
+      - { tr: "Önce İstanbul'a uçacağız.", de: "Zuerst fliegen wir nach Istanbul." }
+      - { tr: "İstanbul'da üç gün kalacağız.", de: "In Istanbul bleiben wir drei Tage." }
+      - { tr: "Müzeleri gezeceğiz.", de: "Wir werden die Museen besichtigen." }
+      - { tr: "Sonra Antalya'ya gideceğiz.", de: "Danach fahren wir nach Antalya." }
+      - { tr: "Orada denizde yüzeceğiz ve dinleneceğiz.", de: "Dort werden wir im Meer schwimmen und uns ausruhen." }
+      - { tr: "Valizimi yarın hazırlayacağım.", de: "Meinen Koffer packe ich morgen." }
+  - id: a2-u02-t2
+    title: "Besuch aus Deutschland"
+    reviewed: false
+    glossary:
+      - { tr: "gelecek", de: "wird kommen (gelmek, Futur)", vocab: "gelmek" }
+    sentences:
+      - { tr: "Seneye Almanya'dan bir arkadaşım gelecek.", de: "Nächstes Jahr kommt ein Freund von mir aus Deutschland." }
+      - { tr: "Tren saat ikide gelecek.", de: "Der Zug kommt um zwei Uhr an." }
+      - { tr: "Onu istasyonda bekleyeceğim.", de: "Ich werde am Bahnhof auf ihn warten." }
+      - { tr: "Belki şehirde gezeceğiz.", de: "Vielleicht bummeln wir durch die Stadt." }
+      - { tr: "Ama arkadaşım uzun kalmayacak.", de: "Aber mein Freund wird nicht lange bleiben." }
+      - { tr: "Bir hafta sonra Berlin'e dönecek.", de: "Nach einer Woche fährt er nach Berlin zurück." }

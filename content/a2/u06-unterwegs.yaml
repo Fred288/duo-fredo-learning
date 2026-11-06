@@ -702,3 +702,31 @@ vocab:
   - { tr: yan, de: [Seite, neben], pos: noun }
   - { tr: kolay, de: [leicht, einfach], pos: adj }
   - { tr: burası, de: [dieser Ort hier], pos: pron }
+texts:
+  - id: a2-u06-t1
+    title: "Der Weg zur Post"
+    reviewed: false
+    glossary:
+      - { tr: "mı", de: "Fragepartikel (… ?)" }
+    sentences:
+      - { tr: "Affedersiniz, postane nerede?", de: "Entschuldigung, wo ist die Post?" }
+      - { tr: "Düz gidin ve köşeden sağa dönün.", de: "Gehen Sie geradeaus und biegen Sie an der Ecke rechts ab." }
+      - { tr: "Sonra köprüden geçin.", de: "Dann gehen Sie über die Brücke." }
+      - { tr: "Postane meydanın karşısında.", de: "Die Post ist gegenüber dem Platz." }
+      - { tr: "Postane uzak mı?", de: "Ist die Post weit?" }
+      - { tr: "Hayır, çok yakın.", de: "Nein, ganz nah." }
+      - { tr: "Beş dakika.", de: "Fünf Minuten." }
+  - id: a2-u06-t2
+    title: "Mit der U-Bahn"
+    reviewed: false
+    glossary:
+      - { tr: "geç", de: "überquer (geçmek, Imperativ)", vocab: "geçmek" }
+      - { tr: "bin", de: "steig ein (binmek, Imperativ)", vocab: "binmek" }
+      - { tr: "in", de: "steig aus (inmek, Imperativ)", vocab: "inmek" }
+    sentences:
+      - { tr: "Metroya bin ve üç durak sonra in.", de: "Steig in die U-Bahn und steig drei Haltestellen später aus." }
+      - { tr: "Metrodan çık, sola dön.", de: "Geh aus der U-Bahn hinaus und bieg links ab." }
+      - { tr: "Kavşağı geç.", de: "Überquer die Kreuzung." }
+      - { tr: "Müze köşede, bankanın yanında.", de: "Das Museum ist an der Ecke, neben der Bank." }
+      - { tr: "Haritaya bak ve kaybolma!", de: "Schau auf die Karte und verlauf dich nicht!" }
+      - { tr: "Akşam görüşürüz!", de: "Bis heute Abend!" }

@@ -608,3 +608,24 @@ vocab:
   - { tr: parti, de: [Party], pos: noun }
   - { tr: ile, de: [mit, und], pos: postp }
   - { tr: sene, de: [Jahr], pos: noun }
+texts:
+  - id: a2-u01-t1
+    title: "Ein langer Samstag"
+    reviewed: false
+    sentences:
+      - { tr: "Geçen cumartesi erken kalktım.", de: "Letzten Samstag bin ich früh aufgestanden." }
+      - { tr: "Sabah markete gittim ve ekmek aldım.", de: "Am Morgen bin ich in den Supermarkt gegangen und habe Brot gekauft." }
+      - { tr: "Öğleden sonra Ayşe ile buluştum.", de: "Am Nachmittag habe ich mich mit Ayşe getroffen." }
+      - { tr: "Lokantada yemek yedik.", de: "Wir haben im Restaurant gegessen." }
+      - { tr: "Akşam eve döndüm.", de: "Am Abend bin ich nach Hause zurückgekehrt." }
+      - { tr: "Ama anahtarımı lokantada unuttum!", de: "Aber ich habe meinen Schlüssel im Restaurant vergessen!" }
+  - id: a2-u01-t2
+    title: "Meine Großeltern"
+    reviewed: false
+    sentences:
+      - { tr: "Dedem 1950 yılında İzmir'de doğdu.", de: "Mein Großvater wurde 1950 in Izmir geboren." }
+      - { tr: "Dedem ve ninem Ankara'da tanıştılar.", de: "Mein Großvater und meine Großmutter haben sich in Ankara kennengelernt." }
+      - { tr: "İki yıl sonra evlendiler.", de: "Zwei Jahre später haben sie geheiratet." }
+      - { tr: "Sonra Almanya'ya taşındılar.", de: "Danach sind sie nach Deutschland gezogen." }
+      - { tr: "Otuz yıl Frankfurt'ta yaşadılar.", de: "Sie haben dreißig Jahre in Frankfurt gelebt." }
+      - { tr: "Geçen yıl Türkiye'ye döndüler.", de: "Letztes Jahr sind sie in die Türkei zurückgekehrt." }

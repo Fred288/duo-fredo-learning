@@ -820,3 +820,27 @@ vocab:
   - { tr: kim, de: [wer], pos: pron }
   - { tr: melek, de: [Engel], pos: noun, softens: true }
   - { tr: labirent, de: [Labyrinth], pos: noun }
+texts:
+  - id: a2-u08-t1
+    title: "Wo ist meine Tasche?"
+    reviewed: false
+    glossary:
+      - { tr: "da", de: "auch (de nach dunklem Vokal)", vocab: "de" }
+    sentences:
+      - { tr: "Çantamı bulamıyorum.", de: "Ich finde meine Tasche nicht." }
+      - { tr: "Masanın üstünde yok.", de: "Auf dem Tisch ist sie nicht." }
+      - { tr: "Sandalyenin altında da yok.", de: "Unter dem Stuhl ist sie auch nicht." }
+      - { tr: "Belki kapının arkasında?", de: "Vielleicht hinter der Tür?" }
+      - { tr: "Hayır, orada da yok.", de: "Nein, dort auch nicht." }
+      - { tr: "Buldum!", de: "Gefunden!" }
+      - { tr: "Çanta arabanın içinde.", de: "Die Tasche ist im Auto." }
+  - id: a2-u08-t2
+    title: "Ein Geschenk"
+    reviewed: false
+    sentences:
+      - { tr: "Yarın annemin doğum günü.", de: "Morgen hat meine Mutter Geburtstag." }
+      - { tr: "Onun için bir hediye almalıyım.", de: "Ich muss ein Geschenk für sie kaufen." }
+      - { tr: "İşten sonra kardeşimle merkeze gideceğim.", de: "Nach der Arbeit gehe ich mit meinem Bruder ins Zentrum." }
+      - { tr: "Kütüphanenin yanında güzel bir pastane var.", de: "Neben der Bibliothek gibt es eine schöne Konditorei." }
+      - { tr: "Pastaneden sonra çiçek de alacağız.", de: "Nach der Konditorei kaufen wir auch Blumen." }
+      - { tr: "Hediyeyi bir kutuya koyacağım.", de: "Das Geschenk lege ich in eine Schachtel." }

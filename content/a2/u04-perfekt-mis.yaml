@@ -712,3 +712,32 @@ vocab:
   - { tr: mutlu, de: [glücklich], pos: adj }
   - { tr: çünkü, de: [weil, denn], pos: conj }
   - { tr: iş, de: [Arbeit], pos: noun }
+texts:
+  - id: a2-u04-t1
+    title: "Neues vom Nachbarn"
+    reviewed: false
+    glossary:
+      - { tr: "hastanedeymiş", de: "soll im Krankenhaus sein (hastane + Lokativ + imiş)", vocab: "hastane" }
+      - { tr: "değilmiş", de: "soll nicht … sein (değil + imiş)", vocab: "değil" }
+    sentences:
+      - { tr: "Komşumuz dün düşmüş.", de: "Unser Nachbar ist gestern gestürzt, habe ich gehört." }
+      - { tr: "Şimdi hastanedeymiş.", de: "Er soll jetzt im Krankenhaus sein." }
+      - { tr: "Bu haberi annemden duydum.", de: "Diese Nachricht habe ich von meiner Mutter gehört." }
+      - { tr: "Anneme göre çok hasta değilmiş.", de: "Laut meiner Mutter ist er nicht sehr krank." }
+      - { tr: "Yarın hastaneye gideceğiz.", de: "Morgen gehen wir ins Krankenhaus." }
+      - { tr: "Ona çiçek alacağız.", de: "Wir kaufen ihm Blumen." }
+  - id: a2-u04-t2
+    title: "Ein Märchen"
+    reviewed: false
+    glossary:
+      - { tr: "varmış", de: "es gab (var + imiş, Erzählform)", vocab: "var" }
+      - { tr: "yokmuş", de: "es gab nicht (yok + imiş, Erzählform)", vocab: "yok" }
+      - { tr: "eskiymiş", de: "war alt (eski + imiş, Erzählform)", vocab: "eski" }
+    sentences:
+      - { tr: "Bir varmış, bir yokmuş.", de: "Es war einmal (wörtlich: Es gab einmal, es gab nicht)." }
+      - { tr: "Bir kız varmış.", de: "Es war einmal ein Mädchen." }
+      - { tr: "Kız bir gün yolda bir anahtar bulmuş.", de: "Eines Tages fand das Mädchen auf dem Weg einen Schlüssel." }
+      - { tr: "Anahtar çok eskiymiş.", de: "Der Schlüssel war sehr alt." }
+      - { tr: "Kız eski bir kapıyı açmış.", de: "Das Mädchen öffnete eine alte Tür." }
+      - { tr: "Odada çok para varmış.", de: "Im Zimmer war viel Geld." }
+      - { tr: "Kız çok şaşırmış ve çok mutlu olmuş.", de: "Das Mädchen staunte sehr und wurde sehr glücklich." }

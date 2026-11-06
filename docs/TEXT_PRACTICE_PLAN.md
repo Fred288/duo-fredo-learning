@@ -1,6 +1,6 @@
 # Erweiterungsplan: Übungstexte nach der Lektion
 
-Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T4–T6 offen.
+Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T4 umgesetzt (A2: 20 Texte, 2 je Unit, 6–7 Sätze; Claude-Entwurf, `reviewed: false`, Gegenprüfung in frischer Session steht aus). T5–T6 offen.
 
 ## Ziel
 
@@ -136,3 +136,10 @@ nur mit Opus, die Gegenprüfung jeweils in einer neuen Session.
   a1-u05, Namen Ayşe/Mehmet a1-u06. Vorher Namen nur über das Glossar.
 - Abgleich mit Übungssätzen (Skript im Arbeitsverzeichnis): Nur feste Wendungen dürfen
   wörtlich vorkommen (Rica ederim, Hoşça kal, Afiyet olsun, İyi akşamlar).
+- Weitere Grenzen der Rückführung (aus T4): gebeugte Mehrwort-Verben (alışveriş yaptım,
+  dans etmem) und gebeugte Mehrwort-Nomen (boş zamanımda) gar nicht; Passiv nur Präsens und
+  Aorist (gönderildi ins Glossar); `da` als Variante von `de` und -ki-Formen (vitrindeki) ins
+  Glossar. Gleich lautende Formen landen bei der falschen Vokabel: Futur `gelecek` → Adjektiv
+  „nächste“, Imperativ `geç` → „spät“, `bin` → „tausend“; dann Glossar mit `vocab` aufs Verb.
+  Deshalb nach dem Build die Zuordnung je Wort ansehen, nicht nur auf ✖ achten.
+- Namen, die zugleich Vokabel sind, meiden (Can'dan → can „Leben“).
