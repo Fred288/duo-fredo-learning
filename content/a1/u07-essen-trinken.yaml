@@ -520,3 +520,23 @@ vocab:
   - { tr: maalesef, de: [leider], pos: adv }
   - { tr: afiyet olsun, de: [guten Appetit], pos: phrase }
   - { tr: şekerli, de: [mit Zucker], pos: adj }
+texts:
+  - id: a1-u07-t1
+    title: "Frühstück"
+    reviewed: false
+    sentences:
+      - { tr: "Kahvaltıda peynir, zeytin ve yumurta var.", de: "Zum Frühstück gibt es Käse, Oliven und Eier." }
+      - { tr: "Bal var ama süt yok.", de: "Es gibt Honig, aber keine Milch." }
+      - { tr: "Buzdolabında domates yok.", de: "Im Kühlschrank sind keine Tomaten." }
+      - { tr: "Ben çay istiyorum.", de: "Ich möchte Tee." }
+      - { tr: "Afiyet olsun!", de: "Guten Appetit!" }
+  - id: a1-u07-t2
+    title: "Im Restaurant"
+    reviewed: false
+    glossary:
+      - { tr: "mı", de: "Fragepartikel (… ?)" }
+    sentences:
+      - { tr: "Lokantada balık var mı?", de: "Gibt es im Restaurant Fisch?" }
+      - { tr: "Maalesef balık yok, ama tavuk var.", de: "Leider gibt es keinen Fisch, aber es gibt Huhn." }
+      - { tr: "Tavuk ve bir su, lütfen.", de: "Huhn und ein Wasser, bitte." }
+      - { tr: "Hesabı istiyorum, lütfen.", de: "Ich möchte die Rechnung, bitte." }

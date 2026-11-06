@@ -397,3 +397,21 @@ vocab:
   - { tr: Paris, de: [Paris], pos: noun, proper: true }
   - { tr: Münih, de: [München], pos: noun, proper: true }
   - { tr: Viyana, de: [Wien], pos: noun, proper: true }
+texts:
+  - id: a1-u03-t1
+    title: "In der Stadt"
+    reviewed: false
+    sentences:
+      - { tr: "Banka nerede?", de: "Wo ist die Bank?" }
+      - { tr: "Banka caddede.", de: "Die Bank ist an der Hauptstraße." }
+      - { tr: "Eczane burada, hastane orada.", de: "Die Apotheke ist hier, das Krankenhaus dort." }
+      - { tr: "Lokanta otelde.", de: "Das Restaurant ist im Hotel." }
+  - id: a1-u03-t2
+    title: "Woher und wohin?"
+    reviewed: false
+    sentences:
+      - { tr: "Nereden?", de: "Woher?" }
+      - { tr: "Berlin'den.", de: "Aus Berlin." }
+      - { tr: "Nereye?", de: "Wohin?" }
+      - { tr: "İstanbul'a.", de: "Nach Istanbul." }
+      - { tr: "İstanbul Türkiye'de.", de: "Istanbul liegt in der Türkei." }

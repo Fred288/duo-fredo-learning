@@ -377,3 +377,21 @@ vocab:
   - { tr: dağ, de: [Berg], pos: noun }
   - { tr: yol, de: [Weg, Straße], pos: noun }
   - { tr: su, de: [Wasser], pos: noun, y_stem: true }
+texts:
+  - id: a1-u01-t1
+    title: "Am Morgen"
+    reviewed: false
+    sentences:
+      - { tr: "Günaydın!", de: "Guten Morgen!" }
+      - { tr: "Nasılsın?", de: "Wie geht es dir?" }
+      - { tr: "İyiyim, teşekkürler.", de: "Mir geht es gut, danke." }
+      - { tr: "Çay, lütfen.", de: "Tee, bitte." }
+  - id: a1-u01-t2
+    title: "Am Abend"
+    reviewed: false
+    sentences:
+      - { tr: "İyi akşamlar!", de: "Guten Abend!" }
+      - { tr: "Su, lütfen.", de: "Wasser, bitte." }
+      - { tr: "Rica ederim.", de: "Gern geschehen." }
+      - { tr: "Hoşça kal!", de: "Tschüss! (sagt, wer geht)" }
+      - { tr: "Güle güle!", de: "Tschüss! (sagt, wer bleibt)" }

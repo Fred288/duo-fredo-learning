@@ -546,3 +546,22 @@ vocab:
   - { tr: hafta sonu, de: [Wochenende], pos: noun, compound_stem: hafta son }
   - { tr: sabahları, de: [morgens, jeden Morgen], pos: adv }
   - { tr: çıkmak, de: [hinausgehen, hinaufgehen], pos: verb, causative: ar }
+texts:
+  - id: a1-u12-t1
+    title: "Meine Wohnung"
+    reviewed: false
+    sentences:
+      - { tr: "Benim dairem küçük ama güzel.", de: "Meine Wohnung ist klein, aber schön." }
+      - { tr: "Salonda bir kanepe ve iki koltuk var.", de: "Im Wohnzimmer gibt es ein Sofa und zwei Sessel." }
+      - { tr: "Yatak odasında bir yatak ve bir lamba var.", de: "Im Schlafzimmer gibt es ein Bett und eine Lampe." }
+      - { tr: "Balkonda çok çiçek var.", de: "Auf dem Balkon gibt es viele Blumen." }
+      - { tr: "Kira çok pahalı değil.", de: "Die Miete ist nicht sehr teuer." }
+  - id: a1-u12-t2
+    title: "Das Wochenende"
+    reviewed: false
+    sentences:
+      - { tr: "Hafta sonu evde oturdum.", de: "Am Wochenende bin ich zu Hause geblieben." }
+      - { tr: "Cumartesi kitap okudum.", de: "Am Samstag habe ich ein Buch gelesen." }
+      - { tr: "Pazar günü balkonda kahvaltı yaptım.", de: "Am Sonntag habe ich auf dem Balkon gefrühstückt." }
+      - { tr: "Akşam annem geldi.", de: "Am Abend ist meine Mutter gekommen." }
+      - { tr: "Film izledik.", de: "Wir haben einen Film gesehen." }

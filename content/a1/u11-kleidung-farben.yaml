@@ -532,3 +532,23 @@ vocab:
   - { tr: başka, de: [anderer, andere, anderes], pos: adj }
   - { tr: sadece, de: [nur], pos: adv }
   - { tr: bakmak, de: [schauen, ansehen], pos: verb }
+texts:
+  - id: a1-u11-t1
+    title: "Ein blaues Hemd"
+    reviewed: false
+    glossary:
+      - { tr: "mı", de: "Fragepartikel (… ?)" }
+    sentences:
+      - { tr: "Bu mavi gömlek ne kadar?", de: "Wie viel kostet dieses blaue Hemd?" }
+      - { tr: "Altmış lira.", de: "Sechzig Lira." }
+      - { tr: "Çok pahalı!", de: "Sehr teuer!" }
+      - { tr: "Kırmızı gömlek var mı?", de: "Gibt es ein rotes Hemd?" }
+      - { tr: "Evet, şu beyaz gömlek ucuz.", de: "Ja, das weiße Hemd da ist billig." }
+  - id: a1-u11-t2
+    title: "Eine neue Jacke"
+    reviewed: false
+    sentences:
+      - { tr: "Yeni bir ceket istiyorum.", de: "Ich möchte eine neue Jacke." }
+      - { tr: "Eski ceketim çok kısa.", de: "Meine alte Jacke ist sehr kurz." }
+      - { tr: "Siyah ceketler güzel ama pahalı.", de: "Die schwarzen Jacken sind schön, aber teuer." }
+      - { tr: "Bugün sadece bakıyorum.", de: "Heute schaue ich nur." }

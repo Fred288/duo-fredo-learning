@@ -487,3 +487,24 @@ vocab:
   - { tr: yaşında, de: [… Jahre alt], pos: phrase }
   - { tr: çok, de: [viel, viele, sehr], pos: adv }
   - { tr: kahve, de: [Kaffee], pos: noun }
+texts:
+  - id: a1-u05-t1
+    title: "Im Café"
+    reviewed: false
+    sentences:
+      - { tr: "Bir kahve, lütfen.", de: "Einen Kaffee, bitte." }
+      - { tr: "Bu kahve ne kadar?", de: "Wie viel kostet dieser Kaffee?" }
+      - { tr: "Yirmi beş lira.", de: "Fünfundzwanzig Lira." }
+      - { tr: "Çay ne kadar?", de: "Wie viel kostet der Tee?" }
+      - { tr: "On lira.", de: "Zehn Lira." }
+  - id: a1-u05-t2
+    title: "Wie alt?"
+    reviewed: false
+    glossary:
+      - { tr: "yaşındasın", de: "du bist … Jahre alt (yaşında + du)", vocab: "yaşında" }
+      - { tr: "yaşındayım", de: "ich bin … Jahre alt (yaşında + ich)", vocab: "yaşında" }
+    sentences:
+      - { tr: "Sen kaç yaşındasın?", de: "Wie alt bist du?" }
+      - { tr: "Ben yirmi yaşındayım.", de: "Ich bin zwanzig Jahre alt." }
+      - { tr: "Kedi kaç yaşında?", de: "Wie alt ist die Katze?" }
+      - { tr: "Kedi üç yaşında.", de: "Die Katze ist drei Jahre alt." }

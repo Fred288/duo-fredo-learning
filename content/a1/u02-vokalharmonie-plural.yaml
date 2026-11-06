@@ -394,3 +394,11 @@ texts:
       - { tr: Öğrenciler okulda., de: Die Schüler sind in der Schule. }
       - { tr: Köpekler bahçede., de: Die Hunde sind im Garten. }
       - { tr: Elmalar masada., de: Die Äpfel liegen auf dem Tisch. }
+  - id: a1-u02-t2
+    title: "Im Haus und im Garten"
+    reviewed: false
+    sentences:
+      - { tr: "Kitaplar masada.", de: "Die Bücher liegen auf dem Tisch." }
+      - { tr: "Kalemler odada.", de: "Die Stifte sind im Zimmer." }
+      - { tr: "Çocuklar bahçede.", de: "Die Kinder sind im Garten." }
+      - { tr: "Kediler pencerede.", de: "Die Katzen sind am Fenster." }

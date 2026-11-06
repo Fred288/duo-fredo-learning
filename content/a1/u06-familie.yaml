@@ -432,3 +432,22 @@ vocab:
   - { tr: Mehmet, de: [Mehmet], pos: noun, proper: true }
   - { tr: anneanne, de: [Großmutter (Mutter der Mutter)], pos: noun }
   - { tr: babaanne, de: [Großmutter (Mutter des Vaters)], pos: noun }
+texts:
+  - id: a1-u06-t1
+    title: "Ayşes Familie"
+    reviewed: false
+    sentences:
+      - { tr: "Bu Ayşe'nin ailesi.", de: "Das ist Ayşes Familie." }
+      - { tr: "Ayşe'nin annesi öğretmen.", de: "Ayşes Mutter ist Lehrerin." }
+      - { tr: "Babası doktor.", de: "Ihr Vater ist Arzt." }
+      - { tr: "Ağabeyinin adı Mehmet.", de: "Ihr älterer Bruder heißt Mehmet." }
+      - { tr: "Mehmet mühendis.", de: "Mehmet ist Ingenieur." }
+  - id: a1-u06-t2
+    title: "Meine Familie"
+    reviewed: false
+    sentences:
+      - { tr: "Benim adım Mehmet.", de: "Ich heiße Mehmet." }
+      - { tr: "Annem hemşire, babam aşçı.", de: "Meine Mutter ist Krankenpflegerin, mein Vater ist Koch." }
+      - { tr: "Ablamın adı Ayşe.", de: "Meine ältere Schwester heißt Ayşe." }
+      - { tr: "Ablam İzmir'de.", de: "Meine ältere Schwester ist in Izmir." }
+      - { tr: "Dedem seksen yaşında.", de: "Mein Großvater ist achtzig Jahre alt." }

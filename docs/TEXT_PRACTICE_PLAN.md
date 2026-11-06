@@ -1,6 +1,6 @@
 # Erweiterungsplan: Übungstexte nach der Lektion
 
-Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3–T6 offen.
+Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Gegenprüfung in frischer Session steht aus). T4–T6 offen.
 
 ## Ziel
 
@@ -126,3 +126,13 @@ nur mit Opus, die Gegenprüfung jeweils in einer neuen Session.
 - Sollen die vorhandenen Lesetexte (`-r1`) zusätzlich in die Auswahl? Sie sind länger und
   stehen schon als Lektion da. Vorschlag: nein.
 - Gibt es ein Angebot auch nach dem Wiederholen? Vorschlag: nein, nur nach Kurslektionen.
+
+## Erfahrungen aus T3 (für T4–T6)
+
+- Kopula-Formen von Nomen (öğretmensin, değilim, yaşındayım) und die Fragepartikel (mı, musun,
+  misiniz) kennt die Rückführung nicht: Sie gehören ins `glossary` des Textes, mit `vocab` auf die
+  Grundform, wo es eine gibt. Kopula 1sg nach Konsonant (öğretmenim) löst sich als Possessiv auf.
+- Funktionswörter kommen spät: `ve`, `ama`, `var`/`yok` erst a1-u07, `de` (auch) a1-u09, `bu`/`bir`
+  a1-u05, Namen Ayşe/Mehmet a1-u06. Vorher Namen nur über das Glossar.
+- Abgleich mit Übungssätzen (Skript im Arbeitsverzeichnis): Nur feste Wendungen dürfen
+  wörtlich vorkommen (Rica ederim, Hoşça kal, Afiyet olsun, İyi akşamlar).

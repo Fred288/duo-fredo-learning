@@ -559,3 +559,20 @@ vocab:
   - { tr: mağaza, de: [Geschäft, Laden], pos: noun }
   - { tr: açık, de: [offen, geöffnet], pos: adj }
   - { id: yemek-essen, tr: yemek, de: [Essen, Mahlzeit], pos: noun }
+texts:
+  - id: a1-u10-t1
+    title: "Ein Termin"
+    reviewed: false
+    sentences:
+      - { tr: "Yarın doktorda randevum var.", de: "Morgen habe ich einen Termin beim Arzt." }
+      - { tr: "Randevu saat dokuzda.", de: "Der Termin ist um neun Uhr." }
+      - { tr: "Ders saat on buçukta başlıyor.", de: "Der Unterricht beginnt um halb elf." }
+      - { tr: "Akşam sinemada film izliyoruz.", de: "Abends sehen wir im Kino einen Film." }
+  - id: a1-u10-t2
+    title: "Die Woche"
+    reviewed: false
+    sentences:
+      - { tr: "Pazartesiden cumaya kadar bankada çalışıyorum.", de: "Von Montag bis Freitag arbeite ich in der Bank." }
+      - { tr: "Cumartesi mağazaya gidiyorum.", de: "Am Samstag gehe ich ins Geschäft." }
+      - { tr: "Mağaza akşam sekize kadar açık.", de: "Das Geschäft ist abends bis acht Uhr offen." }
+      - { tr: "Pazar günü geç kalkıyorum.", de: "Am Sonntag stehe ich spät auf." }

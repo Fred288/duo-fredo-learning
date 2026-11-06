@@ -446,3 +446,25 @@ vocab:
   - { tr: de, de: [auch], pos: particle }
   - { tr: yavaş, de: [langsam], pos: adj }
   - { tr: hızlı, de: [schnell], pos: adj }
+texts:
+  - id: a1-u09-t1
+    title: "Sport"
+    reviewed: false
+    glossary:
+      - { tr: "musun", de: "Fragepartikel mu + du: … du …?" }
+    sentences:
+      - { tr: "Futbolu seviyor musun?", de: "Magst du Fußball?" }
+      - { tr: "Hayır, futbolu sevmiyorum.", de: "Nein, ich mag Fußball nicht." }
+      - { tr: "Ama her gün yüzüyorum.", de: "Aber ich schwimme jeden Tag." }
+      - { tr: "Sen de yüzüyor musun?", de: "Schwimmst du auch?" }
+      - { tr: "Evet, ama yavaş yüzüyorum.", de: "Ja, aber ich schwimme langsam." }
+  - id: a1-u09-t2
+    title: "Kannst du Englisch?"
+    reviewed: false
+    glossary:
+      - { tr: "musun", de: "Fragepartikel mu + du: … du …?" }
+    sentences:
+      - { tr: "Sen İngilizce biliyor musun?", de: "Kannst du Englisch?" }
+      - { tr: "Evet, biraz biliyorum.", de: "Ja, ein bisschen." }
+      - { tr: "Ama sen çok hızlı konuşuyorsun, anlamıyorum.", de: "Aber du sprichst sehr schnell, ich verstehe dich nicht." }
+      - { tr: "Ben Almanca hiç bilmiyorum.", de: "Ich kann gar kein Deutsch." }

@@ -452,3 +452,21 @@ vocab:
   - { tr: müzik, de: [Musik], pos: noun }
   - { tr: ne, de: [was], pos: pron, y_stem: true }
   - { tr: gazete, de: [Zeitung], pos: noun }
+texts:
+  - id: a1-u08-t1
+    title: "Mein Tag"
+    reviewed: false
+    sentences:
+      - { tr: "Sabah kalkıyorum ve kahvaltı yapıyorum.", de: "Morgens stehe ich auf und frühstücke." }
+      - { tr: "Bugün evde çalışıyorum.", de: "Heute arbeite ich zu Hause." }
+      - { tr: "Şimdi müzik dinliyorum.", de: "Jetzt höre ich Musik." }
+      - { tr: "Akşam televizyon izliyorum.", de: "Abends sehe ich fern." }
+  - id: a1-u08-t2
+    title: "Zu Hause"
+    reviewed: false
+    sentences:
+      - { tr: "Annem gazete okuyor.", de: "Meine Mutter liest Zeitung." }
+      - { tr: "Babam çay içiyor.", de: "Mein Vater trinkt Tee." }
+      - { tr: "Çocuklar sokakta oynuyor.", de: "Die Kinder spielen auf der Straße." }
+      - { tr: "Kedi uyuyor.", de: "Die Katze schläft." }
+      - { tr: "Biz şimdi yemek yiyoruz.", de: "Wir essen jetzt." }

@@ -2,6 +2,29 @@
 
 exports[`Übungstexte aus content/ > nur Bekanntes, IDs und Satzzahl bleiben stabil 1`] = `
 {
+  "a1-u01-t1": 4,
+  "a1-u01-t2": 5,
   "a1-u02-t1": 4,
+  "a1-u02-t2": 4,
+  "a1-u03-t1": 4,
+  "a1-u03-t2": 5,
+  "a1-u04-t1": 5,
+  "a1-u04-t2": 5,
+  "a1-u05-t1": 5,
+  "a1-u05-t2": 4,
+  "a1-u06-t1": 5,
+  "a1-u06-t2": 5,
+  "a1-u07-t1": 5,
+  "a1-u07-t2": 4,
+  "a1-u08-t1": 4,
+  "a1-u08-t2": 5,
+  "a1-u09-t1": 5,
+  "a1-u09-t2": 4,
+  "a1-u10-t1": 4,
+  "a1-u10-t2": 4,
+  "a1-u11-t1": 5,
+  "a1-u11-t2": 4,
+  "a1-u12-t1": 5,
+  "a1-u12-t2": 5,
 }
 `;

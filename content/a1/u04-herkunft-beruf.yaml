@@ -428,3 +428,31 @@ vocab:
   - { tr: avukat, de: [Anwalt, Anwältin], pos: noun }
   - { tr: polis, de: [Polizist, Polizistin, Polizei], pos: noun }
   - { tr: hemşire, de: [Krankenpfleger, Krankenschwester, Pflegekraft], pos: noun }
+texts:
+  - id: a1-u04-t1
+    title: "Ich bin Jonas"
+    reviewed: false
+    glossary:
+      - { tr: "Jonas", de: "Jonas (Name)" }
+      - { tr: "değilim", de: "bin nicht (değil + ich)", vocab: "değil" }
+      - { tr: "müsün", de: "Fragepartikel mü + du: bist du …?" }
+      - { tr: "misin", de: "Fragepartikel mi + du: bist du …?" }
+    sentences:
+      - { tr: "Merhaba! Ben Jonas.", de: "Hallo! Ich bin Jonas." }
+      - { tr: "Ben Türk değilim, Almanım.", de: "Ich bin kein Türke, ich bin Deutscher." }
+      - { tr: "Ben mühendisim.", de: "Ich bin Ingenieur." }
+      - { tr: "Sen Türk müsün?", de: "Bist du Türke?" }
+      - { tr: "Sen öğretmen misin?", de: "Bist du Lehrer?" }
+  - id: a1-u04-t2
+    title: "Im Krankenhaus"
+    reviewed: false
+    glossary:
+      - { tr: "değiliz", de: "sind nicht (değil + wir)", vocab: "değil" }
+      - { tr: "avukatız", de: "wir sind Anwälte (avukat + wir)", vocab: "avukat" }
+      - { tr: "misiniz", de: "Fragepartikel mi + ihr: seid ihr …?" }
+    sentences:
+      - { tr: "O doktor.", de: "Er ist Arzt." }
+      - { tr: "Onlar hemşire.", de: "Sie sind Krankenpfleger." }
+      - { tr: "Biz polis değiliz.", de: "Wir sind keine Polizisten." }
+      - { tr: "Biz avukatız.", de: "Wir sind Anwälte." }
+      - { tr: "Siz İngiliz misiniz?", de: "Seid ihr Engländer?" }
