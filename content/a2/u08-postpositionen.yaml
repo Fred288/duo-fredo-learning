@@ -842,5 +842,5 @@ texts:
       - { tr: "Onun için bir hediye almalıyım.", de: "Ich muss ein Geschenk für sie kaufen." }
       - { tr: "İşten sonra kardeşimle merkeze gideceğim.", de: "Nach der Arbeit gehe ich mit meinem Bruder ins Zentrum." }
       - { tr: "Kütüphanenin yanında güzel bir pastane var.", de: "Neben der Bibliothek gibt es eine schöne Konditorei." }
-      - { tr: "Pastaneden sonra çiçek de alacağız.", de: "Nach der Konditorei kaufen wir auch Blumen." }
+      - { tr: "Pastaneden sonra çiçek alacağız.", de: "Nach der Konditorei kaufen wir Blumen." }
       - { tr: "Hediyeyi bir kutuya koyacağım.", de: "Das Geschenk lege ich in eine Schachtel." }

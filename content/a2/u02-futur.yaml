@@ -633,14 +633,14 @@ texts:
       - { tr: "Orada denizde yüzeceğiz ve dinleneceğiz.", de: "Dort werden wir im Meer schwimmen und uns ausruhen." }
       - { tr: "Valizimi yarın hazırlayacağım.", de: "Meinen Koffer packe ich morgen." }
   - id: a2-u02-t2
-    title: "Besuch aus Deutschland"
+    title: "Besuch aus Ankara"
     reviewed: false
     glossary:
       - { tr: "gelecek", de: "wird kommen (gelmek, Futur)", vocab: "gelmek" }
     sentences:
-      - { tr: "Seneye Almanya'dan bir arkadaşım gelecek.", de: "Nächstes Jahr kommt ein Freund von mir aus Deutschland." }
+      - { tr: "Haftaya Ankara'dan bir arkadaşım gelecek.", de: "Nächste Woche kommt ein Freund von mir aus Ankara." }
       - { tr: "Tren saat ikide gelecek.", de: "Der Zug kommt um zwei Uhr an." }
       - { tr: "Onu istasyonda bekleyeceğim.", de: "Ich werde am Bahnhof auf ihn warten." }
       - { tr: "Belki şehirde gezeceğiz.", de: "Vielleicht bummeln wir durch die Stadt." }
       - { tr: "Ama arkadaşım uzun kalmayacak.", de: "Aber mein Freund wird nicht lange bleiben." }
-      - { tr: "Bir hafta sonra Berlin'e dönecek.", de: "Nach einer Woche fährt er nach Berlin zurück." }
+      - { tr: "Bir hafta sonra Ankara'ya dönecek.", de: "Nach einer Woche fährt er nach Ankara zurück." }

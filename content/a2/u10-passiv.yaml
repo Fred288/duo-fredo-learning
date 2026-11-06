@@ -842,23 +842,23 @@ texts:
     glossary:
       - { tr: "gönderildi", de: "wurde geschickt (göndermek, Passiv)", vocab: "göndermek" }
       - { tr: "vardı", de: "es gab, war da (var + Vergangenheit)", vocab: "var" }
+      - { tr: "kendisi", de: "sie/er selbst (kendi + Possessiv 3. Sg.)", vocab: "kendi" }
     sentences:
       - { tr: "Dün bir paket geldi.", de: "Gestern ist ein Paket gekommen." }
       - { tr: "Paket Almanya'dan gönderildi.", de: "Das Paket wurde aus Deutschland geschickt." }
       - { tr: "Kutunun içinde bir mektup vardı.", de: "In der Kiste war ein Brief." }
-      - { tr: "Mektubu teyzem kendi yazmış.", de: "Meine Tante hatte den Brief selbst geschrieben." }
+      - { tr: "Mektubu teyzem kendisi yazmış.", de: "Den Brief hat meine Tante selbst geschrieben." }
       - { tr: "Çok sevindim.", de: "Ich habe mich sehr gefreut." }
       - { tr: "Akşam ona bir mesaj yazdım.", de: "Am Abend habe ich ihr eine Nachricht geschrieben." }
   - id: a2-u10-t2
     title: "Auf der Post"
     reviewed: false
     glossary:
-      - { tr: "gelecek", de: "wird kommen (gelmek, Futur)", vocab: "gelmek" }
       - { tr: "da", de: "auch (de nach dunklem Vokal)", vocab: "de" }
     sentences:
-      - { tr: "Bugün postaneye gittim.", de: "Heute bin ich zur Post gegangen." }
+      - { tr: "Bugün postaneye gittim ve bir paket gönderdim.", de: "Heute bin ich zur Post gegangen und habe ein Paket geschickt." }
       - { tr: "Önce bir form doldurdum.", de: "Zuerst habe ich ein Formular ausgefüllt." }
       - { tr: "Formu imzaladım ve kimliğimi gösterdim.", de: "Ich habe das Formular unterschrieben und meinen Ausweis gezeigt." }
       - { tr: "Burada pul da satılıyor.", de: "Hier werden auch Briefmarken verkauft." }
       - { tr: "Mektuplar her gün dağıtılır.", de: "Briefe werden jeden Tag verteilt." }
-      - { tr: "Paketim yarın gelecek.", de: "Mein Paket kommt morgen an." }
+      - { tr: "Paket yarın Almanya'da olacak.", de: "Das Paket ist morgen in Deutschland." }
