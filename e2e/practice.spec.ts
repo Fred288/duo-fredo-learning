@@ -36,9 +36,9 @@ test('Übungstext: Angebot nach der Lektion, lesen, übersetzen, zurück zur Uni
   // Übersetzen: Enter vergleicht, Enter auf „Passt“ geht weiter.
   await page.locator('label', { hasText: /^Übersetzen$/ }).click();
   await expect(page.getByText('Satz 1 von 4')).toBeVisible();
-  await page.getByLabel('Deine Übersetzung (freiwillig)').fill('Hallo!');
+  await page.getByLabel('Deine Übersetzung (freiwillig)').fill('Die Mädchen sind daheim.');
   await page.keyboard.press('Enter');
-  await expect(page.getByRole('status')).toContainText('Hallo!');
+  await expect(page.getByRole('status')).toContainText('Die Mädchen sind zu Hause.');
   await page.keyboard.press('Enter');
   await expect(page.getByText('Satz 2 von 4')).toBeVisible();
   await page.getByRole('button', { name: 'Vergleichen' }).click();

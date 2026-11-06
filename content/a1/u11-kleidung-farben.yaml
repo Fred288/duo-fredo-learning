@@ -543,7 +543,7 @@ texts:
       - { tr: "Altmış lira.", de: "Sechzig Lira." }
       - { tr: "Çok pahalı!", de: "Sehr teuer!" }
       - { tr: "Kırmızı gömlek var mı?", de: "Gibt es ein rotes Hemd?" }
-      - { tr: "Evet, şu beyaz gömlek ucuz.", de: "Ja, das weiße Hemd da ist billig." }
+      - { tr: "Hayır, ama şu beyaz gömlek ucuz.", de: "Nein, aber das weiße Hemd da ist billig." }
   - id: a1-u11-t2
     title: "Eine neue Jacke"
     reviewed: false

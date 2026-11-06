@@ -1,6 +1,6 @@
 # Erweiterungsplan: Übungstexte nach der Lektion
 
-Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Gegenprüfung in frischer Session steht aus). T4–T6 offen.
+Stand: 2026-11-06. T1 umgesetzt (Schema, Build-Prüfung, Auswahl, Einstellung `practiceRecent`, ein Beispieltext `a1-u02-t1`); T2 umgesetzt (Ansicht Lesen/Übersetzen, Angebot nach der Lektion, Texte auf der Unit-Seite; Abweichung: statt eines Abschnitts „Texte (n)“ stehen die Texte als Knöpfe „Übungstext“ unter den Lektionen). T3 umgesetzt (A1: 24 Texte, 2 je Unit, 4–5 Sätze; Claude-Entwurf, `reviewed: false`, Opus-gegengeprüft und eingearbeitet, Zweifelsfälle vom Nutzer entschieden). T4–T6 offen.
 
 ## Ziel
 

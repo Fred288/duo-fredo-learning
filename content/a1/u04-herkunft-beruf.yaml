@@ -444,7 +444,7 @@ texts:
       - { tr: "Sen Türk müsün?", de: "Bist du Türke?" }
       - { tr: "Sen öğretmen misin?", de: "Bist du Lehrer?" }
   - id: a1-u04-t2
-    title: "Im Krankenhaus"
+    title: "Berufe"
     reviewed: false
     glossary:
       - { tr: "değiliz", de: "sind nicht (değil + wir)", vocab: "değil" }

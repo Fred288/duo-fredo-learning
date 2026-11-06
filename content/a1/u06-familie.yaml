@@ -447,7 +447,7 @@ texts:
     reviewed: false
     sentences:
       - { tr: "Benim adım Mehmet.", de: "Ich heiße Mehmet." }
-      - { tr: "Annem hemşire, babam aşçı.", de: "Meine Mutter ist Krankenpflegerin, mein Vater ist Koch." }
+      - { tr: "Annem öğretmen, babam doktor.", de: "Meine Mutter ist Lehrerin, mein Vater ist Arzt." }
       - { tr: "Ablamın adı Ayşe.", de: "Meine ältere Schwester heißt Ayşe." }
       - { tr: "Ablam İzmir'de.", de: "Meine ältere Schwester ist in Izmir." }
       - { tr: "Dedem seksen yaşında.", de: "Mein Großvater ist achtzig Jahre alt." }

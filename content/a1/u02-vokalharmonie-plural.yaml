@@ -390,7 +390,7 @@ texts:
     title: Wo ist was?
     reviewed: false
     sentences:
-      - { tr: Merhaba!, de: Hallo! }
+      - { tr: "Kızlar evde.", de: "Die Mädchen sind zu Hause." }
       - { tr: Öğrenciler okulda., de: Die Schüler sind in der Schule. }
       - { tr: Köpekler bahçede., de: Die Hunde sind im Garten. }
       - { tr: Elmalar masada., de: Die Äpfel liegen auf dem Tisch. }

@@ -536,7 +536,7 @@ texts:
     glossary:
       - { tr: "mı", de: "Fragepartikel (… ?)" }
     sentences:
-      - { tr: "Lokantada balık var mı?", de: "Gibt es im Restaurant Fisch?" }
+      - { tr: "Burada balık var mı?", de: "Gibt es hier Fisch?" }
       - { tr: "Maalesef balık yok, ama tavuk var.", de: "Leider gibt es keinen Fisch, aber es gibt Huhn." }
       - { tr: "Tavuk ve bir su, lütfen.", de: "Huhn und ein Wasser, bitte." }
       - { tr: "Hesabı istiyorum, lütfen.", de: "Ich möchte die Rechnung, bitte." }

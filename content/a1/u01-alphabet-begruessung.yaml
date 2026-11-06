@@ -392,6 +392,6 @@ texts:
     sentences:
       - { tr: "İyi akşamlar!", de: "Guten Abend!" }
       - { tr: "Su, lütfen.", de: "Wasser, bitte." }
-      - { tr: "Rica ederim.", de: "Gern geschehen." }
+      - { tr: "Teşekkürler.", de: "Danke." }
       - { tr: "Hoşça kal!", de: "Tschüss! (sagt, wer geht)" }
       - { tr: "Güle güle!", de: "Tschüss! (sagt, wer bleibt)" }
