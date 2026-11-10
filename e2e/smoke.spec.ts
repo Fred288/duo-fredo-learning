@@ -100,6 +100,7 @@ test('Suffix-Builder: richtige und falsche Form mit Begründung', async ({ page 
   await page.getByRole('button', { name: 'ler', exact: true }).click();
   await page.getByRole('button', { name: 'Prüfen' }).click();
   await expect(page.getByRole('status')).toContainText('Richtig!');
+  await expect(page.getByRole('status')).toContainText('Lösung: evler');
   await expect(page.getByRole('status')).toContainText('hell');
   await page.getByRole('button', { name: 'Weiter' }).click();
 
@@ -137,7 +138,11 @@ test('Fehler wiederholen: falsche Antwort bleibt offen, bis sie gelöst ist', as
   await openToday(page);
   await expect(card).toContainText('Zuletzt falsch beantwortet: 1');
   await card.click();
-  await step(first);
+  await answer(page, first, unit);
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await expect(page.getByRole('status')).toContainText('Richtig!');
+  await expect(page.getByRole('status')).toContainText(`Lösung: ${first.answer}`);
+  await page.getByRole('button', { name: 'Weiter' }).click();
   await expect(page.getByRole('heading', { name: 'Durchgang geschafft' })).toBeVisible();
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
   await expect(card).toHaveCount(0);

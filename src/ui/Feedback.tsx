@@ -16,8 +16,15 @@ interface Props {
   /** Regelbegründungen aus der Morphologie-Engine. */
   reasons?: string[];
   retry: boolean;
-  /** Türkische Lösung zum Anhören. */
+  /** Türkische Lösung zum Anhören (fehlt, wo die Lösung deutsch ist). */
   speak?: string;
+  /**
+   * Die Übung zeigt die Lösung nach der Antwort selbst (Hören: Satz und Bedeutung; Zerlegen,
+   * Satzbau: `details`; Tabelle: die Zellen). Dann steht sie bei richtiger Antwort nicht doppelt da.
+   */
+  solutionShown?: boolean;
+  /** Sprache der Lösung, wenn bekannt (Vorlesen und Aussprache für Screenreader). */
+  solutionLang?: 'tr' | 'de';
   /** Aufbau der Lösung (Zerlegen: Stücke mit Rollen, Satzbau: Satzglieder mit Rollen). */
   details?: ReactNode;
 }
@@ -30,8 +37,17 @@ export function Feedback({
   retry,
   speak,
   details,
+  solutionShown = false,
+  solutionLang,
 }: Props) {
   const shown = result.matched ?? solution;
+  // Auch bei richtiger Antwort: Lösung zeigen und anhören, damit man hört, wie es klingen muss.
+  const showSolution = result.verdict !== 'correct' || result.hints.length > 0 || !solutionShown;
+  const speakButton = speak && (
+    <span className="ml-1 align-middle">
+      <SpeakButton text={speak} />
+    </span>
+  );
   return (
     <div
       role="status"
@@ -40,17 +56,14 @@ export function Feedback({
     >
       <p className="font-semibold">
         {t(`feedback.${result.verdict}`)}
-        {speak && (
-          <span className="ml-1 align-middle">
-            <SpeakButton text={speak} />
-          </span>
-        )}
+        {!showSolution && speakButton}
       </p>
-      {result.verdict !== 'correct' || result.hints.length > 0 ? (
-        <p className="mt-1" lang="tr">
-          {t('feedback.solution', { answer: shown })}
+      {showSolution && (
+        <p className="mt-1">
+          {t('feedback.solution.label')} <span lang={solutionLang}>{shown}</span>
+          {speakButton}
         </p>
-      ) : null}
+      )}
       {result.hints.map((h) => (
         <p key={h} className="mt-1 text-sm">
           {t(`feedback.hint.${h}`)}

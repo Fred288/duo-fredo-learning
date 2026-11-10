@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, dayKey } from './day';
+import { addDays, dayKey, daysInMonth, monthStart, weekStart } from './day';
 import {
   activeDays,
   carriedStreak,
   completedLessonIds,
+  lessonsBetween,
   lessonsOnDay,
+  periodGoals,
   openMistakes,
   progressLessons,
   unitOfLesson,
@@ -132,5 +134,37 @@ describe('openMistakes', () => {
       { id: 'a1-u03-h1', type: 'listening' },
     ];
     expect(progressLessons(lessons).map((l) => l.id)).toEqual(['a1-u03-l1']);
+  });
+});
+
+describe('Wochen- und Monatsziel', () => {
+  it('Woche beginnt am Montag, auch über Monats- und Jahresgrenzen', () => {
+    expect(weekStart('2026-11-10')).toBe('2026-11-09'); // Dienstag
+    expect(weekStart('2026-11-09')).toBe('2026-11-09'); // Montag
+    expect(weekStart('2026-11-15')).toBe('2026-11-09'); // Sonntag
+    expect(weekStart('2027-01-01')).toBe('2026-12-28'); // Freitag
+    expect(weekStart('2026-03-29')).toBe('2026-03-23'); // Sonntag der Zeitumstellung
+  });
+  it('kennt Monatsanfang und Monatslänge samt Schaltjahr', () => {
+    expect(monthStart('2026-11-10')).toBe('2026-11-01');
+    expect(daysInMonth('2026-11-10')).toBe(30);
+    expect(daysInMonth('2026-02-01')).toBe(28);
+    expect(daysInMonth('2028-02-29')).toBe(29);
+    expect(daysInMonth('2026-12-31')).toBe(31);
+  });
+  it('zählt Lektionen der laufenden Woche und des Monats, Ziele aus dem Tagesziel', () => {
+    const completions = [
+      c('a1-u01-l1', '2026-10-31'), // Vormonat und Vorwoche
+      c('a1-u01-l1', '2026-11-01'), // Sonntag der Vorwoche, aber im Monat
+      c('a1-u01-l2', '2026-11-02'), // Montag
+      c('a1-u01-l2', '2026-11-02'),
+      c('a1-u02-l1', '2026-11-04'),
+      c('a1-u02-l2', '2026-11-05'), // nach „heute“, zählt nicht
+    ];
+    expect(lessonsBetween(completions, '2026-11-02', '2026-11-04')).toBe(3);
+    expect(periodGoals(completions, '2026-11-04', 2)).toEqual({
+      week: { done: 3, goal: 14 },
+      month: { done: 4, goal: 60 },
+    });
   });
 });

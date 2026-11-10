@@ -30,6 +30,7 @@ export function Settings() {
   const placement = currentPlacement(placements);
   const {
     dailyGoal,
+    showPeriodGoals,
     newWordsPerDay,
     showStreak,
     streakCarry,
@@ -86,6 +87,22 @@ export function Settings() {
             +
           </button>
         </div>
+      </div>
+
+      <div>
+        <label className="flex min-h-11 items-center justify-between gap-4">
+          <span>{t('settings.periodGoals')}</span>
+          <input
+            type="checkbox"
+            checked={showPeriodGoals}
+            onChange={(e) => set('showPeriodGoals', e.target.checked)}
+            aria-describedby="period-goals-hint"
+            className="size-6 accent-brand"
+          />
+        </label>
+        <p id="period-goals-hint" className="text-sm text-ink-subtle">
+          {t('settings.periodGoals.hint')}
+        </p>
       </div>
 
       <div className="flex items-center justify-between gap-4">

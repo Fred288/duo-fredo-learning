@@ -18,7 +18,7 @@ test('Heute: ab 1280 px stehen Karten und Tagesziel nebeneinander, sonst unterei
   await page.goto('/');
   await page.getByRole('button', { name: 'Nein, von vorn' }).click();
   await expect(page.getByRole('button', { name: /^Weiterlernen/ })).toBeVisible();
-  const goal = await box(page, '[aria-label^="Heute:"]');
+  const goal = await box(page, '[aria-label="Lernziele"]');
   const next = await box(page, 'button:has-text("Weiterlernen")');
   if (width(page) >= 1280) {
     expect(next.x + next.width).toBeLessThan(goal.x);

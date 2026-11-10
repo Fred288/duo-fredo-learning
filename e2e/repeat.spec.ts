@@ -30,7 +30,15 @@ async function playRepeat(page: Page) {
         await page
           .locator('label', { has: page.getByText(v.de.join(', '), { exact: true }) })
           .click();
-      } else await page.getByLabel('Deine Antwort').fill(v.tr);
+      } else {
+        await page.getByLabel('Deine Antwort').fill(v.tr);
+        await page.getByRole('button', { name: 'Prüfen' }).click();
+        // Auch richtig beantwortet steht die Lösung da (Wiederholen nutzt den Lektions-Runner).
+        await expect(page.getByRole('status')).toContainText('Richtig!');
+        await expect(page.getByRole('status')).toContainText(`Lösung: ${v.tr}`);
+        await page.getByRole('button', { name: 'Weiter' }).click();
+        continue;
+      }
     } else {
       const unit = unitOf(id);
       const ex = unit.lessons.flatMap((l) => l.exercises).find((e) => e.id === id)!;

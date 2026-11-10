@@ -66,6 +66,22 @@ interface Props {
 }
 
 /** Regelbegründungen; bei Tabellen nur für die falsch ausgefüllten Zeilen. */
+/** Übungen, die ihre Lösung nach der Antwort selbst zeigen (siehe `Feedback.solutionShown`). */
+const SOLUTION_SHOWN: ReadonlySet<Supported['type']> = new Set([
+  'listen',
+  'segment',
+  'sov_puzzle',
+  'paradigm',
+]);
+
+/** Sprache der Lösung; Multiple Choice ist türkisch, wenn der Build `speak_answer` gesetzt hat. */
+function solutionLang(ex: Supported): 'tr' | 'de' | undefined {
+  if (ex.type === 'free_text') return ex.direction === 'tr_de' ? 'de' : 'tr';
+  if (ex.type === 'listen') return ex.mode === 'meaning' ? 'de' : 'tr';
+  if (ex.type === 'multiple_choice') return ex.speak_answer ? 'tr' : undefined;
+  return 'tr';
+}
+
 function reasonsFor(ex: Supported, answer: string, vocab: readonly Vocab[]): string[] | undefined {
   // Gleiche Schritte (Harmonie zweimal in -iniz, -ecek) nur einmal nennen.
   if (ex.type === 'suffix_builder' || ex.type === 'conjugation') {
@@ -313,6 +329,8 @@ function Runner({
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
             speak={spoken.solution}
+            solutionShown={SOLUTION_SHOWN.has(supported.type)}
+            solutionLang={solutionLang(supported)}
             details={
               supported.type === 'segment' ? (
                 <SegmentFeedback ex={supported} answer={answer} />

@@ -66,9 +66,17 @@ describe('Settings-Store', () => {
       { key: 'dailyGoal', value: 99 },
       { key: 'theme', value: 'neon' },
       { key: 'tolerateDiacritics', value: 'ja' },
+      { key: 'showPeriodGoals', value: 'nein' },
     ]);
     await useSettings.getState().load();
     expect(useSettings.getState()).toMatchObject(DEFAULT_SETTINGS);
+  });
+
+  it('speichert den Schalter für Wochen- und Monatsziel', async () => {
+    useSettings.getState().set('showPeriodGoals', false);
+    useSettings.setState({ ...DEFAULT_SETTINGS });
+    await useSettings.getState().load();
+    expect(useSettings.getState().showPeriodGoals).toBe(false);
   });
 
   it('setzt die Dunkelmodus-Klasse auf <html>', () => {

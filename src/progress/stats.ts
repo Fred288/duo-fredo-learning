@@ -1,5 +1,5 @@
 import type { Verdict } from '../lib/answer';
-import { addDays } from './day';
+import { addDays, daysInMonth, monthStart, weekStart } from './day';
 
 export interface Attempt {
   exerciseId: string;
@@ -64,6 +64,36 @@ export const activeDays = (completions: readonly Completion[]): Set<string> =>
 
 export const lessonsOnDay = (completions: readonly Completion[], day: string): number =>
   completions.filter((c) => c.day === day).length;
+
+/** Lektionen von `from` bis einschließlich `to` (Tagesschlüssel sind lexikalisch sortierbar). */
+export const lessonsBetween = (
+  completions: readonly Completion[],
+  from: string,
+  to: string,
+): number => completions.filter((c) => c.day >= from && c.day <= to).length;
+
+export interface GoalProgress {
+  done: number;
+  goal: number;
+}
+
+/**
+ * Wochen- und Monatsziel, abgeleitet aus dem Tagesziel (Nutzerentscheidung): Woche = Tagesziel × 7
+ * (Montag bis Sonntag), Monat = Tagesziel × Tage des Monats. Gezählt werden Lektionen bis heute.
+ */
+export function periodGoals(
+  completions: readonly Completion[],
+  today: string,
+  dailyGoal: number,
+): { week: GoalProgress; month: GoalProgress } {
+  return {
+    week: { done: lessonsBetween(completions, weekStart(today), today), goal: dailyGoal * 7 },
+    month: {
+      done: lessonsBetween(completions, monthStart(today), today),
+      goal: dailyGoal * daysInMonth(today),
+    },
+  };
+}
 
 export const completedLessonIds = (completions: readonly Completion[]): Set<string> =>
   new Set(completions.map((c) => c.lessonId));

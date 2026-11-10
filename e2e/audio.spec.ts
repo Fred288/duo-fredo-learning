@@ -18,6 +18,26 @@ test('Nachschlagewerk: Anhören normal und langsam', async ({ page }) => {
   ]);
 });
 
+test('Richtige Antwort: Lösung steht da und lässt sich normal und langsam anhören', async ({
+  page,
+}) => {
+  await fakeSpeech(page, TURKISH);
+  await page.goto('/');
+  await (await openUnit(page, 'a1-u02')).getByRole('button', { name: /Plural bauen/ }).click();
+  await page.getByRole('button', { name: 'ev', exact: true }).click();
+  await page.getByRole('button', { name: 'ler', exact: true }).click();
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  const status = page.getByRole('status');
+  await expect(status).toContainText('Richtig!');
+  await expect(status).toContainText('Lösung: evler');
+  await status.getByRole('button', { name: 'Anhören: evler', exact: true }).click();
+  await status.getByRole('button', { name: 'Langsam anhören: evler' }).click();
+  expect(await page.evaluate(() => window.__spoken)).toEqual([
+    { text: 'evler', rate: 0.9, lang: 'tr-TR' },
+    { text: 'evler', rate: 0.6, lang: 'tr-TR' },
+  ]);
+});
+
 test('Einstellungen: Probe, Stimme wählen, Audio abschalten', async ({ page }) => {
   await fakeSpeech(page, [
     ...TURKISH,

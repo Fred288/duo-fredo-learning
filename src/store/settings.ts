@@ -10,6 +10,8 @@ export interface Settings {
   tolerateDiacritics: boolean;
   /** Ziel: abgeschlossene Lektionen pro Tag. */
   dailyGoal: number;
+  /** Wochen- und Monatsziel unter dem Tagesziel zeigen (aus dem Tagesziel abgeleitet). */
+  showPeriodGoals: boolean;
   /** Neue Wörter pro Tag im Wiederholen; 0 = keine neuen, schon eingeführte bleiben fällig. */
   newWordsPerDay: number;
   showStreak: boolean;
@@ -46,6 +48,7 @@ export type PracticeMode = 'read' | 'translate';
 export const DEFAULT_SETTINGS: Settings = {
   tolerateDiacritics: true,
   dailyGoal: 1,
+  showPeriodGoals: true,
   newWordsPerDay: 10,
   showStreak: true,
   streakCarry: 0,
@@ -121,6 +124,7 @@ export function pickKnown(stored: Partial<Settings>): Partial<Settings> {
   if (typeof stored.tolerateDiacritics === 'boolean')
     out.tolerateDiacritics = stored.tolerateDiacritics;
   if (typeof stored.showStreak === 'boolean') out.showStreak = stored.showStreak;
+  if (typeof stored.showPeriodGoals === 'boolean') out.showPeriodGoals = stored.showPeriodGoals;
   if (typeof stored.audioEnabled === 'boolean') out.audioEnabled = stored.audioEnabled;
   if (typeof stored.autoplay === 'boolean') out.autoplay = stored.autoplay;
   if (typeof stored.shadowing === 'boolean') out.shadowing = stored.shadowing;

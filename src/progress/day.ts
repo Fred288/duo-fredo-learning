@@ -11,3 +11,19 @@ export function addDays(day: string, n: number): string {
   const [y, m, d] = day.split('-').map(Number) as [number, number, number];
   return dayKey(new Date(y, m - 1, d + n, 12));
 }
+
+/** Montag der Woche, in der `day` liegt (Woche Montag bis Sonntag). */
+export function weekStart(day: string): string {
+  const [y, m, d] = day.split('-').map(Number) as [number, number, number];
+  const weekday = new Date(y, m - 1, d, 12).getDay(); // 0 = Sonntag
+  return addDays(day, -((weekday + 6) % 7));
+}
+
+/** Erster Tag des Monats, in dem `day` liegt. */
+export const monthStart = (day: string): string => `${day.slice(0, 8)}01`;
+
+/** Anzahl Tage des Monats, in dem `day` liegt. */
+export function daysInMonth(day: string): number {
+  const [y, m] = day.split('-').map(Number) as [number, number];
+  return new Date(y, m, 0, 12).getDate();
+}

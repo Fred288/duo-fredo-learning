@@ -525,6 +525,91 @@ describe('LessonRunner Grammatik-Hinweis', () => {
       expect(onAttempt).not.toHaveBeenCalled();
       expect(onComplete).not.toHaveBeenCalled();
     });
+
+    it('richtig gehört: Satz steht einmal da, Anhören im Feedback, keine zweite Lösung', () => {
+      const speaker = new FakeSpeaker('ready');
+      setSpeaker(speaker);
+      render(<LessonRunner lesson={listening} onExit={() => {}} />);
+      fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Günaydın' } });
+      click('Prüfen');
+      const status = screen.getByRole('status');
+      expect(status.textContent).toContain('Richtig!');
+      expect(status.textContent).not.toContain('Lösung:');
+      expect(screen.getAllByText('Günaydın')).toHaveLength(1);
+      click('Langsam anhören: Günaydın');
+      expect(speaker.spoken.at(-1)).toEqual({ text: 'Günaydın', rate: 'slow' });
+    });
+  });
+});
+
+describe('LessonRunner: Lösung auch bei richtiger Antwort', () => {
+  const lessonOf = (exercises: Lesson['exercises']): Lesson => ({
+    id: 'a1-u01-l1',
+    type: 'vocab',
+    title: 'Test',
+    exercises,
+  });
+
+  it('zeigt die türkische Lösung mit Anhören (normal und langsam)', () => {
+    const speaker = new FakeSpeaker('ready');
+    setSpeaker(speaker);
+    const exercises: Lesson['exercises'] = [
+      {
+        id: 'a1-u01-l1-e1',
+        type: 'free_text',
+        direction: 'de_tr',
+        prompt: 'Danke',
+        answers: ['Teşekkürler', 'Teşekkür ederim'],
+      },
+    ];
+    render(<LessonRunner lesson={lessonOf(exercises)} onExit={() => {}} />);
+    fireEvent.change(screen.getByLabelText('Deine Antwort'), {
+      target: { value: 'teşekkür ederim' },
+    });
+    click('Prüfen');
+    const status = screen.getByRole('status');
+    expect(status.textContent).toContain('Richtig!');
+    // Die getroffene Variante, nicht die erste Lösung.
+    expect(status.textContent).toContain('Lösung: Teşekkür ederim');
+    expect(screen.getByText('Teşekkür ederim').getAttribute('lang')).toBe('tr');
+    click('Anhören: Teşekkür ederim');
+    click('Langsam anhören: Teşekkür ederim');
+    expect(speaker.spoken).toEqual([
+      { text: 'Teşekkür ederim', rate: 'normal' },
+      { text: 'Teşekkür ederim', rate: 'slow' },
+    ]);
+  });
+
+  it('deutsche Lösung erscheint, wird aber nicht vorgelesen', () => {
+    setSpeaker(new FakeSpeaker('ready'));
+    const exercises: Lesson['exercises'] = [
+      {
+        id: 'a1-u01-l1-e1',
+        type: 'free_text',
+        direction: 'tr_de',
+        prompt: 'Teşekkürler',
+        answers: ['Danke'],
+      },
+      {
+        id: 'a1-u01-l1-e2',
+        type: 'multiple_choice',
+        prompt: 'Was heißt „Merhaba“?',
+        options: ['Hallo', 'Danke'],
+        answer: 'Hallo',
+      },
+    ];
+    render(<LessonRunner lesson={lessonOf(exercises)} onExit={() => {}} />);
+    fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Danke' } });
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Lösung: Danke');
+    expect(screen.getByText('Danke').getAttribute('lang')).toBe('de');
+    expect(screen.queryByRole('button', { name: /anhören: Danke/i })).toBeNull();
+    click('Weiter');
+
+    fireEvent.click(screen.getByLabelText(/Hallo/));
+    click('Prüfen');
+    expect(screen.getByRole('status').textContent).toContain('Lösung: Hallo');
+    expect(screen.queryByRole('button', { name: /anhören: Hallo/i })).toBeNull();
   });
 });
 
