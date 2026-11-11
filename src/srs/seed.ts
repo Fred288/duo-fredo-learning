@@ -11,7 +11,7 @@ export function seedFromAttempts(attempts: readonly Attempt[], scheduler: Schedu
   const cards = new Map<string, Card>();
   for (const a of [...attempts].sort((x, y) => x.at - y.at)) {
     const unitId = unitOfExercise(a.exerciseId);
-    if (!unitId) continue;
+    if (!unitId || a.retry) continue;
     const ref = { kind: 'exercise', exerciseId: a.exerciseId } as const;
     const id = cardId(ref);
     const card = cards.get(id);

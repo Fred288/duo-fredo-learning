@@ -20,6 +20,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
   const practiceRecent = useSettings((s) => s.practiceRecent);
   const { manifest } = useManifest();
   const recordAttempt = useProgress((s) => s.recordAttempt);
+  const recordMiss = useProgress((s) => s.recordMiss);
   const recordCompletion = useProgress((s) => s.recordCompletion);
   const [lesson, setLesson] = useState<Lesson>();
   const [vocab, setVocab] = useState<Vocab[]>([]);
@@ -87,6 +88,7 @@ export function LessonScreen({ unitId, lessonId }: { unitId: string; lessonId: s
       unitReviewed={unitReviewed}
       onExit={goBack}
       onAttempt={(ex, verdict) => recordAttempt(ex.id, lessonId, verdict, ex.type)}
+      onMiss={(ex) => recordMiss(ex.id, lessonId)}
       onComplete={(correct, total) => recordCompletion(unitId, lessonId, correct, total)}
       grammarFor={explainer ? (ex) => sectionFor(explainer, ex, lesson.title) : undefined}
       doneExtra={

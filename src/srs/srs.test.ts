@@ -90,11 +90,11 @@ describe('Leitner', () => {
       [3, '2026-05-11'],
       [4, '2026-05-25'],
       [5, '2026-06-24'],
-      [5, '2026-07-24'], // Box 5 ist die letzte
-      [5, '2026-08-23'],
+      [6, '2026-09-22'], // Phase 6 ist die letzte: 90 Tage
+      [6, '2027-03-21'], // danach alle 180 Tage, die Karte bleibt im Umlauf
     ]);
     expect(c.lastAt).toBe(5);
-    expect(INTERVALS).toHaveLength(5);
+    expect(INTERVALS).toHaveLength(6);
   });
 
   it('setzt bei falsch immer auf Box 1 zurück und zählt den Rückfall', () => {
@@ -105,6 +105,12 @@ describe('Leitner', () => {
       lapses: 2,
       lastAt: 9,
     });
+  });
+
+  it('hält in der letzten Phase bei fast richtig den 90-Tage-Abstand', () => {
+    const c = card(exRef('x'), { box: 6, due: '2026-05-01' });
+    expect(leitner.review(c, 'almost', today, 1)).toMatchObject({ box: 6, due: '2026-07-30' });
+    expect(leitner.review(c, 'correct', today, 1)).toMatchObject({ box: 6, due: '2026-10-28' });
   });
 
   it('hält bei fast richtig die Box und plant neu', () => {

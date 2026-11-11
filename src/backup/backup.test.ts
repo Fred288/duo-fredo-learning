@@ -186,6 +186,19 @@ describe('parseBackup', () => {
     expect(r.ok && r.backup.data.placements).toEqual([]);
   });
 
+  it('behält Wiederholungsfehler (retry) und unterscheidet sie beim Zusammenführen', () => {
+    const f = file();
+    const retry: Attempt = { ...attempt('a1-u02-l2-e1', 100, 'wrong'), retry: true };
+    const r = parseBackup(
+      json({ ...f, data: { ...f.data, attempts: [...f.data.attempts, retry] } }),
+    );
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.backup.data.attempts).toContainEqual(retry);
+    const merged = mergeBackup(f.data, r.backup.data, 'merge');
+    expect(merged.data.attempts).toHaveLength(f.data.attempts.length + 1);
+  });
+
   it('akzeptiert fehlende Tabellen als leer', () => {
     const r = parseBackup(
       json({ format: BACKUP_FORMAT, version: 1, exportedAt: '2026-10-28T10:00:00Z', data: {} }),

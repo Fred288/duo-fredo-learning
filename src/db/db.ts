@@ -44,9 +44,11 @@ export interface AttemptRow {
   id?: number;
   exerciseId: string;
   lessonId: string;
-  /** Bewertung beim ersten Versuch dieses Laufs. */
+  /** Bewertung beim ersten Versuch dieses Laufs (bei `retry`: ein weiterer Fehlversuch). */
   verdict: Verdict;
   at: number;
+  /** Weiterer falscher Versuch im selben Lauf; nur für die Fehlerzahl (siehe `Attempt.retry`). */
+  retry?: true;
 }
 
 export type CompletionRow = Completion & { id?: number };

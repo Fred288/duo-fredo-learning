@@ -83,7 +83,7 @@ describe('LookupScreen', () => {
     await type('ev');
     fireEvent.keyDown(screen.getByRole('searchbox'), { key: 'Enter' });
     expect(await screen.findByRole('heading', { name: 'ev' })).toBeTruthy();
-    expect(screen.getByText(/Türkisch → Deutsch: Box 2 von 5, fällig/)).toBeTruthy();
+    expect(screen.getByText(/Türkisch → Deutsch: Phase 2 von 6, fällig/)).toBeTruthy();
     expect(screen.getByText(/Unit: Vokalharmonie/)).toBeTruthy();
     expect(screen.getByRole('button', { name: 'Erklärkarte der Unit' })).toBeTruthy();
     expect(useApp.getState().lookupEntry).toBe('ev');

@@ -58,7 +58,13 @@ const time = z.number().int().nonnegative();
 const id = z.string().min(1);
 const verdict = z.enum(['correct', 'almost', 'wrong']);
 
-const AttemptRow = z.object({ exerciseId: id, lessonId: id, verdict, at: time });
+const AttemptRow = z.object({
+  exerciseId: id,
+  lessonId: id,
+  verdict,
+  at: time,
+  retry: z.literal(true).optional(),
+});
 const CompletionRow = z.object({
   lessonId: id,
   unitId: id,

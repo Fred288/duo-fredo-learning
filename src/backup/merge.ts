@@ -35,7 +35,7 @@ const zero = (): Record<Table, number> => ({
 const KEYS: {
   [T in Exclude<Table, 'cards' | 'flashMarks'>]: (row: BackupData[T][number]) => string;
 } = {
-  attempts: (a) => `${a.exerciseId}|${a.at}|${a.verdict}`,
+  attempts: (a) => `${a.exerciseId}|${a.at}|${a.verdict}${a.retry ? '|r' : ''}`,
   completions: (c) => `${c.lessonId}|${c.at}`,
   notes: (n) => `${n.itemId}|${n.at}|${n.text}`,
   // Gültig ist die jüngste Einstufung (`currentPlacement`), auch über Geräte hinweg.

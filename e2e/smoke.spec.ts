@@ -147,3 +147,49 @@ test('Fehler wiederholen: falsche Antwort bleibt offen, bis sie gelöst ist', as
   await page.getByRole('button', { name: 'Zur Übersicht' }).click();
   await expect(card).toHaveCount(0);
 });
+
+test('Weiß ich nicht: kommt wieder, bis richtig; Fehlerzahl und häufigste Fehler', async ({
+  page,
+}) => {
+  const unit = loadUnit('a1-u01');
+  const lesson = unit.lessons[0]!;
+  const [first, ...rest] = lesson.exercises;
+  if (first?.type !== 'multiple_choice') throw new Error('Test erwartet MC als erste Aufgabe');
+  const status = page.getByRole('status');
+  const next = () => page.getByRole('button', { name: 'Weiter' }).click();
+
+  await page.goto('/');
+  await (await openUnit(page, unit.id)).getByRole('button', { name: lesson.title }).click();
+  await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
+  await expect(status).toContainText('Nicht gewusst.');
+  await expect(status).toContainText(`Lösung: ${first.answer}`);
+  await expect(status).toContainText('Wiederholen: Phase 1 von 6, wieder morgen');
+  await next();
+  for (const ex of rest) {
+    await answer(page, ex, unit);
+    await page.getByRole('button', { name: 'Prüfen' }).click();
+    await next();
+  }
+  // Wieder nicht gewusst: kommt ein drittes Mal, die Fehlerzahl steht dabei.
+  await page.getByRole('button', { name: 'Weiß ich nicht' }).click();
+  await expect(status).toContainText('bisher 2-mal falsch');
+  await next();
+  await answer(page, first, unit);
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await expect(status).toContainText('Richtig!');
+  await next();
+  await expect(
+    page.getByText(`${rest.length} von ${lesson.exercises.length} beim ersten Versuch richtig`),
+  ).toBeVisible();
+  await page.getByRole('button', { name: 'Zur Übersicht' }).click();
+
+  await openToday(page);
+  const frequent = page.getByRole('button', { name: /Häufigste Fehler/ });
+  await expect(frequent).toContainText('Übungen, die schon falsch waren: 1');
+  await frequent.click();
+  await answer(page, first, unit);
+  await page.getByRole('button', { name: 'Prüfen' }).click();
+  await expect(status).toContainText('bisher 2-mal falsch');
+  await next();
+  await expect(page.getByRole('heading', { name: 'Durchgang geschafft' })).toBeVisible();
+});

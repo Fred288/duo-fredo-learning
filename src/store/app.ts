@@ -3,6 +3,9 @@ import type { Selection } from '../flashcards/deck';
 import type { FlashMode } from '../flashcards/types';
 import type { TextRef } from '../practice/pick';
 
+/** Stapel von „Fehler wiederholen“: offene Fehler oder die häufigsten. */
+export type MistakesMode = 'open' | 'frequent';
+
 export type Screen =
   | { name: 'today' }
   | { name: 'course' }
@@ -10,7 +13,8 @@ export type Screen =
   | { name: 'more' }
   | { name: 'settings' }
   | { name: 'review' }
-  | { name: 'mistakes' }
+  /** `frequent`: häufigste Fehler (auch behobene) statt der offenen. */
+  | { name: 'mistakes'; mode?: MistakesMode }
   | { name: 'repeat' }
   | { name: 'lookup' }
   | { name: 'stats' }
@@ -69,7 +73,7 @@ interface AppState {
   openMore: () => void;
   openSettings: () => void;
   openReview: () => void;
-  openMistakes: () => void;
+  openMistakes: (mode?: MistakesMode) => void;
   openRepeat: () => void;
   openExplainer: (unitId: string, opts?: { section?: string; from?: 'lookup' }) => void;
   openLookup: () => void;
@@ -220,7 +224,7 @@ export const useApp = create<AppState>((set, get) => {
     openMore: () => go({ name: 'more' }),
     openSettings: () => go({ name: 'settings' }),
     openReview: () => go({ name: 'review' }),
-    openMistakes: () => go({ name: 'mistakes' }),
+    openMistakes: (mode = 'open') => go({ name: 'mistakes', mode }),
     openRepeat: () => go({ name: 'repeat' }),
     openExplainer: (unitId, opts) => go({ name: 'explainer', unitId, ...opts }),
     openLookup: () => go({ name: 'lookup' }),

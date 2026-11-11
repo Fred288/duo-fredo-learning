@@ -2,7 +2,7 @@ import { isListeningCard } from '../content/listening';
 import { openWrong } from '../flashcards/deck';
 import { t } from '../i18n';
 import { dayKey } from '../progress/day';
-import { openMistakes } from '../progress/stats';
+import { frequentMistakes, openMistakes } from '../progress/stats';
 import { planRepeat } from '../srs';
 import { currentPlacement } from '../placement';
 import { useApp } from '../store/app';
@@ -46,6 +46,7 @@ export function Today() {
     completions.length === 0 &&
     placements.length === 0;
   const mistakes = openMistakes(attempts).length;
+  const frequent = frequentMistakes(attempts).length;
   // Weiterlernen: erst mit geladenem Fortschritt und nach einem ersten Start (sonst das Angebot).
   const next =
     manifest && progressLoaded && settingsLoaded && !offerPlacement
@@ -140,12 +141,24 @@ export function Today() {
           {mistakes > 0 && (
             <button
               type="button"
-              onClick={openMistakesScreen}
+              onClick={() => openMistakesScreen()}
               className="block min-h-11 w-full rounded-xl border border-warn-line bg-warn-soft p-4 text-left hover:bg-warn-soft-hover focus-visible:outline-2 focus-visible:outline-focus"
             >
               <span className="block font-medium">{t('mistakes.title')}</span>
               <span className="block text-sm text-ink-muted">
                 {t('mistakes.count', { count: mistakes })}
+              </span>
+            </button>
+          )}
+          {frequent > 0 && (
+            <button
+              type="button"
+              onClick={() => openMistakesScreen('frequent')}
+              className="card block min-h-11 w-full rounded-xl border border-line p-4 text-left hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
+            >
+              <span className="block font-medium">{t('mistakes.frequent.title')}</span>
+              <span className="block text-sm text-ink-muted">
+                {t('mistakes.frequent.count', { count: frequent })}
               </span>
             </button>
           )}

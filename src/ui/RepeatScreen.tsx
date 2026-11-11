@@ -122,7 +122,7 @@ async function buildRun(): Promise<Run | null> {
 
 export function RepeatScreen() {
   const goBack = useApp((s) => s.goBack);
-  const { recordAttempt, recordVocab, recordCompletion } = useProgress.getState();
+  const { recordAttempt, recordMiss, recordVocab, recordCompletion } = useProgress.getState();
   const [run, setRun] = useState<Run | null>();
   const [failed, setFailed] = useState(false);
   // „Nochmal“ im Runner spielt den Durchgang erneut, zählt fürs Tagesziel aber nur einmal.
@@ -181,6 +181,14 @@ export function RepeatScreen() {
         if (entry.ref.kind === 'vocab') recordVocab(entry.ref, entry.unitId, verdict);
         // Übungen zählen auch als Versuch, damit „Fehler wiederholen“ den Stand kennt.
         else recordAttempt(ex.id, run.lessonOf.get(ex.id) ?? '', verdict, ex.type);
+      }}
+      onMiss={(ex) => {
+        const entry = run.entryOf.get(ex.id);
+        if (entry?.ref.kind === 'exercise') recordMiss(ex.id, run.lessonOf.get(ex.id) ?? '');
+      }}
+      cardOf={(ex) => {
+        const entry = run.entryOf.get(ex.id);
+        return entry && cardId(entry.ref);
       }}
       onComplete={(correct, total) => {
         if (completed.current) return;

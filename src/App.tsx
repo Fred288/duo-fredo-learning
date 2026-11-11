@@ -151,7 +151,9 @@ export function App() {
           {screen.name === 'more' && <MoreScreen />}
           {screen.name === 'settings' && <Settings />}
           {screen.name === 'review' && <Review />}
-          {screen.name === 'mistakes' && <MistakesScreen />}
+          {screen.name === 'mistakes' && (
+            <MistakesScreen key={screen.mode ?? 'open'} mode={screen.mode ?? 'open'} />
+          )}
           {screen.name === 'repeat' && <RepeatScreen />}
           {screen.name === 'lookup' && <LookupScreen />}
           {screen.name === 'stats' && <StatsScreen />}

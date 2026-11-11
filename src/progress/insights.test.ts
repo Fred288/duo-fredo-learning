@@ -54,13 +54,13 @@ describe('vocabBoxes', () => {
       card(vo('kitap', 'de_tr'), 'a1-u02', { box: 2 }),
       card(ex('a1-u02-l2-e1'), 'a1-u02', { box: 3 }),
     ];
-    expect(vocabBoxes(units, cards, 'tr_de')).toEqual({ boxes: [1, 0, 0, 0, 1], unseen: 2 });
-    expect(vocabBoxes(units, cards, 'de_tr')).toEqual({ boxes: [0, 1, 0, 0, 0], unseen: 3 });
+    expect(vocabBoxes(units, cards, 'tr_de')).toEqual({ boxes: [1, 0, 0, 0, 1, 0], unseen: 2 });
+    expect(vocabBoxes(units, cards, 'de_tr')).toEqual({ boxes: [0, 1, 0, 0, 0, 0], unseen: 3 });
   });
 
   it('klemmt Boxen außerhalb des Bereichs', () => {
     const cards = [card(vo('ev'), 'a1-u02', { box: 9 })];
-    expect(vocabBoxes(units, cards, 'tr_de').boxes).toEqual([0, 0, 0, 0, 1]);
+    expect(vocabBoxes(units, cards, 'tr_de').boxes).toEqual([0, 0, 0, 0, 0, 1]);
   });
 });
 

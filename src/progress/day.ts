@@ -12,6 +12,15 @@ export function addDays(day: string, n: number): string {
   return dayKey(new Date(y, m - 1, d + n, 12));
 }
 
+/** Tage von `from` bis `to` (beide 'YYYY-MM-DD'); negativ, wenn `to` davor liegt. */
+export function daysBetween(from: string, to: string): number {
+  const utc = (day: string) => {
+    const [y, m, d] = day.split('-').map(Number) as [number, number, number];
+    return Date.UTC(y, m - 1, d);
+  };
+  return Math.round((utc(to) - utc(from)) / 86_400_000);
+}
+
 /** Montag der Woche, in der `day` liegt (Woche Montag bis Sonntag). */
 export function weekStart(day: string): string {
   const [y, m, d] = day.split('-').map(Number) as [number, number, number];

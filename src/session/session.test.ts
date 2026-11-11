@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Exercise } from '../content/schema';
-import { createSession, currentExercise, next, skip, submit, summary } from './session';
+import { GAVE_UP, createSession, currentExercise, next, skip, submit, summary } from './session';
 
 const ex = (id: string): Exercise => ({
   id,
@@ -23,16 +23,31 @@ describe('Session', () => {
     expect(summary(s)).toEqual({ correct: 2, total: 2 });
   });
 
-  it('wiederholt falsche Übungen genau einmal am Ende', () => {
+  it('wiederholt falsche Übungen am Ende, bis sie richtig sind, und zählt jeden Fehler', () => {
     let s = createSession([ex('a'), ex('b')]);
     s = submit(s, wrong);
     expect(s.phase).toBe('feedback');
     s = next(s);
     s = next(submit(s, ok)); // b
     expect(currentExercise(s)?.id).toBe('a');
-    s = next(submit(s, wrong)); // a erneut falsch → nicht nochmal
+    s = next(submit(s, wrong)); // a erneut falsch → kommt nochmal
+    expect(currentExercise(s)?.id).toBe('a');
+    s = next(submit(s, { verdict: 'almost', hints: [] }));
     expect(s.phase).toBe('done');
+    expect(s.misses).toEqual({ a: 2 });
     expect(summary(s)).toEqual({ correct: 1, total: 2 });
+  });
+
+  it('wertet „Weiß ich nicht“ als falsch und wiederholt die Übung', () => {
+    let s = submit(createSession([ex('a')]), GAVE_UP, { gaveUp: true });
+    expect(s.gaveUp).toBe(true);
+    expect(s.firstTry).toEqual({ a: 'wrong' });
+    s = next(s);
+    expect(s.gaveUp).toBe(false);
+    expect(currentExercise(s)?.id).toBe('a');
+    s = next(submit(s, ok));
+    expect(s.phase).toBe('done');
+    expect(summary(s)).toEqual({ correct: 0, total: 1 });
   });
 
   it('wertet den ersten Versuch, nicht die Wiederholung', () => {

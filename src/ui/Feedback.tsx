@@ -27,6 +27,10 @@ interface Props {
   solutionLang?: 'tr' | 'de';
   /** Aufbau der Lösung (Zerlegen: Stücke mit Rollen, Satzbau: Satzglieder mit Rollen). */
   details?: ReactNode;
+  /** Antwort war „Weiß ich nicht“ (zählt als falsch). */
+  gaveUp?: boolean;
+  /** Dezente Zeile mit Phase und Fehlerzahl (`cardNote`). */
+  note?: string;
 }
 
 export function Feedback({
@@ -39,6 +43,8 @@ export function Feedback({
   details,
   solutionShown = false,
   solutionLang,
+  gaveUp = false,
+  note,
 }: Props) {
   const shown = result.matched ?? solution;
   // Auch bei richtiger Antwort: Lösung zeigen und anhören, damit man hört, wie es klingen muss.
@@ -55,7 +61,7 @@ export function Feedback({
       className={`rounded-xl border p-4 ${tone[result.verdict]}`}
     >
       <p className="font-semibold">
-        {t(`feedback.${result.verdict}`)}
+        {gaveUp ? t('feedback.gaveUp') : t(`feedback.${result.verdict}`)}
         {!showSolution && speakButton}
       </p>
       {showSolution && (
@@ -82,6 +88,7 @@ export function Feedback({
       )}
       {explanation && <p className="mt-2 text-sm">{explanation}</p>}
       {retry && <p className="mt-2 text-sm opacity-80">{t('feedback.retry')}</p>}
+      {note && <p className="mt-2 text-sm opacity-80">{note}</p>}
     </div>
   );
 }

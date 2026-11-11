@@ -29,17 +29,19 @@ function dayLabel(day: string, today: string): string {
   return t('lookup.srs.date', { d: d ?? '', m: m ?? '' });
 }
 
-/** Schlichte Balken je Box; die Zahl steht als Text daneben (auch für Screenreader). */
-function Boxes({ counts, label }: { counts: BoxCounts; label: string }) {
+/** Schlichte Balken je Phase; die Zahl steht als Text daneben (auch für Screenreader). */
+function Boxes({ counts, label }: { counts: BoxCounts; label?: string }) {
   const max = Math.max(1, ...counts.boxes);
   return (
     <div className="space-y-1">
-      <h3 className="text-sm font-medium">{label}</h3>
+      {label && <h3 className="text-sm font-medium">{label}</h3>}
       <ul className="space-y-1">
         {counts.boxes.map((n, i) => (
           <li key={i} className="flex items-center gap-3 text-sm">
             <span className="w-36 shrink-0 text-ink-muted">
-              {t('stats.box', { box: i + 1, days: INTERVALS[i] ?? '' })}
+              {i === INTERVALS.length - 1
+                ? t('stats.box.last', { box: i + 1, days: INTERVALS[i]! })
+                : t('stats.box', { box: i + 1, days: INTERVALS[i] ?? '' })}
             </span>
             <span
               aria-hidden="true"
@@ -54,7 +56,9 @@ function Boxes({ counts, label }: { counts: BoxCounts; label: string }) {
           </li>
         ))}
       </ul>
-      <p className="text-sm text-ink-subtle">{t('stats.unseen', { count: counts.unseen })}</p>
+      {counts.unseen !== undefined && (
+        <p className="text-sm text-ink-subtle">{t('stats.unseen', { count: counts.unseen })}</p>
+      )}
     </div>
   );
 }
@@ -132,7 +136,17 @@ export function StatsScreen() {
               </h2>
               <Boxes counts={data.vocab.tr_de} label={t('lookup.srs.tr_de')} />
               <Boxes counts={data.vocab.de_tr} label={t('lookup.srs.de_tr')} />
+              <p className="text-sm text-ink-subtle">{t('stats.phases.hint')}</p>
             </section>
+
+            {data.forms.boxes.some((n) => n > 0) && (
+              <section className={`${card} space-y-4`} aria-labelledby="stats-forms">
+                <h2 id="stats-forms" className="font-medium">
+                  {t('stats.forms')}
+                </h2>
+                <Boxes counts={data.forms} />
+              </section>
+            )}
 
             <section className={card} aria-labelledby="stats-due">
               <h2 id="stats-due" className="font-medium">

@@ -14,7 +14,7 @@ export const REVIEW_ID = 'srs';
 
 interface ProgressState {
   completions: Completion[];
-  /** Erste Versuche je Lauf, Grundlage für "Fehler wiederholen". */
+  /** Erste Versuche je Lauf plus weitere Fehlversuche (`retry`); Grundlage für „Fehler wiederholen“ und die Fehlerzahl. */
   attempts: Attempt[];
   /** SRS-Karten (Übungen und Vokabeln). */
   cards: Card[];
@@ -31,6 +31,11 @@ interface ProgressState {
     verdict: Verdict,
     type?: Exercise['type'],
   ) => void;
+  /**
+   * Weiterer falscher Versuch im selben Lauf: zählt in die Fehlerzahl, nicht als erster Versuch
+   * und nicht für die Karte (die steht nach dem ersten Fehler schon in Phase 1).
+   */
+  recordMiss: (exerciseId: string, lessonId: string) => void;
   /** Bewertet eine Vokabelkarte; legt sie beim ersten Mal an. */
   recordVocab: (ref: CardRef, unitId: string, verdict: Verdict) => void;
   /** Entfernt Karten, deren Inhalt es nicht mehr gibt. */
@@ -119,6 +124,18 @@ export const useProgress = create<ProgressState>((set, get) => {
         const unitId = unitOfExercise(exerciseId);
         const hasCard = get().cards.some((c) => c.id === cardId(ref));
         if (unitId && tracks(type, verdict, hasCard)) review(ref, unitId, verdict);
+      }),
+    recordMiss: (exerciseId, lessonId) =>
+      whenReady(() => {
+        const attempt: Attempt = {
+          exerciseId,
+          lessonId,
+          verdict: 'wrong',
+          at: Date.now(),
+          retry: true,
+        };
+        set((s) => ({ attempts: [...s.attempts, attempt] }));
+        void safely(() => db.attempts.add({ ...attempt }), 0);
       }),
     recordVocab: (ref, unitId, verdict) => whenReady(() => review(ref, unitId, verdict)),
     removeCards: (ids) =>

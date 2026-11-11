@@ -3,12 +3,12 @@ import { sectionFor } from '../content/explainer-section';
 import { fetchExplainer, fetchUnit } from '../content/load';
 import type { Exercise, Lesson, Unit, Vocab } from '../content/schema';
 import { t } from '../i18n';
-import { openMistakes, unitOfLesson } from '../progress/stats';
-import { useApp } from '../store/app';
+import { frequentMistakes, openMistakes, unitOfLesson } from '../progress/stats';
+import { useApp, type MistakesMode } from '../store/app';
 import { useProgress } from '../store/progress';
 import { LessonRunner } from './LessonRunner';
 
-/** Höchstens so viele Fehler pro Durchgang, älteste zuerst. */
+/** Höchstens so viele Fehler pro Durchgang (offen: älteste zuerst, häufigste: meiste Fehler zuerst). */
 const MAX = 15;
 
 interface Run {
@@ -23,15 +23,22 @@ interface Run {
 const explainerOf = (u: Unit) =>
   u.explainer ? fetchExplainer(u.explainer).catch(() => '') : Promise.resolve('');
 
-export function MistakesScreen() {
+/** Übungen des Stapels, je mit der Lektion, unter der ihre Versuche zählen. */
+function pick(mode: MistakesMode): { exerciseId: string; lessonId: string }[] {
+  const { attempts } = useProgress.getState();
+  return (mode === 'frequent' ? frequentMistakes(attempts) : openMistakes(attempts)).slice(0, MAX);
+}
+
+export function MistakesScreen({ mode = 'open' }: { mode?: MistakesMode }) {
   const goBack = useApp((s) => s.goBack);
   const recordAttempt = useProgress((s) => s.recordAttempt);
+  const recordMiss = useProgress((s) => s.recordMiss);
   const [run, setRun] = useState<Run | null>();
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     // Momentaufnahme beim Öffnen; neue Versuche ändern den laufenden Durchgang nicht.
-    const open = openMistakes(useProgress.getState().attempts).slice(0, MAX);
+    const open = pick(mode);
     const unitIds = [...new Set(open.map((m) => unitOfLesson(m.lessonId)))];
     Promise.all(unitIds.map(fetchUnit))
       .then((units) => Promise.all(units.map(explainerOf)).then((mds) => ({ units, mds })))
@@ -43,7 +50,12 @@ export function MistakesScreen() {
         const exercises = open.flatMap((m) => byId.get(m.exerciseId) ?? []);
         if (!exercises.length) return setRun(null);
         setRun({
-          lesson: { id: 'mistakes', type: 'review', title: t('mistakes.title'), exercises },
+          lesson: {
+            id: 'mistakes',
+            type: 'review',
+            title: t(mode === 'frequent' ? 'mistakes.frequent.title' : 'mistakes.title'),
+            exercises,
+          },
           vocab: units.flatMap((u) => [...(u.vocab ?? []), ...(u.lexicon ?? [])]),
           lessonOf: new Map(open.map((m) => [m.exerciseId, m.lessonId])),
           grammar: new Map(
@@ -58,14 +70,14 @@ export function MistakesScreen() {
         });
       })
       .catch(() => setFailed(true));
-  }, []);
+  }, [mode]);
 
   if (failed) return <p className="text-danger">{t('home.error')}</p>;
   if (run === undefined) return <p className="text-ink-subtle">{t('mistakes.loading')}</p>;
   if (run === null) {
     return (
       <section className="space-y-4 text-center">
-        <p>{t('mistakes.empty')}</p>
+        <p>{t(mode === 'frequent' ? 'mistakes.frequent.empty' : 'mistakes.empty')}</p>
         <button
           type="button"
           autoFocus
@@ -89,6 +101,7 @@ export function MistakesScreen() {
       }}
       // Versuche zählen für die echte Lektion; kein Lektionsabschluss, kein Tagesziel.
       onAttempt={(ex, verdict) => recordAttempt(ex.id, run.lessonOf.get(ex.id)!, verdict, ex.type)}
+      onMiss={(ex) => recordMiss(ex.id, run.lessonOf.get(ex.id)!)}
     />
   );
 }

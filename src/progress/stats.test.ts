@@ -8,6 +8,8 @@ import {
   lessonsOnDay,
   periodGoals,
   openMistakes,
+  frequentMistakes,
+  missCounts,
   progressLessons,
   unitOfLesson,
   type Attempt,
@@ -97,6 +99,54 @@ describe('Fortschritt', () => {
   it('wertet Lektionen als erledigt, auch bei mehrfachem Abschluss', () => {
     const done = completedLessonIds(completions);
     expect(unitProgress(['a1-u01-l1', 'a1-u01-l2'], done)).toEqual({ done: 1, total: 2 });
+  });
+});
+
+describe('Fehlerzahl', () => {
+  const a = (
+    exerciseId: string,
+    verdict: Attempt['verdict'],
+    at: number,
+    retry = false,
+  ): Attempt => ({
+    exerciseId,
+    lessonId: 'a1-u03-l2',
+    verdict,
+    at,
+    ...(retry ? { retry: true as const } : {}),
+  });
+
+  it('zählt jede falsche Antwort, auch Wiederholungen im selben Lauf', () => {
+    const attempts = [
+      a('e1', 'wrong', 1),
+      a('e1', 'wrong', 2, true),
+      a('e1', 'correct', 3),
+      a('e2', 'almost', 4),
+    ];
+    expect(missCounts(attempts)).toEqual(new Map([['e1', 2]]));
+  });
+
+  it('Wiederholungsfehler lösen „Fehler wiederholen“ weder aus noch auf', () => {
+    expect(openMistakes([a('e1', 'correct', 1), a('e1', 'wrong', 2, true)])).toEqual([]);
+    expect(openMistakes([a('e1', 'wrong', 1), a('e1', 'wrong', 2, true)]).map((m) => m.at)).toEqual(
+      [1],
+    );
+  });
+
+  it('häufigste Fehler: meiste zuerst, auch behobene, Gleichstand jüngster zuerst', () => {
+    const attempts = [
+      a('e1', 'wrong', 1),
+      a('e1', 'correct', 2),
+      a('e2', 'wrong', 3),
+      a('e2', 'wrong', 4, true),
+      a('e3', 'wrong', 5),
+      a('e4', 'correct', 6),
+    ];
+    expect(frequentMistakes(attempts).map((m) => [m.exerciseId, m.misses])).toEqual([
+      ['e2', 2],
+      ['e3', 1],
+      ['e1', 1],
+    ]);
   });
 });
 

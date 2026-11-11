@@ -23,10 +23,19 @@ export const SETTLED_BOX = 4;
 export const ACCURACY_DAYS = 30;
 
 export interface BoxCounts {
-  /** Anzahl je Box, Index 0 = Box 1. */
+  /** Anzahl je Phase (Box), Index 0 = Phase 1. */
   boxes: number[];
-  /** Vokabeln der Kurs-Units ohne Karte in dieser Richtung. */
-  unseen: number;
+  /** Vokabeln der Kurs-Units ohne Karte in dieser Richtung (nur bei Wörtern). */
+  unseen?: number;
+}
+
+const phaseIndex = (box: number): number => Math.min(Math.max(box, 1), INTERVALS.length) - 1;
+
+/** Übungskarten je Phase. */
+export function exerciseBoxes(cards: readonly Card[]): BoxCounts {
+  const boxes = INTERVALS.map(() => 0);
+  for (const c of cards) if (c.ref.kind === 'exercise') boxes[phaseIndex(c.box)]!++;
+  return { boxes };
 }
 
 /** Vokabeln je Leitner-Box und Richtung. de→tr entsteht erst später, `unseen` zählt dort mit. */
@@ -40,8 +49,7 @@ export function vocabBoxes(
   for (const c of cards) {
     if (c.ref.kind !== 'vocab' || c.ref.dir !== dir) continue;
     seen.add(c.ref.vocabId);
-    const i = Math.min(Math.max(c.box, 1), INTERVALS.length) - 1;
-    boxes[i]!++;
+    boxes[phaseIndex(c.box)]!++;
   }
   const all = new Set(units.flatMap((u) => u.vocab));
   return { boxes, unseen: [...all].filter((v) => !seen.has(v)).length };
@@ -112,7 +120,7 @@ export function unitOverview(
   const fromMs = new Date(`${since}T00:00:00`).getTime();
   const tally = new Map<string, { right: number; all: number }>();
   for (const a of attempts) {
-    if (a.at < fromMs) continue;
+    if (a.at < fromMs || a.retry) continue;
     const unit = unitOfExercise(a.exerciseId);
     if (!unit) continue;
     const t = tally.get(unit) ?? { right: 0, all: 0 };
@@ -140,6 +148,8 @@ export function unitOverview(
 
 export interface Insights {
   vocab: Record<VocabDir, BoxCounts>;
+  /** Übungskarten je Phase. */
+  forms: BoxCounts;
   due: DueDay[];
   hardWords: Card[];
   hardForms: Card[];
@@ -162,6 +172,7 @@ export function insights(
   const cards = reconcileCards(units, allCards).cards.filter((c) => !opts.skip?.(c));
   return {
     vocab: { tr_de: vocabBoxes(units, cards, 'tr_de'), de_tr: vocabBoxes(units, cards, 'de_tr') },
+    forms: exerciseBoxes(cards),
     due: dueForecast(cards, today),
     hardWords: hardItems(cards, 'vocab'),
     hardForms: hardItems(cards, 'exercise'),

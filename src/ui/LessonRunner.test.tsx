@@ -97,6 +97,32 @@ describe('LessonRunner', () => {
     expect(onComplete).toHaveBeenCalledWith(1, 2);
   });
 
+  it('„Weiß ich nicht“ zählt als falsch, zeigt die Lösung und meldet Wiederholungsfehler', () => {
+    const onAttempt = vi.fn();
+    const onMiss = vi.fn();
+    render(
+      <LessonRunner lesson={lesson} onExit={() => {}} onAttempt={onAttempt} onMiss={onMiss} />,
+    );
+    click('Weiß ich nicht');
+    const status = screen.getByRole('status').textContent;
+    expect(status).toContain('Nicht gewusst.');
+    expect(status).toContain('Lösung: Merhaba');
+    expect(status).toContain('noch einmal');
+    expect(onAttempt).toHaveBeenCalledWith(lesson.exercises[0], 'wrong');
+    click('Weiter');
+    fireEvent.change(screen.getByLabelText('Deine Antwort'), { target: { value: 'Teşekkürler' } });
+    click('Prüfen');
+    click('Weiter');
+    click('Weiß ich nicht'); // Wiederholung, wieder nicht gewusst
+    expect(onMiss).toHaveBeenCalledWith(lesson.exercises[0]);
+    expect(onAttempt).toHaveBeenCalledTimes(2);
+    click('Weiter');
+    fireEvent.click(screen.getByLabelText(/Merhaba/));
+    click('Prüfen');
+    click('Weiter');
+    expect(screen.getByText('1 von 2 beim ersten Versuch richtig')).toBeTruthy();
+  });
+
   it('attemptOnce: „Nochmal“ meldet keinen weiteren Versuch', () => {
     const onAttempt = vi.fn();
     render(<LessonRunner lesson={lesson} onExit={() => {}} onAttempt={onAttempt} attemptOnce />);
@@ -107,6 +133,9 @@ describe('LessonRunner', () => {
     click('Prüfen');
     click('Weiter');
     fireEvent.click(screen.getByLabelText(/Hayır/)); // Wiederholung, wieder falsch
+    click('Prüfen');
+    click('Weiter');
+    fireEvent.click(screen.getByLabelText(/Merhaba/)); // kommt wieder, bis sie richtig ist
     click('Prüfen');
     click('Weiter');
     expect(onAttempt).toHaveBeenCalledTimes(2);

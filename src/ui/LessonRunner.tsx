@@ -15,6 +15,7 @@ import { t } from '../i18n';
 import { explainSteps } from '../i18n/explain';
 import { grade, isSupported, paradigmCells, solutionOf, type Supported } from '../session/grade';
 import {
+  GAVE_UP,
   createSession,
   currentExercise,
   next,
@@ -23,6 +24,12 @@ import {
   summary,
   type Session,
 } from '../session/session';
+import type { AnswerResult } from '../lib/answer';
+import { dayKey } from '../progress/day';
+import { missCounts } from '../progress/stats';
+import { cardId } from '../srs/card';
+import { useProgress } from '../store/progress';
+import { cardNote } from './card-note';
 import { stopSpeaking, useAudio, useAutoplay, useCanSpeak } from '../store/audio';
 import { useSettings } from '../store/settings';
 import { solveExercise, solveParadigm } from '../content/lexicon';
@@ -47,6 +54,16 @@ interface Props {
   onExit: () => void;
   /** Erster Versuch je Übung und Lauf. */
   onAttempt?: (exercise: Exercise, verdict: Verdict) => void;
+  /**
+   * Weiterer falscher Versuch derselben Übung im Lauf (sie kam nach einem Fehler wieder), oder ein
+   * falscher Versuch, der wegen `attemptOnce` nicht als Versuch gemeldet wird. Nur für die Fehlerzahl.
+   */
+  onMiss?: (exercise: Exercise) => void;
+  /**
+   * Karten-ID der Übung im Wiederholen (Phase und Fehlerzahl im Feedback); Default `ex:<id>`.
+   * Vokabelübungen im Wiederholen geben ihre Vokabelkarte an.
+   */
+  cardOf?: (exercise: Exercise) => string | undefined;
   /** Nach „Nochmal“ nicht erneut melden (Wiederholen: sonst zählt ein Fehler doppelt). */
   attemptOnce?: boolean;
   /** Meldeziel je Übung, wenn ein Lauf mehrere Units mischt (Wiederholen); sonst `unitId`. */
@@ -115,6 +132,8 @@ function Runner({
   unitReviewed = false,
   onExit,
   onAttempt,
+  onMiss,
+  cardOf,
   attemptOnce = false,
   reportFor,
   onComplete,
@@ -158,14 +177,41 @@ function Runner({
   );
   useAutoplay(spoken.solution, session.phase === 'feedback');
 
+  const respond = useCallback(
+    (result: AnswerResult, gaveUp: boolean) => {
+      if (!supported) return;
+      const again = attemptOnce && attempted.current.has(supported.id);
+      if (!(supported.id in session.firstTry) && !again) onAttempt?.(supported, result.verdict);
+      else if (result.verdict === 'wrong') onMiss?.(supported);
+      attempted.current.add(supported.id);
+      setSession((s) => submit(s, result, { gaveUp }));
+    },
+    [supported, session.firstTry, onAttempt, onMiss, attemptOnce],
+  );
+
   const check = useCallback(() => {
     if (!supported || !answer.trim()) return;
-    const result = grade(supported, answer, { tolerateDiacritics });
-    const again = attemptOnce && attempted.current.has(supported.id);
-    if (!(supported.id in session.firstTry) && !again) onAttempt?.(supported, result.verdict);
-    attempted.current.add(supported.id);
-    setSession((s) => submit(s, result));
-  }, [supported, answer, tolerateDiacritics, session.firstTry, onAttempt, attemptOnce]);
+    respond(grade(supported, answer, { tolerateDiacritics }), false);
+  }, [supported, answer, tolerateDiacritics, respond]);
+
+  /** „Weiß ich nicht“: zählt als falsch, zeigt die Lösung, die Übung kommt wieder. */
+  const giveUp = useCallback(() => {
+    stopSpeaking();
+    respond(GAVE_UP, true);
+  }, [respond]);
+
+  // Phase und Fehlerzahl der Übung (nach der Antwort, dezent im Feedback).
+  const cards = useProgress((s) => s.cards);
+  const attempts = useProgress((s) => s.attempts);
+  const note = useMemo(() => {
+    if (!supported || session.phase !== 'feedback') return undefined;
+    const id = cardOf ? cardOf(supported) : cardId({ kind: 'exercise', exerciseId: supported.id });
+    const card = id ? cards.find((c) => c.id === id) : undefined;
+    const misses = id?.startsWith('vo:')
+      ? (card?.lapses ?? 0)
+      : (missCounts(attempts).get(supported.id) ?? 0);
+    return cardNote(card, misses, session.last!.verdict, dayKey());
+  }, [supported, session.phase, session.last, cardOf, cards, attempts]);
 
   // Abschluss genau einmal melden, auch unter StrictMode (doppelte Effekte).
   const reported = useRef<Session>(null);
@@ -306,6 +352,9 @@ function Runner({
           >
             {t('runner.check')}
           </button>
+          <button type="button" onClick={giveUp} className={`${buttonBase} bg-fill`}>
+            {t('runner.dontKnow')}
+          </button>
           {supported.type === 'listen' && (
             <button
               type="button"
@@ -324,6 +373,8 @@ function Runner({
         <div className="space-y-4">
           <Feedback
             result={session.last!}
+            gaveUp={session.gaveUp}
+            note={note}
             solution={solutionOf(supported)}
             reasons={reasonsFor(supported, answer, vocab)}
             explanation={supported.explanation ?? supported.hint}
@@ -332,7 +383,8 @@ function Runner({
             solutionShown={SOLUTION_SHOWN.has(supported.type)}
             solutionLang={solutionLang(supported)}
             details={
-              supported.type === 'segment' ? (
+              // Ohne Antwort gibt es nichts zu vergleichen; die Lösung steht im Feedback.
+              session.gaveUp ? undefined : supported.type === 'segment' ? (
                 <SegmentFeedback ex={supported} answer={answer} />
               ) : supported.type === 'sov_puzzle' ? (
                 <OrderFeedback ex={supported} answer={answer} />

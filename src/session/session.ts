@@ -7,10 +7,12 @@ export interface Session {
   index: number;
   phase: 'answering' | 'feedback' | 'done';
   last?: AnswerResult;
+  /** Die letzte Antwort war „Weiß ich nicht“ (zählt als falsch). */
+  gaveUp?: boolean;
   /** Bewertung beim ersten Versuch je Übungs-ID. */
   firstTry: Record<string, Verdict>;
-  /** Falsch beantwortete Übungen werden einmal am Ende wiederholt. */
-  requeued: string[];
+  /** Falsche Antworten je Übungs-ID in diesem Lauf (auch die Wiederholungen). */
+  misses: Record<string, number>;
 }
 
 export function createSession(exercises: Exercise[]): Session {
@@ -19,31 +21,43 @@ export function createSession(exercises: Exercise[]): Session {
     index: 0,
     phase: exercises.length ? 'answering' : 'done',
     firstTry: {},
-    requeued: [],
+    misses: {},
   };
 }
 
 export const currentExercise = (s: Session): Exercise | undefined => s.queue[s.index];
 
-export function submit(s: Session, result: AnswerResult): Session {
+/** Ergebnis von „Weiß ich nicht“: falsch, ohne Hinweise. */
+export const GAVE_UP: AnswerResult = { verdict: 'wrong', hints: [] };
+
+/**
+ * Bewertet die aktuelle Übung. Falsch beantwortete Übungen (auch „Weiß ich nicht“) kommen ans Ende
+ * der Warteschlange, bis sie einmal richtig oder fast richtig beantwortet sind.
+ */
+export function submit(
+  s: Session,
+  result: AnswerResult,
+  { gaveUp = false }: { gaveUp?: boolean } = {},
+): Session {
   const ex = currentExercise(s);
   if (!ex || s.phase !== 'answering') return s;
   const firstTry = ex.id in s.firstTry ? s.firstTry : { ...s.firstTry, [ex.id]: result.verdict };
-  const retry = result.verdict === 'wrong' && !s.requeued.includes(ex.id);
+  const wrong = result.verdict === 'wrong';
   return {
     ...s,
     phase: 'feedback',
     last: result,
+    gaveUp,
     firstTry,
-    queue: retry ? [...s.queue, ex] : s.queue,
-    requeued: retry ? [...s.requeued, ex.id] : s.requeued,
+    misses: wrong ? { ...s.misses, [ex.id]: (s.misses[ex.id] ?? 0) + 1 } : s.misses,
+    queue: wrong ? [...s.queue, ex] : s.queue,
   };
 }
 
 export function next(s: Session): Session {
   if (s.phase !== 'feedback') return s;
   const index = s.index + 1;
-  return { ...s, index, last: undefined, phase: index >= s.queue.length ? 'done' : 'answering' };
+  return { ...s, index, last: undefined, gaveUp: false, phase: index >= s.queue.length ? 'done' : 'answering' };
 }
 
 /**
