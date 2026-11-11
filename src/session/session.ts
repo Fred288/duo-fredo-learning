@@ -57,7 +57,13 @@ export function submit(
 export function next(s: Session): Session {
   if (s.phase !== 'feedback') return s;
   const index = s.index + 1;
-  return { ...s, index, last: undefined, gaveUp: false, phase: index >= s.queue.length ? 'done' : 'answering' };
+  return {
+    ...s,
+    index,
+    last: undefined,
+    gaveUp: false,
+    phase: index >= s.queue.length ? 'done' : 'answering',
+  };
 }
 
 /**

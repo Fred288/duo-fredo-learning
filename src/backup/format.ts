@@ -9,7 +9,12 @@ import { pickKnown, type Settings } from '../store/settings';
 
 export const BACKUP_FORMAT = 'yol-backup';
 /** Aktuelle Formatversion; eine ältere Datei läuft vor dem Prüfen durch `MIGRATIONS`. */
-export const BACKUP_VERSION = 1;
+/**
+ * v2: Phase 6 im Wiederholen (`box` bis 6) und Fehlversuche (`attempts.retry`). Inhaltlich wie v1,
+ * aber ein älterer Client würde Phase 6 und `retry` still falsch übernehmen; er lehnt v2 als
+ * `too_new` ab.
+ */
+export const BACKUP_VERSION = 2;
 /** Größere Dateien werden nicht gelesen (Schutz vor versehentlich gewählten Fremddateien). */
 export const MAX_BACKUP_BYTES = 20 * 1024 * 1024;
 
@@ -144,7 +149,10 @@ type Envelope = z.infer<typeof Envelope>;
  * Hebt eine Datei der Version v auf v + 1 (Schlüssel = Ausgangsversion). Heute leer; eine neue
  * Formatversion trägt hier ihren Schritt ein, statt den Leser alter Dateien zu ändern.
  */
-export const MIGRATIONS: Record<number, (b: Envelope) => Envelope> = {};
+export const MIGRATIONS: Record<number, (b: Envelope) => Envelope> = {
+  // v1 → v2: nichts umzurechnen (Boxen 1–5 behalten ihre Bedeutung, ohne `retry` = erster Versuch).
+  1: (b) => ({ ...b, version: 2 }),
+};
 
 /** Gründe, aus denen eine Datei nicht geladen wird; zugleich i18n-Schlüssel `backup.error.*`. */
 export type BackupError = 'too_large' | 'not_json' | 'foreign' | 'too_new' | 'damaged';

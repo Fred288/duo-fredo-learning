@@ -199,6 +199,14 @@ describe('parseBackup', () => {
     expect(merged.data.attempts).toHaveLength(f.data.attempts.length + 1);
   });
 
+  it('liest Dateien der Version 1 über die Migration', () => {
+    const r = parseBackup(json({ ...file(), version: 1 }));
+    expect(r.ok).toBe(true);
+    if (!r.ok) return;
+    expect(r.backup.version).toBe(BACKUP_VERSION);
+    expect(r.backup.data).toEqual(sample());
+  });
+
   it('akzeptiert fehlende Tabellen als leer', () => {
     const r = parseBackup(
       json({ format: BACKUP_FORMAT, version: 1, exportedAt: '2026-10-28T10:00:00Z', data: {} }),

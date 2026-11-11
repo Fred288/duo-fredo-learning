@@ -197,6 +197,8 @@ function Runner({
   /** „Weiß ich nicht“: zählt als falsch, zeigt die Lösung, die Übung kommt wieder. */
   const giveUp = useCallback(() => {
     stopSpeaking();
+    // Eine angefangene Eingabe wurde nicht geprüft; sie soll nicht wie eine Antwort stehen bleiben.
+    setAnswer('');
     respond(GAVE_UP, true);
   }, [respond]);
 
@@ -376,7 +378,7 @@ function Runner({
             gaveUp={session.gaveUp}
             note={note}
             solution={solutionOf(supported)}
-            reasons={reasonsFor(supported, answer, vocab)}
+            reasons={reasonsFor(supported, session.gaveUp ? '' : answer, vocab)}
             explanation={supported.explanation ?? supported.hint}
             retry={session.queue.slice(session.index + 1).some((e) => e.id === supported.id)}
             speak={spoken.solution}

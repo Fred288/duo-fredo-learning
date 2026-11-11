@@ -139,15 +139,6 @@ export function StatsScreen() {
               <p className="text-sm text-ink-subtle">{t('stats.phases.hint')}</p>
             </section>
 
-            {data.forms.boxes.some((n) => n > 0) && (
-              <section className={`${card} space-y-4`} aria-labelledby="stats-forms">
-                <h2 id="stats-forms" className="font-medium">
-                  {t('stats.forms')}
-                </h2>
-                <Boxes counts={data.forms} />
-              </section>
-            )}
-
             <section className={card} aria-labelledby="stats-due">
               <h2 id="stats-due" className="font-medium">
                 {t('stats.due')}
@@ -161,6 +152,15 @@ export function StatsScreen() {
                 ))}
               </ul>
             </section>
+
+            {data.forms.boxes.some((n) => n > 0) && (
+              <section className={`${card} space-y-4`} aria-labelledby="stats-forms">
+                <h2 id="stats-forms" className="font-medium">
+                  {t('stats.forms')}
+                </h2>
+                <Boxes counts={data.forms} />
+              </section>
+            )}
 
             <section className={card} aria-labelledby="stats-hard">
               <h2 id="stats-hard" className="font-medium">

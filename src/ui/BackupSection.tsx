@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { firstAttempts } from '../progress/stats';
 import {
   backupFileName,
   MAX_BACKUP_BYTES,
@@ -189,7 +190,7 @@ export function BackupSection() {
           </p>
           <p className="text-sm">
             {t('backup.counts', {
-              attempts: data.attempts.length,
+              attempts: firstAttempts(data.attempts).length,
               completions: data.completions.length,
               cards: data.cards.length,
               notes: data.notes.length,
